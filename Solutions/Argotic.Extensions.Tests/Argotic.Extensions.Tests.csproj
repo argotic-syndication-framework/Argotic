@@ -1,24 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <IsPackable>false</IsPackable>
     <ApplicationIcon>Argotic.ico</ApplicationIcon>
     <AssemblyVersion>2008.0.2.0</AssemblyVersion>
     <FileVersion>2008.0.2.0</FileVersion>
     <Version>2008.0.2.0</Version>
     <Product>Argotic Syndication Framework</Product>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Description>Argotic Entity Extensibility Class Library, that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</Description>
+    <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Authors />
-    <Company />
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

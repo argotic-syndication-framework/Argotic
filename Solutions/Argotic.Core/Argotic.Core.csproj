@@ -5,6 +5,14 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <ApplicationIcon>Argotic.ico</ApplicationIcon>
+    <AssemblyVersion>2008.0.2.0</AssemblyVersion>
+    <FileVersion>2008.0.2.0</FileVersion>
+    <Version>2008.0.2.0</Version>
+    <Product>Argotic Syndication Framework</Product>
+    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
+    <Description></Description>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

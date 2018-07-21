@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argotic.Common", "Argotic.Common\Argotic.Common.csproj", "{A492338E-F386-4068-8ECE-56BD2B15228C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Argotic.Common", "Argotic.Common\Argotic.Common.csproj", "{A492338E-F386-4068-8ECE-56BD2B15228C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argotic.Core", "Argotic.Core\Argotic.Core.csproj", "{011F2629-1310-4C2E-ADBC-53F2CBE5A131}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Argotic.Core", "Argotic.Core\Argotic.Core.csproj", "{011F2629-1310-4C2E-ADBC-53F2CBE5A131}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argotic.Extensions", "Argotic.Extensions\Argotic.Extensions.csproj", "{768C5E04-5151-469C-8A31-1ED9367C3B4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Argotic.Extensions", "Argotic.Extensions\Argotic.Extensions.csproj", "{768C5E04-5151-469C-8A31-1ED9367C3B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argotic.Extensions.Tests", "Argotic.Extensions.Tests\Argotic.Extensions.Tests.csproj", "{0BC449E0-4074-435B-8EAA-6E950C08B149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{768C5E04-5151-469C-8A31-1ED9367C3B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{768C5E04-5151-469C-8A31-1ED9367C3B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{768C5E04-5151-469C-8A31-1ED9367C3B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC449E0-4074-435B-8EAA-6E950C08B149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC449E0-4074-435B-8EAA-6E950C08B149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC449E0-4074-435B-8EAA-6E950C08B149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC449E0-4074-435B-8EAA-6E950C08B149}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

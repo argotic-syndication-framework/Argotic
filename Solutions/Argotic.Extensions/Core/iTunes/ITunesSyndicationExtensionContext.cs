@@ -26,7 +26,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the name of the artist of the podcast.
         /// </summary>
@@ -71,12 +70,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the full description of the podcast.
         /// </summary>
         private string extensionSummary                                     = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region ITunesSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
         /// </summary>
@@ -86,12 +83,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Author
         /// <summary>
         /// Gets or sets the name of the artist of this podcast.
         /// </summary>
@@ -115,9 +110,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Categories
         /// <summary>
         /// Gets the categories to which this podcast belongs.
         /// </summary>
@@ -135,9 +128,7 @@ namespace Argotic.Extensions.Core
                 return extensionCategories;
             }
         }
-        #endregion
 
-        #region Duration
         /// <summary>
         /// Gets or sets the total duration of this podcast.
         /// </summary>
@@ -154,9 +145,7 @@ namespace Argotic.Extensions.Core
                 extensionDuration = value;
             }
         }
-        #endregion
 
-        #region ExplicitMaterial
         /// <summary>
         /// Gets or sets the explicit language or adult content advisory information for this podcast.
         /// </summary>
@@ -176,9 +165,7 @@ namespace Argotic.Extensions.Core
                 extensionExplicitMaterialDesignation = value;
             }
         }
-        #endregion
 
-        #region Image
         /// <summary>
         /// Gets or sets a URL that points to the album artwork for this podcast.
         /// </summary>
@@ -200,9 +187,7 @@ namespace Argotic.Extensions.Core
                 extensionImage = value;
             }
         }
-        #endregion
 
-        #region IsBlocked
         /// <summary>
         /// Gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.
         /// </summary>
@@ -219,9 +204,7 @@ namespace Argotic.Extensions.Core
                 extensionIsBlocked = value;
             }
         }
-        #endregion
 
-        #region Keywords
         /// <summary>
         /// Gets the search keywords for this podcast.
         /// </summary>
@@ -237,9 +220,7 @@ namespace Argotic.Extensions.Core
                 return extensionKeywords;
             }
         }
-        #endregion
 
-        #region NewFeedUrl
         /// <summary>
         /// Gets or sets the URL where this podcast feed has been relocated to.
         /// </summary>
@@ -259,9 +240,7 @@ namespace Argotic.Extensions.Core
                 extensionNewFeedUrl = value;
             }
         }
-        #endregion
 
-        #region Owner
         /// <summary>
         /// Gets or sets information that can be used to contact the owner of this podcast.
         /// </summary>
@@ -281,9 +260,7 @@ namespace Argotic.Extensions.Core
                 extensionOwner = value;
             }
         }
-        #endregion
 
-        #region Subtitle
         /// <summary>
         /// Gets or sets a brief synopsis of this podcast.
         /// </summary>
@@ -310,9 +287,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Summary
         /// <summary>
         /// Gets or sets the full description of this podcast.
         /// </summary>
@@ -336,12 +311,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -378,9 +351,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -468,12 +439,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the common syndication extension information using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -581,9 +550,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the optional syndication extension information using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -667,9 +634,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region ParseDuration(string value)
         /// <summary>
         /// Returns the <see cref="TimeSpan"/> represented by the supplied duration value.
         /// </summary>
@@ -743,6 +708,5 @@ namespace Argotic.Extensions.Core
 
             return timeSpan;
         }
-        #endregion
     }
 }

@@ -48,8 +48,6 @@ namespace Argotic.Common
             }
         }
 
-        #region WebRequest Options
-
         private AuthenticationLevel? _authenticationLevel;
         [NonSerialized()] private RequestCachePolicy _cachePolicy;
         private string _connectionGroupName;
@@ -131,10 +129,6 @@ namespace Argotic.Common
             set { _useDefaultCredentials = value; }
         }
 
-        #endregion
-
-        #region FtpWebRequest Options
-
         private long? _contentOffset;
         private bool? _enableSsl;
         private string _renameTo;
@@ -175,10 +169,6 @@ namespace Argotic.Common
             get { return _usePassive; }
             set { _usePassive = value; }
         }
-
-        #endregion
-
-        #region HttpWebRequest Options
 
         private string _accept;
         private bool? _allowAutoRedirect;
@@ -325,10 +315,6 @@ namespace Argotic.Common
             set { _userAgent = value; }
         }
 
-        #endregion
-
-        #region Common FtpWebRequest & HttpWebRequest Options
-
         private X509CertificateCollection _clientCertificates;
         private bool? _keepAlive;
         private int? _readWriteTimeout;
@@ -353,8 +339,6 @@ namespace Argotic.Common
             get { return _readWriteTimeout; }
             set { _readWriteTimeout = value; }
         }
-
-        #endregion
 
         /// <summary>
         /// Applies all options on the current instance to the supplied <see cref="WebRequest"/>.

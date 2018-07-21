@@ -38,18 +38,15 @@ namespace Argotic.Extensions.Core
 		//============================================================
 		//	PUBLIC/PRIVATE/PROTECTED MEMBERS
 		//============================================================
-		#region PRIVATE/PROTECTED/PUBLIC MEMBERS
-		/// <summary>
+	    /// <summary>
 		/// Private member to hold specific information about the extension.
 		/// </summary>
 		private PheedSyndicationExtensionContext extensionContext = new PheedSyndicationExtensionContext();
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	CONSTRUCTORS
 		//============================================================
-		#region PheedSyndicationExtension()
-		/// <summary>
+	    /// <summary>
 		/// Initializes a new instance of the <see cref="PheedSyndicationExtension"/> class.
 		/// </summary>
 		public PheedSyndicationExtension()
@@ -59,13 +56,11 @@ namespace Argotic.Extensions.Core
 			//	Initialization handled by base class
 			//------------------------------------------------------------
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	PUBLIC PROPERTIES
 		//============================================================
-		#region Context
-		/// <summary>
+	    /// <summary>
 		/// Gets or sets the <see cref="PheedSyndicationExtensionContext"/> object associated with this extension.
 		/// </summary>
 		/// <value>A <see cref="PheedSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
@@ -88,13 +83,11 @@ namespace Argotic.Extensions.Core
 				extensionContext = value;
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	STATIC METHODS
 		//============================================================
-		#region MatchByType(ISyndicationExtension extension)
-		/// <summary>
+	    /// <summary>
 		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
 		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
 		/// </summary>
@@ -120,13 +113,11 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	PUBLIC METHODS
 		//============================================================
-		#region Load(IXPathNavigable source)
-		/// <summary>
+	    /// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="PheedSyndicationExtension"/>.</param>
@@ -158,10 +149,8 @@ namespace Argotic.Extensions.Core
 
 			return wasLoaded;
 		}
-		#endregion
 
-		#region Load(XmlReader reader)
-		/// <summary>
+	    /// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
 		/// </summary>
 		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="PheedSyndicationExtension"/>.</param>
@@ -181,10 +170,8 @@ namespace Argotic.Extensions.Core
 
 			return this.Load(document.CreateNavigator());
 		}
-		#endregion
 
-		#region WriteTo(XmlWriter writer)
-		/// <summary>
+	    /// <summary>
 		/// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
 		/// </summary>
 		/// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
@@ -201,13 +188,11 @@ namespace Argotic.Extensions.Core
 			//------------------------------------------------------------
 			this.Context.WriteTo(writer, this.XmlNamespace);
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	PUBLIC OVERRIDES
 		//============================================================
-		#region ToString()
-		/// <summary>
+	    /// <summary>
 		/// Returns a <see cref="String"/> that represents the current <see cref="PheedSyndicationExtension"/>.
 		/// </summary>
 		/// <returns>A <see cref="String"/> that represents the current <see cref="PheedSyndicationExtension"/>.</returns>
@@ -239,13 +224,11 @@ namespace Argotic.Extensions.Core
 				}
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	ICOMPARABLE IMPLEMENTATION
 		//============================================================
-		#region CompareTo(object obj)
-		/// <summary>
+	    /// <summary>
 		/// Compares the current instance with another object of the same type.
 		/// </summary>
 		/// <param name="obj">An object to compare with this instance.</param>
@@ -278,10 +261,8 @@ namespace Argotic.Extensions.Core
 				throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
 			}
 		}
-		#endregion
 
-		#region Equals(Object obj)
-		/// <summary>
+	    /// <summary>
 		/// Determines whether the specified <see cref="Object"/> is equal to the current instance.
 		/// </summary>
 		/// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
@@ -298,10 +279,8 @@ namespace Argotic.Extensions.Core
 
 			return (this.CompareTo(obj) == 0);
 		}
-		#endregion
 
-		#region GetHashCode()
-		/// <summary>
+	    /// <summary>
 		/// Returns a hash code for the current instance.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
@@ -312,10 +291,8 @@ namespace Argotic.Extensions.Core
 			//------------------------------------------------------------
 			return this.ToString().GetHashCode();
 		}
-		#endregion
 
-		#region == operator
-		/// <summary>
+	    /// <summary>
 		/// Determines if operands are equal.
 		/// </summary>
 		/// <param name="first">Operand to be compared.</param>
@@ -337,10 +314,8 @@ namespace Argotic.Extensions.Core
 
 			return first.Equals(second);
 		}
-		#endregion
 
-		#region != operator
-		/// <summary>
+	    /// <summary>
 		/// Determines if operands are not equal.
 		/// </summary>
 		/// <param name="first">Operand to be compared.</param>
@@ -350,10 +325,8 @@ namespace Argotic.Extensions.Core
 		{
 			return !(first == second);
 		}
-		#endregion
 
-		#region < operator
-		/// <summary>
+	    /// <summary>
 		/// Determines if first operand is less than second operand.
 		/// </summary>
 		/// <param name="first">Operand to be compared.</param>
@@ -375,10 +348,8 @@ namespace Argotic.Extensions.Core
 
 			return (first.CompareTo(second) < 0);
 		}
-		#endregion
 
-		#region > operator
-		/// <summary>
+	    /// <summary>
 		/// Determines if first operand is greater than second operand.
 		/// </summary>
 		/// <param name="first">Operand to be compared.</param>
@@ -400,6 +371,5 @@ namespace Argotic.Extensions.Core
 
 			return (first.CompareTo(second) > 0);
 		}
-		#endregion
 	}
 }

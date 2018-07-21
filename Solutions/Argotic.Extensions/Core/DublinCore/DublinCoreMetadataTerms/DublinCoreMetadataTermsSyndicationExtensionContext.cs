@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the summary of the resource.
         /// </summary>
@@ -244,12 +243,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the date (often a range) of validity of the resource.
         /// </summary>
         private string extensionDateValid                   = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region DublinCoreMetadataTermsSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> class.
         /// </summary>
@@ -259,12 +256,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Abstract
         /// <summary>
         /// Gets or sets the summary of the resource.
         /// </summary>
@@ -288,9 +283,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AccessRights
         /// <summary>
         /// Gets or sets information about who can access the resource or an indication of its security status.
         /// </summary>
@@ -325,9 +318,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AccrualMethod
         /// <summary>
         /// Gets or sets the method by which items are added to a collection.
         /// </summary>
@@ -360,9 +351,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AccrualPeriodicity
         /// <summary>
         /// Gets or sets the frequency with which items are added to a collection.
         /// </summary>
@@ -395,9 +384,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AccrualPolicy
         /// <summary>
         /// Gets or sets thepolicy governing the addition of items to a collection.
         /// </summary>
@@ -430,9 +417,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AlternativeTitle
         /// <summary>
         /// Gets or sets the alternative name for the resource.
         /// </summary>
@@ -459,9 +444,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Audience
         /// <summary>
         /// Gets or sets the class of entity for whom the resource is intended or useful.
         /// </summary>
@@ -494,9 +477,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region AudienceEducationLevel
         /// <summary>
         /// Gets or sets the class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
         /// </summary>
@@ -529,9 +510,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region BibliographicCitation
         /// <summary>
         /// Gets or sets the bibliographic reference for the resource.
         /// </summary>
@@ -558,9 +537,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region ConformsTo
         /// <summary>
         /// Gets or sets the established standard to which the described resource conforms.
         /// </summary>
@@ -593,9 +570,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Contributor
         /// <summary>
         /// Gets or sets the entity responsible for making contributions to the resource.
         /// </summary>
@@ -628,9 +603,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Coverage
         /// <summary>
         /// Gets or sets the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
         /// </summary>
@@ -670,9 +643,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Creator
         /// <summary>
         /// Gets or sets the entity primarily responsible for making the resource.
         /// </summary>
@@ -706,9 +677,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Date
         /// <summary>
         /// Gets or sets a point or period of time associated with an event in the lifecycle of the resource.
         /// </summary>
@@ -731,9 +700,7 @@ namespace Argotic.Extensions.Core
                 extensionDate = value;
             }
         }
-        #endregion
 
-        #region DateAccepted
         /// <summary>
         /// Gets or sets the date of acceptance of the resource.
         /// </summary>
@@ -759,9 +726,7 @@ namespace Argotic.Extensions.Core
                 extensionDateAccepted = value;
             }
         }
-        #endregion
 
-        #region DateAvailable
         /// <summary>
         /// Gets or sets the date that the resource became or will become available.
         /// </summary>
@@ -790,9 +755,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region DateCopyrighted
         /// <summary>
         /// Gets or sets the date of copyright of the resource.
         /// </summary>
@@ -815,9 +778,7 @@ namespace Argotic.Extensions.Core
                 extensionDateCopyrighted = value;
             }
         }
-        #endregion
 
-        #region DateCreated
         /// <summary>
         /// Gets or sets the date of creation of the resource.
         /// </summary>
@@ -840,9 +801,7 @@ namespace Argotic.Extensions.Core
                 extensionDateCreated = value;
             }
         }
-        #endregion
 
-        #region DateIssued
         /// <summary>
         /// Gets or sets the date of issuance of the resource.
         /// </summary>
@@ -865,9 +824,7 @@ namespace Argotic.Extensions.Core
                 extensionDateIssued = value;
             }
         }
-        #endregion
 
-        #region DateModified
         /// <summary>
         /// Gets or sets the date on which the resource was changed.
         /// </summary>
@@ -890,9 +847,7 @@ namespace Argotic.Extensions.Core
                 extensionDateModified = value;
             }
         }
-        #endregion
 
-        #region DateSubmitted
         /// <summary>
         /// Gets or sets the date of submission of the resource.
         /// </summary>
@@ -918,9 +873,7 @@ namespace Argotic.Extensions.Core
                 extensionDateSubmitted = value;
             }
         }
-        #endregion
 
-        #region DateValid
         /// <summary>
         /// Gets or sets the date that the resource is valid for.
         /// </summary>
@@ -949,9 +902,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets an account of the resource.
         /// </summary>
@@ -978,9 +929,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Extent
         /// <summary>
         /// Gets or sets the size or duration of the resource.
         /// </summary>
@@ -1014,9 +963,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Format
         /// <summary>
         /// Gets or sets the file format, physical medium, or dimensions of the resource.
         /// </summary>
@@ -1053,9 +1000,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region HasFormat
         /// <summary>
         /// Gets or sets a related resource that is substantially the same as the pre-existing described resource, but in another format.
         /// </summary>
@@ -1082,9 +1027,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region HasPart
         /// <summary>
         /// Gets or sets a related resource that is included either physically or logically in the described resource.
         /// </summary>
@@ -1111,9 +1054,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region HasVersion
         /// <summary>
         /// Gets or sets a related resource that is a version, edition, or adaptation of the described resource.
         /// </summary>
@@ -1140,9 +1081,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Identifier
         /// <summary>
         /// Gets or sets an unambiguous reference to the resource within a given context.
         /// </summary>
@@ -1169,9 +1108,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region InstructionalMethod
         /// <summary>
         /// Gets or sets the process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
         /// </summary>
@@ -1204,9 +1141,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsFormatOf
         /// <summary>
         /// Gets or sets a related resource that is substantially the same as the described resource, but in another format.
         /// </summary>
@@ -1233,9 +1168,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsPartOf
         /// <summary>
         /// Gets or sets a related resource in which the described resource is physically or logically included.
         /// </summary>
@@ -1262,9 +1195,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsReferencedBy
         /// <summary>
         /// Gets or sets a related resource that references, cites, or otherwise points to the described resource.
         /// </summary>
@@ -1291,9 +1222,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsReplacedBy
         /// <summary>
         /// Gets or sets a related resource that supplants, displaces, or supersedes the described resource.
         /// </summary>
@@ -1320,9 +1249,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsRequiredBy
         /// <summary>
         /// Gets or sets a related resource that requires the described resource to support its function, delivery, or coherence.
         /// </summary>
@@ -1349,9 +1276,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region IsVersionOf
         /// <summary>
         /// Gets or sets a related resource of which the described resource is a version, edition, or adaptation.
         /// </summary>
@@ -1378,9 +1303,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the language of the resource.
         /// </summary>
@@ -1401,9 +1324,7 @@ namespace Argotic.Extensions.Core
                 extensionLanguage = value;
             }
         }
-        #endregion
 
-        #region License
         /// <summary>
         /// Gets or sets the legal document giving official permission to do something with the resource.
         /// </summary>
@@ -1436,9 +1357,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Mediator
         /// <summary>
         /// Gets or sets the entity that mediates access to the resource and for whom the resource is intended or useful.
         /// </summary>
@@ -1472,9 +1391,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Medium
         /// <summary>
         /// Gets or sets the material or physical carrier of the resource.
         /// </summary>
@@ -1508,9 +1425,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Provenance
         /// <summary>
         /// Gets or sets the statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
         /// </summary>
@@ -1544,9 +1459,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Publisher
         /// <summary>
         /// Gets or sets the entity responsible for making the resource available.
         /// </summary>
@@ -1580,9 +1493,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region References
         /// <summary>
         /// Gets or sets a related resource that is referenced, cited, or otherwise pointed to by the described resource.
         /// </summary>
@@ -1611,9 +1522,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Relation
         /// <summary>
         /// Gets or sets a related resource.
         /// </summary>
@@ -1643,9 +1552,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Replaces
         /// <summary>
         /// Gets or sets a related resource that is supplanted, displaced, or superseded by the described resource.
         /// </summary>
@@ -1674,9 +1581,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Requires
         /// <summary>
         /// Gets or sets a related resource that is required by the described resource to support its function, delivery, or coherence.
         /// </summary>
@@ -1705,9 +1610,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Rights
         /// <summary>
         /// Gets or sets information about rights held in and over the resource.
         /// </summary>
@@ -1742,9 +1645,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region RightsHolder
         /// <summary>
         /// Gets or sets the person or organization owning or managing rights over the resource.
         /// </summary>
@@ -1777,9 +1678,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Source
         /// <summary>
         /// Gets or sets a related resource from which the described resource is derived.
         /// </summary>
@@ -1812,9 +1711,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region SpatialCoverage
         /// <summary>
         /// Gets or sets the spatial characteristics of the resource.
         /// </summary>
@@ -1838,9 +1735,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Subject
         /// <summary>
         /// Gets or sets the topic of the resource.
         /// </summary>
@@ -1874,9 +1769,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region TableOfContents
         /// <summary>
         /// Gets or sets the list of sub-units of the resource.
         /// </summary>
@@ -1900,9 +1793,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region TemporalCoverage
         /// <summary>
         /// Gets or sets the temporal characteristics of the resource.
         /// </summary>
@@ -1926,9 +1817,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the name given to the resource.
         /// </summary>
@@ -1955,9 +1844,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region TypeVocabulary
         /// <summary>
         /// Gets or sets the nature or genre of the resource.
         /// </summary>
@@ -1984,12 +1871,10 @@ namespace Argotic.Extensions.Core
                 extensionType = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2038,9 +1923,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -2066,12 +1949,10 @@ namespace Argotic.Extensions.Core
             this.WriteGroup4(writer, xmlNamespace);
             this.WriteGroup5(writer, xmlNamespace);
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadGroup1(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2172,9 +2053,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadGroup2(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2295,9 +2174,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadGroup3(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2398,9 +2275,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadGroup4(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2517,9 +2392,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadGroup5(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2620,9 +2493,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadGroup6(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -2692,9 +2563,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteGroup1(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -2764,9 +2633,7 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("conformsTo", xmlNamespace, this.ConformsTo);
             }
         }
-        #endregion
 
-        #region WriteGroup2(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -2836,9 +2703,7 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("educationLevel", xmlNamespace, this.AudienceEducationLevel);
             }
         }
-        #endregion
 
-        #region WriteGroup3(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -2908,9 +2773,7 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("isReferencedBy", xmlNamespace, this.IsReferencedBy);
             }
         }
-        #endregion
 
-        #region WriteGroup4(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -2980,9 +2843,7 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("provenance", xmlNamespace, this.Provenance);
             }
         }
-        #endregion
 
-        #region WriteGroup5(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -3077,6 +2938,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("valid", xmlNamespace, this.DateValid);
             }
         }
-        #endregion
     }
 }

@@ -22,17 +22,14 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the Really Simple Discoverability (RSD) 1.0 namespace identifier.
         /// </summary>
         private const string RSD_NAMESPACE  = "http://archipelago.phrasewise.com/rsd";
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region RsdNamespace
         /// <summary>
         /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
         /// </summary>
@@ -44,12 +41,10 @@ namespace Argotic.Syndication.Specialized
                 return RSD_NAMESPACE;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Really Simple Discoverability (RSD) syndication entities.
         /// </summary>
@@ -76,9 +71,7 @@ namespace Argotic.Syndication.Specialized
 
             return manager;
         }
-        #endregion
 
-        #region SelectSafe(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         /// <summary>
         /// Selects a node set using the specified XPath expression with the <see cref="IXmlNamespaceResolver"/> object specified to resolve namespace prefixes.
         /// </summary>
@@ -120,9 +113,7 @@ namespace Argotic.Syndication.Specialized
 
             return iterator;
         }
-        #endregion
 
-        #region SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         /// <summary>
         /// Selects a single node in the <see cref="XPathNavigator"/> object using the specified XPath query with the <see cref="IXmlNamespaceResolver"/> object specified to resolve namespace prefixes.
         /// </summary>
@@ -164,6 +155,5 @@ namespace Argotic.Syndication.Specialized
 
             return navigator;
         }
-        #endregion
     }
 }

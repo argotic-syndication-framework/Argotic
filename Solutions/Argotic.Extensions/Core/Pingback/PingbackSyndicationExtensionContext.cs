@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the URL of the Pingback server.
         /// </summary>
@@ -37,12 +36,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the targets that were pinged in reference.
         /// </summary>
         private Collection<Uri> extensionAbouts;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region PingbackSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="PingbackSyndicationExtensionContext"/> class.
         /// </summary>
@@ -52,12 +49,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Abouts
         /// <summary>
         /// Gets the targets that were pinged in reference.
         /// </summary>
@@ -77,9 +72,7 @@ namespace Argotic.Extensions.Core
                 return extensionAbouts;
             }
         }
-        #endregion
 
-        #region Server
         /// <summary>
         /// Gets or sets the URL of the Pingback server.
         /// </summary>
@@ -98,9 +91,7 @@ namespace Argotic.Extensions.Core
                 extensionServer = value;
             }
         }
-        #endregion
 
-        #region Target
         /// <summary>
         /// Gets or sets the value that should be used as the <i>targetURI</i> in a ping.
         /// </summary>
@@ -119,12 +110,10 @@ namespace Argotic.Extensions.Core
                 extensionTarget = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -191,9 +180,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -224,6 +211,5 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
     }
 }

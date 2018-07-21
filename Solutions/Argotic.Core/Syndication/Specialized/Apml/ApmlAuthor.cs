@@ -36,7 +36,6 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -57,12 +56,10 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold a date indicating the last time the author was updated.
         /// </summary>
         private DateTime authorUpdatedOn    = DateTime.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region ApmlAuthor()
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlAuthor"/> class.
         /// </summary>
@@ -72,9 +69,7 @@ namespace Argotic.Syndication.Specialized
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region ApmlAuthor(string key, decimal value)
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlAuthor"/> class using the supplied parameters.
         /// </summary>
@@ -97,9 +92,7 @@ namespace Argotic.Syndication.Specialized
             this.Key        = key;
             this.Value      = value;
         }
-        #endregion
 
-        #region ApmlAuthor(string key, decimal value, string from, DateTime utcUpdatedOn)
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlAuthor"/> class using the supplied parameters.
         /// </summary>
@@ -131,12 +124,10 @@ namespace Argotic.Syndication.Specialized
             this.From       = from;
             this.UpdatedOn  = utcUpdatedOn;
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -162,9 +153,7 @@ namespace Argotic.Syndication.Specialized
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -176,12 +165,10 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region From
         /// <summary>
         /// Gets or sets the name of the entity that contributed this author.
         /// </summary>
@@ -205,9 +192,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
-        #region Key
         /// <summary>
         /// Gets or sets the unique key for this author.
         /// </summary>
@@ -227,9 +212,7 @@ namespace Argotic.Syndication.Specialized
                 authorKey = value.Trim();
             }
         }
-        #endregion
 
-        #region UpdatedOn
         /// <summary>
         /// Gets or sets a date-time indicating the last time this author was updated.
         /// </summary>
@@ -249,9 +232,7 @@ namespace Argotic.Syndication.Specialized
                 authorUpdatedOn = value;
             }
         }
-        #endregion
 
-        #region Value
         /// <summary>
         /// Gets or sets the decimal score of this author.
         /// </summary>
@@ -272,12 +253,10 @@ namespace Argotic.Syndication.Specialized
                 authorValue = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -304,9 +283,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -333,9 +310,7 @@ namespace Argotic.Syndication.Specialized
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -368,12 +343,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="ApmlAuthor"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -443,9 +416,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="ApmlAuthor"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -483,9 +454,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="ApmlAuthor"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -523,12 +492,10 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="ApmlAuthor"/>.
         /// </summary>
@@ -561,12 +528,10 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -602,9 +567,7 @@ namespace Argotic.Syndication.Specialized
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -622,9 +585,7 @@ namespace Argotic.Syndication.Specialized
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -638,9 +599,7 @@ namespace Argotic.Syndication.Specialized
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -663,9 +622,7 @@ namespace Argotic.Syndication.Specialized
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -676,9 +633,7 @@ namespace Argotic.Syndication.Specialized
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -701,9 +656,7 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -726,6 +679,5 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

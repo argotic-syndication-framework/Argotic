@@ -26,7 +26,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a collection of media objects that are effectively the same content, yet different representations.
         /// </summary>
@@ -79,12 +78,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the media group.
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaGroup()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaGroup"/> class.
         /// </summary>
@@ -94,12 +91,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Contents
         /// <summary>
         /// Gets a collection of media objects that are effectively the same content, yet different representations.
         /// </summary>
@@ -118,12 +113,10 @@ namespace Argotic.Extensions.Core
                 return groupContents;
             }
         }
-        #endregion
 
         //============================================================
         //	SECONDARY PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for this media group.
         /// </summary>
@@ -142,9 +135,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCategories;
             }
         }
-        #endregion
 
-        #region Copyright
         /// <summary>
         /// Gets or sets the copyright information for this media group.
         /// </summary>
@@ -164,9 +155,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectCopyright = value;
             }
         }
-        #endregion
 
-        #region Credits
         /// <summary>
         /// Gets the entities that contributed to the creation of this media group.
         /// </summary>
@@ -189,9 +178,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCredits;
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets the description of this media group.
         /// </summary>
@@ -211,9 +198,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectDescription = value;
             }
         }
-        #endregion
 
-        #region Hashes
         /// <summary>
         /// Gets the hash digests for this media group.
         /// </summary>
@@ -235,9 +220,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectHashes;
             }
         }
-        #endregion
 
-        #region Keywords
         /// <summary>
         /// Gets the relevant keywords that describe this media group.
         /// </summary>
@@ -259,9 +242,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectKeywords;
             }
         }
-        #endregion
 
-        #region Player
         /// <summary>
         /// Gets or sets a web browser media player console this media group can be accessed through.
         /// </summary>
@@ -278,9 +259,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectPlayer = value;
             }
         }
-        #endregion
 
-        #region Ratings
         /// <summary>
         /// Gets the permissible audiences for this media group.
         /// </summary>
@@ -302,9 +281,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRatings;
             }
         }
-        #endregion
 
-        #region Restrictions
         /// <summary>
         /// Gets the restrictions to be placed on aggregators that are rendering this media group.
         /// </summary>
@@ -323,9 +300,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRestrictions;
             }
         }
-        #endregion
 
-        #region TextSeries
         /// <summary>
         /// Gets the text transcript, closed captioning, or lyrics for this media group.
         /// </summary>
@@ -349,9 +324,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectTextSeries;
             }
         }
-        #endregion
 
-        #region Thumbnails
         /// <summary>
         /// Gets the representative images for this media group.
         /// </summary>
@@ -373,9 +346,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectThumbnails;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of this media group.
         /// </summary>
@@ -392,12 +363,10 @@ namespace Argotic.Extensions.Core
                 mediaObjectTitle = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaGroup"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -453,9 +422,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaGroup"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -487,12 +454,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaGroup"/>.
         /// </summary>
@@ -525,12 +490,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -565,9 +528,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -585,9 +546,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -601,9 +560,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -626,9 +583,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -639,9 +594,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -664,9 +617,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -689,6 +640,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

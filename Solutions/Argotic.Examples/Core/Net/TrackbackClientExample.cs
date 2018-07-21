@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region TrackbackClient
             // Initialize the Trackback peer-to-peer notification protocol client
             TrackbackClient client      = new TrackbackClient();
             client.Host                 = new Uri("http://www.example.com/trackback/5");
@@ -53,7 +52,6 @@ namespace Argotic.Examples
                     // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
                 }
             }
-            #endregion
         }
     }
 }

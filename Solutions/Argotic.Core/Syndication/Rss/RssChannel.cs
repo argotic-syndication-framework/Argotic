@@ -39,7 +39,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -128,12 +127,10 @@ namespace Argotic.Syndication
         /// Private member to hold a URL that points to where the feed can be retrieved from.
         /// </summary>
         private Uri channelSelfLink;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region RssChannel()
         /// <summary>
         /// Initializes a new instance of the <see cref="RssChannel"/> class.
         /// </summary>
@@ -144,9 +141,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             
         }
-        #endregion
 
-        #region RssChannel(Uri link, string title, string description)
         /// <summary>
         /// Initializes a new instance of the <see cref="RssChannel"/> class using the supplied link, title, and description.
         /// </summary>
@@ -167,12 +162,10 @@ namespace Argotic.Syndication
             this.Title          = title;
             this.Description    = description;
         }
-        #endregion
 
         //============================================================
         //	INDEXERS
         //============================================================
-        #region this[int index]
         /// <summary>
         /// Gets or sets the <see cref="RssItem"/> at the specified index.
         /// </summary>
@@ -194,12 +187,10 @@ namespace Argotic.Syndication
                 ((Collection<RssItem>)this.Items)[index] = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -225,9 +216,7 @@ namespace Argotic.Syndication
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -239,12 +228,10 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets the categories or tags to which this channel belongs.
         /// </summary>
@@ -262,9 +249,7 @@ namespace Argotic.Syndication
                 return channelCategories;
             }
         }
-        #endregion
 
-        #region Cloud
         /// <summary>
         /// Gets or sets the meta-data clients can use to register to be notified of updates to this feed.
         /// </summary>
@@ -285,9 +270,7 @@ namespace Argotic.Syndication
                 channelCloud = value;
             }
         }
-        #endregion
 
-        #region Copyright
         /// <summary>
         /// Gets or sets the human-readable copyright statement that applies to this feed.
         /// </summary>
@@ -314,9 +297,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets character data that provides a human-readable characterization or summary of this feed.
         /// </summary>
@@ -339,9 +320,7 @@ namespace Argotic.Syndication
                 channelDescription = value.Trim();
             }
         }
-        #endregion
 
-        #region Documentation
         /// <summary>
         /// Gets the URL of the RSS specification implemented by the software that created this feed.
         /// </summary>
@@ -353,9 +332,7 @@ namespace Argotic.Syndication
                 return channelDocumentation;
             }
         }
-        #endregion
 
-        #region Generator
         /// <summary>
         /// Gets or sets a value that credits the software that created this feed.
         /// </summary>
@@ -379,9 +356,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region Image
         /// <summary>
         /// Gets or sets the graphical logo for this feed.
         /// </summary>
@@ -400,9 +375,7 @@ namespace Argotic.Syndication
                 channelImage = value;
             }
         }
-        #endregion
 
-        #region Items
         /// <summary>
         /// Gets or sets the distinct content published in this feed.
         /// </summary>
@@ -428,9 +401,7 @@ namespace Argotic.Syndication
                 channelItems = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural language employed in this feed.
         /// </summary>
@@ -451,9 +422,7 @@ namespace Argotic.Syndication
                 channelLanguage = value;
             }
         }
-        #endregion
 
-        #region LastBuildDate
         /// <summary>
         /// Gets or sets the last date and time the content of this feed was updated.
         /// </summary>
@@ -473,9 +442,7 @@ namespace Argotic.Syndication
                 channelLastBuildDate = value;
             }
         }
-        #endregion
 
-        #region Link
         /// <summary>
         /// Gets or sets the URL of the web site associated with this feed.
         /// </summary>
@@ -494,9 +461,7 @@ namespace Argotic.Syndication
                 channelLink = value;
             }
         }
-        #endregion
 
-        #region ManagingEditor
         /// <summary>
         /// Gets or sets the e-mail address of the person to contact regarding the editorial content of this feed.
         /// </summary>
@@ -526,9 +491,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region PublicationDate
         /// <summary>
         /// Gets or sets the publication date and time of this feed's content.
         /// </summary>
@@ -551,9 +514,7 @@ namespace Argotic.Syndication
                 channelPublicationDate = value;
             }
         }
-        #endregion
 
-        #region Rating
         /// <summary>
         /// Gets or sets an advisory label for the content in this feed.
         /// </summary>
@@ -583,9 +544,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region SelfLink
         /// <summary>
         /// Gets or sets a URL that describes the feed itself.
         /// </summary>
@@ -612,9 +571,7 @@ namespace Argotic.Syndication
                 channelSelfLink = value;
             }
         }
-        #endregion
 
-        #region SkipDays
         /// <summary>
         /// Gets or sets the days of the week during which this feed is not updated.
         /// </summary>
@@ -633,9 +590,7 @@ namespace Argotic.Syndication
                 return channelSkipDays;
             }
         }
-        #endregion
 
-        #region SkipHours
         /// <summary>
         /// Gets or sets the hours of the day during which this feed is not updated.
         /// </summary>
@@ -654,9 +609,7 @@ namespace Argotic.Syndication
                 return channelSkipHours;
             }
         }
-        #endregion
 
-        #region TextInput
         /// <summary>
         /// Gets or sets a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI).
         /// </summary>
@@ -676,9 +629,7 @@ namespace Argotic.Syndication
                 channelTextInput = value;
             }
         }
-        #endregion
 
-        #region TimeToLive
         /// <summary>
         /// Gets or sets the maximum number of minutes to cache the data before a client should request it again.
         /// </summary>
@@ -701,9 +652,7 @@ namespace Argotic.Syndication
                 channelTimeToLive = value;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets character data that provides the name of this feed.
         /// </summary>
@@ -723,9 +672,7 @@ namespace Argotic.Syndication
                 channelTitle = value.Trim();
             }
         }
-        #endregion
 
-        #region Webmaster
         /// <summary>
         /// Gets or sets the e-mail address of the person to contact about technical issues regarding this feed.
         /// </summary>
@@ -755,12 +702,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -787,9 +732,7 @@ namespace Argotic.Syndication
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -816,9 +759,7 @@ namespace Argotic.Syndication
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -851,12 +792,10 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<RssItem> source, Collection<RssItem> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{RssItem}"/> collections.
         /// </summary>
@@ -907,12 +846,10 @@ namespace Argotic.Syndication
 
             return result;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -929,9 +866,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return this.Load(source, new SyndicationResourceLoadSettings());
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1026,9 +961,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="RssChannel"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -1167,12 +1100,10 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	UTILITY METHODS
         //============================================================
-        #region AddItem(RssItem item)
         /// <summary>
         /// Adds the supplied <see cref="RssItem"/> to the current instance's <see cref="Items"/> collection.
         /// </summary>
@@ -1199,9 +1130,7 @@ namespace Argotic.Syndication
 
             return wasAdded;
         }
-        #endregion
 
-        #region RemoveItem(RssItem item)
         /// <summary>
         /// Removes the supplied <see cref="RssItem"/> from the current instance's <see cref="Items"/> collection.
         /// </summary>
@@ -1234,12 +1163,10 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadCollections(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the collection elements of this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1359,9 +1286,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the optional elements of this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1510,9 +1435,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the optional RSS Profile elements of this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1571,12 +1494,10 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="RssChannel"/>.
         /// </summary>
@@ -1609,12 +1530,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -1705,9 +1624,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -1725,9 +1642,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -1741,9 +1656,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -1766,9 +1679,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -1779,9 +1690,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -1804,9 +1713,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -1829,6 +1736,5 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

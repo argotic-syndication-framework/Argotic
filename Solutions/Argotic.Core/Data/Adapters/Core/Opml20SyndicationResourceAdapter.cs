@@ -33,14 +33,10 @@ namespace Argotic.Data.Adapters
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
-        
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes a new instance of the <see cref="Opml20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -57,12 +53,10 @@ namespace Argotic.Data.Adapters
             //	Initialization and argument validation handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Fill(OpmlDocument resource)
         /// <summary>
         /// Modifies the <see cref="OpmlDocument"/> to match the data source.
         /// </summary>
@@ -117,6 +111,5 @@ namespace Argotic.Data.Adapters
                 adapter.Fill(resource, manager);
             }
         }
-        #endregion
     }
 }

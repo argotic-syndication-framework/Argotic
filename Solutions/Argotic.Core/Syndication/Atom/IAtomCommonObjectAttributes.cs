@@ -20,7 +20,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region BaseUri
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -35,9 +34,7 @@ namespace Argotic.Syndication
             get;
             set;
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
         /// </summary>
@@ -52,6 +49,5 @@ namespace Argotic.Syndication
             get;
             set;
         }
-        #endregion
     }
 }

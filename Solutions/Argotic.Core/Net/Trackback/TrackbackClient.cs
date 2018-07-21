@@ -41,7 +41,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the location of the host computer that client Trackback pings will be sent to.
         /// </summary>
@@ -74,12 +73,10 @@ namespace Argotic.Net
         /// Private member to hold Trackback web request used by asynchronous send operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region TrackbackClient()
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClient"/> class.
         /// </summary>
@@ -90,9 +87,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.Initialize();
         }
-        #endregion
 
-        #region TrackbackClient(Uri host)
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified Trackback server.
         /// </summary>
@@ -110,9 +105,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.Host   = host;
         }
-        #endregion
 
-        #region TrackbackClient(Uri host, string userAgent)
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified Trackback server and user agent.
         /// </summary>
@@ -128,23 +121,19 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.UserAgent  = userAgent;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region SendCompleted
         /// <summary>
         /// Occurs when an asynchronous Trackback ping request send operation completes.
         /// </summary>
         /// <seealso cref="SendAsync(TrackbackMessage, Object)"/>
         public event EventHandler<TrackbackMessageSentEventArgs> SendCompleted;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnMessageSent(TrackbackMessageSentEventArgs e)
         /// <summary>
         /// Raises the <see cref="SendCompleted"/> event.
         /// </summary>
@@ -177,12 +166,10 @@ namespace Argotic.Net
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Credentials
         /// <summary>
         /// Gets or sets the authentication credentials utilized by this client when making Trackback pings.
         /// </summary>
@@ -202,9 +189,7 @@ namespace Argotic.Net
                 clientOptions.Credentials = value;
             }
         }
-        #endregion
 
-        #region Host
         /// <summary>
         /// Gets or sets the location of the host computer that client Trackback pings will be sent to.
         /// </summary>
@@ -226,9 +211,7 @@ namespace Argotic.Net
                 clientHost = value;
             }
         }
-        #endregion
 
-        #region Proxy
         /// <summary>
         /// Gets or sets the web proxy utilized by this client to proxy Trackback pings.
         /// </summary>
@@ -248,9 +231,7 @@ namespace Argotic.Net
                 clientOptions.Proxy = value;
             }
         }
-        #endregion
 
-        #region Timeout
         /// <summary>
         /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
         /// </summary>
@@ -283,9 +264,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region UseDefaultCredentials
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
         /// </summary>
@@ -318,9 +297,7 @@ namespace Argotic.Net
                 clientUsesDefaultCredentials = value;
             }
         }
-        #endregion
 
-        #region UserAgent
         /// <summary>
         /// Gets or sets information such as the client application name, version, host operating system, and language. 
         /// </summary>
@@ -340,12 +317,10 @@ namespace Argotic.Net
                 clientUserAgent = value.Trim();
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncSendHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
@@ -362,9 +337,7 @@ namespace Argotic.Net
                 clientAsyncSendCancelled = value;
             }
         }
-        #endregion
 
-        #region SendOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the client is in the process of sending an Trackback ping request.
         /// </summary>
@@ -381,12 +354,10 @@ namespace Argotic.Net
                 clientIsSending = value;
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncSendCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous send operation completes.
         /// </summary>
@@ -447,9 +418,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -476,12 +445,10 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.SendOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Send(TrackbackMessage message)
         /// <summary>
         /// Sends the specified message to a Trackback server to execute an Trackback ping request.
         /// </summary>
@@ -526,9 +493,7 @@ namespace Argotic.Net
 
             return response;
         }
-        #endregion
 
-        #region SendAsync(TrackbackMessage message, Object userToken)
         /// <summary>
         /// Sends the specified message to an Trackback server to execute an Trackback ping request. 
         /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
@@ -586,9 +551,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
         }
-        #endregion
 
-        #region SendAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to send an Trackback ping request.
         /// </summary>
@@ -605,12 +568,10 @@ namespace Argotic.Net
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
         /// <summary>
         /// Initializes a new <see cref="WebRequest"/> suitable for sending an Trackback ping request using the supplied host, user agent, message, credentials, and proxy.
         /// </summary>
@@ -677,9 +638,7 @@ namespace Argotic.Net
 
             return httpRequest;
         }
-        #endregion
 
-        #region Initialize()
         /// <summary>
         /// Initializes the current instance using the application configuration settings.
         /// </summary>
@@ -716,6 +675,5 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
     }
 }

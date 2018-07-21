@@ -29,7 +29,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region AtomId
             AtomFeed feed   = new AtomFeed();
 
             //  Identifies the feed using a universally unique and permanent URI
@@ -54,7 +53,6 @@ namespace Argotic.Examples
             entry.Summary   = new AtomTextConstruct("Some text.");
 
             feed.AddEntry(entry);
-            #endregion
         }
     }
 }

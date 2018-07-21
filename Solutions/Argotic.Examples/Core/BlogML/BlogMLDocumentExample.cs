@@ -33,7 +33,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region BlogMLDocument
             BlogMLDocument document = new BlogMLDocument();
 
             document.RootUrl        = new Uri("/blogs/default.aspx");
@@ -107,7 +106,6 @@ namespace Argotic.Examples
             comment.Title           = new BlogMLTextConstruct("re: Sample Blog Post");
             comment.Content         = new BlogMLTextConstruct("This is a test comment.");
             post.Comments.Add(comment);
-            #endregion
         }
 
         //============================================================
@@ -118,7 +116,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             BlogMLDocument document = BlogMLDocument.Create(new Uri("http://www.example.org/blog/blogML.axd"));
 
             foreach (BlogMLPost post in document.Posts)
@@ -128,7 +125,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the blog post
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -139,7 +135,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load resource asynchronously using event-based notification
             //------------------------------------------------------------
@@ -148,10 +143,8 @@ namespace Argotic.Examples
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
             document.LoadAsync(new Uri("http://www.example.org/blog/blogML.axd"), null);
-            #endregion
         }
 
-        #region ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="BlogMLDocument.Loaded"/> event.
         /// </summary>
@@ -163,7 +156,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -173,7 +165,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://www.example.org/blog/blogML.axd");
 
             BlogMLDocument document = new BlogMLDocument();
@@ -186,7 +177,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the blog post
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -194,7 +184,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             BlogMLDocument document = new BlogMLDocument();
 
             using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read))
@@ -209,7 +198,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -217,7 +205,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             BlogMLDocument document = new BlogMLDocument();
 
             using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read))
@@ -239,7 +226,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -247,7 +233,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             BlogMLDocument document = new BlogMLDocument();
             Uri source              = new Uri("http://www.example.org/blog/blogML.axd");
 
@@ -260,7 +245,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the blog post
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -268,7 +252,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             BlogMLDocument document = new BlogMLDocument();
 
             //  Modify document state using public properties and methods
@@ -277,7 +260,6 @@ namespace Argotic.Examples
             {
                 document.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -285,7 +267,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             BlogMLDocument document = new BlogMLDocument();
 
             //  Modify document state using public properties and methods
@@ -300,7 +281,6 @@ namespace Argotic.Examples
                     document.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

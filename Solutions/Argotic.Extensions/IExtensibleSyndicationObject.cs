@@ -19,7 +19,6 @@ namespace Argotic.Extensions
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to the syndication entity.
         /// </summary>
@@ -31,9 +30,7 @@ namespace Argotic.Extensions
             get;
             set;
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if the syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -42,12 +39,10 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -55,9 +50,7 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         bool AddExtension(ISyndicationExtension extension);
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -72,9 +65,7 @@ namespace Argotic.Extensions
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match);
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -82,6 +73,5 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         bool RemoveExtension(ISyndicationExtension extension);
-        #endregion
     }
 }

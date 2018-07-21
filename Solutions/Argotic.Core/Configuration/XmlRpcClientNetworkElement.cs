@@ -21,7 +21,6 @@ namespace Argotic.Configuration
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the client host configuration property for the element.
         /// </summary>
@@ -46,12 +45,10 @@ namespace Argotic.Configuration
         /// Private member to hold a collection of configuration element properties for the element.
         /// </summary>
         private static ConfigurationPropertyCollection configurationElementProperties = new ConfigurationPropertyCollection();
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcClientNetworkElement()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClientNetworkElement"/> class.
         /// </summary>
@@ -66,12 +63,10 @@ namespace Argotic.Configuration
             configurationElementProperties.Add(configurationElementPasswordProperty);
             configurationElementProperties.Add(configurationElementDomainProperty);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region DefaultCredentials
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="System.Net.CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent with requests.
         /// </summary>
@@ -89,9 +84,7 @@ namespace Argotic.Configuration
                 base[configurationElementDefaultCredentialsProperty] = value;
             }
         }
-        #endregion
 
-        #region Domain
         /// <summary>
         /// Gets or sets the domain or computer name that verifies the network credentials.
         /// </summary>
@@ -109,9 +102,7 @@ namespace Argotic.Configuration
                 base[configurationElementDomainProperty] = value;
             }
         }
-        #endregion
 
-        #region Host
         /// <summary>
         /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
         /// </summary>
@@ -129,9 +120,7 @@ namespace Argotic.Configuration
                 base[configurationSectionHostProperty] = value;
             }
         }
-        #endregion
 
-        #region Password
         /// <summary>
         /// Gets or sets the user password to use to connect to an XML-RPC server.
         /// </summary>
@@ -149,9 +138,7 @@ namespace Argotic.Configuration
                 base[configurationElementPasswordProperty] = value;
             }
         }
-        #endregion
 
-        #region UserName
         /// <summary>
         /// Gets or sets the user name to connect to an XML-RPC server.
         /// </summary>
@@ -169,12 +156,10 @@ namespace Argotic.Configuration
                 base[configurationElementUserNameProperty] = value;
             }
         }
-        #endregion
 
         //============================================================
         //	UTILITY PROPERTIES
         //============================================================
-        #region Credential
         /// <summary>
         /// Returns a <see cref="NetworkCredential"/> for the configured user name, password, and domain.
         /// </summary>
@@ -205,12 +190,10 @@ namespace Argotic.Configuration
                 return credential;
             }
         }
-        #endregion
 
         //============================================================
         //	PROTECTED PROPERTIES
         //============================================================
-        #region Properties
         /// <summary>
         /// Gets the configuration properties for this element.
         /// </summary>
@@ -222,6 +205,5 @@ namespace Argotic.Configuration
                 return configurationElementProperties;
             }
         }
-        #endregion
     }
 }

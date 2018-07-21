@@ -24,7 +24,6 @@ namespace Argotic.Configuration
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold object used to synchronize locks when reading Trackback configuration information.
         /// </summary>
@@ -37,12 +36,10 @@ namespace Argotic.Configuration
         /// Private member to hold object used to synchronize locks when reading syndication resource configuration information.
         /// </summary>
         private static object configurationManagerSyndicationResourceSyncObject;
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region SyndicationSyncObject
         /// <summary>
         /// Gets the <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.
         /// </summary>
@@ -58,9 +55,7 @@ namespace Argotic.Configuration
                 return configurationManagerSyndicationResourceSyncObject;
             }
         }
-        #endregion
 
-        #region TrackbackSyncObject
         /// <summary>
         /// Gets the <see cref="Object"/> used when locking acess to the Trackback configuration file section being managed.
         /// </summary>
@@ -76,9 +71,7 @@ namespace Argotic.Configuration
                 return configurationManagerTrackbackSyncObject;
             }
         }
-        #endregion
 
-        #region XmlRpcSyncObject
         /// <summary>
         /// Gets the <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.
         /// </summary>
@@ -94,12 +87,10 @@ namespace Argotic.Configuration
                 return configurationManagerXmlRpcSyncObject;
             }
         }
-        #endregion
 
         //============================================================
         //	GENERIC METHODS
         //============================================================
-        #region GetSection(string sectionName)
         /// <summary>
         /// Retrieves a specified configuration section for the current application's default configuration.
         /// </summary>
@@ -118,12 +109,10 @@ namespace Argotic.Configuration
 
             return ConfigurationManager.GetSection(sectionName);
         }
-        #endregion
 
         //============================================================
         //	PROVIDER METHODS
         //============================================================
-        #region GetSyndicationResourceSection()
         /// <summary>
         /// Returns the syndication resource configuration section information.
         /// </summary>
@@ -146,12 +135,10 @@ namespace Argotic.Configuration
                 return section;
             }
         }
-        #endregion
 
         //============================================================
         //	NETWORK CLIENT METHODS
         //============================================================
-        #region GetTracbackClientSection()
         /// <summary>
         /// Returns the Trackback client configuration section information.
         /// </summary>
@@ -174,9 +161,7 @@ namespace Argotic.Configuration
                 return section;
             }
         }
-        #endregion
 
-        #region GetXmlRpcClientSection()
         /// <summary>
         /// Returns the XML-RPC client configuration section information.
         /// </summary>
@@ -199,6 +184,5 @@ namespace Argotic.Configuration
                 return section;
             }
         }
-        #endregion
     }
 }

@@ -31,7 +31,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the type of the embedded text.
         /// </summary>
@@ -52,12 +51,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
         /// </summary>
         private string textContent                      = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaText()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaText"/> class.
         /// </summary>
@@ -67,9 +64,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaText(string text)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaText"/> class using the supplied textual content.
         /// </summary>
@@ -83,12 +78,10 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.Content    = text;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Content
         /// <summary>
         /// Gets or sets the content of this embedded text.
         /// </summary>
@@ -111,9 +104,7 @@ namespace Argotic.Extensions.Core
                 textContent = value.Trim();
             }
         }
-        #endregion
 
-        #region End
         /// <summary>
         /// Gets or sets the end time offset that this text stops being relevant to the media object.
         /// </summary>
@@ -138,9 +129,7 @@ namespace Argotic.Extensions.Core
                 textEnd = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the primary language encapsulated in this media object.
         /// </summary>
@@ -165,9 +154,7 @@ namespace Argotic.Extensions.Core
                 textLanguage = value;
             }
         }
-        #endregion
 
-        #region Start
         /// <summary>
         /// Gets or sets the start time offset that this text starts being relevant to the media object.
         /// </summary>
@@ -188,9 +175,7 @@ namespace Argotic.Extensions.Core
                 textStart = value;
             }
         }
-        #endregion
 
-        #region TextType
         /// <summary>
         /// Gets or sets the entity encoding utilized by this embedded text.
         /// </summary>
@@ -213,12 +198,10 @@ namespace Argotic.Extensions.Core
                 textType = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region TextTypeAsString(YahooMediaTextConstructType type)
         /// <summary>
         /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.
         /// </summary>
@@ -257,9 +240,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region TextTypeByName(string name)
         /// <summary>
         /// Returns the <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified entity encoding type name.
         /// </summary>
@@ -305,12 +286,10 @@ namespace Argotic.Extensions.Core
 
             return constructType;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaText"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -395,9 +374,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaText"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -447,12 +424,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaText"/>.
         /// </summary>
@@ -485,12 +460,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -531,9 +504,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -551,9 +522,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -567,9 +536,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -592,9 +559,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -605,9 +570,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -630,9 +593,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -655,6 +616,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

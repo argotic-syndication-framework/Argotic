@@ -26,7 +26,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the value of the parameter.
         /// </summary>
@@ -35,12 +34,10 @@ namespace Argotic.Net
         /// Private member to hold the type of scalar value the parameter represents.
         /// </summary>
         private XmlRpcScalarValueType scalarParameterType   = XmlRpcScalarValueType.None;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcScalarValue()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
         /// </summary>
@@ -50,9 +47,7 @@ namespace Argotic.Net
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region XmlRpcScalarValue(byte[] value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified array of bytes.
         /// </summary>
@@ -75,9 +70,7 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.Base64;
             this.Value      = value;
         }
-        #endregion
 
-        #region XmlRpcScalarValue(bool value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified boolean value.
         /// </summary>
@@ -94,9 +87,7 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.Boolean;
             this.Value      = value;
         }
-        #endregion
 
-        #region XmlRpcScalarValue(DateTime value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified instance in time.
         /// </summary>
@@ -113,9 +104,7 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.DateTime;
             this.Value      = value;
         }
-        #endregion
 
-        #region XmlRpcScalarValue(double value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified double-precision signed floating-point number.
         /// </summary>
@@ -132,9 +121,7 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.Double;
             this.Value      = value;
         }
-        #endregion
 
-        #region XmlRpcScalarValue(int value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified 32-bit signed integer.
         /// </summary>
@@ -151,9 +138,7 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.Integer;
             this.Value      = value;
         }
-        #endregion
 
-        #region XmlRpcScalarValue(string value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified series of characters.
         /// </summary>
@@ -170,12 +155,10 @@ namespace Argotic.Net
             this.ValueType  = XmlRpcScalarValueType.String;
             this.Value      = !String.IsNullOrEmpty(value) ? value : String.Empty;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Value
         /// <summary>
         /// Gets or sets the value of this parameter.
         /// </summary>
@@ -197,9 +180,7 @@ namespace Argotic.Net
                 scalarParameterValue = value;
             }
         }
-        #endregion
 
-        #region ValueType
         /// <summary>
         /// Gets or sets the type of scalar value this parameter represents.
         /// </summary>
@@ -224,12 +205,10 @@ namespace Argotic.Net
                 scalarParameterType = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -291,9 +270,7 @@ namespace Argotic.Net
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="XmlRpcScalarValue"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -324,12 +301,10 @@ namespace Argotic.Net
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.
         /// </summary>
@@ -362,12 +337,10 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -400,9 +373,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -420,9 +391,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -436,9 +405,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -461,9 +428,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -474,9 +439,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -499,9 +462,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -524,12 +485,10 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region StringAsValue(XmlRpcScalarValueType type, string scalar)
         /// <summary>
         /// Returns an <see cref="Object"/> that represents the converted value for the specified <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
@@ -586,9 +545,7 @@ namespace Argotic.Net
 
             return result;
         }
-        #endregion
 
-        #region ValueAsString(XmlRpcScalarValueType type, object scalar)
         /// <summary>
         /// Returns the string representation of the supplied scalar value using the specified <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
@@ -647,6 +604,5 @@ namespace Argotic.Net
 
             return value;
         }
-        #endregion
     }
 }

@@ -18,7 +18,6 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region ApprovalStatus
         /// <summary>
         /// Gets or sets the approval status of the web log entity.
         /// </summary>
@@ -31,9 +30,7 @@ namespace Argotic.Syndication.Specialized
             get;
             set;
         }
-        #endregion
 
-        #region CreatedOn
         /// <summary>
         /// Gets or sets a date-time indicating when the web log entity was created.
         /// </summary>
@@ -49,9 +46,7 @@ namespace Argotic.Syndication.Specialized
             get;
             set;
         }
-        #endregion
 
-        #region Id
         /// <summary>
         /// Gets or sets the unique identifier of the web log entity.
         /// </summary>
@@ -61,9 +56,7 @@ namespace Argotic.Syndication.Specialized
             get;
             set;
         }
-        #endregion
 
-        #region LastModifiedOn
         /// <summary>
         /// Gets or sets a date-time indicating when the web log entity was last modified.
         /// </summary>
@@ -79,9 +72,7 @@ namespace Argotic.Syndication.Specialized
             get;
             set;
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of the web log entity.
         /// </summary>
@@ -92,6 +83,5 @@ namespace Argotic.Syndication.Specialized
             get;
             set;
         }
-        #endregion
     }
 }

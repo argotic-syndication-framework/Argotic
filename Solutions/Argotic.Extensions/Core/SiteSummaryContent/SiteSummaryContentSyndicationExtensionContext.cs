@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the entity-encoded or CDATA-escaped version of the content of the item.
         /// </summary>
@@ -32,12 +31,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the alternative versions of the item's content.
         /// </summary>
         private Collection<SiteSummaryContentItem> extensionItems;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SiteSummaryContentSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtensionContext"/> class.
         /// </summary>
@@ -47,12 +44,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Encoded
         /// <summary>
         /// Gets or sets an alternative version of the content of this item.
         /// </summary>
@@ -79,9 +74,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Items
         /// <summary>
         /// Gets the alternative versions of this item's content.
         /// </summary>
@@ -104,12 +97,10 @@ namespace Argotic.Extensions.Core
                 return extensionItems;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -165,9 +156,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -204,6 +193,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteEndElement();
             }
         }
-        #endregion
     }
 }

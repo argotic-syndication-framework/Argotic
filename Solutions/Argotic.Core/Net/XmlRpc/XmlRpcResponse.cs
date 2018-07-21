@@ -33,7 +33,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the response value that was returned for the remote procedure call.
         /// </summary>
@@ -42,12 +41,10 @@ namespace Argotic.Net
         /// Private member to hold the response fault information.
         /// </summary>
         private XmlRpcStructureValue responseFault;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcResponse()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class.
         /// </summary>
@@ -57,9 +54,7 @@ namespace Argotic.Net
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region XmlRpcResponse(IXmlRpcValue parameter)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="IXmlRpcValue"/>.
         /// </summary>
@@ -77,9 +72,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             responseParameter   = parameter;
         }
-        #endregion
 
-        #region XmlRpcResponse(XmlRpcStructureValue fault)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="XmlRpcStructureValue"/>.
         /// </summary>
@@ -97,9 +90,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             responseFault   = fault;
         }
-        #endregion
 
-        #region XmlRpcResponse(int faultCode, string faultMessage)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied fault code and message.
         /// </summary>
@@ -118,9 +109,7 @@ namespace Argotic.Net
 
             responseFault   = faultStructure;
         }
-        #endregion
 
-        #region XmlRpcResponse(WebResponse response)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="WebResponse"/>.
         /// </summary>
@@ -173,12 +162,10 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Fault
         /// <summary>
         /// Gets the fault information that was returned for the remote procedure call.
         /// </summary>
@@ -195,9 +182,7 @@ namespace Argotic.Net
                 return responseFault;
             }
         }
-        #endregion
 
-        #region Parameter
         /// <summary>
         /// Gets the response information that was returned for the remote procedure call.
         /// </summary>
@@ -213,12 +198,10 @@ namespace Argotic.Net
                 return responseParameter;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="XmlRpcResponse"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -279,9 +262,7 @@ namespace Argotic.Net
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="XmlRpcResponse"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -317,12 +298,10 @@ namespace Argotic.Net
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
         /// </summary>
@@ -355,12 +334,10 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -425,9 +402,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -445,9 +420,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -461,9 +434,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -486,9 +457,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -499,9 +468,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -524,9 +491,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -549,6 +514,5 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

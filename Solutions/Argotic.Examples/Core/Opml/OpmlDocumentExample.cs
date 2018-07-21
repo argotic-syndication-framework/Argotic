@@ -34,7 +34,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region OpmlDocument
             OpmlDocument document   = new OpmlDocument();
 
             document.Head.Title                 = "Example OPML List";
@@ -48,7 +47,6 @@ namespace Argotic.Examples
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
-            #endregion
         }
 
         //============================================================
@@ -59,7 +57,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             OpmlDocument document   = OpmlDocument.Create(new Uri("http://blog.oppositionallydefiant.com/opml.axd"));
 
             foreach (OpmlOutline outline in document.Outlines)
@@ -69,7 +66,6 @@ namespace Argotic.Examples
                     //  Process outline information
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -80,7 +76,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load resource asynchronously using event-based notification
             //------------------------------------------------------------
@@ -89,10 +84,8 @@ namespace Argotic.Examples
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
             document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/opml.axd"), null);
-            #endregion
         }
 
-        #region ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="OpmlDocument.Loaded"/> event.
         /// </summary>
@@ -104,7 +97,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -114,7 +106,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/opml.axd");
 
             OpmlDocument document   = new OpmlDocument();
@@ -127,7 +118,6 @@ namespace Argotic.Examples
                     //  Process outline information
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -135,7 +125,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             OpmlDocument document   = new OpmlDocument();
 
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
@@ -150,7 +139,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -158,7 +146,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             OpmlDocument document   = new OpmlDocument();
 
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
@@ -180,7 +167,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -188,7 +174,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             OpmlDocument document   = new OpmlDocument();
             Uri source              = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
 
@@ -201,7 +186,6 @@ namespace Argotic.Examples
                     //  Process outline information
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -209,7 +193,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             OpmlDocument document   = new OpmlDocument();
 
             //  Modify document state using public properties and methods
@@ -218,7 +201,6 @@ namespace Argotic.Examples
             {
                 document.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -226,7 +208,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             OpmlDocument document   = new OpmlDocument();
 
             //  Modify document state using public properties and methods
@@ -241,7 +222,6 @@ namespace Argotic.Examples
                     document.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

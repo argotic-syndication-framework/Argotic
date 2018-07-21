@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the URL of an OPML file containing the blogroll for the web site.
         /// </summary>
@@ -39,12 +38,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the URL of the site's changes file.
         /// </summary>
         private Uri extensionChanges;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region BlogChannelSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtensionContext"/> class.
         /// </summary>
@@ -54,12 +51,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Blink
         /// <summary>
         /// Gets or sets the URL of a weblog that the author is promoting.
         /// </summary>
@@ -76,9 +71,7 @@ namespace Argotic.Extensions.Core
                 extensionBlink = value;
             }
         }
-        #endregion
 
-        #region BlogRoll
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the blogroll for the web site.
         /// </summary>
@@ -95,9 +88,7 @@ namespace Argotic.Extensions.Core
                 extensionBlogRoll = value;
             }
         }
-        #endregion
 
-        #region Changes
         /// <summary>
         /// Gets or sets the URL the web site's change tracking endpoint.
         /// </summary>
@@ -120,9 +111,7 @@ namespace Argotic.Extensions.Core
                 extensionChanges = value;
             }
         }
-        #endregion
 
-        #region MySubscriptions
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the author's feed subscriptions.
         /// </summary>
@@ -139,12 +128,10 @@ namespace Argotic.Extensions.Core
                 extensionMySubscriptions = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -219,9 +206,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -261,6 +246,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("changes", xmlNamespace, this.Changes.ToString());
             }
         }
-        #endregion
     }
 }

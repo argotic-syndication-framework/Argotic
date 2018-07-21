@@ -27,7 +27,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the well known name for the character encoding parameter.
         /// </summary>
@@ -48,12 +47,10 @@ namespace Argotic.Net
         /// Private member to hold additional parameters applied to the media content.
         /// </summary>
         private Dictionary<string, string> webContentMediaParameters;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region WebContentType()
         /// <summary>
         /// Initializes a new instance of the <see cref="WebContentType"/> class.
         /// </summary>
@@ -63,9 +60,7 @@ namespace Argotic.Net
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region WebContentType(string mediaType, string mediaSubtype)
         /// <summary>
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type and sub-type.
         /// </summary>
@@ -83,9 +78,7 @@ namespace Argotic.Net
             this.MediaType      = mediaType;
             this.MediaSubtype   = mediaSubtype;
         }
-        #endregion
 
-        #region WebContentType(string mediaType, string mediaSubtype, string discriminator)
         /// <summary>
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type and type discriminator.
         /// </summary>
@@ -103,9 +96,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.Discriminator  = discriminator;
         }
-        #endregion
 
-        #region WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet)
         /// <summary>
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type, type discriminator and character encoding.
         /// </summary>
@@ -130,12 +121,10 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.CharacterSet   = characterSet.WebName;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region CharacterSet
         /// <summary>
         /// Gets or sets the character encoding of this media content.
         /// </summary>
@@ -166,9 +155,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region Discriminator
         /// <summary>
         /// Gets or sets the type discriminator of this media content.
         /// </summary>
@@ -200,9 +187,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region Encoding
         /// <summary>
         /// Gets the <see cref="Encoding"/> for the current <see cref="CharacterSet"/>.
         /// </summary>
@@ -227,9 +212,7 @@ namespace Argotic.Net
                 return encoding;
             }
         }
-        #endregion
 
-        #region MediaType
         /// <summary>
         /// Gets or sets the top-level media type used to declare the general type of data this media content represents.
         /// </summary>
@@ -249,9 +232,7 @@ namespace Argotic.Net
                 webContentMediaType = value.Trim();
             }
         }
-        #endregion
 
-        #region MediaSubtype
         /// <summary>
         /// Gets or sets the specific format for the general type of data this media content represents.
         /// </summary>
@@ -271,9 +252,7 @@ namespace Argotic.Net
                 webContentMediaSubType = value.Trim();
             }
         }
-        #endregion
 
-        #region Parameters
         /// <summary>
         /// Gets the name/value pairs of additional parameters applied to this media content.
         /// </summary>
@@ -294,12 +273,10 @@ namespace Argotic.Net
                 return webContentMediaParameters;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target)
         /// <summary>
         /// Compares two specified <see cref="Dictionary{T, T}"/> collections.
         /// </summary>
@@ -358,12 +335,10 @@ namespace Argotic.Net
 
             return result;
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="WebContentType"/>.
         /// </summary>
@@ -401,9 +376,7 @@ namespace Argotic.Net
 
             return builder.ToString();
         }
-        #endregion
 
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -438,9 +411,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -458,9 +429,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -474,9 +443,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -499,9 +466,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -512,9 +477,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -537,9 +500,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -562,6 +523,5 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

@@ -29,7 +29,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region AtomCategory
             AtomFeed feed   = new AtomFeed();
 
             feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
@@ -61,7 +60,6 @@ namespace Argotic.Examples
             entry.Categories.Add(entryCategory);
 
             feed.AddEntry(entry);
-            #endregion
         }
     }
 }

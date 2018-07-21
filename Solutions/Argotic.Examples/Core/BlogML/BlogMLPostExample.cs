@@ -29,7 +29,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region BlogMLPost
             BlogMLDocument document = new BlogMLDocument();
 
             document.RootUrl        = new Uri("/blogs/default.aspx");
@@ -104,7 +103,6 @@ namespace Argotic.Examples
             comment.Title           = new BlogMLTextConstruct("re: Sample Blog Post");
             comment.Content         = new BlogMLTextConstruct("This is a test comment.");
             post.Comments.Add(comment);
-            #endregion
         }
 
         //============================================================
@@ -115,13 +113,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void PostTypeAsStringExample()
         {
-            #region PostTypeAsString(BlogMLPostType type)
             string postType = BlogMLPost.PostTypeAsString(BlogMLPostType.Normal);   // normal
 
             if (String.Compare(postType, "normal", StringComparison.OrdinalIgnoreCase) == 0)
             {
             }
-            #endregion
         }
 
         /// <summary>
@@ -129,13 +125,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void PostTypeByNameExample()
         {
-            #region PostTypeByName(string name)
             BlogMLPostType postType = BlogMLPost.PostTypeByName("normal");
 
             if (postType == BlogMLPostType.Normal)
             {
             }
-            #endregion
         }
     }
 }

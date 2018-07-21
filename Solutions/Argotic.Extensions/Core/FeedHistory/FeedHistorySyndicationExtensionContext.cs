@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a value indicating if feed contains all of the entries of a logical feed.
         /// </summary>
@@ -36,12 +35,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a collection of relations for linked feed documents that together contain the entries of a logical feed.
         /// </summary>
         private Collection<FeedHistoryLinkRelation> extensionLinkRelations;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedHistorySyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtensionContext"/> class.
         /// </summary>
@@ -51,12 +48,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region IsArchive
         /// <summary>
         /// Gets or sets a value indicating the feed is a set of linked feed documents that together contain the entries of a logical feed, without any guarantees about the stability of the documents' contents.
         /// </summary>
@@ -73,9 +68,7 @@ namespace Argotic.Extensions.Core
                 extensionIsArchive = value;
             }
         }
-        #endregion
 
-        #region IsComplete
         /// <summary>
         /// Gets or sets a value indicating the feed contains all of the entries of a logical feed; any entry not actually in the feed document should not be considered to be part of that feed.
         /// </summary>
@@ -92,9 +85,7 @@ namespace Argotic.Extensions.Core
                 extensionIsComplete = value;
             }
         }
-        #endregion
 
-        #region Relations
         /// <summary>
         /// Gets a collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.
         /// </summary>
@@ -111,12 +102,10 @@ namespace Argotic.Extensions.Core
                 return extensionLinkRelations;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -188,9 +177,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -225,6 +212,5 @@ namespace Argotic.Extensions.Core
                 relation.WriteTo(writer);
             }
         }
-        #endregion
     }
 }

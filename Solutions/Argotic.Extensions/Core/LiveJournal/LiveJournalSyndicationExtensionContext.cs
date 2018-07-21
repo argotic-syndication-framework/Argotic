@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the current music.
         /// </summary>
@@ -43,12 +42,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the associated user picture.
         /// </summary>
         private LiveJournalUserPicture extensionUserPicture;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region LiveJournalSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtensionContext"/> class.
         /// </summary>
@@ -58,12 +55,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region IsPreformatted
         /// <summary>
         /// Gets or sets a value indicating if the author has requested that the entry HTML be displayed without modification.
         /// </summary>
@@ -83,9 +78,7 @@ namespace Argotic.Extensions.Core
                 extensionIsPreformatted = value;
             }
         }
-        #endregion
 
-        #region Mood
         /// <summary>
         /// Gets or sets the current mood.
         /// </summary>
@@ -102,9 +95,7 @@ namespace Argotic.Extensions.Core
                 extensionMood = value;
             }
         }
-        #endregion
 
-        #region Music
         /// <summary>
         /// Gets or sets the current music.
         /// </summary>
@@ -131,9 +122,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Security
         /// <summary>
         /// Gets or sets the access level.
         /// </summary>
@@ -154,9 +143,7 @@ namespace Argotic.Extensions.Core
                 extensionSecurity = value;
             }
         }
-        #endregion
 
-        #region UserPicture
         /// <summary>
         /// Gets or sets theassociated user picture.
         /// </summary>
@@ -176,12 +163,10 @@ namespace Argotic.Extensions.Core
                 extensionUserPicture = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -259,9 +244,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -303,6 +286,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("preformatted", xmlNamespace, String.Empty);
             }
         }
-        #endregion
     }
 }

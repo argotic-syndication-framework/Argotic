@@ -33,7 +33,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region AtomEntry
             AtomEntry entry = new AtomEntry();
 
             entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
@@ -43,7 +42,6 @@ namespace Argotic.Examples
             entry.Authors.Add(new AtomPersonConstruct("John Doe"));
             entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
             entry.Summary   = new AtomTextConstruct("A stand-alone Atom Entry Document.");
-            #endregion
         }
 
         //============================================================
@@ -54,14 +52,12 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             AtomEntry entry = AtomEntry.Create(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"));
 
             if (entry.PublishedOn >= DateTime.Today)
             {
                 //  Perform some processing on the entry
             }
-            #endregion
         }
 
         //============================================================
@@ -72,7 +68,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load entry asynchronously using event-based notification
             //------------------------------------------------------------
@@ -81,10 +76,8 @@ namespace Argotic.Examples
             entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
 
             entry.LoadAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"), null);
-            #endregion
         }
 
-        #region EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="AtomFeed.Loaded"/> event.
         /// </summary>
@@ -96,7 +89,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -106,7 +98,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://example.org/blog/1234");
 
             AtomEntry entry         = new AtomEntry();
@@ -116,7 +107,6 @@ namespace Argotic.Examples
             {
                 //  Perform some processing on the entry
             }
-            #endregion
         }
 
         /// <summary>
@@ -124,7 +114,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             AtomEntry entry = new AtomEntry();
 
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
@@ -136,7 +125,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the entry
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -144,7 +132,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             AtomEntry entry = new AtomEntry();
 
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
@@ -163,7 +150,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -171,7 +157,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             AtomEntry entry = new AtomEntry();
             Uri source      = new Uri("http://example.org/blog/1234");
 
@@ -181,7 +166,6 @@ namespace Argotic.Examples
             {
                 //  Perform some processing on the entry
             }
-            #endregion
         }
 
         /// <summary>
@@ -189,7 +173,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             AtomEntry entry = new AtomEntry();
 
             //  Modify entry state using public properties and methods
@@ -198,7 +181,6 @@ namespace Argotic.Examples
             {
                 entry.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -206,7 +188,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             AtomEntry entry = new AtomEntry();
 
             //  Modify entry state using public properties and methods
@@ -221,7 +202,6 @@ namespace Argotic.Examples
                     entry.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

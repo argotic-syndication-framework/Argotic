@@ -22,7 +22,6 @@ namespace Argotic.Configuration.Provider
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the default provider configuration property for the section.
         /// </summary>
@@ -35,12 +34,10 @@ namespace Argotic.Configuration.Provider
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
         private static ConfigurationPropertyCollection configurationSectionProperties               = new ConfigurationPropertyCollection();
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SyndicationResourceSection()
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSection"/> class.
         /// </summary>
@@ -52,12 +49,10 @@ namespace Argotic.Configuration.Provider
             configurationSectionProperties.Add(configurationSectionProvidersProperty);
             configurationSectionProperties.Add(configurationSectionDefaultProviderProperty);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region DefaultProvider
         /// <summary>
         /// Gets or sets the name of the default provider that is used to manage syndication resources.
         /// </summary>
@@ -79,9 +74,7 @@ namespace Argotic.Configuration.Provider
                 base[configurationSectionDefaultProviderProperty] = value;
             }
         }
-        #endregion
 
-        #region Providers
         /// <summary>
         /// Gets a <see cref="ProviderSettingsCollection"/> object of <see cref="ProviderSettings"/> objects.
         /// </summary>
@@ -106,12 +99,10 @@ namespace Argotic.Configuration.Provider
                 return (ProviderSettingsCollection)base[configurationSectionProvidersProperty];
             }
         }
-        #endregion
 
         //============================================================
         //	PROTECTED PROPERTIES
         //============================================================
-        #region Properties
         /// <summary>
         /// Gets the configuration properties for this section.
         /// </summary>
@@ -123,6 +114,5 @@ namespace Argotic.Configuration.Provider
                 return configurationSectionProperties;
             }
         }
-        #endregion
     }
 }

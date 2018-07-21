@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region BlogChannelSyndicationExtension
             // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
             RssFeed feed    = RssFeed.Create(new Uri("http://www.example.com/feed.aspx?format=rss"));
 
@@ -50,7 +49,6 @@ namespace Argotic.Examples
             {
                 feed.Save(stream);
             }
-            #endregion
         }
     }
 }

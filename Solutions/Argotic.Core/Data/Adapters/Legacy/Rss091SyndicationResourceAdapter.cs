@@ -34,14 +34,10 @@ namespace Argotic.Data.Adapters
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
-        
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region Rss091SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes a new instance of the <see cref="Rss091SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -58,12 +54,10 @@ namespace Argotic.Data.Adapters
             //	Initialization and argument validation handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Fill(RssFeed resource)
         /// <summary>
         /// Modifies the <see cref="RssFeed"/> to match the data source.
         /// </summary>
@@ -98,12 +92,10 @@ namespace Argotic.Data.Adapters
                 adapter.Fill(resource, manager);
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the supplied <see cref="RssChannel"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -185,9 +177,7 @@ namespace Argotic.Data.Adapters
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
             adapter.Fill(channel);
         }
-        #endregion
 
-        #region FillChannelCollections(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the supplied <see cref="RssChannel"/> collection entities using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -302,9 +292,7 @@ namespace Argotic.Data.Adapters
                 }
             }
         }
-        #endregion
 
-        #region FillChannelOptionals(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the supplied <see cref="RssChannel"/> optional entities using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -381,9 +369,7 @@ namespace Argotic.Data.Adapters
                 Rss091SyndicationResourceAdapter.FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
             }
         }
-        #endregion
 
-        #region FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the supplied <see cref="RssImage"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -464,9 +450,7 @@ namespace Argotic.Data.Adapters
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
             adapter.Fill(image);
         }
-        #endregion
 
-        #region FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the supplied <see cref="RssTextInput"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -529,6 +513,5 @@ namespace Argotic.Data.Adapters
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
             adapter.Fill(textInput);
         }
-        #endregion
     }
 }

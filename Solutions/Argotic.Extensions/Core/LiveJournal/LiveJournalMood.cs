@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the textual content of the current mood.
         /// </summary>
@@ -33,12 +32,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a site specific identifier for the current mood.
         /// </summary>
         private int moodIdentifier  = Int32.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region LiveJournalMood()
         /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalMood"/> class.
         /// </summary>
@@ -48,12 +45,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Content
         /// <summary>
         /// Gets or sets the textual content that describes this mood.
         /// </summary>
@@ -73,9 +68,7 @@ namespace Argotic.Extensions.Core
                 moodContent = value.Trim();
             }
         }
-        #endregion
 
-        #region Id
         /// <summary>
         /// Gets or sets a site specific identifier for this mood.
         /// </summary>
@@ -92,12 +85,10 @@ namespace Argotic.Extensions.Core
                 moodIdentifier = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="LiveJournalMood"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -144,9 +135,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="LiveJournalMood"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -178,12 +167,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="LiveJournalMood"/>.
         /// </summary>
@@ -216,12 +203,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -255,9 +240,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -275,9 +258,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -291,9 +272,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -316,9 +295,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -329,9 +306,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -354,9 +329,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -379,6 +352,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

@@ -26,8 +26,7 @@ namespace Argotic.Extensions
 		//============================================================
 		//	PUBLIC/PRIVATE/PROTECTED MEMBERS
 		//============================================================
-		#region PRIVATE/PROTECTED/PUBLIC MEMBERS
-		/// <summary>
+	    /// <summary>
 		/// Private member to hold the XPathNavigator used to load a syndication extension.
 		/// </summary>
 		private XPathNavigator adapterNavigator;
@@ -35,13 +34,11 @@ namespace Argotic.Extensions
 		/// Private member to hold the XPathNavigator used to configure the load of a syndication extension.
 		/// </summary>
 		private SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	CONSTRUCTORS
 		//============================================================
-		#region SyndicationExtensionAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
-		/// <summary>
+	    /// <summary>
 		/// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
 		/// </summary>
 		/// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the extended syndication resource information.</param>
@@ -59,13 +56,11 @@ namespace Argotic.Extensions
 			adapterNavigator    = navigator;
 			adapterSettings     = settings;
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	STATIC PROPERTIES
 		//============================================================
-		#region FrameworkExtensions
-		/// <summary>
+	    /// <summary>
 		/// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
 		/// </summary>
 		/// <value>
@@ -105,13 +100,11 @@ namespace Argotic.Extensions
 				return extensions;
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	PUBLIC PROPERTIES
 		//============================================================
-		#region Navigator
-		/// <summary>
+	    /// <summary>
 		/// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
 		/// </summary>
 		/// <value>The <see cref="XPathNavigator"/> used to fill an extensible syndication resource.</value>
@@ -122,10 +115,8 @@ namespace Argotic.Extensions
 				return adapterNavigator;
 			}
 		}
-		#endregion
 
-		#region Settings
-		/// <summary>
+	    /// <summary>
 		/// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.
 		/// </summary>
 		/// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.</value>
@@ -136,13 +127,11 @@ namespace Argotic.Extensions
 				return adapterSettings;
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	STATIC METHODS
 		//============================================================
-		#region FillExtensionTypes(IExtensibleSyndicationObject entity, Collection<Type> types)
-		/// <summary>
+	    /// <summary>
 		/// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.
 		/// </summary>
 		/// <param name="entity">A <see cref="IExtensibleSyndicationObject"/> to extract syndication extensions from.</param>
@@ -180,10 +169,8 @@ namespace Argotic.Extensions
 				}
 			}
 		}
-		#endregion
 
-		#region GetExtensions(Collection<Type> types)
-		/// <summary>
+	    /// <summary>
 		/// Creates a collection of <see cref="ISyndicationExtension"/> instances for the specified types.
 		/// </summary>
 		/// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects to be instantiated.</param>
@@ -222,10 +209,8 @@ namespace Argotic.Extensions
 
 			return extensions;
 		}
-		#endregion
 
-		#region GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
-		/// <summary>
+	    /// <summary>
 		/// Creates a collection of <see cref="ISyndicationExtension"/> instances for the specified types.
 		/// </summary>
 		/// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent user-defined syndication extensions to be instantiated.</param>
@@ -282,10 +267,8 @@ namespace Argotic.Extensions
 
 			return supportedExtensions;
 		}
-		#endregion
 
-		#region WriteExtensionsTo(IEnumerable<ISyndicationExtension> extensions, XmlWriter writer)
-		/// <summary>
+	    /// <summary>
 		/// Saves the supplied <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects to the specified <see cref="XmlWriter"/>.
 		/// </summary>
 		/// <param name="extensions">A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent the syndication extensions to be written.</param>
@@ -308,10 +291,8 @@ namespace Argotic.Extensions
 				extension.WriteTo(writer);
 			}
 		}
-		#endregion
 
-		#region WriteXmlNamespaceDeclarations(Collection<Type> types, XmlWriter writer)
-		/// <summary>
+	    /// <summary>
 		/// Writes the prefixed XML namespace declarations for the supplied <see cref="Collection{T}"/> collection of syndication extension <see cref="Type"/> objects to the specified <see cref="XmlWriter"/>.
 		/// </summary>
 		/// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent the syndication extensions to write prefixed XML namespace declarations for.</param>
@@ -342,13 +323,11 @@ namespace Argotic.Extensions
 				}
 			}
 		}
-		#endregion
 
-		//============================================================
+	    //============================================================
 		//	PUBLIC METHODS
 		//============================================================
-		#region Fill(IExtensibleSyndicationObject entity)
-		/// <summary>
+	    /// <summary>
 		/// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
 		/// </summary>
 		/// <remarks>
@@ -374,10 +353,8 @@ namespace Argotic.Extensions
 			//------------------------------------------------------------
 			this.Fill(entity, manager);
 		}
-		#endregion
 
-		#region Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
-		/// <summary>
+	    /// <summary>
 		/// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
 		/// </summary>
 		/// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
@@ -425,6 +402,5 @@ namespace Argotic.Extensions
 				}
 			}
 		}
-		#endregion
 	}
 }

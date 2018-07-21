@@ -19,7 +19,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         ///  Private member to hold the display name for the attributed field.
         /// </summary>
@@ -28,12 +27,10 @@ namespace Argotic.Common
         /// Private member to hold the alterate textual value for the attributed field.
         /// </summary>
         private string enumMetadataAlternateValue   = String.Empty;
-        #endregion
-        
+
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region EnumerationMetadataAttribute()
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
         /// </summary>
@@ -43,12 +40,10 @@ namespace Argotic.Common
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region AlternateValue
         /// <summary>
         /// Gets or sets the alternate textual value for the attributed field.
         /// </summary>
@@ -72,9 +67,7 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
-        #region DisplayName
         /// <summary>
         /// Gets or sets the display name for the attributed field.
         /// </summary>
@@ -98,12 +91,10 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.
         /// </summary>
@@ -118,12 +109,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return String.Format(null, "[EnumerationMetadata(DisplayName = \"{0}\", AlternateValue=\"{1}\")]", this.DisplayName, this.AlternateValue);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -157,9 +146,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -177,9 +164,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -193,9 +178,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -218,9 +201,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -231,9 +212,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -256,9 +235,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -281,6 +258,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

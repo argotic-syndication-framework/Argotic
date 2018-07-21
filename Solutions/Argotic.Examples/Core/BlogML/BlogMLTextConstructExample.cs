@@ -29,13 +29,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void ConstructTypeAsStringExample()
         {
-            #region ConstructTypeAsString(BlogMLContentType type)
             string contentType  = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
 
             if (String.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
             {
             }
-            #endregion
         }
 
         /// <summary>
@@ -43,13 +41,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void ConstructTypeByNameExample()
         {
-            #region ConstructTypeByName(string name)
             BlogMLContentType contentType   = BlogMLTextConstruct.ConstructTypeByName("html");
 
             if (contentType == BlogMLContentType.Html)
             {
             }
-            #endregion
         }
     }
 }

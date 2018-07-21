@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a value indicating if the feed is intended to be consumed as a list.
         /// </summary>
@@ -36,12 +35,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold information that allows the client to sort on the values of feed properties.
         /// </summary>
         private Collection<SimpleListSort> extensionSorts;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SimpleListSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleListSyndicationExtensionContext"/> class.
         /// </summary>
@@ -51,12 +48,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Grouping
         /// <summary>
         /// Gets information that allows the client to group or filter on the values of feed properties.
         /// </summary>
@@ -75,9 +70,7 @@ namespace Argotic.Extensions.Core
                 return extensionGroups;
             }
         }
-        #endregion
 
-        #region Sorting
         /// <summary>
         /// Gets information that allows the client to sort on the values of feed properties.
         /// </summary>
@@ -96,9 +89,7 @@ namespace Argotic.Extensions.Core
                 return extensionSorts;
             }
         }
-        #endregion
 
-        #region TreatAsList
         /// <summary>
         /// Gets or sets a value indicating if this feed is intended to be consumed as a list.
         /// </summary>
@@ -119,12 +110,10 @@ namespace Argotic.Extensions.Core
                 extensionTreatAsList = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -195,9 +184,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -239,6 +226,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteEndElement();
             }
         }
-        #endregion
     }
 }

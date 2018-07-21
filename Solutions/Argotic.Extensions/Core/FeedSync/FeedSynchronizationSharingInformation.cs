@@ -28,7 +28,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a lower bound of items contained within the feed.
         /// </summary>
@@ -45,12 +44,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold 
         /// </summary>
         private Collection<FeedSynchronizationRelatedInformation> sharingInformationRelations;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedSynchronizationSharingInformation()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSharingInformation"/> class.
         /// </summary>
@@ -60,9 +57,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region FeedSynchronizationSharingInformation(string since, string until)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSharingInformation"/> class using the supplied parameters.
         /// </summary>
@@ -76,9 +71,7 @@ namespace Argotic.Extensions.Core
             this.Since  = since;
             this.Until  = until;
         }
-        #endregion
 
-        #region FeedSynchronizationSharingInformation(string since, string until, DateTime utcExpires)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSharingInformation"/> class using the supplied parameters.
         /// </summary>
@@ -92,12 +85,10 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.ExpiresOn  = utcExpires;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region ExpiresOn
         /// <summary>
         /// Gets or sets the publisher suggested date-time subscribers should read the feed in order to avoid missing item updates.
         /// </summary>
@@ -121,9 +112,7 @@ namespace Argotic.Extensions.Core
                 sharingInformationExpires = value;
             }
         }
-        #endregion
 
-        #region Relations
         /// <summary>
         /// Gets the related feeds or locations.
         /// </summary>
@@ -142,9 +131,7 @@ namespace Argotic.Extensions.Core
                 return sharingInformationRelations;
             }
         }
-        #endregion
 
-        #region Since
         /// <summary>
         /// Gets or sets a lower bound of items contained within the feed.
         /// </summary>
@@ -184,9 +171,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Until
         /// <summary>
         /// Gets or sets an upper bound of items contained within the feed.
         /// </summary>
@@ -226,12 +211,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<FeedSynchronizationRelatedInformation> source, Collection<FeedSynchronizationRelatedInformation> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{FeedSynchronizationRelatedInformation}"/> collections.
         /// </summary>
@@ -282,12 +265,10 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="FeedSynchronizationSharingInformation"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -367,9 +348,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="FeedSynchronizationSharingInformation"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -414,12 +393,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationSharingInformation"/>.
         /// </summary>
@@ -452,12 +429,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -493,9 +468,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -513,9 +486,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -529,9 +500,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -554,9 +523,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -567,9 +534,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -592,9 +557,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -617,6 +580,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

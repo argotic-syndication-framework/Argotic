@@ -26,7 +26,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -51,12 +50,10 @@ namespace Argotic.Net
         /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
         /// </summary>
         private Object eventUserToken;
-        #endregion
-        
+
         //============================================================
 		//	CONSTRUCTORS
         //============================================================
-        #region XmlRpcMessageSentEventArgs()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.
         /// </summary>
@@ -66,9 +63,7 @@ namespace Argotic.Net
 			//	
 			//------------------------------------------------------------
 		}
-		#endregion
 
-        #region XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, Object state)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class using the supplied parameters.
         /// </summary>
@@ -99,9 +94,7 @@ namespace Argotic.Net
             eventOptions        = new WebRequestOptions(credentials, proxy);
             eventUserToken      = state;
         }
-        #endregion
 
-        #region XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, Object state)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class using the supplied parameters.
         /// </summary>
@@ -131,12 +124,10 @@ namespace Argotic.Net
             eventOptions        = options ?? new WebRequestOptions();
             eventUserToken      = state;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region Empty
         /// <summary>
         /// Represents an syndication resource loaded event with no event data.
         /// </summary>
@@ -149,12 +140,10 @@ namespace Argotic.Net
                 return emptyEventArguments;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Credentials
         /// <summary>
         /// Gets the authentication credentials utilized by the client when making the remote procedure call.
         /// </summary>
@@ -169,9 +158,7 @@ namespace Argotic.Net
                 return eventOptions.Credentials;
             }
         }
-        #endregion
 
-        #region Host
         /// <summary>
         /// Gets the the location of the host computer that the remote procedure call was sent to.
         /// </summary>
@@ -185,9 +172,7 @@ namespace Argotic.Net
                 return eventHost;
             }
         }
-        #endregion
 
-        #region Message
         /// <summary>
         /// Gets the remote procedure call payload that was sent.
         /// </summary>
@@ -201,9 +186,7 @@ namespace Argotic.Net
                 return eventMessage;
             }
         }
-        #endregion
 
-        #region Proxy
         /// <summary>
         /// Gets the web proxy utilized by the client to proxy the remote procedure call.
         /// </summary>
@@ -218,9 +201,7 @@ namespace Argotic.Net
                 return eventOptions.Proxy;
             }
         }
-        #endregion
 
-        #region Response
         /// <summary>
         /// Gets the response to the remote procedure call.
         /// </summary>
@@ -234,9 +215,7 @@ namespace Argotic.Net
                 return eventResponse;
             }
         }
-        #endregion
 
-        #region State
         /// <summary>
         /// Gets an <see cref="Object"/> containing state information that was passed to the asynchronous send operation.
         /// </summary>
@@ -250,12 +229,10 @@ namespace Argotic.Net
                 return eventUserToken;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.
         /// </summary>
@@ -277,12 +254,10 @@ namespace Argotic.Net
 
             return String.Format(null, "[XmlRpcMessageSentEventArgs(Host = \"{0}\", Message = \"{1}\", Response = \"{2}\", Credentials = \"{3}\", Proxy = \"{4}\", State = \"{5}\")]", host, message, response, credentials, proxy, state);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -318,9 +293,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -338,9 +311,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -354,9 +325,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -379,9 +348,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -392,9 +359,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -417,9 +382,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -442,6 +405,5 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

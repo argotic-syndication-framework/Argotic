@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a thumbnail sized version of the photograph.
         /// </summary>
@@ -32,12 +31,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a larger or original version of the photograph.
         /// </summary>
         private Uri extensionImageSource;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region PheedSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
         /// </summary>
@@ -47,9 +44,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
         /// <summary>
         /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class using the supplied parameters.
         /// </summary>
@@ -65,12 +60,10 @@ namespace Argotic.Extensions.Core
             this.Source     = source;
             this.Thumbnail  = thumbnail;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Source
         /// <summary>
         /// Gets or sets the original version of this photograph.
         /// </summary>
@@ -89,9 +82,7 @@ namespace Argotic.Extensions.Core
                 extensionImageSource = value;
             }
         }
-        #endregion
 
-        #region Thumbnail
         /// <summary>
         /// Gets or sets the thumbnail sized version of this photograph.
         /// </summary>
@@ -113,12 +104,10 @@ namespace Argotic.Extensions.Core
                 extensionThumbnail = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -171,9 +160,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -196,6 +183,5 @@ namespace Argotic.Extensions.Core
             writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : String.Empty);
             writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : String.Empty);
         }
-        #endregion
     }
 }

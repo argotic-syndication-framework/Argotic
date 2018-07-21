@@ -34,7 +34,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for the media object.
         /// </summary>
@@ -46,9 +45,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Copyright
         /// <summary>
         /// Gets or sets the copyright information for the media object.
         /// </summary>
@@ -61,9 +58,7 @@ namespace Argotic.Extensions.Core
             get;
             set;
         }
-        #endregion
 
-        #region Credits
         /// <summary>
         /// Gets the entities that contributed to the creation of the media object.
         /// </summary>
@@ -79,9 +74,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets the description of the media object.
         /// </summary>
@@ -94,9 +87,7 @@ namespace Argotic.Extensions.Core
             get;
             set;
         }
-        #endregion
 
-        #region Hashes
         /// <summary>
         /// Gets the hash digests for the media object.
         /// </summary>
@@ -111,9 +102,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Keywords
         /// <summary>
         /// Gets the relevant keywords that describe the media object.
         /// </summary>
@@ -128,9 +117,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Player
         /// <summary>
         /// Gets or sets a web browser media player console the media object can be accessed through.
         /// </summary>
@@ -140,9 +127,7 @@ namespace Argotic.Extensions.Core
             get;
             set;
         }
-        #endregion
 
-        #region Ratings
         /// <summary>
         /// Gets the permissible audiences for the media object.
         /// </summary>
@@ -157,9 +142,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Restrictions
         /// <summary>
         /// Gets the restrictions to be placed on aggregators that are rendering the media object.
         /// </summary>
@@ -171,9 +154,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region TextSeries
         /// <summary>
         /// Gets the text transcript, closed captioning, or lyrics for the media object.
         /// </summary>
@@ -190,9 +171,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Thumbnails
         /// <summary>
         /// Gets the representative images for the media object.
         /// </summary>
@@ -207,9 +186,7 @@ namespace Argotic.Extensions.Core
         {
             get;
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of the media object.
         /// </summary>
@@ -219,6 +196,5 @@ namespace Argotic.Extensions.Core
             get;
             set;
         }
-        #endregion
     }
 }

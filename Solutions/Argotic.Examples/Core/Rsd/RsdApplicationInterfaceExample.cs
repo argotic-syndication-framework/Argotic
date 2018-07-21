@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region RsdApplicationInterface
             RsdDocument document    = new RsdDocument();
 
             document.EngineName     = "Blog Munging CMS";
@@ -49,7 +48,6 @@ namespace Argotic.Examples
             conversantApi.Settings.Add("service-specific-setting", "a value");
             conversantApi.Settings.Add("another-setting", "another value");
             document.AddInterface(conversantApi);
-            #endregion
         }
     }
 }

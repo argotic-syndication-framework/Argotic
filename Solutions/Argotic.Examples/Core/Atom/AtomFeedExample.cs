@@ -33,7 +33,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region AtomFeed
             AtomFeed feed   = new AtomFeed();
 
             feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
@@ -54,7 +53,6 @@ namespace Argotic.Examples
             entry.Summary   = new AtomTextConstruct("Some text.");
 
             feed.AddEntry(entry);
-            #endregion
         }
 
         //============================================================
@@ -65,7 +63,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             AtomFeed feed   = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
             
             foreach(AtomEntry entry in feed.Entries)
@@ -75,7 +72,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the feed entry
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -86,7 +82,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load feed asynchronously using event-based notification
             //------------------------------------------------------------
@@ -95,10 +90,8 @@ namespace Argotic.Examples
             feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
             feed.LoadAsync(new Uri("http://news.google.com/?output=atom"), null);
-            #endregion
         }
 
-        #region FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="AtomFeed.Loaded"/> event.
         /// </summary>
@@ -110,7 +103,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -120,7 +112,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://news.google.com/?output=atom");
 
             AtomFeed feed   = new AtomFeed();
@@ -133,7 +124,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the feed entry
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -141,7 +131,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             AtomFeed feed   = new AtomFeed();
 
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
@@ -156,7 +145,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -164,7 +152,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             AtomFeed feed   = new AtomFeed();
 
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
@@ -186,7 +173,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -194,7 +180,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             AtomFeed feed   = new AtomFeed();
             Uri source      = new Uri("http://news.google.com/?output=atom");
 
@@ -207,7 +192,6 @@ namespace Argotic.Examples
                     //  Perform some processing on the feed entry
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -215,7 +199,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             AtomFeed feed   = new AtomFeed();
 
             //  Modify feed state using public properties and methods
@@ -224,7 +207,6 @@ namespace Argotic.Examples
             {
                 feed.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -232,7 +214,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             AtomFeed feed   = new AtomFeed();
 
             //  Modify feed state using public properties and methods
@@ -247,7 +228,6 @@ namespace Argotic.Examples
                     feed.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

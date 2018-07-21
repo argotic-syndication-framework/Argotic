@@ -29,7 +29,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the algorithm used to create the hash.
         /// </summary>
@@ -38,12 +37,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the hash value.
         /// </summary>
         private string hashValue                        = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaHash()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaHash"/> class.
         /// </summary>
@@ -53,9 +50,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaHash(string value)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaHash"/> class using the supplied hash digest value.
         /// </summary>
@@ -69,12 +64,10 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.Value  = value;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Algorithm
         /// <summary>
         /// Gets or sets the algorithm used to create this hash.
         /// </summary>
@@ -97,9 +90,7 @@ namespace Argotic.Extensions.Core
                 hashAlgorithm = value;
             }
         }
-        #endregion
 
-        #region Value
         /// <summary>
         /// Gets or sets the value of this hash.
         /// </summary>
@@ -119,12 +110,10 @@ namespace Argotic.Extensions.Core
                 hashValue = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
         /// <summary>
         /// Computes the hash value for the supplied <see cref="Stream"/> using the specified <see cref="YahooMediaHashAlgorithm"/>.
         /// </summary>
@@ -164,9 +153,7 @@ namespace Argotic.Extensions.Core
 
             return base64EncodedHash;
         }
-        #endregion
 
-        #region HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm)
         /// <summary>
         /// Returns the hash algorithm identifier for the supplied <see cref="YahooMediaHashAlgorithm"/>.
         /// </summary>
@@ -205,9 +192,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region HashAlgorithmByName(string name)
         /// <summary>
         /// Returns the <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified hash algorithm name.
         /// </summary>
@@ -253,12 +238,10 @@ namespace Argotic.Extensions.Core
 
             return hashAlgorithm;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaHash"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -305,9 +288,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaHash"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -342,12 +323,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaHash"/>.
         /// </summary>
@@ -380,12 +359,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -419,9 +396,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -439,9 +414,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -455,9 +428,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -480,9 +451,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -493,9 +462,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -518,9 +485,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -543,6 +508,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

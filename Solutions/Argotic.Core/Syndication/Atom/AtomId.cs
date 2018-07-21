@@ -106,7 +106,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -123,12 +122,10 @@ namespace Argotic.Syndication
         /// Private member to hold an IRI that represents a permanent, universally unique identifier for the entity.
         /// </summary>
         private Uri idUri;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomId()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomId"/> class.
         /// </summary>
@@ -138,9 +135,7 @@ namespace Argotic.Syndication
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region AtomId(Uri uri)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomId"/> class using the supplied <see cref="Uri"/>.
         /// <param name="uri">A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that represents a permanent, universally unique identifier for this entity.</param>
@@ -153,12 +148,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Uri    = uri;
         }
-        #endregion
 
         //============================================================
         //	COMMON PROPERTIES
         //============================================================
-        #region BaseUri
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -180,9 +173,7 @@ namespace Argotic.Syndication
                 commonObjectBaseUri = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
         /// </summary>
@@ -204,12 +195,10 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -235,9 +224,7 @@ namespace Argotic.Syndication
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -249,12 +236,10 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Uri
         /// <summary>
         /// Gets or sets an IRI that represents a permanent, universally unique identifier for this entity.
         /// </summary>
@@ -278,12 +263,10 @@ namespace Argotic.Syndication
                 idUri = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -310,9 +293,7 @@ namespace Argotic.Syndication
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -339,9 +320,7 @@ namespace Argotic.Syndication
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -374,12 +353,10 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="AtomId"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -424,9 +401,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="AtomId"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -464,9 +439,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="AtomId"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -494,12 +467,10 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="AtomId"/>.
         /// </summary>
@@ -532,12 +503,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -572,9 +541,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -592,9 +559,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -608,9 +573,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -633,9 +596,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -646,9 +607,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -671,9 +630,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -696,6 +653,5 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

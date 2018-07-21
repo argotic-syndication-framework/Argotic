@@ -20,7 +20,6 @@ namespace Argotic.Extensions
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Description
         /// <summary>
         /// Gets a human-readable description of the syndication extension.
         /// </summary>
@@ -29,9 +28,7 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
-        #region Documentation
         /// <summary>
         /// Gets a <see cref="Uri"/> that points to documentation for the syndication extension.
         /// </summary>
@@ -40,9 +37,7 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
-        #region Name
         /// <summary>
         /// Gets the human-readable name of the syndication extension.
         /// </summary>
@@ -51,9 +46,7 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the specification that the syndication extension conforms to.
         /// </summary>
@@ -62,9 +55,7 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
-        #region XmlNamespace
         /// <summary>
         /// Gets the XML namespace that is used when qualifying the syndication extension's element and attribute names.
         /// </summary>
@@ -73,9 +64,7 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
-        #region XmlPrefix
         /// <summary>
         /// Gets the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
         /// </summary>
@@ -84,24 +73,20 @@ namespace Argotic.Extensions
         {
             get;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the syndication extension state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="ISyndicationExtension.Load(IXPathNavigable)"/>
         /// <seealso cref="ISyndicationExtension.Load(XmlReader)"/>
         event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	UTILITY METHODS
         //============================================================
-        #region ExistsInSource(XPathNavigator source)
         /// <summary>
         /// Determines if the <see cref="ISyndicationExtension"/> exists in the XML data in the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -122,12 +107,10 @@ namespace Argotic.Extensions
         ///     </para>
         /// </remarks>
         bool ExistsInSource(XPathNavigator source);
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces utilized by this <see cref="SyndicationExtension"/>.
         /// </summary>
@@ -141,9 +124,7 @@ namespace Argotic.Extensions
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator);
-        #endregion
 
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -163,9 +144,7 @@ namespace Argotic.Extensions
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         bool Load(IXPathNavigable source);
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
@@ -191,24 +170,19 @@ namespace Argotic.Extensions
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         bool Load(XmlReader reader);
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         void WriteTo(XmlWriter writer);
-        #endregion
 
-        #region WriteXmlNamespaceDeclaration(XmlWriter writer)
         /// <summary>
         /// Writes the prefixed XML namespace for the current syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the prefixed XML namespace declaration to.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         void WriteXmlNamespaceDeclaration(XmlWriter writer);
-        #endregion
     }
 }

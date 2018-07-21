@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region RssGuid
             RssFeed feed    = new RssFeed();
 
             feed.Channel.Title          = "Dallas Times-Herald";
@@ -45,7 +44,6 @@ namespace Argotic.Examples
             item.Guid           = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
 
             feed.Channel.AddItem(item);
-            #endregion
         }
     }
 }

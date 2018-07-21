@@ -23,7 +23,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the Atom 1.0 namespace identifier.
         /// </summary>
@@ -40,12 +39,10 @@ namespace Argotic.Syndication
         /// Private member to hold the XML 1.1 namespace identifier.
         /// </summary>
         private const string XML_NAMESPACE      = "http://www.w3.org/XML/1998/namespace";
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region AtomNamespace
         /// <summary>
         /// Gets the XML namespace URI for the Atom 1.0 specification.
         /// </summary>
@@ -57,9 +54,7 @@ namespace Argotic.Syndication
                 return ATOM_NAMESPACE;
             }
         }
-        #endregion
 
-        #region AtomPublishingNamespace
         /// <summary>
         /// Gets the XML namespace URI for the Atom Publishing Protocol 1.0 specification.
         /// </summary>
@@ -71,9 +66,7 @@ namespace Argotic.Syndication
                 return ATOMPUB_NAMESPACE;
             }
         }
-        #endregion
 
-        #region XhtmlNamespace
         /// <summary>
         /// Gets the XML namespace URI for the XHTML specification.
         /// </summary>
@@ -85,12 +78,10 @@ namespace Argotic.Syndication
                 return XHTML_NAMESPACE;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -119,9 +110,7 @@ namespace Argotic.Syndication
 
             return manager;
         }
-        #endregion
 
-        #region CompareCommonObjectAttributes(IAtomCommonObjectAttributes source, IAtomCommonObjectAttributes target)
         /// <summary>
         /// Compares objects that implement the <see cref="IAtomCommonObjectAttributes"/> interface.
         /// </summary>
@@ -162,9 +151,7 @@ namespace Argotic.Syndication
 
             return result;
         }
-        #endregion
 
-        #region FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
         /// <summary>
         /// Modifies the <see cref="IAtomCommonObjectAttributes"/> to match the data source.
         /// </summary>
@@ -225,9 +212,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteCommonObjectAttributes(IAtomCommonObjectAttributes target, XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="IAtomCommonObjectAttributes"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -259,6 +244,5 @@ namespace Argotic.Syndication
                 writer.WriteAttributeString("xml", "lang", XML_NAMESPACE, source.Language.Name);
             }
         }
-        #endregion
     }
 }

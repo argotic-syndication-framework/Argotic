@@ -47,7 +47,6 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
@@ -88,12 +87,10 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of applications for the document.
         /// </summary>
         private Collection<ApmlApplication> documentApplications;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region ApmlDocument()
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
         /// </summary>
@@ -103,12 +100,10 @@ namespace Argotic.Syndication.Specialized
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	INDEXERS
         //============================================================
-        #region this[int index]
         /// <summary>
         /// Gets or sets the <see cref="ApmlProfile"/> at the specified index.
         /// </summary>
@@ -130,24 +125,20 @@ namespace Argotic.Syndication.Specialized
                 ((Collection<ApmlProfile>)this.Profiles)[index] = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="ApmlDocument.Load(IXPathNavigable)"/>
         /// <seealso cref="ApmlDocument.Load(XmlReader)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Raises the <see cref="ApmlDocument.Loaded"/> event.
         /// </summary>
@@ -169,12 +160,10 @@ namespace Argotic.Syndication.Specialized
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -200,9 +189,7 @@ namespace Argotic.Syndication.Specialized
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -214,12 +201,10 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Applications
         /// <summary>
         /// Gets or sets the applications for this document.
         /// </summary>
@@ -235,9 +220,7 @@ namespace Argotic.Syndication.Specialized
                 return documentApplications;
             }
         }
-        #endregion
 
-        #region DefaultProfileName
         /// <summary>
         /// Gets or sets the name of the default profile for this document.
         /// </summary>
@@ -257,9 +240,7 @@ namespace Argotic.Syndication.Specialized
                 documentDefaultProfileName = value.Trim();
             }
         }
-        #endregion
 
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
@@ -271,9 +252,7 @@ namespace Argotic.Syndication.Specialized
                 return documentFormat;
             }
         }
-        #endregion
 
-        #region Head
         /// <summary>
         /// Gets or sets the basic administrative information for this document.
         /// </summary>
@@ -292,9 +271,7 @@ namespace Argotic.Syndication.Specialized
                 documentHead = value;
             }
         }
-        #endregion
 
-        #region Profiles
         /// <summary>
         /// Gets or sets the attention profiles for this document.
         /// </summary>
@@ -321,9 +298,7 @@ namespace Argotic.Syndication.Specialized
             }
 
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
@@ -335,12 +310,10 @@ namespace Argotic.Syndication.Specialized
                 return documentVersion;
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncLoadHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -357,9 +330,7 @@ namespace Argotic.Syndication.Specialized
                 resourceAsyncLoadCancelled = value;
             }
         }
-        #endregion
 
-        #region LoadOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
@@ -376,12 +347,10 @@ namespace Argotic.Syndication.Specialized
                 resourceIsLoading = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region Create(Uri source)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>.
         /// </summary>
@@ -407,9 +376,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             return ApmlDocument.Create(source, new WebRequestOptions());
         }
-        #endregion
 
-        #region Create(Uri source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -425,9 +392,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             return ApmlDocument.Create(source, new WebRequestOptions(), settings);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -451,9 +416,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             return ApmlDocument.Create(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -472,9 +435,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             return ApmlDocument.Create(source, options, null);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -496,9 +457,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             return ApmlDocument.Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -527,12 +486,10 @@ namespace Argotic.Syndication.Specialized
 
             return syndicationResource;
         }
-        #endregion
 
         //============================================================
         //	ASYNC METHODS
         //============================================================
-        #region LoadAsync(Uri source, Object userToken)
         /// <summary>
         /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -571,9 +528,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.LoadAsync(source, null, userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         /// <summary>
         /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -600,9 +555,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -635,9 +588,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         /// <summary>
         /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -708,9 +659,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
@@ -738,12 +687,10 @@ namespace Argotic.Syndication.Specialized
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncLoadCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -836,9 +783,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -865,12 +810,10 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -897,9 +840,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -926,9 +867,7 @@ namespace Argotic.Syndication.Specialized
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -961,12 +900,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	UTILITY METHODS
         //============================================================
-        #region AddProfile(ApmlProfile profile)
         /// <summary>
         /// Adds the supplied <see cref="ApmlProfile"/> to the current instance's <see cref="Profiles"/> collection.
         /// </summary>
@@ -993,9 +930,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasAdded;
         }
-        #endregion
 
-        #region RemoveProfile(ApmlProfile profile)
         /// <summary>
         /// Removes the supplied <see cref="ApmlProfile"/> from the current instance's <see cref="Profiles"/> collection.
         /// </summary>
@@ -1028,12 +963,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
         //============================================================
-        #region CreateNavigator()
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ApmlDocument"/>.
         /// </summary>
@@ -1063,9 +996,7 @@ namespace Argotic.Syndication.Specialized
                 return document.CreateNavigator();
             }
         }
-        #endregion
 
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -1091,9 +1022,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(source, null);
         }
-        #endregion
 
-        #region Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1126,9 +1055,7 @@ namespace Argotic.Syndication.Specialized
             XPathNavigator navigator    = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
-        #endregion
 
-        #region Load(Stream stream)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -1154,9 +1081,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(stream, null);
         }
-        #endregion
 
-        #region Load(Stream stream, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -1187,9 +1112,7 @@ namespace Argotic.Syndication.Specialized
                 this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
             }
         }
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -1215,9 +1138,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(reader, null);
         }
-        #endregion
 
-        #region Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -1241,9 +1162,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(new XPathDocument(reader), settings);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -1293,9 +1212,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -1330,9 +1247,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(source, options, null);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1382,9 +1297,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1449,9 +1362,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
-        #endregion
 
-        #region Save(Stream stream)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -1473,9 +1384,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Save(stream, null);
         }
-        #endregion
 
-        #region Save(Stream stream, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -1508,9 +1417,7 @@ namespace Argotic.Syndication.Specialized
                 this.Save(writer, settings);
             }
         }
-        #endregion
 
-        #region Save(XmlWriter writer)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -1537,9 +1444,7 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.Save(writer, new SyndicationResourceSaveSettings());
         }
-        #endregion
 
-        #region Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -1642,12 +1547,10 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         /// <summary>
         /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1681,6 +1584,5 @@ namespace Argotic.Syndication.Specialized
             //------------------------------------------------------------
             this.OnDocumentLoaded(eventData);
         }
-        #endregion
     }
 }

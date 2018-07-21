@@ -24,7 +24,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold pixel location of the top edge of the window.
         /// </summary>
@@ -41,12 +40,10 @@ namespace Argotic.Syndication
         /// Private member to hold pixel location of the right edge of the window.
         /// </summary>
         private int windowRight     = Int32.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region OpmlWindow()
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
         /// </summary>
@@ -56,9 +53,7 @@ namespace Argotic.Syndication
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region OpmlWindow(int top, int left, int bottom, int right)
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlWindow"/> class using the supplied pixel locations.
         /// </summary>
@@ -76,12 +71,10 @@ namespace Argotic.Syndication
             this.Right      = right;
             this.Top        = top;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Bottom
         /// <summary>
         /// Gets or sets the pixel location of the bottom edge of this window.
         /// </summary>
@@ -98,9 +91,7 @@ namespace Argotic.Syndication
                 windowBottom = value;
             }
         }
-        #endregion
 
-        #region Left
         /// <summary>
         /// Gets or sets the pixel location of the left edge of this window.
         /// </summary>
@@ -117,9 +108,7 @@ namespace Argotic.Syndication
                 windowLeft = value;
             }
         }
-        #endregion
 
-        #region Right
         /// <summary>
         /// Gets or sets the pixel location of the right edge of this window.
         /// </summary>
@@ -136,9 +125,7 @@ namespace Argotic.Syndication
                 windowRight = value;
             }
         }
-        #endregion
 
-        #region Top
         /// <summary>
         /// Gets or sets the pixel location of the top edge of this window.
         /// </summary>
@@ -155,12 +142,10 @@ namespace Argotic.Syndication
                 windowTop = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -232,9 +217,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="OpmlWindow"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -270,12 +253,10 @@ namespace Argotic.Syndication
                 writer.WriteElementString("windowRight", this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="OpmlWindow"/>.
         /// </summary>
@@ -308,12 +289,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -349,9 +328,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -369,9 +346,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -385,9 +360,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -410,9 +383,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -423,9 +394,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -448,9 +417,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -473,6 +440,5 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

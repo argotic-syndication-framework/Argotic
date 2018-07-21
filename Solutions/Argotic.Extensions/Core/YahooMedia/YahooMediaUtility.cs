@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CompareCommonObjectEntities(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         /// <summary>
         /// Compares objects that implement the <see cref="IYahooMediaCommonObjectEntities"/> interface.
         /// </summary>
@@ -61,9 +60,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaCategory}"/> collections.
         /// </summary>
@@ -114,9 +111,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaContent}"/> collections.
         /// </summary>
@@ -167,9 +162,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaCredit}"/> collections.
         /// </summary>
@@ -220,9 +213,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaGroup}"/> collections.
         /// </summary>
@@ -273,9 +264,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaHash}"/> collections.
         /// </summary>
@@ -326,9 +315,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaRating}"/> collections.
         /// </summary>
@@ -379,9 +366,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaRestriction}"/> collections.
         /// </summary>
@@ -432,9 +417,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaText}"/> collections.
         /// </summary>
@@ -485,9 +468,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{YahooMediaThumbnail}"/> collections.
         /// </summary>
@@ -538,9 +519,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
         /// <summary>
         /// Modifies the <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
         /// </summary>
@@ -585,9 +564,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteCommonObjectEntities(IYahooMediaCommonObjectEntities target, XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="IYahooMediaCommonObjectEntities"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -674,12 +651,10 @@ namespace Argotic.Extensions.Core
                 thumbnail.WriteTo(writer);
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region CompareCommonObjectEntityClasses(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         /// <summary>
         /// Compares the classes for objects that implement the <see cref="IYahooMediaCommonObjectEntities"/> interface.
         /// </summary>
@@ -778,9 +753,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region CompareCommonObjectEntityCollections(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         /// <summary>
         /// Compares the collections for objects that implement the <see cref="IYahooMediaCommonObjectEntities"/> interface.
         /// </summary>
@@ -824,9 +797,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region FillCommonObjectEntityClasses(IAtomCommonObjectAttributes target, XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Modifies the classes of a <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
         /// </summary>
@@ -926,9 +897,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region FillCommonObjectEntityCollectionsPrimary(IAtomCommonObjectAttributes target, XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Modifies the primary collections of a <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
         /// </summary>
@@ -1018,9 +987,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region FillCommonObjectEntityCollectionsSecondary(IAtomCommonObjectAttributes target, XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Modifies the secondary collections of a <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
         /// </summary>
@@ -1096,6 +1063,5 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
     }
 }

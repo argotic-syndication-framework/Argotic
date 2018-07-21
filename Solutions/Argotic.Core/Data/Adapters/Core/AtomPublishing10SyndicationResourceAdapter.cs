@@ -33,14 +33,10 @@ namespace Argotic.Data.Adapters
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
-        
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishing10SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -57,12 +53,10 @@ namespace Argotic.Data.Adapters
             //	Initialization and argument validation handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Fill(AtomCategoryDocument resource)
         /// <summary>
         /// Modifies the <see cref="AtomCategoryDocument"/> to match the data source.
         /// </summary>
@@ -149,9 +143,7 @@ namespace Argotic.Data.Adapters
                 adapter.Fill(resource, manager);
             }
         }
-        #endregion
 
-        #region Fill(AtomServiceDocument resource)
         /// <summary>
         /// Modifies the <see cref="AtomServiceDocument"/> to match the data source.
         /// </summary>
@@ -198,6 +190,5 @@ namespace Argotic.Data.Adapters
                 adapter.Fill(resource, manager);
             }
         }
-        #endregion
     }
 }

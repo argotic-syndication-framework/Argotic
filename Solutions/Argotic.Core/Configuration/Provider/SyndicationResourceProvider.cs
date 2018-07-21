@@ -27,7 +27,6 @@ namespace Argotic.Configuration.Provider
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region ApplicationName
         /// <summary>
         /// Gets or sets the name of the application using the custom syndication resource provider.
         /// </summary>
@@ -52,12 +51,10 @@ namespace Argotic.Configuration.Provider
             get;
             set;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateResource(Object providerResourceKey, ISyndicationResource resource);
         /// <summary>
         /// Adds a new syndication resource to the data source.
         /// </summary>
@@ -67,9 +64,7 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public abstract SyndicationResourceCreateStatus CreateResource(Object providerResourceKey, ISyndicationResource resource);
-        #endregion
 
-        #region DeleteResource(Object providerResourceKey)
         /// <summary>
         /// Removes a resource from the syndication data source.
         /// </summary>
@@ -77,9 +72,7 @@ namespace Argotic.Configuration.Provider
         /// <returns><b>true</b> if the syndication resource was successfully deleted; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
         public abstract bool DeleteResource(Object providerResourceKey);
-        #endregion
 
-        #region GetResource(Object providerResourceKey)
         /// <summary>
         /// Gets resource information from the data source based on the unique identifier for the syndication resource.
         /// </summary>
@@ -87,9 +80,7 @@ namespace Argotic.Configuration.Provider
         /// <returns>An object that implements the <see cref="ISyndicationResource"/> interface populated with the specified resources's information from the data source.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
         public abstract ISyndicationResource GetResource(Object providerResourceKey);
-        #endregion
 
-        #region GetResources(SyndicationContentFormat format)
         /// <summary>
         /// Gets a collection of all the resources in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.
         /// </summary>
@@ -102,9 +93,7 @@ namespace Argotic.Configuration.Provider
         ///     </para>
         /// </remarks>
         public abstract Collection<ISyndicationResource> GetResources(SyndicationContentFormat format);
-        #endregion
 
-        #region GetResources(int pageIndex, int pageSize, out int totalRecords)
         /// <summary>
         /// Gets a collection of all the resources in the data source in pages of data.
         /// </summary>
@@ -135,9 +124,7 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="pageSize"/> is <i>less than or equal to</i> zero.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
         public abstract Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords);
-        #endregion
 
-        #region UpdateResource(Object providerResourceKey, ISyndicationResource resource)
         /// <summary>
         /// Updates information about a syndication resource in the data source.
         /// </summary>
@@ -148,6 +135,5 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public abstract void UpdateResource(Object providerResourceKey, ISyndicationResource resource);
-        #endregion
     }
 }

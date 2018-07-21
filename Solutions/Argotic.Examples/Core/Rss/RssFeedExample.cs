@@ -35,7 +35,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region RssFeed
             RssFeed feed    = new RssFeed();
 
             feed.Channel.Title          = "Dallas Times-Herald";
@@ -90,7 +89,6 @@ namespace Argotic.Examples
             item.Source             = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
 
             feed.Channel.AddItem(item);
-            #endregion
         }
 
         //============================================================
@@ -101,7 +99,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             RssFeed feed    = RssFeed.Create(new Uri("http://news.google.com/?output=rss"));
 
             foreach (RssItem item in feed.Channel.Items)
@@ -111,7 +108,6 @@ namespace Argotic.Examples
                     //  Process channel items published in the last week
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -122,7 +118,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load feed asynchronously using event-based notification
             //------------------------------------------------------------
@@ -131,10 +126,8 @@ namespace Argotic.Examples
             feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
             feed.LoadAsync(new Uri("http://news.google.com/?output=rss"), null);
-            #endregion
         }
 
-        #region FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="RssFeed.Loaded"/> event.
         /// </summary>
@@ -146,7 +139,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -156,7 +148,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://news.google.com/?output=rss");
 
             RssFeed feed    = new RssFeed();
@@ -169,7 +160,6 @@ namespace Argotic.Examples
                     //  Process channel items published in the last week
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -177,7 +167,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             RssFeed feed    = new RssFeed();
 
             using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
@@ -192,7 +181,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -200,7 +188,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             RssFeed feed    = new RssFeed();
 
             using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
@@ -222,7 +209,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -230,7 +216,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             RssFeed feed    = new RssFeed();
             Uri source      = new Uri("http://news.google.com/?output=rss");
 
@@ -243,7 +228,6 @@ namespace Argotic.Examples
                     //  Process channel items published in the last week
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -251,7 +235,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             RssFeed feed   = new RssFeed();
 
             //  Modify feed state using public properties and methods
@@ -260,7 +243,6 @@ namespace Argotic.Examples
             {
                 feed.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -268,7 +250,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             RssFeed feed   = new RssFeed();
 
             //  Modify feed state using public properties and methods
@@ -283,7 +264,6 @@ namespace Argotic.Examples
                     feed.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/12/2008	brian.kuhn	Created ComparisonUtility Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.XPath;
@@ -23,7 +16,6 @@ namespace Argotic.Common
         //============================================================
         //	COLLECTION COMPARISON METHODS
         //============================================================
-        #region CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -74,9 +66,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<int> source, Collection<int> target)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -127,9 +117,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<long> source, Collection<long> target)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -180,9 +168,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -234,9 +220,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<Type> source, Collection<Type> target)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -287,9 +271,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -341,9 +323,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<XPathNavigator> source, Collection<XPathNavigator> target)
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -394,9 +374,7 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target, StringComparison comparisonType)
         /// <summary>
         /// Compares two specified generic dictionaries.
         /// </summary>
@@ -455,6 +433,5 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
     }
 }

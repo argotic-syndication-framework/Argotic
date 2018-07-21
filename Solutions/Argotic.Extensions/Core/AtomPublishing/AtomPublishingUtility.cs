@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the Atom 1.0 namespace identifier.
         /// </summary>
@@ -40,7 +39,6 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the XML 1.1 namespace identifier.
         /// </summary>
         private const string XML_NAMESPACE      = "http://www.w3.org/XML/1998/namespace";
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
@@ -50,7 +48,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -79,9 +76,7 @@ namespace Argotic.Extensions.Core
 
             return manager;
         }
-        #endregion
 
-        #region CompareCommonObjectAttributes(IAtomPublishingCommonObjectAttributes source, IAtomPublishingCommonObjectAttributes target)
         /// <summary>
         /// Compares objects that implement the <see cref="IAtomPublishingCommonObjectAttributes"/> interface.
         /// </summary>
@@ -122,9 +117,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region FillCommonObjectAttributes(IAtomPublishingCommonObjectAttributes target, XPathNavigator source)
         /// <summary>
         /// Modifies the <see cref="IAtomPublishingCommonObjectAttributes"/> to match the data source.
         /// </summary>
@@ -185,9 +178,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteCommonObjectAttributes(IAtomPublishingCommonObjectAttributes target, XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="IAtomPublishingCommonObjectAttributes"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -219,6 +210,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteAttributeString("xml", "lang", XML_NAMESPACE, source.Language.Name);
             }
         }
-        #endregion
     }
 }

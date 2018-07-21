@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold an IRI that identifies the location of the link relation.
         /// </summary>
@@ -33,12 +32,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a value that indicates the type of the link relation.
         /// </summary>
         private FeedHistoryLinkRelationType linkRelationType    = FeedHistoryLinkRelationType.None;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedHistoryLinkRelation()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedHistoryLinkRelation"/> class.
         /// </summary>
@@ -48,9 +45,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region FeedHistoryLinkRelation(FeedHistoryLinkRelationType relation, Uri href)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedHistoryLinkRelation"/> class using the supplied relation type and location.
         /// </summary>
@@ -65,12 +60,10 @@ namespace Argotic.Extensions.Core
             this.RelationType   = relation;
             this.Uri            = href;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region RelationType
         /// <summary>
         /// Gets or sets a value that indicates the type of this link relation.
         /// </summary>
@@ -90,9 +83,7 @@ namespace Argotic.Extensions.Core
                 linkRelationType = value;
             }
         }
-        #endregion
 
-        #region Uri
         /// <summary>
         /// Gets or sets an IRI that identifies the location of this link relation.
         /// </summary>
@@ -111,12 +102,10 @@ namespace Argotic.Extensions.Core
                 linkRelationLocation = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="FeedHistoryLinkRelation"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -169,9 +158,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="FeedHistoryLinkRelation"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -194,12 +181,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="FeedHistoryLinkRelation"/>.
         /// </summary>
@@ -232,12 +217,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -271,9 +254,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -291,9 +272,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -307,9 +286,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -332,9 +309,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -345,9 +320,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -370,9 +343,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -395,6 +366,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

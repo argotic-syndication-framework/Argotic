@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the sharing information exposed by a syndication feed.
         /// </summary>
@@ -31,12 +30,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold information required for synchronization of syndication feeds.
         /// </summary>
         private FeedSynchronizationItem synchronizationItem;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedSynchronizationSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtensionContext"/> class.
         /// </summary>
@@ -46,12 +43,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Sharing
         /// <summary>
         /// Gets or sets information from a specific feed publisher to the specific feed consumer that requested the feed.
         /// </summary>
@@ -71,9 +66,7 @@ namespace Argotic.Extensions.Core
                 extensionSharingInformation = value;
             }
         }
-        #endregion
 
-        #region Synchronization
         /// <summary>
         /// Gets or sets the information required for synchronization.
         /// </summary>
@@ -101,12 +94,10 @@ namespace Argotic.Extensions.Core
                 synchronizationItem = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -159,9 +150,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -191,6 +180,5 @@ namespace Argotic.Extensions.Core
                 this.Synchronization.WriteTo(writer);
             }
         }
-        #endregion
     }
 }

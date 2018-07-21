@@ -31,7 +31,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the type of relationship that the restriction represents.
         /// </summary>
@@ -44,12 +43,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the entities the restriction applies to.
         /// </summary>
         private Collection<string> restrictionEntities;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaRestriction()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaRestriction"/> class.
         /// </summary>
@@ -59,12 +56,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Entities
         /// <summary>
         /// Gets the entities this restriction applies to.
         /// </summary>
@@ -95,9 +90,7 @@ namespace Argotic.Extensions.Core
                 return restrictionEntities;
             }
         }
-        #endregion
 
-        #region EntityType
         /// <summary>
         /// Gets or sets the type of media that this restriction applies to.
         /// </summary>
@@ -114,9 +107,7 @@ namespace Argotic.Extensions.Core
                 restrictionType = value;
             }
         }
-        #endregion
 
-        #region Relationship
         /// <summary>
         /// Gets or sets the type of relationship that this restriction represents.
         /// </summary>
@@ -133,12 +124,10 @@ namespace Argotic.Extensions.Core
                 restrictionRelationship = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region RelationshipAsString(YahooMediaRestrictionRelationship type)
         /// <summary>
         /// Returns the relationship identifier for the supplied <see cref="YahooMediaRestrictionRelationship"/>.
         /// </summary>
@@ -177,9 +166,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region RelationshipByName(string name)
         /// <summary>
         /// Returns the <see cref="YahooMediaRestrictionRelationship"/> enumeration value that corresponds to the specified relationship name.
         /// </summary>
@@ -225,9 +212,7 @@ namespace Argotic.Extensions.Core
 
             return restrictionRelationship;
         }
-        #endregion
 
-        #region RestrictionTypeAsString(YahooMediaRestrictionType type)
         /// <summary>
         /// Returns the restriction type identifier for the supplied <see cref="YahooMediaRestrictionType"/>.
         /// </summary>
@@ -266,9 +251,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region RestrictionTypeByName(string name)
         /// <summary>
         /// Returns the <see cref="YahooMediaRestrictionType"/> enumeration value that corresponds to the specified restriction type name.
         /// </summary>
@@ -314,12 +297,10 @@ namespace Argotic.Extensions.Core
 
             return restrictionType;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaRestriction"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -393,9 +374,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaRestriction"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -438,12 +417,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaRestriction"/>.
         /// </summary>
@@ -476,12 +453,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -516,9 +491,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -536,9 +509,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -552,9 +523,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -577,9 +546,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -590,9 +557,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -615,9 +580,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -640,6 +603,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

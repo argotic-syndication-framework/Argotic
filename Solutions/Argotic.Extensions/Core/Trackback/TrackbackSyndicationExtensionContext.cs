@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the item's TrackBack URL.
         /// </summary>
@@ -33,12 +32,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the TRackbackURLs that were pinged in reference.
         /// </summary>
         private Collection<Uri> extensionAbouts;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region TrackbackSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackSyndicationExtensionContext"/> class.
         /// </summary>
@@ -48,12 +45,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Abouts
         /// <summary>
         /// Gets the trackbacks that were pinged in reference.
         /// </summary>
@@ -73,9 +68,7 @@ namespace Argotic.Extensions.Core
                 return extensionAbouts;
             }
         }
-        #endregion
 
-        #region Ping
         /// <summary>
         /// Gets or sets the TrackBack URL.
         /// </summary>
@@ -94,12 +87,10 @@ namespace Argotic.Extensions.Core
                 extensionPing = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -155,9 +146,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -187,6 +176,5 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
     }
 }

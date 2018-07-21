@@ -17,7 +17,6 @@ namespace Argotic.Common
         //============================================================
         //	METHOD ARGUMENT VALIDATION
         //============================================================
-        #region ArgumentNotNull(object value, string name)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not a null reference.
         /// </summary>
@@ -33,9 +32,7 @@ namespace Argotic.Common
                 throw new ArgumentNullException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotNullOrEmptyString(string value, string name)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not a null reference or an empty string.
         /// </summary>
@@ -51,9 +48,7 @@ namespace Argotic.Common
                 throw new ArgumentNullException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotGreaterThan(int value, int maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not greater than the specified maximum.
         /// </summary>
@@ -71,9 +66,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotGreaterThan(long value, string name, long maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not greater than the specified maximum.
         /// </summary>
@@ -91,9 +84,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotGreaterThan(decimal value, string name, decimal maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not greater than the specified maximum.
         /// </summary>
@@ -111,9 +102,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotLessThan(int value, int minimum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not less than the specified minimum.
         /// </summary>
@@ -131,9 +120,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotLessThan(long value, string name, long minimum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not less than the specified minimum.
         /// </summary>
@@ -151,9 +138,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotLessThan(decimal value, string name, decimal minimum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not less than the specified minimum.
         /// </summary>
@@ -171,9 +156,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotOutOfRange(int value, int minimum, int maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is within the specified range.
         /// </summary>
@@ -192,9 +175,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotOutOfRange(long value, int minimum, long maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is within the specified range.
         /// </summary>
@@ -213,9 +194,7 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
 
-        #region ArgumentNotOutOfRange(decimal value, int minimum, decimal maximum)
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is within the specified range.
         /// </summary>
@@ -234,6 +213,5 @@ namespace Argotic.Common
                 throw new ArgumentOutOfRangeException(name);
             }
         }
-        #endregion
     }
 }

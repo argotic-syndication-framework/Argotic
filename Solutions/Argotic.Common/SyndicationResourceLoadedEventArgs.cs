@@ -27,7 +27,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -49,12 +48,10 @@ namespace Argotic.Common
         /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
         /// </summary>
         private Object eventUserToken;
-        #endregion
-        
+
         //============================================================
 		//	CONSTRUCTORS
         //============================================================
-        #region SyndicationResourceLoadedEventArgs()
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
         /// </summary>
@@ -64,9 +61,7 @@ namespace Argotic.Common
 			//	
 			//------------------------------------------------------------
 		}
-		#endregion
 
-        #region SyndicationResourceLoadedEventArgs(IXPathNavigable navigator)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -81,9 +76,7 @@ namespace Argotic.Common
 
             eventNavigator  = data.CreateNavigator();
         }
-        #endregion
 
-        #region SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -109,9 +102,7 @@ namespace Argotic.Common
             eventSource         = source;
             eventOptions        = new WebRequestOptions(credentials, proxy);
         }
-        #endregion
 
-        #region SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -132,9 +123,7 @@ namespace Argotic.Common
             eventSource         = source;
             eventOptions        = options ?? new WebRequestOptions();
         }
-        #endregion
 
-        #region SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and user token.
         /// </summary>
@@ -155,9 +144,7 @@ namespace Argotic.Common
         {
             eventUserToken  = state;
         }
-        #endregion
 
-        #region SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and user token.
         /// </summary>
@@ -173,12 +160,10 @@ namespace Argotic.Common
         {
             eventUserToken  = state;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region Empty
         /// <summary>
         /// Represents an syndication resource loaded event with no event data.
         /// </summary>
@@ -191,12 +176,10 @@ namespace Argotic.Common
                 return emptyEventArguments;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Credentials
         /// <summary>
         /// Gets the network credentials used for authenticating the request to the Internet resource that the syndication resource was loaded from.
         /// </summary>
@@ -212,9 +195,7 @@ namespace Argotic.Common
                 return eventOptions.Credentials;
             }
         }
-        #endregion
 
-        #region Data
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
         /// </summary>
@@ -228,9 +209,7 @@ namespace Argotic.Common
                 return eventNavigator;
             }
         }
-        #endregion
 
-        #region Proxy
         /// <summary>
         /// Gets the network proxy used to access the Internet resource that the syndication resource was loaded from.
         /// </summary>
@@ -246,9 +225,7 @@ namespace Argotic.Common
                 return eventOptions.Proxy;
             }
         }
-        #endregion
 
-        #region Source
         /// <summary>
         /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
         /// </summary>
@@ -264,9 +241,7 @@ namespace Argotic.Common
                 return eventSource;
             }
         }
-        #endregion
 
-        #region State
         /// <summary>
         /// Gets an <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
         /// </summary>
@@ -282,12 +257,10 @@ namespace Argotic.Common
                 return eventUserToken;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
         /// </summary>
@@ -308,12 +281,10 @@ namespace Argotic.Common
 
             return String.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -348,9 +319,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -368,9 +337,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -384,9 +351,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -409,9 +374,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -422,9 +385,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -447,9 +408,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -472,6 +431,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

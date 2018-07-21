@@ -31,7 +31,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region RssChannel
             RssFeed feed    = new RssFeed();
 
             feed.Channel.Title          = "Dallas Times-Herald";
@@ -69,7 +68,6 @@ namespace Argotic.Examples
             feed.Channel.TextInput          = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
             feed.Channel.TimeToLive         = 60;
             feed.Channel.Webmaster          = "helpdesk@dallas.example.com";
-            #endregion
         }
     }
 }

@@ -34,14 +34,10 @@ namespace Argotic.Data.Adapters
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
-        
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes a new instance of the <see cref="Atom03SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -58,12 +54,10 @@ namespace Argotic.Data.Adapters
             //	Initialization and argument validation handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -91,12 +85,10 @@ namespace Argotic.Data.Adapters
 
             return manager;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Fill(AtomEntry resource)
         /// <summary>
         /// Modifies the <see cref="AtomEntry"/> to match the data source.
         /// </summary>
@@ -124,9 +116,7 @@ namespace Argotic.Data.Adapters
                 Atom03SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
             }
         }
-        #endregion
 
-        #region Fill(AtomFeed resource)
         /// <summary>
         /// Modifies the <see cref="AtomFeed"/> to match the data source.
         /// </summary>
@@ -184,12 +174,10 @@ namespace Argotic.Data.Adapters
                 adapter.Fill(resource, manager);
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -259,9 +247,7 @@ namespace Argotic.Data.Adapters
 
             return content;
         }
-        #endregion
 
-        #region CreateGenerator(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a <see cref="AtomGenerator"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -327,9 +313,7 @@ namespace Argotic.Data.Adapters
 
             return generator;
         }
-        #endregion
 
-        #region CreatePerson(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a <see cref="AtomPersonConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -393,9 +377,7 @@ namespace Argotic.Data.Adapters
 
             return person;
         }
-        #endregion
 
-        #region CreateTextContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a <see cref="AtomTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -477,9 +459,7 @@ namespace Argotic.Data.Adapters
 
             return content;
         }
-        #endregion
 
-        #region FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="AtomEntry"/> to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -539,9 +519,7 @@ namespace Argotic.Data.Adapters
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(entry, manager);
         }
-        #endregion
 
-        #region FillEntryCollections(AtomFeed entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="AtomEntry"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -603,9 +581,7 @@ namespace Argotic.Data.Adapters
                 }
             }
         }
-        #endregion
 
-        #region FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="AtomEntry"/> optional entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -656,9 +632,7 @@ namespace Argotic.Data.Adapters
                 entry.Summary   = Atom03SyndicationResourceAdapter.CreateTextContent(summaryNavigator, manager, settings);
             }
         }
-        #endregion
 
-        #region FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="AtomFeed"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -740,9 +714,7 @@ namespace Argotic.Data.Adapters
                 }
             }
         }
-        #endregion
 
-        #region FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="AtomFeed"/> optional entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -789,6 +761,5 @@ namespace Argotic.Data.Adapters
                 feed.Subtitle   = Atom03SyndicationResourceAdapter.CreateTextContent(taglineNavigator, manager, settings);
             }
         }
-        #endregion
     }
 }

@@ -32,7 +32,6 @@ namespace Argotic.Publishing
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
@@ -45,12 +44,10 @@ namespace Argotic.Publishing
         /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
         /// </summary>
         private bool entryResourceIsDraft;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomEntryResource()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class.
         /// </summary>
@@ -60,9 +57,7 @@ namespace Argotic.Publishing
             //	Initialization handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class using the supplied <see cref="AtomId"/>, <see cref="AtomTextConstruct"/>, and <see cref="DateTime"/>.
         /// </summary>
@@ -80,9 +75,7 @@ namespace Argotic.Publishing
             //	Initialization handled by base class
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class using the supplied <see cref="AtomId"/>, <see cref="AtomTextConstruct"/>, and <see cref="DateTime"/>.
         /// </summary>
@@ -105,9 +98,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.EditedOn   = editedOn;
         }
-        #endregion
 
-        #region AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class using the supplied <see cref="AtomId"/>, <see cref="AtomTextConstruct"/>, and <see cref="DateTime"/>.
         /// </summary>
@@ -131,12 +122,10 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.IsDraft    = isDraft;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region EditedOn
         /// <summary>
         /// Gets or sets a date-time indicating the most recent instant in time when this entry was edited.
         /// </summary>
@@ -160,9 +149,7 @@ namespace Argotic.Publishing
                 entryResourceEditedOn = value;
             }
         }
-        #endregion
 
-        #region IsDraft
         /// <summary>
         /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
         /// </summary>
@@ -180,12 +167,10 @@ namespace Argotic.Publishing
                 entryResourceIsDraft = value;
             }
         }
-        #endregion
 
         //============================================================
         //	ASYNC METHODS
         //============================================================
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -215,8 +200,7 @@ namespace Argotic.Publishing
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
-        #endregion
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+
         /// <summary>
         /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -287,9 +271,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
@@ -317,12 +299,10 @@ namespace Argotic.Publishing
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncLoadCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -430,9 +410,7 @@ namespace Argotic.Publishing
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -459,12 +437,10 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -498,9 +474,7 @@ namespace Argotic.Publishing
                 this.IsDraft    = controlExtension.Context.IsDraft;
             }
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -547,9 +521,7 @@ namespace Argotic.Publishing
         {
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -599,9 +571,7 @@ namespace Argotic.Publishing
                 this.IsDraft    = controlExtension.Context.IsDraft;
             }
         }
-        #endregion
 
-        #region Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -648,6 +618,5 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             base.Save(writer, settings);
         }
-        #endregion
     }
 }

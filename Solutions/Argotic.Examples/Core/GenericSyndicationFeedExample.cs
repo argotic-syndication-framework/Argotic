@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region GenericSyndicationFeed
             GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
             foreach(GenericSyndicationCategory category in feed.Categories)
@@ -66,7 +65,6 @@ namespace Argotic.Examples
                     //  Process RSS format specific information
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -77,7 +75,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
             foreach (GenericSyndicationItem item in feed.Items)
@@ -95,7 +92,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -106,7 +102,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             GenericSyndicationFeed feed = new GenericSyndicationFeed();
             Uri source                  = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
 
@@ -127,7 +122,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
     }
 }

@@ -33,7 +33,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the name of the method to be called.
         /// </summary>
@@ -46,12 +45,10 @@ namespace Argotic.Net
         /// Private member to hold the character encoding of the message.
         /// </summary>
         private Encoding messageEncoding    = Encoding.UTF8;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcMessage()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
         /// </summary>
@@ -61,9 +58,7 @@ namespace Argotic.Net
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region XmlRpcMessage(string methodName)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class using the specified method name.
         /// </summary>
@@ -77,9 +72,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.MethodName = methodName;
         }
-        #endregion
 
-        #region XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class using the specified method name and parameters.
         /// </summary>
@@ -103,12 +96,10 @@ namespace Argotic.Net
                 this.Parameters.Add(parameter);
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Encoding
         /// <summary>
         /// Gets or sets the <see cref="Encoding">character encoding</see> of this message.
         /// </summary>
@@ -127,9 +118,7 @@ namespace Argotic.Net
                 messageEncoding = value;
             }
         }
-        #endregion
 
-        #region MethodName
         /// <summary>
         /// Gets or sets the name of the method to be called.
         /// </summary>
@@ -149,9 +138,7 @@ namespace Argotic.Net
                 messageMethodName   = value.Trim();
             }
         }
-        #endregion
 
-        #region Parameters
         /// <summary>
         /// Gets the method parameters.
         /// </summary>
@@ -170,12 +157,10 @@ namespace Argotic.Net
                 return messageParameters;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{IXmlRpcValue}"/> collections.
         /// </summary>
@@ -231,12 +216,10 @@ namespace Argotic.Net
 
             return result;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="XmlRpcMessage"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -292,9 +275,7 @@ namespace Argotic.Net
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="XmlRpcMessage"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -328,12 +309,10 @@ namespace Argotic.Net
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
         /// </summary>
@@ -366,12 +345,10 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -406,9 +383,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -426,9 +401,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -442,9 +415,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -467,9 +438,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -480,9 +449,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -505,9 +472,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -530,6 +495,5 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

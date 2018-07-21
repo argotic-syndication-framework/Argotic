@@ -29,7 +29,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region XmlRpcClient
             // Initialize the XML-RPC client
             XmlRpcClient client = new XmlRpcClient();
             client.Host         = new Uri("http://bob.example.net/xmlrpcserver");
@@ -65,7 +64,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
     }
 }

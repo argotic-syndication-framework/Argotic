@@ -21,17 +21,14 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the Attention Profiling Markup Language (APML) 0.6 namespace identifier.
         /// </summary>
         private const string APML_NAMESPACE  = "http://www.apml.org/apml-0.6";
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region ApmlNamespace
         /// <summary>
         /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
         /// </summary>
@@ -43,12 +40,10 @@ namespace Argotic.Syndication.Specialized
                 return APML_NAMESPACE;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Attention Profiling Markup Language (APML) syndication entities.
         /// </summary>
@@ -75,6 +70,5 @@ namespace Argotic.Syndication.Specialized
 
             return manager;
         }
-        #endregion
     }
 }

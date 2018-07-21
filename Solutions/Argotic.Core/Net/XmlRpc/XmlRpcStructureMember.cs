@@ -23,7 +23,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the name of the structure member.
         /// </summary>
@@ -32,12 +31,10 @@ namespace Argotic.Net
         /// Private member to hold the value of the structure member.
         /// </summary>
         private IXmlRpcValue memberValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcStructureMember()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcStructureMember"/> class.
         /// </summary>
@@ -47,9 +44,7 @@ namespace Argotic.Net
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region XmlRpcStructureMember(string name, IXmlRpcValue value)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcStructureMember"/> class using the specified name and value.
         /// </summary>
@@ -66,12 +61,10 @@ namespace Argotic.Net
             this.Name   = name;
             this.Value  = value;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Name
         /// <summary>
         /// Gets or sets the name of this structure member.
         /// </summary>
@@ -91,9 +84,7 @@ namespace Argotic.Net
                 memberName = value.Trim();
             }
         }
-        #endregion
 
-        #region Value
         /// <summary>
         /// Gets or sets the value of this structure member.
         /// </summary>
@@ -112,12 +103,10 @@ namespace Argotic.Net
                 memberValue = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="XmlRpcStructureMember"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -166,9 +155,7 @@ namespace Argotic.Net
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="XmlRpcStructureMember"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -199,12 +186,10 @@ namespace Argotic.Net
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcStructureMember"/>.
         /// </summary>
@@ -237,12 +222,10 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -275,9 +258,7 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -295,9 +276,7 @@ namespace Argotic.Net
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -311,9 +290,7 @@ namespace Argotic.Net
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -336,9 +313,7 @@ namespace Argotic.Net
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -349,9 +324,7 @@ namespace Argotic.Net
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -374,9 +347,7 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -399,6 +370,5 @@ namespace Argotic.Net
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the URI that comment entries are to be posted to.
         /// </summary>
@@ -31,12 +30,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the URI of the syndication feed for comment entries.
         /// </summary>
         private Uri extensionCommentFeed;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region WellFormedWebCommentsSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> class.
         /// </summary>
@@ -46,12 +43,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Comments
         /// <summary>
         /// Gets or sets the URL that comment entries are to be posted to.
         /// </summary>
@@ -68,9 +63,7 @@ namespace Argotic.Extensions.Core
                 extensionComment = value;
             }
         }
-        #endregion
 
-        #region CommentsFeed
         /// <summary>
         /// Gets or sets the URL of the syndication feed for comment entries.
         /// </summary>
@@ -87,12 +80,10 @@ namespace Argotic.Extensions.Core
                 extensionCommentFeed = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -151,9 +142,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -183,6 +172,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("commentRss", xmlNamespace, this.CommentsFeed.ToString());
             }
         }
-        #endregion
     }
 }

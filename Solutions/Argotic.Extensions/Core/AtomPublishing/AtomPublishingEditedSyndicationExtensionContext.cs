@@ -23,17 +23,14 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the last time a resource was edited. If the resource has not been edited yet, indicates the time the resource was created.
         /// </summary>
         private DateTime extensionEditedOn  = DateTime.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomPublishingEditedSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
         /// </summary>
@@ -43,12 +40,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region EditedOn
         /// <summary>
         /// Gets or sets a date-time indicating the most recent instant in time when this resource was edited.
         /// </summary>
@@ -71,12 +66,10 @@ namespace Argotic.Extensions.Core
                 extensionEditedOn = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -117,9 +110,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -144,6 +135,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("edited", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.EditedOn));
             }
         }
-        #endregion
     }
 }

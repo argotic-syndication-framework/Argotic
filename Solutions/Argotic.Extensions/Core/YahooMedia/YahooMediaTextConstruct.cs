@@ -28,7 +28,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the entity encoding utilized by the human-readable text.
         /// </summary>
@@ -37,12 +36,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the content of the human-readable text.
         /// </summary>
         private string textConstructContent                     = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaTextConstruct()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class.
         /// </summary>
@@ -52,9 +49,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaTextConstruct(string text)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class using the supplied text.
         /// </summary>
@@ -68,9 +63,7 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.Content    = text;
         }
-        #endregion
 
-        #region YahooMediaTextConstruct(string text, YahooMediaTextConstructType type)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class using the supplied text.
         /// </summary>
@@ -85,12 +78,10 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.TextType   = type;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Content
         /// <summary>
         /// Gets or sets the content of this human-readable text.
         /// </summary>
@@ -113,9 +104,7 @@ namespace Argotic.Extensions.Core
                 textConstructContent = value.Trim();
             }
         }
-        #endregion
 
-        #region TextType
         /// <summary>
         /// Gets or sets the entity encoding utilized by this human-readable text.
         /// </summary>
@@ -138,12 +127,10 @@ namespace Argotic.Extensions.Core
                 textConstructType = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region TextTypeAsString(YahooMediaTextConstructType type)
         /// <summary>
         /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.
         /// </summary>
@@ -182,9 +169,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region TextTypeByName(string name)
         /// <summary>
         /// Returns the <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified entity encoding type name.
         /// </summary>
@@ -230,12 +215,10 @@ namespace Argotic.Extensions.Core
 
             return constructType;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -282,9 +265,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string elementName)
         /// <summary>
         /// Saves the current <see cref="YahooMediaTextConstruct"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -320,12 +301,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaTextConstruct"/>.
         /// </summary>
@@ -358,12 +337,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -397,9 +374,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -417,9 +392,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -433,9 +406,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -458,9 +429,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -471,9 +440,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -496,9 +463,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -521,6 +486,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

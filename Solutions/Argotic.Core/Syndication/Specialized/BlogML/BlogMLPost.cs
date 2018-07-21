@@ -34,7 +34,6 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the title of the web log entity.
         /// </summary>
@@ -103,12 +102,10 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold views of the post.
         /// </summary>
         private string postViews                                    = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region BlogMLPost()
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
         /// </summary>
@@ -118,12 +115,10 @@ namespace Argotic.Syndication.Specialized
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	COMMON PROPERTIES
         //============================================================
-        #region ApprovalStatus
         /// <summary>
         /// Gets or sets the approval status of this web log entity.
         /// </summary>
@@ -143,9 +138,7 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseApprovalStatus = value;
             }
         }
-        #endregion
 
-        #region CreatedOn
         /// <summary>
         /// Gets or sets a date-time indicating when this web log entity was created.
         /// </summary>
@@ -168,9 +161,7 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseCreatedOn = value;
             }
         }
-        #endregion
 
-        #region Id
         /// <summary>
         /// Gets or sets the unique identifier of this web log entity.
         /// </summary>
@@ -194,9 +185,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
-        #region LastModifiedOn
         /// <summary>
         /// Gets or sets a date-time indicating when this web log entity was last modified.
         /// </summary>
@@ -219,9 +208,7 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseLastModifiedOn = value;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of this web log entity.
         /// </summary>
@@ -240,12 +227,10 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseTitle = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -271,9 +256,7 @@ namespace Argotic.Syndication.Specialized
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -285,12 +268,10 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Attachments
         /// <summary>
         /// Gets the attachments for this post.
         /// </summary>
@@ -306,9 +287,7 @@ namespace Argotic.Syndication.Specialized
                 return postAttachments;
             }
         }
-        #endregion
 
-        #region Authors
         /// <summary>
         /// Gets the authors of this post.
         /// </summary>
@@ -327,9 +306,7 @@ namespace Argotic.Syndication.Specialized
                 return postAuthors;
             }
         }
-        #endregion
 
-        #region Categories
         /// <summary>
         /// Gets the categories for this post.
         /// </summary>
@@ -348,9 +325,7 @@ namespace Argotic.Syndication.Specialized
                 return postCategories;
             }
         }
-        #endregion
 
-        #region Comments
         /// <summary>
         /// Gets the comments for this post.
         /// </summary>
@@ -366,9 +341,7 @@ namespace Argotic.Syndication.Specialized
                 return postComments;
             }
         }
-        #endregion
 
-        #region Content
         /// <summary>
         /// Gets or sets the content of this post.
         /// </summary>
@@ -387,9 +360,7 @@ namespace Argotic.Syndication.Specialized
                 postContent = value;
             }
         }
-        #endregion
 
-        #region Excerpt
         /// <summary>
         /// Gets or sets the excerpt of this post.
         /// </summary>
@@ -406,9 +377,7 @@ namespace Argotic.Syndication.Specialized
                 postExcerpt = value;
             }
         }
-        #endregion
 
-        #region HasExcerpt
         /// <summary>
         /// Gets a value indicating if this post has an excerpt.
         /// </summary>
@@ -420,9 +389,7 @@ namespace Argotic.Syndication.Specialized
                 return this.Excerpt != null;
             }
         }
-        #endregion
 
-        #region Name
         /// <summary>
         /// Gets or sets the name of this post.
         /// </summary>
@@ -439,9 +406,7 @@ namespace Argotic.Syndication.Specialized
                 postName = value;
             }
         }
-        #endregion
 
-        #region PostType
         /// <summary>
         /// Gets or sets the type of web log entry this post represents.
         /// </summary>
@@ -461,9 +426,7 @@ namespace Argotic.Syndication.Specialized
                 postType = value;
             }
         }
-        #endregion
 
-        #region Trackbacks
         /// <summary>
         /// Gets the trackbacks for this post.
         /// </summary>
@@ -480,9 +443,7 @@ namespace Argotic.Syndication.Specialized
                 return postTrackbacks;
             }
         }
-        #endregion
 
-        #region Url
         /// <summary>
         /// Gets or sets the URL of this post.
         /// </summary>
@@ -499,9 +460,7 @@ namespace Argotic.Syndication.Specialized
                 postUrl = value;
             }
         }
-        #endregion
 
-        #region Views
         /// <summary>
         /// Gets or sets the views of this post.
         /// </summary>
@@ -525,12 +484,10 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<BlogMLAttachment> source, Collection<BlogMLAttachment> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{BlogMLAttachment}"/> collections.
         /// </summary>
@@ -581,9 +538,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<BlogMLAuthor> source, Collection<BlogMLAuthor> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{BlogMLAuthor}"/> collections.
         /// </summary>
@@ -634,9 +589,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<BlogMLComment> source, Collection<BlogMLComment> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{BlogMLComment}"/> collections.
         /// </summary>
@@ -687,9 +640,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
-        #endregion
 
-        #region CompareSequence(Collection<BlogMLTrackback> source, Collection<BlogMLTrackback> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{BlogMLTrackback}"/> collections.
         /// </summary>
@@ -740,9 +691,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
-        #endregion
 
-        #region PostTypeAsString(BlogMLPostType type)
         /// <summary>
         /// Returns the post type identifier for the supplied <see cref="BlogMLPostType"/>.
         /// </summary>
@@ -789,9 +738,7 @@ namespace Argotic.Syndication.Specialized
 
             return name;
         }
-        #endregion
 
-        #region PostTypeByName(string name)
         /// <summary>
         /// Returns the <see cref="BlogMLPostType"/> enumeration value that corresponds to the specified post type name.
         /// </summary>
@@ -845,12 +792,10 @@ namespace Argotic.Syndication.Specialized
 
             return postType;
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -877,9 +822,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -906,9 +849,7 @@ namespace Argotic.Syndication.Specialized
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -941,12 +882,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1061,9 +1000,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1187,9 +1124,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="BlogMLPost"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -1300,12 +1235,10 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Modifies the <see cref="BlogMLPost"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -1408,9 +1341,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="BlogMLPost"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -1516,12 +1447,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLPost"/>.
         /// </summary>
@@ -1554,12 +1483,10 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -1621,9 +1548,7 @@ namespace Argotic.Syndication.Specialized
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -1641,9 +1566,7 @@ namespace Argotic.Syndication.Specialized
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -1657,9 +1580,7 @@ namespace Argotic.Syndication.Specialized
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -1682,9 +1603,7 @@ namespace Argotic.Syndication.Specialized
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -1695,9 +1614,7 @@ namespace Argotic.Syndication.Specialized
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -1720,9 +1637,7 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -1745,6 +1660,5 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

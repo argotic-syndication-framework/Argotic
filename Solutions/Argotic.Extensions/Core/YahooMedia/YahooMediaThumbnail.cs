@@ -29,7 +29,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the url of the thumbnail.
         /// </summary>
@@ -46,12 +45,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the time offset in relation to the media object.
         /// </summary>
         private TimeSpan thumbnailTime  = TimeSpan.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaThumbnail()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaThumbnail"/> class.
         /// </summary>
@@ -61,9 +58,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaThumbnail(Uri url)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaThumbnail"/> class using the supplied <see cref="Uri"/>.
         /// </summary>
@@ -76,9 +71,7 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.Url    = url;
         }
-        #endregion
 
-        #region YahooMediaThumbnail(Uri url, int height, int width)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaThumbnail"/> class using the supplied <see cref="Uri"/>, height and width.
         /// </summary>
@@ -94,12 +87,10 @@ namespace Argotic.Extensions.Core
             this.Height = height;
             this.Width  = width;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Height
         /// <summary>
         /// Gets or sets the height of this thumbnail.
         /// </summary>
@@ -116,9 +107,7 @@ namespace Argotic.Extensions.Core
                 thumbnailHeight = value;
             }
         }
-        #endregion
 
-        #region Time
         /// <summary>
         /// Gets or sets the time offset in relation to the media object.
         /// </summary>
@@ -141,9 +130,7 @@ namespace Argotic.Extensions.Core
                 thumbnailTime = value;
             }
         }
-        #endregion
 
-        #region Url
         /// <summary>
         /// Gets or sets the location of this thumbnail image.
         /// </summary>
@@ -162,9 +149,7 @@ namespace Argotic.Extensions.Core
                 thumbnailUrl = value;
             }
         }
-        #endregion
 
-        #region Width
         /// <summary>
         /// Gets or sets the width of this thumbnail.
         /// </summary>
@@ -181,12 +166,10 @@ namespace Argotic.Extensions.Core
                 thumbnailWidth = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaThumbnail"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -261,9 +244,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaThumbnail"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -305,12 +286,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaThumbnail"/>.
         /// </summary>
@@ -343,12 +322,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -384,9 +361,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -404,9 +379,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -420,9 +393,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -445,9 +416,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -458,9 +427,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -483,9 +450,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -508,6 +473,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

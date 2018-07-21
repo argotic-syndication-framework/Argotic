@@ -36,7 +36,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -73,12 +72,10 @@ namespace Argotic.Syndication
         /// Private member to hold a collection of outlines that are children of the outline.
         /// </summary>
         private Collection<OpmlOutline> outlineSubordinateOutlines;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region OpmlOutline()
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
         /// </summary>
@@ -88,9 +85,7 @@ namespace Argotic.Syndication
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region OpmlOutline(string text)
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOutline"/> class using the supplied text.
         /// </summary>
@@ -107,12 +102,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Text   = text;
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -138,9 +131,7 @@ namespace Argotic.Syndication
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -152,12 +143,10 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Attributes
         /// <summary>
         /// Gets a collection of key/value string pairs that represent custom attributes applied to this outline.
         /// </summary>
@@ -177,9 +166,7 @@ namespace Argotic.Syndication
                 return outlineAttributes;
             }
         }
-        #endregion
 
-        #region Categories
         /// <summary>
         /// Gets a collection that describes the categorization taxonomy applied to this outline.
         /// </summary>
@@ -199,9 +186,7 @@ namespace Argotic.Syndication
                 return outlineCategories;
             }
         }
-        #endregion
 
-        #region ContentType
         /// <summary>
         /// Gets or sets a value indicating how this outline's attributes should be interpreted.
         /// </summary>
@@ -225,9 +210,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region CreatedOn
         /// <summary>
         /// Gets or sets a date-time indicating when this outline was created.
         /// </summary>
@@ -250,9 +233,7 @@ namespace Argotic.Syndication
                 outlineCreatedOn = value;
             }
         }
-        #endregion
 
-        #region HasBreakpoint
         /// <summary>
         /// Gets or sets a value indicating if a breakpoint is set on this outline.
         /// </summary>
@@ -272,9 +253,7 @@ namespace Argotic.Syndication
                 outlineHasBreakpointSet = value;
             }
         }
-        #endregion
 
-        #region IsCommented
         /// <summary>
         /// Gets or sets a value indicating whether this outline is commented.
         /// </summary>
@@ -294,9 +273,7 @@ namespace Argotic.Syndication
                 outlineIsCommented = value;
             }
         }
-        #endregion
 
-        #region IsInclusionOutline
         /// <summary>
         /// Gets a value indicating if this outline represents an inclusion.
         /// </summary>
@@ -309,9 +286,7 @@ namespace Argotic.Syndication
                 return (String.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
             }
         }
-        #endregion
 
-        #region IsSubscriptionListOutline
         /// <summary>
         /// Gets a value indicating if this outline represents a subscription list.
         /// </summary>
@@ -324,9 +299,7 @@ namespace Argotic.Syndication
                 return (String.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
             }
         }
-        #endregion
 
-        #region Outlines
         /// <summary>
         /// Gets a collection of outlines that are children of this outline.
         /// </summary>
@@ -342,9 +315,7 @@ namespace Argotic.Syndication
                 return outlineSubordinateOutlines;
             }
         }
-        #endregion
 
-        #region Text
         /// <summary>
         /// Gets or sets the textual content of this outline.
         /// </summary>
@@ -367,12 +338,10 @@ namespace Argotic.Syndication
                 outlineText = value.Trim();
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -399,9 +368,7 @@ namespace Argotic.Syndication
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -428,9 +395,7 @@ namespace Argotic.Syndication
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -463,12 +428,10 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -538,9 +501,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -618,9 +579,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="OpmlOutline"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -688,12 +647,10 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{OpmlOutline}"/> collections.
         /// </summary>
@@ -744,9 +701,7 @@ namespace Argotic.Syndication
 
             return result;
         }
-        #endregion
 
-        #region CreateInclusionOutline(string text, Uri url)
         /// <summary>
         /// Creates a new <see cref="OpmlOutline"/> that represents an inclusion outline using the supplied parameters.
         /// </summary>
@@ -795,9 +750,7 @@ namespace Argotic.Syndication
 
             return outline;
         }
-        #endregion
 
-        #region CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
         /// <summary>
         /// Creates a new <see cref="OpmlOutline"/> that represents a subscription list outline using the supplied parameters.
         /// </summary>
@@ -824,9 +777,7 @@ namespace Argotic.Syndication
         {
             return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, String.Empty, String.Empty, String.Empty, null);
         }
-        #endregion
 
-        #region CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
         /// <summary>
         /// Creates a new <see cref="OpmlOutline"/> that represents a subscription list outline using the supplied parameters.
         /// </summary>
@@ -903,12 +854,10 @@ namespace Argotic.Syndication
 
             return outline;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOutline"/>.
         /// </summary>
@@ -941,12 +890,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -987,9 +934,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -1007,9 +952,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -1023,9 +966,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -1048,9 +989,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -1061,9 +1000,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -1086,9 +1023,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -1111,12 +1046,10 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadAttribute(XPathNavigator attribute)
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using attributes defined on the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1209,6 +1142,5 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
     }
 }

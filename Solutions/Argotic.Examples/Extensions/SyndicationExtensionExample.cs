@@ -16,17 +16,14 @@ namespace Argotic.Examples
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the value of the custom syndication extension's attribute.
         /// </summary>
         private string customExtensionAttribute = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region MyCustomSyndicationExtension()
         /// <summary>
         /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
         /// </summary>
@@ -35,12 +32,10 @@ namespace Argotic.Examples
         {
             // Class state initialized by abstract SyndicationExtension base class
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region MyAttribute
         /// <summary>
         /// Gets or sets the value of the extension attribute.
         /// </summary>
@@ -64,12 +59,10 @@ namespace Argotic.Examples
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region MatchByType(ISyndicationExtension extension)
         /// <summary>
         /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
         /// represents the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>.
@@ -93,12 +86,10 @@ namespace Argotic.Examples
                 return false;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -139,9 +130,7 @@ namespace Argotic.Examples
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
@@ -162,9 +151,7 @@ namespace Argotic.Examples
 
             return this.Load(document.CreateNavigator());
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -189,12 +176,10 @@ namespace Argotic.Examples
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
         /// </summary>
@@ -227,12 +212,10 @@ namespace Argotic.Examples
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -274,9 +257,7 @@ namespace Argotic.Examples
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -294,9 +275,7 @@ namespace Argotic.Examples
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -310,9 +289,7 @@ namespace Argotic.Examples
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -335,9 +312,7 @@ namespace Argotic.Examples
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -348,9 +323,7 @@ namespace Argotic.Examples
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -373,9 +346,7 @@ namespace Argotic.Examples
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -398,6 +369,5 @@ namespace Argotic.Examples
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

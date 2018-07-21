@@ -19,7 +19,6 @@ namespace Argotic.Configuration
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the client timeout configuration property for the section.
         /// </summary>
@@ -36,12 +35,10 @@ namespace Argotic.Configuration
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
         private static ConfigurationPropertyCollection configurationSectionProperties       = new ConfigurationPropertyCollection();
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcClientSection()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClientSection"/> class.
         /// </summary>
@@ -54,12 +51,10 @@ namespace Argotic.Configuration
             configurationSectionProperties.Add(configurationSectionUserAgentProperty);
             configurationSectionProperties.Add(configurationSectionNetworkProperty);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Network
         /// <summary>
         /// Gets the network connection information.
         /// </summary>
@@ -72,9 +67,7 @@ namespace Argotic.Configuration
                 return (XmlRpcClientNetworkElement)base[configurationSectionNetworkProperty];
             }
         }
-        #endregion
 
-        #region Timeout
         /// <summary>
         /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
         /// </summary>
@@ -92,9 +85,7 @@ namespace Argotic.Configuration
                 base[configurationSectionTimeoutProperty] = value;
             }
         }
-        #endregion
 
-        #region UserAgent
         /// <summary>
         /// Gets or sets information such as the client application name, version, host operating system, and language. 
         /// </summary>
@@ -111,12 +102,10 @@ namespace Argotic.Configuration
                 base[configurationSectionUserAgentProperty] = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PROTECTED PROPERTIES
         //============================================================
-        #region Properties
         /// <summary>
         /// Gets the configuration properties for this section.
         /// </summary>
@@ -128,6 +117,5 @@ namespace Argotic.Configuration
                 return configurationSectionProperties;
             }
         }
-        #endregion
     }
 }

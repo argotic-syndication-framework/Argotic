@@ -23,17 +23,14 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the Web Log Markup Language (BlogML) 2.0 namespace identifier.
         /// </summary>
         private const string BLOGML_NAMESPACE  = "http://www.blogml.com/2006/09/BlogML";
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region BlogMLNamespace
         /// <summary>
         /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
         /// </summary>
@@ -45,12 +42,10 @@ namespace Argotic.Syndication.Specialized
                 return BLOGML_NAMESPACE;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region ApprovalStatusAsString(BlogMLApprovalStatus status)
         /// <summary>
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
         /// </summary>
@@ -89,9 +84,7 @@ namespace Argotic.Syndication.Specialized
 
             return name;
         }
-        #endregion
 
-        #region ApprovalStatusByValue(string value)
         /// <summary>
         /// Returns the <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified approval status value.
         /// </summary>
@@ -137,9 +130,7 @@ namespace Argotic.Syndication.Specialized
 
             return approvalStatus;
         }
-        #endregion
 
-        #region CompareCommonObjects(IBlogMLCommonObject source, IBlogMLCommonObject target)
         /// <summary>
         /// Compares objects that implement the <see cref="IBlogMLCommonObject"/> interface.
         /// </summary>
@@ -192,9 +183,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
-        #endregion
 
-        #region CreateNamespaceManager(XmlNameTable nameTable)
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within  Web Log Markup Language (BlogML) syndication entities.
         /// </summary>
@@ -221,9 +210,7 @@ namespace Argotic.Syndication.Specialized
 
             return manager;
         }
-        #endregion
 
-        #region FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
         /// <summary>
         /// Modifies the <see cref="IBlogMLCommonObject"/> to match the data source.
         /// </summary>
@@ -323,9 +310,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Modifies the <see cref="IBlogMLCommonObject"/> to match the data source.
         /// </summary>
@@ -428,9 +413,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteCommonObjectAttributes(IBlogMLCommonObject target, XPathNavigator source)
         /// <summary>
         /// Saves the current <see cref="IBlogMLCommonObject"/> attributes to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -469,9 +452,7 @@ namespace Argotic.Syndication.Specialized
                 writer.WriteAttributeString("approved", BlogMLUtility.ApprovalStatusAsString(source.ApprovalStatus));
             }
         }
-        #endregion
 
-        #region WriteCommonObjectElements(IBlogMLCommonObject target, XPathNavigator source)
         /// <summary>
         /// Saves the current <see cref="IBlogMLCommonObject"/> elements to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -495,6 +476,5 @@ namespace Argotic.Syndication.Specialized
                 source.Title.WriteTo(writer, "title");
             }
         }
-        #endregion
     }
 }

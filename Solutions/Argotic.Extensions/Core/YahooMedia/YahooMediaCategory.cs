@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a URI that identifies the taxonomy scheme.
         /// </summary>
@@ -36,12 +35,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the categorization taxonomy for the media object.
         /// </summary>
         private string categoryContent  = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaCategory()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class.
         /// </summary>
@@ -51,9 +48,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaCategory(string text)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class using the supplied text.
         /// </summary>
@@ -67,12 +62,10 @@ namespace Argotic.Extensions.Core
             //------------------------------------------------------------
             this.Content    = text;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region DefaultScheme
         /// <summary>
         /// Gets the default categorization scheme for media objects.
         /// </summary>
@@ -84,12 +77,10 @@ namespace Argotic.Extensions.Core
                 return new Uri("http://search.yahoo.com/mrss/category_schema");
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Content
         /// <summary>
         /// Gets or sets the categorization taxonomy for this media object.
         /// </summary>
@@ -109,9 +100,7 @@ namespace Argotic.Extensions.Core
                 categoryContent = value.Trim();
             }
         }
-        #endregion
 
-        #region Label
         /// <summary>
         /// Gets or sets the human readable label for this category.
         /// </summary>
@@ -135,9 +124,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Scheme
         /// <summary>
         /// Gets or sets a URI that identifies this categorization scheme.
         /// </summary>
@@ -158,12 +145,10 @@ namespace Argotic.Extensions.Core
                 categoryScheme = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaCategory"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -218,9 +203,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaCategory"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -260,12 +243,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCategory"/>.
         /// </summary>
@@ -298,12 +279,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -338,9 +317,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -358,9 +335,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -374,9 +349,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -399,9 +372,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -412,9 +383,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -437,9 +406,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -462,6 +429,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

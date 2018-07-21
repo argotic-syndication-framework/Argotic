@@ -41,8 +41,7 @@ namespace Argotic.Extensions.Tests
 			}
 		}
 
-		#region Additional test attributes
-		// 
+	    // 
 		//You can use the following additional attributes as you write your tests:
 		//
 		//Use ClassInitialize to run code before running the first test in the class
@@ -69,10 +68,8 @@ namespace Argotic.Extensions.Tests
 		//{
 		//}
 		//
-		#endregion
 
-
-		/// <summary>
+	    /// <summary>
 		///A test for FeedRankSyndicationExtension Constructor
 		///</summary>
 		[TestMethod()]

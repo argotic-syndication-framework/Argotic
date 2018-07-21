@@ -19,7 +19,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the content MIME type of the syndication endpoint.
         /// </summary>
@@ -32,12 +31,10 @@ namespace Argotic.Common
         /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
         /// </summary>
         private Uri endpointSource;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region DiscoverableSyndicationEndpoint()
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class.
         /// </summary>
@@ -47,9 +44,7 @@ namespace Argotic.Common
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region DiscoverableSyndicationEndpoint(Uri source, string contentType)
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class using the supplied <see cref="Uri"/> and MIME content type.
         /// </summary>
@@ -66,9 +61,7 @@ namespace Argotic.Common
             this.ContentType    = contentType;
             this.Source         = source;
         }
-        #endregion
 
-        #region DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class using the supplied <see cref="Uri"/>, MIME content type and title.
         /// </summary>
@@ -87,12 +80,10 @@ namespace Argotic.Common
             this.Source         = source;
             this.Title          = title;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region ContentFormat
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> of the syndication endpoint.
         /// </summary>
@@ -138,9 +129,7 @@ namespace Argotic.Common
                 return syndicationFormat;
             }
         }
-        #endregion
 
-        #region ContentType
         /// <summary>
         /// Gets or sets the MIME content type of the syndication endpoint.
         /// </summary>
@@ -162,9 +151,7 @@ namespace Argotic.Common
                 endpointMediaType   = value.Trim();
             }
         }
-        #endregion
 
-        #region Source
         /// <summary>
         /// Gets or sets the Uniform Resource Locator (URL) of the syndication endpoint.
         /// </summary>
@@ -185,9 +172,7 @@ namespace Argotic.Common
                 endpointSource  = value;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of the syndication endpoint.
         /// </summary>
@@ -212,12 +197,10 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNavigator()
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
         /// </summary>
@@ -235,12 +218,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new WebRequestOptions());
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.
         /// </summary>
@@ -255,12 +236,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return String.Format(null, "<link rel=\"alternate\" type=\"{0}\" title=\"{1}\" href=\"{2}\" />", this.ContentType, this.Title, this.Source != null ? this.Source.ToString() : String.Empty);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -295,9 +274,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -315,9 +292,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -331,9 +306,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -356,9 +329,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -369,9 +340,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -394,9 +363,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -419,6 +386,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

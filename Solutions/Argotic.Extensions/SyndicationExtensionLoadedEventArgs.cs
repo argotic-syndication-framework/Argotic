@@ -28,7 +28,6 @@ namespace Argotic.Extensions
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -42,12 +41,10 @@ namespace Argotic.Extensions
         /// Private member to hold the syndication extension that resulted from the load operation.
         /// </summary>
         private ISyndicationExtension eventExtension;
-        #endregion
-        
+
         //============================================================
 		//	CONSTRUCTORS
         //============================================================
-        #region SyndicationExtensionLoadedEventArgs()
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.
         /// </summary>
@@ -57,9 +54,7 @@ namespace Argotic.Extensions
 			//	
 			//------------------------------------------------------------
 		}
-		#endregion
 
-        #region SyndicationExtensionLoadedEventArgs(IXPathNavigable navigator)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -74,9 +69,7 @@ namespace Argotic.Extensions
 
             eventNavigator  = data.CreateNavigator();
         }
-        #endregion
 
-        #region SyndicationExtensionLoadedEventArgs(IXPathNavigable data, ISyndicationExtension extension)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/> and <see cref="ISyndicationExtension"/>.
         /// </summary>
@@ -95,12 +88,10 @@ namespace Argotic.Extensions
 
             eventExtension  = extension;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region Empty
         /// <summary>
         /// Represents an syndication extension loaded event with no event data.
         /// </summary>
@@ -113,12 +104,10 @@ namespace Argotic.Extensions
                 return emptyEventArguments;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Data
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
         /// </summary>
@@ -132,9 +121,7 @@ namespace Argotic.Extensions
                 return eventNavigator;
             }
         }
-        #endregion
 
-        #region Extension
         /// <summary>
         /// Gets the <see cref="ISyndicationExtension"/> that resulted from the load operation.
         /// </summary>
@@ -148,12 +135,10 @@ namespace Argotic.Extensions
                 return eventExtension;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.
         /// </summary>
@@ -174,12 +159,10 @@ namespace Argotic.Extensions
 
             return String.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -244,9 +227,7 @@ namespace Argotic.Extensions
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -264,9 +245,7 @@ namespace Argotic.Extensions
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -280,9 +259,7 @@ namespace Argotic.Extensions
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -305,9 +282,7 @@ namespace Argotic.Extensions
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -318,9 +293,7 @@ namespace Argotic.Extensions
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -343,9 +316,7 @@ namespace Argotic.Extensions
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -368,6 +339,5 @@ namespace Argotic.Extensions
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

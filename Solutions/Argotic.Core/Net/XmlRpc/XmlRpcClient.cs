@@ -45,7 +45,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the location of the host computer that client XML-RPC calls will be sent to.
         /// </summary>
@@ -78,12 +77,10 @@ namespace Argotic.Net
         /// Private member to hold HTTP web request used by asynchronous send operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region XmlRpcClient()
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class.
         /// </summary>
@@ -94,9 +91,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.Initialize();
         }
-        #endregion
 
-        #region XmlRpcClient(Uri host)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server.
         /// </summary>
@@ -114,9 +109,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.Host   = host;
         }
-        #endregion
 
-        #region XmlRpcClient(Uri host, string userAgent)
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server and user agent.
         /// </summary>
@@ -132,23 +125,19 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.UserAgent  = userAgent;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region SendCompleted
         /// <summary>
         /// Occurs when an asynchronous remote procedure call send operation completes.
         /// </summary>
         /// <seealso cref="SendAsync(XmlRpcMessage, Object)"/>
         public event EventHandler<XmlRpcMessageSentEventArgs> SendCompleted;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnMessageSent(XmlRpcMessageSentEventArgs e)
         /// <summary>
         /// Raises the <see cref="SendCompleted"/> event.
         /// </summary>
@@ -181,12 +170,10 @@ namespace Argotic.Net
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Credentials
         /// <summary>
         /// Gets or sets the authentication credentials utilized by this client when making remote procedure calls.
         /// </summary>
@@ -206,9 +193,7 @@ namespace Argotic.Net
                 clientOptions.Credentials = value;
             }
         }
-        #endregion
 
-        #region Host
         /// <summary>
         /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
         /// </summary>
@@ -230,9 +215,7 @@ namespace Argotic.Net
                 clientHost = value;
             }
         }
-        #endregion
 
-        #region Proxy
         /// <summary>
         /// Gets or sets the web proxy utilized by this client to proxy remote procedure calls.
         /// </summary>
@@ -252,9 +235,7 @@ namespace Argotic.Net
                 clientOptions.Proxy = value;
             }
         }
-        #endregion
 
-        #region Timeout
         /// <summary>
         /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
         /// </summary>
@@ -284,9 +265,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region UseDefaultCredentials
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
         /// </summary>
@@ -319,9 +298,7 @@ namespace Argotic.Net
                 clientUsesDefaultCredentials = value;
             }
         }
-        #endregion
 
-        #region UserAgent
         /// <summary>
         /// Gets or sets information such as the client application name, version, host operating system, and language. 
         /// </summary>
@@ -341,12 +318,10 @@ namespace Argotic.Net
                 clientUserAgent = value.Trim();
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncSendHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
@@ -363,9 +338,7 @@ namespace Argotic.Net
                 clientAsyncSendCancelled = value;
             }
         }
-        #endregion
 
-        #region SendOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the client is in the process of sending a remote procedure call.
         /// </summary>
@@ -382,12 +355,10 @@ namespace Argotic.Net
                 clientIsSending = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region ScalarTypeAsString(XmlRpcScalarValueType type)
         /// <summary>
         /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
@@ -432,9 +403,7 @@ namespace Argotic.Net
 
             return name;
         }
-        #endregion
 
-        #region ScalarTypeByName(string name)
         /// <summary>
         /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
         /// </summary>
@@ -486,9 +455,7 @@ namespace Argotic.Net
 
             return valueType;
         }
-        #endregion
 
-        #region TryParseValue(XPathNavigator source, out IXmlRpcValue value)
         /// <summary>
         /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>. 
         /// Parameters specify the XML data source and the variable where the new <see cref="IXmlRpcValue"/> object is returned.
@@ -624,12 +591,10 @@ namespace Argotic.Net
             value   = null;
             return false;
         }
-        #endregion
 
         //============================================================
         //	INTERNAL METHODS
         //============================================================
-        #region TryParseBoolean(string value, out bool result)
         /// <summary>
         /// Converts the specified string representation of a logical value to its <see cref="Boolean"/> equivalent. A return value indicates whether the conversion succeeded or failed.
         /// </summary>
@@ -669,12 +634,10 @@ namespace Argotic.Net
                 return false;
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncSendCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous send operation completes.
         /// </summary>
@@ -735,9 +698,7 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -764,12 +725,10 @@ namespace Argotic.Net
             //------------------------------------------------------------
             this.SendOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Send(XmlRpcMessage message)
         /// <summary>
         /// Sends the specified message to an XML-RPC server to execute a remote procedure call.
         /// </summary>
@@ -814,9 +773,7 @@ namespace Argotic.Net
 
             return response;
         }
-        #endregion
 
-        #region SendAsync(XmlRpcMessage message, Object userToken)
         /// <summary>
         /// Sends the specified message to an XML-RPC server to execute a remote procedure call. 
         /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
@@ -874,9 +831,7 @@ namespace Argotic.Net
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
         }
-        #endregion
 
-        #region SendAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to send a remote procedure call.
         /// </summary>
@@ -893,12 +848,10 @@ namespace Argotic.Net
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
         /// <summary>
         /// Initializes a new <see cref="WebRequest"/> suitable for sending a remote procedure call using the supplied host, user agent, message, credentials, and proxy.
         /// </summary>
@@ -971,9 +924,7 @@ namespace Argotic.Net
 
             return httpRequest;
         }
-        #endregion
 
-        #region Initialize()
         /// <summary>
         /// Initializes the current instance using the application configuration settings.
         /// </summary>
@@ -1010,6 +961,5 @@ namespace Argotic.Net
                 }
             }
         }
-        #endregion
     }
 }

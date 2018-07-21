@@ -34,7 +34,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region RsdDocument
             RsdDocument document    = new RsdDocument();
 
             document.EngineName     = "Blog Munging CMS";
@@ -52,7 +51,6 @@ namespace Argotic.Examples
             conversantApi.Settings.Add("service-specific-setting", "a value");
             conversantApi.Settings.Add("another-setting", "another value");
             document.AddInterface(conversantApi);
-            #endregion
         }
 
         //============================================================
@@ -63,7 +61,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             RsdDocument document    = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
             
             foreach(RsdApplicationInterface api in document.Interfaces)
@@ -74,7 +71,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -85,7 +81,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load resource asynchronously using event-based notification
             //------------------------------------------------------------
@@ -94,10 +89,8 @@ namespace Argotic.Examples
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
             document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"), null);
-            #endregion
         }
 
-        #region ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="RsdDocument.Loaded"/> event.
         /// </summary>
@@ -109,7 +102,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -119,7 +111,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
 
             RsdDocument document   = new RsdDocument();
@@ -133,7 +124,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -141,7 +131,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             RsdDocument document   = new RsdDocument();
 
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
@@ -157,7 +146,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -165,7 +153,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             RsdDocument document   = new RsdDocument();
 
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
@@ -188,7 +175,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -196,7 +182,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             RsdDocument document   = new RsdDocument();
             Uri source              = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
 
@@ -210,7 +195,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -218,7 +202,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             RsdDocument document   = new RsdDocument();
 
             //  Modify document state using public properties and methods
@@ -227,7 +210,6 @@ namespace Argotic.Examples
             {
                 document.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -235,7 +217,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             RsdDocument document   = new RsdDocument();
 
             //  Modify document state using public properties and methods
@@ -250,7 +231,6 @@ namespace Argotic.Examples
                     document.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

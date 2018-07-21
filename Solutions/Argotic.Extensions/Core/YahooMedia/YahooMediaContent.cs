@@ -32,7 +32,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the direct url to the media object.
         /// </summary>
@@ -137,12 +136,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the media object.
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaContent()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class.
         /// </summary>
@@ -152,9 +149,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region YahooMediaContent(Uri url)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class using the supplied <see cref="Uri"/>.
         /// </summary>
@@ -169,9 +164,7 @@ namespace Argotic.Extensions.Core
 
             this.Url    = url;
         }
-        #endregion
 
-        #region YahooMediaContent(YahooMediaPlayer player)
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class using the supplied <see cref="YahooMediaPlayer"/>.
         /// </summary>
@@ -186,12 +179,10 @@ namespace Argotic.Extensions.Core
 
             this.Player = player;
         }
-        #endregion
 
         //============================================================
         //	PRIMARY PUBLIC PROPERTIES
         //============================================================
-        #region Bitrate
         /// <summary>
         /// Gets or sets the kilobits per second rate of this media object.
         /// </summary>
@@ -208,9 +199,7 @@ namespace Argotic.Extensions.Core
                 contentBitrate = value;
             }
         }
-        #endregion
 
-        #region Channels
         /// <summary>
         /// Gets or sets the number of audio channels in this media object.
         /// </summary>
@@ -227,9 +216,7 @@ namespace Argotic.Extensions.Core
                 contentChannels = value;
             }
         }
-        #endregion
 
-        #region ContentType
         /// <summary>
         /// Gets or sets the content type of this media object.
         /// </summary>
@@ -256,9 +243,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Duration
         /// <summary>
         /// Gets or sets the total play time for this media object.
         /// </summary>
@@ -275,9 +260,7 @@ namespace Argotic.Extensions.Core
                 contentDuration = value;
             }
         }
-        #endregion
 
-        #region Expression
         /// <summary>
         /// Gets or sets the expressed version of this media object.
         /// </summary>
@@ -297,9 +280,7 @@ namespace Argotic.Extensions.Core
                 contentExpression = value;
             }
         }
-        #endregion
 
-        #region FileSize
         /// <summary>
         /// Gets or sets the file size of this media object.
         /// </summary>
@@ -316,9 +297,7 @@ namespace Argotic.Extensions.Core
                 contentFileSize = value;
             }
         }
-        #endregion
 
-        #region FrameRate
         /// <summary>
         /// Gets or sets the number of frames per second for this media object.
         /// </summary>
@@ -335,9 +314,7 @@ namespace Argotic.Extensions.Core
                 contentFramerate = value;
             }
         }
-        #endregion
 
-        #region Height
         /// <summary>
         /// Gets or sets the height of this media object.
         /// </summary>
@@ -354,9 +331,7 @@ namespace Argotic.Extensions.Core
                 contentHeight = value;
             }
         }
-        #endregion
 
-        #region IsDefault
         /// <summary>
         /// Gets or sets a value indicating if this media object is the default object in a group.
         /// </summary>
@@ -376,9 +351,7 @@ namespace Argotic.Extensions.Core
                 contentIsDefault = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the primary language encapsulated in this media object.
         /// </summary>
@@ -403,9 +376,7 @@ namespace Argotic.Extensions.Core
                 contentLanguage = value;
             }
         }
-        #endregion
 
-        #region Medium
         /// <summary>
         /// Gets or sets the content medium of this media object.
         /// </summary>
@@ -425,9 +396,7 @@ namespace Argotic.Extensions.Core
                 contentMedium = value;
             }
         }
-        #endregion
 
-        #region SamplingRate
         /// <summary>
         /// Gets or sets the number of samples per second taken to create this media object.
         /// </summary>
@@ -447,9 +416,7 @@ namespace Argotic.Extensions.Core
                 contentSamplingrate = value;
             }
         }
-        #endregion
 
-        #region Url
         /// <summary>
         /// Gets or sets the location of this media object.
         /// </summary>
@@ -466,9 +433,7 @@ namespace Argotic.Extensions.Core
                 contentUrl = value;
             }
         }
-        #endregion
 
-        #region Width
         /// <summary>
         /// Gets or sets the width of this media object.
         /// </summary>
@@ -485,12 +450,10 @@ namespace Argotic.Extensions.Core
                 contentWidth = value;
             }
         }
-        #endregion
 
         //============================================================
         //	SECONDARY PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for this media object.
         /// </summary>
@@ -509,9 +472,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCategories;
             }
         }
-        #endregion
 
-        #region Copyright
         /// <summary>
         /// Gets or sets the copyright information for this media object.
         /// </summary>
@@ -531,9 +492,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectCopyright = value;
             }
         }
-        #endregion
 
-        #region Credits
         /// <summary>
         /// Gets the entities that contributed to the creation of this media object.
         /// </summary>
@@ -556,9 +515,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCredits;
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets the description of this media object.
         /// </summary>
@@ -578,9 +535,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectDescription = value;
             }
         }
-        #endregion
 
-        #region Hashes
         /// <summary>
         /// Gets the hash digests for this media object.
         /// </summary>
@@ -602,9 +557,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectHashes;
             }
         }
-        #endregion
 
-        #region Keywords
         /// <summary>
         /// Gets the relevant keywords that describe this media object.
         /// </summary>
@@ -626,9 +579,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectKeywords;
             }
         }
-        #endregion
 
-        #region Player
         /// <summary>
         /// Gets or sets a web browser media player console this media object can be accessed through.
         /// </summary>
@@ -645,9 +596,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectPlayer = value;
             }
         }
-        #endregion
 
-        #region Ratings
         /// <summary>
         /// Gets the permissible audiences for this media object.
         /// </summary>
@@ -669,9 +618,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRatings;
             }
         }
-        #endregion
 
-        #region Restrictions
         /// <summary>
         /// Gets the restrictions to be placed on aggregators that are rendering this media object.
         /// </summary>
@@ -690,9 +637,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRestrictions;
             }
         }
-        #endregion
 
-        #region TextSeries
         /// <summary>
         /// Gets the text transcript, closed captioning, or lyrics for this media object.
         /// </summary>
@@ -716,9 +661,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectTextSeries;
             }
         }
-        #endregion
 
-        #region Thumbnails
         /// <summary>
         /// Gets the representative images for this media object.
         /// </summary>
@@ -740,9 +683,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectThumbnails;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of this media object.
         /// </summary>
@@ -759,12 +700,10 @@ namespace Argotic.Extensions.Core
                 mediaObjectTitle = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -803,9 +742,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="YahooMediaContent"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -902,12 +839,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaContent"/>.
         /// </summary>
@@ -940,12 +875,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -997,9 +930,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -1017,9 +948,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -1033,9 +962,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -1058,9 +985,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -1071,9 +996,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -1096,9 +1019,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -1121,12 +1042,10 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadPrimary(XPathNavigator source)
         /// <summary>
         /// Loads the primary properties of this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1234,9 +1153,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region LoadSecondary(XPathNavigator source)
         /// <summary>
         /// Loads the secondary properties of this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1354,6 +1271,5 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
     }
 }

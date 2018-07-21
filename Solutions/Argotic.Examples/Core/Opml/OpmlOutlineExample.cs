@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region OpmlOutline
             OpmlDocument document   = new OpmlDocument();
 
             document.Head.Title                 = "Example OPML List";
@@ -45,7 +44,6 @@ namespace Argotic.Examples
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
-            #endregion
         }
     }
 }

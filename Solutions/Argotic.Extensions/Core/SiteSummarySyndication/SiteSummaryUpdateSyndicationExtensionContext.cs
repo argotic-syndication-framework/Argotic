@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the period over which the feed format is updated.
         /// </summary>
@@ -36,12 +35,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a base date to be used in concert with period and frequency to calculate the publishing schedule.
         /// </summary>
         private DateTime extensionUpdateBase                    = DateTime.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SiteSummaryUpdateSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
         /// </summary>
@@ -51,12 +48,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Base
         /// <summary>
         /// Gets or sets the base date to be used in concert with period and frequency to calculate the publishing schedule.
         /// </summary>
@@ -79,9 +74,7 @@ namespace Argotic.Extensions.Core
                 extensionUpdateBase = value;
             }
         }
-        #endregion
 
-        #region Frequency
         /// <summary>
         /// Gets or sets the frequency of updates in relation to the update period.
         /// </summary>
@@ -100,9 +93,7 @@ namespace Argotic.Extensions.Core
                 extensionUpdateFrequency = value;
             }
         }
-        #endregion
 
-        #region Period
         /// <summary>
         /// Gets or sets the period over which the feed format is updated.
         /// </summary>
@@ -122,12 +113,10 @@ namespace Argotic.Extensions.Core
                 extensionUpdatePeriod = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -191,9 +180,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -228,6 +215,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("updateBase", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Base));
             }
         }
-        #endregion
     }
 }

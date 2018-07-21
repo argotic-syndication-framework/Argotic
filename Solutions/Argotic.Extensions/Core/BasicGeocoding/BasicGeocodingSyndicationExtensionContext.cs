@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the latitude spatial coordinate.
         /// </summary>
@@ -33,12 +32,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the longitude spatial coordinate.
         /// </summary>
         private decimal extensionLongitude  = Decimal.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region BasicGeocodingSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
         /// </summary>
@@ -48,12 +45,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Latitude
         /// <summary>
         /// Gets or sets the geocoding latitude coordinate.
         /// </summary>
@@ -70,9 +65,7 @@ namespace Argotic.Extensions.Core
                 extensionLatitude = value;
             }
         }
-        #endregion
 
-        #region Longitude
         /// <summary>
         /// Gets or sets the geocoding longitude coordinate.
         /// </summary>
@@ -89,12 +82,10 @@ namespace Argotic.Extensions.Core
                 extensionLongitude = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -144,9 +135,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -187,6 +176,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("long", xmlNamespace, this.Longitude.ToString("N", formatProvider));
             }
         }
-        #endregion
     }
 }

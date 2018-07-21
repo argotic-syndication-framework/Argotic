@@ -25,7 +25,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -42,12 +41,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a value indicating if the client is requesting to control the visibility of a resource.
         /// </summary>
         private bool extensionIsDraft;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomPublishingControlSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtensionContext"/> class.
         /// </summary>
@@ -57,12 +54,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	COMMON PROPERTIES
         //============================================================
-        #region BaseUri
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -84,9 +79,7 @@ namespace Argotic.Extensions.Core
                 commonObjectBaseUri = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
         /// </summary>
@@ -108,12 +101,10 @@ namespace Argotic.Extensions.Core
                 commonObjectLanguage = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -139,9 +130,7 @@ namespace Argotic.Extensions.Core
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -153,12 +142,10 @@ namespace Argotic.Extensions.Core
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region IsDraft
         /// <summary>
         /// Gets or sets a value indicating if client has requested to control the visibility of the resource.
         /// </summary>
@@ -175,12 +162,10 @@ namespace Argotic.Extensions.Core
                 extensionIsDraft = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -207,9 +192,7 @@ namespace Argotic.Extensions.Core
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -236,9 +219,7 @@ namespace Argotic.Extensions.Core
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -271,12 +252,10 @@ namespace Argotic.Extensions.Core
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -333,9 +312,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -373,9 +350,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -410,6 +385,5 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
     }
 }

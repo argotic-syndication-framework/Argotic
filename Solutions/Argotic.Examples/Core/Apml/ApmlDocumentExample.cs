@@ -34,7 +34,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region ApmlDocument
             ApmlDocument document       = new ApmlDocument();
             document.DefaultProfileName = "Work";
 
@@ -120,7 +119,6 @@ namespace Argotic.Examples
             sampleApplication.Data              = "<SampleAppEl />";
 
             document.Applications.Add(sampleApplication);
-            #endregion
         }
 
         //============================================================
@@ -131,7 +129,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            #region Create(Uri source)
             ApmlDocument document   = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
 
             foreach (ApmlProfile profile in document.Profiles)
@@ -142,7 +139,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         //============================================================
@@ -153,7 +149,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            #region LoadAsync(Uri source, Object userToken)
             //------------------------------------------------------------
             //	Load resource asynchronously using event-based notification
             //------------------------------------------------------------
@@ -162,10 +157,8 @@ namespace Argotic.Examples
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
             document.LoadAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"), null);
-            #endregion
         }
 
-        #region ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Handles the <see cref="ApmlDocument.Loaded"/> event.
         /// </summary>
@@ -177,7 +170,6 @@ namespace Argotic.Examples
             {
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
@@ -187,7 +179,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            #region Load(IXPathNavigable source)
             XPathDocument source    = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
             ApmlDocument document   = new ApmlDocument();
@@ -201,7 +192,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -209,7 +199,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            #region Load(Stream stream)
             ApmlDocument document   = new ApmlDocument();
 
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
@@ -225,7 +214,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -233,7 +221,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            #region Load(XmlReader reader)
             ApmlDocument document   = new ApmlDocument();
 
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
@@ -256,7 +243,6 @@ namespace Argotic.Examples
                     }
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -264,7 +250,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
             ApmlDocument document   = new ApmlDocument();
             Uri source              = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
@@ -278,7 +263,6 @@ namespace Argotic.Examples
                     break;
                 }
             }
-            #endregion
         }
 
         /// <summary>
@@ -286,7 +270,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            #region Save(Stream stream)
             ApmlDocument document   = new ApmlDocument();
 
             //  Modify document state using public properties and methods
@@ -295,7 +278,6 @@ namespace Argotic.Examples
             {
                 document.Save(stream);
             }
-            #endregion
         }
 
         /// <summary>
@@ -303,7 +285,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            #region Save(XmlWriter writer)
             ApmlDocument document   = new ApmlDocument();
 
             //  Modify document state using public properties and methods
@@ -318,7 +299,6 @@ namespace Argotic.Examples
                     document.Save(writer);
                 }
             }
-            #endregion
         }
     }
 }

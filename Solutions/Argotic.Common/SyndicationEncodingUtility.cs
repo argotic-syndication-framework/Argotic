@@ -27,7 +27,6 @@ namespace Argotic.Common
         //============================================================
         //	WEB RESOURCE PARSING METHODS
         //============================================================
-        #region CreateSafeNavigator(string xml)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied XML data.
         /// </summary>
@@ -67,9 +66,7 @@ namespace Argotic.Common
 
             return navigator;
         }
-        #endregion
 
-        #region CreateSafeNavigator(Stream stream)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/>.
         /// </summary>
@@ -115,9 +112,7 @@ namespace Argotic.Common
                 return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
             }
         }
-        #endregion
 
-        #region CreateSafeNavigator(Stream stream, Encoding encoding)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/> using the specified <see cref="Encoding"/>.
         /// </summary>
@@ -146,9 +141,7 @@ namespace Argotic.Common
                 return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
             }
         }
-        #endregion
 
-        #region CreateSafeNavigator(TextReader reader)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="TextReader"/>.
         /// </summary>
@@ -171,9 +164,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
         }
-        #endregion
 
-        #region CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -199,9 +190,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region CreateSafeNavigator(Uri source, WebRequestOptions options)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -220,9 +209,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
-        #endregion
 
-        #region CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -253,9 +240,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
         }
-        #endregion
 
-        #region CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
         /// <summary>
         /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -316,9 +301,7 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
-        #region CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -340,9 +323,7 @@ namespace Argotic.Common
         {
             return SyndicationEncodingUtility.CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region CreateWebRequest(Uri source, WebRequestOptions options)
         /// <summary>
         /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -381,9 +362,7 @@ namespace Argotic.Common
             if (options != null) options.ApplyOptions(request);
             return request;
         }
-        #endregion
 
-        #region CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -405,9 +384,7 @@ namespace Argotic.Common
         {
             return SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region CreateWebResponse(Uri source, WebRequestOptions options)
         /// <summary>
         /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -438,12 +415,10 @@ namespace Argotic.Common
 
             return response;
         }
-        #endregion
 
         //============================================================
         //	DECODING METHODS
         //============================================================
-        #region DecodeBase64String(string encodedValue)
         /// <summary>
         /// Decodes a base64 encoded string.
         /// </summary>
@@ -476,9 +451,7 @@ namespace Argotic.Common
 
             return stream;
         }
-        #endregion
 
-        #region DecodeHtmlEscapedString(string escapedValue)
         /// <summary>
         /// Decodes an HTML escaped string.
         /// </summary>
@@ -506,12 +479,10 @@ namespace Argotic.Common
 
             return decodedResult;
         }
-        #endregion
 
         //============================================================
         //	XML ENCODING METHODS
         //============================================================
-        #region EncodeInvalidXmlHexadecimalCharacters(string content)
         /// <summary>
         /// Encodes the supplied string so that it can be safely represented in XML.
         /// </summary>
@@ -556,9 +527,7 @@ namespace Argotic.Common
 
             return encodedContent;
         }
-        #endregion
 
-        #region GetCharacterEncoding(HttpRequest request)
         /// <summary>
         /// Extracts the character encoding for the content type of the supplied <see cref="HttpRequest"/>.
         /// </summary>
@@ -621,9 +590,7 @@ namespace Argotic.Common
             
             return contentEncoding;
         }*/
-        #endregion
 
-        #region GetXmlEncoding(byte[] data)
         /// <summary>
         /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied array of bytes.
         /// </summary>
@@ -648,9 +615,7 @@ namespace Argotic.Common
                 return SyndicationEncodingUtility.GetXmlEncoding(stream);
             }
         }
-        #endregion
 
-        #region GetXmlEncoding(Stream stream)
         /// <summary>
         /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied <see cref="Stream"/>.
         /// </summary>
@@ -675,9 +640,7 @@ namespace Argotic.Common
                 return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
             }
         }
-        #endregion
 
-        #region GetXmlEncoding(string content)
         /// <summary>
         /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied content.
         /// </summary>
@@ -723,9 +686,7 @@ namespace Argotic.Common
 
             return encoding;
         }
-        #endregion
 
-        #region RemoveInvalidXmlHexadecimalCharacters(string content)
         /// <summary>
         /// Sanitizes the supplied string so that it can be safely represented in XML.
         /// </summary>
@@ -757,12 +718,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return invalidXmlHexadecimalCharacters.Replace(content, String.Empty);
         }
-        #endregion
 
         //============================================================
         //	FILE SYSTEM ENCODING METHODS
         //============================================================
-        #region EncodeSafeDirectoryName(string name)
         /// <summary>
         /// Converts a string into a value that can be safely used as a <see cref="Directory">directory</see> name.
         /// </summary>
@@ -796,9 +755,7 @@ namespace Argotic.Common
 
             return directoryName;
         }
-        #endregion
 
-        #region GetStreamBytes(Stream stream)
         /// <summary>
         /// Gets an array of bytes that represent the data of the supplied <see cref="Stream"/>.
         /// </summary>
@@ -862,6 +819,5 @@ namespace Argotic.Common
 
             return result;
         }
-        #endregion
     }
 }

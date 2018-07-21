@@ -23,17 +23,14 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a collection of URI's that represent creative commons licenses that apply to published content.
         /// </summary>
         private Collection<Uri> extensionLicenses;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region CreativeCommonsSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtensionContext"/> class.
         /// </summary>
@@ -43,12 +40,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Licenses
         /// <summary>
         /// Gets or sets the creative commons licenses that apply to the published content.
         /// </summary>
@@ -67,12 +62,10 @@ namespace Argotic.Extensions.Core
                 return extensionLicenses;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -116,9 +109,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -146,6 +137,5 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
     }
 }

@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the textual content of the item.
         /// </summary>
@@ -37,12 +36,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a URI representing the encoding of the item.
         /// </summary>
         private Uri itemEncoding;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SiteSummaryContentItem()
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryContentItem"/> class.
         /// </summary>
@@ -52,12 +49,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region WellFormedXmlEncoding
         /// <summary>
         /// Gets the URI used when syndicated content is encoded as well-formed XML.
         /// </summary>
@@ -70,12 +65,10 @@ namespace Argotic.Extensions.Core
                 return new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Content
         /// <summary>
         /// Gets or sets the textual content of this item.
         /// </summary>
@@ -98,9 +91,7 @@ namespace Argotic.Extensions.Core
                 itemContent = value.Trim();
             }
         }
-        #endregion
 
-        #region Encoding
         /// <summary>
         /// Gets or sets the encoding of this item.
         /// </summary>
@@ -121,9 +112,7 @@ namespace Argotic.Extensions.Core
                 itemEncoding = value;
             }
         }
-        #endregion
 
-        #region Format
         /// <summary>
         /// Gets or sets the format of this item.
         /// </summary>
@@ -142,12 +131,10 @@ namespace Argotic.Extensions.Core
                 itemFormat = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="SiteSummaryContentItem"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -212,9 +199,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="SiteSummaryContentItem"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -248,12 +233,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SiteSummaryContentItem"/>.
         /// </summary>
@@ -286,12 +269,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -326,9 +307,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -346,9 +325,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -362,9 +339,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -387,9 +362,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -400,9 +373,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -425,9 +396,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -450,6 +419,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

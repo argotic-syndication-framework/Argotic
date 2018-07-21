@@ -30,7 +30,6 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            #region ApmlProfile
             ApmlDocument document       = new ApmlDocument();
             document.DefaultProfileName = "Work";
 
@@ -103,7 +102,6 @@ namespace Argotic.Examples
             sampleApplication.Data              = "<SampleAppEl />";
 
             document.Applications.Add(sampleApplication);
-            #endregion
         }
     }
 }

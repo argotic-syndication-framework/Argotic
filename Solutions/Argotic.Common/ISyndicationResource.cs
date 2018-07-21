@@ -29,7 +29,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that the resource implements.
         /// </summary>
@@ -38,9 +37,7 @@ namespace Argotic.Common
         {
             get;
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that the resource conforms to.
         /// </summary>
@@ -49,24 +46,20 @@ namespace Argotic.Common
         {
             get;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="ISyndicationResource.Load(IXPathNavigable)"/>
         /// <seealso cref="ISyndicationResource.Load(XmlReader)"/>
         event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNavigator()
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ISyndicationResource"/>.
         /// </summary>
@@ -76,9 +69,7 @@ namespace Argotic.Common
         ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="ISyndicationResource"/>.
         /// </remarks>
         XPathNavigator CreateNavigator();
-        #endregion
 
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -106,9 +97,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(IXPathNavigable source);
-        #endregion
 
-        #region Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -122,9 +111,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings);
-        #endregion
 
-        #region Load(Stream stream)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -152,9 +139,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Stream stream);
-        #endregion
 
-        #region Load(Stream stream, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -183,9 +168,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Stream stream, SyndicationResourceLoadSettings settings);
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -213,9 +196,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(XmlReader reader);
-        #endregion
 
-        #region Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -244,9 +225,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(XmlReader reader, SyndicationResourceLoadSettings settings);
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -293,9 +272,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Uri source, ICredentials credentials, IWebProxy proxy);
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -311,9 +288,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Uri source, WebRequestOptions options);
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -361,9 +336,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings);
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -380,9 +353,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
         void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings);
-        #endregion
 
-        #region LoadAsync(Uri source, Object userToken)
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -404,9 +375,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         void LoadAsync(Uri source, Object userToken);
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -428,9 +397,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken);
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -458,9 +425,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken);
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -483,9 +448,7 @@ namespace Argotic.Common
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken);
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load the syndication resource.
         /// </summary>
@@ -495,9 +458,7 @@ namespace Argotic.Common
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
         void LoadAsyncCancel();
-        #endregion
 
-        #region Save(Stream stream)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -514,9 +475,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         void Save(Stream stream);
-        #endregion
 
-        #region Save(Stream stream, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -534,9 +493,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         void Save(Stream stream, SyndicationResourceSaveSettings settings);
-        #endregion
 
-        #region Save(XmlWriter writer)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -553,9 +510,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         void Save(XmlWriter writer);
-        #endregion
 
-        #region Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -568,6 +523,5 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         void Save(XmlWriter writer, SyndicationResourceSaveSettings settings);
-        #endregion
     }
 }

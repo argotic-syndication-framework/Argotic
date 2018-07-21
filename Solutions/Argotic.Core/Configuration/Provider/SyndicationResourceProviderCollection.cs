@@ -19,7 +19,6 @@ namespace Argotic.Configuration.Provider
         //============================================================
         //	INDEXERS
         //============================================================
-        #region this[string name]
         /// <summary>
         /// Gets the provider with the specified name.
         /// </summary>
@@ -32,12 +31,10 @@ namespace Argotic.Configuration.Provider
                 return (SyndicationResourceProvider)base[name];
             }
         }
-        #endregion
 
         //============================================================
         //	ICOLLECTION<T> IMPLEMENTATION
         //============================================================
-        #region Add(SyndicationResourceProvider item)
         /// <summary>
         /// Adds an item to the collection.
         /// </summary>
@@ -46,9 +43,7 @@ namespace Argotic.Configuration.Provider
         {
             base.Add(item);
         }
-        #endregion
 
-        #region Contains(SyndicationResourceProvider item)
         /// <summary>
         /// Determines whether the collection contains a specific value.
         /// </summary>
@@ -74,9 +69,7 @@ namespace Argotic.Configuration.Provider
                 return false;
             }
         }
-        #endregion
 
-        #region CopyTo(SyndicationResourceProvider[] array, int arrayIndex)
         /// <summary>
         /// Copies the elements of the <see cref="SyndicationResourceProviderCollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
         /// </summary>
@@ -89,9 +82,7 @@ namespace Argotic.Configuration.Provider
         {
             base.CopyTo(array, arrayIndex);
         }
-        #endregion
 
-        #region IsReadOnly
         /// <summary>
         /// Gets a value indicating whether the collection is read-only.
         /// </summary>
@@ -103,9 +94,7 @@ namespace Argotic.Configuration.Provider
                 return false;
             }
         }
-        #endregion
 
-        #region Remove(SyndicationResourceProvider item)
         /// <summary>
         /// Removes a specific <see cref="SyndicationResourceProvider"/> from the collection.
         /// </summary>
@@ -126,9 +115,7 @@ namespace Argotic.Configuration.Provider
                 return false;
             }
         }
-        #endregion
 
-        #region GetEnumerator()
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
@@ -140,6 +127,5 @@ namespace Argotic.Configuration.Provider
                 yield return provider;
             }
         }
-        #endregion
     }
 }

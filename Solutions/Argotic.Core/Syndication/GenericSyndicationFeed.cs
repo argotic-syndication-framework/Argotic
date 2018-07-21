@@ -44,7 +44,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the underlying syndication resource that is being absratracted by this generic feed.
         /// </summary>
@@ -89,12 +88,10 @@ namespace Argotic.Syndication
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region GenericSyndicationFeed()
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationFeed"/> class.
         /// </summary>
@@ -104,23 +101,19 @@ namespace Argotic.Syndication
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the generic syndication feed state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="GenericSyndicationFeed.Load(Uri, ICredentials, IWebProxy)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Raises the <see cref="GenericSyndicationFeed.Loaded"/> event.
         /// </summary>
@@ -142,12 +135,10 @@ namespace Argotic.Syndication
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets the categories associated with this feed.
         /// </summary>
@@ -165,9 +156,7 @@ namespace Argotic.Syndication
                 return feedCategories;
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets character data that provides a human-readable characterization or summary of this feed.
         /// </summary>
@@ -182,9 +171,7 @@ namespace Argotic.Syndication
                 return feedDescription;
             }
         }
-        #endregion
 
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication feed implements.
         /// </summary>
@@ -196,9 +183,7 @@ namespace Argotic.Syndication
                 return feedFormat;
             }
         }
-        #endregion
 
-        #region Items
         /// <summary>
         /// Gets the distinct content published in this feed.
         /// </summary>
@@ -220,9 +205,7 @@ namespace Argotic.Syndication
                 return feedItems;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets the natural or formal language in which the feed content is written.
         /// </summary>
@@ -237,9 +220,7 @@ namespace Argotic.Syndication
                 return feedLanguage;
             }
         }
-        #endregion
 
-        #region LastUpdatedOn
         /// <summary>
         /// Gets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
         /// </summary>
@@ -254,9 +235,7 @@ namespace Argotic.Syndication
                 return feedLastUpdatedOn;
             }
         }
-        #endregion
 
-        #region Resource
         /// <summary>
         /// Gets the syndication resource that is being absratracted by this generic feed.
         /// </summary>
@@ -271,9 +250,7 @@ namespace Argotic.Syndication
                 return feedResource;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets character data that provides the name of this feed.
         /// </summary>
@@ -288,12 +265,10 @@ namespace Argotic.Syndication
                 return feedTitle;
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncLoadHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -310,9 +285,7 @@ namespace Argotic.Syndication
                 resourceAsyncLoadCancelled = value;
             }
         }
-        #endregion
 
-        #region LoadOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
@@ -329,12 +302,10 @@ namespace Argotic.Syndication
                 resourceIsLoading = value;
             }
         }
-        #endregion
 
         //============================================================
         //	COMPARISON METHODS
         //============================================================
-        #region CompareSequence(Collection<GenericSyndicationCategory> source, Collection<GenericSyndicationCategory> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{GenericSyndicationCategory}"/> collections.
         /// </summary>
@@ -385,12 +356,10 @@ namespace Argotic.Syndication
 
             return result;
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region Create(Uri source)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>.
         /// </summary>
@@ -416,9 +385,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return GenericSyndicationFeed.Create(source, new WebRequestOptions());
         }
-        #endregion
 
-        #region Create(Uri source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -434,9 +401,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return GenericSyndicationFeed.Create(source, new WebRequestOptions(), settings);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -460,9 +425,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return GenericSyndicationFeed.Create(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -481,9 +444,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return GenericSyndicationFeed.Create(source, options, null);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -505,9 +466,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return GenericSyndicationFeed.Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -536,12 +495,10 @@ namespace Argotic.Syndication
 
             return syndicationResource;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(String str)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="String"/>.
         /// </summary>
@@ -569,9 +526,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(navigator,  new SyndicationResourceLoadSettings(),  new SyndicationResourceLoadedEventArgs(navigator));
         }
-        #endregion
 
-        #region Load(Stream stream)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -589,9 +544,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(stream, null);
         }
-        #endregion
 
-        #region Load(Stream stream, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -628,9 +581,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(navigator, settings == null ? new SyndicationResourceLoadSettings() : settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -680,9 +631,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -717,9 +666,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(source, options, null);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -769,9 +716,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -836,9 +781,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
-        #endregion
 
-        #region Parse(AtomFeed feed)
         /// <summary>
         /// Initializes the generic syndication feed using the supplied <see cref="AtomFeed"/>.
         /// </summary>
@@ -889,9 +832,7 @@ namespace Argotic.Syndication
                 ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
             }
         }
-        #endregion
 
-        #region Parse(RssFeed feed)
         /// <summary>
         /// Initializes the generic syndication feed using the supplied <see cref="RssFeed"/>.
         /// </summary>
@@ -942,9 +883,7 @@ namespace Argotic.Syndication
                 ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
             }
         }
-        #endregion
 
-        #region Parse(OpmlDocument opmlDoc)
         /// <summary>
         /// Initializes the generic syndication feed using the supplied <see cref="OpmlDocument"/>.
         /// Since OmplDocument hasn't direct mappings to feeds in this method we simply initialize 
@@ -965,12 +904,10 @@ namespace Argotic.Syndication
             feedResource = opmlDocument;
             feedFormat = SyndicationContentFormat.Opml;
         }
-        #endregion
 
         //============================================================
         //	ASYNC METHODS
         //============================================================
-        #region LoadAsync(Uri source, Object userToken)
         /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -1009,9 +946,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadAsync(source, null, userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1038,9 +973,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -1073,9 +1006,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -1146,9 +1077,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
@@ -1176,12 +1105,10 @@ namespace Argotic.Syndication
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncLoadCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -1290,9 +1217,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -1319,12 +1244,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         /// <summary>
         /// Loads the generic syndication feed using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1382,6 +1305,5 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.OnFeedLoaded(eventData);
         }
-        #endregion
     }
 }

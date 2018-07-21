@@ -46,7 +46,6 @@ namespace Argotic.Publishing
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -63,12 +62,10 @@ namespace Argotic.Publishing
         /// Private member to hold the value of the accepted media range.
         /// </summary>
         private string acceptedMediaRangeValue  = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomAcceptedMediaRange()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
         /// </summary>
@@ -78,9 +75,7 @@ namespace Argotic.Publishing
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region AtomAcceptedMediaRange(string mediaRange)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class using the specified media range.
         /// </summary>
@@ -92,12 +87,10 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.MediaRange = mediaRange;
         }
-        #endregion
 
         //============================================================
         //	COMMON PROPERTIES
         //============================================================
-        #region BaseUri
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -119,9 +112,7 @@ namespace Argotic.Publishing
                 commonObjectBaseUri = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
         /// </summary>
@@ -143,12 +134,10 @@ namespace Argotic.Publishing
                 commonObjectLanguage = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -174,9 +163,7 @@ namespace Argotic.Publishing
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -188,12 +175,10 @@ namespace Argotic.Publishing
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -220,9 +205,7 @@ namespace Argotic.Publishing
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -249,9 +232,7 @@ namespace Argotic.Publishing
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -284,12 +265,10 @@ namespace Argotic.Publishing
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region AtomEntryMediaRange
         /// <summary>
         /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.
         /// </summary>
@@ -301,9 +280,7 @@ namespace Argotic.Publishing
                 return "application/atom+xml;type=entry";
             }
         }
-        #endregion
 
-        #region AtomFeedMediaRange
         /// <summary>
         /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.
         /// </summary>
@@ -315,12 +292,10 @@ namespace Argotic.Publishing
                 return "application/atom+xml;type=feed";
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region MediaRange
         /// <summary>
         /// Gets or sets the value of this accepted media range.
         /// </summary>
@@ -355,12 +330,10 @@ namespace Argotic.Publishing
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -398,9 +371,7 @@ namespace Argotic.Publishing
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -438,9 +409,7 @@ namespace Argotic.Publishing
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="AtomAcceptedMediaRange"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -471,12 +440,10 @@ namespace Argotic.Publishing
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
         /// </summary>
@@ -509,9 +476,7 @@ namespace Argotic.Publishing
                 }
             }
         }
-        #endregion
 
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -545,9 +510,7 @@ namespace Argotic.Publishing
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -565,9 +528,7 @@ namespace Argotic.Publishing
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -581,9 +542,7 @@ namespace Argotic.Publishing
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -606,9 +565,7 @@ namespace Argotic.Publishing
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -619,9 +576,7 @@ namespace Argotic.Publishing
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -644,9 +599,7 @@ namespace Argotic.Publishing
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -669,6 +622,5 @@ namespace Argotic.Publishing
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

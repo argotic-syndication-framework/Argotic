@@ -22,7 +22,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
         /// </summary>
@@ -31,12 +30,10 @@ namespace Argotic.Syndication
         /// Private member to hold a string that identifies the categorization scheme.
         /// </summary>
         private string categoryScheme   = String.Empty;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region GenericSyndicationCategory(string term)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
         /// </summary>
@@ -55,9 +52,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             categoryTerm    = term;
         }
-        #endregion
 
-        #region GenericSyndicationCategory(string term, string scheme)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term and scheme.
         /// </summary>
@@ -72,9 +67,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             categoryScheme  = scheme;
         }
-        #endregion
 
-        #region GenericSyndicationCategory(AtomCategory category)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="AtomCategory"/>.
         /// </summary>
@@ -104,9 +97,7 @@ namespace Argotic.Syndication
                 categoryTerm    = category.Label.Trim();
             }
         }
-        #endregion
 
-        #region GenericSyndicationCategory(RssCategory category)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="RssCategory"/>.
         /// </summary>
@@ -132,12 +123,10 @@ namespace Argotic.Syndication
                 categoryTerm    = category.Value.Trim();
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Scheme
         /// <summary>
         /// Gets a string that identifies the categorization scheme.
         /// </summary>
@@ -149,9 +138,7 @@ namespace Argotic.Syndication
                 return categoryScheme;
             }
         }
-        #endregion
 
-        #region Term
         /// <summary>
         /// Gets a string that identifies the category.
         /// </summary>
@@ -163,12 +150,10 @@ namespace Argotic.Syndication
                 return categoryTerm;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.
         /// </summary>
@@ -183,12 +168,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return String.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -222,9 +205,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -242,9 +223,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -258,9 +237,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -283,9 +260,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -296,9 +271,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -321,9 +294,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -346,6 +317,5 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

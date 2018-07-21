@@ -27,7 +27,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -64,12 +63,10 @@ namespace Argotic.Syndication
         /// Private member to hold information that describes the pixel locations of the outline window.
         /// </summary>
         private OpmlWindow headWindow;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region OpmlHead()
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlHead"/> class.
         /// </summary>
@@ -79,12 +76,10 @@ namespace Argotic.Syndication
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -110,9 +105,7 @@ namespace Argotic.Syndication
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -124,12 +117,10 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region CreatedOn
         /// <summary>
         /// Gets or sets a date-time indicating when this document was created.
         /// </summary>
@@ -149,9 +140,7 @@ namespace Argotic.Syndication
                 headCreatedOn = value;
             }
         }
-        #endregion
 
-        #region Documentation
         /// <summary>
         /// Gets the http address of the documentation that this OPML document conforms to.
         /// </summary>
@@ -165,9 +154,7 @@ namespace Argotic.Syndication
                 return headDocumentation;
             }
         }
-        #endregion
 
-        #region ExpansionState
         /// <summary>
         /// Gets a collection of line numbers that are expanded within the outline.
         /// </summary>
@@ -187,9 +174,7 @@ namespace Argotic.Syndication
                 return headExpansionState;
             }
         }
-        #endregion
 
-        #region ModifiedOn
         /// <summary>
         /// Gets or sets a date-time indicating when this document was created.
         /// </summary>
@@ -209,9 +194,7 @@ namespace Argotic.Syndication
                 headModifiedOn = value;
             }
         }
-        #endregion
 
-        #region Owner
         /// <summary>
         /// Gets or sets information that describes the owner of this document.
         /// </summary>
@@ -235,9 +218,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of this document.
         /// </summary>
@@ -261,9 +242,7 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
-        #region VerticalScrollState
         /// <summary>
         /// Gets or sets a number indicating which line of this outline is displayed on the top line of the window.
         /// </summary>
@@ -283,9 +262,7 @@ namespace Argotic.Syndication
                 headVerticalScrollState = value;
             }
         }
-        #endregion
 
-        #region Window
         /// <summary>
         /// Gets or sets information that describes the pixel location of the edges of the outline window for this document.
         /// </summary>
@@ -309,12 +286,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -341,9 +316,7 @@ namespace Argotic.Syndication
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -370,9 +343,7 @@ namespace Argotic.Syndication
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -405,12 +376,10 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="OpmlHead"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -517,9 +486,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="OpmlHead"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -557,9 +524,7 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="OpmlHead"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -632,12 +597,10 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="OpmlHead"/>.
         /// </summary>
@@ -670,12 +633,10 @@ namespace Argotic.Syndication
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -709,9 +670,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -729,9 +688,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -745,9 +702,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -770,9 +725,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -783,9 +736,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -808,9 +759,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -833,6 +782,5 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

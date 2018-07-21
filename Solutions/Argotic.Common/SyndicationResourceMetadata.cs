@@ -21,7 +21,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the syndication content format that the syndication resource conforms to.
         /// </summary>
@@ -39,12 +38,10 @@ namespace Argotic.Common
         /// </summary>
         [NonSerialized()]
         private XPathNavigator resourceRootNode;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SyndicationResourceMetadata(XPathNavigator navigator)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -62,12 +59,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             this.Load(navigator);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
         /// </summary>
@@ -87,9 +82,7 @@ namespace Argotic.Common
                 resourceFormat = value;
             }
         }
-        #endregion
 
-        #region Namespaces
         /// <summary>
         /// Gets a dictionary of the XML namespaces declared in the syndication resource.
         /// </summary>
@@ -101,9 +94,7 @@ namespace Argotic.Common
                 return resourceNamespaces;
             }
         }
-        #endregion
 
-        #region Resource
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
         /// </summary>
@@ -115,9 +106,7 @@ namespace Argotic.Common
                 return resourceRootNode;
             }
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
         /// </summary>
@@ -129,12 +118,10 @@ namespace Argotic.Common
                 return resourceVersion;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region GetVersionFromAttribute(XPathNavigator navigator, string name)
         /// <summary>
         /// Returns a <see cref="Version"/> object for the value of the XML attribute in <paramref name="navigator"/> with a local name specified by <paramref name="name"/>.
         /// </summary>
@@ -191,9 +178,7 @@ namespace Argotic.Common
             
             return version;
         }
-        #endregion
 
-        #region TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource.
         /// </summary>
@@ -247,9 +232,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom formatted syndication resource.
         /// </summary>
@@ -336,9 +319,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol category document formatted syndication resource.
         /// </summary>
@@ -393,9 +374,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol service document formatted syndication resource.
         /// </summary>
@@ -450,9 +429,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource.
         /// </summary>
@@ -505,9 +482,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Microsummary Generator formatted syndication resource.
         /// </summary>
@@ -560,9 +535,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a News Markup Language (NewsML) formatted syndication resource.
         /// </summary>
@@ -604,9 +577,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a OpenSearch Description formatted syndication resource.
         /// </summary>
@@ -659,9 +630,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource.
         /// </summary>
@@ -704,9 +673,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Discovery (RSD) formatted syndication resource.
         /// </summary>
@@ -765,9 +732,7 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
-        #region TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         /// <summary>
         /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Syndication (RSS) formatted syndication resource.
         /// </summary>
@@ -838,12 +803,10 @@ namespace Argotic.Common
 
             return resourceConformsToFormat;
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region Load(XPathNavigator resource)
         /// <summary>
         /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -954,12 +917,10 @@ namespace Argotic.Common
                 resourceVersion     = null;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
         /// </summary>
@@ -979,12 +940,10 @@ namespace Argotic.Common
 
             return String.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -1052,9 +1011,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -1072,9 +1029,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -1088,9 +1043,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -1113,9 +1066,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -1126,9 +1077,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -1151,9 +1100,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -1176,6 +1123,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

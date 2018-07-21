@@ -21,7 +21,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
@@ -38,12 +37,10 @@ namespace Argotic.Common
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         private bool syndicationExtensionAutodetectionEnabled   = true;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SyndicationResourceSaveSettings()
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
         /// </summary>
@@ -53,12 +50,10 @@ namespace Argotic.Common
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region AutoDetectExtensions
         /// <summary>
         /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
@@ -82,9 +77,7 @@ namespace Argotic.Common
                 syndicationExtensionAutodetectionEnabled = value;
             }
         }
-        #endregion
 
-        #region CharacterEncoding
         /// <summary>
         /// Gets or sets the character encoding to use when persisting a syndication resource.
         /// </summary>
@@ -103,9 +96,7 @@ namespace Argotic.Common
                 characterEncoding = value;
             }
         }
-        #endregion
 
-        #region MinimizeOutputSize
         /// <summary>
         /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
         /// </summary>
@@ -122,9 +113,7 @@ namespace Argotic.Common
                 minimizeOutputSize = value;
             }
         }
-        #endregion
 
-        #region SupportedExtensions
         /// <summary>
         /// Gets the syndication extensions that extend the syndication resource.
         /// </summary>
@@ -146,12 +135,10 @@ namespace Argotic.Common
                 return supportedSyndicationExtensions;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -166,12 +153,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return String.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -207,9 +192,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -227,9 +210,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -243,9 +224,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -268,9 +247,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -281,9 +258,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -306,9 +281,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -331,6 +304,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

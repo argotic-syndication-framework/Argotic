@@ -26,7 +26,6 @@ namespace Argotic.Common
         //============================================================
         //	RFC-3339 FORMAT METHODS
         //============================================================
-        #region ParseRfc3339DateTime(string value)
         /// <summary>
         /// Converts the specified string representation of a RFC-3339 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
@@ -60,9 +59,7 @@ namespace Argotic.Common
                 throw new FormatException(String.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
             }
         }
-        #endregion
 
-        #region ToRfc3339DateTime(DateTime utcDateTime)
         /// <summary>
         /// Converts the value of the supplied <see cref="DateTime"/> object to its equivalent RFC-3339 date string representation.
         /// </summary>
@@ -88,9 +85,7 @@ namespace Argotic.Common
                 return utcDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.ff'Z'", dateTimeFormat);
             }
         }
-        #endregion
 
-        #region TryParseRfc3339DateTime(string value, out DateTime result)
         /// <summary>
         /// Converts the specified string representation of a RFC-3339 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
@@ -143,12 +138,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return DateTime.TryParseExact(value, formats, dateTimeFormat, DateTimeStyles.AdjustToUniversal, out result);
         }
-        #endregion
-        
+
         //============================================================
         //	RFC-822 FORMAT METHODS
         //============================================================
-        #region ReplaceRfc822TimeZoneWithOffset(string value)
         /// <summary>
         /// Replaces the RFC-822 time-zone component with its offset equivalent.
         /// </summary>
@@ -249,9 +242,7 @@ namespace Argotic.Common
 
             return zoneRepresentedAsLocalDifferential;
         }
-        #endregion
 
-        #region ParseRfc822DateTime(string value)
         /// <summary>
         /// Converts the specified string representation of a RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
@@ -285,9 +276,7 @@ namespace Argotic.Common
                 throw new FormatException(String.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
             }
         }
-        #endregion
 
-        #region ToRfc822DateTime(DateTime dateTime)
         /// <summary>
         /// Converts the value of the supplied <see cref="DateTime"/> object to its equivalent RFC-822 date string representation.
         /// </summary>
@@ -306,9 +295,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return dateTime.ToString(dateTimeFormat.RFC1123Pattern, dateTimeFormat);
         }
-        #endregion
 
-        #region TryParseRfc822DateTime(string value, out DateTime result)
         /// <summary>
         /// Converts the specified string representation of a RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
@@ -401,6 +388,5 @@ namespace Argotic.Common
 
             return false;
         }
-        #endregion
     }
 }

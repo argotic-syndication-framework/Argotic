@@ -23,7 +23,6 @@ namespace Argotic.Net
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="IXmlRpcValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -34,21 +33,17 @@ namespace Argotic.Net
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         bool Load(XPathNavigator source);
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="IXmlRpcValue"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         void WriteTo(XmlWriter writer);
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.
         /// </summary>
@@ -57,6 +52,5 @@ namespace Argotic.Net
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
         string ToString();
-        #endregion
     }
 }

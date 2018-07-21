@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the section name.
         /// </summary>
@@ -41,12 +40,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the hit parade identifiers.
         /// </summary>
         private Collection<int> extensionHitParade;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SiteSummarySlashSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
         /// </summary>
@@ -56,12 +53,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Comments
         /// <summary>
         /// Gets or sets the number of comments.
         /// </summary>
@@ -78,9 +73,7 @@ namespace Argotic.Extensions.Core
                 extensionComments = value;
             }
         }
-        #endregion
 
-        #region Department
         /// <summary>
         /// Gets or sets the name of the department.
         /// </summary>
@@ -104,9 +97,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region HitParade
         /// <summary>
         /// Gets the hit parade identifiers.
         /// </summary>
@@ -125,9 +116,7 @@ namespace Argotic.Extensions.Core
                 return extensionHitParade;
             }
         }
-        #endregion
 
-        #region Section
         /// <summary>
         /// Gets or sets the name of the section.
         /// </summary>
@@ -151,12 +140,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -242,9 +229,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -294,6 +279,5 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("hit_parade", xmlNamespace, String.Join(",", hitParade));
             }
         }
-        #endregion
     }
 }

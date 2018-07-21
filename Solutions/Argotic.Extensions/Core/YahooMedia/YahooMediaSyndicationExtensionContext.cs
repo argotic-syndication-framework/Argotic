@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
@@ -81,12 +80,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the syndication entity.
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region YahooMediaSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtensionContext"/> class.
         /// </summary>
@@ -96,12 +93,10 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Contents
         /// <summary>
         /// Gets or sets the publishable media objects.
         /// </summary>
@@ -132,9 +127,7 @@ namespace Argotic.Extensions.Core
                 extensionContents = value;
             }
         }
-        #endregion
 
-        #region Groups
         /// <summary>
         /// Gets or sets the media objects that are effectively the same content, yet different representations.
         /// </summary>
@@ -166,12 +159,10 @@ namespace Argotic.Extensions.Core
                 extensionGroups = value;
             }
         }
-        #endregion
 
         //============================================================
         //	SECONDARY PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for this syndication entity.
         /// </summary>
@@ -190,9 +181,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCategories;
             }
         }
-        #endregion
 
-        #region Copyright
         /// <summary>
         /// Gets or sets the copyright information for this syndication entity.
         /// </summary>
@@ -212,9 +201,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectCopyright = value;
             }
         }
-        #endregion
 
-        #region Credits
         /// <summary>
         /// Gets the entities that contributed to the creation of this syndication entity.
         /// </summary>
@@ -237,9 +224,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectCredits;
             }
         }
-        #endregion
 
-        #region Description
         /// <summary>
         /// Gets or sets the description of this syndication entity.
         /// </summary>
@@ -259,9 +244,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectDescription = value;
             }
         }
-        #endregion
 
-        #region Hashes
         /// <summary>
         /// Gets the hash digests for this syndication entity.
         /// </summary>
@@ -283,9 +266,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectHashes;
             }
         }
-        #endregion
 
-        #region Keywords
         /// <summary>
         /// Gets the relevant keywords that describe this syndication entity.
         /// </summary>
@@ -307,9 +288,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectKeywords;
             }
         }
-        #endregion
 
-        #region Player
         /// <summary>
         /// Gets or sets a web browser media player console this syndication entity can be accessed through.
         /// </summary>
@@ -326,9 +305,7 @@ namespace Argotic.Extensions.Core
                 mediaObjectPlayer = value;
             }
         }
-        #endregion
 
-        #region Ratings
         /// <summary>
         /// Gets the permissible audiences for this syndication entity.
         /// </summary>
@@ -350,9 +327,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRatings;
             }
         }
-        #endregion
 
-        #region Restrictions
         /// <summary>
         /// Gets the restrictions to be placed on aggregators that are rendering this syndication entity.
         /// </summary>
@@ -371,9 +346,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectRestrictions;
             }
         }
-        #endregion
 
-        #region TextSeries
         /// <summary>
         /// Gets the text transcript, closed captioning, or lyrics for this syndication entity.
         /// </summary>
@@ -397,9 +370,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectTextSeries;
             }
         }
-        #endregion
 
-        #region Thumbnails
         /// <summary>
         /// Gets the representative images for this syndication entity.
         /// </summary>
@@ -421,9 +392,7 @@ namespace Argotic.Extensions.Core
                 return mediaObjectThumbnails;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets or sets the title of this syndication entity.
         /// </summary>
@@ -440,12 +409,10 @@ namespace Argotic.Extensions.Core
                 mediaObjectTitle = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -509,9 +476,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -543,12 +508,10 @@ namespace Argotic.Extensions.Core
 
             YahooMediaUtility.WriteCommonObjectEntities(this, writer);
         }
-        #endregion
 
         //============================================================
         //	UTILITY METHODS
         //============================================================
-        #region AddContent(YahooMediaContent content)
         /// <summary>
         /// Adds the supplied <see cref="YahooMediaContent"/> to the current instance's <see cref="Contents"/> collection.
         /// </summary>
@@ -575,9 +538,7 @@ namespace Argotic.Extensions.Core
 
             return wasAdded;
         }
-        #endregion
 
-        #region AddGroup(YahooMediaGroup group)
         /// <summary>
         /// Adds the supplied <see cref="YahooMediaGroup"/> to the current instance's <see cref="Groups"/> collection.
         /// </summary>
@@ -604,9 +565,7 @@ namespace Argotic.Extensions.Core
 
             return wasAdded;
         }
-        #endregion
 
-        #region RemoveContent(YahooMediaContent content)
         /// <summary>
         /// Removes the supplied <see cref="YahooMediaContent"/> from the current instance's <see cref="Contents"/> collection.
         /// </summary>
@@ -639,9 +598,7 @@ namespace Argotic.Extensions.Core
 
             return wasRemoved;
         }
-        #endregion
 
-        #region RemoveGroup(YahooMediaGroup content)
         /// <summary>
         /// Removes the supplied <see cref="YahooMediaGroup"/> from the current instance's <see cref="Groups"/> collection.
         /// </summary>
@@ -674,6 +631,5 @@ namespace Argotic.Extensions.Core
 
             return wasRemoved;
         }
-        #endregion
     }
 }

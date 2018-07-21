@@ -28,17 +28,14 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PUBLIC/PRIVATE/PROTECTED MEMBERS
         /// <summary>
         /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
         /// </summary>
         private static string frameworkUserAgent    = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region FrameworkUserAgent
         /// <summary>
         /// Gets the raw user agent string used by the framework when sending web requests.
         /// </summary>
@@ -50,12 +47,10 @@ namespace Argotic.Common
                 return frameworkUserAgent;
             }
         }
-        #endregion
 
         //============================================================
         //	ENUMERATION UTILITY METHODS
         //============================================================
-        #region SyndicationContentFormatByName(string name)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified format name.
         /// </summary>
@@ -101,9 +96,7 @@ namespace Argotic.Common
 
             return syndicationFormat;
         }
-        #endregion
 
-        #region SyndicationContentFormatGet(Uri source)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/>.
         /// </summary>
@@ -130,9 +123,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.SyndicationContentFormatGet(source, null);
         }
-        #endregion
 
-        #region SyndicationContentFormatGet(Uri source, ICredentials credentials)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/> using the supplied <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -165,9 +156,7 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
-        #region SyndicationContentFormatGet(Stream stream)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource represented by the supplied <see cref="Stream"/>.
         /// </summary>
@@ -193,9 +182,7 @@ namespace Argotic.Common
                 return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
             }
         }
-        #endregion
 
-        #region SyndicationContentFormatGet(XmlReader reader)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource represented by the supplied <see cref="XmlReader"/>.
         /// </summary>
@@ -247,9 +234,7 @@ namespace Argotic.Common
 
             return syndicationFormat;
         }
-        #endregion
 
-        #region SyndicationContentFormatGet(XPathNavigator navigator)
         /// <summary>
         /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource represented by the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -309,12 +294,10 @@ namespace Argotic.Common
 
             return syndicationFormat;
         }
-        #endregion
 
         //============================================================
         //	GENERAL WEB RESOURCE METHODS
         //============================================================
-        #region ExtractHtmlAttributes(string content)
         /// <summary>
         /// Returns a <see cref="Hashtable"/> of the HTML attribute name/value pairs for the supplied content.
         /// </summary>
@@ -369,9 +352,7 @@ namespace Argotic.Common
 
             return hashtable;
         }
-        #endregion
 
-        #region ExtractUrls(string content)
         /// <summary>
         /// Returns a collection of <see cref="Uri"/> instances that represent HTML header links and/or anchor tags in the supplied HTML markup.
         /// </summary>
@@ -433,9 +414,7 @@ namespace Argotic.Common
             
             return results;
         }
-        #endregion
 
-        #region GetAbsoluteBaseUri(HttpRequest request)
         /// <summary>
         /// Returns a <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
         /// </summary>
@@ -473,10 +452,7 @@ namespace Argotic.Common
             
             return baseUri;
         }*/
-        
-        #endregion
 
-        #region SourceReferencesTarget(Uri source, Uri target)
         /// <summary>
         /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>.
         /// </summary>
@@ -501,9 +477,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.SourceReferencesTarget(source, target, null);
         }
-        #endregion
 
-        #region SourceReferencesTarget(Uri source, Uri target, ICredentials credentials)
         /// <summary>
         /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>, using the specifed <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -563,9 +537,7 @@ namespace Argotic.Common
             
             return sourceContainsLinkToTarget;
         }
-        #endregion
 
-        #region UriExists(Uri uri)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> exists.
         /// </summary>
@@ -590,9 +562,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.UriExists(uri, null);
         }
-        #endregion
 
-        #region UriExists(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> exists using the specified <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -646,12 +616,10 @@ namespace Argotic.Common
             
             return uriExists;
         }
-        #endregion
 
         //============================================================
         //	CONDITIONAL GET METHODS
         //============================================================
-        #region ConditionalGet(Uri source, DateTime lastModified, string entityTag)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/> and entity tag.
         /// </summary>
@@ -676,9 +644,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions());
         }
-        #endregion
 
-        #region ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -710,9 +676,7 @@ namespace Argotic.Common
                 return null;
             }
         }
-        #endregion
 
-        #region ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -736,9 +700,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -767,9 +729,7 @@ namespace Argotic.Common
                 return null;
             }
         }
-        #endregion
 
-        #region TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out HttpWebResponse response)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/> and entity tag.
         /// </summary>
@@ -798,9 +758,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(), out response);
         }
-        #endregion
 
-        #region TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -871,9 +829,7 @@ namespace Argotic.Common
 
             return sourceHasBeenModified;
         }
-        #endregion
 
-        #region TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy, out HttpWebResponse response)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -901,9 +857,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy), out response);
         }
-        #endregion
 
-        #region TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
         /// <summary>
         /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -971,12 +925,10 @@ namespace Argotic.Common
 
             return sourceHasBeenModified;
         }
-        #endregion
 
         //============================================================
         //	SYNDICATED CONTENT AUTO-DISCOVERY METHODS
         //============================================================
-        #region ExtractDiscoverableSyndicationEndpoints(string content)
         /// <summary>
         /// Extracts auto-discoverable syndication endpoints from the supplied HTML markup.
         /// </summary>
@@ -1053,9 +1005,7 @@ namespace Argotic.Common
             
             return results;
         }
-        #endregion
 
-        #region ExtractDiscoverableSyndicationEndpoints(Stream stream)
         /// <summary>
         /// Extracts auto-discoverable syndication endpoints from the supplied <see cref="Stream"/>.
         /// </summary>
@@ -1083,9 +1033,7 @@ namespace Argotic.Common
                 return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
             }
         }
-        #endregion
 
-        #region LocateDiscoverableSyndicationEndpoints(Uri uri)
         /// <summary>
         /// Returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/>.
         /// </summary>
@@ -1114,9 +1062,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(uri, null);
         }
-        #endregion
 
-        #region LocateDiscoverableSyndicationEndpoints(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/> 
         /// using the specified <see cref="ICredentials">credentials</see>.
@@ -1161,12 +1107,10 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PINGBACK PEER-TO-PEER NOTIFICATION METHODS
         //============================================================
-        #region ExtractPingbackNotificationServer(string content)
         /// <summary>
         /// Extracts a <see cref="HtmlAnchor"/> that represents a pingback auto-discovery link from the supplied HTML markup.
         /// </summary>
@@ -1261,9 +1205,7 @@ namespace Argotic.Common
             
             return pingbackAnchor;
         }
-        #endregion
 
-        #region IsPingbackEnabled(Uri uri)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource.
         /// </summary>
@@ -1320,9 +1262,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.IsPingbackEnabled(uri, null);
         }
-        #endregion
 
-        #region IsPingbackEnabled(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource using the specified <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -1436,9 +1376,7 @@ namespace Argotic.Common
             
             return isPingbackEnabled;
         }
-        #endregion
 
-        #region LocatePingbackNotificationServer(Uri uri)
         /// <summary>
         /// Returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/>.
         /// </summary>
@@ -1498,9 +1436,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.LocatePingbackNotificationServer(uri, null);
         }
-        #endregion
 
-        #region LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/>
         /// using the specified <see cref="ICredentials">credentials</see>.
@@ -1625,12 +1561,10 @@ namespace Argotic.Common
             
             return pingbackXmlRpcServer;
         }
-        #endregion
 
         //============================================================
         //	TRACKBACK PEER-TO-PEER NOTIFICATION METHODS
         //============================================================
-        #region ExtractTrackbackNotificationServers(string content)
         /// <summary>
         /// Extracts embedded RDF Trackback discovery meta-data from the supplied HTML markup.
         /// </summary>
@@ -1688,9 +1622,7 @@ namespace Argotic.Common
 
             return results;
         }
-        #endregion
 
-        #region ExtractTrackbackNotificationServers(Stream stream)
         /// <summary>
         /// Extracts embedded RDF Trackback discovery meta-data from the supplied <see cref="Stream"/>.
         /// </summary>
@@ -1719,9 +1651,7 @@ namespace Argotic.Common
                 return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
             }
         }
-        #endregion
 
-        #region IsTrackbackEnabled(Uri uri)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource.
         /// </summary>
@@ -1779,9 +1709,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.IsTrackbackEnabled(uri, null);
         }
-        #endregion
 
-        #region IsTrackbackEnabled(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource using the specified <see cref="ICredentials">credentials</see>.
         /// </summary>
@@ -1836,9 +1764,7 @@ namespace Argotic.Common
 
             return (SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0);
         }
-        #endregion
 
-        #region LocateTrackbackNotificationServers(Uri uri)
         /// <summary>
         /// Returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/>.
         /// </summary>
@@ -1868,9 +1794,7 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, null);
         }
-        #endregion
 
-        #region LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
         /// <summary>
         /// Returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/> 
         /// using the specified <see cref="ICredentials">credentials</see>.
@@ -1916,6 +1840,5 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
     }
 }

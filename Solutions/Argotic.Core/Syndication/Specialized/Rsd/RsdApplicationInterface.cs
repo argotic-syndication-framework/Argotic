@@ -36,7 +36,6 @@ namespace Argotic.Syndication.Specialized
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -69,12 +68,10 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold service specific settings for the application interface.
         /// </summary>
         private Dictionary<string, string> interfaceSettings;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region RsdApplicationInterface()
         /// <summary>
         /// Initializes a new instance of the <see cref="RsdApplicationInterface"/> class.
         /// </summary>
@@ -84,9 +81,7 @@ namespace Argotic.Syndication.Specialized
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region RsdApplicationInterface(string name, Uri link, bool isPreferred, string weblogId)
         /// <summary>
         /// Initializes a new instance of the <see cref="RsdApplicationInterface"/> class using the supplied parameters.
         /// </summary>
@@ -107,12 +102,10 @@ namespace Argotic.Syndication.Specialized
             this.Name           = name;
             this.WeblogId       = weblogId;
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -138,9 +131,7 @@ namespace Argotic.Syndication.Specialized
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -152,12 +143,10 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Documentation
         /// <summary>
         /// Gets or sets the location of the documentation for this application interface.
         /// </summary>
@@ -174,9 +163,7 @@ namespace Argotic.Syndication.Specialized
                 interfaceDocumentation = value;
             }
         }
-        #endregion
 
-        #region IsPreferred
         /// <summary>
         /// Gets or sets a value indicating if this application interface is preferred.
         /// </summary>
@@ -193,9 +180,7 @@ namespace Argotic.Syndication.Specialized
                 interfaceIsPreferred = value;
             }
         }
-        #endregion
 
-        #region Link
         /// <summary>
         /// Gets or sets the communication endpoint of this application interface.
         /// </summary>
@@ -214,9 +199,7 @@ namespace Argotic.Syndication.Specialized
                 interfaceLink = value;
             }
         }
-        #endregion
 
-        #region Name
         /// <summary>
         /// Gets or sets the name of this application interface.
         /// </summary>
@@ -262,9 +245,7 @@ namespace Argotic.Syndication.Specialized
                 interfaceName = value.Trim();
             }
         }
-        #endregion
 
-        #region Notes
         /// <summary>
         /// Gets or sets human readable text that explains the features and settings for this application interface.
         /// </summary>
@@ -288,9 +269,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
-        #region Settings
         /// <summary>
         /// Gets a collection of service specific settings for this application interface.
         /// </summary>
@@ -306,9 +285,7 @@ namespace Argotic.Syndication.Specialized
                 return interfaceSettings;
             }
         }
-        #endregion
 
-        #region WeblogId
         /// <summary>
         /// Gets or sets a custom web log identifier utilized by this application interface.
         /// </summary>
@@ -332,12 +309,10 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -364,9 +339,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -393,9 +366,7 @@ namespace Argotic.Syndication.Specialized
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -428,12 +399,10 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="RsdApplicationInterface"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -548,9 +517,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads this <see cref="RsdApplicationInterface"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -588,9 +555,7 @@ namespace Argotic.Syndication.Specialized
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="RsdApplicationInterface"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -645,12 +610,10 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.
         /// </summary>
@@ -683,12 +646,10 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -727,9 +688,7 @@ namespace Argotic.Syndication.Specialized
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -747,9 +706,7 @@ namespace Argotic.Syndication.Specialized
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -763,9 +720,7 @@ namespace Argotic.Syndication.Specialized
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -788,9 +743,7 @@ namespace Argotic.Syndication.Specialized
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -801,9 +754,7 @@ namespace Argotic.Syndication.Specialized
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -826,9 +777,7 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -851,6 +800,5 @@ namespace Argotic.Syndication.Specialized
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

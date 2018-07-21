@@ -38,7 +38,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the globally unique identifier for the item.
         /// </summary>
@@ -63,12 +62,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold information about conflicting updates to the item.
         /// </summary>
         private Collection<XPathNavigator> synchronizationConflicts;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedSynchronizationItem()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class.
         /// </summary>
@@ -78,9 +75,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region FeedSynchronizationItem(string id, int updates)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied indentifier and number of updates.
         /// </summary>
@@ -97,9 +92,7 @@ namespace Argotic.Extensions.Core
             this.Id         = id;
             this.Updates    = updates;
         }
-        #endregion
 
-        #region FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied indentifier, number of updates, and initial <see cref="FeedSynchronizationHistory"/>.
         /// </summary>
@@ -118,12 +111,10 @@ namespace Argotic.Extensions.Core
             Guard.ArgumentNotNull(history, "history");
             this.Histories.Add(history);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Conflicts
         /// <summary>
         /// Gets the conflicting updates for this item.
         /// </summary>
@@ -142,9 +133,7 @@ namespace Argotic.Extensions.Core
                 return synchronizationConflicts;
             }
         }
-        #endregion
 
-        #region Histories
         /// <summary>
         /// Gets the information about updates to this item.
         /// </summary>
@@ -163,9 +152,7 @@ namespace Argotic.Extensions.Core
                 return synchronizationHistories;
             }
         }
-        #endregion
 
-        #region Id
         /// <summary>
         /// Gets or sets the globally unique identifier for this item.
         /// </summary>
@@ -205,9 +192,7 @@ namespace Argotic.Extensions.Core
                 synchronizationId = value.Trim();
             }
         }
-        #endregion
 
-        #region ConflictPreservation
         /// <summary>
         /// Gets or sets a value indicating whether conflict preservation is performed for this item.
         /// </summary>
@@ -238,9 +223,7 @@ namespace Argotic.Extensions.Core
                 synchronizationConflictPreservation = value;
             }
         }
-        #endregion
 
-        #region TombstoneStatus
         /// <summary>
         /// Gets or sets a value indicating if the item has been deleted.
         /// </summary>
@@ -267,9 +250,7 @@ namespace Argotic.Extensions.Core
                 synchronizationTombstoneStatus = value;
             }
         }
-        #endregion
 
-        #region Updates
         /// <summary>
         /// Gets or sets the number of updates applied to this item.
         /// </summary>
@@ -288,12 +269,10 @@ namespace Argotic.Extensions.Core
                 synchronizationUpdates = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{FeedSynchronizationHistory}"/> collections.
         /// </summary>
@@ -344,9 +323,7 @@ namespace Argotic.Extensions.Core
 
             return result;
         }
-        #endregion
 
-        #region ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)
         /// <summary>
         /// Returns the conflict preservation identifier for the supplied <see cref="FeedSynchronizationConflictPreservationDirective"/>.
         /// </summary>
@@ -385,9 +362,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region ConflictPreservationByName(string name)
         /// <summary>
         /// Returns the <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified conflict preservation name.
         /// </summary>
@@ -433,9 +408,7 @@ namespace Argotic.Extensions.Core
 
             return preservationDirective;
         }
-        #endregion
 
-        #region TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)
         /// <summary>
         /// Returns the tombstone status identifier for the supplied <see cref="FeedSynchronizationTombstoneStatus"/>.
         /// </summary>
@@ -474,9 +447,7 @@ namespace Argotic.Extensions.Core
 
             return name;
         }
-        #endregion
 
-        #region TombstoneStatusByName(string name)
         /// <summary>
         /// Returns the <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified tombstone status name.
         /// </summary>
@@ -522,12 +493,10 @@ namespace Argotic.Extensions.Core
 
             return tombstoneStatus;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source)
         /// <summary>
         /// Loads this <see cref="FeedSynchronizationItem"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -633,9 +602,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer)
         /// <summary>
         /// Saves the current <see cref="FeedSynchronizationItem"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -688,12 +655,10 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationItem"/>.
         /// </summary>
@@ -726,12 +691,10 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -769,9 +732,7 @@ namespace Argotic.Extensions.Core
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -789,9 +750,7 @@ namespace Argotic.Extensions.Core
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -805,9 +764,7 @@ namespace Argotic.Extensions.Core
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -830,9 +787,7 @@ namespace Argotic.Extensions.Core
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -843,9 +798,7 @@ namespace Argotic.Extensions.Core
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -868,9 +821,7 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -893,6 +844,5 @@ namespace Argotic.Extensions.Core
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the permanent, universally unique identifier for the ranking scheme.
         /// </summary>
@@ -40,12 +39,10 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the decimal value of the rank.
         /// </summary>
         private decimal extensionValue  = Decimal.MinValue;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region FeedRankSyndicationExtensionContext()
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
         /// </summary>
@@ -55,9 +52,7 @@ namespace Argotic.Extensions.Core
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region FeedRankSyndicationExtensionContext(Uri scheme, decimal value)
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class using the supplied schem and value.
         /// </summary>
@@ -72,12 +67,10 @@ namespace Argotic.Extensions.Core
             this.Scheme = scheme;
             this.Value  = value;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Domain
         /// <summary>
         /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
         /// </summary>
@@ -94,9 +87,7 @@ namespace Argotic.Extensions.Core
                 extensionDomain = value;
             }
         }
-        #endregion
 
-        #region Label
         /// <summary>
         /// Gets or sets the language sensitive, human-readable label for this rank.
         /// </summary>
@@ -120,9 +111,7 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-        #endregion
 
-        #region Scheme
         /// <summary>
         /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.
         /// </summary>
@@ -141,9 +130,7 @@ namespace Argotic.Extensions.Core
                 extensionScheme = value;
             }
         }
-        #endregion
 
-        #region Value
         /// <summary>
         /// Gets or sets the value of this rank.
         /// </summary>
@@ -160,12 +147,10 @@ namespace Argotic.Extensions.Core
                 extensionValue = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Load(XPathNavigator source, XmlNamespaceManager manager)
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -242,9 +227,7 @@ namespace Argotic.Extensions.Core
 
             return wasLoaded;
         }
-        #endregion
 
-        #region WriteTo(XmlWriter writer, string xmlNamespace)
         /// <summary>
         /// Writes the current context to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -285,6 +268,5 @@ namespace Argotic.Extensions.Core
 
             writer.WriteEndElement();
         }
-        #endregion
     }
 }

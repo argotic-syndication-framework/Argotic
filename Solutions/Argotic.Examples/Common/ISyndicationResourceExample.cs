@@ -18,7 +18,6 @@ namespace Argotic.Examples
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
@@ -39,12 +38,10 @@ namespace Argotic.Examples
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
@@ -56,9 +53,7 @@ namespace Argotic.Examples
                 return feedFormat;
             }
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
@@ -70,12 +65,10 @@ namespace Argotic.Examples
                 return feedVersion;
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncLoadHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -92,9 +85,7 @@ namespace Argotic.Examples
                 resourceAsyncLoadCancelled = value;
             }
         }
-        #endregion
 
-        #region LoadOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
@@ -111,24 +102,20 @@ namespace Argotic.Examples
                 resourceIsLoading = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="MyCustomRssFeed.Load(IXPathNavigable)"/>
         /// <seealso cref="MyCustomRssFeed.Load(XmlReader)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Raises the <see cref="MyCustomRssFeed.Loaded"/> event.
         /// </summary>
@@ -150,12 +137,10 @@ namespace Argotic.Examples
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	INSTANCE METHODS
         //============================================================
-        #region CreateNavigator()
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="MyCustomRssFeed"/>.
         /// </summary>
@@ -185,9 +170,7 @@ namespace Argotic.Examples
                 return document.CreateNavigator();
             }
         }
-        #endregion
 
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -205,9 +188,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(source, null);
         }
-        #endregion
 
-        #region Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -240,9 +221,7 @@ namespace Argotic.Examples
             XPathNavigator navigator    = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
-        #endregion
 
-        #region Load(Stream stream)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -260,9 +239,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(stream, null);
         }
-        #endregion
 
-        #region Load(Stream stream, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -293,9 +270,7 @@ namespace Argotic.Examples
                 this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
             }
         }
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -313,9 +288,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(reader, null);
         }
-        #endregion
 
-        #region Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -339,9 +312,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(new XPathDocument(reader), settings);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -383,9 +354,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -412,9 +381,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(source, options, null);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -464,9 +431,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -531,9 +496,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
-        #endregion
 
-        #region Save(Stream stream)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -547,9 +510,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Save(stream, null);
         }
-        #endregion
 
-        #region Save(Stream stream, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -582,9 +543,7 @@ namespace Argotic.Examples
                 this.Save(writer, settings);
             }
         }
-        #endregion
 
-        #region Save(XmlWriter writer)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -603,9 +562,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.Save(writer, new SyndicationResourceSaveSettings());
         }
-        #endregion
 
-        #region Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> using the supplied <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -632,12 +589,10 @@ namespace Argotic.Examples
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	ASYNC METHODS
         //============================================================
-        #region LoadAsync(Uri source, Object userToken)
         /// <summary>
         /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -664,9 +619,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.LoadAsync(source, null, userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         /// <summary>
         /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -693,9 +646,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -728,9 +679,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         /// <summary>
         /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -801,9 +750,7 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
@@ -831,12 +778,10 @@ namespace Argotic.Examples
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncLoadCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -927,9 +872,7 @@ namespace Argotic.Examples
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -956,12 +899,10 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         /// <summary>
         /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -993,6 +934,5 @@ namespace Argotic.Examples
             //------------------------------------------------------------
             this.OnFeedLoaded(eventData);
         }
-        #endregion
     }
 }

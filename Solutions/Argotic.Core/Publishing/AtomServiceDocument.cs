@@ -48,7 +48,6 @@ namespace Argotic.Publishing
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
@@ -85,12 +84,10 @@ namespace Argotic.Publishing
         /// Private member to hold the workspaces associated to this document.
         /// </summary>
         private IEnumerable<AtomWorkspace> documentWorkspaces;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region AtomServiceDocument()
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomServiceDocument"/> class.
         /// </summary>
@@ -100,9 +97,7 @@ namespace Argotic.Publishing
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
-        #region AtomServiceDocument(Collection<AtomWorkspace> workspaces)
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomServiceDocument"/> class using the supplied <see cref="Collection{AtomWorkspace}"/> collection.
         /// </summary>
@@ -124,12 +119,10 @@ namespace Argotic.Publishing
                 this.AddWorkspace(workspace);
             }
         }
-        #endregion
 
         //============================================================
         //	INDEXERS
         //============================================================
-        #region this[int index]
         /// <summary>
         /// Gets or sets the <see cref="AtomWorkspace"/> at the specified index.
         /// </summary>
@@ -151,24 +144,20 @@ namespace Argotic.Publishing
                 ((Collection<AtomWorkspace>)this.Workspaces)[index] = value;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC EVENTS
         //============================================================
-        #region Loaded
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="AtomServiceDocument.Load(IXPathNavigable)"/>
         /// <seealso cref="AtomServiceDocument.Load(XmlReader)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-        #endregion
 
         //============================================================
         //	EVENT HANDLER DELEGATE METHODS
         //============================================================
-        #region OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
         /// <summary>
         /// Raises the <see cref="AtomServiceDocument.Loaded"/> event.
         /// </summary>
@@ -190,12 +179,10 @@ namespace Argotic.Publishing
                 handler(this, e);
             }
         }
-        #endregion
 
         //============================================================
         //	COMMON PROPERTIES
         //============================================================
-        #region BaseUri
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -217,9 +204,7 @@ namespace Argotic.Publishing
                 commonObjectBaseUri = value;
             }
         }
-        #endregion
 
-        #region Language
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
         /// </summary>
@@ -241,12 +226,10 @@ namespace Argotic.Publishing
                 commonObjectLanguage = value;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY PROPERTIES
         //============================================================
-        #region Extensions
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -272,9 +255,7 @@ namespace Argotic.Publishing
                 objectSyndicationExtensions = value;
             }
         }
-        #endregion
 
-        #region HasExtensions
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
@@ -286,12 +267,10 @@ namespace Argotic.Publishing
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        #endregion
 
         //============================================================
         //	EXTENSIBILITY METHODS
         //============================================================
-        #region AddExtension(ISyndicationExtension extension)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -318,9 +297,7 @@ namespace Argotic.Publishing
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindExtension(Predicate<ISyndicationExtension> match)
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
@@ -347,9 +324,7 @@ namespace Argotic.Publishing
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveExtension(ISyndicationExtension extension)
         /// <summary>
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -382,12 +357,10 @@ namespace Argotic.Publishing
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	STATIC PROPERTIES
         //============================================================
-        #region MediaType
         /// <summary>
         /// Gets the IANA MIME media type identifier assigned to Atom service documents.
         /// </summary>
@@ -402,12 +375,10 @@ namespace Argotic.Publishing
                 return "application/atomsvc+xml";
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Format
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
@@ -419,9 +390,7 @@ namespace Argotic.Publishing
                 return documentFormat;
             }
         }
-        #endregion
 
-        #region Version
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
@@ -433,9 +402,7 @@ namespace Argotic.Publishing
                 return documentVersion;
             }
         }
-        #endregion
 
-        #region Workspaces
         /// <summary>
         /// Gets or sets the workspaces associated with this document.
         /// </summary>
@@ -462,12 +429,10 @@ namespace Argotic.Publishing
                 documentWorkspaces = value;
             }
         }
-        #endregion
 
         //============================================================
         //	INTERNAL PROPERTIES
         //============================================================
-        #region AsyncLoadHasBeenCancelled
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -484,9 +449,7 @@ namespace Argotic.Publishing
                 resourceAsyncLoadCancelled = value;
             }
         }
-        #endregion
 
-        #region LoadOperationInProgress
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
@@ -503,12 +466,10 @@ namespace Argotic.Publishing
                 resourceIsLoading = value;
             }
         }
-        #endregion
 
         //============================================================
         //	STATIC METHODS
         //============================================================
-        #region CompareSequence(Collection<AtomWorkspace> source, Collection<AtomWorkspace> target)
         /// <summary>
         /// Compares two specified <see cref="Collection{AtomWorkspace}"/> collections.
         /// </summary>
@@ -559,9 +520,7 @@ namespace Argotic.Publishing
 
             return result;
         }
-        #endregion
 
-        #region Create(Uri source)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>.
         /// </summary>
@@ -579,9 +538,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             return AtomServiceDocument.Create(source, new WebRequestOptions());
         }
-        #endregion
 
-        #region Create(Uri source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -597,9 +554,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             return AtomServiceDocument.Create(source, new WebRequestOptions(), settings);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -623,9 +578,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             return AtomServiceDocument.Create(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -644,9 +597,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             return AtomServiceDocument.Create(source, options, null);
         }
-        #endregion
 
-        #region Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -668,9 +619,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             return AtomServiceDocument.Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
         /// </summary>
@@ -699,12 +648,10 @@ namespace Argotic.Publishing
 
             return syndicationResource;
         }
-        #endregion
 
         //============================================================
         //	ASYNC METHODS
         //============================================================
-        #region LoadAsync(Uri source, Object userToken)
         /// <summary>
         /// Loads this <see cref="AtomServiceDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -731,9 +678,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.LoadAsync(source, null, userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         /// <summary>
         /// Loads this <see cref="AtomServiceDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -760,9 +705,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         /// <summary>
         /// Loads this <see cref="AtomServiceDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -795,9 +738,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
-        #endregion
 
-        #region LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         /// <summary>
         /// Loads this <see cref="AtomServiceDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
         /// </summary>
@@ -868,9 +809,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
-        #endregion
 
-        #region LoadAsyncCancel()
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
@@ -898,12 +837,10 @@ namespace Argotic.Publishing
                 asyncHttpWebRequest.Abort();
             }
         }
-        #endregion
 
         //============================================================
         //	CALLBACK DELEGATE METHODS
         //============================================================
-        #region AsyncLoadCallback(IAsyncResult result)
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -996,9 +933,7 @@ namespace Argotic.Publishing
                 }
             }
         }
-        #endregion
 
-        #region AsyncTimeoutCallback(object state, bool timedOut)
         /// <summary>
         /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
         /// </summary>
@@ -1025,12 +960,10 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-        #endregion
 
         //============================================================
         //	COLLECTION METHODS
         //============================================================
-        #region AddWorkspace(AtomWorkspace workspace)
         /// <summary>
         /// Adds the supplied <see cref="AtomWorkspace"/> to the document's <see cref="Workspaces"/> collection.
         /// </summary>
@@ -1057,9 +990,7 @@ namespace Argotic.Publishing
 
             return wasAdded;
         }
-        #endregion
 
-        #region FindWorkspace(Predicate<AtomWorkspace> match)
         /// <summary>
         /// Searches for a workspace that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Workspaces"/> collection.
         /// </summary>
@@ -1086,9 +1017,7 @@ namespace Argotic.Publishing
             List<AtomWorkspace> list = new List<AtomWorkspace>(this.Workspaces);
             return list.Find(match);
         }
-        #endregion
 
-        #region RemoveWorkspace(AtomWorkspace workspace)
         /// <summary>
         /// Removes the supplied <see cref="AtomWorkspace"/> from the document's <see cref="Workspaces"/> collection.
         /// </summary>
@@ -1121,12 +1050,10 @@ namespace Argotic.Publishing
 
             return wasRemoved;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region CreateNavigator()
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="AtomServiceDocument"/>.
         /// </summary>
@@ -1156,9 +1083,7 @@ namespace Argotic.Publishing
                 return document.CreateNavigator();
             }
         }
-        #endregion
 
-        #region Load(IXPathNavigable source)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -1176,9 +1101,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(source, null);
         }
-        #endregion
 
-        #region Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1211,9 +1134,7 @@ namespace Argotic.Publishing
             XPathNavigator navigator    = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
-        #endregion
 
-        #region Load(Stream stream)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -1231,9 +1152,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(stream, null);
         }
-        #endregion
 
-        #region Load(Stream stream, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="Stream"/>.
         /// </summary>
@@ -1264,9 +1183,7 @@ namespace Argotic.Publishing
                 this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
             }
         }
-        #endregion
 
-        #region Load(XmlReader reader)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -1284,9 +1201,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(reader, null);
         }
-        #endregion
 
-        #region Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
         /// </summary>
@@ -1310,9 +1225,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(new XPathDocument(reader), settings);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -1354,9 +1267,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         /// </summary>
@@ -1383,9 +1294,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(source, options, null);
         }
-        #endregion
 
-        #region Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1435,9 +1344,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
-        #endregion
 
-        #region Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1502,9 +1409,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
-        #endregion
 
-        #region Save(Stream stream)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -1518,9 +1423,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Save(stream, null);
         }
-        #endregion
 
-        #region Save(Stream stream, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
@@ -1553,9 +1456,7 @@ namespace Argotic.Publishing
                 this.Save(writer, settings);
             }
         }
-        #endregion
 
-        #region Save(XmlWriter writer)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
@@ -1574,9 +1475,7 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.Save(writer, new SyndicationResourceSaveSettings());
         }
-        #endregion
 
-        #region Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -1624,12 +1523,10 @@ namespace Argotic.Publishing
 
             writer.WriteEndElement();
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         /// <summary>
         /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1663,6 +1560,5 @@ namespace Argotic.Publishing
             //------------------------------------------------------------
             this.OnDocumentLoaded(eventData);
         }
-        #endregion
     }
 }

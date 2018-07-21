@@ -24,7 +24,6 @@ namespace Argotic.Data.Adapters
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the XPathNavigator used to load a syndication resource.
         /// </summary>
@@ -33,12 +32,10 @@ namespace Argotic.Data.Adapters
         /// Private member to hold the XPathNavigator used to configure the load of a syndication resource.
         /// </summary>
         private SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -57,12 +54,10 @@ namespace Argotic.Data.Adapters
             adapterNavigator    = navigator;
             adapterSettings     = settings;
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Navigator
         /// <summary>
         /// Gets the <see cref="XPathNavigator"/> used to fill a syndication resource.
         /// </summary>
@@ -74,9 +69,7 @@ namespace Argotic.Data.Adapters
                 return adapterNavigator;
             }
         }
-        #endregion
 
-        #region Settings
         /// <summary>
         /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.
         /// </summary>
@@ -88,12 +81,10 @@ namespace Argotic.Data.Adapters
                 return adapterSettings;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC METHODS
         //============================================================
-        #region Fill(ISyndicationResource resource, SyndicationContentFormat format)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -172,12 +163,10 @@ namespace Argotic.Data.Adapters
                     break;
             }
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -204,9 +193,7 @@ namespace Argotic.Data.Adapters
                 apml06Adapter.Fill(apmlDocument);
             }
         }
-        #endregion
 
-        #region FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -254,9 +241,7 @@ namespace Argotic.Data.Adapters
                 }
             }
         }
-        #endregion
 
-        #region FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -291,9 +276,7 @@ namespace Argotic.Data.Adapters
                 }
             }
         }
-        #endregion
 
-        #region FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -320,9 +303,7 @@ namespace Argotic.Data.Adapters
                 blogML20Adapter.Fill(blogMLDocument);
             }
         }
-        #endregion
 
-        #region FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -359,9 +340,7 @@ namespace Argotic.Data.Adapters
                 opml20Adapter.Fill(opmlDocument);
             }
         }
-        #endregion
 
-        #region FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -394,9 +373,7 @@ namespace Argotic.Data.Adapters
                 rsd06Adapter.Fill(rsdDocument);
             }
         }
-        #endregion
 
-        #region FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -447,6 +424,5 @@ namespace Argotic.Data.Adapters
                 rss090Adapter.Fill(rssFeed);
             }
         }
-        #endregion
     }
 }

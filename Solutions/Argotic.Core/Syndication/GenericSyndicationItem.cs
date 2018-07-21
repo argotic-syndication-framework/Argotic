@@ -22,7 +22,6 @@ namespace Argotic.Syndication
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the title of the syndication item.
         /// </summary>
@@ -39,12 +38,10 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of categories associated with the item.
         /// </summary>
         private Collection<GenericSyndicationCategory> itemCategories   = new Collection<GenericSyndicationCategory>();
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region GenericSyndicationItem(AtomEntry entry)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -62,9 +59,7 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadFrom(entry);
         }
-        #endregion
 
-        #region GenericSyndicationItem(RssItem item)
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="RssItem"/>.
         /// </summary>
@@ -82,12 +77,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             this.LoadFrom(item);
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Categories
         /// <summary>
         /// Gets the categories associated with this item.
         /// </summary>
@@ -105,9 +98,7 @@ namespace Argotic.Syndication
                 return itemCategories;
             }
         }
-        #endregion
 
-        #region PublishedOn
         /// <summary>
         /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.
         /// </summary>
@@ -127,9 +118,7 @@ namespace Argotic.Syndication
                 return itemPublishedOn;
             }
         }
-        #endregion
 
-        #region Summary
         /// <summary>
         /// Gets a short summary, abstract, or excerpt for this item.
         /// </summary>
@@ -149,9 +138,7 @@ namespace Argotic.Syndication
                 return itemSummary;
             }
         }
-        #endregion
 
-        #region Title
         /// <summary>
         /// Gets the human-readable title for this item.
         /// </summary>
@@ -166,12 +153,10 @@ namespace Argotic.Syndication
                 return itemTitle;
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.
         /// </summary>
@@ -186,12 +171,10 @@ namespace Argotic.Syndication
             //------------------------------------------------------------
             return String.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : String.Empty);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -226,9 +209,7 @@ namespace Argotic.Syndication
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -246,9 +227,7 @@ namespace Argotic.Syndication
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -262,9 +241,7 @@ namespace Argotic.Syndication
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -287,9 +264,7 @@ namespace Argotic.Syndication
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -300,9 +275,7 @@ namespace Argotic.Syndication
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -325,9 +298,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -350,12 +321,10 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
 
         //============================================================
         //	PRIVATE METHODS
         //============================================================
-        #region LoadFrom(AtomEntry entry)
         /// <summary>
         /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -400,9 +369,7 @@ namespace Argotic.Syndication
                 itemCategories.Add(genericCategory);
             }
         }
-        #endregion
 
-        #region LoadFrom(RssItem item)
         /// <summary>
         /// Loads the generic syndication item using the supplied <see cref="RssItem"/>.
         /// </summary>
@@ -439,6 +406,5 @@ namespace Argotic.Syndication
                 itemCategories.Add(genericCategory);
             }
         }
-        #endregion
     }
 }

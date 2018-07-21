@@ -22,7 +22,6 @@ namespace Argotic.Common
         //============================================================
         //	PUBLIC/PRIVATE/PROTECTED MEMBERS
         //============================================================
-        #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the MIME media type name.
         /// </summary>
@@ -35,12 +34,10 @@ namespace Argotic.Common
         /// Private member to hold a URI that points to the documentation the describes the MIME media type.
         /// </summary>
         private Uri mimeMediaDocumentation;
-        #endregion
 
         //============================================================
         //	CONSTRUCTORS
         //============================================================
-        #region MimeMediaTypeAttribute()
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMediaTypeAttribute"/> class.
         /// </summary>
@@ -50,12 +47,10 @@ namespace Argotic.Common
             //	
             //------------------------------------------------------------
         }
-        #endregion
 
         //============================================================
         //	PUBLIC PROPERTIES
         //============================================================
-        #region Documentation
         /// <summary>
         /// Gets or sets a URI that points to the documentation the describes the MIME media type for the attributed field.
         /// </summary>
@@ -87,9 +82,7 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
-        #region Name
         /// <summary>
         /// Gets or sets the MIME media type name for the attributed field.
         /// </summary>
@@ -113,9 +106,7 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
-        #region SubName
         /// <summary>
         /// Gets or sets the MIME media sub-type name for the attributed field.
         /// </summary>
@@ -139,12 +130,10 @@ namespace Argotic.Common
                 }
             }
         }
-        #endregion
 
         //============================================================
         //	PUBLIC OVERRIDES
         //============================================================
-        #region ToString()
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
         /// </summary>
@@ -159,12 +148,10 @@ namespace Argotic.Common
             //------------------------------------------------------------
             return String.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : String.Empty);
         }
-        #endregion
 
         //============================================================
         //	ICOMPARABLE IMPLEMENTATION
         //============================================================
-        #region CompareTo(object obj)
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -199,9 +186,7 @@ namespace Argotic.Common
                 throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
-        #endregion
 
-        #region Equals(Object obj)
         /// <summary>
         /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
         /// </summary>
@@ -219,9 +204,7 @@ namespace Argotic.Common
 
             return (this.CompareTo(obj) == 0);
         }
-        #endregion
 
-        #region GetHashCode()
         /// <summary>
         /// Returns a hash code for the current instance.
         /// </summary>
@@ -235,9 +218,7 @@ namespace Argotic.Common
 
             return charArray.GetHashCode();
         }
-        #endregion
 
-        #region == operator
         /// <summary>
         /// Determines if operands are equal.
         /// </summary>
@@ -260,9 +241,7 @@ namespace Argotic.Common
 
             return first.Equals(second);
         }
-        #endregion
 
-        #region != operator
         /// <summary>
         /// Determines if operands are not equal.
         /// </summary>
@@ -273,9 +252,7 @@ namespace Argotic.Common
         {
             return !(first == second);
         }
-        #endregion
 
-        #region < operator
         /// <summary>
         /// Determines if first operand is less than second operand.
         /// </summary>
@@ -298,9 +275,7 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) < 0);
         }
-        #endregion
 
-        #region > operator
         /// <summary>
         /// Determines if first operand is greater than second operand.
         /// </summary>
@@ -323,6 +298,5 @@ namespace Argotic.Common
 
             return (first.CompareTo(second) > 0);
         }
-        #endregion
     }
 }

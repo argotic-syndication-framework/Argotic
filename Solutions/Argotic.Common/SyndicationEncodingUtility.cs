@@ -568,7 +568,7 @@ namespace Argotic.Common
         ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static Encoding GetCharacterEncoding(HttpRequest request)
+        /*public static Encoding GetCharacterEncoding(HttpRequest request)
         {
             //------------------------------------------------------------
             //	Local members
@@ -620,7 +620,7 @@ namespace Argotic.Common
             }
             
             return contentEncoding;
-        }
+        }*/
         #endregion
 
         #region GetXmlEncoding(byte[] data)

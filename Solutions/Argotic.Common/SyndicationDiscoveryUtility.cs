@@ -445,7 +445,7 @@ namespace Argotic.Common
         ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
+        /*public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
         {
             //------------------------------------------------------------
             //	Local members
@@ -472,7 +472,7 @@ namespace Argotic.Common
             }
             
             return baseUri;
-        }
+        }*/
         
         #endregion
 

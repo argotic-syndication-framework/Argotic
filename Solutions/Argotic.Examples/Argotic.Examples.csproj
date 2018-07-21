@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon>Argotic.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

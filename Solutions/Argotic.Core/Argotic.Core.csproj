@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Configuration\Provider\XmlSyndicationResourceProvider.cs" />
+    <Compile Remove="Syndication\SyndicationManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>

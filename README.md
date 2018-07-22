@@ -4,7 +4,5 @@ The project has been updated to .NET Standard 2.0. The source code is in the pro
 
 See the [wiki](https://github.com/endjin/Argotic/wiki) for detailed documentation.
 
-**Argotic: We speak the language so you don't have to.**
-
 *ar·got·ic* (_ahr-got-ik_)
 A specialized idiomatic vocabulary peculiar to a particular class or group of people.

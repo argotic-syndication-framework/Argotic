@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created OpmlDocument Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -49,9 +42,7 @@ namespace Argotic.Syndication
     [Serializable()]
     public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
@@ -84,23 +75,14 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of outlines that comprise the published content of the document.
         /// </summary>
         private IEnumerable<OpmlOutline> documentOutlines;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlDocument"/> class.
         /// </summary>
         public OpmlDocument()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
+
         }
 
-        //============================================================
-        //	INDEXERS
-        //============================================================
         /// <summary>
         /// Gets or sets the <see cref="OpmlOutline"/> at the specified index.
         /// </summary>
@@ -122,34 +104,19 @@ namespace Argotic.Syndication
                 ((Collection<OpmlOutline>)this.Outlines)[index] = value;
             }
         }
-
-        //============================================================
-        //	PUBLIC EVENTS
-        //============================================================
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="OpmlDocument.Load(IXPathNavigable)"/>
         /// <seealso cref="OpmlDocument.Load(XmlReader)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
-
-        //============================================================
-        //	EVENT HANDLER DELEGATE METHODS
-        //============================================================
         /// <summary>
         /// Raises the <see cref="OpmlDocument.Loaded"/> event.
         /// </summary>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
         protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
-
-            //------------------------------------------------------------
-            //	Raise event on registered handler(s)
-            //------------------------------------------------------------
             handler = this.Loaded;
 
             if (handler != null)
@@ -157,10 +124,6 @@ namespace Argotic.Syndication
                 handler(this, e);
             }
         }
-
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -198,10 +161,6 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
@@ -272,9 +231,6 @@ namespace Argotic.Syndication
             }
         }
 
-        //============================================================
-        //	INTERNAL PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -309,9 +265,6 @@ namespace Argotic.Syndication
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>.
         /// </summary>
@@ -332,9 +285,6 @@ namespace Argotic.Syndication
         /// </example>
         public static OpmlDocument Create(Uri source)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameter and default settings
-            //------------------------------------------------------------
             return OpmlDocument.Create(source, new WebRequestOptions());
         }
 
@@ -348,9 +298,6 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         public static OpmlDocument Create(Uri source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameters and default settings
-            //------------------------------------------------------------
             return OpmlDocument.Create(source, new WebRequestOptions(), settings);
         }
 
@@ -372,9 +319,6 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         public static OpmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameters and default settings
-            //------------------------------------------------------------
             return OpmlDocument.Create(source, new WebRequestOptions(credentials, proxy));
         }
 
@@ -391,9 +335,6 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         public static OpmlDocument Create(Uri source, WebRequestOptions options)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameters and default settings
-            //------------------------------------------------------------
             return OpmlDocument.Create(source, options, null);
         }
 
@@ -413,9 +354,6 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         public static OpmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameters
-            //------------------------------------------------------------
             return OpmlDocument.Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
 
@@ -430,27 +368,13 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         public static OpmlDocument Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             OpmlDocument syndicationResource = new OpmlDocument();
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Create new instance using supplied parameters
-            //------------------------------------------------------------
             syndicationResource.Load(source, options, settings);
 
             return syndicationResource;
         }
 
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -484,9 +408,6 @@ namespace Argotic.Syndication
         /// </example>
         public void LoadAsync(Uri source, Object userToken)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameter and default settings
-            //------------------------------------------------------------
             this.LoadAsync(source, null, userToken);
         }
 
@@ -511,9 +432,6 @@ namespace Argotic.Syndication
         /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameter and specified settings
-            //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
 
@@ -544,9 +462,6 @@ namespace Argotic.Syndication
         /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
         {
-            //------------------------------------------------------------
-            //	Create instance using supplied parameter and specified settings
-            //------------------------------------------------------------
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
 
@@ -572,52 +487,26 @@ namespace Argotic.Syndication
         /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Use default settings if none specified by the caller
-            //------------------------------------------------------------
             if (settings == null)
             {
                 settings    = new SyndicationResourceLoadSettings();
             }
 
-            //------------------------------------------------------------
-            //	Validate syndication resource state
-            //------------------------------------------------------------
             if (this.LoadOperationInProgress)
             {
                 throw new InvalidOperationException();
             }
 
-            //------------------------------------------------------------
-            //	Indicate that a load operation is in progress
-            //------------------------------------------------------------
             this.LoadOperationInProgress    = true;
-
-            //------------------------------------------------------------
-            //	Reset the asynchronous load operation cancelled indicator
-            //------------------------------------------------------------
             this.AsyncLoadHasBeenCancelled  = false;
 
-            //------------------------------------------------------------
-            //	Build HTTP web request used to retrieve the syndication resource
-            //------------------------------------------------------------
+            
             asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
             asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            //------------------------------------------------------------
-            //	Get the async response to the web request
-            //------------------------------------------------------------
             object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-
-            //------------------------------------------------------------
-            //  Register the timeout callback
-            //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
 
@@ -631,36 +520,18 @@ namespace Argotic.Syndication
         /// </remarks>
         public void LoadAsyncCancel()
         {
-            //------------------------------------------------------------
-            //	Determine if load of syndication resource call in progress 
-            //  and the async operation has not already been cancelled
-            //------------------------------------------------------------
             if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
             {
-                //------------------------------------------------------------
-                //	Set async operation cancelled indicator
-                //------------------------------------------------------------
                 this.AsyncLoadHasBeenCancelled  = true;
-
-                //------------------------------------------------------------
-                //	Cancel the async load operation
-                //------------------------------------------------------------
                 asyncHttpWebRequest.Abort();
             }
         }
-
-        //============================================================
-        //	CALLBACK DELEGATE METHODS
-        //============================================================
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncLoadCallback(IAsyncResult result)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
             XPathNavigator navigator                    = null;
             WebRequest httpWebRequest                   = null;
@@ -668,15 +539,8 @@ namespace Argotic.Syndication
             Uri source                                  = null;
             WebRequestOptions options                   = null;
             SyndicationResourceLoadSettings settings    = null;
-
-            //------------------------------------------------------------
-            //	Determine if the async send operation completed
-            //------------------------------------------------------------
             if (result.IsCompleted)
             {
-                //------------------------------------------------------------
-                //	Extract the send operations parameters from the user state
-                //------------------------------------------------------------
                 object[] parameters = (object[])result.AsyncState;
                 httpWebRequest      = parameters[0] as WebRequest;
                 document            = parameters[1] as OpmlDocument;
@@ -684,20 +548,9 @@ namespace Argotic.Syndication
                 settings            = parameters[3] as SyndicationResourceLoadSettings;
                 options             = parameters[4] as WebRequestOptions;
                 object userToken    = parameters[5];
-
-                //------------------------------------------------------------
-                //	Verify expected parameters were found
-                //------------------------------------------------------------
                 if (document != null)
                 {
-                    //------------------------------------------------------------
-                    //	Get the response to the syndication resource request
-                    //------------------------------------------------------------
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-
-                    //------------------------------------------------------------
-                    //	Load syndication resource
-                    //------------------------------------------------------------
                     using (Stream stream = httpWebResponse.GetResponseStream())
                     {
                         if (settings != null)
@@ -722,24 +575,12 @@ namespace Argotic.Syndication
                                 {
                                     navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                                 }
-
-                                //------------------------------------------------------------
-                                //	Load syndication resource using the framework adapters
-                                //------------------------------------------------------------
                                 SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(document, SyndicationContentFormat.Opml);
-
-                                //------------------------------------------------------------
-                                //	Raise Loaded event to notify registered handlers of state change
-                                //------------------------------------------------------------
                                 document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
-
-                    //------------------------------------------------------------
-                    //	Reset load operation in progress indicator
-                    //------------------------------------------------------------
                     document.LoadOperationInProgress    = false;
                 }
             }
@@ -752,29 +593,15 @@ namespace Argotic.Syndication
         /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
         private void AsyncTimeoutCallback(object state, bool timedOut)
         {
-            //------------------------------------------------------------
-            //	Determine if asynchronous load operation timed out
-            //------------------------------------------------------------
             if (timedOut)
             {
-                //------------------------------------------------------------
-                //	Abort asynchronous load operation
-                //------------------------------------------------------------
                 if (asyncHttpWebRequest != null)
                 {
                     asyncHttpWebRequest.Abort();
                 }
             }
-
-            //------------------------------------------------------------
-            //	Reset load operation in progress indicator
-            //------------------------------------------------------------
             this.LoadOperationInProgress    = false;
         }
-
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -783,19 +610,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -817,14 +633,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
-
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -840,19 +649,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -861,10 +659,6 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-
-        //============================================================
-        //	UTILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="OpmlOutline"/> to the current instance's <see cref="Outlines"/> collection.
         /// </summary>
@@ -873,19 +667,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddOutline(OpmlOutline outline)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(outline, "outline");
-
-            //------------------------------------------------------------
-            //	Add outline to collection
-            //------------------------------------------------------------
             ((Collection<OpmlOutline>)this.Outlines).Add(outline);
             wasAdded    = true;
 
@@ -903,19 +686,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveOutline(OpmlOutline outline)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(outline, "outline");
-
-            //------------------------------------------------------------
-            //	Remove outline from collection
-            //------------------------------------------------------------
             if (((Collection<OpmlOutline>)this.Outlines).Contains(outline))
             {
                 ((Collection<OpmlOutline>)this.Outlines).Remove(outline);
@@ -925,9 +697,6 @@ namespace Argotic.Syndication
             return wasRemoved;
         }
 
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="OpmlDocument"/>.
         /// </summary>
@@ -978,9 +747,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Load(IXPathNavigable source)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using default settings
-            //------------------------------------------------------------
             this.Load(source, null);
         }
 
@@ -997,22 +763,11 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Use default settings if none specified by the caller
-            //------------------------------------------------------------
             if (settings == null)
             {
                 settings    = new SyndicationResourceLoadSettings();
             }
-
-            //------------------------------------------------------------
-            //	Load syndication resource using the framework adapters
-            //------------------------------------------------------------
             XPathNavigator navigator    = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
@@ -1037,9 +792,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Load(Stream stream)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using default settings
-            //------------------------------------------------------------
             this.Load(stream, null);
         }
 
@@ -1056,14 +808,7 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(Stream stream, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(stream, "stream");
-
-            //------------------------------------------------------------
-            //	Use stream to create a XPathNavigator to load from
-            //------------------------------------------------------------
             if (settings != null)
             {
                 this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
@@ -1094,9 +839,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Load(XmlReader reader)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using default settings
-            //------------------------------------------------------------
             this.Load(reader, null);
         }
 
@@ -1113,14 +855,7 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(reader, "reader");
-
-            //------------------------------------------------------------
-            //	Use reader to create a IXPathNavigable to load from
-            //------------------------------------------------------------
             this.Load(new XPathDocument(reader), settings);
         }
 
@@ -1168,9 +903,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using default settings
-            //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
 
@@ -1203,9 +935,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Load(Uri source, WebRequestOptions options)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using default settings
-            //------------------------------------------------------------
             this.Load(source, options, null);
         }
 
@@ -1253,9 +982,6 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Load syndication resource using specified settings
-            //------------------------------------------------------------
             this.Load(source, new WebRequestOptions(credentials, proxy));
         }
 
@@ -1288,27 +1014,13 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XPathNavigator navigator    = null;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Use default settings if none specified by the caller
-            //------------------------------------------------------------
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
             }
 
-            //------------------------------------------------------------
-            //	Initialize XPathNavigator for supplied Uri, credentials, and proxy
-            //------------------------------------------------------------
             if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
             {
                 navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
@@ -1317,10 +1029,6 @@ namespace Argotic.Syndication
             {
                 navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
             }
-
-            //------------------------------------------------------------
-            //	Load syndication resource using the framework adapters
-            //------------------------------------------------------------
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
 
@@ -1340,9 +1048,6 @@ namespace Argotic.Syndication
         /// </example>
         public void Save(Stream stream)
         {
-            //------------------------------------------------------------
-            //	Persist syndication resource using default settings
-            //------------------------------------------------------------
             this.Save(stream, null);
         }
 
@@ -1355,9 +1060,6 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(stream, "stream");
 
             if (settings == null)
@@ -1365,9 +1067,6 @@ namespace Argotic.Syndication
                 settings    = new SyndicationResourceSaveSettings();
             }
 
-            //------------------------------------------------------------
-            //	Create XmlWriter against supplied stream to save document
-            //------------------------------------------------------------
             XmlWriterSettings writerSettings    = new XmlWriterSettings();
             writerSettings.OmitXmlDeclaration   = false;
             writerSettings.Indent               = !settings.MinimizeOutputSize;
@@ -1395,14 +1094,7 @@ namespace Argotic.Syndication
         /// </example>
         public void Save(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Save feed using default settings
-            //------------------------------------------------------------
             this.Save(writer, new SyndicationResourceSaveSettings());
         }
 
@@ -1416,15 +1108,8 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNull(settings, "settings");
-
-            //------------------------------------------------------------
-            //	Save document
-            //------------------------------------------------------------
             writer.WriteStartElement("opml");
             writer.WriteAttributeString("version", this.Version.ToString());
 
@@ -1453,10 +1138,6 @@ namespace Argotic.Syndication
             {
                 this.Head.WriteTo(writer);
             }
-
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteStartElement("body");
@@ -1468,10 +1149,6 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
-
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1487,22 +1164,11 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
-
-            //------------------------------------------------------------
-            //	Load syndication resource using the framework adapters
-            //------------------------------------------------------------
             SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(this, SyndicationContentFormat.Opml);
-
-            //------------------------------------------------------------
-            //	Raise Loaded event to notify registered handlers of state change
-            //------------------------------------------------------------
             this.OnDocumentLoaded(eventData);
         }
     }

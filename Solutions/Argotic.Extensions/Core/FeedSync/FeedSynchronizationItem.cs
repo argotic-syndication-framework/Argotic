@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/04/2008	brian.kuhn	Created FeedSynchronizationItem Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -35,9 +28,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class FeedSynchronizationItem : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the globally unique identifier for the item.
         /// </summary>
@@ -62,18 +53,11 @@ namespace Argotic.Extensions.Core
         /// Private member to hold information about conflicting updates to the item.
         /// </summary>
         private Collection<XPathNavigator> synchronizationConflicts;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class.
         /// </summary>
         public FeedSynchronizationItem()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -86,9 +70,6 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
         public FeedSynchronizationItem(string id, int updates)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Id         = id;
             this.Updates    = updates;
         }
@@ -105,16 +86,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="history"/> is a null reference (Nothing in Visual Basic).</exception>
         public FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history) : this(id, updates)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(history, "history");
             this.Histories.Add(history);
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the conflicting updates for this item.
         /// </summary>
@@ -269,10 +243,6 @@ namespace Argotic.Extensions.Core
                 synchronizationUpdates = value;
             }
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified <see cref="Collection{FeedSynchronizationHistory}"/> collections.
         /// </summary>
@@ -294,14 +264,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -331,14 +294,7 @@ namespace Argotic.Extensions.Core
         /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
         public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
@@ -373,19 +329,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             FeedSynchronizationConflictPreservationDirective preservationDirective  = FeedSynchronizationConflictPreservationDirective.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
@@ -416,14 +361,7 @@ namespace Argotic.Extensions.Core
         /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
         public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
@@ -458,19 +396,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             FeedSynchronizationTombstoneStatus tombstoneStatus  = FeedSynchronizationTombstoneStatus.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
@@ -494,9 +421,6 @@ namespace Argotic.Extensions.Core
             return tombstoneStatus;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="FeedSynchronizationItem"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -508,25 +432,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Create namespace manager to resolve prefixed elements
-            //------------------------------------------------------------
             FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
             XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string idAttribute          = source.GetAttribute("id", String.Empty);
@@ -610,19 +519,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("sync", extension.XmlNamespace);
 
             writer.WriteAttributeString("id", this.Id);
@@ -656,9 +554,6 @@ namespace Argotic.Extensions.Core
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationItem"/>.
         /// </summary>
@@ -668,9 +563,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -692,9 +584,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -703,17 +592,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             FeedSynchronizationItem value  = obj as FeedSynchronizationItem;
 
             if (value != null)
@@ -740,9 +622,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is FeedSynchronizationItem))
             {
                 return false;
@@ -757,9 +636,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -773,9 +649,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(FeedSynchronizationItem first, FeedSynchronizationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -807,9 +680,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(FeedSynchronizationItem first, FeedSynchronizationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -830,9 +700,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(FeedSynchronizationItem first, FeedSynchronizationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/07/2008	brian.kuhn	Created YahooMediaCategory Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,9 +13,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class YahooMediaCategory : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold a URI that identifies the taxonomy scheme.
         /// </summary>
@@ -36,17 +27,11 @@ namespace Argotic.Extensions.Core
         /// </summary>
         private string categoryContent  = String.Empty;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class.
         /// </summary>
         public YahooMediaCategory()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -57,15 +42,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
         public YahooMediaCategory(string text)
         {
-            //------------------------------------------------------------
-            //	Initialize class state suing guarded properties
-            //------------------------------------------------------------
             this.Content    = text;
         }
 
-        //============================================================
-        //	STATIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the default categorization scheme for media objects.
         /// </summary>
@@ -78,9 +57,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the categorization taxonomy for this media object.
         /// </summary>
@@ -146,9 +122,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="YahooMediaCategory"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -160,19 +133,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasAttributes)
             {
                 string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
@@ -211,19 +173,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("category", extension.XmlNamespace);
 
             if (this.Scheme != null)
@@ -244,9 +195,6 @@ namespace Argotic.Extensions.Core
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCategory"/>.
         /// </summary>
@@ -256,9 +204,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -280,9 +225,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -291,17 +233,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             YahooMediaCategory value  = obj as YahooMediaCategory;
 
             if (value != null)
@@ -325,9 +260,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is YahooMediaCategory))
             {
                 return false;
@@ -342,9 +274,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -358,9 +287,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(YahooMediaCategory first, YahooMediaCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -392,9 +318,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(YahooMediaCategory first, YahooMediaCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -415,9 +338,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(YahooMediaCategory first, YahooMediaCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

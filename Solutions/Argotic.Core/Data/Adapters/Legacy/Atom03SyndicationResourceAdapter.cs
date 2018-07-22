@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/04/2007	brian.kuhn	Created Atom03SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,23 +14,16 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Atom03SyndicationResourceAdapter"/> serves as a bridge between an <see cref="AtomFeed"/> or <see cref="AtomEntry"/> and an XML data source. 
-    ///         The <see cref="Atom03SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(AtomFeed)"/> or <see cref="Fill(AtomEntry)"/>, which changes the data 
+    ///         The <see cref="Atom03SyndicationResourceAdapter"/> serves as a bridge between an <see cref="AtomFeed"/> or <see cref="AtomEntry"/> and an XML data source.
+    ///         The <see cref="Atom03SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(AtomFeed)"/> or <see cref="Fill(AtomEntry)"/>, which changes the data
     ///         in the <see cref="AtomFeed"/> or <see cref="AtomEntry"/> to match the data in the data source.
     ///     </para>
     ///     <para>
-    ///         This syndication resource adapter is designed to fill <see cref="AtomFeed"/> or <see cref="AtomEntry"/> objects using 
+    ///         This syndication resource adapter is designed to fill <see cref="AtomFeed"/> or <see cref="AtomEntry"/> objects using
     ///         a <see cref="XPathNavigator"/> that represents XML data that conforms to the Atom 0.3 specification.</para>
     /// </remarks>
     public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="Atom03SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -50,14 +36,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -66,19 +46,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
         protected static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlNamespaceManager manager = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(nameTable, "nameTable");
 
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(nameTable);
             manager.AddNamespace("atom", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
             manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
@@ -86,9 +57,6 @@ namespace Argotic.Data.Adapters
             return manager;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="AtomEntry"/> to match the data source.
         /// </summary>
@@ -96,19 +64,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(AtomEntry resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator entryNavigator   = this.Navigator.SelectSingleNode("atom:entry", manager);
 
             if (entryNavigator != null)
@@ -124,19 +83,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(AtomFeed resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = Atom03SyndicationResourceAdapter.CreateNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("atom:feed", manager);
 
             if (feedNavigator != null)
@@ -175,9 +125,6 @@ namespace Argotic.Data.Adapters
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Creates a <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -193,27 +140,15 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static AtomContent CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             AtomContent content     = new AtomContent();
             string modeAttribute    = String.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             AtomUtility.FillCommonObjectAttributes(content, source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string typeAttribute    = source.GetAttribute("type", String.Empty);
@@ -263,26 +198,14 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static AtomGenerator CreateGenerator(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             AtomGenerator generator = new AtomGenerator();
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             AtomUtility.FillCommonObjectAttributes(generator, source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasAttributes)
             {
                 string urlAttribute     = source.GetAttribute("url", String.Empty);
@@ -329,26 +252,14 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static AtomPersonConstruct CreatePerson(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             AtomPersonConstruct person  = new AtomPersonConstruct();
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             AtomUtility.FillCommonObjectAttributes(person, source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator nameNavigator    = source.SelectSingleNode("atom:name", manager);
             XPathNavigator urlNavigator     = source.SelectSingleNode("atom:url", manager);
             XPathNavigator emailNavigator   = source.SelectSingleNode("atom:email", manager);
@@ -393,26 +304,14 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static AtomTextConstruct CreateTextContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             AtomTextConstruct content   = new AtomTextConstruct();
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             AtomUtility.FillCommonObjectAttributes(content, source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string modeAttribute    = source.GetAttribute("mode", String.Empty);
@@ -476,17 +375,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             AtomUtility.FillCommonObjectAttributes(entry, source);
 
             XPathNavigator idNavigator          = source.SelectSingleNode("atom:id", manager);
@@ -536,17 +429,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillEntryCollections(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNodeIterator authorIterator        = source.Select("atom:author", manager);
             XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
             XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
@@ -598,17 +485,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator contentNavigator     = source.SelectSingleNode("atom:content", manager);
             XPathNavigator createdNavigator     = source.SelectSingleNode("atom:created", manager);
             XPathNavigator summaryNavigator     = source.SelectSingleNode("atom:summary", manager);
@@ -649,17 +530,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNodeIterator authorIterator        = source.Select("atom:author", manager);
             XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
             XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
@@ -731,17 +606,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator generatorNavigator   = source.SelectSingleNode("atom:generator", manager);
             XPathNavigator copyrightNavigator   = source.SelectSingleNode("atom:copyright", manager);
             XPathNavigator taglineNavigator     = source.SelectSingleNode("atom:tagline", manager);

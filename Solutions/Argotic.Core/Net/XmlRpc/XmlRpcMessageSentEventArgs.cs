@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/14/2008	brian.kuhn	Created XmlRpcMessageSentEventArgs Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Net;
 
 using Argotic.Common;
@@ -23,9 +16,6 @@ namespace Argotic.Net
     [Serializable()]
     public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -51,17 +41,11 @@ namespace Argotic.Net
         /// </summary>
         private Object eventUserToken;
 
-        //============================================================
-		//	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.
         /// </summary>
         public XmlRpcMessageSentEventArgs()
 		{
-			//------------------------------------------------------------
-			//	
-			//------------------------------------------------------------
 		}
 
         /// <summary>
@@ -78,16 +62,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, Object state)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            //------------------------------------------------------------
-            //	Initialize class members
-            //------------------------------------------------------------
             eventHost           = host;
             eventMessage        = message;
             eventResponse       = response;
@@ -108,16 +86,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, Object state)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            //------------------------------------------------------------
-            //	Initialize class members
-            //------------------------------------------------------------
             eventHost           = host;
             eventMessage        = message;
             eventResponse       = response;
@@ -125,9 +97,6 @@ namespace Argotic.Net
             eventUserToken      = state;
         }
 
-        //============================================================
-        //	STATIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Represents an syndication resource loaded event with no event data.
         /// </summary>
@@ -141,14 +110,11 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the authentication credentials utilized by the client when making the remote procedure call.
         /// </summary>
         /// <value>
-        ///     A <see cref="ICredentials"/> that represents the authentication credentials utilized by the client when making the remote procedure call. 
+        ///     A <see cref="ICredentials"/> that represents the authentication credentials utilized by the client when making the remote procedure call.
         ///     If no credentials were provided, returns <b>null</b>.
         /// </value>
         public ICredentials Credentials
@@ -191,7 +157,7 @@ namespace Argotic.Net
         /// Gets the web proxy utilized by the client to proxy the remote procedure call.
         /// </summary>
         /// <value>
-        ///     A <see cref="IWebProxy"/> that represents the web proxy utilized by the client to proxy the remote procedure call. 
+        ///     A <see cref="IWebProxy"/> that represents the web proxy utilized by the client to proxy the remote procedure call.
         ///     If no proxy was used, returns <b>null</b>.
         /// </value>
         public IWebProxy Proxy
@@ -230,9 +196,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.
         /// </summary>
@@ -242,9 +205,6 @@ namespace Argotic.Net
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             string host         = this.Host != null ? this.Host.ToString() : String.Empty;
             string message      = this.Message != null ? this.Message.ToString() : String.Empty;
             string response     = this.Response != null ? this.Response.ToString() : String.Empty;
@@ -255,9 +215,6 @@ namespace Argotic.Net
             return String.Format(null, "[XmlRpcMessageSentEventArgs(Host = \"{0}\", Message = \"{1}\", Response = \"{2}\", Credentials = \"{3}\", Proxy = \"{4}\", State = \"{5}\")]", host, message, response, credentials, proxy, state);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -266,17 +223,11 @@ namespace Argotic.Net
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             XmlRpcMessageSentEventArgs value  = obj as XmlRpcMessageSentEventArgs;
 
             if (value != null)
@@ -301,9 +252,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is XmlRpcMessageSentEventArgs))
             {
                 return false;
@@ -318,9 +266,6 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -334,9 +279,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -368,9 +310,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -391,9 +330,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

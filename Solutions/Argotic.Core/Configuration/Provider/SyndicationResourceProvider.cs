@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/22/2008	brian.kuhn	Created SyndicationResourceProvider Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Configuration.Provider;
 using System.Security.Permissions;
@@ -24,25 +17,22 @@ namespace Argotic.Configuration.Provider
     //[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     public abstract class SyndicationResourceProvider : ProviderBase
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the name of the application using the custom syndication resource provider.
         /// </summary>
         /// <value>The name of the application using the custom syndication resource provider.</value>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="ApplicationName"/> property value is stored in the data source with related 
+        ///         The <see cref="ApplicationName"/> property value is stored in the data source with related
         ///         syndication resource information to associate a resource with a particular application.
         ///     </para>
         ///     <para>
-        ///         Because syndication resource providers store resource information uniquely for each application, 
-        ///         multiple applications can use the same data source without running into a conflict if duplicate syndication resources are created. 
+        ///         Because syndication resource providers store resource information uniquely for each application,
+        ///         multiple applications can use the same data source without running into a conflict if duplicate syndication resources are created.
         ///         Alternatively, multiple applications can use the same syndication resource data source by specifying the same <see cref="ApplicationName"/>.
         ///     </para>
         ///     <para>
-        ///         In your syndication resource provider implementation, you will need to ensure that your data schema includes the <see cref="ApplicationName"/> 
+        ///         In your syndication resource provider implementation, you will need to ensure that your data schema includes the <see cref="ApplicationName"/>
         ///         and that data source queries and updates also include the <see cref="ApplicationName"/>.
         ///     </para>
         /// </remarks>
@@ -52,9 +42,6 @@ namespace Argotic.Configuration.Provider
             set;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Adds a new syndication resource to the data source.
         /// </summary>
@@ -88,7 +75,7 @@ namespace Argotic.Configuration.Provider
         /// <returns>A <see cref="Collection{T}"/> of all of the syndication resources contained in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property. 
+        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         /// </remarks>
@@ -101,22 +88,22 @@ namespace Argotic.Configuration.Provider
         /// <param name="pageSize">The size of the page of results to return.</param>
         /// <param name="totalRecords">The total number of matched resources.</param>
         /// <returns>
-        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects 
+        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects
         ///     with a size of <paramref name="pageSize"/>, beginning at the page specified by <paramref name="pageIndex"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property. 
+        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         ///     <para>
-        ///         The results returned by <see cref="GetResources(int, int, out int)"/> are constrained by the <paramref name="pageIndex"/> and <paramref name="pageSize"/> parameters. 
-        ///         The <paramref name="pageSize"/> parameter identifies the number of <see cref="ISyndicationResource"/> objects to return in the collection. 
-        ///         The <paramref name="pageIndex"/> parameter identifies which page of results to return, where 0 identifies the first page. 
+        ///         The results returned by <see cref="GetResources(int, int, out int)"/> are constrained by the <paramref name="pageIndex"/> and <paramref name="pageSize"/> parameters.
+        ///         The <paramref name="pageSize"/> parameter identifies the number of <see cref="ISyndicationResource"/> objects to return in the collection.
+        ///         The <paramref name="pageIndex"/> parameter identifies which page of results to return, where 0 identifies the first page.
         ///         The <paramref name="totalRecords"/> parameter is an out parameter that is set to the total number of syndication resources in the data source.
         ///     </para>
         ///     <para>
-        ///         For example, if there are 13 resources in the data source, and the <paramref name="pageIndex"/> value was 1 with a <paramref name="pageSize"/> of 5, 
+        ///         For example, if there are 13 resources in the data source, and the <paramref name="pageIndex"/> value was 1 with a <paramref name="pageSize"/> of 5,
         ///         then the <see cref="Collection{T}"/> would contain the sixth through the tenth resources returned. The <paramref name="totalRecords"/> parameter would be set to 13.
         ///     </para>
         /// </remarks>

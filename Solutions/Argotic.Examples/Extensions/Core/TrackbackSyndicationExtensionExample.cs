@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/20/2007	brian.kuhn	Created TrackbackSyndicationExtensionExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 
 using Argotic.Extensions.Core;
@@ -23,9 +16,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static class TrackbackSyndicationExtensionExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the TrackbackSyndicationExtension class.
         /// </summary>

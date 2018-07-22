@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created RssItemExample Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 using Argotic.Syndication;
@@ -22,9 +15,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public static class RssItemExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the RssItem class.
         /// </summary>

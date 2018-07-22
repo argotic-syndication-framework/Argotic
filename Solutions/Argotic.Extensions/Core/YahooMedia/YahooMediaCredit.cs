@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/07/2008	brian.kuhn	Created YahooMediaCredit Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -26,9 +19,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class YahooMediaCredit : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the role the entity played.
         /// </summary>
@@ -41,18 +32,11 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the name of the entity that contributed to the creation of the media object.
         /// </summary>
         private string creditEntityName = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaCredit"/> class.
         /// </summary>
         public YahooMediaCredit()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -63,15 +47,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is an empty string.</exception>
         public YahooMediaCredit(string entity)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Entity = entity;
         }
 
-        //============================================================
-        //	STATIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the European Broadcasting Union Roles scheme.
         /// </summary>
@@ -87,9 +65,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the name of the entity that contributed to this media object.
         /// </summary>
@@ -160,9 +135,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -174,19 +146,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasAttributes)
             {
                 string roleAttribute    = source.GetAttribute("role", String.Empty);
@@ -225,19 +186,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("credit", extension.XmlNamespace);
 
             if (!String.IsNullOrEmpty(this.Role))
@@ -258,9 +208,6 @@ namespace Argotic.Extensions.Core
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCredit"/>.
         /// </summary>
@@ -270,9 +217,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -294,9 +238,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -305,17 +246,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             YahooMediaCredit value  = obj as YahooMediaCredit;
 
             if (value != null)
@@ -339,9 +273,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is YahooMediaCredit))
             {
                 return false;
@@ -356,9 +287,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -372,9 +300,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(YahooMediaCredit first, YahooMediaCredit second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -406,9 +331,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(YahooMediaCredit first, YahooMediaCredit second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -429,9 +351,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(YahooMediaCredit first, YahooMediaCredit second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

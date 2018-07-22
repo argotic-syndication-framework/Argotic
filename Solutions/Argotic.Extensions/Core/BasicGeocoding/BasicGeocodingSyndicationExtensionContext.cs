@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created BasicGeocodingSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,9 +14,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class BasicGeocodingSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the latitude spatial coordinate.
         /// </summary>
@@ -32,23 +23,13 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the longitude spatial coordinate.
         /// </summary>
         private decimal extensionLongitude  = Decimal.MinValue;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
         /// </summary>
         public BasicGeocodingSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the geocoding latitude coordinate.
         /// </summary>
@@ -83,9 +64,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -96,20 +74,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             XPathNavigator latitudeNavigator    = source.SelectSingleNode("geo:lat", manager);
             XPathNavigator longitudeNavigator   = source.SelectSingleNode("geo:long", manager);
 
@@ -146,26 +113,12 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             NumberFormatInfo formatProvider = new NumberFormatInfo();
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
 
-            //------------------------------------------------------------
-            //	Restrict number of decimal digits to most significant digits
-            //------------------------------------------------------------
             formatProvider.NumberDecimalDigits      = 7;
             formatProvider.NumberDecimalSeparator   = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if (this.Latitude != Decimal.MinValue)
             {
                 writer.WriteElementString("lat", xmlNamespace, this.Latitude.ToString("N", formatProvider));

@@ -1,12 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-11/26/2007	brian.kuhn	Created SyndicationContentFormat Enumeration
-07/01/2008  brian.kuhn  Add Resource Description Framework (RDF) value.
-****************************************************************************/
-using System;
+﻿using System;
 
 namespace Argotic.Common
 {

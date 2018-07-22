@@ -1,13 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created ITunesSyndicationExtensionContext Class
-07/22/2008  brian.kuhn  Fixed issue 10626
-11/15/2009  Ilja Khaprov Fixed issue 13840
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
@@ -23,9 +14,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class ITunesSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the name of the artist of the podcast.
         /// </summary>
@@ -70,23 +59,13 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the full description of the podcast.
         /// </summary>
         private string extensionSummary                                     = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
         /// </summary>
         public ITunesSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the name of the artist of this podcast.
         /// </summary>
@@ -312,9 +291,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -325,20 +301,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if(this.LoadCommon(source, manager))
             {
                 wasLoaded   = true;
@@ -362,15 +327,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if (this.NewFeedUrl != null)
             {
                 writer.WriteElementString("new-feed-url", xmlNamespace, this.NewFeedUrl.ToString());
@@ -440,9 +398,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Initializes the common syndication extension information using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -453,20 +408,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator authorNavigator      = source.SelectSingleNode("itunes:author", manager);
@@ -561,20 +505,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator blockNavigator       = source.SelectSingleNode("itunes:block", manager);
@@ -643,14 +576,8 @@ namespace Argotic.Extensions.Core
         /// <remarks>Value can be formatted as an integer, HH:MM:SS, H:MM:SS, MM:SS, or M:SS.</remarks>
         private static TimeSpan ParseDuration(string value)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             TimeSpan timeSpan   = TimeSpan.MinValue;
 
-            //------------------------------------------------------------
-            //	Parse duration representation
-            //------------------------------------------------------------
             if (!value.Contains(":"))
             {
                 int totalSeconds;

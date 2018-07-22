@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created PheedSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -20,9 +13,6 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class PheedSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold a thumbnail sized version of the photograph.
         /// </summary>
@@ -31,18 +21,11 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a larger or original version of the photograph.
         /// </summary>
         private Uri extensionImageSource;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
         /// </summary>
         public PheedSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -54,16 +37,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is a null reference (Nothing in Visual Basic).</exception>
         public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Source     = source;
             this.Thumbnail  = thumbnail;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the original version of this photograph.
         /// </summary>
@@ -105,9 +82,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -118,20 +92,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator thumbnailNavigator   = source.SelectSingleNode("photo:thumbnail", manager);
@@ -171,15 +135,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : String.Empty);
             writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : String.Empty);
         }

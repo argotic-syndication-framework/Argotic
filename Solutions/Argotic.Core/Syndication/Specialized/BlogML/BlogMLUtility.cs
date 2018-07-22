@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/08/2008	brian.kuhn	Created BlogMLUtility Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,17 +13,11 @@ namespace Argotic.Syndication.Specialized
     /// <remarks>This utility class is not intended for use outside the Web Log Markup Language (BlogML) syndication entities within the framework.</remarks>
     internal static class BlogMLUtility
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the Web Log Markup Language (BlogML) 2.0 namespace identifier.
         /// </summary>
         private const string BLOGML_NAMESPACE  = "http://www.blogml.com/2006/09/BlogML";
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
         /// </summary>
@@ -42,10 +29,6 @@ namespace Argotic.Syndication.Specialized
                 return BLOGML_NAMESPACE;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
         /// </summary>
@@ -53,14 +36,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>The approval status identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
@@ -95,19 +71,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             BlogMLApprovalStatus approvalStatus = BlogMLApprovalStatus.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(value, "value");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
@@ -139,14 +104,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjects(IBlogMLCommonObject source, IBlogMLCommonObject target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Handle parameter null reference cases
-            //------------------------------------------------------------
             if (source == null && target == null)
             {
                 return 0;
@@ -159,10 +117,6 @@ namespace Argotic.Syndication.Specialized
             {
                 return -1;
             }
-            
-            //------------------------------------------------------------
-            //	Attempt to perform comparison
-            //------------------------------------------------------------
             result  = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
             result  = result | source.CreatedOn.CompareTo(target.CreatedOn);
             result  = result | String.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
@@ -192,19 +146,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlNamespaceManager manager = null;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(nameTable, "nameTable");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(nameTable);
             manager.AddNamespace("blog", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
@@ -221,25 +164,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
-
-            //------------------------------------------------------------
-            //	Attempt to extract xml:base attribute information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string idAttribute              = source.GetAttribute("id", String.Empty);
@@ -323,26 +251,11 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
-
-            //------------------------------------------------------------
-            //	Attempt to extract xml:base attribute information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string idAttribute              = source.GetAttribute("id", String.Empty);
@@ -423,15 +336,9 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public static void WriteCommonObjectAttributes(IBlogMLCommonObject source, XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write common entity information
-            //------------------------------------------------------------
             if (!String.IsNullOrEmpty(source.Id))
             {
                 writer.WriteAttributeString("id", source.Id);
@@ -462,15 +369,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public static void WriteCommonObjectElements(IBlogMLCommonObject source, XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write common entity information
-            //------------------------------------------------------------
             if (source.Title != null)
             {
                 source.Title.WriteTo(writer, "title");

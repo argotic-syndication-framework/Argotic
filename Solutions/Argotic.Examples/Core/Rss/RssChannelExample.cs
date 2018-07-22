@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created RssChannelExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 
 using Argotic.Common;
@@ -23,9 +16,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public static class RssChannelExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the RssChannel class.
         /// </summary>

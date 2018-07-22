@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created BlogMLPostExample Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 using Argotic.Syndication.Specialized;
@@ -21,9 +14,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class BlogMLPostExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the BlogMLPost class.
         /// </summary>
@@ -104,10 +94,6 @@ namespace Argotic.Examples
             comment.Content         = new BlogMLTextConstruct("This is a test comment.");
             post.Comments.Add(comment);
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method
         /// </summary>

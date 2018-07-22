@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/18/2008	brian.kuhn	Created SyndicationExtensionLoadedEventArgs Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -25,9 +18,7 @@ namespace Argotic.Extensions
     [Serializable()]
     public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -42,17 +33,11 @@ namespace Argotic.Extensions
         /// </summary>
         private ISyndicationExtension eventExtension;
 
-        //============================================================
-		//	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.
         /// </summary>
         public SyndicationExtensionLoadedEventArgs()
 		{
-			//------------------------------------------------------------
-			//	
-			//------------------------------------------------------------
 		}
 
         /// <summary>
@@ -62,9 +47,6 @@ namespace Argotic.Extensions
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationExtensionLoadedEventArgs(IXPathNavigable data) : this()
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(data, "data");
 
             eventNavigator  = data.CreateNavigator();
@@ -81,17 +63,10 @@ namespace Argotic.Extensions
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationExtensionLoadedEventArgs(IXPathNavigable data, ISyndicationExtension extension) : this(data)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
             eventExtension  = extension;
         }
-
-        //============================================================
-        //	STATIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Represents an syndication extension loaded event with no event data.
         /// </summary>
@@ -104,10 +79,6 @@ namespace Argotic.Extensions
                 return emptyEventArguments;
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
         /// </summary>
@@ -135,10 +106,6 @@ namespace Argotic.Extensions
                 return eventExtension;
             }
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.
         /// </summary>
@@ -148,9 +115,6 @@ namespace Argotic.Extensions
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             string name         = this.Extension != null ? this.Extension.Name : String.Empty;
             string prefix       = this.Extension != null ? this.Extension.XmlPrefix : String.Empty;
             string xmlNamespace = this.Extension != null ? this.Extension.XmlNamespace : String.Empty;
@@ -160,9 +124,6 @@ namespace Argotic.Extensions
             return String.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -171,17 +132,10 @@ namespace Argotic.Extensions
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             SyndicationExtensionLoadedEventArgs value  = obj as SyndicationExtensionLoadedEventArgs;
 
             if (value != null)
@@ -235,9 +189,6 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is SyndicationExtensionLoadedEventArgs))
             {
                 return false;
@@ -252,9 +203,6 @@ namespace Argotic.Extensions
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -268,9 +216,6 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -302,9 +247,6 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -325,9 +267,6 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

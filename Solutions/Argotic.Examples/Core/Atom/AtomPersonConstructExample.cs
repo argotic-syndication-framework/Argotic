@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created AtomPersonConstructExample Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 using Argotic.Syndication;
@@ -21,9 +14,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class AtomPersonConstructExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the AtomPersonConstruct class.
         /// </summary>

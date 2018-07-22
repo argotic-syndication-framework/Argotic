@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created GenericSyndicationFeedExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Net;
 
 using Argotic.Common;
@@ -22,9 +15,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class GenericSyndicationFeedExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the GenericSyndicationFeed class.
         /// </summary>
@@ -67,9 +57,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the GenericSyndicationFeed.Create(Uri) method
         /// </summary>
@@ -93,10 +80,6 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
         /// </summary>

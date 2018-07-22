@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created SyndicationExtensionAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
@@ -23,9 +16,6 @@ namespace Argotic.Extensions
 	/// </summary>
 	public class SyndicationExtensionAdapter
 	{
-		//============================================================
-		//	PUBLIC/PRIVATE/PROTECTED MEMBERS
-		//============================================================
 	    /// <summary>
 		/// Private member to hold the XPathNavigator used to load a syndication extension.
 		/// </summary>
@@ -35,9 +25,6 @@ namespace Argotic.Extensions
 		/// </summary>
 		private SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
 
-	    //============================================================
-		//	CONSTRUCTORS
-		//============================================================
 	    /// <summary>
 		/// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
 		/// </summary>
@@ -47,19 +34,12 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
 		public SyndicationExtensionAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
 		{
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(navigator, "navigator");
 			Guard.ArgumentNotNull(settings, "settings");
 
 			adapterNavigator    = navigator;
 			adapterSettings     = settings;
 		}
-
-	    //============================================================
-		//	STATIC PROPERTIES
-		//============================================================
 	    /// <summary>
 		/// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
 		/// </summary>
@@ -100,10 +80,6 @@ namespace Argotic.Extensions
 				return extensions;
 			}
 		}
-
-	    //============================================================
-		//	PUBLIC PROPERTIES
-		//============================================================
 	    /// <summary>
 		/// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
 		/// </summary>
@@ -127,10 +103,6 @@ namespace Argotic.Extensions
 				return adapterSettings;
 			}
 		}
-
-	    //============================================================
-		//	STATIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.
 		/// </summary>
@@ -145,15 +117,9 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static void FillExtensionTypes(IExtensibleSyndicationObject entity, Collection<Type> types)
 		{
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(entity, "entity");
 			Guard.ArgumentNotNull(types, "types");
 
-			//------------------------------------------------------------
-			//	Fill types collection using entity extensions
-			//------------------------------------------------------------
 			if (entity.HasExtensions)
 			{
 				foreach (ISyndicationExtension extension in entity.Extensions)
@@ -182,19 +148,9 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();
-
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(types, "types");
 
-			//------------------------------------------------------------
-			//	Activate instance for each valid type
-			//------------------------------------------------------------
 			foreach(Type type in types)
 			{
 				if (type != null)
@@ -226,20 +182,10 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			Collection<ISyndicationExtension> supportedExtensions   = new Collection<ISyndicationExtension>();
-
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(types, "types");
 			Guard.ArgumentNotNull(namespaces, "namespaces");
 
-			//------------------------------------------------------------
-			//	Add native framework extensions based on XML namespaces
-			//------------------------------------------------------------
 			Collection<ISyndicationExtension> nativeExtensions  = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
 			foreach (ISyndicationExtension extension in nativeExtensions)
@@ -253,9 +199,6 @@ namespace Argotic.Extensions
 				}
 			}
 
-			//------------------------------------------------------------
-			//	Add user defined extensions if not already in collection
-			//------------------------------------------------------------
 			Collection<ISyndicationExtension> userExtensions    = SyndicationExtensionAdapter.GetExtensions(types);
 			foreach (ISyndicationExtension extension in userExtensions)
 			{
@@ -277,15 +220,9 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static void WriteExtensionsTo(IEnumerable<ISyndicationExtension> extensions, XmlWriter writer)
 		{
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(extensions, "extensions");
 			Guard.ArgumentNotNull(writer, "writer");
 
-			//------------------------------------------------------------
-			//	Write each syndication extension to the supplied writer
-			//------------------------------------------------------------
 			foreach (ISyndicationExtension extension in extensions)
 			{
 				extension.WriteTo(writer);
@@ -301,16 +238,9 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static void WriteXmlNamespaceDeclarations(Collection<Type> types, XmlWriter writer)
 		{
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(types, "types");
 			Guard.ArgumentNotNull(writer, "writer");
 
-			//------------------------------------------------------------
-			//	Write each syndication extension prefixed XML namespace 
-			//  to the supplied writer
-			//------------------------------------------------------------
 			foreach (Type type in types)
 			{
 				if (type != null)
@@ -323,10 +253,6 @@ namespace Argotic.Extensions
 				}
 			}
 		}
-
-	    //============================================================
-		//	PUBLIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
 		/// </summary>
@@ -338,19 +264,9 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference (Nothing in Visual Basic).</exception>
 		public void Fill(IExtensibleSyndicationObject entity)
 		{
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(entity, "entity");
-
-			//------------------------------------------------------------
-			//	Create namespace resolver
-			//------------------------------------------------------------
 			XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-			//------------------------------------------------------------
-			//	Fill syndication extensions
-			//------------------------------------------------------------
 			this.Fill(entity, manager);
 		}
 
@@ -363,20 +279,10 @@ namespace Argotic.Extensions
 		/// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
 		public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();
-
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(entity, "entity");
 			Guard.ArgumentNotNull(manager, "manager");
 
-			//------------------------------------------------------------
-			//	Get syndication extensions supported by the load operation
-			//------------------------------------------------------------
 			if (this.Settings.AutoDetectExtensions)
 			{
 				extensions  = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, (Dictionary<string, string>)this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
@@ -386,9 +292,6 @@ namespace Argotic.Extensions
 				extensions  = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
 			}
 
-			//------------------------------------------------------------
-			//	Add syndication extensions to entity if they exist in source
-			//------------------------------------------------------------
 			foreach (ISyndicationExtension extension in extensions)
 			{
 				if (extension.ExistsInSource(this.Navigator) && extension.GetType() != entity.GetType())

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/10/2007	brian.kuhn	Created SyndicationResourceMetadata Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.XPath;
@@ -18,9 +11,6 @@ namespace Argotic.Common
     [Serializable()]
     public class SyndicationResourceMetadata : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the syndication content format that the syndication resource conforms to.
         /// </summary>
@@ -39,9 +29,6 @@ namespace Argotic.Common
         [NonSerialized()]
         private XPathNavigator resourceRootNode;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -49,25 +36,16 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceMetadata(XPathNavigator navigator)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
 
-            //------------------------------------------------------------
-            //	Extract syndication resource meta-data from navigator
-            //------------------------------------------------------------
             this.Load(navigator);
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
         /// </summary>
         /// <value>
-        ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to. 
+        ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to.
         ///     If the syndication content format is unable to be determined, returns <see cref="SyndicationContentFormat.None"/>.
         /// </value>
         public SyndicationContentFormat Format
@@ -119,9 +97,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Returns a <see cref="Version"/> object for the value of the XML attribute in <paramref name="navigator"/> with a local name specified by <paramref name="name"/>.
         /// </summary>
@@ -133,25 +108,13 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         protected static Version GetVersionFromAttribute(XPathNavigator navigator, string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Version version = null;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            //------------------------------------------------------------
-            //	Extract the version information
-            //------------------------------------------------------------
             string value    = navigator.GetAttribute(name, String.Empty);
 
-            //------------------------------------------------------------
-            //	Extract version for specified attribute
-            //------------------------------------------------------------
             if (!String.IsNullOrEmpty(value))
             {
                 try
@@ -175,7 +138,7 @@ namespace Argotic.Common
                     return null;
                 }
             }
-            
+
             return version;
         }
 
@@ -191,32 +154,17 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("APML", manager)) != null || (navigator = resource.SelectSingleNode("apml:APML", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -244,33 +192,18 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
             manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("feed", manager)) != null || (navigator = resource.SelectSingleNode("atom:feed", manager)) != null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of feed
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -293,9 +226,6 @@ namespace Argotic.Common
             }
             else if ((navigator = resource.SelectSingleNode("entry", manager)) != null || (navigator = resource.SelectSingleNode("atom:entry", manager)) != null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of entry
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -331,34 +261,19 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
             manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
             manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("categories", manager)) != null || (navigator = resource.SelectSingleNode("app:categories", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of entry
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -386,34 +301,19 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
             manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
             manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("service", manager)) != null || (navigator = resource.SelectSingleNode("app:service", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of entry
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -441,32 +341,17 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("blog", manager)) != null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -494,32 +379,17 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("generator", manager)) != null || (navigator = resource.SelectSingleNode("micro:generator", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -547,25 +417,13 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("NewsML")) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version of resource
-                //------------------------------------------------------------
                 version     = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
                 resourceConformsToFormat    = true;
@@ -589,32 +447,17 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) != null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -643,25 +486,13 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("opml")) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version of resource
-                //------------------------------------------------------------
                 version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
                 resourceConformsToFormat    = true;
@@ -686,32 +517,17 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("rsd", manager)) != null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -745,33 +561,19 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
-             //	Local members
-            //------------------------------------------------------------
             bool resourceConformsToFormat   = false;
             XmlNamespaceManager manager     = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Initialize namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(resource.NameTable);
             manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
             manager.AddNamespace("rss09", "http://my.netscape.com/rdf/simple/0.9/");
             manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
 
-            //------------------------------------------------------------
-            //	Determine if resource conforms to syndication format
-            //------------------------------------------------------------
             version = null;
             if ((navigator = resource.SelectSingleNode("rss", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -783,9 +585,6 @@ namespace Argotic.Common
             }
             else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) != null)
             {
-                //------------------------------------------------------------
-                //	Extract version and namespaces of resource
-                //------------------------------------------------------------
                 version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -804,9 +603,6 @@ namespace Argotic.Common
             return resourceConformsToFormat;
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -814,36 +610,19 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         private void Load(XPathNavigator resource)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XPathNavigator navigator    = null;
             Version version             = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Get XML namespaces declared on syndication resource
-            //------------------------------------------------------------
             Dictionary<string, string> namespaces   = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
             foreach (string prefix in namespaces.Keys)
             {
                 resourceNamespaces.Add(prefix, namespaces[prefix]);
             }
 
-            //------------------------------------------------------------
-            //	Get syndication resource format version using 
-            //  version XML attribute
-            //------------------------------------------------------------
             resourceVersion     = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
 
-            //------------------------------------------------------------
-            //	Determine content format based on root element qualified name
-            //  and expected XML namespace(s)
-            //------------------------------------------------------------
             if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
             {
                 resourceFormat      = SyndicationContentFormat.Apml;
@@ -918,9 +697,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
         /// </summary>
@@ -930,9 +706,6 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             string format       = this.Format.ToString();
             string version      = this.Version != null ? this.Version.ToString() : String.Empty;
             string namespaces   = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
@@ -941,9 +714,6 @@ namespace Argotic.Common
             return String.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -952,17 +722,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             SyndicationResourceMetadata value  = obj as SyndicationResourceMetadata;
 
             if (value != null)
@@ -1019,9 +783,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is SyndicationResourceMetadata))
             {
                 return false;
@@ -1036,9 +797,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -1052,9 +810,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -1086,9 +841,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -1109,9 +861,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

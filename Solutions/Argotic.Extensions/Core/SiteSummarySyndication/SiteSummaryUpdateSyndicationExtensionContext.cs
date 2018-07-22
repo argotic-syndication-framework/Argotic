@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created SiteSummaryUpdateSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,9 +13,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class SiteSummaryUpdateSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the period over which the feed format is updated.
         /// </summary>
@@ -36,22 +27,13 @@ namespace Argotic.Extensions.Core
         /// </summary>
         private DateTime extensionUpdateBase                    = DateTime.MinValue;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
         /// </summary>
         public SiteSummaryUpdateSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base date to be used in concert with period and frequency to calculate the publishing schedule.
         /// </summary>
@@ -114,9 +96,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -127,20 +106,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator updatePeriodNavigator    = source.SelectSingleNode("sy:updatePeriod", manager);
@@ -191,15 +159,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if(this.Period != SiteSummaryUpdatePeriod.None)
             {
                 writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));

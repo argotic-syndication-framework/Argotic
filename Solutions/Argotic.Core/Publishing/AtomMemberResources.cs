@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-07/09/2008	brian.kuhn	Created AtomMemberResources class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -30,12 +23,12 @@ namespace Argotic.Publishing
     ///         The <see cref="AtomMemberResources"/> describes a <see cref="AtomFeed"/>. The <see cref="AtomMemberResources"/> <b>must</b> specify a <see cref="Title"/> and <see cref="AtomMemberResources.Uri"/>.
     ///     </para>
     ///     <para>
-    ///         The <see cref="AtomMemberResources"/> <i>may</i> contain any number of <see cref="AtomAcceptedMediaRange">accept</see> entities, 
-    ///         indicating the types of representations accepted by the <see cref="AtomMemberResources">collection</see>. The order of such elements is <u>not</u> significant. 
+    ///         The <see cref="AtomMemberResources"/> <i>may</i> contain any number of <see cref="AtomAcceptedMediaRange">accept</see> entities,
+    ///         indicating the types of representations accepted by the <see cref="AtomMemberResources">collection</see>. The order of such elements is <u>not</u> significant.
     ///         Additionally, the <see cref="AtomMemberResources">collection</see> <i>may</i> contain any number of <see cref="AtomCategoryDocument">categories</see>.
     ///     </para>
     ///     <para>
-    ///         The <see cref="AtomMemberResources"/> <i>may</i> appear as a child of an <see cref="AtomFeed"/> or <see cref="AtomSource"/> element in an <see cref="AtomFeed"/> document. 
+    ///         The <see cref="AtomMemberResources"/> <i>may</i> appear as a child of an <see cref="AtomFeed"/> or <see cref="AtomSource"/> element in an <see cref="AtomFeed"/> document.
     ///         Its content identifies a collection by which new entries can be added to appear in the feed.
     ///     </para>
     /// </remarks>
@@ -44,9 +37,6 @@ namespace Argotic.Publishing
     [Serializable()]
     public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -72,22 +62,16 @@ namespace Argotic.Publishing
         /// </summary>
         private Collection<AtomCategoryDocument> collectionCategories;
         /// <summary>
-        /// Private member to hold 
+        /// Private member to hold
         /// </summary>
         private Collection<AtomAcceptedMediaRange> collectionAcceptedMediaRanges;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomMemberResources"/> class.
         /// </summary>
         public AtomMemberResources()
             : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -99,23 +83,17 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomMemberResources(Uri href, AtomTextConstruct title) : this()
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded property
-            //------------------------------------------------------------
             this.Uri    = href;
             this.Title  = title;
         }
 
-        //============================================================
-        //	COMMON PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
         /// <remarks>
         ///     <para>
-        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>, 
+        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
         public Uri BaseUri
@@ -153,9 +131,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -194,9 +169,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -205,19 +177,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -232,21 +195,15 @@ namespace Argotic.Publishing
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
 
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -262,19 +219,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -284,23 +232,20 @@ namespace Argotic.Publishing
             return wasRemoved;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a list of media ranges that are accepted by this collection.
         /// </summary>
         /// <value>A <see cref="Collection{AtomAcceptedMediaRange}"/> of <see cref="AtomAcceptedMediaRange"/> objects that represent a list of media ranges that this collection will accept from clients.</value>
         /// <remarks>
         ///     <para>
-        ///         A value of <b>application/atom+xml;type=entry</b> <i>may</i> appear in any <see cref="AtomAcceptedMediaRange">accept</see> list of media ranges 
-        ///         and indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to the <see cref="AtomMemberResources"/>. 
-        ///         If no <see cref="AtomAcceptedMediaRange"/> is present, clients <i>should</i> treat this as equivalent to an <see cref="AtomAcceptedMediaRange"/> with the content <b>application/atom+xml;type=entry</b>. 
-        ///         The <see cref="AtomAcceptedMediaRange"/> class exposes a static string property named <see cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/> that can be used to assign the 
+        ///         A value of <b>application/atom+xml;type=entry</b> <i>may</i> appear in any <see cref="AtomAcceptedMediaRange">accept</see> list of media ranges
+        ///         and indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to the <see cref="AtomMemberResources"/>.
+        ///         If no <see cref="AtomAcceptedMediaRange"/> is present, clients <i>should</i> treat this as equivalent to an <see cref="AtomAcceptedMediaRange"/> with the content <b>application/atom+xml;type=entry</b>.
+        ///         The <see cref="AtomAcceptedMediaRange"/> class exposes a static string property named <see cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/> that can be used to assign the
         ///         <b>application/atom+xml;type=entry</b> media range value.
         ///     </para>
         ///     <para>
-        ///         If one <see cref="AtomAcceptedMediaRange"/> exists and is empty, clients <i>should</i> assume 
+        ///         If one <see cref="AtomAcceptedMediaRange"/> exists and is empty, clients <i>should</i> assume
         ///         that the <see cref="AtomMemberResources"/> <b>does not</b> support the creation of new <see cref="AtomFeed.Entries"/>.
         ///     </para>
         /// </remarks>
@@ -321,8 +266,8 @@ namespace Argotic.Publishing
         /// </summary>
         /// <value>A <see cref="Collection{AtomCategoryDocument}"/> of <see cref="AtomCategoryDocument"/> objects that represent a list of categories that can be applied to members of this collection.</value>
         /// <remarks>
-        ///     The server <i>may</i> reject attempts to create or store members whose categories are not present in its categories list. 
-        ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject otherwise acceptable members whose categories are not in its categories list. 
+        ///     The server <i>may</i> reject attempts to create or store members whose categories are not present in its categories list.
+        ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject otherwise acceptable members whose categories are not in its categories list.
         ///     The absence of <see cref="Categories"/> means that the category handling of the <see cref="AtomMemberResources"/> is unspecified.
         ///     A <see cref="AtomCategoryDocument.IsFixed">fixed</see> category list that contains zero categories indicates the <see cref="AtomMemberResources"/> does not accept category data.
         /// </remarks>
@@ -342,7 +287,7 @@ namespace Argotic.Publishing
         /// Gets or sets information that conveys a human-readable title for this collection.
         /// </summary>
         /// <value>
-        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this collection. 
+        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this collection.
         ///     The default value is an empty <see cref="AtomTextConstruct"/>.
         /// </value>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -383,9 +328,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified <see cref="Collection{AtomAcceptedMediaRange}"/> collections.
         /// </summary>
@@ -407,14 +349,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -444,7 +380,7 @@ namespace Argotic.Publishing
         /// <returns>A <see cref="AtomLink"/> object that can be used to retrieve, update, and delete the Resource represented by an editable <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit</b>. The value of <i>edit</i> specifies 
+        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit</b>. The value of <i>edit</i> specifies
         ///         that the value of the <paramref name="href"/> attribute is the IRI of an editable <see cref="AtomEntry"/>.
         ///     </para>
         ///     <para>An <see cref="AtomEntry"/> <b>must not</b> contain more than one <i>edit</i> link relation.</para>
@@ -452,9 +388,6 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
         public static AtomLink CreateEditLink(Uri href)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(href, "href");
 
             return new AtomLink(href, "edit");
@@ -467,26 +400,23 @@ namespace Argotic.Publishing
         /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies 
+        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
         ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
         ///     </para>
         ///     <para>
-        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations. 
-        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i> 
-        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values. 
-        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource. 
-        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client 
-        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations 
-        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the 
+        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
+        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
+        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
+        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
+        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations
+        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
         public static AtomLink CreateEditMediaLink(Uri href)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(href, "href");
 
             return new AtomLink(href, "edit-media");
@@ -500,17 +430,17 @@ namespace Argotic.Publishing
         /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies 
+        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
         ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
         ///     </para>
         ///     <para>
-        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations. 
-        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i> 
-        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values. 
-        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource. 
-        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client 
-        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations 
-        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the 
+        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
+        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
+        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
+        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
+        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations
+        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
@@ -531,17 +461,17 @@ namespace Argotic.Publishing
         /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies 
+        ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
         ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
         ///     </para>
         ///     <para>
-        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations. 
-        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i> 
-        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values. 
-        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource. 
-        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client 
-        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations 
-        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the 
+        ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
+        ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+        ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
+        ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
+        ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
+        ///         preferences for <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/>. If a client encounters multiple <i>edit-media</i> link relations
+        ///         in an <see cref="AtomEntry"/> and has no preference based on the <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> then the
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
@@ -555,7 +485,7 @@ namespace Argotic.Publishing
         }
 
         /// <summary>
-        /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
+        /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/>
         /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
@@ -563,14 +493,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool MatchByType(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Determine if search condition was met 
-            //------------------------------------------------------------
             if (extension.GetType() == typeof(AtomMemberResources))
             {
                 return true;
@@ -585,22 +509,22 @@ namespace Argotic.Publishing
         /// Encodes a sequence of characters that may be safely used as the value of a Slug HTTP entity-header.
         /// </summary>
         /// <param name="characterSequence">
-        ///     A sequence of characters that constitutes a request by a client to use the <paramref name="characterSequence"/> as part of any <see cref="Uri"/> 
+        ///     A sequence of characters that constitutes a request by a client to use the <paramref name="characterSequence"/> as part of any <see cref="Uri"/>
         ///     that would normally be used to retrieve the web resource.
         /// </param>
         /// <returns>The percent-encoded value of the UTF-8 encoding of the <paramref name="characterSequence"/> to be included in a <see cref="Uri"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         <i>Slug</i> is an HTTP entity-header whose presence in a POST to a <see cref="AtomMemberResources"/> constitutes a request by the client 
+        ///         <i>Slug</i> is an HTTP entity-header whose presence in a POST to a <see cref="AtomMemberResources"/> constitutes a request by the client
         ///         to use the header's value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.
         ///     </para>
         ///     <para>
-        ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance, 
-        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating 
+        ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
+        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
         ///         the <see cref="AtomId"/>, or as the <see cref="AtomEntry.Title">title</see> of a Media Link Entry.
         ///     </para>
         ///     <para>
-        ///         Servers <i>may</i> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it. 
+        ///         Servers <i>may</i> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it.
         ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
         ///     </para>
         /// </remarks>
@@ -608,9 +532,6 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is an empty string.</exception>
         public static string SlugEncode(string characterSequence)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(characterSequence, "characterSequence");
 
             return System.Web.HttpUtility.UrlEncode(characterSequence, System.Text.Encoding.UTF8).Replace("+", " ");
@@ -623,16 +544,16 @@ namespace Argotic.Publishing
         /// <returns></returns>
         /// <remarks>
         ///     <para>
-        ///         <i>Slug</i> is an HTTP entity-header whose presence in a POST to a <see cref="AtomMemberResources"/> constitutes a request by the client 
+        ///         <i>Slug</i> is an HTTP entity-header whose presence in a POST to a <see cref="AtomMemberResources"/> constitutes a request by the client
         ///         to use the header's value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.
         ///     </para>
         ///     <para>
-        ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance, 
-        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating 
+        ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
+        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
         ///         the <see cref="AtomId"/>, or as the <see cref="AtomEntry.Title">title</see> of a Media Link Entry.
         ///     </para>
         ///     <para>
-        ///         Servers <i>may</i> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it. 
+        ///         Servers <i>may</i> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it.
         ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
         ///     </para>
         /// </remarks>
@@ -640,17 +561,11 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is an empty string.</exception>
         public static string SlugDecode(string slug)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(slug, "slug");
 
             return System.Web.HttpUtility.UrlDecode(slug, System.Text.Encoding.UTF8);
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -662,37 +577,19 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(IXPathNavigable source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Create navigator against source
-            //------------------------------------------------------------
             XPathNavigator navigator    = source.CreateNavigator();
 
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             if (AtomUtility.FillCommonObjectAttributes(this, navigator))
             {
                 wasLoaded = true;
             }
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if (navigator.HasAttributes)
             {
                 string hrefAttribute    = navigator.GetAttribute("href", String.Empty);
@@ -763,25 +660,13 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             wasLoaded   = this.Load(source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -796,14 +681,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(XmlReader reader)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(reader, "reader");
 
-            //------------------------------------------------------------
-            //	Pass to load method with no explicit settings
-            //------------------------------------------------------------
             return this.Load(reader, null);
         }
 
@@ -816,14 +695,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(reader, "reader");
 
-            //------------------------------------------------------------
-            //	Create navigator against reader and pass to load method
-            //------------------------------------------------------------
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
@@ -840,14 +713,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public override void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("collection", AtomUtility.AtomPublishingNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -871,17 +738,11 @@ namespace Argotic.Publishing
                 category.Save(writer);
             }
 
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="AtomMemberResources"/>.
         /// </summary>
@@ -891,9 +752,6 @@ namespace Argotic.Publishing
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -923,17 +781,11 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             AtomMemberResources value  = obj as AtomMemberResources;
 
             if (value != null)
@@ -958,9 +810,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is AtomMemberResources))
             {
                 return false;
@@ -975,9 +824,6 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -991,9 +837,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(AtomMemberResources first, AtomMemberResources second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -1025,9 +868,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(AtomMemberResources first, AtomMemberResources second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -1048,9 +888,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(AtomMemberResources first, AtomMemberResources second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

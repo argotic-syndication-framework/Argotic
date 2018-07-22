@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created ISyndicationExtension Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -17,9 +10,6 @@ namespace Argotic.Extensions
     /// <seealso cref="SyndicationExtension"/>
     public interface ISyndicationExtension
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a human-readable description of the syndication extension.
         /// </summary>
@@ -73,10 +63,6 @@ namespace Argotic.Extensions
         {
             get;
         }
-
-        //============================================================
-        //	PUBLIC EVENTS
-        //============================================================
         /// <summary>
         /// Occurs when the syndication extension state has been changed by a load operation.
         /// </summary>
@@ -84,9 +70,6 @@ namespace Argotic.Extensions
         /// <seealso cref="ISyndicationExtension.Load(XmlReader)"/>
         event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
 
-        //============================================================
-        //	UTILITY METHODS
-        //============================================================
         /// <summary>
         /// Determines if the <see cref="ISyndicationExtension"/> exists in the XML data in the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -108,9 +91,6 @@ namespace Argotic.Extensions
         /// </remarks>
         bool ExistsInSource(XPathNavigator source);
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces utilized by this <see cref="SyndicationExtension"/>.
         /// </summary>

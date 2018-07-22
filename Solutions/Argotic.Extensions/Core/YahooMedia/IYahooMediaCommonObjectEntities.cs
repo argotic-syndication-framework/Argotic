@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/09/2007	brian.kuhn	Created IYahooMediaCommonObjectEntities Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 
 namespace Argotic.Extensions.Core
@@ -31,9 +24,6 @@ namespace Argotic.Extensions.Core
     /// <seealso cref="YahooMediaSyndicationExtensionContext"/>
     interface IYahooMediaCommonObjectEntities
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for the media object.
         /// </summary>

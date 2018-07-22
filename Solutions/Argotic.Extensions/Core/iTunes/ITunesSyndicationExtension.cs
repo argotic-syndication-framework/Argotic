@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created ITunesSyndicationExtension Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -35,31 +28,17 @@ namespace Argotic.Extensions.Core
 	[Serializable()]
 	public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 	{
-		//============================================================
-		//	PUBLIC/PRIVATE/PROTECTED MEMBERS
-		//============================================================
 	    /// <summary>
 		/// Private member to hold specific information about the extension.
 		/// </summary>
 		private ITunesSyndicationExtensionContext extensionContext  = new ITunesSyndicationExtensionContext();
-
-	    //============================================================
-		//	CONSTRUCTORS
-		//============================================================
 	    /// <summary>
 		/// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
 		/// </summary>
 		public ITunesSyndicationExtension()
 			: base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
 		{
-			//------------------------------------------------------------
-			//	Initialization handled by base class
-			//------------------------------------------------------------
 		}
-
-	    //============================================================
-		//	PUBLIC PROPERTIES
-		//============================================================
 	    /// <summary>
 		/// Gets or sets the <see cref="ITunesSyndicationExtensionContext"/> object associated with this extension.
 		/// </summary>
@@ -83,10 +62,6 @@ namespace Argotic.Extensions.Core
 				extensionContext = value;
 			}
 		}
-
-	    //============================================================
-		//	STATIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Compares two specified <see cref="Collection{ITunesCategory}"/> collections.
 		/// </summary>
@@ -108,14 +83,7 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static int CompareSequence(Collection<ITunesCategory> source, Collection<ITunesCategory> target)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			int result  = 0;
-
-			//------------------------------------------------------------
-			//	Validate parameters
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(source, "source");
 			Guard.ArgumentNotNull(target, "target");
 
@@ -145,14 +113,7 @@ namespace Argotic.Extensions.Core
 		/// <returns>The explicit material identifier for the supplied <paramref name="material"/>, otherwise returns an empty string.</returns>
 		public static string ExplicitMaterialAsString(ITunesExplicitMaterial material)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			string name = String.Empty;
-
-			//------------------------------------------------------------
-			//	Return alternate value based on supplied protocol
-			//------------------------------------------------------------
 			foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
 			{
 				if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
@@ -187,19 +148,8 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
 		public static ITunesExplicitMaterial ExplicitMaterialByName(string name)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			ITunesExplicitMaterial explicitMaterial = ITunesExplicitMaterial.None;
-
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-			//------------------------------------------------------------
-			//	Determine syndication content format based on supplied name
-			//------------------------------------------------------------
 			foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
 			{
 				if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
@@ -232,14 +182,7 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static bool MatchByType(ISyndicationExtension extension)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(extension, "extension");
-
-			//------------------------------------------------------------
-			//	Determine if search condition was met 
-			//------------------------------------------------------------
 			if (extension.GetType() == typeof(ITunesSyndicationExtension))
 			{
 				return true;
@@ -249,10 +192,6 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
-
-	    //============================================================
-		//	PUBLIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
@@ -261,25 +200,10 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(IXPathNavigable source)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			bool wasLoaded  = false;
-
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(source, "source");
-
-			//------------------------------------------------------------
-			//	Attempt to extract syndication extension information
-			//------------------------------------------------------------
 			XPathNavigator navigator    = source.CreateNavigator();
 			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-
-			//------------------------------------------------------------
-			//	Raise extension loaded event
-			//------------------------------------------------------------
 			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
 			this.OnExtensionLoaded(args);
 
@@ -294,14 +218,7 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(XmlReader reader)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(reader, "reader");
-
-			//------------------------------------------------------------
-			//	Create navigator against reader and pass to load method
-			//------------------------------------------------------------
 			XPathDocument document  = new XPathDocument(reader);
 
 			return this.Load(document.CreateNavigator());
@@ -314,20 +231,9 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override void WriteTo(XmlWriter writer)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(writer, "writer");
-
-			//------------------------------------------------------------
-			//	Write current extension details to the writer
-			//------------------------------------------------------------
 			this.Context.WriteTo(writer, this.XmlNamespace);
 		}
-
-	    //============================================================
-		//	PUBLIC OVERRIDES
-		//============================================================
 	    /// <summary>
 		/// Returns a <see cref="String"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
 		/// </summary>
@@ -337,9 +243,6 @@ namespace Argotic.Extensions.Core
 		/// </remarks>
 		public override string ToString()
 		{
-			//------------------------------------------------------------
-			//	Build the string representation
-			//------------------------------------------------------------
 			using(MemoryStream stream = new MemoryStream())
 			{
 				XmlWriterSettings settings  = new XmlWriterSettings();
@@ -360,10 +263,6 @@ namespace Argotic.Extensions.Core
 				}
 			}
 		}
-
-	    //============================================================
-		//	ICOMPARABLE IMPLEMENTATION
-		//============================================================
 	    /// <summary>
 		/// Compares the current instance with another object of the same type.
 		/// </summary>
@@ -372,17 +271,10 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
 		public int CompareTo(object obj)
 		{
-			//------------------------------------------------------------
-			//	If target is a null reference, instance is greater
-			//------------------------------------------------------------
 			if (obj == null)
 			{
 				return 1;
 			}
-
-			//------------------------------------------------------------
-			//	Determine comparison result using property state of objects
-			//------------------------------------------------------------
 			ITunesSyndicationExtension value  = obj as ITunesSyndicationExtension;
 
 			if (value != null)
@@ -414,9 +306,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
 		public override bool Equals(Object obj)
 		{
-			//------------------------------------------------------------
-			//	Determine equality via type then by comparision
-			//------------------------------------------------------------
 			if (!(obj is ITunesSyndicationExtension))
 			{
 				return false;
@@ -431,9 +320,6 @@ namespace Argotic.Extensions.Core
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			//------------------------------------------------------------
-			//	Generate has code using unique value of ToString() method
-			//------------------------------------------------------------
 			return this.ToString().GetHashCode();
 		}
 
@@ -445,9 +331,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
 		public static bool operator ==(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return true;
@@ -479,9 +362,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
 		public static bool operator <(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return false;
@@ -502,9 +382,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
 		public static bool operator >(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return false;

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/05/2007	brian.kuhn	Created DiscoverableSyndicationEndpoint Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml.XPath;
 
 namespace Argotic.Common
@@ -16,9 +9,6 @@ namespace Argotic.Common
     [Serializable()]
     public class DiscoverableSyndicationEndpoint : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the content MIME type of the syndication endpoint.
         /// </summary>
@@ -32,17 +22,11 @@ namespace Argotic.Common
         /// </summary>
         private Uri endpointSource;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class.
         /// </summary>
         public DiscoverableSyndicationEndpoint()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -55,9 +39,6 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType)
         {
-            //------------------------------------------------------------
-            //	Validation handled by property setters
-            //------------------------------------------------------------
             this.ContentType    = contentType;
             this.Source         = source;
         }
@@ -73,22 +54,16 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
         {
-            //------------------------------------------------------------
-            //	Validation handled by property setters
-            //------------------------------------------------------------
             this.ContentType    = contentType;
             this.Source         = source;
             this.Title          = title;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> of the syndication endpoint.
         /// </summary>
         /// <value>
-        ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication content format that the auto-discoverable syndicated content conforms to. 
+        ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication content format that the auto-discoverable syndicated content conforms to.
         ///     If a format cannot be determined for the <see cref="ContentType">content type</see>, returns <see cref="SyndicationContentFormat.None"/>.
         /// </value>
         /// <remarks>The syndication content format is determined based upon the <see cref="ContentType"/> of the current instance.</remarks>
@@ -198,9 +173,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
         /// </summary>
@@ -208,20 +180,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference (Nothing in Visual Basic).</exception>
         public XPathNavigator CreateNavigator()
         {
-            //------------------------------------------------------------
-            //	Validate that endpoint has a valid source 
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(this.Source, "Source");
 
-            //------------------------------------------------------------
-            //	Return a safe navigator for endpoint
-            //------------------------------------------------------------
             return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new WebRequestOptions());
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.
         /// </summary>
@@ -231,15 +194,9 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             return String.Format(null, "<link rel=\"alternate\" type=\"{0}\" title=\"{1}\" href=\"{2}\" />", this.ContentType, this.Title, this.Source != null ? this.Source.ToString() : String.Empty);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -248,17 +205,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             DiscoverableSyndicationEndpoint value  = obj as DiscoverableSyndicationEndpoint;
 
             if (value != null)
@@ -282,9 +233,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is DiscoverableSyndicationEndpoint))
             {
                 return false;
@@ -299,9 +247,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -315,9 +260,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -349,9 +291,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -372,9 +311,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

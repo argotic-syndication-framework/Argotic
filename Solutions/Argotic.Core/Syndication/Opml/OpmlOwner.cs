@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/04/2007	brian.kuhn	Created OpmlOwner Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,9 +14,7 @@ namespace Argotic.Syndication
     [Serializable()]
     public class OpmlOwner : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the name of the owner of the document.
         /// </summary>
@@ -36,18 +27,12 @@ namespace Argotic.Syndication
         /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
         /// </summary>
         private Uri ownerId;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOwner"/> class.
         /// </summary>
         public OpmlOwner()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
+
         }
 
         /// <summary>
@@ -56,9 +41,6 @@ namespace Argotic.Syndication
         /// <param name="name">The name of the owner of this document.</param>
         public OpmlOwner(string name)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using proerty setter
-            //------------------------------------------------------------
             this.Name   = name;
         }
 
@@ -69,9 +51,6 @@ namespace Argotic.Syndication
         /// <param name="emailAddress">The email address of the owner of this document.</param>
         public OpmlOwner(string name, string emailAddress) : this(name)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using proerty setter
-            //------------------------------------------------------------
             this.EmailAddress   = emailAddress;
         }
 
@@ -86,15 +65,8 @@ namespace Argotic.Syndication
         /// </param>
         public OpmlOwner(string name, string emailAddress, Uri id) : this(name, emailAddress)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using proerty setter
-            //------------------------------------------------------------
             this.Id             = id;
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the email address of the owner of this document.
         /// </summary>
@@ -165,10 +137,6 @@ namespace Argotic.Syndication
                 }
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="OpmlOwner"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -180,19 +148,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator ownerNameNavigator   = source.SelectSingleNode("ownerName");
             XPathNavigator ownerEmailNavigator  = source.SelectSingleNode("ownerEmail");
             XPathNavigator ownerIdNavigator     = source.SelectSingleNode("ownerId");
@@ -229,14 +186,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             if(!String.IsNullOrEmpty(this.Name))
             {
                 writer.WriteElementString("ownerName", this.Name);
@@ -252,10 +202,6 @@ namespace Argotic.Syndication
                 writer.WriteElementString("ownerId", this.Id.ToString());
             }
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOwner"/>.
         /// </summary>
@@ -265,9 +211,6 @@ namespace Argotic.Syndication
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -288,10 +231,6 @@ namespace Argotic.Syndication
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -300,17 +239,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             OpmlOwner value  = obj as OpmlOwner;
 
             if (value != null)
@@ -334,9 +266,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is OpmlOwner))
             {
                 return false;
@@ -351,9 +280,6 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -367,9 +293,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(OpmlOwner first, OpmlOwner second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -401,9 +324,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(OpmlOwner first, OpmlOwner second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -424,9 +344,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(OpmlOwner first, OpmlOwner second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

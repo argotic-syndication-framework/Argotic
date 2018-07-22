@@ -1,12 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/22/2008	brian.kuhn	Created XmlSyndicationResourceProvider Class
-07/01/2008  brian.kuhn  Implemented fix for work item 10410.
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Configuration.Provider;
@@ -28,9 +20,6 @@ namespace Argotic.Configuration.Provider
     //[AspNetHostingPermissionAttribute(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
     public class XmlSyndicationResourceProvider : SyndicationResourceProvider
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         #region PRIVATE/PROTECTED/PUBLIC MEMBERS
         /// <summary>
         /// Private member to hold the name of the application using the syndication resource provider.
@@ -46,9 +35,6 @@ namespace Argotic.Configuration.Provider
         private static object providerSyncObject    = new object();
         #endregion
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         #region ApplicationName
         /// <summary>
         /// Gets or sets the name of the application using the XML syndication resource provider.
@@ -56,12 +42,12 @@ namespace Argotic.Configuration.Provider
         /// <value>The name of the application using the XML syndication resource provider.</value>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="ApplicationName"/> property value is stored in the data source with related 
+        ///         The <see cref="ApplicationName"/> property value is stored in the data source with related
         ///         syndication resource information to associate a resource with a particular application.
         ///     </para>
         ///     <para>
-        ///         Because syndication resource providers store resource information uniquely for each application, 
-        ///         multiple applications can use the same data source without running into a conflict if duplicate syndication resources are created. 
+        ///         Because syndication resource providers store resource information uniquely for each application,
+        ///         multiple applications can use the same data source without running into a conflict if duplicate syndication resources are created.
         ///         Alternatively, multiple applications can use the same syndication resource data source by specifying the same <see cref="ApplicationName"/>.
         ///     </para>
         /// </remarks>
@@ -92,7 +78,7 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <value>The path to the XML data storage directory.</value>
         /// <remarks>
-        ///     The path will be mapped to the physical file path that corresponds to the virtual path on the Web server if the <paramref name="value"/> 
+        ///     The path will be mapped to the physical file path that corresponds to the virtual path on the Web server if the <paramref name="value"/>
         ///     starts with <i>~</i> and <see cref="System.Web.HttpContext.Current"/> is not a <b>null</b> reference, otherwise a physical file path is assumed.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -112,9 +98,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	PRIVATE PROPERTIES
-        //============================================================
         #region ApplicationPath
         /// <summary>
         /// Gets the physical path to the application data storage directory.
@@ -122,12 +105,12 @@ namespace Argotic.Configuration.Provider
         /// <value>The physical file path to the application XML data storage directory specifed by the <see cref="Path"/> and <see cref="ApplicationName"/>.</value>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="Path"/> is mapped to the physical file path that corresponds to the virtual path on the Web server if the <paramref name="value"/> 
+        ///         The <see cref="Path"/> is mapped to the physical file path that corresponds to the virtual path on the Web server if the <paramref name="value"/>
         ///         starts with <i>~</i> and <see cref="System.Web.HttpContext.Current"/> is not a <b>null</b> reference, otherwise a physical file path is assumed.
         ///     </para>
         ///     <para>
-        ///         The <see cref="ApplicationName"/>, if specified, is encoded using <see cref="SyndicationEncodingUtility.EncodeSafeDirectoryName(string)"/>. 
-        ///         When an application name is specified for the provider, a sub-directory for the <see cref="ApplicationName"/> is created to store syndication 
+        ///         The <see cref="ApplicationName"/>, if specified, is encoded using <see cref="SyndicationEncodingUtility.EncodeSafeDirectoryName(string)"/>.
+        ///         When an application name is specified for the provider, a sub-directory for the <see cref="ApplicationName"/> is created to store syndication
         ///         resources that are segmented by application.
         ///     </para>
         /// </remarks>
@@ -169,9 +152,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         #region BuildResource(SyndicationContentFormat format, Stream stream)
         /// <summary>
         /// Instantiates a <see cref="ISyndicationResource"/> that conforms to the specified <see cref="SyndicationContentFormat"/> using the supplied <see cref="Stream"/>.
@@ -179,20 +159,14 @@ namespace Argotic.Configuration.Provider
         /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
         /// <param name="format">A <see cref="SyndicationContentFormat"/> enumeration value that indicates the type syndication resource the <paramref name="stream"/> represents.</param>
         /// <returns>
-        ///     An <see cref="ISyndicationResource"/> object that conforms to the specified <paramref name="format"/>, initialized using the supplied <paramref name="stream"/>. 
+        ///     An <see cref="ISyndicationResource"/> object that conforms to the specified <paramref name="format"/>, initialized using the supplied <paramref name="stream"/>.
         ///     If the <paramref name="format"/> is not supported by the provider, returns a <b>null</b> reference.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         private static ISyndicationResource BuildResource(SyndicationContentFormat format, Stream stream)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(stream, "stream");
 
-            //------------------------------------------------------------
-            //	Create syndication resource based on content format
-            //------------------------------------------------------------
             if (format == SyndicationContentFormat.Apml)
             {
                 ApmlDocument document   = new ApmlDocument();
@@ -262,14 +236,8 @@ namespace Argotic.Configuration.Provider
         /// <returns>The file extension for the supplied <paramref name="format"/>, otherwise returns the <b>.xml</b> file extension.</returns>
         private static string ContentFormatAsFileExtension(SyndicationContentFormat format)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string fileExtension    = ".xml";
 
-            //------------------------------------------------------------
-            //	Return file extension based on content format
-            //------------------------------------------------------------
             switch (format)
             {
                 case SyndicationContentFormat.Apml:
@@ -324,19 +292,10 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentNullException">The <paramref name="fileExtension"/> is an empty string.</exception>
         private static SyndicationContentFormat ContentFormatByFileExtension(string fileExtension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             SyndicationContentFormat format = SyndicationContentFormat.None;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(fileExtension, "fileExtension");
 
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             if (String.Compare(fileExtension, ".apml", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 format  = SyndicationContentFormat.Apml;
@@ -384,8 +343,8 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <param name="value">A string containing a globally unique identifier to convert.</param>
         /// <param name="result">
-        ///     When this method returns, contains the <see cref="Guid"/> value equivalent to the globally unique identifier contained in <paramref name="value"/>, if the conversion succeeded, 
-        ///     or <see cref="Guid.Empty"/> if the conversion failed. The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, 
+        ///     When this method returns, contains the <see cref="Guid"/> value equivalent to the globally unique identifier contained in <paramref name="value"/>, if the conversion succeeded,
+        ///     or <see cref="Guid.Empty"/> if the conversion failed. The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string,
         ///     or does not contain a valid string representation of a globally unique identifier. This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
@@ -419,9 +378,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	UTILITY METHODS
-        //============================================================
         #region BuildResourcePath(Guid resourceKey, SyndicationContentFormat format)
         /// <summary>
         /// Builds the physical file path for a syndication resource XML data file using the supplied <see cref="Guid"/> and <see cref="SyndicationContentFormat"/>.
@@ -430,7 +386,7 @@ namespace Argotic.Configuration.Provider
         /// <param name="format">The <see cref="SyndicationContentFormat"/> enumeration value that determines the file extension that is used.</param>
         /// <returns>The physical file path for a syndication resource XML data file using the supplied <see cref="Guid"/> and <see cref="SyndicationContentFormat"/>.</returns>
         /// <remarks>
-        ///     If the physical file path for a syndication resource XML data file defines a directory path that does not exist, 
+        ///     If the physical file path for a syndication resource XML data file defines a directory path that does not exist,
         ///     the <see cref="BuildResourcePath(Guid, SyndicationContentFormat)"/> method will attempt to create the directory.
         /// </remarks>
         private string BuildResourcePath(Guid resourceKey, SyndicationContentFormat format)
@@ -458,14 +414,8 @@ namespace Argotic.Configuration.Provider
         /// <returns><b>true</b> if the syndication resource exists for the supplied provider key; otherwise, <b>false</b>.</returns>
         private bool ResourceKeyExists(Guid key)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool keyExists  = false;
 
-            //------------------------------------------------------------
-            //	Determine if resource file exists for specified key
-            //------------------------------------------------------------
             DirectoryInfo applicationDirectory  = new DirectoryInfo(this.ApplicationPath);
             if (applicationDirectory.Exists)
             {
@@ -480,9 +430,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         #region CreateResource(Object providerResourceKey, ISyndicationResource resource)
         /// <summary>
         /// Adds a new syndication resource to the data source.
@@ -494,14 +441,8 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public override SyndicationResourceCreateStatus CreateResource(Object providerResourceKey, ISyndicationResource resource)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Guid resourceKey    = Guid.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
             Guard.ArgumentNotNull(resource, "resource");
 
@@ -511,9 +452,6 @@ namespace Argotic.Configuration.Provider
                 return SyndicationResourceCreateStatus.InvalidProviderResourceKey;
             }
 
-            //------------------------------------------------------------
-            //	Add syndication resource to data store
-            //------------------------------------------------------------
             lock (providerSyncObject)
             {
                 return this.ResourceAdd(resourceKey, resource);
@@ -531,14 +469,8 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentException">The <paramref name="providerResourceKey"/> does not represent a valid <see cref="System.Guid"/> structure.</exception>
         public override bool DeleteResource(Object providerResourceKey)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Guid resourceKey    = Guid.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
@@ -546,9 +478,6 @@ namespace Argotic.Configuration.Provider
                 throw new ArgumentException(String.Format(null, "The provider resource key of {0} does not represent a valid System.Guid structure.", providerResourceKey), "providerResourceKey");
             }
 
-            //------------------------------------------------------------
-            //	Remove syndication resource from data store
-            //------------------------------------------------------------
             lock (providerSyncObject)
             {
                 return this.ResourceRemove(resourceKey);
@@ -566,14 +495,8 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentException">The <paramref name="providerResourceKey"/> does not represent a valid <see cref="System.Guid"/> structure.</exception>
         public override ISyndicationResource GetResource(Object providerResourceKey)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Guid resourceKey    = Guid.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
@@ -581,9 +504,6 @@ namespace Argotic.Configuration.Provider
                 throw new ArgumentException(String.Format(null, "The provider resource key of {0} does not represent a valid System.Guid structure.", providerResourceKey), "providerResourceKey");
             }
 
-            //------------------------------------------------------------
-            //	Get syndication resource from data store
-            //------------------------------------------------------------
             lock (providerSyncObject)
             {
                 return this.ResourceGet(resourceKey);
@@ -599,24 +519,18 @@ namespace Argotic.Configuration.Provider
         /// <returns>A <see cref="Collection{T}"/> of all of the syndication resources contained in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property. 
+        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentException">The <paramref name="format"/> is invalid.</exception>
         public override Collection<ISyndicationResource> GetResources(SyndicationContentFormat format)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             if (format == SyndicationContentFormat.None)
             {
                 throw new ArgumentException(String.Format(null, "The the specified content format of {0} is invalid.", format), "format");
             }
 
-            //------------------------------------------------------------
-            //	Get syndication resources from data store
-            //------------------------------------------------------------
             lock (providerSyncObject)
             {
                 return this.ResourcesGet(format);
@@ -632,22 +546,22 @@ namespace Argotic.Configuration.Provider
         /// <param name="pageSize">The size of the page of results to return.</param>
         /// <param name="totalRecords">The total number of matched resources.</param>
         /// <returns>
-        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects 
+        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects
         ///     with a size of <paramref name="pageSize"/>, beginning at the page specified by <paramref name="pageIndex"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property. 
+        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         ///     <para>
-        ///         The results returned by <see cref="GetResources(int, int, out int)"/> are constrained by the <paramref name="pageIndex"/> and <paramref name="pageSize"/> parameters. 
-        ///         The <paramref name="pageSize"/> parameter identifies the number of <see cref="ISyndicationResource"/> objects to return in the collection. 
-        ///         The <paramref name="pageIndex"/> parameter identifies which page of results to return, where 0 identifies the first page. 
+        ///         The results returned by <see cref="GetResources(int, int, out int)"/> are constrained by the <paramref name="pageIndex"/> and <paramref name="pageSize"/> parameters.
+        ///         The <paramref name="pageSize"/> parameter identifies the number of <see cref="ISyndicationResource"/> objects to return in the collection.
+        ///         The <paramref name="pageIndex"/> parameter identifies which page of results to return, where 0 identifies the first page.
         ///         The <paramref name="totalRecords"/> parameter is an out parameter that is set to the total number of syndication resources in the data source.
         ///     </para>
         ///     <para>
-        ///         For example, if there are 13 resources in the data source, and the <paramref name="pageIndex"/> value was 1 with a <paramref name="pageSize"/> of 5, 
+        ///         For example, if there are 13 resources in the data source, and the <paramref name="pageIndex"/> value was 1 with a <paramref name="pageSize"/> of 5,
         ///         then the <see cref="Collection{T}"/> would contain the sixth through the tenth resources returned. The <paramref name="totalRecords"/> parameter would be set to 13.
         ///     </para>
         /// </remarks>
@@ -656,15 +570,9 @@ namespace Argotic.Configuration.Provider
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
         public override Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotLessThan(pageIndex, "pageIndex", 0);
             Guard.ArgumentNotLessThan(pageSize, "pageSize", 1);
-            
-            //------------------------------------------------------------
-            //	Get syndication resources from data store
-            //------------------------------------------------------------
+
             lock (providerSyncObject)
             {
                 return this.ResourcesGet(pageIndex, pageSize, out totalRecords);
@@ -685,14 +593,8 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentException">The <paramref name="providerResourceKey"/> does not represent a valid <see cref="System.Guid"/> structure.</exception>
         public override void UpdateResource(Object providerResourceKey, ISyndicationResource resource)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Guid resourceKey    = Guid.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
             Guard.ArgumentNotNull(resource, "resource");
 
@@ -701,9 +603,6 @@ namespace Argotic.Configuration.Provider
                 throw new ArgumentException(String.Format(null, "The provider resource key of {0} does not represent a valid System.Guid structure.", providerResourceKey), "providerResourceKey");
             }
 
-            //------------------------------------------------------------
-            //	Update syndication resource within data store
-            //------------------------------------------------------------
             lock (providerSyncObject)
             {
                 this.ResourceUpdate(resourceKey, resource);
@@ -711,9 +610,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         #region ResourceAdd(Guid resourceKey, ISyndicationResource resource)
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationResource"/> to the data store using the specifed <see cref="Guid"/>.
@@ -723,27 +619,15 @@ namespace Argotic.Configuration.Provider
         /// <returns>A <see cref="SyndicationResourceCreateStatus"/> enumeration value that indicates the result of the adding the syndication resource to the data store.</returns>
         private SyndicationResourceCreateStatus ResourceAdd(Guid resourceKey, ISyndicationResource resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Validate resource does not already exist
-            //------------------------------------------------------------
             if (this.ResourceKeyExists(resourceKey))
             {
                 return SyndicationResourceCreateStatus.DuplicateProviderResourceKey;
             }
 
-            //------------------------------------------------------------
-            //	Build path to XML data file for syndication resource
-            //------------------------------------------------------------
             string resourceFilePath = this.BuildResourcePath(resourceKey, resource.Format);
 
-            //------------------------------------------------------------
-            //	Persist syndication resource
-            //------------------------------------------------------------
             using (FileStream stream = new FileStream(resourceFilePath, FileMode.Create, FileAccess.Write))
             {
                 SyndicationResourceSaveSettings settings    = new SyndicationResourceSaveSettings();
@@ -763,27 +647,18 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <param name="resourceKey">A <see cref="Guid"/> that represents the globally unique identifier for the resource to be retrieved.</param>
         /// <returns>
-        ///     The <see cref="ISyndicationResource"/> that has the specified <paramref name="resourceKey"/>. 
+        ///     The <see cref="ISyndicationResource"/> that has the specified <paramref name="resourceKey"/>.
         ///     If no resource exists for the specified <paramref name="resourceKey"/>, returns a <b>null</b> reference.
         /// </returns>
         private ISyndicationResource ResourceGet(Guid resourceKey)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             ISyndicationResource resource   = null;
 
-            //------------------------------------------------------------
-            //	Validate resource exists
-            //------------------------------------------------------------
             if (!this.ResourceKeyExists(resourceKey))
             {
                 return null;
             }
 
-            //------------------------------------------------------------
-            //	Load syndication resource from XML data source
-            //------------------------------------------------------------
             DirectoryInfo applicationDirectory  = new DirectoryInfo(this.ApplicationPath);
             if (applicationDirectory.Exists)
             {
@@ -811,27 +686,18 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <param name="resourceKey">A <see cref="Guid"/> that represents the globally unique identifier for the resource to be removed.</param>
         /// <returns>
-        ///     <b>true</b> if the syndication resource was successfully removed; otherwise, <b>false</b>. 
+        ///     <b>true</b> if the syndication resource was successfully removed; otherwise, <b>false</b>.
         ///     If resource does not exist for specified <paramref name="resourceKey"/>, returns <b>false</b>.
         /// </returns>
         private bool ResourceRemove(Guid resourceKey)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool resourceRemoved    = false;
 
-            //------------------------------------------------------------
-            //	Validate resource exists
-            //------------------------------------------------------------
             if (!this.ResourceKeyExists(resourceKey))
             {
                 return false;
             }
 
-            //------------------------------------------------------------
-            //	Remove syndication resource XML data source
-            //------------------------------------------------------------
             DirectoryInfo applicationDirectory  = new DirectoryInfo(this.ApplicationPath);
             if (applicationDirectory.Exists)
             {
@@ -857,14 +723,8 @@ namespace Argotic.Configuration.Provider
         /// </returns>
         private Collection<ISyndicationResource> ResourcesGet(SyndicationContentFormat format)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Collection<ISyndicationResource> resources  = new Collection<ISyndicationResource>();
 
-            //------------------------------------------------------------
-            //	Load filtered syndication resources from XML data store
-            //------------------------------------------------------------
             DirectoryInfo applicationDirectory = new DirectoryInfo(this.ApplicationPath);
             if (applicationDirectory.Exists)
             {
@@ -901,20 +761,14 @@ namespace Argotic.Configuration.Provider
         /// <param name="pageSize">The size of the page of results to return.</param>
         /// <param name="totalRecords">The total number of syndication resources in the data store.</param>
         /// <returns>
-        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects 
+        ///     A <see cref="Collection{T}"/> that contains a page of <see cref="ISyndicationResource"/> objects
         ///     with a size of <paramref name="pageSize"/>, beginning at the page specified by <paramref name="pageIndex"/>.
         /// </returns>
         private Collection<ISyndicationResource> ResourcesGet(int pageIndex, int pageSize, out int totalRecords)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Collection<ISyndicationResource> resources      = new Collection<ISyndicationResource>();
             Collection<ISyndicationResource> pagedResources = new Collection<ISyndicationResource>();
 
-            //------------------------------------------------------------
-            //	Load syndication resources from XML data store
-            //------------------------------------------------------------
             DirectoryInfo applicationDirectory = new DirectoryInfo(this.ApplicationPath);
             if (applicationDirectory.Exists)
             {
@@ -939,9 +793,6 @@ namespace Argotic.Configuration.Provider
                 }
             }
 
-            //------------------------------------------------------------
-            //	Build paged syndication resources
-            //------------------------------------------------------------
             totalRecords    = resources.Count;
 
             if (pageSize > resources.Count)
@@ -979,27 +830,15 @@ namespace Argotic.Configuration.Provider
         /// </remarks>
         private void ResourceUpdate(Guid resourceKey, ISyndicationResource resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Validate resource exists
-            //------------------------------------------------------------
             if (!this.ResourceKeyExists(resourceKey))
             {
                 return;
             }
 
-            //------------------------------------------------------------
-            //	Build path to XML data file for syndication resource
-            //------------------------------------------------------------
             string resourceFilePath = this.BuildResourcePath(resourceKey, resource.Format);
 
-            //------------------------------------------------------------
-            //	Persist updated syndication resource information
-            //------------------------------------------------------------
             if (File.Exists(resourceFilePath))
             {
                 using (FileStream stream = new FileStream(resourceFilePath, FileMode.Create, FileAccess.Write))
@@ -1014,9 +853,6 @@ namespace Argotic.Configuration.Provider
         }
         #endregion
 
-        //============================================================
-        //	OVERRIDDEN METHODS
-        //============================================================
         #region Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         /// <summary>
         /// Initializes the provider.
@@ -1024,9 +860,9 @@ namespace Argotic.Configuration.Provider
         /// <param name="name">The friendly name of the provider.</param>
         /// <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
         /// <remarks>
-        ///     The base class implementation internally tracks the number of times the provider's <see cref="Initialize(string, NameValueCollection)">Initialize</see> method 
-        ///     has been called. If a provider is initialized more than once, an <see cref="InvalidOperationException"/> is thrown stating that the provider is already initialized. 
-        ///     Because most feature providers call <see cref="Initialize(string, NameValueCollection)">Initialize</see> prior to performing provider-specific initialization, 
+        ///     The base class implementation internally tracks the number of times the provider's <see cref="Initialize(string, NameValueCollection)">Initialize</see> method
+        ///     has been called. If a provider is initialized more than once, an <see cref="InvalidOperationException"/> is thrown stating that the provider is already initialized.
+        ///     Because most feature providers call <see cref="Initialize(string, NameValueCollection)">Initialize</see> prior to performing provider-specific initialization,
         ///     this method is a central location for preventing double initialization.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> of the provider is <b>null</b> reference (Nothing in Visual Basic).</exception>
@@ -1036,14 +872,8 @@ namespace Argotic.Configuration.Provider
         /// </exception>
         public override void Initialize(string name, NameValueCollection config)
         {
-            //------------------------------------------------------------
-            //	Initialize state of provider base atributes
-            //------------------------------------------------------------
             base.Initialize(name, config);
 
-            //------------------------------------------------------------
-            //	Initialize custom provider properties
-            //------------------------------------------------------------
             string applicationName  = config["applicationName"];
             string path             = config["path"];
 
@@ -1062,9 +892,6 @@ namespace Argotic.Configuration.Provider
             this.Path               = path;
             config.Remove("path");
 
-            //------------------------------------------------------------
-            //	Validate that there are no unexpected attributes
-            //------------------------------------------------------------
             if (config.Count > 0)
             {
                 string extraAttribute   = config.GetKey(0);

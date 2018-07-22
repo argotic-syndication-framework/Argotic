@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created ApmlSourceExample Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 using Argotic.Syndication.Specialized;
@@ -22,9 +15,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
     public static class ApmlSourceExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the ApmlSource class.
         /// </summary>

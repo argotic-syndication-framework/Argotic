@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created AtomEntryExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -25,9 +18,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class AtomEntryExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the AtomEntry class.
         /// </summary>
@@ -43,10 +33,6 @@ namespace Argotic.Examples
             entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
             entry.Summary   = new AtomTextConstruct("A stand-alone Atom Entry Document.");
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the AtomEntry.Create(Uri) method
         /// </summary>
@@ -60,17 +46,11 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load entry asynchronously using event-based notification
-            //------------------------------------------------------------
             AtomEntry entry = new AtomEntry();
 
             entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
@@ -89,10 +69,6 @@ namespace Argotic.Examples
             {
             }
         }
-
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/19/2007	brian.kuhn	Created XmlRpcClientExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Text;
 
 using Argotic.Net;
@@ -21,9 +14,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class XmlRpcClientExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the XmlRpcClient class.
         /// </summary>

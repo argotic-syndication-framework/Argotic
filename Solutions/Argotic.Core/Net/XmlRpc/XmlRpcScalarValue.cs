@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/13/2008	brian.kuhn	Created XmlRpcScalarValue Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
@@ -16,16 +9,13 @@ using Argotic.Common;
 namespace Argotic.Net
 {
     /// <summary>
-    /// Represents a scalar remote procedure parameter value. 
+    /// Represents a scalar remote procedure parameter value.
     /// </summary>
     /// <seealso cref="XmlRpcMessage.Parameters"/>
     /// <seealso cref="IXmlRpcValue"/>
     [Serializable()]
     public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the value of the parameter.
         /// </summary>
@@ -35,17 +25,11 @@ namespace Argotic.Net
         /// </summary>
         private XmlRpcScalarValueType scalarParameterType   = XmlRpcScalarValueType.None;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
         /// </summary>
         public XmlRpcScalarValue()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -53,20 +37,14 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">An array of 8-bit unsigned integers.</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Base64"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Base64"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcScalarValue(byte[] value)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(value, "value");
 
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.Base64;
             this.Value      = value;
         }
@@ -76,14 +54,11 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">A boolean value.</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Boolean"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Boolean"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         public XmlRpcScalarValue(bool value)
         {
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.Boolean;
             this.Value      = value;
         }
@@ -93,14 +68,11 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">A <see cref="DateTime"/>, provided in Coordinated Universal Time (UTC).</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.DateTime"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.DateTime"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         public XmlRpcScalarValue(DateTime value)
         {
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.DateTime;
             this.Value      = value;
         }
@@ -110,14 +82,11 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">A double-precision signed floating-point number.</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Double"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Double"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         public XmlRpcScalarValue(double value)
         {
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.Double;
             this.Value      = value;
         }
@@ -127,14 +96,11 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">A 32-bit signed integer.</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Integer"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Integer"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         public XmlRpcScalarValue(int value)
         {
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.Integer;
             this.Value      = value;
         }
@@ -144,21 +110,15 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="value">A series of characters.</param>
         /// <remarks>
-        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.String"/>, 
+        ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.String"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
         public XmlRpcScalarValue(string value)
         {
-            //------------------------------------------------------------
-            //	Initialize class state
-            //------------------------------------------------------------
             this.ValueType  = XmlRpcScalarValueType.String;
             this.Value      = !String.IsNullOrEmpty(value) ? value : String.Empty;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the value of this parameter.
         /// </summary>
@@ -185,7 +145,7 @@ namespace Argotic.Net
         /// Gets or sets the type of scalar value this parameter represents.
         /// </summary>
         /// <value>
-        ///     A <see cref="XmlRpcScalarValueType"/> enumeration value that indicates the type of scalar value this parameter represents. 
+        ///     A <see cref="XmlRpcScalarValueType"/> enumeration value that indicates the type of scalar value this parameter represents.
         ///     The default value is <see cref="XmlRpcScalarValueType.None"/>, which indicates that no type was specified.
         /// </value>
         /// <remarks>
@@ -206,9 +166,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -220,19 +177,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Attempt to extract scalar parameter information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 if (source.MoveToFirstChild())
@@ -278,14 +226,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("value");
 
             if (this.ValueType != XmlRpcScalarValueType.None)
@@ -302,9 +244,6 @@ namespace Argotic.Net
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.
         /// </summary>
@@ -314,9 +253,6 @@ namespace Argotic.Net
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -338,9 +274,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -349,17 +282,11 @@ namespace Argotic.Net
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             XmlRpcScalarValue value  = obj as XmlRpcScalarValue;
 
             if (value != null)
@@ -381,9 +308,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is XmlRpcScalarValue))
             {
                 return false;
@@ -398,9 +322,6 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -414,9 +335,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -448,9 +366,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -471,9 +386,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -486,9 +398,6 @@ namespace Argotic.Net
             return (first.CompareTo(second) > 0);
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Returns an <see cref="Object"/> that represents the converted value for the specified <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
@@ -499,19 +408,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
         private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             object result   = String.Empty;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(scalar, "scalar");
 
-            //------------------------------------------------------------
-            //	Convert string representation to expected value type
-            //------------------------------------------------------------
             switch (type)
             {
                 case XmlRpcScalarValueType.Base64:
@@ -554,14 +454,8 @@ namespace Argotic.Net
         /// <returns>The string representation of the current instance's <see cref="Value"/>, based on its <see cref="ValueType"/>.</returns>
         private static string ValueAsString(XmlRpcScalarValueType type, object scalar)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string value    = String.Empty;
 
-            //------------------------------------------------------------
-            //	Return string representation based on data type
-            //------------------------------------------------------------
             if (scalar == null)
             {
                 return String.Empty;

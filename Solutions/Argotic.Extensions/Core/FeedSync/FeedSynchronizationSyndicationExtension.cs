@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created FeedSynchronizationSyndicationExtension Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -36,31 +29,18 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold specific information about the extension.
         /// </summary>
         private FeedSynchronizationSyndicationExtensionContext extensionContext = new FeedSynchronizationSyndicationExtensionContext();
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
         /// </summary>
         public FeedSynchronizationSyndicationExtension()
             : base("sx", "http://feedsync.org/2007/feedsync", new Version("1.0"), new Uri("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
         {
-            //------------------------------------------------------------
-            //	Initialization handled by base class
-            //------------------------------------------------------------
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the <see cref="FeedSynchronizationSyndicationExtensionContext"/> object associated with this extension.
         /// </summary>
@@ -84,10 +64,6 @@ namespace Argotic.Extensions.Core
                 extensionContext = value;
             }
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
         /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -97,14 +73,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool MatchByType(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Determine if search condition was met 
-            //------------------------------------------------------------
             if (extension.GetType() == typeof(FeedSynchronizationSyndicationExtension))
             {
                 return true;
@@ -114,10 +83,6 @@ namespace Argotic.Extensions.Core
                 return false;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -126,25 +91,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(IXPathNavigable source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             XPathNavigator navigator    = source.CreateNavigator();
             wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-
-            //------------------------------------------------------------
-            //	Raise extension loaded event
-            //------------------------------------------------------------
             SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
             this.OnExtensionLoaded(args);
 
@@ -159,14 +109,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(XmlReader reader)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(reader, "reader");
-
-            //------------------------------------------------------------
-            //	Create navigator against reader and pass to load method
-            //------------------------------------------------------------
             XPathDocument document  = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator());
@@ -179,20 +122,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public override void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             this.Context.WriteTo(writer, this.XmlNamespace);
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.
         /// </summary>
@@ -202,9 +134,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -225,10 +154,6 @@ namespace Argotic.Extensions.Core
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -237,17 +162,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             FeedSynchronizationSyndicationExtension value  = obj as FeedSynchronizationSyndicationExtension;
 
             if (value != null)
@@ -306,9 +224,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is FeedSynchronizationSyndicationExtension))
             {
                 return false;
@@ -323,9 +238,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -339,9 +251,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(FeedSynchronizationSyndicationExtension first, FeedSynchronizationSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -373,9 +282,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(FeedSynchronizationSyndicationExtension first, FeedSynchronizationSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -396,9 +302,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(FeedSynchronizationSyndicationExtension first, FeedSynchronizationSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

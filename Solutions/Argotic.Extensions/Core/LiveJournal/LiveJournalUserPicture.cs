@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/04/2008	brian.kuhn	Created LiveJournalUserPicture Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,9 +14,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class LiveJournalUserPicture : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the URL of the GIF, JPEG, or PNG image.
         /// </summary>
@@ -40,18 +31,12 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the image height.
         /// </summary>
         private int userPictureHeight       = Int32.MinValue;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalUserPicture"/> class.
         /// </summary>
         public LiveJournalUserPicture()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
+
         }
 
         /// <summary>
@@ -68,18 +53,11 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="height"/> is greater than <b>100</b>.</exception>
         public LiveJournalUserPicture(Uri url, string keyword, int width, int height)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Url        = url;
             this.Keyword    = keyword;
             this.Width      = width;
             this.Height     = height;
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the height of this picture.
         /// </summary>
@@ -163,10 +141,6 @@ namespace Argotic.Extensions.Core
                 userPictureWidth = value;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="LiveJournalUserPicture"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -178,25 +152,12 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Create namespace manager to resolve prefixed elements
-            //------------------------------------------------------------
             LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
             XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator urlNavigator     = source.SelectSingleNode("url", manager);
@@ -259,19 +220,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("userpic", extension.XmlNamespace);
 
             writer.WriteElementString("url", extension.XmlNamespace, this.Url != null ? this.Url.ToString() : String.Empty);
@@ -282,9 +232,6 @@ namespace Argotic.Extensions.Core
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="LiveJournalUserPicture"/>.
         /// </summary>
@@ -294,9 +241,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -318,9 +262,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -329,17 +270,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             LiveJournalUserPicture value  = obj as LiveJournalUserPicture;
 
             if (value != null)
@@ -364,9 +298,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is LiveJournalUserPicture))
             {
                 return false;
@@ -381,9 +312,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -397,9 +325,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(LiveJournalUserPicture first, LiveJournalUserPicture second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -431,9 +356,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(LiveJournalUserPicture first, LiveJournalUserPicture second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -454,9 +376,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(LiveJournalUserPicture first, LiveJournalUserPicture second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

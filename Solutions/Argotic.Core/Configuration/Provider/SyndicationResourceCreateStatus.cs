@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/22/2008	brian.kuhn	Created SyndicationResourceCreateStatus Enumeration
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml.XPath;
 
 using Argotic.Common;

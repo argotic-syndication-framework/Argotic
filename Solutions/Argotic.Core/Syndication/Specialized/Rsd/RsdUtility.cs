@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/08/2008	brian.kuhn	Created RsdUtility Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -19,17 +12,11 @@ namespace Argotic.Syndication.Specialized
     /// <remarks>This utility class is not intended for use outside the Really Simple Discoverability (RSD) syndication entities within the framework.</remarks>
     internal static class RsdUtility
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the Really Simple Discoverability (RSD) 1.0 namespace identifier.
         /// </summary>
         private const string RSD_NAMESPACE  = "http://archipelago.phrasewise.com/rsd";
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
         /// </summary>
@@ -41,10 +28,6 @@ namespace Argotic.Syndication.Specialized
                 return RSD_NAMESPACE;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Really Simple Discoverability (RSD) syndication entities.
         /// </summary>
@@ -53,19 +36,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlNamespaceManager manager = null;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(nameTable, "nameTable");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(nameTable);
             manager.AddNamespace("rsd", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
 
@@ -91,14 +63,7 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XPathNodeIterator SelectSafe(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XPathNodeIterator iterator = null;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
             Guard.ArgumentNotNull(resolver, "resolver");
@@ -133,14 +98,7 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XPathNavigator navigator = null;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
             Guard.ArgumentNotNull(resolver, "resolver");

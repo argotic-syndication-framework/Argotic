@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created ISyndicationResource Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -19,16 +12,13 @@ namespace Argotic.Common
     /// <seealso cref="Argotic.Common.SyndicationResourceMetadata"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ISyndicationResource interface.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\ISyndicationResourceExample.cs" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\ISyndicationResourceExample.cs"
     ///         />
     ///     </code>
     /// </example>
     public interface ISyndicationResource
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that the resource implements.
         /// </summary>
@@ -47,9 +37,6 @@ namespace Argotic.Common
             get;
         }
 
-        //============================================================
-        //	PUBLIC EVENTS
-        //============================================================
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
@@ -57,15 +44,12 @@ namespace Argotic.Common
         /// <seealso cref="ISyndicationResource.Load(XmlReader)"/>
         event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ISyndicationResource"/>.
         /// </summary>
         /// <returns>A read-only <see cref="XPathNavigator"/> object.</returns>
         /// <remarks>
-        ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="ISyndicationResource"/>. 
+        ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="ISyndicationResource"/>.
         ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="ISyndicationResource"/>.
         /// </remarks>
         XPathNavigator CreateNavigator();
@@ -81,7 +65,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="source"/> should be passed to the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method 
+        ///                     When implementing this method, the <paramref name="source"/> should be passed to the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method
         ///                     with the <item>settings</item> parameter as <b>null</b>.
         ///                 </description>
         ///             </item>
@@ -123,7 +107,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="stream"/> should be passed to the <see cref="ISyndicationResource.Load(Stream, SyndicationResourceLoadSettings)"/> method 
+        ///                     When implementing this method, the <paramref name="stream"/> should be passed to the <see cref="ISyndicationResource.Load(Stream, SyndicationResourceLoadSettings)"/> method
         ///                     with the <item>settings</item> parameter as <b>null</b>.
         ///                 </description>
         ///             </item>
@@ -152,7 +136,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XPathNavigator"/> 
+        ///                     When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XPathNavigator"/>
         ///                     that is then passed to the <see cref="ISyndicationResource.Load(IXPathNavigable)"/> method.
         ///                 </description>
         ///             </item>
@@ -180,7 +164,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="reader"/> should be passed to the <see cref="ISyndicationResource.Load(XmlReader, SyndicationResourceLoadSettings)"/> method 
+        ///                     When implementing this method, the <paramref name="reader"/> should be passed to the <see cref="ISyndicationResource.Load(XmlReader, SyndicationResourceLoadSettings)"/> method
         ///                     with the <item>settings</item> parameter as <b>null</b>.
         ///                 </description>
         ///             </item>
@@ -209,7 +193,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="reader"/> should be used to create a <see cref="XPathNavigator"/> 
+        ///                     When implementing this method, the <paramref name="reader"/> should be used to create a <see cref="XPathNavigator"/>
         ///                     that is then passed to the <see cref="ISyndicationResource.Load(IXPathNavigable)"/> method.
         ///                 </description>
         ///             </item>
@@ -238,7 +222,7 @@ namespace Argotic.Common
         /// </param>
         /// <remarks>
         ///     <para>
-        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/> 
+        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
         ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         ///     </para>
         ///     <para>
@@ -246,7 +230,7 @@ namespace Argotic.Common
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <paramref name="source"/>, <paramref name="credentials"/>, and <paramref name="proxy"/> parameters should be passed 
+        ///                     When implementing this method, the <paramref name="source"/>, <paramref name="credentials"/>, and <paramref name="proxy"/> parameters should be passed
         ///                     to the <see cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)"/> method with the <item>settings</item> parameter as <b>null</b>.
         ///                 </description>
         ///             </item>
@@ -280,7 +264,7 @@ namespace Argotic.Common
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <remarks>
         ///     <para>
-        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/> 
+        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
         ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         ///     </para>
         /// </remarks>
@@ -302,7 +286,7 @@ namespace Argotic.Common
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
         /// <remarks>
         ///     <para>
-        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/> 
+        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
         ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         ///     </para>
         ///     <para>
@@ -320,7 +304,7 @@ namespace Argotic.Common
         ///             </item>
         ///             <item>
         ///                 <description>
-        ///                     Implementers should consider using the <see cref="SyndicationEncodingUtility.CreateSafeNavigator(Uri, ICredentials, IWebProxy, System.Text.Encoding)"/> utility method 
+        ///                     Implementers should consider using the <see cref="SyndicationEncodingUtility.CreateSafeNavigator(Uri, ICredentials, IWebProxy, System.Text.Encoding)"/> utility method
         ///                     to retrieve the syndication resource information in a safe manner.
         ///                 </description>
         ///             </item>
@@ -345,7 +329,7 @@ namespace Argotic.Common
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
         /// <remarks>
         ///     <para>
-        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/> 
+        ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
         ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
         ///     </para>
         /// </remarks>
@@ -363,11 +347,11 @@ namespace Argotic.Common
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>.</para>
         ///     <para>The <see cref="ISyndicationResource"/> should be loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
@@ -385,11 +369,11 @@ namespace Argotic.Common
         /// <remarks>
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
         ///     </para>
         /// </remarks>
@@ -413,11 +397,11 @@ namespace Argotic.Common
         /// <remarks>
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
@@ -436,11 +420,11 @@ namespace Argotic.Common
         /// <remarks>
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
@@ -453,8 +437,8 @@ namespace Argotic.Common
         /// Cancels an asynchronous operation to load the syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation. 
-        ///     If there is a load operation in progress, this method releases resources used to execute the load operation. 
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation.
+        ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
         void LoadAsyncCancel();
@@ -468,7 +452,7 @@ namespace Argotic.Common
         ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
         ///     </para>
         ///     <para>
-        ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be passed 
+        ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be passed
         ///         to the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method with the <item>settings</item> parameter as <b>null</b>.
         ///     </para>
         /// </remarks>
@@ -486,7 +470,7 @@ namespace Argotic.Common
         ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
         ///     </para>
         ///     <para>
-        ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XmlWriter"/> 
+        ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XmlWriter"/>
         ///         that is then passed to the <see cref="ISyndicationResource.Save(XmlWriter)"/> method.
         ///     </para>
         /// </remarks>
@@ -503,7 +487,7 @@ namespace Argotic.Common
         ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="XmlWriter"/>.
         ///     </para>
         ///     <para>
-        ///         <b>Notes to Implementers:</b> When implementing this method, a default instance the <see cref="SyndicationResourceSaveSettings"/> should be created 
+        ///         <b>Notes to Implementers:</b> When implementing this method, a default instance the <see cref="SyndicationResourceSaveSettings"/> should be created
         ///         and then passed to the <see cref="ISyndicationResource.Save(XmlWriter, SyndicationResourceSaveSettings)"/> method along with the supplied <paramref name="writer"/>.
         ///     </para>
         /// </remarks>

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/19/2008	brian.kuhn	Created TrackbackResponse Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -21,9 +14,9 @@ namespace Argotic.Net
     /// <seealso cref="TrackbackClient.Send(TrackbackMessage)"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackResponse class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs" 
-    ///             region="TrackbackClient" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs"
+    ///             region="TrackbackClient"
     ///         />
     ///     </code>
     /// </example>
@@ -31,9 +24,6 @@ namespace Argotic.Net
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public class TrackbackResponse : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold a value indicating if the the Trackback ping request failed.
         /// </summary>
@@ -43,9 +33,6 @@ namespace Argotic.Net
         /// </summary>
         private string responseErrorMessage;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackResponse"/> class.
         /// </summary>
@@ -54,9 +41,6 @@ namespace Argotic.Net
         /// </remarks>
         public TrackbackResponse()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -70,9 +54,6 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is an empty string.</exception>
         public TrackbackResponse(string errorMessage)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(errorMessage, "errorMessage");
 
             responseErrorMessage    = errorMessage;
@@ -88,14 +69,8 @@ namespace Argotic.Net
         /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
         public TrackbackResponse(WebResponse response)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(response, "response");
 
-            //------------------------------------------------------------
-            //	Validate response format
-            //------------------------------------------------------------
             if (String.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
             {
                 throw new ArgumentException(String.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
@@ -105,9 +80,6 @@ namespace Argotic.Net
                 throw new ArgumentException(String.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
             }
 
-            //------------------------------------------------------------
-            //	Extract Trackback response information
-            //------------------------------------------------------------
             using (Stream stream = response.GetResponseStream())
             {
                 XmlReaderSettings settings              = new XmlReaderSettings();
@@ -131,9 +103,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets information about cause of the Trackback ping request failure.
         /// </summary>
@@ -158,9 +127,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="TrackbackResponse"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -172,19 +138,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Attempt to extract response information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator errorNavigator   = source.SelectSingleNode("error");
@@ -221,14 +178,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("response");
 
             if (!String.IsNullOrEmpty(this.ErrorMessage))
@@ -244,9 +195,6 @@ namespace Argotic.Net
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.
         /// </summary>
@@ -256,9 +204,6 @@ namespace Argotic.Net
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -280,9 +225,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -291,17 +233,11 @@ namespace Argotic.Net
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             TrackbackResponse value  = obj as TrackbackResponse;
 
             if (value != null)
@@ -324,9 +260,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is TrackbackResponse))
             {
                 return false;
@@ -341,9 +274,6 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -357,9 +287,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(TrackbackResponse first, TrackbackResponse second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -391,9 +318,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(TrackbackResponse first, TrackbackResponse second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -414,9 +338,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(TrackbackResponse first, TrackbackResponse second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

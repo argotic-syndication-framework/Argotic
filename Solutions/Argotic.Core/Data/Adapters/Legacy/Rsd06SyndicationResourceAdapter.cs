@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created Rsd06SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,8 +14,8 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Rsd06SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RsdDocument"/> and an XML data source. 
-    ///         The <see cref="Rsd06SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RsdDocument)"/>, which changes the data 
+    ///         The <see cref="Rsd06SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RsdDocument"/> and an XML data source.
+    ///         The <see cref="Rsd06SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RsdDocument)"/>, which changes the data
     ///         in the <see cref="RsdDocument"/> to match the data in the data source.
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 0.6 specification.</para>
@@ -30,13 +23,6 @@ namespace Argotic.Data.Adapters
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
     public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="Rsd06SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -49,14 +35,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="RsdDocument"/> to match the data source.
         /// </summary>
@@ -64,19 +44,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(RsdDocument resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
 
             if (serviceNavigator == null)

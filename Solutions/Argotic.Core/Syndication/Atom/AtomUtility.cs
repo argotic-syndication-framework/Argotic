@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created AtomUtility Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,9 +13,7 @@ namespace Argotic.Syndication
     /// <remarks>This utility class is not intended for use outside the Atom syndication entities within the framework.</remarks>
     internal static class AtomUtility
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the Atom 1.0 namespace identifier.
         /// </summary>
@@ -39,10 +30,6 @@ namespace Argotic.Syndication
         /// Private member to hold the XML 1.1 namespace identifier.
         /// </summary>
         private const string XML_NAMESPACE      = "http://www.w3.org/XML/1998/namespace";
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the XML namespace URI for the Atom 1.0 specification.
         /// </summary>
@@ -78,10 +65,6 @@ namespace Argotic.Syndication
                 return XHTML_NAMESPACE;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -90,19 +73,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlNamespaceManager manager = null;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(nameTable, "nameTable");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(nameTable);
             manager.AddNamespace("atom", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
             manager.AddNamespace("app", ATOMPUB_NAMESPACE);
@@ -119,14 +91,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjectAttributes(IAtomCommonObjectAttributes source, IAtomCommonObjectAttributes target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Handle parameter null reference cases
-            //------------------------------------------------------------
             if (source == null && target == null)
             {
                 return 0;
@@ -139,10 +104,6 @@ namespace Argotic.Syndication
             {
                 return -1;
             }
-
-            //------------------------------------------------------------
-            //	Attempt to perform comparison
-            //------------------------------------------------------------
             result  = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             string sourceLanguageName   = source.Language != null ? source.Language.Name : String.Empty;
@@ -162,25 +123,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
-
-            //------------------------------------------------------------
-            //	Attempt to extract xml:base attribute information
-            //------------------------------------------------------------
             string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
             if (!String.IsNullOrEmpty(xmlBaseAttribute))
             {
@@ -191,10 +137,6 @@ namespace Argotic.Syndication
                     wasLoaded       = true;
                 }
             }
-
-            //------------------------------------------------------------
-            //	Attempt to extract xml:lang attribute information
-            //------------------------------------------------------------
             string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml"));
             if (!String.IsNullOrEmpty(xmlLangAttribute))
             {
@@ -222,23 +164,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public static void WriteCommonObjectAttributes(IAtomCommonObjectAttributes source, XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write xml:base attribute if necessary
-            //------------------------------------------------------------
             if (source.BaseUri != null)
             {
                 writer.WriteAttributeString("xml", "base", XML_NAMESPACE, source.BaseUri.ToString());
             }
-
-            //------------------------------------------------------------
-            //	Write xml:lang attribute if necessary
-            //------------------------------------------------------------
             if (source.Language != null)
             {
                 writer.WriteAttributeString("xml", "lang", XML_NAMESPACE, source.Language.Name);

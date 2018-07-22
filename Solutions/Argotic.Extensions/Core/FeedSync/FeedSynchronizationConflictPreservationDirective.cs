@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/04/2008	brian.kuhn	Created FeedSynchronizationConflictPreservationDirective Enumeration
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 
@@ -14,9 +7,6 @@ namespace Argotic.Extensions.Core
     /// <summary>
     /// Represents whether conflict preservation should be performed for a <see cref="FeedSynchronizationItem"/>.
     /// </summary>
-    /// <remarks>
-    ///     
-    /// </remarks>
     /// <seealso cref="FeedSynchronizationItem.ConflictPreservation"/>
     /// <seealso cref="FeedSynchronizationItem"/>
     [Serializable()]

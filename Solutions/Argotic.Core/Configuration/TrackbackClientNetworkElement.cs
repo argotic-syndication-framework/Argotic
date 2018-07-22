@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/19/2008	brian.kuhn	Created TrackbackClientNetworkElement Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Net;
@@ -19,9 +12,6 @@ namespace Argotic.Configuration
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public sealed class TrackbackClientNetworkElement : ConfigurationElement
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the client host configuration property for the element.
         /// </summary>
@@ -47,17 +37,11 @@ namespace Argotic.Configuration
         /// </summary>
         private static ConfigurationPropertyCollection configurationElementProperties                   = new ConfigurationPropertyCollection();
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClientNetworkElement"/> class.
         /// </summary>
         public TrackbackClientNetworkElement()
         {
-            //------------------------------------------------------------
-            //	Initialize configuration element properties
-            //------------------------------------------------------------
             configurationElementProperties.Add(configurationSectionHostProperty);
             configurationElementProperties.Add(configurationElementDefaultCredentialsProperty);
             configurationElementProperties.Add(configurationElementUserNameProperty);
@@ -65,9 +49,6 @@ namespace Argotic.Configuration
             configurationElementProperties.Add(configurationElementDomainProperty);
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="System.Net.CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent with requests.
         /// </summary>
@@ -158,14 +139,11 @@ namespace Argotic.Configuration
             }
         }
 
-        //============================================================
-        //	UTILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="NetworkCredential"/> for the configured user name, password, and domain.
         /// </summary>
         /// <returns>
-        ///     A <see cref="NetworkCredential"/> object initialized using the curent <see cref="UserName"/>, <see cref="Password"/>, and <see cref="Domain"/>. 
+        ///     A <see cref="NetworkCredential"/> object initialized using the curent <see cref="UserName"/>, <see cref="Password"/>, and <see cref="Domain"/>.
         /// </returns>
         /// <remarks>
         ///     If <see cref="UserName"/> is a null or empty string, returns a <b>null</b> reference.
@@ -192,9 +170,6 @@ namespace Argotic.Configuration
             }
         }
 
-        //============================================================
-        //	PROTECTED PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the configuration properties for this element.
         /// </summary>

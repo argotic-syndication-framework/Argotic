@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created RssFeedExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -27,9 +20,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public static class RssFeedExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the RssFeed class.
         /// </summary>
@@ -91,9 +81,6 @@ namespace Argotic.Examples
             feed.Channel.AddItem(item);
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the RssFeed.Create(Uri) method
         /// </summary>
@@ -110,17 +97,11 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load feed asynchronously using event-based notification
-            //------------------------------------------------------------
             RssFeed feed   = new RssFeed();
 
             feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
@@ -140,9 +121,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

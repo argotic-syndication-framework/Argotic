@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-11/26/2007	brian.kuhn	Created Guard Class
-****************************************************************************/
-using System;
+﻿using System;
 
 namespace Argotic.Common
 {
@@ -14,9 +7,6 @@ namespace Argotic.Common
     /// </summary>
     public static class Guard
     {
-        //============================================================
-        //	METHOD ARGUMENT VALIDATION
-        //============================================================
         /// <summary>
         /// Validates that the supplied <paramref name="value"/> is not a null reference.
         /// </summary>
@@ -56,7 +46,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="maximum">The maximum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotGreaterThan(int value, string name, int maximum)
@@ -74,7 +64,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="maximum">The maximum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotGreaterThan(long value, string name, long maximum)
@@ -92,7 +82,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="maximum">The maximum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotGreaterThan(decimal value, string name, decimal maximum)
@@ -110,7 +100,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="minimum">The minimum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotLessThan(int value, string name, int minimum)
@@ -128,7 +118,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="minimum">The minimum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotLessThan(long value, string name, long minimum)
@@ -146,7 +136,7 @@ namespace Argotic.Common
         /// <param name="name">The name of the method argument.</param>
         /// <param name="minimum">The minimum acceptable value.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotLessThan(decimal value, string name, decimal minimum)
@@ -165,7 +155,7 @@ namespace Argotic.Common
         /// <param name="minimum">The minimum acceptable value of the range.</param>
         /// <param name="maximum">The maximum acceptable value of the range.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotOutOfRange(int value, string name, int minimum, int maximum)
@@ -184,7 +174,7 @@ namespace Argotic.Common
         /// <param name="minimum">The minimum acceptable value of the range.</param>
         /// <param name="maximum">The maximum acceptable value of the range.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotOutOfRange(long value, string name, int minimum, long maximum)
@@ -203,7 +193,7 @@ namespace Argotic.Common
         /// <param name="minimum">The minimum acceptable value of the range.</param>
         /// <param name="maximum">The maximum acceptable value of the range.</param>
         /// <remarks>
-        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>, 
+        ///     If the <paramref name="value"/> is <b>less than</b> the specified <paramref name="minimum"/> <u>or</u> <b>greater than</b> the specified <paramref name="maximum"/>,
         ///     an <see cref="ArgumentOutOfRangeException"/> is raised using the supplied <paramref name="name"/>.
         /// </remarks>
         public static void ArgumentNotOutOfRange(decimal value, string name, int minimum, decimal maximum)

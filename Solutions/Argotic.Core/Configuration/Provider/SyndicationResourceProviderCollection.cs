@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/22/2008	brian.kuhn	Created SyndicationResourceProviderCollection Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration.Provider;
 
@@ -16,9 +9,6 @@ namespace Argotic.Configuration.Provider
     /// </summary>
     public class SyndicationResourceProviderCollection : ProviderCollection, ICollection<SyndicationResourceProvider>
     {
-        //============================================================
-        //	INDEXERS
-        //============================================================
         /// <summary>
         /// Gets the provider with the specified name.
         /// </summary>
@@ -32,9 +22,6 @@ namespace Argotic.Configuration.Provider
             }
         }
 
-        //============================================================
-        //	ICOLLECTION<T> IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Adds an item to the collection.
         /// </summary>
@@ -74,7 +61,7 @@ namespace Argotic.Configuration.Provider
         /// Copies the elements of the <see cref="SyndicationResourceProviderCollection"/> to an <see cref="Array"/>, starting at a particular <see cref="Array"/> index.
         /// </summary>
         /// <param name="array">
-        ///     The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="SyndicationResourceProviderCollection"/>. 
+        ///     The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="SyndicationResourceProviderCollection"/>.
         ///     The <see cref="Array"/> must have zero-based indexing.
         /// </param>
         /// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
@@ -100,7 +87,7 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <param name="item"></param>
         /// <returns>
-        ///     <b>true</b> if item was successfully removed from the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>. 
+        ///     <b>true</b> if item was successfully removed from the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>.
         ///     This method also returns <b>false</b> if item is not found in the collection.
         /// </returns>
         public bool Remove(SyndicationResourceProvider item)

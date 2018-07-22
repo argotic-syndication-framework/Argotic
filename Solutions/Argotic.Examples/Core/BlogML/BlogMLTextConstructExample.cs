@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created BlogMLTextConstructExample Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 using Argotic.Syndication.Specialized;
@@ -21,9 +14,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class BlogMLTextConstructExample
     {
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType) method
         /// </summary>

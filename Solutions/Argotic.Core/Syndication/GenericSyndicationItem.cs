@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/20/2008	brian.kuhn	Created GenericSyndicationItem Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 
 using Argotic.Common;
@@ -19,9 +12,7 @@ namespace Argotic.Syndication
     [Serializable()]
     public class GenericSyndicationItem : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the title of the syndication item.
         /// </summary>
@@ -38,10 +29,6 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of categories associated with the item.
         /// </summary>
         private Collection<GenericSyndicationCategory> itemCategories   = new Collection<GenericSyndicationCategory>();
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -49,14 +36,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
         public GenericSyndicationItem(AtomEntry entry)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(entry, "entry");
-
-            //------------------------------------------------------------
-            //	Extract information from the format specific content
-            //------------------------------------------------------------
             this.LoadFrom(entry);
         }
 
@@ -67,20 +47,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference (Nothing in Visual Basic).</exception>
         public GenericSyndicationItem(RssItem item)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(item, "item");
-
-            //------------------------------------------------------------
-            //	Extract information from the format specific content
-            //------------------------------------------------------------
             this.LoadFrom(item);
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the categories associated with this item.
         /// </summary>
@@ -153,10 +122,6 @@ namespace Argotic.Syndication
                 return itemTitle;
             }
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.
         /// </summary>
@@ -166,15 +131,8 @@ namespace Argotic.Syndication
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             return String.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : String.Empty);
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -183,17 +141,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             GenericSyndicationItem value  = obj as GenericSyndicationItem;
 
             if (value != null)
@@ -217,9 +168,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is GenericSyndicationItem))
             {
                 return false;
@@ -234,9 +182,6 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -250,9 +195,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(GenericSyndicationItem first, GenericSyndicationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -284,9 +226,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(GenericSyndicationItem first, GenericSyndicationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -307,9 +246,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(GenericSyndicationItem first, GenericSyndicationItem second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -321,10 +257,6 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
-
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -332,14 +264,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
         private void LoadFrom(AtomEntry entry)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(entry, "entry");
 
-            //------------------------------------------------------------
-            //	Initialize generic item
-            //------------------------------------------------------------
             if (entry.Title != null && !String.IsNullOrEmpty(entry.Title.Content))
             {
                 itemTitle       = entry.Title.Content.Trim();
@@ -377,14 +303,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference (Nothing in Visual Basic).</exception>
         private void LoadFrom(RssItem item)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(item, "item");
-
-            //------------------------------------------------------------
-            //	Initialize generic item
-            //------------------------------------------------------------
             if (!String.IsNullOrEmpty(item.Title))
             {
                 itemTitle       = item.Title.Trim();

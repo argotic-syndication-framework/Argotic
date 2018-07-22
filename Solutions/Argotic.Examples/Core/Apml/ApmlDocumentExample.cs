@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created ApmlDocumentExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -26,9 +19,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
     public static class ApmlDocumentExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the ApmlDocument class.
         /// </summary>
@@ -37,17 +27,11 @@ namespace Argotic.Examples
             ApmlDocument document       = new ApmlDocument();
             document.DefaultProfileName = "Work";
 
-            //------------------------------------------------------------
-            //	Provide basic administrative data about the APML document
-            //------------------------------------------------------------
             document.Head.Title         = "Example APML file for apml.org";
             document.Head.Generator     = "Written by Hand";
             document.Head.EmailAddress  = "sample@apml.org";
             document.Head.CreatedOn     = new DateTime(2007, 3, 11, 13, 55, 0);
 
-            //------------------------------------------------------------
-            //	Define home profile
-            //------------------------------------------------------------
             ApmlProfile homeProfile     = new ApmlProfile();
             homeProfile.Name            = "Home";
 
@@ -92,9 +76,6 @@ namespace Argotic.Examples
 
             document.AddProfile(homeProfile);
 
-            //------------------------------------------------------------
-            //	Define work profile
-            //------------------------------------------------------------
             ApmlProfile workProfile     = new ApmlProfile();
             workProfile.Name            = "Work";
 
@@ -112,18 +93,11 @@ namespace Argotic.Examples
 
             document.AddProfile(workProfile);
 
-            //------------------------------------------------------------
-            //	Define application information
-            //------------------------------------------------------------
             ApmlApplication sampleApplication   = new ApmlApplication("sample.com");
             sampleApplication.Data              = "<SampleAppEl />";
 
             document.Applications.Add(sampleApplication);
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the ApmlDocument.Create(Uri) method
         /// </summary>
@@ -140,18 +114,11 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load resource asynchronously using event-based notification
-            //------------------------------------------------------------
             ApmlDocument document   = new ApmlDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
@@ -170,10 +137,6 @@ namespace Argotic.Examples
             {
             }
         }
-
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

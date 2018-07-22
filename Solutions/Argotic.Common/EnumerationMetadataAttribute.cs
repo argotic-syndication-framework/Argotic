@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-11/26/2007	brian.kuhn	Created EnumerationMetadataAttribute Class
-****************************************************************************/
-using System;
+﻿using System;
 
 namespace Argotic.Common
 {
@@ -16,9 +9,6 @@ namespace Argotic.Common
     [Serializable()]
     public sealed class EnumerationMetadataAttribute : Attribute, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         ///  Private member to hold the display name for the attributed field.
         /// </summary>
@@ -28,22 +18,13 @@ namespace Argotic.Common
         /// </summary>
         private string enumMetadataAlternateValue   = String.Empty;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
         /// </summary>
         public EnumerationMetadataAttribute() : base()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the alternate textual value for the attributed field.
         /// </summary>
@@ -92,9 +73,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.
         /// </summary>
@@ -104,15 +82,9 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             return String.Format(null, "[EnumerationMetadata(DisplayName = \"{0}\", AlternateValue=\"{1}\")]", this.DisplayName, this.AlternateValue);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -121,17 +93,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             EnumerationMetadataAttribute value  = obj as EnumerationMetadataAttribute;
 
             if (value != null)
@@ -154,9 +120,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is EnumerationMetadataAttribute))
             {
                 return false;
@@ -171,9 +134,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -187,9 +147,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(EnumerationMetadataAttribute first, EnumerationMetadataAttribute second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -221,9 +178,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(EnumerationMetadataAttribute first, EnumerationMetadataAttribute second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -244,9 +198,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(EnumerationMetadataAttribute first, EnumerationMetadataAttribute second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

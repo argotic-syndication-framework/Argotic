@@ -1,18 +1,11 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/13/2008	brian.kuhn	Created IXmlRpcValue Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
 namespace Argotic.Net
 {
     /// <summary>
-    /// Defines generalized properties, methods, indexers and events that a value type or class 
+    /// Defines generalized properties, methods, indexers and events that a value type or class
     /// implements to create a type-specific XML-RPC values.
     /// </summary>
     /// <seealso cref="XmlRpcArrayValue"/>
@@ -20,9 +13,6 @@ namespace Argotic.Net
     /// <seealso cref="XmlRpcStructureValue"/>
     public interface IXmlRpcValue
     {
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="IXmlRpcValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -41,9 +31,6 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         void WriteTo(XmlWriter writer);
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.
         /// </summary>

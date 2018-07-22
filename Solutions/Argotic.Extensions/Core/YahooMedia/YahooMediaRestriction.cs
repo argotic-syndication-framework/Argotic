@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/07/2008	brian.kuhn	Created YahooMediaRestriction Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -28,9 +21,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class YahooMediaRestriction : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the type of relationship that the restriction represents.
         /// </summary>
@@ -43,23 +34,13 @@ namespace Argotic.Extensions.Core
         /// Private member to hold the entities the restriction applies to.
         /// </summary>
         private Collection<string> restrictionEntities;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaRestriction"/> class.
         /// </summary>
         public YahooMediaRestriction()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the entities this restriction applies to.
         /// </summary>
@@ -125,9 +106,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Returns the relationship identifier for the supplied <see cref="YahooMediaRestrictionRelationship"/>.
         /// </summary>
@@ -135,14 +113,7 @@ namespace Argotic.Extensions.Core
         /// <returns>The relationship identifier for the supplied <paramref name="relationship"/>, otherwise returns an empty string.</returns>
         public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
@@ -177,19 +148,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static YahooMediaRestrictionRelationship RelationshipByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             YahooMediaRestrictionRelationship restrictionRelationship   = YahooMediaRestrictionRelationship.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
@@ -220,14 +180,7 @@ namespace Argotic.Extensions.Core
         /// <returns>The restriction type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         public static string RestrictionTypeAsString(YahooMediaRestrictionType type)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
@@ -262,19 +215,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static YahooMediaRestrictionType RestrictionTypeByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             YahooMediaRestrictionType restrictionType   = YahooMediaRestrictionType.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
@@ -298,9 +240,6 @@ namespace Argotic.Extensions.Core
             return restrictionType;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="YahooMediaRestriction"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -312,19 +251,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasAttributes)
             {
                 string relationshipAttribute    = source.GetAttribute("relationship", String.Empty);
@@ -382,19 +310,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("restriction", extension.XmlNamespace);
 
             if(this.Relationship != YahooMediaRestrictionRelationship.None)
@@ -418,9 +335,6 @@ namespace Argotic.Extensions.Core
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaRestriction"/>.
         /// </summary>
@@ -430,9 +344,6 @@ namespace Argotic.Extensions.Core
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -454,9 +365,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -465,17 +373,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             YahooMediaRestriction value  = obj as YahooMediaRestriction;
 
             if (value != null)
@@ -499,9 +400,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is YahooMediaRestriction))
             {
                 return false;
@@ -516,9 +414,6 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -532,9 +427,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(YahooMediaRestriction first, YahooMediaRestriction second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -566,9 +458,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(YahooMediaRestriction first, YahooMediaRestriction second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -589,9 +478,6 @@ namespace Argotic.Extensions.Core
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(YahooMediaRestriction first, YahooMediaRestriction second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

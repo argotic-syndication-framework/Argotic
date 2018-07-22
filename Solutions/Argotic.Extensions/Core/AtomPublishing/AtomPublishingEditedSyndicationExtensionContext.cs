@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-07/16/2008	brian.kuhn	Created AtomPublishingEditedSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,30 +13,18 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class AtomPublishingEditedSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the last time a resource was edited. If the resource has not been edited yet, indicates the time the resource was created.
         /// </summary>
         private DateTime extensionEditedOn  = DateTime.MinValue;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
         /// </summary>
         public AtomPublishingEditedSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
-        }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
+        }
         /// <summary>
         /// Gets or sets a date-time indicating the most recent instant in time when this resource was edited.
         /// </summary>
@@ -66,10 +47,6 @@ namespace Argotic.Extensions.Core
                 extensionEditedOn = value;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -80,20 +57,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator editedNavigator  = source.SelectSingleNode("app:edited", manager);
@@ -121,15 +87,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if (this.EditedOn != DateTime.MinValue)
             {
                 writer.WriteElementString("edited", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.EditedOn));

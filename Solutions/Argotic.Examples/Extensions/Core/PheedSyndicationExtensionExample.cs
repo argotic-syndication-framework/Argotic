@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/20/2007	brian.kuhn	Created PheedSyndicationExtensionExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 
 using Argotic.Extensions.Core;
@@ -23,9 +16,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
     public static class PheedSyndicationExtensionExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the PheedSyndicationExtension class.
         /// </summary>

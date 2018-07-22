@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/11/2008	brian.kuhn	Created IBlogMLCommonObject Interface
-****************************************************************************/
-using System;
+﻿using System;
 
 namespace Argotic.Syndication.Specialized
 {
@@ -15,9 +8,6 @@ namespace Argotic.Syndication.Specialized
     /// <seealso cref="Argotic.Syndication.Specialized.BlogMLAuthor"/>
     interface IBlogMLCommonObject
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the approval status of the web log entity.
         /// </summary>

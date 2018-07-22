@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/18/2008	brian.kuhn	Created IExtensibleSyndicationObject Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Argotic.Extensions
@@ -16,9 +9,6 @@ namespace Argotic.Extensions
     /// </summary>
     public interface IExtensibleSyndicationObject
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to the syndication entity.
         /// </summary>
@@ -40,9 +30,6 @@ namespace Argotic.Extensions
             get;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>

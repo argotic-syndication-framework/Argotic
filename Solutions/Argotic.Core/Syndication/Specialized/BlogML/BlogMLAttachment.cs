@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/16/2008	brian.kuhn	Created BlogMLAttachment Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -29,9 +22,7 @@ namespace Argotic.Syndication.Specialized
     [Serializable()]
     public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -60,23 +51,13 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the attachment resource content.
         /// </summary>
         private string attachmentContent                            = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLAttachment"/> class.
         /// </summary>
         public BlogMLAttachment()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
-        }
 
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
+        }
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -114,10 +95,6 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets content of this attachment.
         /// </summary>
@@ -233,10 +210,6 @@ namespace Argotic.Syndication.Specialized
                 attachmentUrl = value;
             }
         }
-
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -245,19 +218,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -279,14 +241,7 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
-
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -302,19 +257,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -323,10 +267,6 @@ namespace Argotic.Syndication.Specialized
 
             return wasRemoved;
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="BlogMLAttachment"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -338,19 +278,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasAttributes)
             {
                 string embeddedAttribute    = source.GetAttribute("embedded", String.Empty);
@@ -428,25 +357,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             wasLoaded   = this.Load(source);
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -460,14 +374,7 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("attachment", BlogMLUtility.BlogMLNamespace);
 
             writer.WriteAttributeString("embedded", this.IsEmbedded ? "true" : "false");
@@ -492,18 +399,10 @@ namespace Argotic.Syndication.Specialized
             {
                 writer.WriteString(this.Content);
             }
-
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLAttachment"/>.
         /// </summary>
@@ -513,9 +412,6 @@ namespace Argotic.Syndication.Specialized
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -536,10 +432,6 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -548,17 +440,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             BlogMLAttachment value  = obj as BlogMLAttachment;
 
             if (value != null)
@@ -585,9 +470,6 @@ namespace Argotic.Syndication.Specialized
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is BlogMLAttachment))
             {
                 return false;
@@ -602,9 +484,6 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -618,9 +497,6 @@ namespace Argotic.Syndication.Specialized
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(BlogMLAttachment first, BlogMLAttachment second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -652,9 +528,6 @@ namespace Argotic.Syndication.Specialized
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(BlogMLAttachment first, BlogMLAttachment second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -675,9 +548,6 @@ namespace Argotic.Syndication.Specialized
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(BlogMLAttachment first, BlogMLAttachment second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

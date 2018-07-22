@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-11/27/2007	brian.kuhn	Created TrackbackDiscoveryMetadata Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
@@ -19,9 +12,6 @@ namespace Argotic.Common
     [Serializable()]
     public class TrackbackDiscoveryMetadata : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the XML namespace for Resource Description Framework (RDF) entities.
         /// </summary>
@@ -51,17 +41,11 @@ namespace Argotic.Common
         /// </summary>
         private Uri trackbackDiscoveryPingEndpoint;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackDiscoveryMetadata"/> class.
         /// </summary>
         public TrackbackDiscoveryMetadata()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -71,20 +55,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         public TrackbackDiscoveryMetadata(XPathNavigator navigator) : this()
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
 
-            //------------------------------------------------------------
-            //	Extract auto-discovery meta-data from navigator
-            //------------------------------------------------------------
             this.Load(navigator);
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the Resource Description Framework (RDF) entity reference.
         /// </summary>
@@ -166,9 +141,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="TrackbackDiscoveryMetadata"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -180,28 +152,16 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator navigator)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
             XmlNamespaceManager manager = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
 
-            //------------------------------------------------------------
-            //	Initialize XML namespace manager with expected namespaces
-            //------------------------------------------------------------
             manager = new XmlNamespaceManager(navigator.NameTable);
             manager.AddNamespace("rdf", RDF_NAMESPACE);
             manager.AddNamespace("dc", DUBLIN_CORE_NAMESPACE);
             manager.AddNamespace("trackback", TRACKBACK_NAMESPACE);
 
-            //------------------------------------------------------------
-            //	Attempt to extract Trackback meta-data information
-            //------------------------------------------------------------
             XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rdf:RDF\rdf:Description", manager);
 
             if (descriptionNavigator != null && descriptionNavigator.HasAttributes)
@@ -213,10 +173,6 @@ namespace Argotic.Common
 
                 if (String.IsNullOrEmpty(pingAttribute))
                 {
-                    //------------------------------------------------------------
-                    //	rdf:Description elment does not have a trackback:ping 
-                    //  attribute, so return false.
-                    //------------------------------------------------------------
                     return false;
                 }
 
@@ -267,14 +223,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write embedded RDF that rpresents this discovery meta-data
-            //------------------------------------------------------------
             writer.WriteStartElement("rdf", "RDF", RDF_NAMESPACE);
             writer.WriteAttributeString("xmlns", "dc", null, DUBLIN_CORE_NAMESPACE);
             writer.WriteAttributeString("xmlns", "trackback", null, TRACKBACK_NAMESPACE);
@@ -289,9 +239,6 @@ namespace Argotic.Common
             writer.WriteFullEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="TrackbackDiscoveryMetadata"/>.
         /// </summary>
@@ -301,9 +248,6 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -325,9 +269,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -336,17 +277,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             TrackbackDiscoveryMetadata value  = obj as TrackbackDiscoveryMetadata;
 
             if (value != null)
@@ -371,9 +306,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is TrackbackDiscoveryMetadata))
             {
                 return false;
@@ -388,9 +320,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -404,9 +333,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -438,9 +364,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -461,9 +384,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

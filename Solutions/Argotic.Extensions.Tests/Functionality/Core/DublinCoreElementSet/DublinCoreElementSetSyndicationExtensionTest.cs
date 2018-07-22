@@ -17,7 +17,6 @@ namespace Argotic.Extensions.Tests
 	[TestClass()]
 	public class DublinCoreElementSetSyndicationExtensionTest
 	{
-
 		const string namespc = @"xmlns:dc=""http://purl.org/dc/elements/1.1/""";
 
 		private const string nycText = "<contributor xmlns=\"http://purl.org/dc/elements/1.1/\">Helper</contributor>\r\n"+
@@ -69,34 +68,6 @@ namespace Argotic.Extensions.Tests
 				testContextInstance = value;
 			}
 		}
-
-	    // 
-		//You can use the following additional attributes as you write your tests:
-		//
-		//Use ClassInitialize to run code before running the first test in the class
-		//[ClassInitialize()]
-		//public static void MyClassInitialize(TestContext testContext)
-		//{
-		//}
-		//
-		//Use ClassCleanup to run code after all tests in a class have run
-		//[ClassCleanup()]
-		//public static void MyClassCleanup()
-		//{
-		//}
-		//
-		//Use TestInitialize to run code before running each test
-		//[TestInitialize()]
-		//public void MyTestInitialize()
-		//{
-		//}
-		//
-		//Use TestCleanup to run code after each test has run
-		//[TestCleanup()]
-		//public void MyTestCleanup()
-		//{
-		//}
-		//
 
 	    /// <summary>
 		///A test for DublinCoreElementSetSyndicationExtension Constructor
@@ -216,32 +187,33 @@ namespace Argotic.Extensions.Tests
 	  }
 
 
-		[TestMethod]
-	public void DublinCoreElementSet_FullTest()
-		{
-			var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+	    [TestMethod]
+	    public void DublinCoreElementSet_FullTest()
+	    {
+	        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-			 using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-			 {
-				 RssFeed feed = new RssFeed();
-				 feed.Load(reader);
+	        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
+	        {
+	            RssFeed feed = new RssFeed();
+	            feed.Load(reader);
 
-				 //				 Assert.IsTrue(feed.Channel.HasExtensions);
-				 //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-				 //						 typeof(DublinCoreElementSetSyndicationExtension));
+	            //				 Assert.IsTrue(feed.Channel.HasExtensions);
+	            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
+	            //						 typeof(DublinCoreElementSetSyndicationExtension));
 
-				 Assert.AreEqual(1, feed.Channel.Items.Count());
-				 var item = feed.Channel.Items.Single();
-				 Assert.IsTrue(item.HasExtensions);
-				 var itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
-				 Assert.IsNotNull(itemExtension);
-				 Assert.IsInstanceOfType(item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-				  typeof(DublinCoreElementSetSyndicationExtension));
+	            Assert.AreEqual(1, feed.Channel.Items.Count());
+	            var item = feed.Channel.Items.Single();
+	            Assert.IsTrue(item.HasExtensions);
+	            var itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
+	            Assert.IsNotNull(itemExtension);
+	            Assert.IsInstanceOfType(
+	                item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
+	                typeof(DublinCoreElementSetSyndicationExtension));
 
-			 }
-		}
+	        }
+	    }
 
-		/// <summary>
+	    /// <summary>
 		///A test for MatchByType
 		///</summary>
 		[TestMethod()]
@@ -426,6 +398,5 @@ namespace Argotic.Extensions.Tests
 			dub.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
 			return dub;
 		}
-
 	}
 }

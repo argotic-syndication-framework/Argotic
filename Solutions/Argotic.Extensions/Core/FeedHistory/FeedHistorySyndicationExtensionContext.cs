@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created FeedHistorySyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,9 +13,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class FeedHistorySyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold a value indicating if feed contains all of the entries of a logical feed.
         /// </summary>
@@ -35,23 +26,13 @@ namespace Argotic.Extensions.Core
         /// Private member to hold a collection of relations for linked feed documents that together contain the entries of a logical feed.
         /// </summary>
         private Collection<FeedHistoryLinkRelation> extensionLinkRelations;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtensionContext"/> class.
         /// </summary>
         public FeedHistorySyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
-        }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
+        }
         /// <summary>
         /// Gets or sets a value indicating the feed is a set of linked feed documents that together contain the entries of a logical feed, without any guarantees about the stability of the documents' contents.
         /// </summary>
@@ -102,10 +83,6 @@ namespace Argotic.Extensions.Core
                 return extensionLinkRelations;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -116,28 +93,14 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
-            //------------------------------------------------------------
-            //	Add Atom XML namespace if necessary
-            //------------------------------------------------------------
             if (String.IsNullOrEmpty(manager.LookupNamespace("atom")))
             {
                 manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
             }
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator archiveNavigator     = source.SelectSingleNode("fh:archive", manager);
@@ -188,15 +151,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if (this.IsArchive)
             {
                 writer.WriteElementString("archive", xmlNamespace, String.Empty);

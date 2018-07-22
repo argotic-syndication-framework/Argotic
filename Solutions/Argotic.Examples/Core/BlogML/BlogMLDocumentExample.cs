@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/12/2007	brian.kuhn	Created BlogMLDocumentExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -25,9 +18,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class BlogMLDocumentExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the BlogMLDocument class.
         /// </summary>
@@ -107,10 +97,6 @@ namespace Argotic.Examples
             comment.Content         = new BlogMLTextConstruct("This is a test comment.");
             post.Comments.Add(comment);
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the BlogMLDocument.Create(Uri) method
         /// </summary>
@@ -126,18 +112,11 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load resource asynchronously using event-based notification
-            //------------------------------------------------------------
             BlogMLDocument document   = new BlogMLDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
@@ -157,9 +136,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

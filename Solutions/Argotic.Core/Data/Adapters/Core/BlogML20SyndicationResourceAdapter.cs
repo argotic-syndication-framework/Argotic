@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/17/2008	brian.kuhn	Created BlogML20SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,21 +14,14 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="BlogML20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="BlogMLDocument"/> and an XML data source. 
-    ///         The <see cref="BlogML20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(BlogMLDocument)"/>, which changes the data 
+    ///         The <see cref="BlogML20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="BlogMLDocument"/> and an XML data source.
+    ///         The <see cref="BlogML20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(BlogMLDocument)"/>, which changes the data
     ///         in the <see cref="BlogMLDocument"/> to match the data in the data source.
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="BlogMLDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the BlogML 2.0 specification.</para>
     /// </remarks>
     public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogML20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -48,14 +34,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="BlogMLDocument"/> to match the data source.
         /// </summary>
@@ -63,19 +43,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(BlogMLDocument resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
             if (blogNavigator != null)
             {
@@ -134,9 +105,6 @@ namespace Argotic.Data.Adapters
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="BlogMLDocument"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
         /// </summary>
@@ -153,17 +121,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(document, "document");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNodeIterator authorsIterator               = source.Select("blog:authors/blog:author", manager);
             XPathNodeIterator extendedPropertiesIterator    = source.Select("blog:extended-properties/blog:property", manager);
             XPathNodeIterator categoriesIterator            = source.Select("blog:categories/blog:category", manager);

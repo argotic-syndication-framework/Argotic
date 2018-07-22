@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created AtomSource Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -45,9 +38,7 @@ namespace Argotic.Syndication
     [Serializable()]
     public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -108,18 +99,12 @@ namespace Argotic.Syndication
         /// Private member to hold a value indicating the most recent instant in time when the source was modified in a way the publisher considers significant.
         /// </summary>
         private DateTime sourceUpdatedOn    = DateTime.MinValue;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomSource"/> class.
         /// </summary>
         public AtomSource()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
+
         }
 
         /// <summary>
@@ -133,17 +118,10 @@ namespace Argotic.Syndication
         /// </param>
         public AtomSource(AtomId id, AtomTextConstruct title, DateTime utcUpdatedOn)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using properties
-            //------------------------------------------------------------
             this.Id         = id;
             this.Title      = title;
             this.UpdatedOn  = utcUpdatedOn;
         }
-
-        //============================================================
-        //	COMMON PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -187,10 +165,6 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
-
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -228,10 +202,6 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the authors of this source.
         /// </summary>
@@ -446,10 +416,6 @@ namespace Argotic.Syndication
                 sourceUpdatedOn = value;
             }
         }
-
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -458,19 +424,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -492,14 +447,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
-
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -515,19 +463,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -536,10 +473,6 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="AtomSource"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -551,32 +484,13 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
-
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
                 wasLoaded   = true;
             }
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator idNavigator              = source.SelectSingleNode("atom:id", manager);
             XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
             XPathNavigator updatedNavigator         = source.SelectSingleNode("atom:updated", manager);
@@ -635,25 +549,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             wasLoaded   = this.Load(source);
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -667,14 +566,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("source", AtomUtility.AtomNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -737,18 +629,10 @@ namespace Argotic.Syndication
             {
                 link.WriteTo(writer);
             }
-
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="AtomSource"/>.
         /// </summary>
@@ -758,9 +642,6 @@ namespace Argotic.Syndication
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -781,10 +662,6 @@ namespace Argotic.Syndication
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -793,17 +670,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             AtomSource value  = obj as AtomSource;
 
             if (value != null)
@@ -896,9 +766,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is AtomSource))
             {
                 return false;
@@ -913,9 +780,6 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -929,9 +793,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(AtomSource first, AtomSource second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -963,9 +824,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(AtomSource first, AtomSource second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -986,9 +844,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(AtomSource first, AtomSource second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -1001,9 +856,6 @@ namespace Argotic.Syndication
             return (first.CompareTo(second) > 0);
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="AtomSource"/> collection elements using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1017,20 +869,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNodeIterator authorIterator        = source.Select("atom:author", manager);
             XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
             XPathNodeIterator categoryIterator      = source.Select("atom:category", manager);
@@ -1104,20 +945,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             XPathNavigator generatorNavigator       = source.SelectSingleNode("atom:generator", manager);
             XPathNavigator iconNavigator            = source.SelectSingleNode("atom:icon", manager);
             XPathNavigator logoNavigator            = source.SelectSingleNode("atom:logo", manager);

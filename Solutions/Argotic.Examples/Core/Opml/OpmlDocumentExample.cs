@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created OpmlDocumentExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -26,9 +19,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
     public static class OpmlDocumentExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the OpmlDocument class.
         /// </summary>
@@ -48,10 +38,6 @@ namespace Argotic.Examples
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the OpmlDocument.Create(Uri) method
         /// </summary>
@@ -68,17 +54,11 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load resource asynchronously using event-based notification
-            //------------------------------------------------------------
             OpmlDocument document   = new OpmlDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
@@ -97,10 +77,6 @@ namespace Argotic.Examples
             {
             }
         }
-
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

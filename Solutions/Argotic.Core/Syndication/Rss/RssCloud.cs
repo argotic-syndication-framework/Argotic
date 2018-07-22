@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/11/2007	brian.kuhn	Created RssCloud Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -36,9 +29,7 @@ namespace Argotic.Syndication
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public class RssCloud : IComparable, IExtensibleSyndicationObject
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -63,18 +54,11 @@ namespace Argotic.Syndication
         /// Private member to hold message format the web service employs.
         /// </summary>
         private string cloudRegisterProcedure   = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="RssCloud"/> class.
         /// </summary>
         public RssCloud()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -95,19 +79,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is an empty string.</exception>
         public RssCloud(string domain, string path, int port, RssCloudProtocol protocol, string registerProcedure)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Domain             = domain;
             this.Path               = path;
             this.Port               = port;
             this.Protocol           = protocol;
             this.RegisterProcedure  = registerProcedure;
         }
-
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -145,10 +122,6 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the host name or IP address of the web service that monitors updates to a feed.
         /// </summary>
@@ -252,10 +225,6 @@ namespace Argotic.Syndication
                 cloudRegisterProcedure = value.Trim();
             }
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Returns the cloud protocol identifier for the supplied <see cref="RssCloudProtocol"/>.
         /// </summary>
@@ -271,14 +240,7 @@ namespace Argotic.Syndication
         /// </example>
         public static string CloudProtocolAsString(RssCloudProtocol protocol)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
-
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(RssCloudProtocol))
@@ -321,19 +283,8 @@ namespace Argotic.Syndication
         /// </example>
         public static RssCloudProtocol CloudProtocolByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             RssCloudProtocol cloudProtocol  = RssCloudProtocol.None;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(RssCloudProtocol))
@@ -356,10 +307,6 @@ namespace Argotic.Syndication
 
             return cloudProtocol;
         }
-
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -368,19 +315,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -402,14 +338,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
-
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -425,19 +354,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
-
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -446,10 +364,6 @@ namespace Argotic.Syndication
 
             return wasRemoved;
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="RssCloud"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -461,19 +375,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if (source.HasAttributes)
             {
                 string domain               = source.GetAttribute("domain", String.Empty);
@@ -540,25 +443,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             wasLoaded   = this.Load(source);
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -572,14 +460,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("cloud");
 
             writer.WriteAttributeString("domain", this.Domain);
@@ -587,18 +468,10 @@ namespace Argotic.Syndication
             writer.WriteAttributeString("port", this.Port.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             writer.WriteAttributeString("protocol", RssCloud.CloudProtocolAsString(this.Protocol));
             writer.WriteAttributeString("registerProcedure", this.RegisterProcedure);
-
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="RssCloud"/>.
         /// </summary>
@@ -608,9 +481,6 @@ namespace Argotic.Syndication
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -631,10 +501,6 @@ namespace Argotic.Syndication
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -643,17 +509,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             RssCloud value  = obj as RssCloud;
 
             if (value != null)
@@ -679,9 +538,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is RssCloud))
             {
                 return false;
@@ -696,9 +552,6 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -712,9 +565,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(RssCloud first, RssCloud second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -746,9 +596,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(RssCloud first, RssCloud second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -769,9 +616,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(RssCloud first, RssCloud second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created IAtomCommonObjectAttributes Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 
 namespace Argotic.Syndication
@@ -17,9 +10,6 @@ namespace Argotic.Syndication
     /// <seealso cref="Argotic.Syndication.AtomFeed"/>
     interface IAtomCommonObjectAttributes
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>

@@ -53,6 +53,5 @@ namespace Argotic.Extensions.Tests
 		{
 			return string.Format(strFullXml1, namespc, strExt);
 		}
-
 	}
 }

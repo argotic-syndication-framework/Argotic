@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/13/2008	brian.kuhn	Created XmlRpcStructureValue Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml;
@@ -23,25 +16,16 @@ namespace Argotic.Net
     [Serializable()]
     public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the structure members.
         /// </summary>
         private Collection<XmlRpcStructureMember> structureMembers;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcStructureValue"/> class.
         /// </summary>
         public XmlRpcStructureValue()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -51,14 +35,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcStructureValue(XPathNodeIterator iterator)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(iterator, "iterator");
 
-            //------------------------------------------------------------
-            //	Parse iterator nodes to load collection
-            //------------------------------------------------------------
             if (iterator.Count > 0)
             {
                 while (iterator.MoveNext())
@@ -72,16 +50,13 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	INDEXERS
-        //============================================================
         /// <summary>
         /// Gets or sets the <see cref="XmlRpcStructureMember"/> that has the specified name.
         /// </summary>
         /// <param name="name">The name that uniquely identifies the member to get or set.</param>
         /// <returns>The <see cref="XmlRpcStructureMember"/> with the specified name.</returns>
         /// <remarks>
-        ///     If no member exists for the specified <paramref name="name"/>, returns a <b>null</b> reference. 
+        ///     If no member exists for the specified <paramref name="name"/>, returns a <b>null</b> reference.
         ///     This indexer uses a <i>case insensitive</i> comparison of the specified member <paramref name="name"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -111,7 +86,7 @@ namespace Argotic.Net
             {
                 Guard.ArgumentNotNullOrEmptyString(name, "name");
                 Guard.ArgumentNotNull(value, "value");
-                
+
                 for (int i = 0; i < this.Members.Count; i++)
                 {
                     XmlRpcStructureMember member    = this.Members[i];
@@ -124,14 +99,11 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets this structure's members.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="XmlRpcStructureMember"/> objects that represent this structure's members. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="XmlRpcStructureMember"/> objects that represent this structure's members.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<XmlRpcStructureMember> Members
@@ -146,9 +118,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified <see cref="Collection{XmlRpcStructureMember}"/> collections.
         /// </summary>
@@ -170,14 +139,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<XmlRpcStructureMember> source, Collection<XmlRpcStructureMember> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -205,9 +168,6 @@ namespace Argotic.Net
             return result;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="XmlRpcStructureValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -219,19 +179,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Attempt to extract structure information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNodeIterator memberIterator    = source.Select("struct/member");
@@ -259,14 +210,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("value");
 
             writer.WriteStartElement("struct");
@@ -279,9 +224,6 @@ namespace Argotic.Net
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcStructureValue"/>.
         /// </summary>
@@ -291,9 +233,6 @@ namespace Argotic.Net
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -315,9 +254,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -326,17 +262,11 @@ namespace Argotic.Net
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             XmlRpcStructureValue value  = obj as XmlRpcStructureValue;
 
             if (value != null)
@@ -358,9 +288,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is XmlRpcStructureValue))
             {
                 return false;
@@ -375,9 +302,6 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -391,9 +315,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(XmlRpcStructureValue first, XmlRpcStructureValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -425,9 +346,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(XmlRpcStructureValue first, XmlRpcStructureValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -448,9 +366,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(XmlRpcStructureValue first, XmlRpcStructureValue second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

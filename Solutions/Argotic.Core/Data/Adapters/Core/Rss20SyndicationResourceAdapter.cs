@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created Rss20SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -20,8 +13,8 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Rss20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source. 
-    ///         The <see cref="Rss20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data 
+    ///         The <see cref="Rss20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source.
+    ///         The <see cref="Rss20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data
     ///         in the <see cref="RssFeed"/> to match the data in the data source.
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 2.0 specification.</para>
@@ -29,13 +22,6 @@ namespace Argotic.Data.Adapters
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="Rss20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -48,14 +34,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="RssFeed"/> to match the data source.
         /// </summary>
@@ -63,19 +43,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(RssFeed resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("rss", manager);
 
             if (feedNavigator != null)

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/20/2007	brian.kuhn	Created SiteSummarySlashSyndicationExtensionExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 
 using Argotic.Extensions.Core;
@@ -22,9 +15,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class SiteSummarySlashSyndicationExtensionExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the SiteSummarySlashSyndicationExtension class.
         /// </summary>

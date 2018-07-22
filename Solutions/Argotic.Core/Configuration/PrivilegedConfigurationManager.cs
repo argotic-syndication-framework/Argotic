@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/19/2008	brian.kuhn	Created PrivilegedConfigurationManager Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Configuration;
 using System.Security.Permissions;
 using System.Threading;
@@ -21,9 +14,6 @@ namespace Argotic.Configuration
     //[ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
     internal static class PrivilegedConfigurationManager
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold object used to synchronize locks when reading Trackback configuration information.
         /// </summary>
@@ -37,9 +27,6 @@ namespace Argotic.Configuration
         /// </summary>
         private static object configurationManagerSyndicationResourceSyncObject;
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.
         /// </summary>
@@ -88,9 +75,6 @@ namespace Argotic.Configuration
             }
         }
 
-        //============================================================
-        //	GENERIC METHODS
-        //============================================================
         /// <summary>
         /// Retrieves a specified configuration section for the current application's default configuration.
         /// </summary>
@@ -102,22 +86,16 @@ namespace Argotic.Configuration
         [SecurityPermission(SecurityAction.Demand)]
         internal static object GetSection(string sectionName)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(sectionName, "sectionName");
 
             return ConfigurationManager.GetSection(sectionName);
         }
 
-        //============================================================
-        //	PROVIDER METHODS
-        //============================================================
         /// <summary>
         /// Returns the syndication resource configuration section information.
         /// </summary>
         /// <returns>
-        ///     A <see cref="XmlRpcClientSection"/> object that represents the syndication resource configuration information. 
+        ///     A <see cref="XmlRpcClientSection"/> object that represents the syndication resource configuration information.
         ///     If no configuration section is defined for syndication resources, returns a <b>null</b> reference.
         /// </returns>
         [SecurityPermission(SecurityAction.Demand)]
@@ -136,14 +114,11 @@ namespace Argotic.Configuration
             }
         }
 
-        //============================================================
-        //	NETWORK CLIENT METHODS
-        //============================================================
         /// <summary>
         /// Returns the Trackback client configuration section information.
         /// </summary>
         /// <returns>
-        ///     A <see cref="XmlRpcClientSection"/> object that represents the Trackback client configuration information. 
+        ///     A <see cref="XmlRpcClientSection"/> object that represents the Trackback client configuration information.
         ///     If no configuration section is defined for the client application, returns a <b>null</b> reference.
         /// </returns>
         [SecurityPermission(SecurityAction.Demand)]
@@ -166,7 +141,7 @@ namespace Argotic.Configuration
         /// Returns the XML-RPC client configuration section information.
         /// </summary>
         /// <returns>
-        ///     A <see cref="XmlRpcClientSection"/> object that represents the XML-RPC client configuration information. 
+        ///     A <see cref="XmlRpcClientSection"/> object that represents the XML-RPC client configuration information.
         ///     If no configuration section is defined for the client application, returns a <b>null</b> reference.
         /// </returns>
         [SecurityPermission(SecurityAction.Demand)]

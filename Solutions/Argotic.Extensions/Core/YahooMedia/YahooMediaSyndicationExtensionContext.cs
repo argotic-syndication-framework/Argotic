@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created YahooMediaSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
@@ -21,9 +14,6 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEntities
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
@@ -81,22 +71,13 @@ namespace Argotic.Extensions.Core
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtensionContext"/> class.
         /// </summary>
         public YahooMediaSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the publishable media objects.
         /// </summary>
@@ -160,9 +141,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	SECONDARY PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for this syndication entity.
         /// </summary>
@@ -410,9 +388,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -423,20 +398,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNodeIterator contentIterator   = source.Select("media:content", manager);
@@ -487,15 +451,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             foreach(YahooMediaContent content in this.Contents)
             {
                 content.WriteTo(writer);
@@ -509,9 +466,6 @@ namespace Argotic.Extensions.Core
             YahooMediaUtility.WriteCommonObjectEntities(this, writer);
         }
 
-        //============================================================
-        //	UTILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="YahooMediaContent"/> to the current instance's <see cref="Contents"/> collection.
         /// </summary>
@@ -520,19 +474,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddContent(YahooMediaContent content)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(content, "content");
 
-            //------------------------------------------------------------
-            //	Add media object to collection
-            //------------------------------------------------------------
             ((Collection<YahooMediaContent>)this.Contents).Add(content);
             wasAdded    = true;
 
@@ -547,19 +491,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddGroup(YahooMediaGroup group)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(group, "group");
 
-            //------------------------------------------------------------
-            //	Add media group to collection
-            //------------------------------------------------------------
             ((Collection<YahooMediaGroup>)this.Groups).Add(group);
             wasAdded = true;
 
@@ -577,19 +511,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveContent(YahooMediaContent content)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(content, "content");
 
-            //------------------------------------------------------------
-            //	Remove media object from collection
-            //------------------------------------------------------------
             if (((Collection<YahooMediaContent>)this.Contents).Contains(content))
             {
                 ((Collection<YahooMediaContent>)this.Contents).Remove(content);
@@ -610,19 +534,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveGroup(YahooMediaGroup group)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(group, "group");
 
-            //------------------------------------------------------------
-            //	Remove media group from collection
-            //------------------------------------------------------------
             if (((Collection<YahooMediaGroup>)this.Groups).Contains(group))
             {
                 ((Collection<YahooMediaGroup>)this.Groups).Remove(group);

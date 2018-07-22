@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created SyndicationResourceLoadedEventArgs Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Net;
 using System.Xml.XPath;
 
@@ -15,7 +8,7 @@ namespace Argotic.Common
     /// Provides data for the <see cref="ISyndicationResource.Loaded"/> event.
     /// </summary>
     /// <remarks>
-    ///     A <see cref="ISyndicationResource.Loaded"/> event occurs whenever the <see cref="ISyndicationResource.Load(System.Xml.XmlReader)"/> 
+    ///     A <see cref="ISyndicationResource.Loaded"/> event occurs whenever the <see cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
     ///     or <see cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/> methods are called.
     /// </remarks>
     /// <seealso cref="ISyndicationResource"/>
@@ -24,9 +17,6 @@ namespace Argotic.Common
     [Serializable()]
     public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
@@ -49,17 +39,11 @@ namespace Argotic.Common
         /// </summary>
         private Object eventUserToken;
 
-        //============================================================
-		//	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
         /// </summary>
         public SyndicationResourceLoadedEventArgs()
 		{
-			//------------------------------------------------------------
-			//	
-			//------------------------------------------------------------
 		}
 
         /// <summary>
@@ -69,9 +53,6 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data) : this()
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(data, "data");
 
             eventNavigator  = data.CreateNavigator();
@@ -94,9 +75,6 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy) : this(data)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
             eventSource         = source;
@@ -115,9 +93,6 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options) : this(data)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
             eventSource         = source;
@@ -161,9 +136,6 @@ namespace Argotic.Common
             eventUserToken  = state;
         }
 
-        //============================================================
-        //	STATIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Represents an syndication resource loaded event with no event data.
         /// </summary>
@@ -177,14 +149,11 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the network credentials used for authenticating the request to the Internet resource that the syndication resource was loaded from.
         /// </summary>
         /// <value>
-        ///     The <see cref="ICredentials"/> that were used to authenticate the request to an Internet resource. 
+        ///     The <see cref="ICredentials"/> that were used to authenticate the request to an Internet resource.
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no credentials were provided, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
@@ -214,7 +183,7 @@ namespace Argotic.Common
         /// Gets the network proxy used to access the Internet resource that the syndication resource was loaded from.
         /// </summary>
         /// <value>
-        ///     The <see cref="IWebProxy"/> used to access the Internet resource. 
+        ///     The <see cref="IWebProxy"/> used to access the Internet resource.
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no proxy was specified, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
@@ -230,7 +199,7 @@ namespace Argotic.Common
         /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
         /// </summary>
         /// <value>
-        ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. 
+        ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
@@ -246,7 +215,7 @@ namespace Argotic.Common
         /// Gets an <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
         /// </summary>
         /// <value>
-        ///     A <see cref="Object"/> containing state information that was passed to the asynchronous load operation. 
+        ///     A <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no user token provided, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.LoadAsync(Uri, Object)"/>
@@ -258,9 +227,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
         /// </summary>
@@ -270,9 +236,6 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             string source       = this.Source != null ? this.Source.ToString() : String.Empty;
             string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
             string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
@@ -282,9 +245,6 @@ namespace Argotic.Common
             return String.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -293,17 +253,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             SyndicationResourceLoadedEventArgs value  = obj as SyndicationResourceLoadedEventArgs;
 
             if (value != null)
@@ -327,9 +281,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is SyndicationResourceLoadedEventArgs))
             {
                 return false;
@@ -344,9 +295,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -360,9 +308,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -394,9 +339,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -417,9 +359,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

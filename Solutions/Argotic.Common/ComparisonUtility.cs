@@ -13,9 +13,6 @@ namespace Argotic.Common
     /// </remarks>
     public static class ComparisonUtility
     {
-        //============================================================
-        //	COLLECTION COMPARISON METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified generic collections.
         /// </summary>
@@ -37,14 +34,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -88,14 +79,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<int> source, Collection<int> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -139,14 +124,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<long> source, Collection<long> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -178,7 +157,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
         /// <remarks>
         ///     <para>
-        ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands. 
+        ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
         ///     </para>
         ///     <para>
         ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
@@ -191,17 +170,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
-            
+
             if (source.Count == target.Count)
             {
                 for (int i = 0; i < source.Count; i++)
@@ -242,14 +215,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<Type> source, Collection<Type> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -281,7 +248,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
         /// <remarks>
         ///     <para>
-        ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands. 
+        ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
         ///     </para>
         ///     <para>
         ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
@@ -294,17 +261,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
-            
+
             if (source.Count == target.Count)
             {
                 for (int i = 0; i < source.Count; i++)
@@ -345,14 +306,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<XPathNavigator> source, Collection<XPathNavigator> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -397,17 +352,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target, StringComparison comparisonType)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
-            
+
             if (source.Count == target.Count)
             {
                 foreach (string key in source.Keys)

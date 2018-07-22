@@ -1,12 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/12/2008	brian.kuhn	Created XmlRpcClient Class
-04/10/2008  brian.kuhn  Implemented fix for work item 9960.
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -27,30 +19,27 @@ namespace Argotic.Net
     ///     <para>This implementation of XML-RPC is based on the XML-RPC 1.0 specification which can be found at <a href="http://www.xmlrpc.com/spec">http://www.xmlrpc.com/spec</a>.</para>
     ///     <para><b>XML-RPC</b> is a Remote Procedure Calling protocol that works over the Internet.</para>
     ///     <para>
-    ///         An XML-RPC <i>message</i> is an HTTP-POST request. The body of the request is in XML. 
+    ///         An XML-RPC <i>message</i> is an HTTP-POST request. The body of the request is in XML.
     ///         A procedure executes on the server and the value it returns is also formatted in XML.
     ///     </para>
     ///     <para>Procedure parameters can be scalars, numbers, strings, dates and other simple types; and can also be complex record and list structures.</para>
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs" 
-    ///             region="XmlRpcClient" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
+    ///             region="XmlRpcClient"
     ///         />
     ///     </code>
     /// </example>
     public class XmlRpcClient
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the location of the host computer that client XML-RPC calls will be sent to.
         /// </summary>
         private Uri clientHost;
         /// <summary>
-        /// Private member to hold information such as the application name, version, host operating system, and language. 
+        /// Private member to hold information such as the application name, version, host operating system, and language.
         /// </summary>
         private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
         /// <summary>
@@ -78,17 +67,11 @@ namespace Argotic.Net
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class.
         /// </summary>
         public XmlRpcClient()
         {
-            //------------------------------------------------------------
-            //	Attempt to initialize class state using configuration settings
-            //------------------------------------------------------------
             this.Initialize();
         }
 
@@ -99,14 +82,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcClient(Uri host)
         {
-            //------------------------------------------------------------
-            //	Attempt to initialize class state using configuration settings
-            //------------------------------------------------------------
             this.Initialize();
 
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.Host   = host;
         }
 
@@ -120,49 +97,34 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
         public XmlRpcClient(Uri host, string userAgent) : this(host)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             this.UserAgent  = userAgent;
         }
 
-        //============================================================
-        //	PUBLIC EVENTS
-        //============================================================
         /// <summary>
         /// Occurs when an asynchronous remote procedure call send operation completes.
         /// </summary>
         /// <seealso cref="SendAsync(XmlRpcMessage, Object)"/>
         public event EventHandler<XmlRpcMessageSentEventArgs> SendCompleted;
 
-        //============================================================
-        //	EVENT HANDLER DELEGATE METHODS
-        //============================================================
         /// <summary>
         /// Raises the <see cref="SendCompleted"/> event.
         /// </summary>
         /// <param name="e">A <see cref="XmlRpcMessageSentEventArgs"/> that contains the event data.</param>
         /// <remarks>
         ///     <para>
-        ///         Classes that inherit from the <see cref="XmlRpcClient"/> class can override the <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> method 
+        ///         Classes that inherit from the <see cref="XmlRpcClient"/> class can override the <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> method
         ///         to perform additional tasks when the <see cref="SendCompleted"/> event occurs.
         ///     </para>
         ///     <para>
-        ///         <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate. 
+        ///         <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate.
         ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
         ///     </para>
         /// </remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
         protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             EventHandler<XmlRpcMessageSentEventArgs> handler    = null;
 
-            //------------------------------------------------------------
-            //	Raise event on registered handler(s)
-            //------------------------------------------------------------
             handler = this.SendCompleted;
 
             if (handler != null)
@@ -171,14 +133,11 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the authentication credentials utilized by this client when making remote procedure calls.
         /// </summary>
         /// <value>
-        ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making remote procedure calls. 
+        ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making remote procedure calls.
         ///     The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.
         /// </value>
         public ICredentials Credentials
@@ -220,7 +179,7 @@ namespace Argotic.Net
         /// Gets or sets the web proxy utilized by this client to proxy remote procedure calls.
         /// </summary>
         /// <value>
-        ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy remote procedure calls. 
+        ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy remote procedure calls.
         ///     The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.
         /// </value>
         public IWebProxy Proxy
@@ -272,17 +231,17 @@ namespace Argotic.Net
         /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
         ///     <para>
-        ///         Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf. 
-        ///         Set this property to <b>true</b> when this <see cref="XmlRpcClient"/> object should, if requested by the server, authenticate using the 
+        ///         Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf.
+        ///         Set this property to <b>true</b> when this <see cref="XmlRpcClient"/> object should, if requested by the server, authenticate using the
         ///         default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.
         ///     </para>
         ///     <para>
-        ///         Credentials information can also be specified using the application and machine configuration files. 
+        ///         Credentials information can also be specified using the application and machine configuration files.
         ///         For more information, see <see cref="Argotic.Configuration.XmlRpcClientNetworkElement"/> Element (Network Settings).
         ///     </para>
         ///     <para>
-        ///         If the UseDefaultCredentials property is set to <b>false</b>, then the value set in the <see cref="Credentials"/> property 
-        ///         will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <b>false</b> 
+        ///         If the UseDefaultCredentials property is set to <b>false</b>, then the value set in the <see cref="Credentials"/> property
+        ///         will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <b>false</b>
         ///         and the <see cref="Credentials"/> property has not been set, then remote procedure calls are sent to the server anonymously.
         ///     </para>
         /// </remarks>
@@ -300,7 +259,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Gets or sets information such as the client application name, version, host operating system, and language. 
+        /// Gets or sets information such as the client application name, version, host operating system, and language.
         /// </summary>
         /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -319,9 +278,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	INTERNAL PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
@@ -356,30 +312,21 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
         /// <param name="type">The <see cref="XmlRpcScalarValueType"/> to get the scalar type identifier for.</param>
         /// <returns>The scalar type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         /// <example>
-        ///     <code 
-        ///         lang="cs" 
-        ///         title="The following code example demonstrates the usage of the ScalarTypeAsString method." 
+        ///     <code
+        ///         lang="cs"
+        ///         title="The following code example demonstrates the usage of the ScalarTypeAsString method."
         ///     />
         /// </example>
         public static string ScalarTypeAsString(XmlRpcScalarValueType type)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             string name = String.Empty;
 
-            //------------------------------------------------------------
-            //	Return alternate value based on supplied protocol
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
@@ -413,26 +360,17 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
-        ///     <code 
-        ///         lang="cs" 
-        ///         title="The following code example demonstrates the usage of the ScalarTypeByName method." 
+        ///     <code
+        ///         lang="cs"
+        ///         title="The following code example demonstrates the usage of the ScalarTypeByName method."
         ///     />
         /// </example>
         public static XmlRpcScalarValueType ScalarTypeByName(string name)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlRpcScalarValueType valueType = XmlRpcScalarValueType.None;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            //------------------------------------------------------------
-            //	Determine syndication content format based on supplied name
-            //------------------------------------------------------------
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
@@ -457,17 +395,17 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>. 
+        /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>.
         /// Parameters specify the XML data source and the variable where the new <see cref="IXmlRpcValue"/> object is returned.
         /// </summary>
         /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
         /// <param name="value">
-        ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <b>null</b> if the conversion failed. 
+        ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <b>null</b> if the conversion failed.
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns>
-        ///     <b>true</b> if <paramref name="source"/> was converted successfully; otherwise, <b>false</b>. 
-        ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference (Nothing in Visual Basic), 
+        ///     <b>true</b> if <paramref name="source"/> was converted successfully; otherwise, <b>false</b>.
+        ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference (Nothing in Visual Basic),
         ///     or represents XML data that is not in the expected format.
         /// </returns>
         /// <remarks>
@@ -475,18 +413,12 @@ namespace Argotic.Net
         /// </remarks>
         public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             if (source == null || String.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
             {
                 value   = null;
                 return false;
             }
 
-            //------------------------------------------------------------
-            //	Attempt to perform conversion
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator navigator    = source.CreateNavigator();
@@ -585,24 +517,18 @@ namespace Argotic.Net
                 return true;
             }
 
-            //------------------------------------------------------------
-            //	Conversion failed, so set result as null and return false
-            //------------------------------------------------------------
             value   = null;
             return false;
         }
 
-        //============================================================
-        //	INTERNAL METHODS
-        //============================================================
         /// <summary>
         /// Converts the specified string representation of a logical value to its <see cref="Boolean"/> equivalent. A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">A string containing the value to convert.</param>
         /// <param name="result">
-        ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>; 
-        ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>. 
-        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>. 
+        ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
+        ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
+        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
@@ -635,34 +561,22 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	CALLBACK DELEGATE METHODS
-        //============================================================
         /// <summary>
         /// Called when a corresponding asynchronous send operation completes.
         /// </summary>
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncSendCallback(IAsyncResult result)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlRpcResponse response         = null;
             WebRequest httpWebRequest       = null;
             XmlRpcClient client             = null;
             Uri host                        = null;
             XmlRpcMessage message           = null;
             WebRequestOptions options       = null;
-            object userToken                = null;     
+            object userToken                = null;
 
-            //------------------------------------------------------------
-            //	Determine if the async send operation completed
-            //------------------------------------------------------------
             if (result.IsCompleted)
             {
-                //------------------------------------------------------------
-                //	Extract the send operations parameters from the user state
-                //------------------------------------------------------------
                 object[] parameters = (object[])result.AsyncState;
                 httpWebRequest      = parameters[0] as WebRequest;
                 client              = parameters[1] as XmlRpcClient;
@@ -671,29 +585,14 @@ namespace Argotic.Net
                 options             = parameters[4] as WebRequestOptions;
                 userToken           = parameters[5];
 
-                //------------------------------------------------------------
-                //	Verify expected parameters were found
-                //------------------------------------------------------------
                 if (client != null)
                 {
-                    //------------------------------------------------------------
-                    //	Get the HTTP response to the remote procedure call
-                    //------------------------------------------------------------
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                    //------------------------------------------------------------
-                    //	Extract the XML-RPC response to the remote procedure call
-                    //------------------------------------------------------------
                     response    = new XmlRpcResponse(httpWebResponse);
 
-                    //------------------------------------------------------------
-                    //	Raise SendCompleted event to notify registered handlers of state change
-                    //------------------------------------------------------------
                     client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
 
-                    //------------------------------------------------------------
-                    //	Reset async operation in progress indicator
-                    //------------------------------------------------------------
                     client.SendOperationInProgress  = false;
                 }
             }
@@ -706,29 +605,17 @@ namespace Argotic.Net
         /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
         private void AsyncTimeoutCallback(object state, bool timedOut)
         {
-            //------------------------------------------------------------
-            //	Determine if asynchronous send operation timed out
-            //------------------------------------------------------------
             if (timedOut)
             {
-                //------------------------------------------------------------
-                //	Abort asynchronous send operation
-                //------------------------------------------------------------
                 if (asyncHttpWebRequest != null)
                 {
                     asyncHttpWebRequest.Abort();
                 }
             }
 
-            //------------------------------------------------------------
-            //	Reset async operation in progress indicator
-            //------------------------------------------------------------
             this.SendOperationInProgress    = false;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Sends the specified message to an XML-RPC server to execute a remote procedure call.
         /// </summary>
@@ -739,19 +626,10 @@ namespace Argotic.Net
         /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
         public XmlRpcResponse Send(XmlRpcMessage message)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             XmlRpcResponse response = null;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(message, "message");
 
-            //------------------------------------------------------------
-            //	Validate client state
-            //------------------------------------------------------------
             if(this.Host == null)
             {
                 throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
@@ -761,9 +639,6 @@ namespace Argotic.Net
                 throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
             }
 
-            //------------------------------------------------------------
-            //	Execute the remote procedure call
-            //------------------------------------------------------------
             WebRequest webRequest   = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
             using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
@@ -775,14 +650,14 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Sends the specified message to an XML-RPC server to execute a remote procedure call. 
+        /// Sends the specified message to an XML-RPC server to execute a remote procedure call.
         /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
         /// </summary>
         /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event. 
+        ///         To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event.
         ///         You can cancel a <see cref="SendAsync(XmlRpcMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
         ///     </para>
         /// </remarks>
@@ -792,14 +667,8 @@ namespace Argotic.Net
         //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
         public void SendAsync(XmlRpcMessage message, Object userToken)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(message, "message");
 
-            //------------------------------------------------------------
-            //	Validate client state
-            //------------------------------------------------------------
             if (this.Host == null)
             {
                 throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
@@ -809,26 +678,14 @@ namespace Argotic.Net
                 throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
             }
 
-            //------------------------------------------------------------
-            //	Set async operation tracking indicators
-            //------------------------------------------------------------
             this.SendOperationInProgress    = true;
             this.AsyncSendHasBeenCancelled  = false;
 
-            //------------------------------------------------------------
-            //	Build HTTP web request used to send the remote procedure call
-            //------------------------------------------------------------
             asyncHttpWebRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-            //------------------------------------------------------------
-            //	Get the async response to the web request
-            //------------------------------------------------------------
             object[] state      = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
 
-            //------------------------------------------------------------
-            //  Register the timeout callback
-            //------------------------------------------------------------
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
         }
 
@@ -836,8 +693,8 @@ namespace Argotic.Net
         /// Cancels an asynchronous operation to send a remote procedure call.
         /// </summary>
         /// <remarks>
-        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(XmlRpcMessage, Object)"/> operation. 
-        ///     If there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation. 
+        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(XmlRpcMessage, Object)"/> operation.
+        ///     If there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
         ///     If there is no send operation pending, this method does nothing.
         /// </remarks>
         public void SendAsyncCancel()
@@ -849,9 +706,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Initializes a new <see cref="WebRequest"/> suitable for sending a remote procedure call using the supplied host, user agent, message, credentials, and proxy.
         /// </summary>
@@ -868,22 +722,13 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             HttpWebRequest httpRequest  = null;
             byte[] payloadData;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
             Guard.ArgumentNotNull(message, "message");
 
-            //------------------------------------------------------------
-            //	Build the XML-RPC payload data
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -902,9 +747,6 @@ namespace Argotic.Net
                 payloadData                 = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
             }
 
-            //------------------------------------------------------------
-            //	Build HTTP web request used to send a remote procedure call
-            //------------------------------------------------------------
             httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
             httpRequest.Method              = "POST";
             httpRequest.ContentLength       = payloadData.Length;

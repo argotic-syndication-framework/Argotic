@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/07/2007	brian.kuhn	Created Opml20SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -21,8 +14,8 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Opml20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="OpmlDocument"/> and an XML data source. 
-    ///         The <see cref="Opml20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(OpmlDocument)"/>, which changes the data 
+    ///         The <see cref="Opml20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="OpmlDocument"/> and an XML data source.
+    ///         The <see cref="Opml20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(OpmlDocument)"/>, which changes the data
     ///         in the <see cref="OpmlDocument"/> to match the data in the data source.
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="OpmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the OPML 2.0 specification.</para>
@@ -30,13 +23,6 @@ namespace Argotic.Data.Adapters
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
     public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="Opml20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -49,14 +35,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="OpmlDocument"/> to match the data source.
         /// </summary>
@@ -64,19 +44,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(OpmlDocument resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("opml", manager);
             if (documentNavigator != null)
             {

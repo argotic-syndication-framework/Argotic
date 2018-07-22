@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created FeedSynchronizationSyndicationExtensionContext Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -19,9 +12,7 @@ namespace Argotic.Extensions.Core
     [Serializable()]
     public class FeedSynchronizationSyndicationExtensionContext
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the sharing information exposed by a syndication feed.
         /// </summary>
@@ -30,23 +21,13 @@ namespace Argotic.Extensions.Core
         /// Private member to hold information required for synchronization of syndication feeds.
         /// </summary>
         private FeedSynchronizationItem synchronizationItem;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtensionContext"/> class.
         /// </summary>
         public FeedSynchronizationSyndicationExtensionContext()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
-        }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
+        }
         /// <summary>
         /// Gets or sets information from a specific feed publisher to the specific feed consumer that requested the feed.
         /// </summary>
@@ -94,10 +75,6 @@ namespace Argotic.Extensions.Core
                 synchronizationItem = value;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -108,20 +85,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
@@ -161,15 +127,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             if(this.Sharing != null)
             {
                 this.Sharing.WriteTo(writer);

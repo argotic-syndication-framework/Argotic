@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-07/09/2008	brian.kuhn	Created AtomWorkspace class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -27,22 +20,19 @@ namespace Argotic.Publishing
     ///         The <see cref="AtomWorkspace"/> class implements the <i>app:workspace</i> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
     ///     </para>
     ///     <para>
-    ///         A <see cref="AtomServiceDocument">service document</see> groups <see cref="AtomMemberResources">collections</see> into <see cref="AtomWorkspace">workspaces</see>. 
-    ///         Operations on <see cref="AtomWorkspace">workspaces</see>, such as creation or deletion, are not defined by the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a> 
-    ///         specification. The <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a> specification assigns no meaning to <see cref="AtomWorkspace">workspaces</see>; 
+    ///         A <see cref="AtomServiceDocument">service document</see> groups <see cref="AtomMemberResources">collections</see> into <see cref="AtomWorkspace">workspaces</see>.
+    ///         Operations on <see cref="AtomWorkspace">workspaces</see>, such as creation or deletion, are not defined by the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>
+    ///         specification. The <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a> specification assigns no meaning to <see cref="AtomWorkspace">workspaces</see>;
     ///         that is, a <see cref="AtomWorkspace">workspace</see> does not imply any specific processing assumptions.
     ///     </para>
     ///     <para>
-    ///         There is no requirement that a server support multiple <see cref="AtomWorkspace">workspaces</see>. 
+    ///         There is no requirement that a server support multiple <see cref="AtomWorkspace">workspaces</see>.
     ///         In addition, a <see cref="AtomMemberResources">collection</see> <i>may</i> appear in more than one <see cref="AtomWorkspace">workspace</see>.
     ///     </para>
     /// </remarks>
     [Serializable()]
     public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -64,17 +54,11 @@ namespace Argotic.Publishing
         /// </summary>
         private IEnumerable<AtomMemberResources> workspaceCollections;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomWorkspace"/> class.
         /// </summary>
         public AtomWorkspace()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -84,9 +68,6 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomWorkspace(AtomTextConstruct title)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded property
-            //------------------------------------------------------------
             this.Title  = title;
         }
 
@@ -99,9 +80,6 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using guarded property
-            //------------------------------------------------------------
             this.Title  = title;
 
             Guard.ArgumentNotNull(collections, "collections");
@@ -111,9 +89,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	INDEXERS
-        //============================================================
         /// <summary>
         /// Gets or sets the <see cref="AtomMemberResources"/> available for editing at the specified index.
         /// </summary>
@@ -136,16 +111,13 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	COMMON PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
         /// <remarks>
         ///     <para>
-        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>, 
+        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
         public Uri BaseUri
@@ -183,9 +155,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	EXTENSIBILITY PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -224,9 +193,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	EXTENSIBILITY METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -235,19 +201,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Add syndication extension to collection
-            //------------------------------------------------------------
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded    = true;
 
@@ -262,21 +219,15 @@ namespace Argotic.Publishing
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
 
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -292,19 +243,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Remove syndication extension from collection
-            //------------------------------------------------------------
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -314,9 +256,6 @@ namespace Argotic.Publishing
             return wasRemoved;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the collections of resources available for editing that are associated with this workspace.
         /// </summary>
@@ -348,7 +287,7 @@ namespace Argotic.Publishing
         /// Gets or sets information that conveys a human-readable title for this workspace.
         /// </summary>
         /// <value>
-        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this workspace. 
+        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this workspace.
         ///     The default value is an empty <see cref="AtomTextConstruct"/>.
         /// </value>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -366,9 +305,6 @@ namespace Argotic.Publishing
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified <see cref="Collection{AtomMemberResources}"/> collections.
         /// </summary>
@@ -390,14 +326,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -420,9 +350,6 @@ namespace Argotic.Publishing
             return result;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Adds the supplied <see cref="AtomMemberResources"/> to the <see cref="Collections"/> of the workspace.
         /// </summary>
@@ -431,19 +358,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddCollection(AtomMemberResources collection)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasAdded   = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(collection, "collection");
 
-            //------------------------------------------------------------
-            //	Add element to collection
-            //------------------------------------------------------------
             ((Collection<AtomMemberResources>)this.Collections).Add(collection);
             wasAdded    = true;
 
@@ -458,21 +376,15 @@ namespace Argotic.Publishing
         ///     The first collection that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="AtomMemberResources"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{AtomMemberResources}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Collections"/> are individually passed to the <see cref="Predicate{AtomMemberResources}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{AtomMemberResources}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Collections"/> are individually passed to the <see cref="Predicate{AtomMemberResources}"/> delegate, moving forward in
         ///     the <see cref="Collections"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomMemberResources FindCollection(Predicate<AtomMemberResources> match)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(match, "match");
 
-            //------------------------------------------------------------
-            //	Perform predicate based search
-            //------------------------------------------------------------
             List<AtomMemberResources> list = new List<AtomMemberResources>(this.Collections);
             return list.Find(match);
         }
@@ -488,32 +400,17 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded              = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to extract common attributes information
-            //------------------------------------------------------------
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
                 wasLoaded = true;
             }
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
@@ -558,25 +455,13 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication information
-            //------------------------------------------------------------
             wasLoaded   = this.Load(source);
 
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -594,19 +479,10 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool RemoveCollection(AtomMemberResources collection)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasRemoved = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(collection, "collection");
 
-            //------------------------------------------------------------
-            //	Remove element from collection
-            //------------------------------------------------------------
             if (((Collection<AtomMemberResources>)this.Collections).Contains(collection))
             {
                 ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
@@ -623,14 +499,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("workspace", AtomUtility.AtomPublishingNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -644,17 +514,11 @@ namespace Argotic.Publishing
                 collection.WriteTo(writer);
             }
 
-            //------------------------------------------------------------
-            //	Write the syndication extensions of the current instance
-            //------------------------------------------------------------
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="AtomWorkspace"/>.
         /// </summary>
@@ -664,9 +528,6 @@ namespace Argotic.Publishing
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -696,17 +557,11 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             AtomWorkspace value  = obj as AtomWorkspace;
 
             if (value != null)
@@ -730,9 +585,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is AtomWorkspace))
             {
                 return false;
@@ -747,9 +599,6 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -763,9 +612,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(AtomWorkspace first, AtomWorkspace second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -797,9 +643,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(AtomWorkspace first, AtomWorkspace second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -820,9 +663,6 @@ namespace Argotic.Publishing
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(AtomWorkspace first, AtomWorkspace second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

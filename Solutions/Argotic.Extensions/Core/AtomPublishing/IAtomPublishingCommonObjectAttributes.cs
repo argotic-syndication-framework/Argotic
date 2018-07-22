@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-07/16/2008	brian.kuhn	Created IAtomPublishingCommonObjectAttributes Interface
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 
 namespace Argotic.Extensions.Core
@@ -15,9 +8,6 @@ namespace Argotic.Extensions.Core
     /// </summary>
     interface IAtomPublishingCommonObjectAttributes
     {
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>

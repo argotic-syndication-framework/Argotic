@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-04/11/2007	brian.kuhn	Created AtomFeedExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Xml;
@@ -25,9 +18,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class AtomFeedExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the AtomFeed class.
         /// </summary>
@@ -54,10 +44,6 @@ namespace Argotic.Examples
 
             feed.AddEntry(entry);
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the AtomFeed.Create(Uri) method
         /// </summary>
@@ -73,18 +59,11 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	ASYNC METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
         public static void LoadAsyncExample()
         {
-            //------------------------------------------------------------
-            //	Load feed asynchronously using event-based notification
-            //------------------------------------------------------------
             AtomFeed feed   = new AtomFeed();
 
             feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
@@ -103,10 +82,6 @@ namespace Argotic.Examples
             {
             }
         }
-
-        //============================================================
-        //	INSTANCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>

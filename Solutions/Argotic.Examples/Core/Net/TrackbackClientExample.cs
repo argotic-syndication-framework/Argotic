@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/19/2007	brian.kuhn	Created TrackbackClientExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Text;
 
 using Argotic.Net;
@@ -22,9 +15,6 @@ namespace Argotic.Examples
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static class TrackbackClientExample
     {
-        //============================================================
-        //	CLASS SUMMARY
-        //============================================================
         /// <summary>
         /// Provides example code for the TrackbackClient class.
         /// </summary>

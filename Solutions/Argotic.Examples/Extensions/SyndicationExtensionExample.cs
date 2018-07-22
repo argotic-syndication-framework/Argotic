@@ -13,17 +13,11 @@ namespace Argotic.Examples
     /// </summary>
     public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold the value of the custom syndication extension's attribute.
         /// </summary>
         private string customExtensionAttribute = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
         /// </summary>
@@ -32,10 +26,6 @@ namespace Argotic.Examples
         {
             // Class state initialized by abstract SyndicationExtension base class
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the value of the extension attribute.
         /// </summary>
@@ -59,10 +49,6 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
         /// represents the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>.
@@ -74,9 +60,6 @@ namespace Argotic.Examples
         {
             Guard.ArgumentNotNull(extension, "extension");
 
-            //------------------------------------------------------------
-            //	Determine if search condition was met 
-            //------------------------------------------------------------
             if (extension.GetType() == typeof(MyCustomSyndicationExtension))
             {
                 return true;
@@ -86,10 +69,6 @@ namespace Argotic.Examples
                 return false;
             }
         }
-
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
@@ -98,19 +77,8 @@ namespace Argotic.Examples
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(IXPathNavigable source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Attempt to extract syndication extension information
-            //------------------------------------------------------------
             XPathNavigator navigator    = source.CreateNavigator();
             if (navigator.HasAttributes)
             {
@@ -122,9 +90,6 @@ namespace Argotic.Examples
                 }
             }
 
-            //------------------------------------------------------------
-            //	Raise extension loaded event
-            //------------------------------------------------------------
             SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
             this.OnExtensionLoaded(args);
 
@@ -139,14 +104,8 @@ namespace Argotic.Examples
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(XmlReader reader)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(reader, "reader");
 
-            //------------------------------------------------------------
-            //	Create navigator against reader and pass to load method
-            //------------------------------------------------------------
             XPathDocument document  = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator());
@@ -159,14 +118,8 @@ namespace Argotic.Examples
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public override void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write current extension details to the writer
-            //------------------------------------------------------------
             writer.WriteStartElement("CustomExtension", this.XmlNamespace);
 
             if(!String.IsNullOrEmpty(this.MyAttribute))
@@ -176,10 +129,6 @@ namespace Argotic.Examples
 
             writer.WriteEndElement();
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
         /// </summary>
@@ -189,9 +138,6 @@ namespace Argotic.Examples
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -212,10 +158,6 @@ namespace Argotic.Examples
                 }
             }
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -224,17 +166,10 @@ namespace Argotic.Examples
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             MyCustomSyndicationExtension value  = obj as MyCustomSyndicationExtension;
 
             if (value != null)
@@ -265,9 +200,6 @@ namespace Argotic.Examples
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is MyCustomSyndicationExtension))
             {
                 return false;
@@ -282,9 +214,6 @@ namespace Argotic.Examples
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -298,9 +227,6 @@ namespace Argotic.Examples
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -332,9 +258,6 @@ namespace Argotic.Examples
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -355,9 +278,6 @@ namespace Argotic.Examples
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

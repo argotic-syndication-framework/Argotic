@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-01/23/2008	brian.kuhn	Created BasicGeocodingSyndicationExtension Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
@@ -37,31 +30,17 @@ namespace Argotic.Extensions.Core
 	[Serializable()]
 	public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable
 	{
-		//============================================================
-		//	PUBLIC/PRIVATE/PROTECTED MEMBERS
-		//============================================================
 	    /// <summary>
 		/// Private member to hold specific information about the extension.
 		/// </summary>
 		private BasicGeocodingSyndicationExtensionContext extensionContext = new BasicGeocodingSyndicationExtensionContext();
-
-	    //============================================================
-		//	CONSTRUCTORS
-		//============================================================
 	    /// <summary>
 		/// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtension"/> class.
 		/// </summary>
 		public BasicGeocodingSyndicationExtension()
 			: base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new Version("1.0"), new Uri("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
 		{
-			//------------------------------------------------------------
-			//	Initialization handled by base class
-			//------------------------------------------------------------
 		}
-
-	    //============================================================
-		//	PUBLIC PROPERTIES
-		//============================================================
 	    /// <summary>
 		/// Gets or sets the <see cref="BasicGeocodingSyndicationExtensionContext"/> object associated with this extension.
 		/// </summary>
@@ -85,10 +64,6 @@ namespace Argotic.Extensions.Core
 				extensionContext = value;
 			}
 		}
-
-	    //============================================================
-		//	STATIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Converts the supplied decimal value to an equivalent degrees, minutes, seconds string representation.
 		/// </summary>
@@ -97,9 +72,6 @@ namespace Argotic.Extensions.Core
 		/// <seealso cref="ConvertDegreesMinutesSecondsToDecimal(string)"/>
 		public static string ConvertDecimalToDegreesMinutesSeconds(decimal value)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			string degreesPart  = String.Empty;
 			string minutesPart  = String.Empty;
 			string secondsPart  = String.Empty;
@@ -151,21 +123,10 @@ namespace Argotic.Extensions.Core
 		/// <seealso cref="ConvertDecimalToDegreesMinutesSeconds(decimal)"/>
 		public static decimal ConvertDegreesMinutesSecondsToDecimal(string degreesMinutesSeconds)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			decimal degrees;
 			decimal minutes;
 			decimal seconds;
-
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNullOrEmptyString(degreesMinutesSeconds, "degreesMinutesSeconds");
-
-			//------------------------------------------------------------
-			//	Validate string format
-			//------------------------------------------------------------
 			if (!degreesMinutesSeconds.Contains("°"))
 			{
 				throw new FormatException(String.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
@@ -178,10 +139,6 @@ namespace Argotic.Extensions.Core
 			{
 				throw new FormatException(String.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
 			}
-
-			//------------------------------------------------------------
-			//	Extract and clean up delimited values
-			//------------------------------------------------------------
 			string degreesValue = degreesMinutesSeconds.Substring(0, degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase));
 			string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) - 1);
 			string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("\"", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - 1);
@@ -191,9 +148,6 @@ namespace Argotic.Extensions.Core
 			secondsValue        = secondsValue.Replace("N", String.Empty).Replace("S", String.Empty).Replace("E", String.Empty).Replace("W", String.Empty);
 			secondsValue        = secondsValue.Trim();
 
-			//------------------------------------------------------------
-			//	Validate extracted delimited values
-			//------------------------------------------------------------
 			if (!Decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out degrees))
 			{
 				throw new FormatException(String.Format(null, "The supplied degrees of {0} does not represent an integer.", degreesValue));
@@ -206,10 +160,6 @@ namespace Argotic.Extensions.Core
 			{
 				throw new FormatException(String.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
 			}
-
-			//------------------------------------------------------------
-			//	Calculate decimal representation
-			//------------------------------------------------------------
 			return (degrees + (minutes/60) + (seconds/3600));
 		}
 
@@ -222,14 +172,7 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
 		public static bool MatchByType(ISyndicationExtension extension)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(extension, "extension");
-
-			//------------------------------------------------------------
-			//	Determine if search condition was met 
-			//------------------------------------------------------------
 			if (extension.GetType() == typeof(BasicGeocodingSyndicationExtension))
 			{
 				return true;
@@ -239,10 +182,6 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
-
-	    //============================================================
-		//	PUBLIC METHODS
-		//============================================================
 	    /// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
@@ -251,25 +190,10 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(IXPathNavigable source)
 		{
-			//------------------------------------------------------------
-			//	Local members
-			//------------------------------------------------------------
 			bool wasLoaded  = false;
-
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(source, "source");
-
-			//------------------------------------------------------------
-			//	Attempt to extract syndication extension information
-			//------------------------------------------------------------
 			XPathNavigator navigator    = source.CreateNavigator();
 			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-
-			//------------------------------------------------------------
-			//	Raise extension loaded event
-			//------------------------------------------------------------
 			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
 			this.OnExtensionLoaded(args);
 
@@ -284,14 +208,7 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(XmlReader reader)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(reader, "reader");
-
-			//------------------------------------------------------------
-			//	Create navigator against reader and pass to load method
-			//------------------------------------------------------------
 			XPathDocument document  = new XPathDocument(reader);
 
 			return this.Load(document.CreateNavigator());
@@ -305,20 +222,10 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override void WriteTo(XmlWriter writer)
 		{
-			//------------------------------------------------------------
-			//	Validate parameter
-			//------------------------------------------------------------
 			Guard.ArgumentNotNull(writer, "writer");
-
-			//------------------------------------------------------------
-			//	Write current extension details to the writer
-			//------------------------------------------------------------
 			this.Context.WriteTo(writer, this.XmlNamespace);
 		}
 
-	    //============================================================
-		//	PUBLIC OVERRIDES
-		//============================================================
 	    /// <summary>
 		/// Returns a <see cref="String"/> that represents the current <see cref="BasicGeocodingSyndicationExtension"/>.
 		/// </summary>
@@ -328,9 +235,6 @@ namespace Argotic.Extensions.Core
 		/// </remarks>
 		public override string ToString()
 		{
-			//------------------------------------------------------------
-			//	Build the string representation
-			//------------------------------------------------------------
 			using(MemoryStream stream = new MemoryStream())
 			{
 				XmlWriterSettings settings  = new XmlWriterSettings();
@@ -352,9 +256,6 @@ namespace Argotic.Extensions.Core
 			}
 		}
 
-	    //============================================================
-		//	ICOMPARABLE IMPLEMENTATION
-		//============================================================
 	    /// <summary>
 		/// Compares the current instance with another object of the same type.
 		/// </summary>
@@ -363,17 +264,11 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
 		public int CompareTo(object obj)
 		{
-			//------------------------------------------------------------
-			//	If target is a null reference, instance is greater
-			//------------------------------------------------------------
 			if (obj == null)
 			{
 				return 1;
 			}
 
-			//------------------------------------------------------------
-			//	Determine comparison result using property state of objects
-			//------------------------------------------------------------
 			BasicGeocodingSyndicationExtension value  = obj as BasicGeocodingSyndicationExtension;
 
 			if (value != null)
@@ -403,9 +298,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
 		public override bool Equals(Object obj)
 		{
-			//------------------------------------------------------------
-			//	Determine equality via type then by comparision
-			//------------------------------------------------------------
 			if (!(obj is BasicGeocodingSyndicationExtension))
 			{
 				return false;
@@ -420,9 +312,6 @@ namespace Argotic.Extensions.Core
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()
 		{
-			//------------------------------------------------------------
-			//	Generate hash code using unique value of ToString() method
-			//------------------------------------------------------------
 			return this.ToString().GetHashCode();
 		}
 
@@ -434,9 +323,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
 		public static bool operator ==(BasicGeocodingSyndicationExtension first, BasicGeocodingSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return true;
@@ -468,9 +354,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
 		public static bool operator <(BasicGeocodingSyndicationExtension first, BasicGeocodingSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return false;
@@ -491,9 +374,6 @@ namespace Argotic.Extensions.Core
 		/// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
 		public static bool operator >(BasicGeocodingSyndicationExtension first, BasicGeocodingSyndicationExtension second)
 		{
-			//------------------------------------------------------------
-			//	Handle null reference comparison
-			//------------------------------------------------------------
 			if (object.Equals(first, null) && object.Equals(second, null))
 			{
 				return false;

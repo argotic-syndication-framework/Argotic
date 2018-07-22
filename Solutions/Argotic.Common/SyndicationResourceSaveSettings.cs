@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/07/2007	brian.kuhn	Created SyndicationResourceSaveSettings Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
@@ -18,9 +11,6 @@ namespace Argotic.Common
     [Serializable()]
     public sealed class SyndicationResourceSaveSettings : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
@@ -38,31 +28,22 @@ namespace Argotic.Common
         /// </summary>
         private bool syndicationExtensionAutodetectionEnabled   = true;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
         /// </summary>
         public SyndicationResourceSaveSettings()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         /// <value>
-        ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; otherwise <b>false</b>. 
+        ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; otherwise <b>false</b>.
         ///     The default value is <b>true</b>.
         /// </value>
         /// <remarks>
-        ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added 
+        ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added
         ///     to the <see cref="SupportedExtensions"/> collection prior to the save operation execution.
         /// </remarks>
         public bool AutoDetectExtensions
@@ -118,7 +99,7 @@ namespace Argotic.Common
         /// Gets the syndication extensions that extend the syndication resource.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances used during the save operation. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances used during the save operation.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -136,9 +117,6 @@ namespace Argotic.Common
             }
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
@@ -148,15 +126,9 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             return String.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -165,17 +137,11 @@ namespace Argotic.Common
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             SyndicationResourceSaveSettings value  = obj as SyndicationResourceSaveSettings;
 
             if (value != null)
@@ -200,9 +166,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is SyndicationResourceSaveSettings))
             {
                 return false;
@@ -217,9 +180,6 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -233,9 +193,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -267,9 +224,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -290,9 +244,6 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

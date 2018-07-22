@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -21,9 +14,6 @@ namespace Argotic.Data.Adapters
     /// </summary>
     public class SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the XPathNavigator used to load a syndication resource.
         /// </summary>
@@ -33,9 +23,6 @@ namespace Argotic.Data.Adapters
         /// </summary>
         private SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -45,9 +32,6 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");
 
@@ -55,9 +39,6 @@ namespace Argotic.Data.Adapters
             adapterSettings     = settings;
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the <see cref="XPathNavigator"/> used to fill a syndication resource.
         /// </summary>
@@ -82,9 +63,6 @@ namespace Argotic.Data.Adapters
             }
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -95,31 +73,19 @@ namespace Argotic.Data.Adapters
         /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>.</exception>
         public void Fill(ISyndicationResource resource, SyndicationContentFormat format)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             if (format == SyndicationContentFormat.None)
             {
                 throw new ArgumentException(String.Format(null, "The specified syndication content format of {0} is invalid.", format), "format");
             }
 
-            //------------------------------------------------------------
-            //	Extract syndication resource meta-data
-            //------------------------------------------------------------
             SyndicationResourceMetadata resourceMetadata    = new SyndicationResourceMetadata(this.Navigator);
 
-            //------------------------------------------------------------
-            //	Verify resource conforms to specified format
-            //------------------------------------------------------------
             if (format != resourceMetadata.Format)
             {
                 throw new FormatException(String.Format(null, "The supplied syndication resource has a content format of {0}, which does not match the expected content format of {1}.", resourceMetadata.Format, format));
             }
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             switch (format)
             {
                 case SyndicationContentFormat.Apml:
@@ -164,9 +130,6 @@ namespace Argotic.Data.Adapters
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
         /// </summary>
@@ -176,15 +139,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             ApmlDocument apmlDocument   = resource as ApmlDocument;
 
             if (resourceMetadata.Version == new Version("0.6"))
@@ -203,15 +160,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             AtomFeed atomFeed   = resource as AtomFeed;
             AtomEntry atomEntry = resource as AtomEntry;
 
@@ -251,15 +202,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             AtomCategoryDocument categoryDocument   = resource as AtomCategoryDocument;
             AtomServiceDocument serviceDocument     = resource as AtomServiceDocument;
 
@@ -286,15 +231,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             BlogMLDocument blogMLDocument                       = resource as BlogMLDocument;
             BlogML20SyndicationResourceAdapter blogML20Adapter  = new BlogML20SyndicationResourceAdapter(this.Navigator, this.Settings);
 
@@ -313,15 +252,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             OpmlDocument opmlDocument                       = resource as OpmlDocument;
             Opml20SyndicationResourceAdapter opml20Adapter  = new Opml20SyndicationResourceAdapter(this.Navigator, this.Settings);
 
@@ -350,15 +283,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             RsdDocument rsdDocument = resource as RsdDocument;
 
             if (resourceMetadata.Version == new Version("1.0"))
@@ -383,15 +310,9 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
         private void FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
             Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-            //------------------------------------------------------------
-            //	Fill syndication resource using appropriate data adapter
-            //------------------------------------------------------------
             RssFeed rssFeed = resource as RssFeed;
 
             if (resourceMetadata.Version == new Version("2.0"))

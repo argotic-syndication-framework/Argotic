@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/15/2008	brian.kuhn	Created XmlRpcClientSection Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 
@@ -16,9 +9,6 @@ namespace Argotic.Configuration
     /// </summary>
     public sealed class XmlRpcClientSection : ConfigurationSection
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the client timeout configuration property for the section.
         /// </summary>
@@ -36,25 +26,16 @@ namespace Argotic.Configuration
         /// </summary>
         private static ConfigurationPropertyCollection configurationSectionProperties       = new ConfigurationPropertyCollection();
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClientSection"/> class.
         /// </summary>
         public XmlRpcClientSection()
         {
-            //------------------------------------------------------------
-            //	Initialize configuration section properties
-            //------------------------------------------------------------
             configurationSectionProperties.Add(configurationSectionTimeoutProperty);
             configurationSectionProperties.Add(configurationSectionUserAgentProperty);
             configurationSectionProperties.Add(configurationSectionNetworkProperty);
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the network connection information.
         /// </summary>
@@ -87,7 +68,7 @@ namespace Argotic.Configuration
         }
 
         /// <summary>
-        /// Gets or sets information such as the client application name, version, host operating system, and language. 
+        /// Gets or sets information such as the client application name, version, host operating system, and language.
         /// </summary>
         /// <value>A string that represents information such as the client application name, version, host operating system, and language.</value>
         [ConfigurationProperty("agent", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
@@ -103,9 +84,6 @@ namespace Argotic.Configuration
             }
         }
 
-        //============================================================
-        //	PROTECTED PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets the configuration properties for this section.
         /// </summary>

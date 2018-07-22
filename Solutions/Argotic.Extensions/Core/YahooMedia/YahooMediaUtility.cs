@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/09/2007	brian.kuhn	Created YahooMediaUtility Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
@@ -20,9 +13,6 @@ namespace Argotic.Extensions.Core
     /// <remarks>This utility class is not intended for use outside the Yahoo media syndication entities within the framework.</remarks>
     internal static class YahooMediaUtility
     {
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Compares objects that implement the <see cref="IYahooMediaCommonObjectEntities"/> interface.
         /// </summary>
@@ -31,14 +21,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjectEntities(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Handle parameter null reference cases
-            //------------------------------------------------------------
             if (source == null && target == null)
             {
                 return 0;
@@ -51,10 +34,6 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-
-            //------------------------------------------------------------
-            //	Attempt to perform comparison
-            //------------------------------------------------------------
             result      = result | YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
             result      = result | YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
 
@@ -82,14 +61,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -133,14 +105,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -184,14 +149,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -235,14 +193,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -286,14 +237,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -337,14 +281,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -388,14 +325,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -439,14 +369,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -490,14 +413,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -530,26 +446,11 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
-
-            //------------------------------------------------------------
-            //	Initialize XML namespace resolver
-            //------------------------------------------------------------
             YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
             XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
-            
-            //------------------------------------------------------------
-            //	Attempt to extract common entity information
-            //------------------------------------------------------------
             wasLoaded   = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
 
             if (YahooMediaUtility.FillCommonObjectEntityCollectionsPrimary(target, source, manager))
@@ -574,20 +475,9 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public static void WriteCommonObjectEntities(IYahooMediaCommonObjectEntities source, XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
-
-            //------------------------------------------------------------
-            //	Create extension instance to retrieve XML namespace
-            //------------------------------------------------------------
             YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-
-            //------------------------------------------------------------
-            //	Write common entity information
-            //------------------------------------------------------------
             if (source.Title != null)
             {
                 source.Title.WriteTo(writer, "title");
@@ -652,9 +542,6 @@ namespace Argotic.Extensions.Core
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Compares the classes for objects that implement the <see cref="IYahooMediaCommonObjectEntities"/> interface.
         /// </summary>
@@ -663,14 +550,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         private static int CompareCommonObjectEntityClasses(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Handle parameter null reference cases
-            //------------------------------------------------------------
             if (source == null && target == null)
             {
                 return 0;
@@ -683,10 +563,6 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-
-            //------------------------------------------------------------
-            //	Attempt to perform comparison
-            //------------------------------------------------------------
             if(source.Copyright != null)
             {
                 if(target.Copyright != null)
@@ -762,14 +638,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         private static int CompareCommonObjectEntityCollections(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
-
-            //------------------------------------------------------------
-            //	Handle parameter null reference cases
-            //------------------------------------------------------------
             if (source == null && target == null)
             {
                 return 0;
@@ -782,10 +651,6 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-
-            //------------------------------------------------------------
-            //	Attempt to perform comparison
-            //------------------------------------------------------------
             result      = result | YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
             result      = result | YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
             result      = result | YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
@@ -810,21 +675,10 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityClasses(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            
-            //------------------------------------------------------------
-            //	Attempt to extract common entity information
-            //------------------------------------------------------------
             if(source.HasChildren)
             {
                 XPathNavigator titleNavigator       = source.SelectSingleNode("media:title", manager);
@@ -910,21 +764,11 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityCollectionsPrimary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            
-            //------------------------------------------------------------
-            //	Attempt to extract common entity information
-            //------------------------------------------------------------
+
             if(source.HasChildren)
             {
                 XPathNodeIterator categoryIterator      = source.Select("media:category", manager);
@@ -1000,21 +844,11 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityCollectionsSecondary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded  = false;
-
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            
-            //------------------------------------------------------------
-            //	Attempt to extract common entity information
-            //------------------------------------------------------------
+
             if(source.HasChildren)
             {
                 XPathNodeIterator hashIterator          = source.Select("media:hash", manager);

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-12/06/2007	brian.kuhn	Created Rss092SyndicationResourceAdapter Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
@@ -22,8 +15,8 @@ namespace Argotic.Data.Adapters
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Rss092SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source. 
-    ///         The <see cref="Rss092SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data 
+    ///         The <see cref="Rss092SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source.
+    ///         The <see cref="Rss092SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data
     ///         in the <see cref="RssFeed"/> to match the data in the data source.
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 0.92 specification.</para>
@@ -31,13 +24,6 @@ namespace Argotic.Data.Adapters
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="Rss092SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -50,14 +36,8 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public Rss092SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
-            //------------------------------------------------------------
-            //	Initialization and argument validation handled by base class
-            //------------------------------------------------------------
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Modifies the <see cref="RssFeed"/> to match the data source.
         /// </summary>
@@ -65,19 +45,10 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         public void Fill(RssFeed resource)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(resource, "resource");
 
-            //------------------------------------------------------------
-            //	Create namespace resolver
-            //------------------------------------------------------------
             XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            //------------------------------------------------------------
-            //	Attempt to fill syndication resource
-            //------------------------------------------------------------
             XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("rss", manager);
 
             if (feedNavigator != null)
@@ -93,9 +64,6 @@ namespace Argotic.Data.Adapters
             }
         }
 
-        //============================================================
-        //	PRIVATE METHODS
-        //============================================================
         /// <summary>
         /// Initializes the supplied <see cref="RssCategory"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
@@ -109,17 +77,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillCategory(RssCategory category, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(category, "category");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract category information
-            //------------------------------------------------------------
             if (navigator.HasAttributes)
             {
                 string domainAttribute  = navigator.GetAttribute("domain", String.Empty);
@@ -151,17 +113,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillCloud(RssCloud cloud, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(cloud, "cloud");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract category information
-            //------------------------------------------------------------
             if (navigator.HasAttributes)
             {
                 string domainAttribute              = navigator.GetAttribute("domain", String.Empty);
@@ -221,17 +177,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Load required channel information
-            //------------------------------------------------------------
             XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
             XPathNavigator linkNavigator        = navigator.SelectSingleNode("link", manager);
             XPathNavigator titleNavigator       = navigator.SelectSingleNode("title", manager);
@@ -276,14 +226,8 @@ namespace Argotic.Data.Adapters
                 Rss092SyndicationResourceAdapter.FillImage(channel.Image, imageNavigator, manager, settings);
             }
 
-            //------------------------------------------------------------
-            //	Load channel optional information
-            //------------------------------------------------------------
             Rss092SyndicationResourceAdapter.FillChannelOptionals(channel, navigator, manager, settings);
 
-            //------------------------------------------------------------
-            //	Load channel collections
-            //------------------------------------------------------------
             Rss092SyndicationResourceAdapter.FillChannelCollections(channel, navigator, manager, settings);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
@@ -303,17 +247,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillChannelCollections(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Extract channel collections information
-            //------------------------------------------------------------
             XPathNodeIterator skipDaysIterator  = navigator.Select("skipDays/day", manager);
             XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
             XPathNodeIterator itemIterator      = navigator.Select("item", manager);
@@ -394,17 +332,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillChannelOptionals(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Extract optional channel information
-            //------------------------------------------------------------
             XPathNavigator copyrightNavigator       = navigator.SelectSingleNode("copyright", manager);
             XPathNavigator managingEditorNavigator  = navigator.SelectSingleNode("managingEditor", manager);
             XPathNavigator webMasterNavigator       = navigator.SelectSingleNode("webMaster", manager);
@@ -478,17 +410,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillEnclosure(RssEnclosure enclosure, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(enclosure, "enclosure");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract enclosure information
-            //------------------------------------------------------------
             if (navigator.HasAttributes)
             {
                 string urlAttribute     = navigator.GetAttribute("url", String.Empty);
@@ -530,17 +456,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(image, "image");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract image information
-            //------------------------------------------------------------
             XPathNavigator linkNavigator    = navigator.SelectSingleNode("link", manager);
             XPathNavigator titleNavigator   = navigator.SelectSingleNode("title", manager);
             XPathNavigator urlNavigator     = navigator.SelectSingleNode("url", manager);
@@ -611,17 +531,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillItem(RssItem item, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(item, "item");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract item information
-            //------------------------------------------------------------
             XPathNavigator titleNavigator       = navigator.SelectSingleNode("title", manager);
             XPathNavigator linkNavigator        = navigator.SelectSingleNode("link", manager);
             XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
@@ -707,17 +621,11 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private static void FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(textInput, "textInput");
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            //------------------------------------------------------------
-            //	Attempt to extract text input information
-            //------------------------------------------------------------
             XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
             XPathNavigator linkNavigator        = navigator.SelectSingleNode("link", manager);
             XPathNavigator nameNavigator        = navigator.SelectSingleNode("name", manager);

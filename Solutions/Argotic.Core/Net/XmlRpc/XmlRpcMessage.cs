@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/13/2008	brian.kuhn	Created XmlRpcMessage Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
@@ -21,18 +14,15 @@ namespace Argotic.Net
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcMessage class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs" 
-    ///             region="XmlRpcClient" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
+    ///             region="XmlRpcClient"
     ///         />
     ///     </code>
     /// </example>
     [Serializable()]
     public class XmlRpcMessage : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
         /// <summary>
         /// Private member to hold the name of the method to be called.
         /// </summary>
@@ -46,17 +36,11 @@ namespace Argotic.Net
         /// </summary>
         private Encoding messageEncoding    = Encoding.UTF8;
 
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
         /// </summary>
         public XmlRpcMessage()
         {
-            //------------------------------------------------------------
-            //	
-            //------------------------------------------------------------
         }
 
         /// <summary>
@@ -67,9 +51,6 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is an empty string.</exception>
         public XmlRpcMessage(string methodName)
         {
-            //------------------------------------------------------------
-            //	Initialize class using guarded properties
-            //------------------------------------------------------------
             this.MethodName = methodName;
         }
 
@@ -83,23 +64,14 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is a null reference (Nothing in Visual Basic).</exception>
         public XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters) : this(methodName)
         {
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(parameters, "parameters");
 
-            //------------------------------------------------------------
-            //	Load the supplied parameters
-            //------------------------------------------------------------
             foreach(IXmlRpcValue parameter in parameters)
             {
                 this.Parameters.Add(parameter);
             }
         }
 
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets or sets the <see cref="Encoding">character encoding</see> of this message.
         /// </summary>
@@ -143,7 +115,7 @@ namespace Argotic.Net
         /// Gets the method parameters.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<IXmlRpcValue> Parameters
@@ -158,9 +130,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	STATIC METHODS
-        //============================================================
         /// <summary>
         /// Compares two specified <see cref="Collection{IXmlRpcValue}"/> collections.
         /// </summary>
@@ -182,14 +151,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             int result  = 0;
 
-            //------------------------------------------------------------
-            //	Validate parameters
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -217,9 +180,6 @@ namespace Argotic.Net
             return result;
         }
 
-        //============================================================
-        //	PUBLIC METHODS
-        //============================================================
         /// <summary>
         /// Loads this <see cref="XmlRpcMessage"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -231,19 +191,10 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             bool wasLoaded = false;
 
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(source, "source");
 
-            //------------------------------------------------------------
-            //	Attempt to extract scalar parameter information
-            //------------------------------------------------------------
             if (source.HasChildren)
             {
                 XPathNavigator methodNameNavigator  = source.SelectSingleNode("methodName");
@@ -283,14 +234,8 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public void WriteTo(XmlWriter writer)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(writer, "writer");
 
-            //------------------------------------------------------------
-            //	Write XML representation of the current instance
-            //------------------------------------------------------------
             writer.WriteStartElement("methodCall");
 
             writer.WriteElementString("methodName", this.MethodName);
@@ -310,9 +255,6 @@ namespace Argotic.Net
             writer.WriteEndElement();
         }
 
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
         /// </summary>
@@ -322,9 +264,6 @@ namespace Argotic.Net
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             using(MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings  = new XmlWriterSettings();
@@ -346,9 +285,6 @@ namespace Argotic.Net
             }
         }
 
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -357,17 +293,11 @@ namespace Argotic.Net
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
 
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             XmlRpcMessage value  = obj as XmlRpcMessage;
 
             if (value != null)
@@ -391,9 +321,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is XmlRpcMessage))
             {
                 return false;
@@ -408,9 +335,6 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -424,9 +348,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(XmlRpcMessage first, XmlRpcMessage second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -458,9 +379,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(XmlRpcMessage first, XmlRpcMessage second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -481,9 +399,6 @@ namespace Argotic.Net
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(XmlRpcMessage first, XmlRpcMessage second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-03/06/2007	brian.kuhn	Created SyndicationDiscoveryUtilityExample Class
-****************************************************************************/
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Net;
 
@@ -23,9 +16,6 @@ namespace Argotic.Examples
     /// </remarks>
     public static class SyndicationDiscoveryUtilityExample
     {
-        //============================================================
-        //	ENUMERATION UTILITY METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri) method
         /// </summary>
@@ -42,9 +32,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	GENERAL WEB RESOURCE METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.SourceReferencesTarget(Uri, Uri) method
         /// </summary>
@@ -74,24 +61,15 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	CONDITIONAL GET EXAMPLES
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, string) method
         /// </summary>
         public static void ConditionalGetExample()
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
             DateTime lastModified;
             string entityTag;
 
-            //------------------------------------------------------------
-            //	Retrieve the modification date and entity tag information
-            //------------------------------------------------------------
             HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
             httpRequest.AllowAutoRedirect   = true;
             httpRequest.KeepAlive           = true;
@@ -108,9 +86,6 @@ namespace Argotic.Examples
                 the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
             */
 
-            //------------------------------------------------------------
-            //	Determine if web resource has been modified
-            //------------------------------------------------------------
             WebResponse conditionalResponse = SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag);
             if (conditionalResponse != null)
             {
@@ -123,16 +98,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void TryConditionalGetExample()
         {
-            //------------------------------------------------------------
-            //	Local members
-            //------------------------------------------------------------
             Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
             DateTime lastModified;
             string entityTag;
-
-            //------------------------------------------------------------
-            //	Retrieve the modification date and entity tag information
-            //------------------------------------------------------------
             HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
             httpRequest.AllowAutoRedirect   = true;
             httpRequest.KeepAlive           = true;
@@ -149,9 +117,7 @@ namespace Argotic.Examples
                 the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
             */
 
-            //------------------------------------------------------------
-            //	Determine if web resource has been modified
-            //------------------------------------------------------------
+
             HttpWebResponse conditionalResponse = null;
             if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out conditionalResponse))
             {
@@ -159,9 +125,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	SYNDICATED CONTENT AUTO-DISCOVERY METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri) method
         /// </summary>
@@ -185,9 +148,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	PINGBACK PEER-TO-PEER NOTIFICATION METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.IsPingbackEnabled(Uri) method
         /// </summary>
@@ -222,9 +182,6 @@ namespace Argotic.Examples
             }
         }
 
-        //============================================================
-        //	TRACKBACK PEER-TO-PEER NOTIFICATION METHODS
-        //============================================================
         /// <summary>
         /// Provides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri) method
         /// </summary>

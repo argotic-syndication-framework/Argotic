@@ -1,11 +1,4 @@
-﻿/****************************************************************************
-Modification History:
-*****************************************************************************
-Date		Author		Description
-*****************************************************************************
-02/20/2008	brian.kuhn	Created GenericSyndicationCategory Class
-****************************************************************************/
-using System;
+﻿using System;
 
 using Argotic.Common;
 
@@ -19,9 +12,7 @@ namespace Argotic.Syndication
     [Serializable()]
     public class GenericSyndicationCategory : IComparable
     {
-        //============================================================
-        //	PUBLIC/PRIVATE/PROTECTED MEMBERS
-        //============================================================
+
         /// <summary>
         /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
         /// </summary>
@@ -30,10 +21,6 @@ namespace Argotic.Syndication
         /// Private member to hold a string that identifies the categorization scheme.
         /// </summary>
         private string categoryScheme   = String.Empty;
-
-        //============================================================
-        //	CONSTRUCTORS
-        //============================================================
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
         /// </summary>
@@ -42,14 +29,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public GenericSyndicationCategory(string term)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNullOrEmptyString(term, "term");
-
-            //------------------------------------------------------------
-            //	Initialize class state using guarded properties
-            //------------------------------------------------------------
             categoryTerm    = term;
         }
 
@@ -62,9 +42,6 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public GenericSyndicationCategory(string term, string scheme) : this(term)
         {
-            //------------------------------------------------------------
-            //	Initialize class state using supplied parameters
-            //------------------------------------------------------------
             categoryScheme  = scheme;
         }
 
@@ -75,14 +52,8 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference (Nothing in Visual Basic).</exception>
         public GenericSyndicationCategory(AtomCategory category)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(category, "category");
 
-            //------------------------------------------------------------
-            //	Extract information from the format specific category
-            //------------------------------------------------------------
             if (category.Scheme != null)
             {
                 categoryScheme  = category.Scheme.ToString();
@@ -105,14 +76,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference (Nothing in Visual Basic).</exception>
         public GenericSyndicationCategory(RssCategory category)
         {
-            //------------------------------------------------------------
-            //	Validate parameter
-            //------------------------------------------------------------
             Guard.ArgumentNotNull(category, "category");
-
-            //------------------------------------------------------------
-            //	Extract information from the format specific category
-            //------------------------------------------------------------
             if(!String.IsNullOrEmpty(category.Domain))
             {
                 categoryScheme  = category.Domain.Trim();
@@ -123,10 +87,6 @@ namespace Argotic.Syndication
                 categoryTerm    = category.Value.Trim();
             }
         }
-
-        //============================================================
-        //	PUBLIC PROPERTIES
-        //============================================================
         /// <summary>
         /// Gets a string that identifies the categorization scheme.
         /// </summary>
@@ -150,10 +110,6 @@ namespace Argotic.Syndication
                 return categoryTerm;
             }
         }
-
-        //============================================================
-        //	PUBLIC OVERRIDES
-        //============================================================
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.
         /// </summary>
@@ -163,15 +119,8 @@ namespace Argotic.Syndication
         /// </remarks>
         public override string ToString()
         {
-            //------------------------------------------------------------
-            //	Build the string representation
-            //------------------------------------------------------------
             return String.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
         }
-
-        //============================================================
-        //	ICOMPARABLE IMPLEMENTATION
-        //============================================================
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -180,17 +129,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
         public int CompareTo(object obj)
         {
-            //------------------------------------------------------------
-            //	If target is a null reference, instance is greater
-            //------------------------------------------------------------
             if (obj == null)
             {
                 return 1;
             }
-
-            //------------------------------------------------------------
-            //	Determine comparison result using property state of objects
-            //------------------------------------------------------------
             GenericSyndicationCategory value  = obj as GenericSyndicationCategory;
 
             if (value != null)
@@ -213,9 +155,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
         public override bool Equals(Object obj)
         {
-            //------------------------------------------------------------
-            //	Determine equality via type then by comparision
-            //------------------------------------------------------------
             if (!(obj is GenericSyndicationCategory))
             {
                 return false;
@@ -230,9 +169,6 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            //------------------------------------------------------------
-            //	Generate has code using unique value of ToString() method
-            //------------------------------------------------------------
             char[] charArray    = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
@@ -246,9 +182,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(GenericSyndicationCategory first, GenericSyndicationCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return true;
@@ -280,9 +213,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(GenericSyndicationCategory first, GenericSyndicationCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;
@@ -303,9 +233,6 @@ namespace Argotic.Syndication
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(GenericSyndicationCategory first, GenericSyndicationCategory second)
         {
-            //------------------------------------------------------------
-            //	Handle null reference comparison
-            //------------------------------------------------------------
             if (object.Equals(first, null) && object.Equals(second, null))
             {
                 return false;

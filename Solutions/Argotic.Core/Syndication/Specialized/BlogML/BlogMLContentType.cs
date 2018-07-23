@@ -1,12 +1,13 @@
 ﻿namespace Argotic.Syndication.Specialized
 {
     using System;
+
     using Argotic.Common;
 
     /// <summary>
     /// Represents the entity encoding utilized by textual content constructs.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public enum BlogMLContentType
     {
         /// <summary>
@@ -37,6 +38,6 @@
         /// Indicates that the textual content is Extensible Hyper-Text Markup Language (XHTML) encoded.
         /// </summary>
         [EnumerationMetadata(DisplayName = "XHTML", AlternateValue = "xhtml")]
-        Xhtml = 4
+        Xhtml = 4,
     }
 }

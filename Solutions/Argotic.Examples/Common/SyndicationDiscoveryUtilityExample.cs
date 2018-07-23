@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Net;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Net;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="SyndicationDiscoveryUtility"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="SyndicationDiscoveryUtility"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="SyndicationDiscoveryUtility"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     public static class SyndicationDiscoveryUtilityExample
@@ -82,7 +81,7 @@ namespace Argotic.Examples
 
             /*
                 Typically the consumer would store the modification date and entity tag information for the resource,
-                and some amount of time passes. Consumer can now use a conditional GET operation to determine if 
+                and some amount of time passes. Consumer can now use a conditional GET operation to determine if
                 the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
             */
 
@@ -113,7 +112,7 @@ namespace Argotic.Examples
 
             /*
                 Typically the consumer would store the modification date and entity tag information for the resource,
-                and some amount of time passes. Consumer can now use a conditional GET operation to determine if 
+                and some amount of time passes. Consumer can now use a conditional GET operation to determine if
                 the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
             */
 
@@ -135,12 +134,12 @@ namespace Argotic.Examples
 
             endpoints = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
 
-            foreach(DiscoverableSyndicationEndpoint endpoint in endpoints)
+            foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
             {
                 if (endpoint.ContentFormat == SyndicationContentFormat.Rss)
                 {
                     RssFeed feed = RssFeed.Create(endpoint.Source);
-                    if(feed.Channel.HasExtensions)
+                    if (feed.Channel.HasExtensions)
                     {
                         // Process feed extensions
                     }
@@ -205,7 +204,7 @@ namespace Argotic.Examples
             Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
             Collection<TrackbackDiscoveryMetadata> endpoints = SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(source);
-            foreach(TrackbackDiscoveryMetadata endpoint in endpoints)
+            foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
             {
                 Argotic.Net.TrackbackClient client = new Argotic.Net.TrackbackClient(endpoint.PingUrl);
                 Argotic.Net.TrackbackMessage message = new Argotic.Net.TrackbackMessage();

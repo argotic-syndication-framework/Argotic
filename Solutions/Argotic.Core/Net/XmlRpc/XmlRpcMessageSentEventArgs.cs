@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net;
+
     using Argotic.Common;
 
     /// <summary>
@@ -12,23 +13,13 @@
     /// </remarks>
     /// <seealso cref="XmlRpcClient.SendAsync(XmlRpcMessage, object)"/>
     /// <seealso cref="XmlRpcClient"/>
-    [Serializable()]
+    [Serializable]
     public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     {
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
-        private static readonly XmlRpcMessageSentEventArgs emptyEventArguments = new XmlRpcMessageSentEventArgs();
-
-        /// <summary>
-        /// Private member to hold the remote procedure call payload that was sent.
-        /// </summary>
-        private XmlRpcMessage eventMessage;
-
-        /// <summary>
-        /// Private member to hold the response to the remote procedure call.
-        /// </summary>
-        private XmlRpcResponse eventResponse;
+        private static readonly XmlRpcMessageSentEventArgs EmptyEventArguments = new XmlRpcMessageSentEventArgs();
 
         /// <summary>
         /// Private member to hold the location of the host computer that the remote procedure call was sent to.
@@ -36,9 +27,19 @@
         private Uri eventHost;
 
         /// <summary>
+        /// Private member to hold the remote procedure call payload that was sent.
+        /// </summary>
+        private XmlRpcMessage eventMessage;
+
+        /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions eventOptions = new WebRequestOptions();
+
+        /// <summary>
+        /// Private member to hold the response to the remote procedure call.
+        /// </summary>
+        private XmlRpcResponse eventResponse;
 
         /// <summary>
         /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
@@ -49,8 +50,8 @@
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.
         /// </summary>
         public XmlRpcMessageSentEventArgs()
-		{
-		}
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class using the supplied parameters.
@@ -64,17 +65,23 @@
         /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
-        public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, object state)
+        public XmlRpcMessageSentEventArgs(
+            Uri host,
+            XmlRpcMessage message,
+            XmlRpcResponse response,
+            ICredentials credentials,
+            IWebProxy proxy,
+            object state)
         {
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            eventHost = host;
-            eventMessage = message;
-            eventResponse = response;
-            eventOptions = new WebRequestOptions(credentials, proxy);
-            eventUserToken = state;
+            this.eventHost = host;
+            this.eventMessage = message;
+            this.eventResponse = response;
+            this.eventOptions = new WebRequestOptions(credentials, proxy);
+            this.eventUserToken = state;
         }
 
         /// <summary>
@@ -88,21 +95,26 @@
         /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
-        public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, object state)
+        public XmlRpcMessageSentEventArgs(
+            Uri host,
+            XmlRpcMessage message,
+            XmlRpcResponse response,
+            WebRequestOptions options,
+            object state)
         {
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            eventHost = host;
-            eventMessage = message;
-            eventResponse = response;
-            eventOptions = options ?? new WebRequestOptions();
-            eventUserToken = state;
+            this.eventHost = host;
+            this.eventMessage = message;
+            this.eventResponse = response;
+            this.eventOptions = options ?? new WebRequestOptions();
+            this.eventUserToken = state;
         }
 
         /// <summary>
-        /// Represents an syndication resource loaded event with no event data.
+        /// Gets represents an syndication resource loaded event with no event data.
         /// </summary>
         /// <value>An uninitialized instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.</value>
         /// <remarks>The value of Empty is a read-only instance of <see cref="XmlRpcMessageSentEventArgs"/> equivalent to the result of calling the <see cref="XmlRpcMessageSentEventArgs()"/> constructor.</remarks>
@@ -110,7 +122,7 @@
         {
             get
             {
-                return emptyEventArguments;
+                return EmptyEventArguments;
             }
         }
 
@@ -125,7 +137,7 @@
         {
             get
             {
-                return eventOptions.Credentials;
+                return this.eventOptions.Credentials;
             }
         }
 
@@ -139,7 +151,7 @@
         {
             get
             {
-                return eventHost;
+                return this.eventHost;
             }
         }
 
@@ -153,7 +165,7 @@
         {
             get
             {
-                return eventMessage;
+                return this.eventMessage;
             }
         }
 
@@ -168,7 +180,7 @@
         {
             get
             {
-                return eventOptions.Proxy;
+                return this.eventOptions.Proxy;
             }
         }
 
@@ -182,7 +194,7 @@
         {
             get
             {
-                return eventResponse;
+                return this.eventResponse;
             }
         }
 
@@ -196,27 +208,79 @@
         {
             get
             {
-                return eventUserToken;
+                return this.eventUserToken;
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-        /// </remarks>
-        public override string ToString()
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
         {
-            string host = this.Host != null ? this.Host.ToString() : string.Empty;
-            string message = this.Message != null ? this.Message.ToString() : string.Empty;
-            string response = this.Response != null ? this.Response.ToString() : string.Empty;
-            string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
 
-            return string.Format(null, "[XmlRpcMessageSentEventArgs(Host = \"{0}\", Message = \"{1}\", Response = \"{2}\", Credentials = \"{3}\", Proxy = \"{4}\", State = \"{5}\")]", host, message, response, credentials, proxy, state);
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -239,13 +303,24 @@
                 int result = 0;
                 result = result | this.Message.CompareTo(value.Message);
                 result = result | this.Response.CompareTo(value.Response);
-                result = result | Uri.Compare(this.Host, value.Host, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Host,
+                             value.Host,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -261,7 +336,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -276,74 +351,37 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessageSentEventArgs"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
+        /// </remarks>
+        public override string ToString()
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
+            string host = this.Host != null ? this.Host.ToString() : string.Empty;
+            string message = this.Message != null ? this.Message.ToString() : string.Empty;
+            string response = this.Response != null ? this.Response.ToString() : string.Empty;
+            string credentials = this.Credentials != null
+                                     ? this.Credentials.GetHashCode().ToString(
+                                         System.Globalization.NumberFormatInfo.InvariantInfo)
+                                     : string.Empty;
+            string proxy = this.Proxy != null
+                               ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
+                               : string.Empty;
+            string state = this.State != null
+                               ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
+                               : string.Empty;
 
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            return string.Format(
+                null,
+                "[XmlRpcMessageSentEventArgs(Host = \"{0}\", Message = \"{1}\", Response = \"{2}\", Credentials = \"{3}\", Proxy = \"{4}\", State = \"{5}\")]",
+                host,
+                message,
+                response,
+                credentials,
+                proxy,
+                state);
         }
     }
 }

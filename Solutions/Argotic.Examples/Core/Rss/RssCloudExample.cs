@@ -1,15 +1,14 @@
-﻿using System;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="RssCloud"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssCloud"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="RssCloud"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
@@ -28,6 +27,7 @@ namespace Argotic.Examples
 
             feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
         }
+
         /// <summary>
         /// Provides example code for the RssCloud.CloudProtocolAsString(RssCloudProtocol) method
         /// </summary>

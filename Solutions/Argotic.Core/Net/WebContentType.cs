@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Net;
     using System.Text;
+
     using Argotic.Common;
 
     /// <summary>
@@ -13,23 +13,23 @@
     /// <remarks>
     ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</para>
     /// </remarks>
-    [Serializable()]
+    [Serializable]
     public class WebContentType : IComparable
     {
         /// <summary>
         /// Private member to hold the well known name for the character encoding parameter.
         /// </summary>
-        private const string CHARSET_PARAMETER_NAME = "charset";
+        private const string CharsetParameterName = "charset";
 
         /// <summary>
         /// Private member to hold the well known name for the type discriminator parameter.
         /// </summary>
-        private const string TYPE_PARAMETER_NAME = "type";
+        private const string TypeParameterName = "type";
 
         /// <summary>
-        /// Private member to hold the type of the media content.
+        /// Private member to hold additional parameters applied to the media content.
         /// </summary>
-        private string webContentMediaType = string.Empty;
+        private Dictionary<string, string> webContentMediaParameters;
 
         /// <summary>
         /// Private member to hold the sub-type of the media content.
@@ -37,9 +37,9 @@
         private string webContentMediaSubType = string.Empty;
 
         /// <summary>
-        /// Private member to hold additional parameters applied to the media content.
+        /// Private member to hold the type of the media content.
         /// </summary>
-        private Dictionary<string, string> webContentMediaParameters;
+        private string webContentMediaType = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebContentType"/> class.
@@ -52,7 +52,7 @@
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type and sub-type.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
-        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
+        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
@@ -67,13 +67,14 @@
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type and type discriminator.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
-        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
+        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents.</param>
         /// <param name="discriminator">A string value that provides a means of discriminating the media content.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
-        public WebContentType(string mediaType, string mediaSubtype, string discriminator) : this(mediaType, mediaSubtype)
+        public WebContentType(string mediaType, string mediaSubtype, string discriminator)
+            : this(mediaType, mediaSubtype)
         {
             this.Discriminator = discriminator;
         }
@@ -82,7 +83,7 @@
         /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type, type discriminator and character encoding.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
-        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
+        /// <param name="mediaSubtype">The specific format for the general type of data the media content represents.</param>
         /// <param name="discriminator">A string value that provides a means of discriminating the media content.</param>
         /// <param name="characterSet">A <see cref="Encoding"/> object that represents the character encoding of the media content.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
@@ -90,7 +91,8 @@
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="characterSet"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        public WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet) : this(mediaType, mediaSubtype, discriminator)
+        public WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet)
+            : this(mediaType, mediaSubtype, discriminator)
         {
             Guard.ArgumentNotNull(characterSet, "characterSet");
 
@@ -112,18 +114,20 @@
         {
             get
             {
-                return this.Parameters.ContainsKey(CHARSET_PARAMETER_NAME) ? this.Parameters[CHARSET_PARAMETER_NAME] : string.Empty;
+                return this.Parameters.ContainsKey(CharsetParameterName)
+                           ? this.Parameters[CharsetParameterName]
+                           : string.Empty;
             }
 
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    this.Parameters[CHARSET_PARAMETER_NAME] = value.Trim();
+                    this.Parameters[CharsetParameterName] = value.Trim();
                 }
                 else
                 {
-                    this.Parameters.Remove(CHARSET_PARAMETER_NAME);
+                    this.Parameters.Remove(CharsetParameterName);
                 }
             }
         }
@@ -144,18 +148,20 @@
         {
             get
             {
-                return this.Parameters.ContainsKey(TYPE_PARAMETER_NAME) ? this.Parameters[TYPE_PARAMETER_NAME] : string.Empty;
+                return this.Parameters.ContainsKey(TypeParameterName)
+                           ? this.Parameters[TypeParameterName]
+                           : string.Empty;
             }
 
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    this.Parameters[TYPE_PARAMETER_NAME] = value.Trim();
+                    this.Parameters[TypeParameterName] = value.Trim();
                 }
                 else
                 {
-                    this.Parameters.Remove(TYPE_PARAMETER_NAME);
+                    this.Parameters.Remove(TypeParameterName);
                 }
             }
         }
@@ -186,26 +192,6 @@
         }
 
         /// <summary>
-        /// Gets or sets the top-level media type used to declare the general type of data this media content represents.
-        /// </summary>
-        /// <value>The top-level media type used to declare the general type of data this media content represents.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public string MediaType
-        {
-            get
-            {
-                return webContentMediaType;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNullOrEmptyString(value, "value");
-                webContentMediaType = value.Trim();
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the specific format for the general type of data this media content represents.
         /// </summary>
         /// <value>The specific format for the general type of data this media content represents.</value>
@@ -215,13 +201,33 @@
         {
             get
             {
-                return webContentMediaSubType;
+                return this.webContentMediaSubType;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                webContentMediaSubType = value.Trim();
+                this.webContentMediaSubType = value.Trim();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the top-level media type used to declare the general type of data this media content represents.
+        /// </summary>
+        /// <value>The top-level media type used to declare the general type of data this media content represents.</value>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+        public string MediaType
+        {
+            get
+            {
+                return this.webContentMediaType;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNullOrEmptyString(value, "value");
+                this.webContentMediaType = value.Trim();
             }
         }
 
@@ -238,13 +244,84 @@
         {
             get
             {
-                if (webContentMediaParameters == null)
+                if (this.webContentMediaParameters == null)
                 {
-                    webContentMediaParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                    this.webContentMediaParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
                 }
 
-                return webContentMediaParameters;
+                return this.webContentMediaParameters;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(WebContentType first, WebContentType second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(WebContentType first, WebContentType second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(WebContentType first, WebContentType second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(WebContentType first, WebContentType second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -275,15 +352,15 @@
 
             if (source.Count == target.Count)
             {
-                foreach(string key in source.Keys)
+                foreach (string key in source.Keys)
                 {
-                    if(target.ContainsKey(key))
+                    if (target.ContainsKey(key))
                     {
                         result = result | string.Compare(source[key], target[key], StringComparison.Ordinal);
                     }
                     else
                     {
-                        result = result | - 1;
+                        result = result | -1;
                         break;
                     }
                 }
@@ -298,42 +375,6 @@
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="WebContentType"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="WebContentType"/>.</returns>
-        /// <remarks>
-        ///     This method returns the MIME content type representation for the current instance.
-        /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public override string ToString()
-        {
-            StringBuilder builder = new StringBuilder();
-
-            builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
-
-            if(!string.IsNullOrEmpty(this.Discriminator))
-            {
-                builder.Append(string.Format(null, ";{0}={1}", TYPE_PARAMETER_NAME, this.Discriminator));
-            }
-
-            if (!string.IsNullOrEmpty(this.CharacterSet))
-            {
-                builder.Append(string.Format(null, ";{0}={1}", CHARSET_PARAMETER_NAME, this.CharacterSet));
-            }
-
-            foreach(string parameterName in this.Parameters.Keys)
-            {
-                string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
-                if (string.Compare(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0 && string.Compare(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0)
-                {
-                    builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
-                }
-            }
-
-            return builder.ToString();
         }
 
         /// <summary>
@@ -355,13 +396,19 @@
             {
                 int result = string.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
-                result = result | WebContentType.CompareSequence(this.Parameters, value.Parameters);
+                result = result | CompareSequence(this.Parameters, value.Parameters);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -377,7 +424,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -392,74 +439,44 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="WebContentType"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(WebContentType first, WebContentType second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="WebContentType"/>.</returns>
+        /// <remarks>
+        ///     This method returns the MIME content type representation for the current instance.
+        /// </remarks>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase")]
+        public override string ToString()
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
+            StringBuilder builder = new StringBuilder();
 
-            return first.Equals(second);
-        }
+            builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
 
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(WebContentType first, WebContentType second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(WebContentType first, WebContentType second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (!string.IsNullOrEmpty(this.Discriminator))
             {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
+                builder.Append(string.Format(null, ";{0}={1}", TypeParameterName, this.Discriminator));
             }
 
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(WebContentType first, WebContentType second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (!string.IsNullOrEmpty(this.CharacterSet))
             {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
+                builder.Append(string.Format(null, ";{0}={1}", CharsetParameterName, this.CharacterSet));
             }
 
-            return (first.CompareTo(second) > 0);
+            foreach (string parameterName in this.Parameters.Keys)
+            {
+                string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName])
+                                            ? this.Parameters[parameterName].Trim()
+                                            : string.Empty;
+                if (string.Compare(parameterName, TypeParameterName, StringComparison.OrdinalIgnoreCase) != 0
+                    && string.Compare(parameterName, CharsetParameterName, StringComparison.OrdinalIgnoreCase) != 0)
+                {
+                    builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }

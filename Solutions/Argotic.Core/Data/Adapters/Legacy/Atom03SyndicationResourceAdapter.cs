@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -33,27 +34,9 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
-        }
-
-        /// <summary>
-        /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
-        /// </summary>
-        /// <param name="nameTable">The table of atomized string objects.</param>
-        /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
-        protected static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
-        {
-            XmlNamespaceManager manager = null;
-
-            Guard.ArgumentNotNull(nameTable, "nameTable");
-
-            manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
-            manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
-
-            return manager;
         }
 
         /// <summary>
@@ -71,7 +54,7 @@
 
             if (entryNavigator != null)
             {
-                Atom03SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
+                FillEntry(resource, entryNavigator, manager, this.Settings);
             }
         }
 
@@ -84,7 +67,7 @@
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager = Atom03SyndicationResourceAdapter.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = CreateNamespaceManager(this.Navigator.NameTable);
 
             XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("atom:feed", manager);
 
@@ -104,7 +87,7 @@
 
                 if (titleNavigator != null)
                 {
-                    resource.Title = Atom03SyndicationResourceAdapter.CreateTextContent(titleNavigator, manager, this.Settings);
+                    resource.Title = CreateTextContent(titleNavigator, manager, this.Settings);
                 }
 
                 if (modifiedNavigator != null)
@@ -116,12 +99,33 @@
                     }
                 }
 
-                Atom03SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
-                Atom03SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
+                FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
+                FillFeedCollections(resource, feedNavigator, manager, this.Settings);
 
                 SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
                 adapter.Fill(resource, manager);
             }
+        }
+
+        /// <summary>
+        /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
+        /// </summary>
+        /// <param name="nameTable">The table of atomized string objects.</param>
+        /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
+        protected static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
+        {
+            XmlNamespaceManager manager = null;
+
+            Guard.ArgumentNotNull(nameTable, "nameTable");
+
+            manager = new XmlNamespaceManager(nameTable);
+            manager.AddNamespace(
+                "atom",
+                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
+            manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
+
+            return manager;
         }
 
         /// <summary>
@@ -137,7 +141,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static AtomContent CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static AtomContent CreateContent(
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             AtomContent content = new AtomContent();
             string modeAttribute = string.Empty;
@@ -195,7 +202,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static AtomGenerator CreateGenerator(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static AtomGenerator CreateGenerator(
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             AtomGenerator generator = new AtomGenerator();
 
@@ -205,7 +215,7 @@
 
             AtomUtility.FillCommonObjectAttributes(generator, source);
 
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
                 string urlAttribute = source.GetAttribute("url", string.Empty);
                 string versionAttribute = source.GetAttribute("version", string.Empty);
@@ -249,7 +259,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static AtomPersonConstruct CreatePerson(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static AtomPersonConstruct CreatePerson(
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             AtomPersonConstruct person = new AtomPersonConstruct();
 
@@ -301,7 +314,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static AtomTextConstruct CreateTextContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static AtomTextConstruct CreateTextContent(
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             AtomTextConstruct content = new AtomTextConstruct();
 
@@ -372,7 +388,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntry(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -393,7 +413,7 @@
 
             if (titleNavigator != null)
             {
-                entry.Title = Atom03SyndicationResourceAdapter.CreateTextContent(titleNavigator, manager, settings);
+                entry.Title = CreateTextContent(titleNavigator, manager, settings);
             }
 
             if (modifiedNavigator != null)
@@ -405,8 +425,8 @@
                 }
             }
 
-            Atom03SyndicationResourceAdapter.FillEntryOptionals(entry, source, manager, settings);
-            Atom03SyndicationResourceAdapter.FillEntryCollections(entry, source, manager, settings);
+            FillEntryOptionals(entry, source, manager, settings);
+            FillEntryCollections(entry, source, manager, settings);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(entry, manager);
@@ -426,7 +446,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntryCollections(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntryCollections(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -441,7 +465,7 @@
             {
                 while (authorIterator.MoveNext())
                 {
-                    AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorIterator.Current, manager, settings);
+                    AtomPersonConstruct author = CreatePerson(authorIterator.Current, manager, settings);
                     entry.Authors.Add(author);
                 }
             }
@@ -450,7 +474,7 @@
             {
                 while (contributorIterator.MoveNext())
                 {
-                    AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorIterator.Current, manager, settings);
+                    AtomPersonConstruct contributor = CreatePerson(contributorIterator.Current, manager, settings);
                     entry.Contributors.Add(contributor);
                 }
             }
@@ -482,7 +506,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntryOptionals(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -495,7 +523,7 @@
 
             if (contentNavigator != null)
             {
-                entry.Content = Atom03SyndicationResourceAdapter.CreateContent(contentNavigator, manager, settings);
+                entry.Content = CreateContent(contentNavigator, manager, settings);
             }
 
             if (createdNavigator != null)
@@ -509,7 +537,7 @@
 
             if (summaryNavigator != null)
             {
-                entry.Summary = Atom03SyndicationResourceAdapter.CreateTextContent(summaryNavigator, manager, settings);
+                entry.Summary = CreateTextContent(summaryNavigator, manager, settings);
             }
         }
 
@@ -527,7 +555,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillFeedCollections(
+            AtomFeed feed,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");
@@ -543,7 +575,7 @@
             {
                 while (authorIterator.MoveNext())
                 {
-                    AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorIterator.Current, manager, settings);
+                    AtomPersonConstruct author = CreatePerson(authorIterator.Current, manager, settings);
                     feed.Authors.Add(author);
                 }
             }
@@ -552,7 +584,7 @@
             {
                 while (contributorIterator.MoveNext())
                 {
-                    AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorIterator.Current, manager, settings);
+                    AtomPersonConstruct contributor = CreatePerson(contributorIterator.Current, manager, settings);
                     feed.Contributors.Add(contributor);
                 }
             }
@@ -565,7 +597,7 @@
                     AtomEntry entry = new AtomEntry();
                     counter++;
 
-                    Atom03SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
+                    FillEntry(entry, entryIterator.Current, manager, settings);
 
                     if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                     {
@@ -603,7 +635,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillFeedOptionals(
+            AtomFeed feed,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");
@@ -616,17 +652,17 @@
 
             if (generatorNavigator != null)
             {
-                feed.Generator = Atom03SyndicationResourceAdapter.CreateGenerator(generatorNavigator, manager, settings);
+                feed.Generator = CreateGenerator(generatorNavigator, manager, settings);
             }
 
             if (copyrightNavigator != null)
             {
-                feed.Rights = Atom03SyndicationResourceAdapter.CreateTextContent(copyrightNavigator, manager, settings);
+                feed.Rights = CreateTextContent(copyrightNavigator, manager, settings);
             }
 
             if (taglineNavigator != null)
             {
-                feed.Subtitle = Atom03SyndicationResourceAdapter.CreateTextContent(taglineNavigator, manager, settings);
+                feed.Subtitle = CreateTextContent(taglineNavigator, manager, settings);
             }
         }
     }

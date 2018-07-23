@@ -1,65 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Permissions;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions
+﻿namespace Argotic.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Security.Permissions;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Provides the set of methods, properties and events that web content syndication extensions should inherit from.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="SyndicationExtension"/> abstract class is provided to reduce the difficulty of implementing custom syndication extensions. 
-    ///         While implementers are free to implement their custom syndication extensions by implementing the <see cref="ISyndicationExtension"/> interface, 
+    ///         The <see cref="SyndicationExtension"/> abstract class is provided to reduce the difficulty of implementing custom syndication extensions.
+    ///         While implementers are free to implement their custom syndication extensions by implementing the <see cref="ISyndicationExtension"/> interface,
     ///         it is <i>recommended</i> that custom syndication extensions inherit from the <see cref="SyndicationExtension"/> base class.
     ///     </para>
     ///     <para>
-    ///         If you choose to not inherit from the <see cref="SyndicationExtension"/> abstract base class, please be aware that the <see cref="SyndicationExtensionAdapter"/> class 
-    ///         internally calls the <see cref="Activator.CreateInstance(Type)"/> method, and so any custom syndication extension will need to have the 
+    ///         If you choose to not inherit from the <see cref="SyndicationExtension"/> abstract base class, please be aware that the <see cref="SyndicationExtensionAdapter"/> class
+    ///         internally calls the <see cref="Activator.CreateInstance(Type)"/> method, and so any custom syndication extension will need to have the
     ///         appropriate <see cref="SecurityPermissionAttribute"/> and <see cref="ReflectionPermissionAttribute"/> attributes applied as necessary.
     ///     </para>
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the SyndicationExtension abstract base class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\SyndicationExtensionExample.cs" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\SyndicationExtensionExample.cs"
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializable
     {
-
         /// <summary>
         /// Private member to hold the human-readable description of the syndication extension.
         /// </summary>
-        private string extensionDescription  = String.Empty;
+        private string extensionDescription = string.Empty;
+
         /// <summary>
         /// Private member to hold a URL that points to documentation for the syndication extension.
         /// </summary>
         private Uri extensionDocumentation;
+
         /// <summary>
         /// Private member to hold the human-readable name of the syndication extension.
         /// </summary>
-        private string extensionName = String.Empty;
+        private string extensionName = string.Empty;
+
         /// <summary>
         /// Private member to hold the version of the specification that the syndication extension conforms to.
         /// </summary>
         private Version extensionVersion;
+
         /// <summary>
         /// Private member to hold the XML namespace that is used when qualifying the syndication extension's element and attribute names.
         /// </summary>
-        private string extensionXmlNamespace = String.Empty;
+        private string extensionXmlNamespace = string.Empty;
+
         /// <summary>
         /// Private member to hold the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
         /// </summary>
-        private string extensionXmlPrefix    = String.Empty;
+        private string extensionXmlPrefix = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationExtension"/> class.
         /// </summary>
@@ -83,10 +87,10 @@ namespace Argotic.Extensions
             Guard.ArgumentNotNullOrEmptyString(xmlPrefix, "xmlPrefix");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
             Guard.ArgumentNotNull(version, "version");
-            
-            extensionXmlPrefix      = xmlPrefix.Trim();
-            extensionXmlNamespace   = xmlNamespace.Trim();
-            extensionVersion        = version;
+
+            this.extensionXmlPrefix = xmlPrefix.Trim();
+            this.extensionXmlNamespace = xmlNamespace.Trim();
+            this.extensionVersion = version;
         }
 
         /// <summary>
@@ -106,18 +110,26 @@ namespace Argotic.Extensions
         /// <exception cref="ArgumentNullException">The <paramref name="documentation"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version, Uri documentation, string name, string description) : this(xmlPrefix, xmlNamespace, version)
+        protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version, Uri documentation, string name, string description)
+            : this(xmlPrefix, xmlNamespace, version)
         {
             Guard.ArgumentNotNull(documentation, "documentation");
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            extensionDocumentation      = documentation;
-            extensionName               = name.Trim();
-            if(!String.IsNullOrEmpty(description))
+            this.extensionDocumentation = documentation;
+            this.extensionName = name.Trim();
+            if (!string.IsNullOrEmpty(description))
             {
-                extensionDescription    = description.Trim();
+                this.extensionDescription = description.Trim();
             }
         }
+
+        /// <summary>
+        /// Occurs when the <see cref="SyndicationExtension"/> state has been changed by a load operation.
+        /// </summary>
+        /// <seealso cref="SyndicationExtension.Load(IXPathNavigable)"/>
+        /// <seealso cref="SyndicationExtension.Load(XmlReader)"/>
+        public event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
 
         /// <summary>
         /// Gets a human-readable description of this syndication extension.
@@ -127,7 +139,7 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionDescription;
+                return this.extensionDescription;
             }
         }
 
@@ -139,7 +151,7 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionDocumentation;
+                return this.extensionDocumentation;
             }
         }
 
@@ -151,7 +163,7 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionName;
+                return this.extensionName;
             }
         }
 
@@ -163,7 +175,7 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionVersion;
+                return this.extensionVersion;
             }
         }
 
@@ -175,7 +187,7 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionXmlNamespace;
+                return this.extensionXmlNamespace;
             }
         }
 
@@ -187,38 +199,19 @@ namespace Argotic.Extensions
         {
             get
             {
-                return extensionXmlPrefix;
+                return this.extensionXmlPrefix;
             }
         }
-        /// <summary>
-        /// Occurs when the <see cref="SyndicationExtension"/> state has been changed by a load operation.
-        /// </summary>
-        /// <seealso cref="SyndicationExtension.Load(IXPathNavigable)"/>
-        /// <seealso cref="SyndicationExtension.Load(XmlReader)"/>
-        public event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
-        /// <summary>
-        /// Raises the <see cref="SyndicationExtension.Loaded"/> event.
-        /// </summary>
-        /// <param name="e">A <see cref="SyndicationExtensionLoadedEventArgs"/> that contains the event data.</param>
-        protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
-        {
-            EventHandler<SyndicationExtensionLoadedEventArgs> handler   = null;
-            handler = this.Loaded;
 
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces utilized by this <see cref="SyndicationExtension"/>.
         /// </summary>
         /// <param name="navigator">Provides a cursor model for navigating syndication extension data.</param>
         /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
         /// <remarks>
-        ///     This method will return a <see cref="XmlNamespaceManager"/> that has a namespace added to it using the <see cref="XmlPrefix"/> and <see cref="XmlNamespace"/> 
-        ///     of the extension unless the supplied <see cref="XPathNavigator"/> already has an XML namespace associated to the <see cref="XmlPrefix"/>, in which case 
-        ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that 
+        ///     This method will return a <see cref="XmlNamespaceManager"/> that has a namespace added to it using the <see cref="XmlPrefix"/> and <see cref="XmlNamespace"/>
+        ///     of the extension unless the supplied <see cref="XPathNavigator"/> already has an XML namespace associated to the <see cref="XmlPrefix"/>, in which case
+        ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that
         ///     is not per the extension's specification has been declared on the syndication resource.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -228,14 +221,14 @@ namespace Argotic.Extensions
             Guard.ArgumentNotNull(navigator, "navigator");
             manager = new XmlNamespaceManager(navigator.NameTable);
 
-            Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            string existingXmlNamespace             = String.Empty;
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+            string existingXmlNamespace = string.Empty;
             if (namespaces.ContainsKey(this.XmlPrefix))
             {
-                existingXmlNamespace    = namespaces[this.XmlPrefix];
+                existingXmlNamespace = namespaces[this.XmlPrefix];
             }
 
-            manager.AddNamespace(this.XmlPrefix, !String.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
+            manager.AddNamespace(this.XmlPrefix, !string.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
 
             return manager;
         }
@@ -247,8 +240,8 @@ namespace Argotic.Extensions
         /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> elements or attributes are present in the <paramref name="source"/>; otherwise <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
-        ///         This method should be as lightweight as possible when determining if the <see cref="SyndicationExtension"/> or its related entities are present in the <paramref name="source"/>. 
-        ///         The default implementation utilizes the <see cref="XPathNavigator.GetNamespacesInScope(XmlNamespaceScope)"/> method to determine if the <paramref name="source"/> contains 
+        ///         This method should be as lightweight as possible when determining if the <see cref="SyndicationExtension"/> or its related entities are present in the <paramref name="source"/>.
+        ///         The default implementation utilizes the <see cref="XPathNavigator.GetNamespacesInScope(XmlNamespaceScope)"/> method to determine if the <paramref name="source"/> contains
         ///         the expected namespace(s) for this <see cref="SyndicationExtension"/>.
         ///     </para>
         ///     <para>It is recommended that you call this method prior to executing a possibly costly load operation using the <see cref="SyndicationExtension.Load(IXPathNavigable)"/> method.</para>
@@ -257,8 +250,8 @@ namespace Argotic.Extensions
         {
             bool extensionExists = false;
             Guard.ArgumentNotNull(source, "source");
-            Dictionary<string, string> namespaces   = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
             if (namespaces.ContainsValue(this.XmlNamespace))
             {
                 extensionExists = true;
@@ -283,24 +276,24 @@ namespace Argotic.Extensions
         }
 
         /// <summary>
-        /// This method is reserved and <u>should not be used</u>. When implementing the <see cref="IXmlSerializable"/> interface, it is recommended 
-        /// that a <b>null</b> reference (Nothing in Visual Basic) is returned from this method, and instead, if 
+        /// This method is reserved and <u>should not be used</u>. When implementing the <see cref="IXmlSerializable"/> interface, it is recommended
+        /// that a <b>null</b> reference (Nothing in Visual Basic) is returned from this method, and instead, if
         /// specifying a custom schema is required, to apply the <see cref="XmlSchemaProviderAttribute"/> to the class.
         /// </summary>
         /// <returns>
-        ///     A <see cref="XmlSchema"/> object that represents an in-memory representation of an XML Schema as specified 
-        ///     in the <b>World Wide Web Consortium (W3C)</b> XML Schema <i>Structures</i> and <i>Datatypes</i> specifications. 
+        ///     A <see cref="XmlSchema"/> object that represents an in-memory representation of an XML Schema as specified
+        ///     in the <b>World Wide Web Consortium (W3C)</b> XML Schema <i>Structures</i> and <i>Datatypes</i> specifications.
         ///     The default return value for this method is a <b>null</b> reference (Nothing in Visual Basic).
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         When serializing or deserializing an object, the <see cref="XmlSerializer"/> class does not perform XML validation. 
-        ///         For this reason, it is often safe to omit schema information by providing a trivial implementation of this method, 
+        ///         When serializing or deserializing an object, the <see cref="XmlSerializer"/> class does not perform XML validation.
+        ///         For this reason, it is often safe to omit schema information by providing a trivial implementation of this method,
         ///         for example by returning a <b>null</b> reference (Nothing in Visual Basic).
         ///     </para>
         ///     <para>
-        ///         Some .NET Framework types as well as legacy custom types implementing the <see cref="IXmlSerializable"/> interface may be using <see cref="IXmlSerializable.GetSchema()"/> 
-        ///         instead of <see cref="XmlSchemaProviderAttribute"/>. In this case, the method returns an accurate XML schema that describes the XML representation 
+        ///         Some .NET Framework types as well as legacy custom types implementing the <see cref="IXmlSerializable"/> interface may be using <see cref="IXmlSerializable.GetSchema()"/>
+        ///         instead of <see cref="XmlSchemaProviderAttribute"/>. In this case, the method returns an accurate XML schema that describes the XML representation
         ///         of the object generated by the <see cref="WriteXml(XmlWriter)"/> method.
         ///     </para>
         /// </remarks>
@@ -364,7 +357,7 @@ namespace Argotic.Extensions
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <see cref="XmlReader"/> should be used to create a <see cref="IXPathNavigable"/> 
+        ///                     When implementing this method, the <see cref="XmlReader"/> should be used to create a <see cref="IXPathNavigable"/>
         ///                     that is then passed to the <see cref="SyndicationExtension.Load(IXPathNavigable)"/> method.
         ///                 </description>
         ///             </item>
@@ -385,5 +378,20 @@ namespace Argotic.Extensions
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         public abstract void WriteTo(XmlWriter writer);
+
+        /// <summary>
+        /// Raises the <see cref="SyndicationExtension.Loaded"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="SyndicationExtensionLoadedEventArgs"/> that contains the event data.</param>
+        protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
+        {
+            EventHandler<SyndicationExtensionLoadedEventArgs> handler = null;
+            handler = this.Loaded;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
     }
 }

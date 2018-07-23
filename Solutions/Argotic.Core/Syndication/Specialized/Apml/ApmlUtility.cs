@@ -2,6 +2,7 @@
 {
     using System;
     using System.Xml;
+
     using Argotic.Common;
 
     /// <summary>
@@ -10,11 +11,10 @@
     /// <remarks>This utility class is not intended for use outside the Attention Profiling Markup Language (APML) syndication entities within the framework.</remarks>
     internal static class ApmlUtility
     {
-
         /// <summary>
         /// Private member to hold the Attention Profiling Markup Language (APML) 0.6 namespace identifier.
         /// </summary>
-        private const string APML_NAMESPACE = "http://www.apml.org/apml-0.6";
+        private const string InternalApmlNamespace = "http://www.apml.org/apml-0.6";
 
         /// <summary>
         /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
@@ -24,7 +24,7 @@
         {
             get
             {
-                return APML_NAMESPACE;
+                return InternalApmlNamespace;
             }
         }
 
@@ -39,7 +39,9 @@
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("apml", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : APML_NAMESPACE);
+            manager.AddNamespace(
+                "apml",
+                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : InternalApmlNamespace);
 
             return manager;
         }

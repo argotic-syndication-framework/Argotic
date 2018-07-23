@@ -10,6 +10,7 @@
     using System.Threading;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Data.Adapters;
 
@@ -20,44 +21,19 @@
     /// <seealso cref="RssFeed"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the GenericSyndicationFeed class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" 
-    ///             region="GenericSyndicationFeed" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs"
+    ///             region="GenericSyndicationFeed"
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public class GenericSyndicationFeed
     {
         /// <summary>
-        /// Private member to hold the underlying syndication resource that is being absratracted by this generic feed.
+        /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
-        private ISyndicationResource feedResource;
-
-        /// <summary>
-        /// Private member to hold the type of syndication format that the syndication feed implements.
-        /// </summary>
-        private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
-
-        /// <summary>
-        /// Private member to hold the title of the syndication feed.
-        /// </summary>
-        private string feedTitle = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the description of the syndication feed.
-        /// </summary>
-        private string feedDescription = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
-        /// </summary>
-        private DateTime feedLastUpdatedOn = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the feed content is written.
-        /// </summary>
-        private CultureInfo feedLanguage;
+        private static WebRequest asyncHttpWebRequest;
 
         /// <summary>
         /// Private member to hold the collection of categories associated with the feed.
@@ -65,9 +41,39 @@
         private Collection<GenericSyndicationCategory> feedCategories = new Collection<GenericSyndicationCategory>();
 
         /// <summary>
+        /// Private member to hold the description of the syndication feed.
+        /// </summary>
+        private string feedDescription = string.Empty;
+
+        /// <summary>
+        /// Private member to hold the type of syndication format that the syndication feed implements.
+        /// </summary>
+        private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
+
+        /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
         private IEnumerable<GenericSyndicationItem> feedItems = new Collection<GenericSyndicationItem>();
+
+        /// <summary>
+        /// Private member to hold the natural or formal language in which the feed content is written.
+        /// </summary>
+        private CultureInfo feedLanguage;
+
+        /// <summary>
+        /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
+        /// </summary>
+        private DateTime feedLastUpdatedOn = DateTime.MinValue;
+
+        /// <summary>
+        /// Private member to hold the underlying syndication resource that is being absratracted by this generic feed.
+        /// </summary>
+        private ISyndicationResource feedResource;
+
+        /// <summary>
+        /// Private member to hold the title of the syndication feed.
+        /// </summary>
+        private string feedTitle = string.Empty;
 
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
@@ -78,11 +84,6 @@
         /// Private member to hold a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         private bool resourceIsLoading;
-
-        /// <summary>
-        /// Private member to hold HTTP web request used by asynchronous load operations.
-        /// </summary>
-        private static WebRequest asyncHttpWebRequest;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationFeed"/> class.
@@ -98,36 +99,21 @@
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
 
         /// <summary>
-        /// Raises the <see cref="GenericSyndicationFeed.Loaded"/> event.
-        /// </summary>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-        protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
-        {
-            EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
-            handler = this.Loaded;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        /// <summary>
         /// Gets the categories associated with this feed.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this feed. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this feed.
         /// </value>
         public Collection<GenericSyndicationCategory> Categories
         {
             get
             {
-                if (feedCategories == null)
+                if (this.feedCategories == null)
                 {
-                    feedCategories = new Collection<GenericSyndicationCategory>();
+                    this.feedCategories = new Collection<GenericSyndicationCategory>();
                 }
 
-                return feedCategories;
+                return this.feedCategories;
             }
         }
 
@@ -135,14 +121,14 @@
         /// Gets character data that provides a human-readable characterization or summary of this feed.
         /// </summary>
         /// <value>
-        ///     Character data that provides a human-readable characterization or summary of this feed. 
+        ///     Character data that provides a human-readable characterization or summary of this feed.
         ///     The default value is an <b>empty</b> string, which indicates that no description was specified.
         /// </value>
         public string Description
         {
             get
             {
-                return feedDescription;
+                return this.feedDescription;
             }
         }
 
@@ -154,7 +140,7 @@
         {
             get
             {
-                return feedFormat;
+                return this.feedFormat;
             }
         }
 
@@ -162,7 +148,7 @@
         /// Gets the distinct content published in this feed.
         /// </summary>
         /// <value>
-        ///     A <see cref="IEnumerable{T}"/> collection of <see cref="GenericSyndicationItem"/> objects that represent distinct content published in this feed. 
+        ///     A <see cref="IEnumerable{T}"/> collection of <see cref="GenericSyndicationItem"/> objects that represent distinct content published in this feed.
         ///     The default value is an <b>empty</b> collection, which indictaes that no discrete content was published in this feed.
         /// </value>
         /// <remarks>
@@ -172,12 +158,12 @@
         {
             get
             {
-                if (feedItems == null)
+                if (this.feedItems == null)
                 {
-                    feedItems = new Collection<GenericSyndicationItem>();
+                    this.feedItems = new Collection<GenericSyndicationItem>();
                 }
 
-                return feedItems;
+                return this.feedItems;
             }
         }
 
@@ -185,14 +171,14 @@
         /// Gets the natural or formal language in which the feed content is written.
         /// </summary>
         /// <value>
-        ///     A <see cref="CultureInfo"/> that represents the natural or formal language in which this feed's content is written. 
+        ///     A <see cref="CultureInfo"/> that represents the natural or formal language in which this feed's content is written.
         ///     The default value is a <b>null</b> reference, which indicates that no natural or formal language was specified.
         /// </value>
         public CultureInfo Language
         {
             get
             {
-                return feedLanguage;
+                return this.feedLanguage;
             }
         }
 
@@ -200,14 +186,14 @@
         /// Gets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
         /// </summary>
         /// <value>
-        ///     A <see cref="DateTime"/> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant. 
+        ///     A <see cref="DateTime"/> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
         ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that update date was specified.
         /// </value>
         public DateTime LastUpdatedOn
         {
             get
             {
-                return feedLastUpdatedOn;
+                return this.feedLastUpdatedOn;
             }
         }
 
@@ -215,14 +201,14 @@
         /// Gets the syndication resource that is being absratracted by this generic feed.
         /// </summary>
         /// <value>
-        ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed. 
+        ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed.
         ///     The default value is a <b>null</b> reference, which indicates that this generic feed has not been initialized using a syndication resource.
         /// </value>
         public ISyndicationResource Resource
         {
             get
             {
-                return feedResource;
+                return this.feedResource;
             }
         }
 
@@ -230,48 +216,48 @@
         /// Gets character data that provides the name of this feed.
         /// </summary>
         /// <value>
-        ///     Character data that provides the name of this feed. 
+        ///     Character data that provides the name of this feed.
         ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
         /// </value>
         public string Title
         {
             get
             {
-                return feedTitle;
+                return this.feedTitle;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
         internal bool AsyncLoadHasBeenCancelled
         {
             get
             {
-                return resourceAsyncLoadCancelled;
+                return this.resourceAsyncLoadCancelled;
             }
 
             set
             {
-                resourceAsyncLoadCancelled = value;
+                this.resourceAsyncLoadCancelled = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the syndication resource is in the process of loading.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
         internal bool LoadOperationInProgress
         {
             get
             {
-                return resourceIsLoading;
+                return this.resourceIsLoading;
             }
 
             set
             {
-                resourceIsLoading = value;
+                this.resourceIsLoading = value;
             }
         }
 
@@ -294,7 +280,9 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static int CompareSequence(Collection<GenericSyndicationCategory> source, Collection<GenericSyndicationCategory> target)
+        public static int CompareSequence(
+            Collection<GenericSyndicationCategory> source,
+            Collection<GenericSyndicationCategory> target)
         {
             int result = 0;
             Guard.ArgumentNotNull(source, "source");
@@ -331,15 +319,15 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" 
-        ///             region="Create(Uri source)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs"
+        ///             region="Create(Uri source)"
         ///         />
         ///     </code>
         /// </example>
         public static GenericSyndicationFeed Create(Uri source)
         {
-            return GenericSyndicationFeed.Create(source, new WebRequestOptions());
+            return Create(source, new WebRequestOptions());
         }
 
         /// <summary>
@@ -352,7 +340,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static GenericSyndicationFeed Create(Uri source, SyndicationResourceLoadSettings settings)
         {
-            return GenericSyndicationFeed.Create(source, new WebRequestOptions(), settings);
+            return Create(source, new WebRequestOptions(), settings);
         }
 
         /// <summary>
@@ -373,7 +361,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static GenericSyndicationFeed Create(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            return GenericSyndicationFeed.Create(source, new WebRequestOptions(credentials, proxy));
+            return Create(source, new WebRequestOptions(credentials, proxy));
         }
 
         /// <summary>
@@ -389,7 +377,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static GenericSyndicationFeed Create(Uri source, WebRequestOptions options)
         {
-            return GenericSyndicationFeed.Create(source, options, null);
+            return Create(source, options, null);
         }
 
         /// <summary>
@@ -406,9 +394,13 @@
         /// <returns>An <see cref="GenericSyndicationFeed"/> object loaded using the <paramref name="source"/> data.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        public static GenericSyndicationFeed Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
+        public static GenericSyndicationFeed Create(
+            Uri source,
+            ICredentials credentials,
+            IWebProxy proxy,
+            SyndicationResourceLoadSettings settings)
         {
-            return GenericSyndicationFeed.Create(source, new WebRequestOptions(credentials, proxy), settings);
+            return Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
 
         /// <summary>
@@ -420,7 +412,10 @@
         /// <returns>An <see cref="GenericSyndicationFeed"/> object loaded using the <paramref name="source"/> data.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        public static GenericSyndicationFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+        public static GenericSyndicationFeed Create(
+            Uri source,
+            WebRequestOptions options,
+            SyndicationResourceLoadSettings settings)
         {
             GenericSyndicationFeed syndicationResource = new GenericSyndicationFeed();
             Guard.ArgumentNotNull(source, "source");
@@ -443,7 +438,10 @@
         {
             Guard.ArgumentNotNull(str, "string");
             XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(str);
-            this.Load(navigator,  new SyndicationResourceLoadSettings(),  new SyndicationResourceLoadedEventArgs(navigator));
+            this.Load(
+                navigator,
+                new SyndicationResourceLoadSettings(),
+                new SyndicationResourceLoadedEventArgs(navigator));
         }
 
         /// <summary>
@@ -485,7 +483,10 @@
                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
             }
 
-            this.Load(navigator, settings == null ? new SyndicationResourceLoadSettings() : settings, new SyndicationResourceLoadedEventArgs(navigator));
+            this.Load(
+                navigator,
+                settings == null ? new SyndicationResourceLoadSettings() : settings,
+                new SyndicationResourceLoadedEventArgs(navigator));
         }
 
         /// <summary>
@@ -524,9 +525,9 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" 
-        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs"
+        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
         ///         />
         ///     </code>
         /// </example>
@@ -556,9 +557,9 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" 
-        ///             region="Load(Uri source, WebRequestOptions options)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs"
+        ///             region="Load(Uri source, WebRequestOptions options)"
         ///         />
         ///     </code>
         /// </example>
@@ -593,8 +594,8 @@
         ///             </item>
         ///             <item>
         ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -609,7 +610,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to a supported syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
-        public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
+        public void Load(
+            Uri source,
+            ICredentials credentials,
+            IWebProxy proxy,
+            SyndicationResourceLoadSettings settings)
         {
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
@@ -625,8 +630,8 @@
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -650,7 +655,7 @@
                 settings = new SyndicationResourceLoadSettings();
             }
 
-            if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
+            if (settings.CharacterEncoding == Encoding.UTF8)
             {
                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
             }
@@ -663,108 +668,6 @@
         }
 
         /// <summary>
-        /// Initializes the generic syndication feed using the supplied <see cref="AtomFeed"/>.
-        /// </summary>
-        /// <param name="feed">The <see cref="AtomFeed"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Parse(AtomFeed feed)
-        {
-            Guard.ArgumentNotNull(feed, "feed");
-            feedResource = feed;
-            feedFormat = SyndicationContentFormat.Atom;
-
-            if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
-            {
-                feedTitle = feed.Title.Content;
-            }
-
-            if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
-            {
-                feedDescription = feed.Subtitle.Content;
-            }
-
-            if (feed.UpdatedOn != DateTime.MinValue)
-            {
-                feedLastUpdatedOn = feed.UpdatedOn;
-            }
-
-            if(feed.Language != null)
-            {
-                feedLanguage = feed.Language;
-            }
-
-            foreach(AtomCategory category in feed.Categories)
-            {
-                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
-                feedCategories.Add(genericCategory);
-            }
-
-            foreach(AtomEntry entry in feed.Entries)
-            {
-                GenericSyndicationItem genericItem = new GenericSyndicationItem(entry);
-                ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
-            }
-        }
-
-        /// <summary>
-        /// Initializes the generic syndication feed using the supplied <see cref="RssFeed"/>.
-        /// </summary>
-        /// <param name="feed">The <see cref="RssFeed"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Parse(RssFeed feed)
-        {
-            Guard.ArgumentNotNull(feed, "feed");
-            feedResource = feed;
-            feedFormat = SyndicationContentFormat.Rss;
-
-            if (!string.IsNullOrEmpty(feed.Channel.Title))
-            {
-                feedTitle = feed.Channel.Title;
-            }
-
-            if (!string.IsNullOrEmpty(feed.Channel.Description))
-            {
-                feedDescription = feed.Channel.Description;
-            }
-
-            if (feed.Channel.LastBuildDate != DateTime.MinValue)
-            {
-                feedLastUpdatedOn = feed.Channel.LastBuildDate;
-            }
-
-            if (feed.Channel.Language != null)
-            {
-                feedLanguage = feed.Channel.Language;
-            }
-
-            foreach (RssCategory category in feed.Channel.Categories)
-            {
-                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
-                feedCategories.Add(genericCategory);
-            }
-
-            foreach (RssItem item in feed.Channel.Items)
-            {
-                GenericSyndicationItem genericItem = new GenericSyndicationItem(item);
-                ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
-            }
-        }
-
-        /// <summary>
-        /// Initializes the generic syndication feed using the supplied <see cref="OpmlDocument"/>.
-        /// Since OmplDocument hasn't direct mappings to feeds in this method we simply initialize 
-        /// feedFormat to Opml and feedResource to omplDocument
-        /// </summary>
-        /// <param name="feed">The <see cref="RssFeed"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Parse(OpmlDocument opmlDocument)
-        {
-            Guard.ArgumentNotNull(opmlDocument, "omplDocument");
-            feedResource = opmlDocument;
-            feedFormat = SyndicationContentFormat.Opml;
-        }
-
-        /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
         /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
@@ -772,11 +675,11 @@
         /// <remarks>
         ///     <para>The <see cref="RssFeed"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -785,13 +688,13 @@
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs" 
-        ///             region="LoadAsync(Uri source, Object userToken)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
+        ///             region="LoadAsync(Uri source, Object userToken)"
         ///         />
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs" 
-        ///             region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
+        ///             region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
         ///         />
         ///     </code>
         /// </example>
@@ -808,11 +711,11 @@
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -838,18 +741,23 @@
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
+        public void LoadAsync(
+            Uri source,
+            SyndicationResourceLoadSettings settings,
+            ICredentials credentials,
+            IWebProxy proxy,
+            object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -863,18 +771,22 @@
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
+        public void LoadAsync(
+            Uri source,
+            SyndicationResourceLoadSettings settings,
+            WebRequestOptions options,
+            object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
             if (settings == null)
@@ -890,22 +802,27 @@
             this.LoadOperationInProgress = true;
             this.AsyncLoadHasBeenCancelled = false;
 
-            
             asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-            asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
+            asyncHttpWebRequest.Timeout = Convert.ToInt32(
+                settings.Timeout.TotalMilliseconds,
+                NumberFormatInfo.InvariantInfo);
 
-            
             object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                result.AsyncWaitHandle,
+                new WaitOrTimerCallback(this.AsyncTimeoutCallback),
+                state,
+                settings.Timeout,
+                true);
         }
 
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation. 
-        ///     If there is a load operation in progress, this method releases resources used to execute the load operation. 
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation.
+        ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
         public void LoadAsyncCancel()
@@ -918,12 +835,129 @@
         }
 
         /// <summary>
+        /// Initializes the generic syndication feed using the supplied <see cref="AtomFeed"/>.
+        /// </summary>
+        /// <param name="feed">The <see cref="AtomFeed"/> to build an abstraction against.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void Parse(AtomFeed feed)
+        {
+            Guard.ArgumentNotNull(feed, "feed");
+            this.feedResource = feed;
+            this.feedFormat = SyndicationContentFormat.Atom;
+
+            if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
+            {
+                this.feedTitle = feed.Title.Content;
+            }
+
+            if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
+            {
+                this.feedDescription = feed.Subtitle.Content;
+            }
+
+            if (feed.UpdatedOn != DateTime.MinValue)
+            {
+                this.feedLastUpdatedOn = feed.UpdatedOn;
+            }
+
+            if (feed.Language != null)
+            {
+                this.feedLanguage = feed.Language;
+            }
+
+            foreach (AtomCategory category in feed.Categories)
+            {
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
+                this.feedCategories.Add(genericCategory);
+            }
+
+            foreach (AtomEntry entry in feed.Entries)
+            {
+                GenericSyndicationItem genericItem = new GenericSyndicationItem(entry);
+                ((Collection<GenericSyndicationItem>)this.feedItems).Add(genericItem);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the generic syndication feed using the supplied <see cref="RssFeed"/>.
+        /// </summary>
+        /// <param name="feed">The <see cref="RssFeed"/> to build an abstraction against.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void Parse(RssFeed feed)
+        {
+            Guard.ArgumentNotNull(feed, "feed");
+            this.feedResource = feed;
+            this.feedFormat = SyndicationContentFormat.Rss;
+
+            if (!string.IsNullOrEmpty(feed.Channel.Title))
+            {
+                this.feedTitle = feed.Channel.Title;
+            }
+
+            if (!string.IsNullOrEmpty(feed.Channel.Description))
+            {
+                this.feedDescription = feed.Channel.Description;
+            }
+
+            if (feed.Channel.LastBuildDate != DateTime.MinValue)
+            {
+                this.feedLastUpdatedOn = feed.Channel.LastBuildDate;
+            }
+
+            if (feed.Channel.Language != null)
+            {
+                this.feedLanguage = feed.Channel.Language;
+            }
+
+            foreach (RssCategory category in feed.Channel.Categories)
+            {
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
+                this.feedCategories.Add(genericCategory);
+            }
+
+            foreach (RssItem item in feed.Channel.Items)
+            {
+                GenericSyndicationItem genericItem = new GenericSyndicationItem(item);
+                ((Collection<GenericSyndicationItem>)this.feedItems).Add(genericItem);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the generic syndication feed using the supplied <see cref="OpmlDocument"/>.
+        /// Since OmplDocument hasn't direct mappings to feeds in this method we simply initialize
+        /// feedFormat to Opml and feedResource to omplDocument.
+        /// </summary>
+        /// <param name="opmlDocument">The <see cref="OpmlDocument"/> to build an abstraction against.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="opmlDocument"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void Parse(OpmlDocument opmlDocument)
+        {
+            Guard.ArgumentNotNull(opmlDocument, "omplDocument");
+            this.feedResource = opmlDocument;
+            this.feedFormat = SyndicationContentFormat.Opml;
+        }
+
+        /// <summary>
+        /// Raises the <see cref="GenericSyndicationFeed.Loaded"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
+        protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
+        {
+            EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
+            handler = this.Loaded;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncLoadCallback(IAsyncResult result)
         {
-            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+            Encoding encoding = Encoding.UTF8;
             XPathNavigator navigator = null;
             WebRequest httpWebRequest = null;
             GenericSyndicationFeed feed = null;
@@ -958,13 +992,16 @@
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
-                                if (encoding == System.Text.Encoding.UTF8)
+                                if (encoding == Encoding.UTF8)
                                 {
                                     navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                                 }
                                 else
                                 {
-                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(
+                                        source,
+                                        options,
+                                        settings.CharacterEncoding);
                                 }
 
                                 SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
@@ -972,7 +1009,9 @@
                                 if (metadata.Format == SyndicationContentFormat.Atom)
                                 {
                                     AtomFeed atomFeed = new AtomFeed();
-                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(
+                                        navigator,
+                                        settings);
                                     adapter.Fill(atomFeed, SyndicationContentFormat.Atom);
 
                                     feed.Parse(atomFeed);
@@ -980,13 +1019,16 @@
                                 else if (metadata.Format == SyndicationContentFormat.Rss)
                                 {
                                     RssFeed rssFeed = new RssFeed();
-                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(
+                                        navigator,
+                                        settings);
                                     adapter.Fill(rssFeed, SyndicationContentFormat.Rss);
 
                                     feed.Parse(rssFeed);
                                 }
 
-                                feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                                feed.OnFeedLoaded(
+                                    new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
@@ -1027,7 +1069,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
+        private void Load(
+            XPathNavigator navigator,
+            SyndicationResourceLoadSettings settings,
+            SyndicationResourceLoadedEventArgs eventData)
         {
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");

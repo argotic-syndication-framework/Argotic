@@ -10,33 +10,50 @@
     public sealed class XmlRpcClientSection : ConfigurationSection
     {
         /// <summary>
+        /// Private member to hold the client network configuration property for the section.
+        /// </summary>
+        private static readonly ConfigurationProperty ConfigurationSectionNetworkProperty = new ConfigurationProperty(
+            "network",
+            typeof(XmlRpcClientNetworkElement),
+            null,
+            ConfigurationPropertyOptions.None);
+
+        /// <summary>
         /// Private member to hold the client timeout configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionTimeoutProperty = new ConfigurationProperty("timeout", typeof(System.TimeSpan), TimeSpan.FromSeconds(15), new TimeSpanConverter(), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionTimeoutProperty = new ConfigurationProperty(
+            "timeout",
+            typeof(TimeSpan),
+            TimeSpan.FromSeconds(15),
+            new TimeSpanConverter(),
+            null,
+            ConfigurationPropertyOptions.None);
 
         /// <summary>
         /// Private member to hold the client user agent configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new ConfigurationProperty("agent", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-
-        /// <summary>
-        /// Private member to hold the client network configuration property for the section.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationSectionNetworkProperty = new ConfigurationProperty("network", typeof(XmlRpcClientNetworkElement), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionUserAgentProperty = new ConfigurationProperty(
+            "agent",
+            typeof(string),
+            string.Empty,
+            new StringConverter(),
+            null,
+            ConfigurationPropertyOptions.None);
 
         /// <summary>
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
-        private static ConfigurationPropertyCollection configurationSectionProperties = new ConfigurationPropertyCollection();
+        private static ConfigurationPropertyCollection configurationSectionProperties =
+            new ConfigurationPropertyCollection();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClientSection"/> class.
         /// </summary>
         public XmlRpcClientSection()
         {
-            configurationSectionProperties.Add(configurationSectionTimeoutProperty);
-            configurationSectionProperties.Add(configurationSectionUserAgentProperty);
-            configurationSectionProperties.Add(configurationSectionNetworkProperty);
+            configurationSectionProperties.Add(ConfigurationSectionTimeoutProperty);
+            configurationSectionProperties.Add(ConfigurationSectionUserAgentProperty);
+            configurationSectionProperties.Add(ConfigurationSectionNetworkProperty);
         }
 
         /// <summary>
@@ -48,7 +65,7 @@
         {
             get
             {
-                return (XmlRpcClientNetworkElement)base[configurationSectionNetworkProperty];
+                return (XmlRpcClientNetworkElement)this[ConfigurationSectionNetworkProperty];
             }
         }
 
@@ -57,16 +74,17 @@
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
         [ConfigurationProperty("timeout", DefaultValue = "0:0:15.0", Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter(typeof(System.TimeSpan))]
+        [TypeConverter(typeof(TimeSpan))]
         public TimeSpan Timeout
         {
             get
             {
-                return (TimeSpan)base[configurationSectionTimeoutProperty];
+                return (TimeSpan)this[ConfigurationSectionTimeoutProperty];
             }
+
             set
             {
-                base[configurationSectionTimeoutProperty] = value;
+                this[ConfigurationSectionTimeoutProperty] = value;
             }
         }
 
@@ -79,11 +97,12 @@
         {
             get
             {
-                return (string)base[configurationSectionUserAgentProperty];
+                return (string)this[ConfigurationSectionUserAgentProperty];
             }
+
             set
             {
-                base[configurationSectionUserAgentProperty] = value;
+                this[ConfigurationSectionUserAgentProperty] = value;
             }
         }
 

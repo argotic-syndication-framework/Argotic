@@ -3,6 +3,7 @@
     using System;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -18,7 +19,10 @@
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 2.0 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -31,7 +35,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 

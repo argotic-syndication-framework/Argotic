@@ -1,35 +1,34 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="AtomPublishingEditedSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class AtomPublishingEditedSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the last time a resource was edited. If the resource has not been edited yet, indicates the time the resource was created.
         /// </summary>
-        private DateTime extensionEditedOn  = DateTime.MinValue;
+        private DateTime extensionEditedOn = DateTime.MinValue;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
         /// </summary>
         public AtomPublishingEditedSyndicationExtensionContext()
         {
-
         }
+
         /// <summary>
         /// Gets or sets a date-time indicating the most recent instant in time when this resource was edited.
         /// </summary>
         /// <value>
-        ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this resource was edited. 
+        ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this resource was edited.
         ///     If the resource has not been edited yet, indicates the time the resource was created. The default value is <see cref="DateTime.MinValue"/>, which indicates that no edit time was provided.
         /// </value>
         /// <remarks>
@@ -39,14 +38,15 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionEditedOn;
+                return this.extensionEditedOn;
             }
 
             set
             {
-                extensionEditedOn = value;
+                this.extensionEditedOn = value;
             }
         }
+
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -57,19 +57,19 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator editedNavigator  = source.SelectSingleNode("app:edited", manager);
-                if (editedNavigator != null && !String.IsNullOrEmpty(editedNavigator.Value))
+                XPathNavigator editedNavigator = source.SelectSingleNode("app:edited", manager);
+                if (editedNavigator != null && !string.IsNullOrEmpty(editedNavigator.Value))
                 {
                     DateTime editedOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(editedNavigator.Value, out editedOn))
                     {
-                        this.EditedOn   = editedOn;
-                        wasLoaded       = true;
+                        this.EditedOn = editedOn;
+                        wasLoaded = true;
                     }
                 }
             }

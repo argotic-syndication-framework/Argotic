@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Configuration.Provider
 {
     using System;
-    using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
@@ -63,6 +63,6 @@
         /// The syndication resource was successfully created.
         /// </summary>
         [EnumerationMetadata(AlternateValue = "", DisplayName = "Success")]
-        Success = 8
+        Success = 8,
     }
 }

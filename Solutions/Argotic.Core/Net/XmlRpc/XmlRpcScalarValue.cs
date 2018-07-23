@@ -5,6 +5,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
@@ -12,18 +13,18 @@
     /// </summary>
     /// <seealso cref="XmlRpcMessage.Parameters"/>
     /// <seealso cref="IXmlRpcValue"/>
-    [Serializable()]
+    [Serializable]
     public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
-        /// <summary>
-        /// Private member to hold the value of the parameter.
-        /// </summary>
-        private object scalarParameterValue;
-
         /// <summary>
         /// Private member to hold the type of scalar value the parameter represents.
         /// </summary>
         private XmlRpcScalarValueType scalarParameterType = XmlRpcScalarValueType.None;
+
+        /// <summary>
+        /// Private member to hold the value of the parameter.
+        /// </summary>
+        private object scalarParameterValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
@@ -131,13 +132,13 @@
         {
             get
             {
-                return scalarParameterValue;
+                return this.scalarParameterValue;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                scalarParameterValue = value;
+                this.scalarParameterValue = value;
             }
         }
 
@@ -157,122 +158,84 @@
         {
             get
             {
-                return scalarParameterType;
+                return this.scalarParameterType;
             }
 
             set
             {
-                scalarParameterType = value;
+                this.scalarParameterType = value;
             }
         }
 
         /// <summary>
-        /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcScalarValue"/>.</para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            bool wasLoaded = false;
-
-            Guard.ArgumentNotNull(source, "source");
-
-            if(source.HasChildren)
+            if (Equals(first, null) && Equals(second, null))
             {
-                if (source.MoveToFirstChild())
-                {
-                    XmlRpcScalarValueType type = XmlRpcScalarValueType.None;
-                    if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
-                        type = XmlRpcScalarValueType.Integer;
-                    }
-                    else
-                    {
-                        type = XmlRpcClient.ScalarTypeByName(source.Name);
-                    }
-
-                    if (type != XmlRpcScalarValueType.None)
-                    {
-                        this.ValueType = type;
-                        if(!string.IsNullOrEmpty(source.Value))
-                        {
-                            this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
-                        }
-
-                        wasLoaded = true;
-                    }
-                }
+                return true;
             }
-            else
+            else if (Equals(first, null) && !Equals(second, null))
             {
-                if (!string.IsNullOrEmpty(source.Value))
-                {
-                    this.Value = source.Value;
-                    wasLoaded = true;
-                }
+                return false;
             }
 
-            return wasLoaded;
+            return first.Equals(second);
         }
 
         /// <summary>
-        /// Saves the current <see cref="XmlRpcScalarValue"/> to the specified <see cref="XmlWriter"/>.
+        /// Determines if first operand is greater than second operand.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-
-            writer.WriteStartElement("value");
-
-            if (this.ValueType != XmlRpcScalarValueType.None)
+            if (Equals(first, null) && Equals(second, null))
             {
-                writer.WriteStartElement(XmlRpcClient.ScalarTypeAsString(this.ValueType));
-                writer.WriteString(XmlRpcScalarValue.ValueAsString(this.ValueType, this.Value));
-                writer.WriteEndElement();
+                return false;
             }
-            else
+            else if (Equals(first, null) && !Equals(second, null))
             {
-                writer.WriteString(this.Value != null ? this.Value.ToString() : string.Empty);
+                return false;
             }
 
-            writer.WriteEndElement();
+            return first.CompareTo(second) > 0;
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.
+        /// Determines if operands are not equal.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(XmlRpcScalarValue first, XmlRpcScalarValue second)
         {
-            using(MemoryStream stream = new MemoryStream())
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(XmlRpcScalarValue first, XmlRpcScalarValue second)
+        {
+            if (Equals(first, null) && Equals(second, null))
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
+                return false;
             }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -298,7 +261,13 @@
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -314,7 +283,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -329,74 +298,112 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(XmlRpcScalarValue first, XmlRpcScalarValue second)
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcScalarValue"/>.</para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            bool wasLoaded = false;
+
+            Guard.ArgumentNotNull(source, "source");
+
+            if (source.HasChildren)
             {
-                return true;
+                if (source.MoveToFirstChild())
+                {
+                    XmlRpcScalarValueType type = XmlRpcScalarValueType.None;
+                    if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
+                        type = XmlRpcScalarValueType.Integer;
+                    }
+                    else
+                    {
+                        type = XmlRpcClient.ScalarTypeByName(source.Name);
+                    }
+
+                    if (type != XmlRpcScalarValueType.None)
+                    {
+                        this.ValueType = type;
+                        if (!string.IsNullOrEmpty(source.Value))
+                        {
+                            this.Value = StringAsValue(type, source.Value);
+                        }
+
+                        wasLoaded = true;
+                    }
+                }
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            else
             {
-                return false;
+                if (!string.IsNullOrEmpty(source.Value))
+                {
+                    this.Value = source.Value;
+                    wasLoaded = true;
+                }
             }
 
-            return first.Equals(second);
+            return wasLoaded;
         }
 
         /// <summary>
-        /// Determines if operands are not equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(XmlRpcScalarValue first, XmlRpcScalarValue second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
         {
-            return !(first == second);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
-        /// Determines if first operand is less than second operand.
+        /// Saves the current <see cref="XmlRpcScalarValue"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(XmlRpcScalarValue first, XmlRpcScalarValue second)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            Guard.ArgumentNotNull(writer, "writer");
+
+            writer.WriteStartElement("value");
+
+            if (this.ValueType != XmlRpcScalarValueType.None)
             {
-                return false;
+                writer.WriteStartElement(XmlRpcClient.ScalarTypeAsString(this.ValueType));
+                writer.WriteString(ValueAsString(this.ValueType, this.Value));
+                writer.WriteEndElement();
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            else
             {
-                return true;
+                writer.WriteString(this.Value != null ? this.Value.ToString() : string.Empty);
             }
 
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(XmlRpcScalarValue first, XmlRpcScalarValue second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            writer.WriteEndElement();
         }
 
         /// <summary>
@@ -483,15 +490,18 @@
                     break;
 
                 case XmlRpcScalarValueType.DateTime:
-                    value = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
+                    value = SyndicationDateTimeUtility.ToRfc3339DateTime(
+                        Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
                     break;
 
                 case XmlRpcScalarValueType.Double:
-                    value = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                    value = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo)
+                        .ToString(NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.Integer:
-                    value = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                    value = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo)
+                        .ToString(NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.String:

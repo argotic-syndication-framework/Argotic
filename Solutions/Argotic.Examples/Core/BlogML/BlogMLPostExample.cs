@@ -1,15 +1,14 @@
-﻿using System;
-
-using Argotic.Common;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using Argotic.Common;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Contains the code examples for the <see cref="BlogMLPost"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="BlogMLPost"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="BlogMLPost"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     public static class BlogMLPostExample
@@ -94,6 +93,7 @@ namespace Argotic.Examples
             comment.Content = new BlogMLTextConstruct("This is a test comment.");
             post.Comments.Add(comment);
         }
+
         /// <summary>
         /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method
         /// </summary>

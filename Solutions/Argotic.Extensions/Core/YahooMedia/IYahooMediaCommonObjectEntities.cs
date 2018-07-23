@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+
     /// <summary>
     /// Allows an object to implement common Yahoo media entities by representing a set of properties, methods, indexers and events common to Yahoo media syndication resources.
     /// </summary>
@@ -11,8 +11,8 @@ namespace Argotic.Extensions.Core
     ///          The following properties are optional and may appear as sub-elements of syndication entities, <see cref="YahooMediaContent"/> and/or <see cref="YahooMediaGroup"/>.
     ///     </para>
     ///     <para>
-    ///         When a property appears at a shallow level, such as syndication entities, it means that the property should be applied to every media object within its scope. 
-    ///         Duplicated properties appearing at deeper levels of the document tree have higher priority over other levels. For example, <see cref="YahooMediaContent"/> level 
+    ///         When a property appears at a shallow level, such as syndication entities, it means that the property should be applied to every media object within its scope.
+    ///         Duplicated properties appearing at deeper levels of the document tree have higher priority over other levels. For example, <see cref="YahooMediaContent"/> level
     ///         properties are favored over syndication entity level properties.
     ///     </para>
     ///     <para>
@@ -22,13 +22,13 @@ namespace Argotic.Extensions.Core
     /// <seealso cref="YahooMediaContent"/>
     /// <seealso cref="YahooMediaGroup"/>
     /// <seealso cref="YahooMediaSyndicationExtensionContext"/>
-    interface IYahooMediaCommonObjectEntities
+    public interface IYahooMediaCommonObjectEntities
     {
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         Collection<YahooMediaCategory> Categories
@@ -53,11 +53,11 @@ namespace Argotic.Extensions.Core
         /// Gets the entities that contributed to the creation of the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
         ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
         /// </remarks>
         Collection<YahooMediaCredit> Credits
@@ -82,7 +82,7 @@ namespace Argotic.Extensions.Core
         /// Gets the hash digests for the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -97,7 +97,7 @@ namespace Argotic.Extensions.Core
         /// Gets the relevant keywords that describe the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -122,7 +122,7 @@ namespace Argotic.Extensions.Core
         /// Gets the permissible audiences for the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -137,7 +137,7 @@ namespace Argotic.Extensions.Core
         /// Gets the restrictions to be placed on aggregators that are rendering the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         Collection<YahooMediaRestriction> Restrictions
@@ -149,12 +149,12 @@ namespace Argotic.Extensions.Core
         /// Gets the text transcript, closed captioning, or lyrics for the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
         ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
         /// </remarks>
         Collection<YahooMediaText> TextSeries
@@ -166,7 +166,7 @@ namespace Argotic.Extensions.Core
         /// Gets the representative images for the media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of the media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of the media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>

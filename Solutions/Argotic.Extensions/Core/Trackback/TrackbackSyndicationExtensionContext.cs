@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="TrackbackSyndicationExtension"/>.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-    [Serializable()]
+    [Serializable]
     public class TrackbackSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the item's TrackBack URL.
         /// </summary>
@@ -36,7 +34,7 @@ namespace Argotic.Extensions.Core
         /// Gets the trackbacks that were pinged in reference.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Abouts")]
@@ -44,11 +42,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionAbouts == null)
+                if (this.extensionAbouts == null)
                 {
-                    extensionAbouts = new Collection<Uri>();
+                    this.extensionAbouts = new Collection<Uri>();
                 }
-                return extensionAbouts;
+
+                return this.extensionAbouts;
             }
         }
 
@@ -61,13 +60,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionPing;
+                return this.extensionPing;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionPing = value;
+                this.extensionPing = value;
             }
         }
 
@@ -81,12 +80,12 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             if (source.HasChildren)
             {
-                XPathNavigator pingNavigator    = source.SelectSingleNode("trackback:ping", manager);
+                XPathNavigator pingNavigator = source.SelectSingleNode("trackback:ping", manager);
                 XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
 
                 if (pingNavigator != null)
@@ -94,8 +93,8 @@ namespace Argotic.Extensions.Core
                     Uri ping;
                     if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out ping))
                     {
-                        this.Ping   = ping;
-                        wasLoaded   = true;
+                        this.Ping = ping;
+                        wasLoaded = true;
                     }
                 }
 
@@ -107,7 +106,7 @@ namespace Argotic.Extensions.Core
                         if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out about))
                         {
                             this.Abouts.Add(about);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -128,7 +127,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : String.Empty);
+            writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : string.Empty);
 
             foreach (Uri about in this.Abouts)
             {

@@ -6,6 +6,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
@@ -16,21 +17,23 @@
     /// <seealso cref="ApmlProfile.ImplicitConcepts"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlConcept class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlConceptExample.cs" 
-    ///             region="ApmlConcept" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlConceptExample.cs"
+    ///             region="ApmlConcept"
     ///         />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-    [Serializable()]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Apml")]
+    [Serializable]
     public class ApmlConcept : IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
+        /// Private member to hold the name of the entity that contributed the concept.
         /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+        private string conceptFrom = string.Empty;
 
         /// <summary>
         /// Private member to hold the unique key for the concept.
@@ -38,19 +41,19 @@
         private string conceptKey = string.Empty;
 
         /// <summary>
+        /// Private member to hold a date indicating the last time the concept was updated.
+        /// </summary>
+        private DateTime conceptUpdatedOn = DateTime.MinValue;
+
+        /// <summary>
         /// Private member to hold the decimal score of the concept.
         /// </summary>
         private decimal conceptValue = decimal.MinValue;
 
         /// <summary>
-        /// Private member to hold the name of the entity that contributed the concept.
+        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
-        private string conceptFrom = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a date indicating the last time the concept was updated.
-        /// </summary>
-        private DateTime conceptUpdatedOn = DateTime.MinValue;
+        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlConcept"/> class.
@@ -65,8 +68,8 @@
         /// <param name="key">The unique key for this concept.</param>
         /// <param name="value">The decimal score of this concept.</param>
         /// <remarks>
-        ///     This constructor is meant to be used when creating an <b>explicit</b> concept. Explicit data is for items that are explicitly added by a user to represent something. 
-        ///     For example, a user could edit their own APML file and add items they know they're interested in. 
+        ///     This constructor is meant to be used when creating an <b>explicit</b> concept. Explicit data is for items that are explicitly added by a user to represent something.
+        ///     For example, a user could edit their own APML file and add items they know they're interested in.
         ///     For this reason the <see cref="From"/> and <see cref="UpdatedOn"/> properties are not necessary for explicit data items, because it's a manual process.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -87,8 +90,8 @@
         /// <param name="from">The name of the entity that contributed this concept.</param>
         /// <param name="utcUpdatedOn">A <see cref="DateTime"/> object that indicates the last time this concept was updated.</param>
         /// <remarks>
-        ///     This constructor is meant to be used when creating an <b>implicit</b> concept. Implicit data is added by machines/computers that try to make 
-        ///     some informed guesses about the things that you are interested in. This stuff will change over time and are added with a certain degree of confidence 
+        ///     This constructor is meant to be used when creating an <b>implicit</b> concept. Implicit data is added by machines/computers that try to make
+        ///     some informed guesses about the things that you are interested in. This stuff will change over time and are added with a certain degree of confidence
         ///     that may have a decay in certain applications. For this reason it is important to keep a track of when things were added/modified.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -97,7 +100,8 @@
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="from"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="from"/> is an empty string.</exception>
-        public ApmlConcept(string key, decimal value, string from, DateTime utcUpdatedOn) : this(key, value)
+        public ApmlConcept(string key, decimal value, string from, DateTime utcUpdatedOn)
+            : this(key, value)
         {
             Guard.ArgumentNotNullOrEmptyString(from, "from");
             this.From = from;
@@ -116,30 +120,18 @@
         {
             get
             {
-                if (objectSyndicationExtensions == null)
+                if (this.objectSyndicationExtensions == null)
                 {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
 
-                return objectSyndicationExtensions;
+                return this.objectSyndicationExtensions;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+                this.objectSyndicationExtensions = value;
             }
         }
 
@@ -151,19 +143,31 @@
         {
             get
             {
-                return conceptFrom;
+                return this.conceptFrom;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    conceptFrom = string.Empty;
+                    this.conceptFrom = string.Empty;
                 }
                 else
                 {
-                    conceptFrom = value.Trim();
+                    this.conceptFrom = value.Trim();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// </summary>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        public bool HasExtensions
+        {
+            get
+            {
+                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
 
@@ -177,13 +181,13 @@
         {
             get
             {
-                return conceptKey;
+                return this.conceptKey;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                conceptKey = value.Trim();
+                this.conceptKey = value.Trim();
             }
         }
 
@@ -198,12 +202,12 @@
         {
             get
             {
-                return conceptUpdatedOn;
+                return this.conceptUpdatedOn;
             }
 
             set
             {
-                conceptUpdatedOn = value;
+                this.conceptUpdatedOn = value;
             }
         }
 
@@ -217,15 +221,86 @@
         {
             get
             {
-                return conceptValue;
+                return this.conceptValue;
             }
 
             set
             {
                 Guard.ArgumentNotLessThan(value, "value", decimal.MinusOne);
                 Guard.ArgumentNotGreaterThan(value, "value", decimal.One);
-                conceptValue = value;
+                this.conceptValue = value;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(ApmlConcept first, ApmlConcept second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(ApmlConcept first, ApmlConcept second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(ApmlConcept first, ApmlConcept second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(ApmlConcept first, ApmlConcept second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -245,6 +320,57 @@
         }
 
         /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            ApmlConcept value = obj as ApmlConcept;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+                result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+                result = result | this.Value.CompareTo(value.Value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ApmlConcept))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
         /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -252,8 +378,8 @@
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -265,25 +391,14 @@
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
-            }
+            char[] charArray = this.ToString().ToCharArray();
 
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -315,7 +430,11 @@
                 if (!string.IsNullOrEmpty(valueAttribute))
                 {
                     decimal value;
-                    if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out value))
+                    if (decimal.TryParse(
+                        valueAttribute,
+                        System.Globalization.NumberStyles.Float,
+                        System.Globalization.NumberFormatInfo.InvariantInfo,
+                        out value))
                     {
                         if (value >= decimal.MinusOne && value <= decimal.One)
                         {
@@ -369,31 +488,25 @@
         }
 
         /// <summary>
-        /// Saves the current <see cref="ApmlConcept"/> to the specified <see cref="XmlWriter"/>.
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("Concept", ApmlUtility.ApmlNamespace);
-
-            writer.WriteAttributeString("key", this.Key);
-            writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
-
-            if (!string.IsNullOrEmpty(this.From))
+            bool wasRemoved = false;
+            Guard.ArgumentNotNull(extension, "extension");
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
-                writer.WriteAttributeString("from", this.From);
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
             }
 
-            if (this.UpdatedOn != DateTime.MinValue)
-            {
-                writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
-            }
-
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
-
-            writer.WriteEndElement();
+            return wasRemoved;
         }
 
         /// <summary>
@@ -405,14 +518,14 @@
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
@@ -427,130 +540,33 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="ApmlConcept"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
+            Guard.ArgumentNotNull(writer, "writer");
+            writer.WriteStartElement("Concept", ApmlUtility.ApmlNamespace);
+
+            writer.WriteAttributeString("key", this.Key);
+            writer.WriteAttributeString(
+                "value",
+                this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+
+            if (!string.IsNullOrEmpty(this.From))
             {
-                return 1;
+                writer.WriteAttributeString("from", this.From);
             }
 
-            ApmlConcept value = obj as ApmlConcept;
-
-            if (value != null)
+            if (this.UpdatedOn != DateTime.MinValue)
             {
-                int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-                result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
-                result = result | this.Value.CompareTo(value.Value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is ApmlConcept))
-            {
-                return false;
+                writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
             }
 
-            return (this.CompareTo(obj) == 0);
-        }
+            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(ApmlConcept first, ApmlConcept second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(ApmlConcept first, ApmlConcept second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(ApmlConcept first, ApmlConcept second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(ApmlConcept first, ApmlConcept second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            writer.WriteEndElement();
         }
     }
 }

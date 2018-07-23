@@ -1,15 +1,14 @@
-﻿using System;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="AtomPersonConstruct"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="AtomPersonConstruct"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="AtomPersonConstruct"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     public static class AtomPersonConstructExample

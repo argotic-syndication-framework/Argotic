@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Provides methods that comprise common utility features shared across the Yahoo media syndication entities. This class cannot be inherited.
     /// </summary>
@@ -21,7 +20,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjectEntities(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            int result  = 0;
+            int result = 0;
             if (source == null && target == null)
             {
                 return 0;
@@ -34,8 +33,9 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-            result      = result | YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
-            result      = result | YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
+
+            result = result | YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
+            result = result | YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
 
             return result;
         }
@@ -61,7 +61,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -69,7 +69,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -105,7 +105,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -113,7 +113,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -149,7 +149,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -157,7 +157,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -193,7 +193,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -201,7 +201,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -237,7 +237,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -245,7 +245,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -281,7 +281,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -289,7 +289,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -325,7 +325,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -333,7 +333,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -369,7 +369,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -377,7 +377,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -413,7 +413,7 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -421,7 +421,7 @@ namespace Argotic.Extensions.Core
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -446,21 +446,21 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-            XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
-            wasLoaded   = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+            XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
+            wasLoaded = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
 
             if (YahooMediaUtility.FillCommonObjectEntityCollectionsPrimary(target, source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if (YahooMediaUtility.FillCommonObjectEntityCollectionsSecondary(target, source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -477,7 +477,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
             if (source.Title != null)
             {
                 source.Title.WriteTo(writer, "title");
@@ -497,16 +497,16 @@ namespace Argotic.Extensions.Core
             {
                 source.Player.WriteTo(writer);
             }
-            
-            if(source.Keywords.Count > 0)
+
+            if (source.Keywords.Count > 0)
             {
                 string[] keywords = new string[source.Keywords.Count];
                 source.Keywords.CopyTo(keywords, 0);
 
-                writer.WriteElementString("keywords", extension.XmlNamespace, String.Join(",", keywords));
+                writer.WriteElementString("keywords", extension.XmlNamespace, string.Join(",", keywords));
             }
 
-            foreach(YahooMediaCategory category in source.Categories)
+            foreach (YahooMediaCategory category in source.Categories)
             {
                 category.WriteTo(writer);
             }
@@ -550,7 +550,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         private static int CompareCommonObjectEntityClasses(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            int result  = 0;
+            int result = 0;
             if (source == null && target == null)
             {
                 return 0;
@@ -563,68 +563,69 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-            if(source.Copyright != null)
+
+            if (source.Copyright != null)
             {
-                if(target.Copyright != null)
+                if (target.Copyright != null)
                 {
-                    result  = result | source.Copyright.CompareTo(target.Copyright);
+                    result = result | source.Copyright.CompareTo(target.Copyright);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (target.Copyright != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            if(source.Description != null)
+            if (source.Description != null)
             {
                 if (target.Description != null)
                 {
-                    result  = result | source.Description.CompareTo(target.Description);
+                    result = result | source.Description.CompareTo(target.Description);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (target.Description != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            if(source.Player != null)
+            if (source.Player != null)
             {
                 if (target.Player != null)
                 {
-                    result  = result | source.Player.CompareTo(target.Player);
+                    result = result | source.Player.CompareTo(target.Player);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (target.Player != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            if(source.Title != null)
+            if (source.Title != null)
             {
                 if (target.Title != null)
                 {
-                    result  = result | source.Title.CompareTo(target.Title);
+                    result = result | source.Title.CompareTo(target.Title);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (target.Title != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             return result;
@@ -638,7 +639,7 @@ namespace Argotic.Extensions.Core
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         private static int CompareCommonObjectEntityCollections(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
         {
-            int result  = 0;
+            int result = 0;
             if (source == null && target == null)
             {
                 return 0;
@@ -651,14 +652,15 @@ namespace Argotic.Extensions.Core
             {
                 return -1;
             }
-            result      = result | YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
-            result      = result | YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
-            result      = result | YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
-            result      = result | ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
-            result      = result | YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
-            result      = result | YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
-            result      = result | YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
-            result      = result | YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
+
+            result = result | YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
+            result = result | YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
+            result = result | YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
+            result = result | ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
+            result = result | YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
+            result = result | YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
+            result = result | YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
+            result = result | YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
 
             return result;
         }
@@ -675,25 +677,25 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityClasses(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator titleNavigator       = source.SelectSingleNode("media:title", manager);
+                XPathNavigator titleNavigator = source.SelectSingleNode("media:title", manager);
                 XPathNavigator descriptionNavigator = source.SelectSingleNode("media:description", manager);
-                XPathNavigator copyrightNavigator   = source.SelectSingleNode("media:copyright", manager);
-                XPathNavigator playerNavigator      = source.SelectSingleNode("media:player", manager);
-                XPathNavigator keywordNavigator     = source.SelectSingleNode("media:keywords", manager);
+                XPathNavigator copyrightNavigator = source.SelectSingleNode("media:copyright", manager);
+                XPathNavigator playerNavigator = source.SelectSingleNode("media:player", manager);
+                XPathNavigator keywordNavigator = source.SelectSingleNode("media:keywords", manager);
 
                 if (titleNavigator != null)
                 {
-                    YahooMediaTextConstruct title   = new YahooMediaTextConstruct();
+                    YahooMediaTextConstruct title = new YahooMediaTextConstruct();
                     if (title.Load(titleNavigator))
                     {
-                        target.Title    = title;
-                        wasLoaded       = true;
+                        target.Title = title;
+                        wasLoaded = true;
                     }
                 }
 
@@ -702,8 +704,8 @@ namespace Argotic.Extensions.Core
                     YahooMediaTextConstruct description = new YahooMediaTextConstruct();
                     if (description.Load(descriptionNavigator))
                     {
-                        target.Description  = description;
-                        wasLoaded           = true;
+                        target.Description = description;
+                        wasLoaded = true;
                     }
                 }
 
@@ -712,8 +714,8 @@ namespace Argotic.Extensions.Core
                     YahooMediaCopyright copyright = new YahooMediaCopyright();
                     if (copyright.Load(copyrightNavigator))
                     {
-                        target.Copyright    = copyright;
-                        wasLoaded           = true;
+                        target.Copyright = copyright;
+                        wasLoaded = true;
                     }
                 }
 
@@ -722,12 +724,12 @@ namespace Argotic.Extensions.Core
                     YahooMediaPlayer player = new YahooMediaPlayer();
                     if (player.Load(playerNavigator))
                     {
-                        target.Player   = player;
-                        wasLoaded       = true;
+                        target.Player = player;
+                        wasLoaded = true;
                     }
                 }
 
-                if (keywordNavigator != null && !String.IsNullOrEmpty(keywordNavigator.Value))
+                if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
                 {
                     if (keywordNavigator.Value.Contains(","))
                     {
@@ -738,13 +740,14 @@ namespace Argotic.Extensions.Core
                             {
                                 target.Keywords.Add(keyword);
                             }
+
                             wasLoaded = true;
                         }
                     }
                     else
                     {
                         target.Keywords.Add(keywordNavigator.Value.Trim());
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -764,17 +767,17 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityCollectionsPrimary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNodeIterator categoryIterator      = source.Select("media:category", manager);
-                XPathNodeIterator creditIterator        = source.Select("media:credit", manager);
-                XPathNodeIterator ratingIterator        = source.Select("media:rating", manager);
-                XPathNodeIterator thumbnailIterator     = source.Select("media:thumbnail", manager);
+                XPathNodeIterator categoryIterator = source.Select("media:category", manager);
+                XPathNodeIterator creditIterator = source.Select("media:credit", manager);
+                XPathNodeIterator ratingIterator = source.Select("media:rating", manager);
+                XPathNodeIterator thumbnailIterator = source.Select("media:thumbnail", manager);
 
                 if (categoryIterator != null && categoryIterator.Count > 0)
                 {
@@ -784,7 +787,7 @@ namespace Argotic.Extensions.Core
                         if (category.Load(categoryIterator.Current))
                         {
                             target.Categories.Add(category);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -797,7 +800,7 @@ namespace Argotic.Extensions.Core
                         if (credit.Load(creditIterator.Current))
                         {
                             target.Credits.Add(credit);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -810,7 +813,7 @@ namespace Argotic.Extensions.Core
                         if (rating.Load(ratingIterator.Current))
                         {
                             target.Ratings.Add(rating);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -819,11 +822,11 @@ namespace Argotic.Extensions.Core
                 {
                     while (thumbnailIterator.MoveNext())
                     {
-                        YahooMediaThumbnail thumbnail   = new YahooMediaThumbnail();
+                        YahooMediaThumbnail thumbnail = new YahooMediaThumbnail();
                         if (thumbnail.Load(thumbnailIterator.Current))
                         {
                             target.Thumbnails.Add(thumbnail);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -844,16 +847,16 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private static bool FillCommonObjectEntityCollectionsSecondary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNodeIterator hashIterator          = source.Select("media:hash", manager);
-                XPathNodeIterator restrictionIterator   = source.Select("media:restriction", manager);
-                XPathNodeIterator textIterator          = source.Select("media:text", manager);
+                XPathNodeIterator hashIterator = source.Select("media:hash", manager);
+                XPathNodeIterator restrictionIterator = source.Select("media:restriction", manager);
+                XPathNodeIterator textIterator = source.Select("media:text", manager);
 
                 if (hashIterator != null && hashIterator.Count > 0)
                 {
@@ -863,7 +866,7 @@ namespace Argotic.Extensions.Core
                         if (hash.Load(hashIterator.Current))
                         {
                             target.Hashes.Add(hash);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -872,11 +875,11 @@ namespace Argotic.Extensions.Core
                 {
                     while (restrictionIterator.MoveNext())
                     {
-                        YahooMediaRestriction restriction   = new YahooMediaRestriction();
+                        YahooMediaRestriction restriction = new YahooMediaRestriction();
                         if (restriction.Load(restrictionIterator.Current))
                         {
                             target.Restrictions.Add(restriction);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -889,7 +892,7 @@ namespace Argotic.Extensions.Core
                         if (text.Load(textIterator.Current))
                         {
                             target.TextSeries.Add(text);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }

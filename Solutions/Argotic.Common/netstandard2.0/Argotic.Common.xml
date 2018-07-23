@@ -1429,9 +1429,7 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
             <example>
                 <code lang="cs" title="The following code example demonstrates the usage of the SourceReferencesTarget method.">
-                    <code
-                        source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
-                        region="SourceReferencesTarget(Uri source, Uri target)"
+                    <code source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs" region="SourceReferencesTarget()"
                     />
                 </code>
             </example>

@@ -10,6 +10,18 @@
     public class SyndicationResourceProviderCollection : ProviderCollection, ICollection<SyndicationResourceProvider>
     {
         /// <summary>
+        /// Gets a value indicating whether the collection is read-only.
+        /// </summary>
+        /// <value><b>true</b> if the <see cref="SyndicationResourceProviderCollection"/> is read-only; otherwise, <b>false</b>.</value>
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Gets the provider with the specified name.
         /// </summary>
         /// <param name="name">The key by which the provider is identified.</param>
@@ -38,7 +50,7 @@
         /// <returns><b>true</b> if item is found in the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>.</returns>
         public bool Contains(SyndicationResourceProvider item)
         {
-            if (base.Count > 0)
+            if (this.Count > 0)
             {
                 bool itemExists = false;
                 foreach (SyndicationResourceProvider provider in this)
@@ -72,39 +84,6 @@
         }
 
         /// <summary>
-        /// Gets a value indicating whether the collection is read-only.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="SyndicationResourceProviderCollection"/> is read-only; otherwise, <b>false</b>.</value>
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Removes a specific <see cref="SyndicationResourceProvider"/> from the collection.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns>
-        ///     <b>true</b> if item was successfully removed from the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>.
-        ///     This method also returns <b>false</b> if item is not found in the collection.
-        /// </returns>
-        public bool Remove(SyndicationResourceProvider item)
-        {
-            if (this.Contains(item))
-            {
-                base.Remove(item.Name);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.</returns>
@@ -113,6 +92,27 @@
             foreach (SyndicationResourceProvider provider in this)
             {
                 yield return provider;
+            }
+        }
+
+        /// <summary>
+        /// Removes a specific <see cref="SyndicationResourceProvider"/> from the collection.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>
+        ///     <b>true</b> if item was successfully removed from the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>.
+        ///     This method also returns <b>false</b> if item is not found in the collection.
+        /// </returns>
+        public bool Remove(SyndicationResourceProvider item)
+        {
+            if (this.Contains(item))
+            {
+                this.Remove(item.Name);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

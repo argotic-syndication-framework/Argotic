@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -33,7 +34,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Atom10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Atom10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -52,7 +54,7 @@
 
             if (entryNavigator != null)
             {
-                Atom10SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
+                FillEntry(resource, entryNavigator, manager, this.Settings);
             }
         }
 
@@ -98,8 +100,8 @@
                     }
                 }
 
-                Atom10SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
-                Atom10SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
+                FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
+                FillFeedCollections(resource, feedNavigator, manager, this.Settings);
 
                 SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
                 adapter.Fill(resource, manager);
@@ -119,7 +121,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntry(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -153,8 +159,8 @@
                 }
             }
 
-            Atom10SyndicationResourceAdapter.FillEntryOptionals(entry, source, manager, settings);
-            Atom10SyndicationResourceAdapter.FillEntryCollections(entry, source, manager, settings);
+            FillEntryOptionals(entry, source, manager, settings);
+            FillEntryCollections(entry, source, manager, settings);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(entry, manager);
@@ -174,7 +180,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntryCollections(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntryCollections(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -249,7 +259,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEntryOptionals(
+            AtomEntry entry,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(entry, "entry");
             Guard.ArgumentNotNull(source, "source");
@@ -310,7 +324,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillFeedCollections(
+            AtomFeed feed,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");
@@ -367,7 +385,7 @@
                     AtomEntry entry = new AtomEntry();
                     counter++;
 
-                    Atom10SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
+                    FillEntry(entry, entryIterator.Current, manager, settings);
 
                     if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                     {
@@ -405,7 +423,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillFeedOptionals(
+            AtomFeed feed,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(feed, "feed");
             Guard.ArgumentNotNull(source, "source");

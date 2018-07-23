@@ -420,7 +420,7 @@
             return encodedContent;
         }
 
-#pragma warning disable 1587
+        /*
         /// <summary>
         /// Extracts the character encoding for the content type of the supplied <see cref="HttpRequest"/>.
         /// </summary>
@@ -430,8 +430,7 @@
         ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
-#pragma warning restore 1587
-        /*public static Encoding GetCharacterEncoding(HttpRequest request)
+        public static Encoding GetCharacterEncoding(HttpRequest request)
         {
             Encoding contentEncoding    = null;
 

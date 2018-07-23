@@ -1,38 +1,37 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the explicit language or adult content advisory information of an iTunes podcast.
     /// </summary>
     /// <seealso cref="ITunesSyndicationExtensionContext"/>
-    [Serializable()]
+    [Serializable]
     public enum ITunesExplicitMaterial
     {
         /// <summary>
         /// No explicit material designation specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
-        /// The podcast has no explicit language or adult content included anywhere in its episodes. 
+        /// The podcast has no explicit language or adult content included anywhere in its episodes.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Clean", AlternateValue = "clean")]
-        Clean   = 1,
+        Clean = 1,
 
         /// <summary>
         /// The podcast explicit material advisory was not provided by the publisher.
         /// </summary>
         [EnumerationMetadata(DisplayName = "No", AlternateValue = "no")]
-        No      = 2,
+        No = 2,
 
         /// <summary>
-        /// The podcast has explicit language or adult content included in its episodes. 
+        /// The podcast has explicit language or adult content included in its episodes.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Yes", AlternateValue = "yes")]
-        Yes     = 3
+        Yes = 3,
     }
 }

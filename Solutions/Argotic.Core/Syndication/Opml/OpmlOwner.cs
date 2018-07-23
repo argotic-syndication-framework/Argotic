@@ -4,21 +4,19 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
     /// Represents the owner of an <see cref="OpmlDocument"/>.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-    [Serializable()]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Opml")]
+    [Serializable]
     public class OpmlOwner : IComparable
     {
-
-        /// <summary>
-        /// Private member to hold the name of the owner of the document.
-        /// </summary>
-        private string ownerName = string.Empty;
-
         /// <summary>
         /// Private member to hold email address of the owner of the document.
         /// </summary>
@@ -30,11 +28,15 @@
         private Uri ownerId;
 
         /// <summary>
+        /// Private member to hold the name of the owner of the document.
+        /// </summary>
+        private string ownerName = string.Empty;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOwner"/> class.
         /// </summary>
         public OpmlOwner()
         {
-
         }
 
         /// <summary>
@@ -51,7 +53,8 @@
         /// </summary>
         /// <param name="name">The name of the owner of this document.</param>
         /// <param name="emailAddress">The email address of the owner of this document.</param>
-        public OpmlOwner(string name, string emailAddress) : this(name)
+        public OpmlOwner(string name, string emailAddress)
+            : this(name)
         {
             this.EmailAddress = emailAddress;
         }
@@ -62,10 +65,11 @@
         /// <param name="name">The name of the owner of this document.</param>
         /// <param name="emailAddress">The email address of the owner of this document.</param>
         /// <param name="id">
-        ///     A <see cref="Uri"/> that represents the http address of a web page that contains information 
+        ///     A <see cref="Uri"/> that represents the http address of a web page that contains information
         ///     that allows a human reader to communicate with the author of the document via email or other means.
         /// </param>
-        public OpmlOwner(string name, string emailAddress, Uri id) : this(name, emailAddress)
+        public OpmlOwner(string name, string emailAddress, Uri id)
+            : this(name, emailAddress)
         {
             this.Id = id;
         }
@@ -78,18 +82,18 @@
         {
             get
             {
-                return ownerEmail;
+                return this.ownerEmail;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    ownerEmail = string.Empty;
+                    this.ownerEmail = string.Empty;
                 }
                 else
                 {
-                    ownerEmail = value.Trim();
+                    this.ownerEmail = value.Trim();
                 }
             }
         }
@@ -98,7 +102,7 @@
         /// Gets or sets the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
         /// </summary>
         /// <value>
-        ///     A <see cref="Uri"/> that represents the http address of a web page that contains information 
+        ///     A <see cref="Uri"/> that represents the http address of a web page that contains information
         ///     that allows a human reader to communicate with the author of the document via email or other means.
         /// </value>
         /// <remarks>
@@ -108,12 +112,12 @@
         {
             get
             {
-                return ownerId;
+                return this.ownerId;
             }
 
             set
             {
-                ownerId = value;
+                this.ownerId = value;
             }
         }
 
@@ -125,20 +129,157 @@
         {
             get
             {
-                return ownerName;
+                return this.ownerName;
             }
 
             set
             {
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    ownerName = string.Empty;
+                    this.ownerName = string.Empty;
                 }
                 else
                 {
-                    ownerName = value.Trim();
+                    this.ownerName = value.Trim();
                 }
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(OpmlOwner first, OpmlOwner second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(OpmlOwner first, OpmlOwner second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(OpmlOwner first, OpmlOwner second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(OpmlOwner first, OpmlOwner second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            OpmlOwner value = obj as OpmlOwner;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Id,
+                             value.Id,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is OpmlOwner))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -184,30 +325,6 @@
         }
 
         /// <summary>
-        /// Saves the current <see cref="OpmlOwner"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            if(!string.IsNullOrEmpty(this.Name))
-            {
-                writer.WriteElementString("ownerName", this.Name);
-            }
-
-            if (!string.IsNullOrEmpty(this.EmailAddress))
-            {
-                writer.WriteElementString("ownerEmail", this.EmailAddress);
-            }
-
-            if (this.Id != null)
-            {
-                writer.WriteElementString("ownerId", this.Id.ToString());
-            }
-        }
-
-        /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.</returns>
@@ -216,14 +333,14 @@
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
@@ -238,129 +355,27 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="OpmlOwner"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
+            Guard.ArgumentNotNull(writer, "writer");
+            if (!string.IsNullOrEmpty(this.Name))
             {
-                return 1;
+                writer.WriteElementString("ownerName", this.Name);
             }
 
-            OpmlOwner value = obj as OpmlOwner;
-
-            if (value != null)
+            if (!string.IsNullOrEmpty(this.EmailAddress))
             {
-                int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is OpmlOwner))
-            {
-                return false;
+                writer.WriteElementString("ownerEmail", this.EmailAddress);
             }
 
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(OpmlOwner first, OpmlOwner second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (this.Id != null)
             {
-                return true;
+                writer.WriteElementString("ownerId", this.Id.ToString());
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(OpmlOwner first, OpmlOwner second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(OpmlOwner first, OpmlOwner second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(OpmlOwner first, OpmlOwner second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

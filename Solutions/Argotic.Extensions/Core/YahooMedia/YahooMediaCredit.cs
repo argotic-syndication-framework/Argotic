@@ -1,37 +1,38 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents an entity that contributed to the creation of a media object.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+    ///         Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
     ///         and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
     ///     </para>
     /// </remarks>
-    [Serializable()]
+    [Serializable]
     public class YahooMediaCredit : IComparable
     {
-
         /// <summary>
         /// Private member to hold the role the entity played.
         /// </summary>
-        private string creditRole       = String.Empty;
+        private string creditRole = string.Empty;
+
         /// <summary>
         /// Private member to hold the URI that identifies the role scheme.
         /// </summary>
         private Uri creditScheme;
+
         /// <summary>
         /// Private member to hold the name of the entity that contributed to the creation of the media object.
         /// </summary>
-        private string creditEntityName = String.Empty;
+        private string creditEntityName = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaCredit"/> class.
         /// </summary>
@@ -75,13 +76,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return creditEntityName;
+                return this.creditEntityName;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                creditEntityName = value.Trim();
+                this.creditEntityName = value.Trim();
             }
         }
 
@@ -90,7 +91,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The role the entity played in the creation of the media object.</value>
         /// <remarks>
-        ///     All roles are converted to their lowercase equivalent. See <a href="http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php">European Broadcasting Union Role Codes</a> 
+        ///     All roles are converted to their lowercase equivalent. See <a href="http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php">European Broadcasting Union Role Codes</a>
         ///     for a listing of the default entity roles.
         /// </remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
@@ -98,18 +99,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return creditRole;
+                return this.creditRole;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    creditRole = String.Empty;
+                    this.creditRole = string.Empty;
                 }
                 else
                 {
-                    creditRole = value.ToLowerInvariant().Trim();
+                    this.creditRole = value.ToLowerInvariant().Trim();
                 }
             }
         }
@@ -126,170 +127,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return creditScheme;
+                return this.creditScheme;
             }
 
             set
             {
-                creditScheme = value;
+                this.creditScheme = value;
             }
-        }
-
-        /// <summary>
-        /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaCredit"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaCredit"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded              = false;
-            Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
-            {
-                string roleAttribute    = source.GetAttribute("role", String.Empty);
-                string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
-
-                if (!String.IsNullOrEmpty(roleAttribute))
-                {
-                    this.Role   = roleAttribute;
-                    wasLoaded   = true;
-                }
-
-                if (!String.IsNullOrEmpty(schemeAttribute))
-                {
-                    Uri scheme;
-                    if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
-                    {
-                        this.Scheme = scheme;
-                        wasLoaded   = true;
-                    }
-                }
-            }
-
-            if (!String.IsNullOrEmpty(source.Value))
-            {
-                this.Entity = source.Value;
-                wasLoaded   = true;
-            }
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="YahooMediaCredit"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-            writer.WriteStartElement("credit", extension.XmlNamespace);
-
-            if (!String.IsNullOrEmpty(this.Role))
-            {
-                writer.WriteAttributeString("role", this.Role);
-            }
-
-            if (this.Scheme != null)
-            {
-                writer.WriteAttributeString("scheme", this.Scheme.ToString());
-            }
-
-            if (!String.IsNullOrEmpty(this.Entity))
-            {
-                writer.WriteString(this.Entity);
-            }
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCredit"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaCredit"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-            YahooMediaCredit value  = obj as YahooMediaCredit;
-
-            if (value != null)
-            {
-                int result  = String.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is YahooMediaCredit))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -340,7 +184,7 @@ namespace Argotic.Extensions.Core
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -360,7 +204,165 @@ namespace Argotic.Extensions.Core
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.
+        /// </summary>
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="YahooMediaCredit"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaCredit"/>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
+        {
+            bool wasLoaded = false;
+            Guard.ArgumentNotNull(source, "source");
+            if (source.HasAttributes)
+            {
+                string roleAttribute = source.GetAttribute("role", string.Empty);
+                string schemeAttribute = source.GetAttribute("scheme", string.Empty);
+
+                if (!string.IsNullOrEmpty(roleAttribute))
+                {
+                    this.Role = roleAttribute;
+                    wasLoaded = true;
+                }
+
+                if (!string.IsNullOrEmpty(schemeAttribute))
+                {
+                    Uri scheme;
+                    if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
+                    {
+                        this.Scheme = scheme;
+                        wasLoaded = true;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(source.Value))
+            {
+                this.Entity = source.Value;
+                wasLoaded = true;
+            }
+
+            return wasLoaded;
+        }
+
+        /// <summary>
+        /// Saves the current <see cref="YahooMediaCredit"/> to the specified <see cref="XmlWriter"/>.
+        /// </summary>
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
+        {
+            Guard.ArgumentNotNull(writer, "writer");
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+            writer.WriteStartElement("credit", extension.XmlNamespace);
+
+            if (!string.IsNullOrEmpty(this.Role))
+            {
+                writer.WriteAttributeString("role", this.Role);
+            }
+
+            if (this.Scheme != null)
+            {
+                writer.WriteAttributeString("scheme", this.Scheme.ToString());
+            }
+
+            if (!string.IsNullOrEmpty(this.Entity))
+            {
+                writer.WriteString(this.Entity);
+            }
+
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaCredit"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaCredit"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            YahooMediaCredit value = obj as YahooMediaCredit;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is YahooMediaCredit))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

@@ -1,132 +1,156 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a publishable media object.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>. 
+    ///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>.
     ///         The sequence of <see cref="YahooMediaContent"/> objects within a <see cref="YahooMediaGroup"/> implies the order of presentation.
     ///     </para>
     /// </remarks>
     /// <seealso cref="IYahooMediaCommonObjectEntities"/>
-    [Serializable()]
+    [Serializable]
     public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
-
         /// <summary>
         /// Private member to hold the direct url to the media object.
         /// </summary>
         private Uri contentUrl;
+
         /// <summary>
         /// Private member to hold the number of bytes the media object represents on disk.
         /// </summary>
-        private long contentFileSize                    = Int64.MinValue;
+        private long contentFileSize = long.MinValue;
+
         /// <summary>
         /// Private member to hold the MIME type of the media object.
         /// </summary>
-        private string contentMimeType                  = String.Empty;
+        private string contentMimeType = string.Empty;
+
         /// <summary>
         /// Private member to hold the type of the media object.
         /// </summary>
-        private YahooMediaMedium contentMedium          = YahooMediaMedium.None;
+        private YahooMediaMedium contentMedium = YahooMediaMedium.None;
+
         /// <summary>
         /// Private member to hold a value indicating if the media object is the default object in a group.
         /// </summary>
         private bool contentIsDefault;
+
         /// <summary>
         /// Private member to hold the expressed version of the media object.
         /// </summary>
-        private YahooMediaExpression contentExpression  = YahooMediaExpression.None;
+        private YahooMediaExpression contentExpression = YahooMediaExpression.None;
+
         /// <summary>
         /// Private member to hold the kilobits per second rate of the media object.
         /// </summary>
-        private int contentBitrate                      = Int32.MinValue;
+        private int contentBitrate = int.MinValue;
+
         /// <summary>
         /// Private member to hold the number of frames per second for the media object.
         /// </summary>
-        private int contentFramerate                    = Int32.MinValue;
+        private int contentFramerate = int.MinValue;
+
         /// <summary>
         /// Private member to hold the number of samples per second taken to create the media object.
         /// </summary>
-        private decimal contentSamplingrate             = Decimal.MinValue;
+        private decimal contentSamplingrate = decimal.MinValue;
+
         /// <summary>
         /// Private member to hold the number of audio channels in the media object.
         /// </summary>
-        private int contentChannels                     = Int32.MinValue;
+        private int contentChannels = int.MinValue;
+
         /// <summary>
         /// Private member to hold the total play time for the media object.
         /// </summary>
-        private TimeSpan contentDuration                = TimeSpan.MinValue;
+        private TimeSpan contentDuration = TimeSpan.MinValue;
+
         /// <summary>
         /// Private member to hold the height of the media object.
         /// </summary>
-        private int contentHeight                       = Int32.MinValue;
+        private int contentHeight = int.MinValue;
+
         /// <summary>
         /// Private member to hold the width of the media object.
         /// </summary>
-        private int contentWidth                        = Int32.MinValue;
+        private int contentWidth = int.MinValue;
+
         /// <summary>
         /// Private member to hold the primary language encapsulated in the media object.
         /// </summary>
         private CultureInfo contentLanguage;
+
         /// <summary>
         /// Private member to hold the permissible audiences for the media object.
         /// </summary>
         private Collection<YahooMediaRating> mediaObjectRatings;
+
         /// <summary>
         /// Private member to hold the title of the media object.
         /// </summary>
         private YahooMediaTextConstruct mediaObjectTitle;
+
         /// <summary>
         /// Private member to hold a short description of the media object.
         /// </summary>
         private YahooMediaTextConstruct mediaObjectDescription;
+
         /// <summary>
         /// Private member to hold the relevant keywords that describe the media object.
         /// </summary>
         private Collection<string> mediaObjectKeywords;
+
         /// <summary>
         /// Private member to hold the representative images for the media object.
         /// </summary>
         private Collection<YahooMediaThumbnail> mediaObjectThumbnails;
+
         /// <summary>
         /// Private member to hold a taxonomy that gives an indication of the type of content for the media object.
         /// </summary>
         private Collection<YahooMediaCategory> mediaObjectCategories;
+
         /// <summary>
         /// Private member to hold the hash digests for the media object.
         /// </summary>
         private Collection<YahooMediaHash> mediaObjectHashes;
+
         /// <summary>
         /// Private member to hold a web browser media player console the media object can be accessed through.
         /// </summary>
         private YahooMediaPlayer mediaObjectPlayer;
+
         /// <summary>
         /// Private member to hold the entities that contributed to the creation of the media object.
         /// </summary>
         private Collection<YahooMediaCredit> mediaObjectCredits;
+
         /// <summary>
         /// Private member to hold the copyright information for the media object.
         /// </summary>
         private YahooMediaCopyright mediaObjectCopyright;
+
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media object.
         /// </summary>
         private Collection<YahooMediaText> mediaObjectTextSeries;
+
         /// <summary>
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the media object.
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class.
         /// </summary>
@@ -143,7 +167,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(url, "url");
 
-            this.Url    = url;
+            this.Url = url;
         }
 
         /// <summary>
@@ -161,34 +185,34 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets the kilobits per second rate of this media object.
         /// </summary>
-        /// <value>The <i>kilobits</i> per second rate of this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no bit-rate was specified.</value>
+        /// <value>The <i>kilobits</i> per second rate of this media object. The default value is <see cref="int.MinValue"/>, which indicates that no bit-rate was specified.</value>
         public int Bitrate
         {
             get
             {
-                return contentBitrate;
+                return this.contentBitrate;
             }
 
             set
             {
-                contentBitrate = value;
+                this.contentBitrate = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the number of audio channels in this media object.
         /// </summary>
-        /// <value>The number of audio channels in this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no audio channels were specified.</value>
+        /// <value>The number of audio channels in this media object. The default value is <see cref="int.MinValue"/>, which indicates that no audio channels were specified.</value>
         public int Channels
         {
             get
             {
-                return contentChannels;
+                return this.contentChannels;
             }
 
             set
             {
-                contentChannels = value;
+                this.contentChannels = value;
             }
         }
 
@@ -203,18 +227,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentMimeType;
+                return this.contentMimeType;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    contentMimeType = String.Empty;
+                    this.contentMimeType = string.Empty;
                 }
                 else
                 {
-                    contentMimeType = value.Trim();
+                    this.contentMimeType = value.Trim();
                 }
             }
         }
@@ -227,12 +251,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentDuration;
+                return this.contentDuration;
             }
 
             set
             {
-                contentDuration = value;
+                this.contentDuration = value;
             }
         }
 
@@ -240,75 +264,75 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the expressed version of this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="YahooMediaExpression"/> enumeration value that represents the expressed version of this media object. 
+        ///     A <see cref="YahooMediaExpression"/> enumeration value that represents the expressed version of this media object.
         ///     The default value is <see cref="YahooMediaExpression.None"/>, which indicates that no expression version was specified.
         /// </value>
         public YahooMediaExpression Expression
         {
             get
             {
-                return contentExpression;
+                return this.contentExpression;
             }
 
             set
             {
-                contentExpression = value;
+                this.contentExpression = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the file size of this media object.
         /// </summary>
-        /// <value>The number of bytes this media object represents on disk. The default value is <see cref="Int64.MinValue"/>, which indicates that no file size was specified.</value>
+        /// <value>The number of bytes this media object represents on disk. The default value is <see cref="long.MinValue"/>, which indicates that no file size was specified.</value>
         public long FileSize
         {
             get
             {
-                return contentFileSize;
+                return this.contentFileSize;
             }
 
             set
             {
-                contentFileSize = value;
+                this.contentFileSize = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the number of frames per second for this media object.
         /// </summary>
-        /// <value>The number of frames per second for this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no frame-rate was specified.</value>
+        /// <value>The number of frames per second for this media object. The default value is <see cref="int.MinValue"/>, which indicates that no frame-rate was specified.</value>
         public int FrameRate
         {
             get
             {
-                return contentFramerate;
+                return this.contentFramerate;
             }
 
             set
             {
-                contentFramerate = value;
+                this.contentFramerate = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the height of this media object.
         /// </summary>
-        /// <value>The height of this media object, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
+        /// <value>The height of this media object, typically in pixels. The default value is <see cref="int.MinValue"/>, which indicates that no height was specified.</value>
         public int Height
         {
             get
             {
-                return contentHeight;
+                return this.contentHeight;
             }
 
             set
             {
-                contentHeight = value;
+                this.contentHeight = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if this media object is the default object in a group.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if this media object is the default object in a group.
         /// </summary>
         /// <value><b>true</b> if this media object is the default object that should be used for a <see cref="YahooMediaGroup"/>; otherwise <b>false</b>.</value>
         /// <remarks>
@@ -318,12 +342,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentIsDefault;
+                return this.contentIsDefault;
             }
 
             set
             {
-                contentIsDefault = value;
+                this.contentIsDefault = value;
             }
         }
 
@@ -331,7 +355,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the primary language encapsulated in this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="CultureInfo"/> that represents the primary language encapsulated in this media object. 
+        ///     A <see cref="CultureInfo"/> that represents the primary language encapsulated in this media object.
         ///     The default value is a <b>null</b> reference, which indicates no language was specified.
         /// </value>
         /// <remarks>
@@ -343,12 +367,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentLanguage;
+                return this.contentLanguage;
             }
 
             set
             {
-                contentLanguage = value;
+                this.contentLanguage = value;
             }
         }
 
@@ -356,26 +380,26 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the content medium of this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="YahooMediaMedium"/> enumeration value that represents the type of this media object. 
+        ///     A <see cref="YahooMediaMedium"/> enumeration value that represents the type of this media object.
         ///     The default value is <see cref="YahooMediaMedium.None"/>, which indicates that no content medium was specified.
         /// </value>
         public YahooMediaMedium Medium
         {
             get
             {
-                return contentMedium;
+                return this.contentMedium;
             }
 
             set
             {
-                contentMedium = value;
+                this.contentMedium = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the number of samples per second taken to create this media object.
         /// </summary>
-        /// <value>The number of samples per second taken to create this media object. The default value is <see cref="Decimal.MinValue"/>, which indicates that no sampling-rate was specified.</value>
+        /// <value>The number of samples per second taken to create this media object. The default value is <see cref="decimal.MinValue"/>, which indicates that no sampling-rate was specified.</value>
         /// <remarks>
         ///     This property is expressed in thousands of samples per second (kHz).
         /// </remarks>
@@ -383,12 +407,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentSamplingrate;
+                return this.contentSamplingrate;
             }
 
             set
             {
-                contentSamplingrate = value;
+                this.contentSamplingrate = value;
             }
         }
 
@@ -400,29 +424,29 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return contentUrl;
+                return this.contentUrl;
             }
 
             set
             {
-                contentUrl = value;
+                this.contentUrl = value;
             }
         }
 
         /// <summary>
         /// Gets or sets the width of this media object.
         /// </summary>
-        /// <value>The width of this media object, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
+        /// <value>The width of this media object, typically in pixels. The default value is <see cref="int.MinValue"/>, which indicates that no width was specified.</value>
         public int Width
         {
             get
             {
-                return contentWidth;
+                return this.contentWidth;
             }
 
             set
             {
-                contentWidth = value;
+                this.contentWidth = value;
             }
         }
 
@@ -430,18 +454,19 @@ namespace Argotic.Extensions.Core
         /// Gets a taxonomy that gives an indication of the type of content for this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaCategory> Categories
         {
             get
             {
-                if (mediaObjectCategories == null)
+                if (this.mediaObjectCategories == null)
                 {
-                    mediaObjectCategories = new Collection<YahooMediaCategory>();
+                    this.mediaObjectCategories = new Collection<YahooMediaCategory>();
                 }
-                return mediaObjectCategories;
+
+                return this.mediaObjectCategories;
             }
         }
 
@@ -456,12 +481,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectCopyright;
+                return this.mediaObjectCopyright;
             }
 
             set
             {
-                mediaObjectCopyright = value;
+                this.mediaObjectCopyright = value;
             }
         }
 
@@ -469,22 +494,23 @@ namespace Argotic.Extensions.Core
         /// Gets the entities that contributed to the creation of this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
         ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
         /// </remarks>
         public Collection<YahooMediaCredit> Credits
         {
             get
             {
-                if (mediaObjectCredits == null)
+                if (this.mediaObjectCredits == null)
                 {
-                    mediaObjectCredits = new Collection<YahooMediaCredit>();
+                    this.mediaObjectCredits = new Collection<YahooMediaCredit>();
                 }
-                return mediaObjectCredits;
+
+                return this.mediaObjectCredits;
             }
         }
 
@@ -499,12 +525,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectDescription;
+                return this.mediaObjectDescription;
             }
 
             set
             {
-                mediaObjectDescription = value;
+                this.mediaObjectDescription = value;
             }
         }
 
@@ -512,7 +538,7 @@ namespace Argotic.Extensions.Core
         /// Gets the hash digests for this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -522,11 +548,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectHashes == null)
+                if (this.mediaObjectHashes == null)
                 {
-                    mediaObjectHashes = new Collection<YahooMediaHash>();
+                    this.mediaObjectHashes = new Collection<YahooMediaHash>();
                 }
-                return mediaObjectHashes;
+
+                return this.mediaObjectHashes;
             }
         }
 
@@ -534,7 +561,7 @@ namespace Argotic.Extensions.Core
         /// Gets the relevant keywords that describe this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -544,11 +571,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectKeywords == null)
+                if (this.mediaObjectKeywords == null)
                 {
-                    mediaObjectKeywords = new Collection<string>();
+                    this.mediaObjectKeywords = new Collection<string>();
                 }
-                return mediaObjectKeywords;
+
+                return this.mediaObjectKeywords;
             }
         }
 
@@ -560,12 +588,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectPlayer;
+                return this.mediaObjectPlayer;
             }
 
             set
             {
-                mediaObjectPlayer = value;
+                this.mediaObjectPlayer = value;
             }
         }
 
@@ -573,7 +601,7 @@ namespace Argotic.Extensions.Core
         /// Gets the permissible audiences for this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -583,11 +611,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectRatings == null)
+                if (this.mediaObjectRatings == null)
                 {
-                    mediaObjectRatings = new Collection<YahooMediaRating>();
+                    this.mediaObjectRatings = new Collection<YahooMediaRating>();
                 }
-                return mediaObjectRatings;
+
+                return this.mediaObjectRatings;
             }
         }
 
@@ -595,18 +624,19 @@ namespace Argotic.Extensions.Core
         /// Gets the restrictions to be placed on aggregators that are rendering this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaRestriction> Restrictions
         {
             get
             {
-                if (mediaObjectRestrictions == null)
+                if (this.mediaObjectRestrictions == null)
                 {
-                    mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
+                    this.mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
                 }
-                return mediaObjectRestrictions;
+
+                return this.mediaObjectRestrictions;
             }
         }
 
@@ -614,23 +644,24 @@ namespace Argotic.Extensions.Core
         /// Gets the text transcript, closed captioning, or lyrics for this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
         ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
         /// </remarks>
         public Collection<YahooMediaText> TextSeries
         {
             get
             {
-                if (mediaObjectTextSeries == null)
+                if (this.mediaObjectTextSeries == null)
                 {
-                    mediaObjectTextSeries = new Collection<YahooMediaText>();
+                    this.mediaObjectTextSeries = new Collection<YahooMediaText>();
                 }
-                return mediaObjectTextSeries;
+
+                return this.mediaObjectTextSeries;
             }
         }
 
@@ -638,7 +669,7 @@ namespace Argotic.Extensions.Core
         /// Gets the representative images for this media object.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media object. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media object.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -648,11 +679,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectThumbnails == null)
+                if (this.mediaObjectThumbnails == null)
                 {
-                    mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
+                    this.mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
                 }
-                return mediaObjectThumbnails;
+
+                return this.mediaObjectThumbnails;
             }
         }
 
@@ -664,229 +696,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectTitle;
+                return this.mediaObjectTitle;
             }
 
             set
             {
-                mediaObjectTitle = value;
+                this.mediaObjectTitle = value;
             }
-        }
-
-        /// <summary>
-        /// Loads this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaContent"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded              = false;
-            Guard.ArgumentNotNull(source, "source");
-            wasLoaded       = this.LoadPrimary(source);
-
-            if (this.LoadSecondary(source))
-            {
-                wasLoaded   = true;
-            }
-
-            if(YahooMediaUtility.FillCommonObjectEntities(this, source))
-            {
-                wasLoaded   = true;
-            }
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="YahooMediaContent"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-            writer.WriteStartElement("content", extension.XmlNamespace);
-
-            if(this.Url != null)
-            {
-                writer.WriteAttributeString("url", this.Url.ToString());
-            }
-
-            if (this.FileSize != Int64.MinValue)
-            {
-                writer.WriteAttributeString("fileSize", this.FileSize.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if(!String.IsNullOrEmpty(this.ContentType))
-            {
-                writer.WriteAttributeString("type", this.ContentType);
-            }
-
-            if (this.Medium != YahooMediaMedium.None)
-            {
-                writer.WriteAttributeString("medium", YahooMediaSyndicationExtension.MediumAsString(this.Medium));
-            }
-            
-            if(this.IsDefault)
-            {
-                writer.WriteAttributeString("isDefault", "true");
-            }
-
-            if (this.Expression != YahooMediaExpression.None)
-            {
-                writer.WriteAttributeString("expression", YahooMediaSyndicationExtension.ExpressionAsString(this.Expression));
-            }
-
-            if (this.Bitrate != Int32.MinValue)
-            {
-                writer.WriteAttributeString("bitrate", this.Bitrate.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.FrameRate != Int32.MinValue)
-            {
-                writer.WriteAttributeString("framerate", this.FrameRate.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.SamplingRate != Decimal.MinValue)
-            {
-                writer.WriteAttributeString("samplingrate", this.SamplingRate.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Channels != Int32.MinValue)
-            {
-                writer.WriteAttributeString("channels", this.Channels.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Duration != TimeSpan.MinValue)
-            {
-                writer.WriteAttributeString("duration", this.Duration.TotalSeconds.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Height != Int32.MinValue)
-            {
-                writer.WriteAttributeString("height", this.Height.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Width != Int32.MinValue)
-            {
-                writer.WriteAttributeString("width", this.Width.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Language != null)
-            {
-                writer.WriteAttributeString("lang", this.Language.Name);
-            }
-
-            YahooMediaUtility.WriteCommonObjectEntities(this, writer);
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaContent"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaContent"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            YahooMediaContent value  = obj as YahooMediaContent;
-
-            if (value != null)
-            {
-                int result  = this.Bitrate.CompareTo(value.Bitrate);
-                result      = result | this.Channels.CompareTo(value.Channels);
-                result      = result | String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Duration.CompareTo(value.Duration);
-                result      = result | this.Expression.CompareTo(value.Expression);
-                result      = result | this.FileSize.CompareTo(value.FileSize);
-                result      = result | this.FrameRate.CompareTo(value.FrameRate);
-                result      = result | this.Height.CompareTo(value.Height);
-                result      = result | this.IsDefault.CompareTo(value.IsDefault);
-
-                string sourceLanguageName   = this.Language != null ? this.Language.Name : String.Empty;
-                string targetLanguageName   = value.Language != null ? value.Language.Name : String.Empty;
-                result      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
-
-                result      = result | this.Medium.CompareTo(value.Medium);
-                result      = result | this.SamplingRate.CompareTo(value.SamplingRate);
-                result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Width.CompareTo(value.Width);
-
-                result      = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is YahooMediaContent))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -937,7 +753,7 @@ namespace Argotic.Extensions.Core
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -957,7 +773,223 @@ namespace Argotic.Extensions.Core
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            YahooMediaContent value = obj as YahooMediaContent;
+
+            if (value != null)
+            {
+                int result = this.Bitrate.CompareTo(value.Bitrate);
+                result = result | this.Channels.CompareTo(value.Channels);
+                result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Duration.CompareTo(value.Duration);
+                result = result | this.Expression.CompareTo(value.Expression);
+                result = result | this.FileSize.CompareTo(value.FileSize);
+                result = result | this.FrameRate.CompareTo(value.FrameRate);
+                result = result | this.Height.CompareTo(value.Height);
+                result = result | this.IsDefault.CompareTo(value.IsDefault);
+
+                string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
+                string targetLanguageName = value.Language != null ? value.Language.Name : string.Empty;
+                result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+
+                result = result | this.Medium.CompareTo(value.Medium);
+                result = result | this.SamplingRate.CompareTo(value.SamplingRate);
+                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Width.CompareTo(value.Width);
+
+                result = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
+        }
+
+        /// <summary>
+        /// Loads this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
+        /// </summary>
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaContent"/>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
+        {
+            bool wasLoaded = false;
+            Guard.ArgumentNotNull(source, "source");
+            wasLoaded = this.LoadPrimary(source);
+
+            if (this.LoadSecondary(source))
+            {
+                wasLoaded = true;
+            }
+
+            if (YahooMediaUtility.FillCommonObjectEntities(this, source))
+            {
+                wasLoaded = true;
+            }
+
+            return wasLoaded;
+        }
+
+        /// <summary>
+        /// Saves the current <see cref="YahooMediaContent"/> to the specified <see cref="XmlWriter"/>.
+        /// </summary>
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
+        {
+            Guard.ArgumentNotNull(writer, "writer");
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+            writer.WriteStartElement("content", extension.XmlNamespace);
+
+            if (this.Url != null)
+            {
+                writer.WriteAttributeString("url", this.Url.ToString());
+            }
+
+            if (this.FileSize != long.MinValue)
+            {
+                writer.WriteAttributeString("fileSize", this.FileSize.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (!string.IsNullOrEmpty(this.ContentType))
+            {
+                writer.WriteAttributeString("type", this.ContentType);
+            }
+
+            if (this.Medium != YahooMediaMedium.None)
+            {
+                writer.WriteAttributeString("medium", YahooMediaSyndicationExtension.MediumAsString(this.Medium));
+            }
+
+            if (this.IsDefault)
+            {
+                writer.WriteAttributeString("isDefault", "true");
+            }
+
+            if (this.Expression != YahooMediaExpression.None)
+            {
+                writer.WriteAttributeString("expression", YahooMediaSyndicationExtension.ExpressionAsString(this.Expression));
+            }
+
+            if (this.Bitrate != int.MinValue)
+            {
+                writer.WriteAttributeString("bitrate", this.Bitrate.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.FrameRate != int.MinValue)
+            {
+                writer.WriteAttributeString("framerate", this.FrameRate.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.SamplingRate != decimal.MinValue)
+            {
+                writer.WriteAttributeString("samplingrate", this.SamplingRate.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Channels != int.MinValue)
+            {
+                writer.WriteAttributeString("channels", this.Channels.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Duration != TimeSpan.MinValue)
+            {
+                writer.WriteAttributeString("duration", this.Duration.TotalSeconds.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Height != int.MinValue)
+            {
+                writer.WriteAttributeString("height", this.Height.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Width != int.MinValue)
+            {
+                writer.WriteAttributeString("width", this.Width.ToString(NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Language != null)
+            {
+                writer.WriteAttributeString("lang", this.Language.Name);
+            }
+
+            YahooMediaUtility.WriteCommonObjectEntities(this, writer);
+
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaContent"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaContent"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is YahooMediaContent))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -971,85 +1003,85 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadPrimary(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
-                string urlAttribute             = source.GetAttribute("url", String.Empty);
-                string fileSizeAttribute        = source.GetAttribute("fileSize", String.Empty);
-                string typeAttribute            = source.GetAttribute("type", String.Empty);
-                string mediumAttribute          = source.GetAttribute("medium", String.Empty);
-                string isDefaultAttribute       = source.GetAttribute("isDefault", String.Empty);
-                string expressionAttribute      = source.GetAttribute("expression", String.Empty);
-                string bitrateAttribute         = source.GetAttribute("bitrate", String.Empty);
+                string urlAttribute = source.GetAttribute("url", string.Empty);
+                string fileSizeAttribute = source.GetAttribute("fileSize", string.Empty);
+                string typeAttribute = source.GetAttribute("type", string.Empty);
+                string mediumAttribute = source.GetAttribute("medium", string.Empty);
+                string isDefaultAttribute = source.GetAttribute("isDefault", string.Empty);
+                string expressionAttribute = source.GetAttribute("expression", string.Empty);
+                string bitrateAttribute = source.GetAttribute("bitrate", string.Empty);
 
-                if (!String.IsNullOrEmpty(urlAttribute))
+                if (!string.IsNullOrEmpty(urlAttribute))
                 {
                     Uri url;
                     if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
                     {
-                        this.Url    = url;
-                        wasLoaded   = true;
+                        this.Url = url;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(fileSizeAttribute))
+                if (!string.IsNullOrEmpty(fileSizeAttribute))
                 {
                     long fileSize;
-                    if (Int64.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out fileSize))
+                    if (long.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out fileSize))
                     {
-                        this.FileSize   = fileSize;
-                        wasLoaded       = true;
+                        this.FileSize = fileSize;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(typeAttribute))
+                if (!string.IsNullOrEmpty(typeAttribute))
                 {
-                    this.ContentType    = typeAttribute;
-                    wasLoaded           = true;
+                    this.ContentType = typeAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(mediumAttribute))
+                if (!string.IsNullOrEmpty(mediumAttribute))
                 {
                     YahooMediaMedium medium = YahooMediaSyndicationExtension.MediumByName(mediumAttribute);
                     if (medium != YahooMediaMedium.None)
                     {
                         this.Medium = medium;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(isDefaultAttribute))
+                if (!string.IsNullOrEmpty(isDefaultAttribute))
                 {
-                    if(String.Compare(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        this.IsDefault  = true;
-                        wasLoaded       = true;
+                        this.IsDefault = true;
+                        wasLoaded = true;
                     }
-                    else if (String.Compare(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        this.IsDefault  = false;
-                        wasLoaded       = true;
+                        this.IsDefault = false;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(expressionAttribute))
+                if (!string.IsNullOrEmpty(expressionAttribute))
                 {
                     YahooMediaExpression expression = YahooMediaSyndicationExtension.ExpressionByName(expressionAttribute);
                     if (expression != YahooMediaExpression.None)
                     {
                         this.Expression = expression;
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(bitrateAttribute))
+                if (!string.IsNullOrEmpty(bitrateAttribute))
                 {
                     int bitrate;
-                    if (Int32.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out bitrate))
+                    if (int.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out bitrate))
                     {
-                        this.Bitrate    = bitrate;
-                        wasLoaded       = true;
+                        this.Bitrate = bitrate;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -1068,91 +1100,91 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadSecondary(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
-                string frameRateAttribute       = source.GetAttribute("framerate", String.Empty);
-                string samplingRateAttribute    = source.GetAttribute("samplingrate", String.Empty);
-                string channelsAttribute        = source.GetAttribute("channels", String.Empty);
-                string durationAttribute        = source.GetAttribute("duration", String.Empty);
-                string heightAttribute          = source.GetAttribute("height", String.Empty);
-                string widthAttribute           = source.GetAttribute("width", String.Empty);
-                string languageAttribute        = source.GetAttribute("lang", String.Empty);
+                string frameRateAttribute = source.GetAttribute("framerate", string.Empty);
+                string samplingRateAttribute = source.GetAttribute("samplingrate", string.Empty);
+                string channelsAttribute = source.GetAttribute("channels", string.Empty);
+                string durationAttribute = source.GetAttribute("duration", string.Empty);
+                string heightAttribute = source.GetAttribute("height", string.Empty);
+                string widthAttribute = source.GetAttribute("width", string.Empty);
+                string languageAttribute = source.GetAttribute("lang", string.Empty);
 
-                if (!String.IsNullOrEmpty(frameRateAttribute))
+                if (!string.IsNullOrEmpty(frameRateAttribute))
                 {
                     int frameRate;
-                    if (Int32.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out frameRate))
+                    if (int.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out frameRate))
                     {
-                        this.FrameRate  = frameRate;
-                        wasLoaded       = true;
+                        this.FrameRate = frameRate;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(samplingRateAttribute))
+                if (!string.IsNullOrEmpty(samplingRateAttribute))
                 {
                     decimal samplingRate;
-                    if (Decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out samplingRate))
+                    if (decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out samplingRate))
                     {
-                        this.SamplingRate   = samplingRate;
-                        wasLoaded           = true;
+                        this.SamplingRate = samplingRate;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(channelsAttribute))
+                if (!string.IsNullOrEmpty(channelsAttribute))
                 {
                     int channels;
-                    if (Int32.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out channels))
+                    if (int.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out channels))
                     {
-                        this.Channels   = channels;
-                        wasLoaded       = true;
+                        this.Channels = channels;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(durationAttribute))
+                if (!string.IsNullOrEmpty(durationAttribute))
                 {
                     int seconds;
                     TimeSpan duration;
-                    if (Int32.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out seconds))
+                    if (int.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out seconds))
                     {
-                        this.Duration   = new TimeSpan(0, 0, seconds);
-                        wasLoaded       = true;
+                        this.Duration = new TimeSpan(0, 0, seconds);
+                        wasLoaded = true;
                     }
                     else if (TimeSpan.TryParse(durationAttribute, out duration))
                     {
-                        this.Duration   = duration;
-                        wasLoaded       = true;
+                        this.Duration = duration;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(heightAttribute))
+                if (!string.IsNullOrEmpty(heightAttribute))
                 {
                     int height;
-                    if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out height))
+                    if (int.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out height))
                     {
                         this.Height = height;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(widthAttribute))
+                if (!string.IsNullOrEmpty(widthAttribute))
                 {
                     int width;
-                    if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out width))
+                    if (int.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out width))
                     {
-                        this.Width  = width;
-                        wasLoaded   = true;
+                        this.Width = width;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(languageAttribute))
+                if (!string.IsNullOrEmpty(languageAttribute))
                 {
                     try
                     {
-                        CultureInfo language    = new CultureInfo(languageAttribute);
-                        this.Language           = language;
-                        wasLoaded               = true;
+                        CultureInfo language = new CultureInfo(languageAttribute);
+                        this.Language = language;
+                        wasLoaded = true;
                     }
                     catch (ArgumentException)
                     {

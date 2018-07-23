@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication.Specialized;
@@ -31,7 +32,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -49,7 +51,7 @@
             XPathNavigator blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
             if (blogNavigator != null)
             {
-                if(blogNavigator.HasAttributes)
+                if (blogNavigator.HasAttributes)
                 {
                     string dateCreatedAttribute = blogNavigator.GetAttribute("date-created", string.Empty);
                     string rootUrlAttribute = blogNavigator.GetAttribute("root-url", string.Empty);
@@ -96,7 +98,7 @@
                         }
                     }
 
-                    BlogML20SyndicationResourceAdapter.FillDocumentCollections(resource, blogNavigator, manager, this.Settings);
+                    FillDocumentCollections(resource, blogNavigator, manager, this.Settings);
                 }
 
                 SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(blogNavigator, this.Settings);
@@ -118,7 +120,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillDocumentCollections(
+            BlogMLDocument document,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(document, "document");
             Guard.ArgumentNotNull(source, "source");
@@ -126,7 +132,8 @@
             Guard.ArgumentNotNull(settings, "settings");
 
             XPathNodeIterator authorsIterator = source.Select("blog:authors/blog:author", manager);
-            XPathNodeIterator extendedPropertiesIterator = source.Select("blog:extended-properties/blog:property", manager);
+            XPathNodeIterator extendedPropertiesIterator =
+                source.Select("blog:extended-properties/blog:property", manager);
             XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
             XPathNodeIterator postsIterator = source.Select("blog:posts/blog:post", manager);
 
@@ -151,7 +158,8 @@
                         string propertyName = extendedPropertiesIterator.Current.GetAttribute("name", string.Empty);
                         string propertyValue = extendedPropertiesIterator.Current.GetAttribute("value", string.Empty);
 
-                        if (!string.IsNullOrEmpty(propertyName) && !document.ExtendedProperties.ContainsKey(propertyName))
+                        if (!string.IsNullOrEmpty(propertyName)
+                            && !document.ExtendedProperties.ContainsKey(propertyName))
                         {
                             document.ExtendedProperties.Add(propertyName, propertyValue);
                         }

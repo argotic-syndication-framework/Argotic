@@ -1,6 +1,7 @@
 ﻿namespace Argotic.Syndication
 {
     using System;
+
     using Argotic.Common;
 
     /// <summary>
@@ -8,19 +9,18 @@
     /// </summary>
     /// <seealso cref="GenericSyndicationFeed.Categories"/>
     /// <seealso cref="GenericSyndicationItem.Categories"/>
-    [Serializable()]
+    [Serializable]
     public class GenericSyndicationCategory : IComparable
     {
+        /// <summary>
+        /// Private member to hold a string that identifies the categorization scheme.
+        /// </summary>
+        private string categoryScheme = string.Empty;
 
         /// <summary>
         /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
         /// </summary>
         private string categoryTerm = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a string that identifies the categorization scheme.
-        /// </summary>
-        private string categoryScheme = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
@@ -31,7 +31,7 @@
         public GenericSyndicationCategory(string term)
         {
             Guard.ArgumentNotNullOrEmptyString(term, "term");
-            categoryTerm = term;
+            this.categoryTerm = term;
         }
 
         /// <summary>
@@ -41,9 +41,10 @@
         /// <param name="scheme">A string that identifies the categorization scheme used by this category.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
-        public GenericSyndicationCategory(string term, string scheme) : this(term)
+        public GenericSyndicationCategory(string term, string scheme)
+            : this(term)
         {
-            categoryScheme = scheme;
+            this.categoryScheme = scheme;
         }
 
         /// <summary>
@@ -57,16 +58,16 @@
 
             if (category.Scheme != null)
             {
-                categoryScheme = category.Scheme.ToString();
+                this.categoryScheme = category.Scheme.ToString();
             }
 
             if (!string.IsNullOrEmpty(category.Term))
             {
-                categoryTerm = category.Term.Trim();
+                this.categoryTerm = category.Term.Trim();
             }
             else if (!string.IsNullOrEmpty(category.Label))
             {
-                categoryTerm = category.Label.Trim();
+                this.categoryTerm = category.Label.Trim();
             }
         }
 
@@ -78,14 +79,14 @@
         public GenericSyndicationCategory(RssCategory category)
         {
             Guard.ArgumentNotNull(category, "category");
-            if(!string.IsNullOrEmpty(category.Domain))
+            if (!string.IsNullOrEmpty(category.Domain))
             {
-                categoryScheme = category.Domain.Trim();
+                this.categoryScheme = category.Domain.Trim();
             }
 
             if (!string.IsNullOrEmpty(category.Value))
             {
-                categoryTerm = category.Value.Trim();
+                this.categoryTerm = category.Value.Trim();
             }
         }
 
@@ -97,7 +98,7 @@
         {
             get
             {
-                return categoryScheme;
+                return this.categoryScheme;
             }
         }
 
@@ -109,20 +110,79 @@
         {
             get
             {
-                return categoryTerm;
+                return this.categoryTerm;
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable representation for the current instance.
-        /// </remarks>
-        public override string ToString()
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(GenericSyndicationCategory first, GenericSyndicationCategory second)
         {
-            return string.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(GenericSyndicationCategory first, GenericSyndicationCategory second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(GenericSyndicationCategory first, GenericSyndicationCategory second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(GenericSyndicationCategory first, GenericSyndicationCategory second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -149,7 +209,13 @@
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -165,7 +231,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -180,74 +246,15 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(GenericSyndicationCategory first, GenericSyndicationCategory second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable representation for the current instance.
+        /// </remarks>
+        public override string ToString()
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(GenericSyndicationCategory first, GenericSyndicationCategory second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(GenericSyndicationCategory first, GenericSyndicationCategory second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(GenericSyndicationCategory first, GenericSyndicationCategory second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            return string.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
         }
     }
 }

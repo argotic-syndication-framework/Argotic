@@ -1,15 +1,14 @@
-﻿using System;
-
-using Argotic.Common;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using Argotic.Common;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Contains the code examples for the <see cref="ApmlProfile"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="ApmlProfile"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="ApmlProfile"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]

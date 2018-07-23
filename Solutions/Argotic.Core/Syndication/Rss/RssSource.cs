@@ -6,6 +6,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
@@ -15,17 +16,19 @@
     /// <seealso cref="RssItem.Source"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssSource class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssSourceExample.cs" 
-    ///             region="RssSource" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssSourceExample.cs"
+    ///             region="RssSource"
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public class RssSource : IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -64,7 +67,8 @@
         /// <param name="url">A <see cref="Uri"/> that represents the URL of the source feed.</param>
         /// <param name="title">The title of the source feed.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
-        public RssSource(Uri url, string title) : this(url)
+        public RssSource(Uri url, string title)
+            : this(url)
         {
             this.Title = title;
         }
@@ -81,23 +85,23 @@
         {
             get
             {
-                if (objectSyndicationExtensions == null)
+                if (this.objectSyndicationExtensions == null)
                 {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
 
-                return objectSyndicationExtensions;
+                return this.objectSyndicationExtensions;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
+                this.objectSyndicationExtensions = value;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
         /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
         public bool HasExtensions
@@ -116,12 +120,12 @@
         {
             get
             {
-                return sourceTitle;
+                return this.sourceTitle;
             }
 
             set
             {
-                sourceTitle = value.Trim();
+                this.sourceTitle = value.Trim();
             }
         }
 
@@ -134,14 +138,85 @@
         {
             get
             {
-                return sourceUrl;
+                return this.sourceUrl;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                sourceUrl = value;
+                this.sourceUrl = value;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(RssSource first, RssSource second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(RssSource first, RssSource second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(RssSource first, RssSource second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(RssSource first, RssSource second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -161,6 +236,60 @@
         }
 
         /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            RssSource value = obj as RssSource;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Url,
+                             value.Url,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RssSource))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
         /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -168,8 +297,8 @@
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -181,25 +310,14 @@
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
-            }
+            char[] charArray = this.ToString().ToCharArray();
 
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -215,7 +333,7 @@
         {
             bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
                 string urlAttribute = source.GetAttribute("url", string.Empty);
 
@@ -263,25 +381,25 @@
         }
 
         /// <summary>
-        /// Saves the current <see cref="RssSource"/> to the specified <see cref="XmlWriter"/>.
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("source");
-
-            writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
-
-            if(!string.IsNullOrEmpty(this.Title))
+            bool wasRemoved = false;
+            Guard.ArgumentNotNull(extension, "extension");
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
-                writer.WriteValue(this.Title);
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
             }
 
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
-
-            writer.WriteEndElement();
+            return wasRemoved;
         }
 
         /// <summary>
@@ -293,14 +411,14 @@
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
@@ -315,128 +433,25 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="RssSource"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
+            Guard.ArgumentNotNull(writer, "writer");
+            writer.WriteStartElement("source");
+
+            writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+
+            if (!string.IsNullOrEmpty(this.Title))
             {
-                return 1;
+                writer.WriteValue(this.Title);
             }
 
-            RssSource value = obj as RssSource;
+            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
-            if (value != null)
-            {
-                int result = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is RssSource))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(RssSource first, RssSource second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(RssSource first, RssSource second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(RssSource first, RssSource second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(RssSource first, RssSource second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            writer.WriteEndElement();
         }
     }
 }

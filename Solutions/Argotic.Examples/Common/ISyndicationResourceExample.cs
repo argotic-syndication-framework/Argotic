@@ -1,41 +1,44 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Example implementation of the <see cref="ISyndicationResource"/> interface.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public class MyCustomRssFeed : ISyndicationResource
     {
-
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
         private static SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
+
         /// <summary>
         /// Private member to hold the version of the syndication format for this syndication resource conforms to.
         /// </summary>
         private static Version feedVersion = new Version(3, 0);
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         private bool resourceAsyncLoadCancelled;
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         private bool resourceIsLoading;
+
         /// <summary>
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
+
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
@@ -59,6 +62,7 @@ namespace Argotic.Examples
                 return feedVersion;
             }
         }
+
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -67,12 +71,12 @@ namespace Argotic.Examples
         {
             get
             {
-                return resourceAsyncLoadCancelled;
+                return this.resourceAsyncLoadCancelled;
             }
 
             set
             {
-                resourceAsyncLoadCancelled = value;
+                this.resourceAsyncLoadCancelled = value;
             }
         }
 
@@ -84,20 +88,22 @@ namespace Argotic.Examples
         {
             get
             {
-                return resourceIsLoading;
+                return this.resourceIsLoading;
             }
 
             set
             {
-                resourceIsLoading = value;
+                this.resourceIsLoading = value;
             }
         }
+
         /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="MyCustomRssFeed.Load(IXPathNavigable)"/>
         /// <seealso cref="MyCustomRssFeed.Load(XmlReader)"/>
         public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+
         /// <summary>
         /// Raises the <see cref="MyCustomRssFeed.Loaded"/> event.
         /// </summary>
@@ -112,24 +118,25 @@ namespace Argotic.Examples
                 handler(this, e);
             }
         }
+
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="MyCustomRssFeed"/>.
         /// </summary>
         /// <returns>A read-only <see cref="XPathNavigator"/> object.</returns>
         /// <remarks>
-        ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="MyCustomRssFeed"/>. 
+        ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="MyCustomRssFeed"/>.
         ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="MyCustomRssFeed"/>.
         /// </remarks>
         public XPathNavigator CreateNavigator()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.ConformanceLevel = ConformanceLevel.Document;
                 settings.Indent = true;
                 settings.OmitXmlDeclaration = false;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.Save(writer);
                     writer.Flush();
@@ -175,6 +182,7 @@ namespace Argotic.Examples
             {
                 settings = new SyndicationResourceLoadSettings();
             }
+
             XPathNavigator navigator = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
@@ -339,8 +347,8 @@ namespace Argotic.Examples
         ///             </item>
         ///             <item>
         ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -371,8 +379,8 @@ namespace Argotic.Examples
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -395,6 +403,7 @@ namespace Argotic.Examples
             {
                 settings = new SyndicationResourceLoadSettings();
             }
+
             if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
             {
                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
@@ -403,6 +412,7 @@ namespace Argotic.Examples
             {
                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
             }
+
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
 
@@ -432,6 +442,7 @@ namespace Argotic.Examples
             {
                 settings = new SyndicationResourceSaveSettings();
             }
+
             XmlWriterSettings writerSettings = new XmlWriterSettings();
             writerSettings.OmitXmlDeclaration = false;
             writerSettings.Indent = !settings.MinimizeOutputSize;
@@ -474,6 +485,7 @@ namespace Argotic.Examples
 
             writer.WriteEndElement();
         }
+
         /// <summary>
         /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -482,11 +494,11 @@ namespace Argotic.Examples
         /// <remarks>
         ///     <para>The <see cref="MyCustomRssFeed"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -506,11 +518,11 @@ namespace Argotic.Examples
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -536,11 +548,11 @@ namespace Argotic.Examples
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -561,11 +573,11 @@ namespace Argotic.Examples
         /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
         /// <remarks>
         ///     <para>
-        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
+        ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
         ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
@@ -579,29 +591,31 @@ namespace Argotic.Examples
             {
                 settings = new SyndicationResourceLoadSettings();
             }
+
             if (this.LoadOperationInProgress)
             {
                 throw new InvalidOperationException();
             }
+
             this.LoadOperationInProgress = true;
             this.AsyncLoadHasBeenCancelled = false;
 
-            
+
             asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
             asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            
+
             object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(this.AsyncTimeoutCallback), state, settings.Timeout, true);
         }
 
         /// <summary>
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation. 
-        ///     If there is a load operation in progress, this method releases resources used to execute the load operation. 
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation.
+        ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
         public void LoadAsyncCancel()
@@ -612,6 +626,7 @@ namespace Argotic.Examples
                 asyncHttpWebRequest.Abort();
             }
         }
+
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
@@ -663,12 +678,13 @@ namespace Argotic.Examples
                                 }
 
                                 //  Code to load the syndication resource using the XPathNavigator would go here.
-                                //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
+                                //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed;
                                 //  otherwise you would utilize the feed's Load method.
                                 feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
+
                     feed.LoadOperationInProgress = false;
                 }
             }
@@ -688,8 +704,10 @@ namespace Argotic.Examples
                     asyncHttpWebRequest.Abort();
                 }
             }
+
             this.LoadOperationInProgress = false;
         }
+
         /// <summary>
         /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -710,7 +728,7 @@ namespace Argotic.Examples
             Guard.ArgumentNotNull(eventData, "eventData");
 
             //  Code to load the syndication resource using the XPathNavigator would go here.
-            //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
+            //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed;
             //  otherwise you would utilize the feed's Load method.
             this.OnFeedLoaded(eventData);
         }

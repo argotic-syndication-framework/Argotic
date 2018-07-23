@@ -3,6 +3,7 @@
     using System;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
@@ -11,11 +12,10 @@
     /// <remarks>This utility class is not intended for use outside the Really Simple Discoverability (RSD) syndication entities within the framework.</remarks>
     internal static class RsdUtility
     {
-
         /// <summary>
         /// Private member to hold the Really Simple Discoverability (RSD) 1.0 namespace identifier.
         /// </summary>
-        private const string RSD_NAMESPACE = "http://archipelago.phrasewise.com/rsd";
+        private const string InternalRsdNamespace = "http://archipelago.phrasewise.com/rsd";
 
         /// <summary>
         /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
@@ -25,7 +25,7 @@
         {
             get
             {
-                return RSD_NAMESPACE;
+                return InternalRsdNamespace;
             }
         }
 
@@ -40,7 +40,9 @@
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
+            manager.AddNamespace(
+                "rsd",
+                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : InternalRsdNamespace);
 
             return manager;
         }
@@ -55,7 +57,7 @@
         ///     An <see cref="XPathNodeIterator"/> that points to the selected node set.
         /// </returns>
         /// <remarks>
-        ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
+        ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided.
         ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -90,14 +92,17 @@
         ///     An <see cref="XPathNavigator"/> object that contains the first matching node for the XPath query specified; otherwise <b>null</b> if there are no query results.
         /// </returns>
         /// <remarks>
-        ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
+        ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided.
         ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
+        public static XPathNavigator SelectSafeSingleNode(
+            XPathNavigator source,
+            string xpath,
+            IXmlNamespaceResolver resolver)
         {
             XPathNavigator navigator = null;
             Guard.ArgumentNotNull(source, "source");

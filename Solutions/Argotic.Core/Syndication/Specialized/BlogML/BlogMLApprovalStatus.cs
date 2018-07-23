@@ -1,12 +1,13 @@
 ﻿namespace Argotic.Syndication.Specialized
 {
     using System;
+
     using Argotic.Common;
 
     /// <summary>
     /// Represents the approval status of a web log entity.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public enum BlogMLApprovalStatus
     {
         /// <summary>
@@ -25,6 +26,6 @@
         /// Indicates that the web log entity is not approved.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Not Approved", AlternateValue = "false")]
-        NotApproved = 2
+        NotApproved = 2,
     }
 }

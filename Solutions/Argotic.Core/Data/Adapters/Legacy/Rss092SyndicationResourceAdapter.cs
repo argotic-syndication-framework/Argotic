@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -20,7 +21,10 @@
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 0.92 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -33,7 +37,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Rss092SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Rss092SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -55,7 +60,7 @@
                 XPathNavigator channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
                 if (channelNavigator != null)
                 {
-                    Rss092SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
+                    FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
                 }
 
                 SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
@@ -74,7 +79,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillCategory(RssCategory category, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillCategory(
+            RssCategory category,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(category, "category");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -100,70 +109,6 @@
         }
 
         /// <summary>
-        /// Initializes the supplied <see cref="RssCloud"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
-        /// </summary>
-        /// <param name="cloud">The <see cref="RssCloud"/> to be filled.</param>
-        /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the cloud XML data.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="RssFeed"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="cloud"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillCloud(RssCloud cloud, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
-        {
-            Guard.ArgumentNotNull(cloud, "cloud");
-            Guard.ArgumentNotNull(navigator, "navigator");
-            Guard.ArgumentNotNull(manager, "manager");
-            Guard.ArgumentNotNull(settings, "settings");
-
-            if (navigator.HasAttributes)
-            {
-                string domainAttribute = navigator.GetAttribute("domain", string.Empty);
-                string portAttribute = navigator.GetAttribute("port", string.Empty);
-                string pathAttribute = navigator.GetAttribute("path", string.Empty);
-                string registerProcedureAttribute = navigator.GetAttribute("registerProcedure", string.Empty);
-                string protocolAttribute = navigator.GetAttribute("protocol", string.Empty);
-
-                if (!string.IsNullOrEmpty(domainAttribute))
-                {
-                    cloud.Domain = domainAttribute;
-                }
-
-                if (!string.IsNullOrEmpty(portAttribute))
-                {
-                    int port;
-                    if (int.TryParse(portAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out port))
-                    {
-                        cloud.Port = port;
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(pathAttribute))
-                {
-                    cloud.Path = pathAttribute;
-                }
-
-                if (!string.IsNullOrEmpty(registerProcedureAttribute))
-                {
-                    cloud.RegisterProcedure = registerProcedureAttribute;
-                }
-
-                if (!string.IsNullOrEmpty(protocolAttribute))
-                {
-                    RssCloudProtocol protocol = RssCloud.CloudProtocolByName(protocolAttribute);
-                    if (protocol != RssCloudProtocol.None)
-                    {
-                        cloud.Protocol = protocol;
-                    }
-                }
-            }
-
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
-            adapter.Fill(cloud);
-        }
-
-        /// <summary>
         /// Initializes the supplied <see cref="RssChannel"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
         /// </summary>
         /// <param name="channel">The <see cref="RssChannel"/> to be filled.</param>
@@ -174,7 +119,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillChannel(
+            RssChannel channel,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -214,7 +163,9 @@
                 }
                 catch (ArgumentException)
                 {
-                    System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to determine CultureInfo with a name of {0}.", languageNavigator.Value);
+                    System.Diagnostics.Trace.TraceWarning(
+                        "Rss092SyndicationResourceAdapter unable to determine CultureInfo with a name of {0}.",
+                        languageNavigator.Value);
                 }
             }
 
@@ -222,12 +173,12 @@
             if (imageNavigator != null)
             {
                 channel.Image = new RssImage();
-                Rss092SyndicationResourceAdapter.FillImage(channel.Image, imageNavigator, manager, settings);
+                FillImage(channel.Image, imageNavigator, manager, settings);
             }
 
-            Rss092SyndicationResourceAdapter.FillChannelOptionals(channel, navigator, manager, settings);
+            FillChannelOptionals(channel, navigator, manager, settings);
 
-            Rss092SyndicationResourceAdapter.FillChannelCollections(channel, navigator, manager, settings);
+            FillChannelCollections(channel, navigator, manager, settings);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
             adapter.Fill(channel);
@@ -244,7 +195,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillChannelCollections(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillChannelCollections(
+            RssChannel channel,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -263,7 +218,10 @@
                     {
                         try
                         {
-                            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
+                            DayOfWeek day = (DayOfWeek)Enum.Parse(
+                                typeof(DayOfWeek),
+                                skipDaysIterator.Current.Value,
+                                true);
                             if (!channel.SkipDays.Contains(day))
                             {
                                 channel.SkipDays.Add(day);
@@ -271,7 +229,9 @@
                         }
                         catch (ArgumentException)
                         {
-                            System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.", skipDaysIterator.Current.Value);
+                            System.Diagnostics.Trace.TraceWarning(
+                                "Rss092SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.",
+                                skipDaysIterator.Current.Value);
                         }
                     }
                 }
@@ -282,17 +242,23 @@
                 while (skipHoursIterator.MoveNext())
                 {
                     int hour;
-                    if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hour))
+                    if (int.TryParse(
+                        skipHoursIterator.Current.Value,
+                        NumberStyles.Integer,
+                        NumberFormatInfo.InvariantInfo,
+                        out hour))
                     {
                         hour = hour - 1; // Convert to zero-based range
 
-                        if (!channel.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
+                        if (!channel.SkipHours.Contains(hour) && hour >= 0 && hour <= 23)
                         {
                             channel.SkipHours.Add(hour);
                         }
                         else
                         {
-                            System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}.", hour);
+                            System.Diagnostics.Trace.TraceWarning(
+                                "Rss092SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}.",
+                                hour);
                         }
                     }
                 }
@@ -311,7 +277,7 @@
                         break;
                     }
 
-                    Rss092SyndicationResourceAdapter.FillItem(item, itemIterator.Current, manager, settings);
+                    FillItem(item, itemIterator.Current, manager, settings);
 
                     ((Collection<RssItem>)channel.Items).Add(item);
                 }
@@ -329,7 +295,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillChannelOptionals(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillChannelOptionals(
+            RssChannel channel,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -386,14 +356,82 @@
             if (textInputNavigator != null)
             {
                 channel.TextInput = new RssTextInput();
-                Rss092SyndicationResourceAdapter.FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
+                FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
             }
 
             if (cloudNavigator != null)
             {
                 channel.Cloud = new RssCloud();
-                Rss092SyndicationResourceAdapter.FillCloud(channel.Cloud, cloudNavigator, manager, settings);
+                FillCloud(channel.Cloud, cloudNavigator, manager, settings);
             }
+        }
+
+        /// <summary>
+        /// Initializes the supplied <see cref="RssCloud"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+        /// </summary>
+        /// <param name="cloud">The <see cref="RssCloud"/> to be filled.</param>
+        /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the cloud XML data.</param>
+        /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="RssFeed"/>.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="cloud"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        private static void FillCloud(
+            RssCloud cloud,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
+        {
+            Guard.ArgumentNotNull(cloud, "cloud");
+            Guard.ArgumentNotNull(navigator, "navigator");
+            Guard.ArgumentNotNull(manager, "manager");
+            Guard.ArgumentNotNull(settings, "settings");
+
+            if (navigator.HasAttributes)
+            {
+                string domainAttribute = navigator.GetAttribute("domain", string.Empty);
+                string portAttribute = navigator.GetAttribute("port", string.Empty);
+                string pathAttribute = navigator.GetAttribute("path", string.Empty);
+                string registerProcedureAttribute = navigator.GetAttribute("registerProcedure", string.Empty);
+                string protocolAttribute = navigator.GetAttribute("protocol", string.Empty);
+
+                if (!string.IsNullOrEmpty(domainAttribute))
+                {
+                    cloud.Domain = domainAttribute;
+                }
+
+                if (!string.IsNullOrEmpty(portAttribute))
+                {
+                    int port;
+                    if (int.TryParse(portAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out port))
+                    {
+                        cloud.Port = port;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(pathAttribute))
+                {
+                    cloud.Path = pathAttribute;
+                }
+
+                if (!string.IsNullOrEmpty(registerProcedureAttribute))
+                {
+                    cloud.RegisterProcedure = registerProcedureAttribute;
+                }
+
+                if (!string.IsNullOrEmpty(protocolAttribute))
+                {
+                    RssCloudProtocol protocol = RssCloud.CloudProtocolByName(protocolAttribute);
+                    if (protocol != RssCloudProtocol.None)
+                    {
+                        cloud.Protocol = protocol;
+                    }
+                }
+            }
+
+            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+            adapter.Fill(cloud);
         }
 
         /// <summary>
@@ -407,7 +445,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillEnclosure(RssEnclosure enclosure, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillEnclosure(
+            RssEnclosure enclosure,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(enclosure, "enclosure");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -453,7 +495,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillImage(
+            RssImage image,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(image, "image");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -502,7 +548,11 @@
             if (heightNavigator != null)
             {
                 int height;
-                if (int.TryParse(heightNavigator.Value, NumberStyles.Integer,NumberFormatInfo.InvariantInfo, out height))
+                if (int.TryParse(
+                    heightNavigator.Value,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.InvariantInfo,
+                    out height))
                 {
                     image.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
                 }
@@ -532,7 +582,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillItem(RssItem item, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillItem(
+            RssItem item,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(item, "item");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -579,7 +633,7 @@
                     }
                 }
 
-                if(!string.IsNullOrEmpty(sourceNavigator.Value))
+                if (!string.IsNullOrEmpty(sourceNavigator.Value))
                 {
                     item.Source.Title = sourceNavigator.Value;
                 }
@@ -590,7 +644,7 @@
                 while (enclosureIterator.MoveNext())
                 {
                     RssEnclosure enclosure = new RssEnclosure();
-                    Rss092SyndicationResourceAdapter.FillEnclosure(enclosure, enclosureIterator.Current, manager, settings);
+                    FillEnclosure(enclosure, enclosureIterator.Current, manager, settings);
 
                     item.Enclosures.Add(enclosure);
                 }
@@ -601,7 +655,7 @@
                 while (categoryIterator.MoveNext())
                 {
                     RssCategory category = new RssCategory();
-                    Rss092SyndicationResourceAdapter.FillCategory(category, categoryIterator.Current, manager, settings);
+                    FillCategory(category, categoryIterator.Current, manager, settings);
 
                     item.Categories.Add(category);
                 }
@@ -622,7 +676,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillTextInput(
+            RssTextInput textInput,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(textInput, "textInput");
             Guard.ArgumentNotNull(navigator, "navigator");

@@ -1,9 +1,9 @@
 ﻿namespace Argotic.Data.Adapters
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Publishing;
@@ -32,7 +32,10 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public AtomPublishing10SyndicationResourceAdapter(
+            XPathNavigator navigator,
+            SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 

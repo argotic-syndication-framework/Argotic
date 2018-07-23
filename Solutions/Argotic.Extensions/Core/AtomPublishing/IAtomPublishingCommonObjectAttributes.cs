@@ -1,12 +1,12 @@
-﻿using System;
-using System.Globalization;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Globalization;
+
     /// <summary>
     /// Allows an object to implement common Atom entity attributes by representing a set of properties, methods, indexers and events common to Atom syndication resources.
     /// </summary>
-    interface IAtomPublishingCommonObjectAttributes
+    public interface IAtomPublishingCommonObjectAttributes
     {
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -14,7 +14,7 @@ namespace Argotic.Extensions.Core
         /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
         /// <remarks>
         ///     <para>
-        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>, 
+        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
         Uri BaseUri

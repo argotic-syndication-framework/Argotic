@@ -4,6 +4,7 @@
     using System.Configuration;
     using System.Security.Permissions;
     using System.Threading;
+
     using Argotic.Common;
     using Argotic.Configuration.Provider;
 
@@ -13,6 +14,11 @@
     // [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
     internal static class PrivilegedConfigurationManager
     {
+        /// <summary>
+        /// Private member to hold object used to synchronize locks when reading syndication resource configuration information.
+        /// </summary>
+        private static object configurationManagerSyndicationResourceSyncObject;
+
         /// <summary>
         /// Private member to hold object used to synchronize locks when reading Trackback configuration information.
         /// </summary>
@@ -24,11 +30,6 @@
         private static object configurationManagerXmlRpcSyncObject;
 
         /// <summary>
-        /// Private member to hold object used to synchronize locks when reading syndication resource configuration information.
-        /// </summary>
-        private static object configurationManagerSyndicationResourceSyncObject;
-
-        /// <summary>
         /// Gets the <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.
         /// </summary>
         /// <value>The <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.</value>
@@ -38,7 +39,10 @@
             {
                 if (configurationManagerSyndicationResourceSyncObject == null)
                 {
-                    Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new object(), null);
+                    Interlocked.CompareExchange(
+                        ref configurationManagerSyndicationResourceSyncObject,
+                        new object(),
+                        null);
                 }
 
                 return configurationManagerSyndicationResourceSyncObject;
@@ -107,9 +111,9 @@
         {
             string sectionPath = "argotic.syndication";
 
-            lock (PrivilegedConfigurationManager.SyndicationSyncObject)
+            lock (SyndicationSyncObject)
             {
-                SyndicationResourceSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as SyndicationResourceSection;
+                SyndicationResourceSection section = GetSection(sectionPath) as SyndicationResourceSection;
                 if (section == null)
                 {
                     return null;
@@ -131,9 +135,9 @@
         {
             string sectionPath = "argotic.net/clientSettings/trackback";
 
-            lock (PrivilegedConfigurationManager.TrackbackSyncObject)
+            lock (TrackbackSyncObject)
             {
-                TrackbackClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as TrackbackClientSection;
+                TrackbackClientSection section = GetSection(sectionPath) as TrackbackClientSection;
                 if (section == null)
                 {
                     return null;
@@ -155,9 +159,9 @@
         {
             string sectionPath = "argotic.net/clientSettings/xmlRpc";
 
-            lock (PrivilegedConfigurationManager.XmlRpcSyncObject)
+            lock (XmlRpcSyncObject)
             {
-                XmlRpcClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as XmlRpcClientSection;
+                XmlRpcClientSection section = GetSection(sectionPath) as XmlRpcClientSection;
                 if (section == null)
                 {
                     return null;

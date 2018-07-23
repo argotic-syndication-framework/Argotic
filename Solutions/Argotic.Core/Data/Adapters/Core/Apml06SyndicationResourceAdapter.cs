@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication.Specialized;
@@ -19,7 +20,10 @@
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="ApmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the APML 0.6 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Apml")]
     public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -32,7 +36,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -86,7 +91,9 @@
                     }
                 }
 
-                XPathNodeIterator applicationIterator = bodyNavigator.Select("apml:Applications/apml:Application", manager);
+                XPathNodeIterator applicationIterator = bodyNavigator.Select(
+                    "apml:Applications/apml:Application",
+                    manager);
                 if (applicationIterator != null && applicationIterator.Count > 0)
                 {
                     while (applicationIterator.MoveNext())
@@ -100,7 +107,9 @@
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
+            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(
+                this.Navigator.SelectSingleNode("apml:APML", manager),
+                this.Settings);
             adapter.Fill(resource, manager);
         }
     }

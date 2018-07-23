@@ -1,19 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="AtomEntry"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="AtomEntry"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="AtomEntry"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     public static class AtomEntryExample
@@ -33,6 +32,7 @@ namespace Argotic.Examples
             entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
             entry.Summary = new AtomTextConstruct("A stand-alone Atom Entry Document.");
         }
+
         /// <summary>
         /// Provides example code for the AtomEntry.Create(Uri) method
         /// </summary>
@@ -65,10 +65,11 @@ namespace Argotic.Examples
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
         private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
-            if(e.State != null)
+            if (e.State != null)
             {
             }
         }
+
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>
@@ -116,7 +117,7 @@ namespace Argotic.Examples
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
 
-                using(XmlReader reader = XmlReader.Create(stream, settings))
+                using (XmlReader reader = XmlReader.Create(stream, settings))
                 {
                     entry.Load(reader);
 
@@ -173,7 +174,7 @@ namespace Argotic.Examples
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     entry.Save(writer);
                 }

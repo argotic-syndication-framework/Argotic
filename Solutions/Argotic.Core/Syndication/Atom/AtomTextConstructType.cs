@@ -1,16 +1,14 @@
 ﻿namespace Argotic.Syndication
 {
     using System;
+
     using Argotic.Common;
 
     /// <summary>
-    /// Represents the entity encoding utilized by human-readable text constructs. 
+    /// Represents the entity encoding utilized by human-readable text constructs.
     /// </summary>
     /// <seealso cref="AtomTextConstruct"/>
-    /// <remarks>
-    ///     
-    /// </remarks>
-    [Serializable()]
+    [Serializable]
     public enum AtomTextConstructType
     {
         /// <summary>
@@ -35,6 +33,6 @@
         /// Indicates that the human-readable text is Extensible Hyper-Text Markup Language (XHTML) encoded.
         /// </summary>
         [EnumerationMetadata(DisplayName = "XHTML", AlternateValue = "xhtml")]
-        Xhtml = 3
+        Xhtml = 3,
     }
 }

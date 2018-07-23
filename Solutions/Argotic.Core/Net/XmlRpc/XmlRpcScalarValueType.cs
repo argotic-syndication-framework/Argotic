@@ -1,6 +1,7 @@
 ﻿namespace Argotic.Net
 {
     using System;
+
     using Argotic.Common;
 
     /// <summary>
@@ -8,8 +9,11 @@
     /// </summary>
     /// <seealso cref="XmlRpcScalarValue.ValueType"/>
     /// <seealso cref="XmlRpcScalarValue"/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    [Serializable()]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
+    [Serializable]
     public enum XmlRpcScalarValueType
     {
         /// <summary>
@@ -52,6 +56,6 @@
         /// The parameter value represents text as a series of characters.
         /// </summary>
         [EnumerationMetadata(DisplayName = "String", AlternateValue = "string")]
-        String = 6
+        String = 6,
     }
 }

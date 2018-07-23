@@ -1,54 +1,56 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="SimpleListSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SimpleListSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold a value indicating if the feed is intended to be consumed as a list.
         /// </summary>
         private bool extensionTreatAsList;
+
         /// <summary>
         /// Private member to hold information that allows the client to group or filter on the values of feed properties.
         /// </summary>
         private Collection<SimpleListGroup> extensionGroups;
+
         /// <summary>
         /// Private member to hold information that allows the client to sort on the values of feed properties.
         /// </summary>
         private Collection<SimpleListSort> extensionSorts;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleListSyndicationExtensionContext"/> class.
         /// </summary>
         public SimpleListSyndicationExtensionContext()
         {
-
         }
+
         /// <summary>
         /// Gets information that allows the client to group or filter on the values of feed properties.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListGroup"/> objects that represent information that allows the client to group or filter on the values of feed properties. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListGroup"/> objects that represent information that allows the client to group or filter on the values of feed properties.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<SimpleListGroup> Grouping
         {
             get
             {
-                if (extensionGroups == null)
+                if (this.extensionGroups == null)
                 {
-                    extensionGroups = new Collection<SimpleListGroup>();
+                    this.extensionGroups = new Collection<SimpleListGroup>();
                 }
-                return extensionGroups;
+
+                return this.extensionGroups;
             }
         }
 
@@ -56,39 +58,40 @@ namespace Argotic.Extensions.Core
         /// Gets information that allows the client to sort on the values of feed properties.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListSort"/> objects that represent information that allows the client to sort on the values of feed properties. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListSort"/> objects that represent information that allows the client to sort on the values of feed properties.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<SimpleListSort> Sorting
         {
             get
             {
-                if (extensionSorts == null)
+                if (this.extensionSorts == null)
                 {
-                    extensionSorts = new Collection<SimpleListSort>();
+                    this.extensionSorts = new Collection<SimpleListSort>();
                 }
-                return extensionSorts;
+
+                return this.extensionSorts;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if this feed is intended to be consumed as a list.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if this feed is intended to be consumed as a list.
         /// </summary>
         /// <value><b>true</b> if the syndication feed is intended to be consumed as a list; otherwise false.</value>
         /// <remarks>
-        ///     This property allows the publisher of a feed document to indicate to the consumers of the feed that the feed is intended to be consumed as a list, 
+        ///     This property allows the publisher of a feed document to indicate to the consumers of the feed that the feed is intended to be consumed as a list,
         ///     and as such is the primary means for feed consumers to identify lists.
         /// </remarks>
         public bool TreatAsList
         {
             get
             {
-                return extensionTreatAsList;
+                return this.extensionTreatAsList;
             }
 
             set
             {
-                extensionTreatAsList = value;
+                this.extensionTreatAsList = value;
             }
         }
 
@@ -102,23 +105,23 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator treatAsNavigator         = source.SelectSingleNode("cf:treatAs", manager);
+                XPathNavigator treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
                 XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
-                if (treatAsNavigator != null && String.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
+                if (treatAsNavigator != null && string.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.TreatAsList    = true;
-                    wasLoaded           = true;
+                    this.TreatAsList = true;
+                    wasLoaded = true;
                 }
 
                 if (listInformationNavigator != null && listInformationNavigator.HasChildren)
                 {
-                    XPathNodeIterator sortIterator  = source.Select("cf:sort", manager);
+                    XPathNodeIterator sortIterator = source.Select("cf:sort", manager);
                     XPathNodeIterator groupIterator = source.Select("cf:group", manager);
 
                     if (sortIterator != null && sortIterator.Count > 0)
@@ -129,7 +132,7 @@ namespace Argotic.Extensions.Core
                             if (sort.Load(sortIterator.Current))
                             {
                                 this.Sorting.Add(sort);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -138,11 +141,11 @@ namespace Argotic.Extensions.Core
                     {
                         while (groupIterator.MoveNext())
                         {
-                            SimpleListGroup group   = new SimpleListGroup();
+                            SimpleListGroup group = new SimpleListGroup();
                             if (group.Load(groupIterator.Current))
                             {
                                 this.Grouping.Add(group);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -164,12 +167,12 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.TreatAsList)
+            if (this.TreatAsList)
             {
                 writer.WriteElementString("treatAs", xmlNamespace, "list");
             }
 
-            if(this.Grouping.Count > 0 || this.Sorting.Count > 0)
+            if (this.Grouping.Count > 0 || this.Sorting.Count > 0)
             {
                 writer.WriteStartElement("listinfo", xmlNamespace);
 

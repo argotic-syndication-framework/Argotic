@@ -1,20 +1,19 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="RssFeed"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssFeed"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="RssFeed"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
@@ -116,7 +115,7 @@ namespace Argotic.Examples
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
         private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
-            if(e.State != null)
+            if (e.State != null)
             {
             }
         }
@@ -174,7 +173,7 @@ namespace Argotic.Examples
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
 
-                using(XmlReader reader = XmlReader.Create(stream, settings))
+                using (XmlReader reader = XmlReader.Create(stream, settings))
                 {
                     feed.Load(reader);
 
@@ -217,7 +216,7 @@ namespace Argotic.Examples
 
             //  Modify feed state using public properties and methods
 
-            using(Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
+            using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
             {
                 feed.Save(stream);
             }
@@ -237,7 +236,7 @@ namespace Argotic.Examples
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     feed.Save(writer);
                 }

@@ -1,19 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Contains the code examples for the <see cref="ApmlDocument"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="ApmlDocument"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="ApmlDocument"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
@@ -98,6 +97,7 @@ namespace Argotic.Examples
 
             document.Applications.Add(sampleApplication);
         }
+
         /// <summary>
         /// Provides example code for the ApmlDocument.Create(Uri) method
         /// </summary>
@@ -114,6 +114,7 @@ namespace Argotic.Examples
                 }
             }
         }
+
         /// <summary>
         /// Provides example code for the LoadAsync(Uri, Object) method
         /// </summary>
@@ -133,10 +134,11 @@ namespace Argotic.Examples
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
         private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
-            if(e.State != null)
+            if (e.State != null)
             {
             }
         }
+
         /// <summary>
         /// Provides example code for the Load(IXPathNavigable) method
         /// </summary>
@@ -192,7 +194,7 @@ namespace Argotic.Examples
                 settings.IgnoreComments = true;
                 settings.IgnoreWhitespace = true;
 
-                using(XmlReader reader = XmlReader.Create(stream, settings))
+                using (XmlReader reader = XmlReader.Create(stream, settings))
                 {
                     document.Load(reader);
 
@@ -237,7 +239,7 @@ namespace Argotic.Examples
 
             //  Modify document state using public properties and methods
 
-            using(Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
+            using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 document.Save(stream);
             }
@@ -257,7 +259,7 @@ namespace Argotic.Examples
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     document.Save(writer);
                 }

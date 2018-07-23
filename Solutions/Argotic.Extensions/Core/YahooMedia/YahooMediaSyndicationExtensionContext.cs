@@ -1,71 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="YahooMediaSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEntities
     {
         /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
         private IEnumerable<YahooMediaContent> extensionContents;
+
         /// <summary>
         /// Private member to hold the collection of media objects that are effectively the same content, yet different representations.
         /// </summary>
         private IEnumerable<YahooMediaGroup> extensionGroups;
+
         /// <summary>
         /// Private member to hold the permissible audiences for the syndication entity.
         /// </summary>
         private Collection<YahooMediaRating> mediaObjectRatings;
+
         /// <summary>
         /// Private member to hold the title of the syndication entity.
         /// </summary>
         private YahooMediaTextConstruct mediaObjectTitle;
+
         /// <summary>
         /// Private member to hold a short description of the syndication entity.
         /// </summary>
         private YahooMediaTextConstruct mediaObjectDescription;
+
         /// <summary>
         /// Private member to hold the relevant keywords that describe the syndication entity.
         /// </summary>
         private Collection<string> mediaObjectKeywords;
+
         /// <summary>
         /// Private member to hold the representative images for the syndication entity.
         /// </summary>
         private Collection<YahooMediaThumbnail> mediaObjectThumbnails;
+
         /// <summary>
         /// Private member to hold a taxonomy that gives an indication of the type of content for the syndication entity.
         /// </summary>
         private Collection<YahooMediaCategory> mediaObjectCategories;
+
         /// <summary>
         /// Private member to hold the hash digests for the syndication entity.
         /// </summary>
         private Collection<YahooMediaHash> mediaObjectHashes;
+
         /// <summary>
         /// Private member to hold a web browser media player console the syndication entity can be accessed through.
         /// </summary>
         private YahooMediaPlayer mediaObjectPlayer;
+
         /// <summary>
         /// Private member to hold the entities that contributed to the creation of the syndication entity.
         /// </summary>
         private Collection<YahooMediaCredit> mediaObjectCredits;
+
         /// <summary>
         /// Private member to hold the copyright information for the syndication entity.
         /// </summary>
         private YahooMediaCopyright mediaObjectCopyright;
+
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the syndication entity.
         /// </summary>
         private Collection<YahooMediaText> mediaObjectTextSeries;
+
         /// <summary>
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the syndication entity.
         /// </summary>
@@ -95,17 +107,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionContents == null)
+                if (this.extensionContents == null)
                 {
-                    extensionContents = new Collection<YahooMediaContent>();
+                    this.extensionContents = new Collection<YahooMediaContent>();
                 }
-                return extensionContents;
+
+                return this.extensionContents;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionContents = value;
+                this.extensionContents = value;
             }
         }
 
@@ -115,7 +128,7 @@ namespace Argotic.Extensions.Core
         /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaGroup"/> objects that represent effectively the same content, yet different representations.</value>
         /// <remarks>
         ///     <para>
-        ///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>. 
+        ///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>.
         ///         The sequence of <see cref="YahooMediaContent"/> objects within a <see cref="YahooMediaGroup"/> implies the order of presentation.
         ///     </para>
         ///     <para>
@@ -127,17 +140,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionGroups == null)
+                if (this.extensionGroups == null)
                 {
-                    extensionGroups = new Collection<YahooMediaGroup>();
+                    this.extensionGroups = new Collection<YahooMediaGroup>();
                 }
-                return extensionGroups;
+
+                return this.extensionGroups;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionGroups = value;
+                this.extensionGroups = value;
             }
         }
 
@@ -145,18 +159,19 @@ namespace Argotic.Extensions.Core
         /// Gets a taxonomy that gives an indication of the type of content for this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaCategory> Categories
         {
             get
             {
-                if (mediaObjectCategories == null)
+                if (this.mediaObjectCategories == null)
                 {
-                    mediaObjectCategories = new Collection<YahooMediaCategory>();
+                    this.mediaObjectCategories = new Collection<YahooMediaCategory>();
                 }
-                return mediaObjectCategories;
+
+                return this.mediaObjectCategories;
             }
         }
 
@@ -171,12 +186,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectCopyright;
+                return this.mediaObjectCopyright;
             }
 
             set
             {
-                mediaObjectCopyright = value;
+                this.mediaObjectCopyright = value;
             }
         }
 
@@ -184,22 +199,23 @@ namespace Argotic.Extensions.Core
         /// Gets the entities that contributed to the creation of this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
         ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
         /// </remarks>
         public Collection<YahooMediaCredit> Credits
         {
             get
             {
-                if (mediaObjectCredits == null)
+                if (this.mediaObjectCredits == null)
                 {
-                    mediaObjectCredits = new Collection<YahooMediaCredit>();
+                    this.mediaObjectCredits = new Collection<YahooMediaCredit>();
                 }
-                return mediaObjectCredits;
+
+                return this.mediaObjectCredits;
             }
         }
 
@@ -214,12 +230,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectDescription;
+                return this.mediaObjectDescription;
             }
 
             set
             {
-                mediaObjectDescription = value;
+                this.mediaObjectDescription = value;
             }
         }
 
@@ -227,7 +243,7 @@ namespace Argotic.Extensions.Core
         /// Gets the hash digests for this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -237,11 +253,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectHashes == null)
+                if (this.mediaObjectHashes == null)
                 {
-                    mediaObjectHashes = new Collection<YahooMediaHash>();
+                    this.mediaObjectHashes = new Collection<YahooMediaHash>();
                 }
-                return mediaObjectHashes;
+
+                return this.mediaObjectHashes;
             }
         }
 
@@ -249,7 +266,7 @@ namespace Argotic.Extensions.Core
         /// Gets the relevant keywords that describe this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -259,11 +276,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectKeywords == null)
+                if (this.mediaObjectKeywords == null)
                 {
-                    mediaObjectKeywords = new Collection<string>();
+                    this.mediaObjectKeywords = new Collection<string>();
                 }
-                return mediaObjectKeywords;
+
+                return this.mediaObjectKeywords;
             }
         }
 
@@ -275,12 +293,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectPlayer;
+                return this.mediaObjectPlayer;
             }
 
             set
             {
-                mediaObjectPlayer = value;
+                this.mediaObjectPlayer = value;
             }
         }
 
@@ -288,7 +306,7 @@ namespace Argotic.Extensions.Core
         /// Gets the permissible audiences for this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -298,11 +316,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectRatings == null)
+                if (this.mediaObjectRatings == null)
                 {
-                    mediaObjectRatings = new Collection<YahooMediaRating>();
+                    this.mediaObjectRatings = new Collection<YahooMediaRating>();
                 }
-                return mediaObjectRatings;
+
+                return this.mediaObjectRatings;
             }
         }
 
@@ -310,18 +329,19 @@ namespace Argotic.Extensions.Core
         /// Gets the restrictions to be placed on aggregators that are rendering this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaRestriction> Restrictions
         {
             get
             {
-                if (mediaObjectRestrictions == null)
+                if (this.mediaObjectRestrictions == null)
                 {
-                    mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
+                    this.mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
                 }
-                return mediaObjectRestrictions;
+
+                return this.mediaObjectRestrictions;
             }
         }
 
@@ -329,23 +349,24 @@ namespace Argotic.Extensions.Core
         /// Gets the text transcript, closed captioning, or lyrics for this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
         ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
         /// </remarks>
         public Collection<YahooMediaText> TextSeries
         {
             get
             {
-                if (mediaObjectTextSeries == null)
+                if (this.mediaObjectTextSeries == null)
                 {
-                    mediaObjectTextSeries = new Collection<YahooMediaText>();
+                    this.mediaObjectTextSeries = new Collection<YahooMediaText>();
                 }
-                return mediaObjectTextSeries;
+
+                return this.mediaObjectTextSeries;
             }
         }
 
@@ -353,7 +374,7 @@ namespace Argotic.Extensions.Core
         /// Gets the representative images for this syndication entity.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this syndication entity. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this syndication entity.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -363,11 +384,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectThumbnails == null)
+                if (this.mediaObjectThumbnails == null)
                 {
-                    mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
+                    this.mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
                 }
-                return mediaObjectThumbnails;
+
+                return this.mediaObjectThumbnails;
             }
         }
 
@@ -379,12 +401,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return mediaObjectTitle;
+                return this.mediaObjectTitle;
             }
 
             set
             {
-                mediaObjectTitle = value;
+                this.mediaObjectTitle = value;
             }
         }
 
@@ -398,23 +420,23 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNodeIterator contentIterator   = source.Select("media:content", manager);
-                XPathNodeIterator groupIterator     = source.Select("media:group", manager);
+                XPathNodeIterator contentIterator = source.Select("media:content", manager);
+                XPathNodeIterator groupIterator = source.Select("media:group", manager);
 
                 if (contentIterator != null && contentIterator.Count > 0)
                 {
                     while (contentIterator.MoveNext())
                     {
-                        YahooMediaContent content   = new YahooMediaContent();
+                        YahooMediaContent content = new YahooMediaContent();
                         if (content.Load(contentIterator.Current))
                         {
                             this.AddContent(content);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -423,11 +445,11 @@ namespace Argotic.Extensions.Core
                 {
                     while (groupIterator.MoveNext())
                     {
-                        YahooMediaGroup group   = new YahooMediaGroup();
+                        YahooMediaGroup group = new YahooMediaGroup();
                         if (group.Load(groupIterator.Current))
                         {
                             this.AddGroup(group);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -435,7 +457,7 @@ namespace Argotic.Extensions.Core
 
             if (YahooMediaUtility.FillCommonObjectEntities(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -453,7 +475,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            foreach(YahooMediaContent content in this.Contents)
+            foreach (YahooMediaContent content in this.Contents)
             {
                 content.WriteTo(writer);
             }
@@ -474,11 +496,11 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddContent(YahooMediaContent content)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(content, "content");
 
             ((Collection<YahooMediaContent>)this.Contents).Add(content);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -517,7 +539,7 @@ namespace Argotic.Extensions.Core
             if (((Collection<YahooMediaContent>)this.Contents).Contains(content))
             {
                 ((Collection<YahooMediaContent>)this.Contents).Remove(content);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;

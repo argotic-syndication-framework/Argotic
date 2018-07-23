@@ -1,33 +1,36 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="LiveJournalSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class LiveJournalSyndicationExtensionContext
     {
         /// <summary>
         /// Private member to hold the current music.
         /// </summary>
-        private string extensionMusic   = String.Empty;
+        private string extensionMusic = string.Empty;
+
         /// <summary>
         /// Private member to hold the current mood.
         /// </summary>
         private LiveJournalMood extensionMood;
+
         /// <summary>
-        /// Private member to hold the access level. 
+        /// Private member to hold the access level.
         /// </summary>
         private LiveJournalSecurity extensionSecurity;
+
         /// <summary>
         /// Private member to hold a value indicating if entry has been preformatted.
         /// </summary>
         private bool extensionIsPreformatted;
+
         /// <summary>
         /// Private member to hold the associated user picture.
         /// </summary>
@@ -41,7 +44,7 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the author has requested that the entry HTML be displayed without modification.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the author has requested that the entry HTML be displayed without modification.
         /// </summary>
         /// <value><b>true</b> if the author has requested that the entry HTML be displayed without modification; otherwise <b>false</b>.</value>
         /// <remarks>
@@ -51,12 +54,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionIsPreformatted;
+                return this.extensionIsPreformatted;
             }
 
             set
             {
-                extensionIsPreformatted = value;
+                this.extensionIsPreformatted = value;
             }
         }
 
@@ -68,12 +71,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionMood;
+                return this.extensionMood;
             }
 
             set
             {
-                extensionMood = value;
+                this.extensionMood = value;
             }
         }
 
@@ -88,18 +91,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionMusic;
+                return this.extensionMusic;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionMusic = String.Empty;
+                    this.extensionMusic = string.Empty;
                 }
                 else
                 {
-                    extensionMusic = value.Trim();
+                    this.extensionMusic = value.Trim();
                 }
             }
         }
@@ -109,19 +112,19 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>A <see cref="LiveJournalSecurity"/> object that represents the access level.</value>
         /// <remarks>
-        ///     If absent, the entry is assumed to be <see cref="LiveJournalSecurityType.Public">publicly</see> accessible. 
+        ///     If absent, the entry is assumed to be <see cref="LiveJournalSecurityType.Public">publicly</see> accessible.
         ///     All feeds requested without authentication will <b>only</b> contain public entries.
         /// </remarks>
         public LiveJournalSecurity Security
         {
             get
             {
-                return extensionSecurity;
+                return this.extensionSecurity;
             }
 
             set
             {
-                extensionSecurity = value;
+                this.extensionSecurity = value;
             }
         }
 
@@ -136,14 +139,15 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionUserPicture;
+                return this.extensionUserPicture;
             }
 
             set
             {
-                extensionUserPicture = value;
+                this.extensionUserPicture = value;
             }
         }
+
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -154,57 +158,57 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator musicNavigator           = source.SelectSingleNode("lj:music", manager);
-                XPathNavigator moodNavigator            = source.SelectSingleNode("lj:mood", manager);
-                XPathNavigator securityNavigator        = source.SelectSingleNode("lj:security", manager);
-                XPathNavigator userPictureNavigator     = source.SelectSingleNode("lj:userpic", manager);
-                XPathNavigator preformattedNavigator    = source.SelectSingleNode("lj:preformatted", manager);
+                XPathNavigator musicNavigator = source.SelectSingleNode("lj:music", manager);
+                XPathNavigator moodNavigator = source.SelectSingleNode("lj:mood", manager);
+                XPathNavigator securityNavigator = source.SelectSingleNode("lj:security", manager);
+                XPathNavigator userPictureNavigator = source.SelectSingleNode("lj:userpic", manager);
+                XPathNavigator preformattedNavigator = source.SelectSingleNode("lj:preformatted", manager);
 
-                if (musicNavigator != null && !String.IsNullOrEmpty(musicNavigator.Value))
+                if (musicNavigator != null && !string.IsNullOrEmpty(musicNavigator.Value))
                 {
-                    this.Music  = musicNavigator.Value;
-                    wasLoaded   = true;
+                    this.Music = musicNavigator.Value;
+                    wasLoaded = true;
                 }
 
                 if (moodNavigator != null)
                 {
-                    LiveJournalMood mood    = new LiveJournalMood();
+                    LiveJournalMood mood = new LiveJournalMood();
                     if (mood.Load(moodNavigator))
                     {
-                        this.Mood   = mood;
-                        wasLoaded   = true;
+                        this.Mood = mood;
+                        wasLoaded = true;
                     }
                 }
 
                 if (securityNavigator != null)
                 {
-                    LiveJournalSecurity security    = new LiveJournalSecurity();
+                    LiveJournalSecurity security = new LiveJournalSecurity();
                     if (security.Load(securityNavigator))
                     {
-                        this.Security   = security;
-                        wasLoaded       = true;
+                        this.Security = security;
+                        wasLoaded = true;
                     }
                 }
 
                 if (userPictureNavigator != null)
                 {
-                    LiveJournalUserPicture userPicture  = new LiveJournalUserPicture();
+                    LiveJournalUserPicture userPicture = new LiveJournalUserPicture();
                     if (userPicture.Load(userPictureNavigator))
                     {
-                        this.UserPicture    = userPicture;
-                        wasLoaded           = true;
+                        this.UserPicture = userPicture;
+                        wasLoaded = true;
                     }
                 }
 
                 if (preformattedNavigator != null)
                 {
                     this.IsPreformatted = true;
-                    wasLoaded           = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -223,14 +227,14 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if (!String.IsNullOrEmpty(this.Music))
+            if (!string.IsNullOrEmpty(this.Music))
             {
                 writer.WriteStartElement("music", xmlNamespace);
                 writer.WriteCData(this.Music);
                 writer.WriteEndElement();
             }
 
-            if(this.Mood != null)
+            if (this.Mood != null)
             {
                 this.Mood.WriteTo(writer);
             }
@@ -242,7 +246,7 @@ namespace Argotic.Extensions.Core
 
             if (this.IsPreformatted)
             {
-                writer.WriteElementString("preformatted", xmlNamespace, String.Empty);
+                writer.WriteElementString("preformatted", xmlNamespace, string.Empty);
             }
         }
     }

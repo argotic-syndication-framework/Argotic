@@ -1,26 +1,27 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="PheedSyndicationExtension"/>.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
-    [Serializable()]
+    [Serializable]
     public class PheedSyndicationExtensionContext
     {
         /// <summary>
         /// Private member to hold a thumbnail sized version of the photograph.
         /// </summary>
         private Uri extensionThumbnail;
+
         /// <summary>
         /// Private member to hold a larger or original version of the photograph.
         /// </summary>
         private Uri extensionImageSource;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
         /// </summary>
@@ -37,8 +38,8 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is a null reference (Nothing in Visual Basic).</exception>
         public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
         {
-            this.Source     = source;
-            this.Thumbnail  = thumbnail;
+            this.Source = source;
+            this.Thumbnail = thumbnail;
         }
 
         /// <summary>
@@ -50,13 +51,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionImageSource;
+                return this.extensionImageSource;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionImageSource = value;
+                this.extensionImageSource = value;
             }
         }
 
@@ -72,13 +73,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionThumbnail;
+                return this.extensionThumbnail;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionThumbnail = value;
+                this.extensionThumbnail = value;
             }
         }
 
@@ -92,13 +93,13 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
             if (source.HasChildren)
             {
-                XPathNavigator thumbnailNavigator   = source.SelectSingleNode("photo:thumbnail", manager);
+                XPathNavigator thumbnailNavigator = source.SelectSingleNode("photo:thumbnail", manager);
                 XPathNavigator imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
 
                 if (thumbnailNavigator != null)
@@ -106,8 +107,8 @@ namespace Argotic.Extensions.Core
                     Uri thumbnail;
                     if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out thumbnail))
                     {
-                        this.Thumbnail  = thumbnail;
-                        wasLoaded       = true;
+                        this.Thumbnail = thumbnail;
+                        wasLoaded = true;
                     }
                 }
 
@@ -117,7 +118,7 @@ namespace Argotic.Extensions.Core
                     if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out original))
                     {
                         this.Source = original;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -137,8 +138,8 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : String.Empty);
-            writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : String.Empty);
+            writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : string.Empty);
+            writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : string.Empty);
         }
     }
 }

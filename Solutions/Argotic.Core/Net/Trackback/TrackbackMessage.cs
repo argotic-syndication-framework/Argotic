@@ -5,6 +5,7 @@
     using System.IO;
     using System.Text;
     using System.Web;
+
     using Argotic.Common;
 
     /// <summary>
@@ -18,8 +19,11 @@
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+    [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Trackback")]
     public class TrackbackMessage : IComparable
     {
         /// <summary>
@@ -28,24 +32,24 @@
         private Encoding messageEncoding = Encoding.UTF8;
 
         /// <summary>
-        /// Private member to hold the title of the entry.
-        /// </summary>
-        private string messageTitle = string.Empty;
-
-        /// <summary>
         /// Private member to hold an excerpt of the entry.
         /// </summary>
         private string messageExcerpt = string.Empty;
 
         /// <summary>
-        /// Private member to hold the name of the weblog to which the entry was posted.
+        /// Private member to hold the title of the entry.
         /// </summary>
-        private string messageWeblogName = string.Empty;
+        private string messageTitle = string.Empty;
 
         /// <summary>
         /// Private member to hold the permalink for the entry.
         /// </summary>
         private Uri messageUrl;
+
+        /// <summary>
+        /// Private member to hold the name of the weblog to which the entry was posted.
+        /// </summary>
+        private string messageWeblogName = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackMessage"/> class.
@@ -61,8 +65,11 @@
         /// <remarks>
         ///     The <paramref name="permalink"/> should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "permalink")]
+        /// <exception cref="ArgumentNullException">The <paramref name="permalink"/> is a null reference (Nothing in Visual Basic).</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "permalink")]
         public TrackbackMessage(Uri permalink)
         {
             this.Permalink = permalink;
@@ -77,13 +84,13 @@
         {
             get
             {
-                return messageEncoding;
+                return this.messageEncoding;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                messageEncoding = value;
+                this.messageEncoding = value;
             }
         }
 
@@ -98,18 +105,18 @@
         {
             get
             {
-                return messageExcerpt;
+                return this.messageExcerpt;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    messageExcerpt = string.Empty;
+                    this.messageExcerpt = string.Empty;
                 }
                 else
                 {
-                    messageExcerpt = value.Trim();
+                    this.messageExcerpt = value.Trim();
                 }
             }
         }
@@ -122,18 +129,21 @@
         ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Permalink")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Permalink")]
         public Uri Permalink
         {
             get
             {
-                return messageUrl;
+                return this.messageUrl;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                messageUrl = value;
+                this.messageUrl = value;
             }
         }
 
@@ -148,18 +158,18 @@
         {
             get
             {
-                return messageTitle;
+                return this.messageTitle;
             }
 
             set
             {
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    messageTitle = string.Empty;
+                    this.messageTitle = string.Empty;
                 }
                 else
                 {
-                    messageTitle = value.Trim();
+                    this.messageTitle = value.Trim();
                 }
             }
         }
@@ -175,20 +185,162 @@
         {
             get
             {
-                return messageWeblogName;
+                return this.messageWeblogName;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    messageWeblogName = string.Empty;
+                    this.messageWeblogName = string.Empty;
                 }
                 else
                 {
-                    messageWeblogName = value.Trim();
+                    this.messageWeblogName = value.Trim();
                 }
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(TrackbackMessage first, TrackbackMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(TrackbackMessage first, TrackbackMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(TrackbackMessage first, TrackbackMessage second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(TrackbackMessage first, TrackbackMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            TrackbackMessage value = obj as TrackbackMessage;
+
+            if (value != null)
+            {
+                int result = string.Compare(
+                    this.Encoding.WebName,
+                    value.Encoding.WebName,
+                    StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Permalink,
+                             value.Permalink,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is TrackbackMessage))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -197,7 +349,7 @@
         /// <param name="source">The <see cref="NameValueCollection"/> to extract information from.</param>
         /// <returns><b>true</b> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
         /// <remarks>
-        ///     <para>This method expects the supplied <paramref name="source"/> to be the <see cref="HttpRequest.Params">HTTP Request Parameters</see> or a similar subset.</para>
+        ///     <para>This method expects the supplied <paramref name="source"/> to be the HTTP Request Parameters or a similar subset.</para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(NameValueCollection source)
@@ -250,33 +402,6 @@
         }
 
         /// <summary>
-        /// Saves the current <see cref="TrackbackMessage"/> to the specified <see cref="StreamWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="StreamWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(StreamWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-
-            writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
-
-            if(!string.IsNullOrEmpty(this.Title))
-            {
-                writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
-            }
-
-            if (!string.IsNullOrEmpty(this.WeblogName))
-            {
-                writer.Write(string.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
-            }
-
-            if (!string.IsNullOrEmpty(this.Excerpt))
-            {
-                writer.Write(string.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
-            }
-        }
-
-        /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
@@ -285,7 +410,7 @@
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 using (StreamWriter writer = new StreamWriter(stream, this.Encoding))
                 {
@@ -302,131 +427,31 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="TrackbackMessage"/> to the specified <see cref="StreamWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="StreamWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(StreamWriter writer)
         {
-            if (obj == null)
+            Guard.ArgumentNotNull(writer, "writer");
+
+            writer.Write(
+                string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
+
+            if (!string.IsNullOrEmpty(this.Title))
             {
-                return 1;
+                writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
             }
 
-            TrackbackMessage value = obj as TrackbackMessage;
-
-            if (value != null)
+            if (!string.IsNullOrEmpty(this.WeblogName))
             {
-                int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is TrackbackMessage))
-            {
-                return false;
+                writer.Write(string.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
             }
 
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(TrackbackMessage first, TrackbackMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (!string.IsNullOrEmpty(this.Excerpt))
             {
-                return true;
+                writer.Write(string.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(TrackbackMessage first, TrackbackMessage second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(TrackbackMessage first, TrackbackMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(TrackbackMessage first, TrackbackMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

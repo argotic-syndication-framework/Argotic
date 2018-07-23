@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Reflection;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
@@ -14,25 +16,19 @@
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the BlogMLPost class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs" 
-    ///             region="BlogMLPost" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
+    ///             region="BlogMLPost"
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
-        /// Private member to hold the title of the web log entity.
+        /// Private member to hold a value indicating the web log entity approval status.
         /// </summary>
-        private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
-
-        /// <summary>
-        /// Private member to hold a unique identifier for the  web log entity.
-        /// </summary>
-        private string commonObjectBaseId = string.Empty;
+        private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
 
         /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was created.
@@ -40,14 +36,19 @@
         private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
 
         /// <summary>
+        /// Private member to hold a unique identifier for the  web log entity.
+        /// </summary>
+        private string commonObjectBaseId = string.Empty;
+
+        /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was last modified.
         /// </summary>
         private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
 
         /// <summary>
-        /// Private member to hold a value indicating the web log entity approval status.
+        /// Private member to hold the title of the web log entity.
         /// </summary>
-        private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
+        private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
 
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
@@ -55,19 +56,9 @@
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
-        /// Private member to hold the textual content of the post.
+        /// Private member to hold attachments for the post.
         /// </summary>
-        private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
-
-        /// <summary>
-        /// Private member to hold the name of the post.
-        /// </summary>
-        private BlogMLTextConstruct postName;
-
-        /// <summary>
-        /// Private member to hold the excerpt of the post.
-        /// </summary>
-        private BlogMLTextConstruct postExcerpt;
+        private Collection<BlogMLAttachment> postAttachments;
 
         /// <summary>
         /// Private member to hold references to authors of the post.
@@ -85,24 +76,34 @@
         private Collection<BlogMLComment> postComments;
 
         /// <summary>
+        /// Private member to hold the textual content of the post.
+        /// </summary>
+        private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
+
+        /// <summary>
+        /// Private member to hold the excerpt of the post.
+        /// </summary>
+        private BlogMLTextConstruct postExcerpt;
+
+        /// <summary>
+        /// Private member to hold the name of the post.
+        /// </summary>
+        private BlogMLTextConstruct postName;
+
+        /// <summary>
         /// Private member to hold trackbacks for the post.
         /// </summary>
         private Collection<BlogMLTrackback> postTrackbacks;
 
         /// <summary>
-        /// Private member to hold attachments for the post.
+        /// Private member to hold the type of web log entry the post represents.
         /// </summary>
-        private Collection<BlogMLAttachment> postAttachments;
+        private BlogMLPostType postType = BlogMLPostType.None;
 
         /// <summary>
         /// Private member to hold the URL of the post.
         /// </summary>
         private Uri postUrl;
-
-        /// <summary>
-        /// Private member to hold the type of web log entry the post represents.
-        /// </summary>
-        private BlogMLPostType postType = BlogMLPostType.None;
 
         /// <summary>
         /// Private member to hold views of the post.
@@ -120,19 +121,112 @@
         /// Gets or sets the approval status of this web log entity.
         /// </summary>
         /// <value>
-        ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available. 
+        ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
         ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
         /// </value>
         public BlogMLApprovalStatus ApprovalStatus
         {
             get
             {
-                return commonObjectBaseApprovalStatus;
+                return this.commonObjectBaseApprovalStatus;
             }
 
             set
             {
-                commonObjectBaseApprovalStatus = value;
+                this.commonObjectBaseApprovalStatus = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the attachments for this post.
+        /// </summary>
+        /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLAttachment"/> objects that represent the attachments for this post.</value>
+        public Collection<BlogMLAttachment> Attachments
+        {
+            get
+            {
+                if (this.postAttachments == null)
+                {
+                    this.postAttachments = new Collection<BlogMLAttachment>();
+                }
+
+                return this.postAttachments;
+            }
+        }
+
+        /// <summary>
+        /// Gets the authors of this post.
+        /// </summary>
+        /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the authors of this post.</value>
+        /// <remarks>
+        ///     The authors referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Authors"/> collection.
+        /// </remarks>
+        public Collection<string> Authors
+        {
+            get
+            {
+                if (this.postAuthors == null)
+                {
+                    this.postAuthors = new Collection<string>();
+                }
+
+                return this.postAuthors;
+            }
+        }
+
+        /// <summary>
+        /// Gets the categories for this post.
+        /// </summary>
+        /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the categories for this post.</value>
+        /// <remarks>
+        ///     The categories referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Categories"/> collection.
+        /// </remarks>
+        public Collection<string> Categories
+        {
+            get
+            {
+                if (this.postCategories == null)
+                {
+                    this.postCategories = new Collection<string>();
+                }
+
+                return this.postCategories;
+            }
+        }
+
+        /// <summary>
+        /// Gets the comments for this post.
+        /// </summary>
+        /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLComment"/> objects that represent the comments for this post.</value>
+        public Collection<BlogMLComment> Comments
+        {
+            get
+            {
+                if (this.postComments == null)
+                {
+                    this.postComments = new Collection<BlogMLComment>();
+                }
+
+                return this.postComments;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the content of this post.
+        /// </summary>
+        /// <value>A <see cref="BlogMLTextConstruct"/> that represents the content of this post.</value>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public BlogMLTextConstruct Content
+        {
+            get
+            {
+                return this.postContent;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.postContent = value;
             }
         }
 
@@ -140,7 +234,7 @@
         /// Gets or sets a date-time indicating when this web log entity was created.
         /// </summary>
         /// <value>
-        ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity. 
+        ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
         ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
         /// </value>
         /// <remarks>
@@ -150,78 +244,29 @@
         {
             get
             {
-                return commonObjectBaseCreatedOn;
+                return this.commonObjectBaseCreatedOn;
             }
 
             set
             {
-                commonObjectBaseCreatedOn = value;
+                this.commonObjectBaseCreatedOn = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets the unique identifier of this web log entity.
+        /// Gets or sets the excerpt of this post.
         /// </summary>
-        /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
-        public string Id
+        /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
+        public BlogMLTextConstruct Excerpt
         {
             get
             {
-                return commonObjectBaseId;
+                return this.postExcerpt;
             }
 
             set
             {
-                if(string.IsNullOrEmpty(value))
-                {
-                    commonObjectBaseId = string.Empty;
-                }
-                else
-                {
-                    commonObjectBaseId = value.Trim();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a date-time indicating when this web log entity was last modified.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant. 
-        ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
-        /// </value>
-        /// <remarks>
-        ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
-        /// </remarks>
-        public DateTime LastModifiedOn
-        {
-            get
-            {
-                return commonObjectBaseLastModifiedOn;
-            }
-
-            set
-            {
-                commonObjectBaseLastModifiedOn = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the title of this web log entity.
-        /// </summary>
-        /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of this web log entity.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public BlogMLTextConstruct Title
-        {
-            get
-            {
-                return commonObjectBaseTitle;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                commonObjectBaseTitle = value;
+                this.postExcerpt = value;
             }
         }
 
@@ -237,145 +282,23 @@
         {
             get
             {
-                if (objectSyndicationExtensions == null)
+                if (this.objectSyndicationExtensions == null)
                 {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
 
-                return objectSyndicationExtensions;
+                return this.objectSyndicationExtensions;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
+                this.objectSyndicationExtensions = value;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-            }
-        }
-
-        /// <summary>
-        /// Gets the attachments for this post.
-        /// </summary>
-        /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLAttachment"/> objects that represent the attachments for this post.</value>
-        public Collection<BlogMLAttachment> Attachments
-        {
-            get
-            {
-                if (postAttachments == null)
-                {
-                    postAttachments = new Collection<BlogMLAttachment>();
-                }
-
-                return postAttachments;
-            }
-        }
-
-        /// <summary>
-        /// Gets the authors of this post.
-        /// </summary>
-        /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the authors of this post.</value>
-        /// <remarks>
-        ///     The authors referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Authors"/> collection.
-        /// </remarks>
-        public Collection<string> Authors
-        {
-            get
-            {
-                if (postAuthors == null)
-                {
-                    postAuthors = new Collection<string>();
-                }
-
-                return postAuthors;
-            }
-        }
-
-        /// <summary>
-        /// Gets the categories for this post.
-        /// </summary>
-        /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the categories for this post.</value>
-        /// <remarks>
-        ///     The categories referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Categories"/> collection.
-        /// </remarks>
-        public Collection<string> Categories
-        {
-            get
-            {
-                if (postCategories == null)
-                {
-                    postCategories = new Collection<string>();
-                }
-
-                return postCategories;
-            }
-        }
-
-        /// <summary>
-        /// Gets the comments for this post.
-        /// </summary>
-        /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLComment"/> objects that represent the comments for this post.</value>
-        public Collection<BlogMLComment> Comments
-        {
-            get
-            {
-                if (postComments == null)
-                {
-                    postComments = new Collection<BlogMLComment>();
-                }
-
-                return postComments;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the content of this post.
-        /// </summary>
-        /// <value>A <see cref="BlogMLTextConstruct"/> that represents the content of this post.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public BlogMLTextConstruct Content
-        {
-            get
-            {
-                return postContent;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                postContent = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the excerpt of this post.
-        /// </summary>
-        /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
-        public BlogMLTextConstruct Excerpt
-        {
-            get
-            {
-                return postExcerpt;
-            }
-
-            set
-            {
-                postExcerpt = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating if this post has an excerpt.
+        /// Gets a value indicating whether gets a value indicating if this post has an excerpt.
         /// </summary>
         /// <value><b>true</b> if this post's <see cref="Excerpt"/> is not null; otherwise <b>false</b>.</value>
         public bool HasExcerpt
@@ -387,6 +310,65 @@
         }
 
         /// <summary>
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// </summary>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        public bool HasExtensions
+        {
+            get
+            {
+                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the unique identifier of this web log entity.
+        /// </summary>
+        /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
+        public string Id
+        {
+            get
+            {
+                return this.commonObjectBaseId;
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    this.commonObjectBaseId = string.Empty;
+                }
+                else
+                {
+                    this.commonObjectBaseId = value.Trim();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a date-time indicating when this web log entity was last modified.
+        /// </summary>
+        /// <value>
+        ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
+        ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
+        /// </value>
+        /// <remarks>
+        ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+        /// </remarks>
+        public DateTime LastModifiedOn
+        {
+            get
+            {
+                return this.commonObjectBaseLastModifiedOn;
+            }
+
+            set
+            {
+                this.commonObjectBaseLastModifiedOn = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the name of this post.
         /// </summary>
         /// <value>A <see cref="BlogMLTextConstruct"/> that represents the name of this post.</value>
@@ -394,12 +376,12 @@
         {
             get
             {
-                return postName;
+                return this.postName;
             }
 
             set
             {
-                postName = value;
+                this.postName = value;
             }
         }
 
@@ -407,19 +389,38 @@
         /// Gets or sets the type of web log entry this post represents.
         /// </summary>
         /// <value>
-        ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents. 
+        ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents.
         ///     The default value is <see cref="BlogMLPostType.None"/>.
         /// </value>
         public BlogMLPostType PostType
         {
             get
             {
-                return postType;
+                return this.postType;
             }
 
             set
             {
-                postType = value;
+                this.postType = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the title of this web log entity.
+        /// </summary>
+        /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of this web log entity.</value>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public BlogMLTextConstruct Title
+        {
+            get
+            {
+                return this.commonObjectBaseTitle;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.commonObjectBaseTitle = value;
             }
         }
 
@@ -427,17 +428,20 @@
         /// Gets the trackbacks for this post.
         /// </summary>
         /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLTrackback"/> objects that represent the trackbacks for this post.</value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackbacks")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Trackbacks")]
         public Collection<BlogMLTrackback> Trackbacks
         {
             get
             {
-                if (postTrackbacks == null)
+                if (this.postTrackbacks == null)
                 {
-                    postTrackbacks = new Collection<BlogMLTrackback>();
+                    this.postTrackbacks = new Collection<BlogMLTrackback>();
                 }
 
-                return postTrackbacks;
+                return this.postTrackbacks;
             }
         }
 
@@ -449,12 +453,12 @@
         {
             get
             {
-                return postUrl;
+                return this.postUrl;
             }
 
             set
             {
-                postUrl = value;
+                this.postUrl = value;
             }
         }
 
@@ -466,20 +470,91 @@
         {
             get
             {
-                return postViews;
+                return this.postViews;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    postViews = string.Empty;
+                    this.postViews = string.Empty;
                 }
                 else
                 {
-                    postViews = value.Trim();
+                    this.postViews = value.Trim();
                 }
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(BlogMLPost first, BlogMLPost second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(BlogMLPost first, BlogMLPost second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(BlogMLPost first, BlogMLPost second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(BlogMLPost first, BlogMLPost second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -665,16 +740,16 @@
         /// <returns>The post type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeAsString method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs" 
-        ///             region="PostTypeAsString(BlogMLPostType type)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
+        ///             region="PostTypeAsString(BlogMLPostType type)"
         ///         />
         ///     </code>
         /// </example>
         public static string PostTypeAsString(BlogMLPostType type)
         {
             string name = string.Empty;
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLPostType))
                 {
@@ -682,11 +757,14 @@
 
                     if (postType == type)
                     {
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(
+                            typeof(EnumerationMetadataAttribute),
+                            false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata =
+                                customAttributes[0] as EnumerationMetadataAttribute;
 
                             name = enumerationMetadata.AlternateValue;
                             break;
@@ -708,9 +786,9 @@
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeByName method.">
-        ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs" 
-        ///             region="PostTypeByName(string name)" 
+        ///         <code
+        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
+        ///             region="PostTypeByName(string name)"
         ///         />
         ///     </code>
         /// </example>
@@ -718,18 +796,22 @@
         {
             BlogMLPostType postType = BlogMLPostType.None;
             Guard.ArgumentNotNullOrEmptyString(name, "name");
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLPostType))
                 {
                     BlogMLPostType type = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(
+                        typeof(EnumerationMetadataAttribute),
+                        false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                        EnumerationMetadataAttribute enumerationMetadata =
+                            customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase)
+                            == 0)
                         {
                             postType = type;
                             break;
@@ -758,6 +840,94 @@
         }
 
         /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            BlogMLPost value = obj as BlogMLPost;
+
+            if (value != null)
+            {
+                int result = CompareSequence(this.Attachments, value.Attachments);
+                result = result | ComparisonUtility.CompareSequence(
+                             this.Authors,
+                             value.Authors,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(
+                             this.Categories,
+                             value.Categories,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | CompareSequence(this.Comments, value.Comments);
+                result = result | this.Content.CompareTo(value.Content);
+
+                if (this.Excerpt != null)
+                {
+                    result = result | this.Excerpt.CompareTo(value.Excerpt);
+                }
+                else if (value.Excerpt != null)
+                {
+                    result = result | -1;
+                }
+
+                if (this.Name != null)
+                {
+                    result = result | this.Name.CompareTo(value.Name);
+                }
+                else if (value.Name != null)
+                {
+                    result = result | -1;
+                }
+
+                result = result | this.PostType.CompareTo(value.PostType);
+                result = result | CompareSequence(this.Trackbacks, value.Trackbacks);
+                result = result | Uri.Compare(
+                             this.Url,
+                             value.Url,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
+
+                result = result | BlogMLUtility.CompareCommonObjects(this, value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is BlogMLPost))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
         /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -765,8 +935,8 @@
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -778,25 +948,14 @@
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
-            }
+            char[] charArray = this.ToString().ToCharArray();
 
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -818,7 +977,7 @@
                 wasLoaded = true;
             }
 
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
                 string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
                 string typeAttribute = source.GetAttribute("type", string.Empty);
@@ -836,7 +995,7 @@
 
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
-                    BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
+                    BlogMLPostType type = PostTypeByName(typeAttribute);
                     if (type != BlogMLPostType.None)
                     {
                         this.PostType = type;
@@ -887,7 +1046,7 @@
                     }
                 }
 
-                if (BlogMLPost.FillPostCollections(this, source, manager))
+                if (FillPostCollections(this, source, manager))
                 {
                     wasLoaded = true;
                 }
@@ -918,7 +1077,7 @@
                 wasLoaded = true;
             }
 
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
                 string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
                 string typeAttribute = source.GetAttribute("type", string.Empty);
@@ -936,7 +1095,7 @@
 
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
-                    BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
+                    BlogMLPostType type = PostTypeByName(typeAttribute);
                     if (type != BlogMLPostType.None)
                     {
                         this.PostType = type;
@@ -987,7 +1146,7 @@
                     }
                 }
 
-                if (BlogMLPost.FillPostCollections(this, source, manager, settings))
+                if (FillPostCollections(this, source, manager, settings))
                 {
                     wasLoaded = true;
                 }
@@ -997,6 +1156,58 @@
             adapter.Fill(this);
 
             return wasLoaded;
+        }
+
+        /// <summary>
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// </summary>
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
+        {
+            bool wasRemoved = false;
+            Guard.ArgumentNotNull(extension, "extension");
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
+            {
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
+            }
+
+            return wasRemoved;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
@@ -1010,14 +1221,14 @@
             writer.WriteStartElement("post", BlogMLUtility.BlogMLNamespace);
             BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-            if(this.Url != null)
+            if (this.Url != null)
             {
                 writer.WriteAttributeString("post-url", this.Url.ToString());
             }
 
             if (this.PostType != BlogMLPostType.None)
             {
-                writer.WriteAttributeString("type", BlogMLPost.PostTypeAsString(this.PostType));
+                writer.WriteAttributeString("type", PostTypeAsString(this.PostType));
             }
 
             writer.WriteAttributeString("hasexcerpt", this.HasExcerpt ? "true" : "false");
@@ -1031,7 +1242,7 @@
 
             this.Content.WriteTo(writer, "content");
 
-            if(this.Name != null)
+            if (this.Name != null)
             {
                 this.Name.WriteTo(writer, "post-name");
             }
@@ -1041,10 +1252,10 @@
                 this.Excerpt.WriteTo(writer, "excerpt");
             }
 
-            if(this.Categories.Count > 0)
+            if (this.Categories.Count > 0)
             {
                 writer.WriteStartElement("categories", BlogMLUtility.BlogMLNamespace);
-                foreach(string category in this.Categories)
+                foreach (string category in this.Categories)
                 {
                     writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
                     writer.WriteAttributeString("ref", category);
@@ -1211,7 +1422,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static bool FillPostCollections(
+            BlogMLPost post,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
             Guard.ArgumentNotNull(post, "post");
@@ -1290,189 +1505,6 @@
             }
 
             return wasLoaded;
-        }
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            BlogMLPost value = obj as BlogMLPost;
-
-            if (value != null)
-            {
-                int result = BlogMLPost.CompareSequence(this.Attachments, value.Attachments);
-                result = result | ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
-                result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-                result = result | BlogMLPost.CompareSequence(this.Comments, value.Comments);
-                result = result | this.Content.CompareTo(value.Content);
-
-                if (this.Excerpt != null)
-                {
-                    result = result | this.Excerpt.CompareTo(value.Excerpt);
-                }
-                else if (value.Excerpt != null)
-                {
-                    result = result | -1;
-                }
-
-                if (this.Name != null)
-                {
-                    result = result | this.Name.CompareTo(value.Name);
-                }
-                else if (value.Name != null)
-                {
-                    result = result | -1;
-                }
-
-                result = result | this.PostType.CompareTo(value.PostType);
-                result = result | BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
-                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
-
-                result = result | BlogMLUtility.CompareCommonObjects(this, value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is BlogMLPost))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(BlogMLPost first, BlogMLPost second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(BlogMLPost first, BlogMLPost second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(BlogMLPost first, BlogMLPost second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(BlogMLPost first, BlogMLPost second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

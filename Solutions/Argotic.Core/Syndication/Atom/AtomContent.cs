@@ -7,6 +7,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
@@ -71,7 +72,7 @@
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
         /// <summary>
@@ -85,16 +86,6 @@
         private CultureInfo commonObjectLanguage;
 
         /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-        /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
-        /// <summary>
-        /// Private member to hold the local content of the entry.
-        /// </summary>
-        private string contentValue = string.Empty;
-
-        /// <summary>
         /// Private member to hold a value indicating the entity encoding of the content.
         /// </summary>
         private string contentMediaType = string.Empty;
@@ -103,6 +94,16 @@
         /// Private member to hold an IRI that identifies the remote location of the content.
         /// </summary>
         private Uri contentSource;
+
+        /// <summary>
+        /// Private member to hold the local content of the entry.
+        /// </summary>
+        private string contentValue = string.Empty;
+
+        /// <summary>
+        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
+        /// </summary>
+        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomContent"/> class.
@@ -151,7 +152,8 @@
         ///         </list>
         ///     </para>
         /// </remarks>
-        public AtomContent(string content, string encoding) : this(content)
+        public AtomContent(string content, string encoding)
+            : this(content)
         {
             this.ContentType = encoding;
         }
@@ -169,73 +171,12 @@
         {
             get
             {
-                return commonObjectBaseUri;
+                return this.commonObjectBaseUri;
             }
 
             set
             {
-                commonObjectBaseUri = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the natural or formal language in which the content is written.
-        /// </summary>
-        /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
-        /// <remarks>
-        ///     <para>
-        ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
-        ///     </para>
-        /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return commonObjectLanguage;
-            }
-
-            set
-            {
-                commonObjectLanguage = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the syndication extensions applied to this syndication entity.
-        /// </summary>
-        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-        /// <remarks>
-        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public IEnumerable<ISyndicationExtension> Extensions
-        {
-            get
-            {
-                if (objectSyndicationExtensions == null)
-                {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return objectSyndicationExtensions;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+                this.commonObjectBaseUri = value;
             }
         }
 
@@ -250,18 +191,18 @@
         {
             get
             {
-                return contentValue;
+                return this.contentValue;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    contentValue = string.Empty;
+                    this.contentValue = string.Empty;
                 }
                 else
                 {
-                    contentValue = value.Trim();
+                    this.contentValue = value.Trim();
                 }
             }
         }
@@ -324,19 +265,80 @@
         {
             get
             {
-                return contentMediaType;
+                return this.contentMediaType;
             }
 
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    contentMediaType = string.Empty;
+                    this.contentMediaType = string.Empty;
                 }
                 else
                 {
-                    contentMediaType = value.Trim();
+                    this.contentMediaType = value.Trim();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the syndication extensions applied to this syndication entity.
+        /// </summary>
+        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+        /// <remarks>
+        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public IEnumerable<ISyndicationExtension> Extensions
+        {
+            get
+            {
+                if (this.objectSyndicationExtensions == null)
+                {
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                }
+
+                return this.objectSyndicationExtensions;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.objectSyndicationExtensions = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// </summary>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        public bool HasExtensions
+        {
+            get
+            {
+                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the natural or formal language in which the content is written.
+        /// </summary>
+        /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+        /// <remarks>
+        ///     <para>
+        ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+        ///     </para>
+        /// </remarks>
+        public CultureInfo Language
+        {
+            get
+            {
+                return this.commonObjectLanguage;
+            }
+
+            set
+            {
+                this.commonObjectLanguage = value;
             }
         }
 
@@ -362,13 +364,84 @@
         {
             get
             {
-                return contentSource;
+                return this.contentSource;
             }
 
             set
             {
-                contentSource = value;
+                this.contentSource = value;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(AtomContent first, AtomContent second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(AtomContent first, AtomContent second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(AtomContent first, AtomContent second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(AtomContent first, AtomContent second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -387,6 +460,66 @@
             wasAdded = true;
 
             return wasAdded;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            AtomContent value = obj as AtomContent;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(
+                             this.ContentType,
+                             value.ContentType,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Source,
+                             value.Source,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is AtomContent))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -411,27 +544,14 @@
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
+            char[] charArray = this.ToString().ToCharArray();
 
-            Guard.ArgumentNotNull(extension, "extension");
-
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
-            }
-
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -523,6 +643,60 @@
         }
 
         /// <summary>
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// </summary>
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
+        {
+            bool wasRemoved = false;
+
+            Guard.ArgumentNotNull(extension, "extension");
+
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
+            {
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
+            }
+
+            return wasRemoved;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomContent"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomContent"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
         /// Saves the current <see cref="AtomContent"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
@@ -534,7 +708,7 @@
             writer.WriteStartElement("content", AtomUtility.AtomNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-            if(!string.IsNullOrEmpty(this.ContentType))
+            if (!string.IsNullOrEmpty(this.ContentType))
             {
                 writer.WriteAttributeString("type", this.ContentType);
             }
@@ -544,12 +718,13 @@
                 writer.WriteAttributeString("src", this.Source.ToString());
             }
 
-            if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0 && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
+            if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0
+                && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
             {
                 writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
             }
 
-            if(!string.IsNullOrEmpty(this.Content))
+            if (!string.IsNullOrEmpty(this.Content))
             {
                 if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -566,164 +741,6 @@
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="AtomContent"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomContent"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            AtomContent value = obj as AtomContent;
-
-            if (value != null)
-            {
-                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-
-                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is AtomContent))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(AtomContent first, AtomContent second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(AtomContent first, AtomContent second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(AtomContent first, AtomContent second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(AtomContent first, AtomContent second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -19,7 +20,10 @@
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 0.90 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -32,7 +36,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Rss090SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Rss090SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -52,21 +57,21 @@
             XPathNavigator channelNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:channel", manager);
             if (channelNavigator != null)
             {
-                Rss090SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
+                FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
             }
 
             XPathNavigator imageNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
             if (imageNavigator != null)
             {
                 resource.Channel.Image = new RssImage();
-                Rss090SyndicationResourceAdapter.FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
+                FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
             }
 
             XPathNavigator textInputNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
             if (textInputNavigator != null)
             {
                 resource.Channel.TextInput = new RssTextInput();
-                Rss090SyndicationResourceAdapter.FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
+                FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
             }
 
             XPathNodeIterator itemIterator = this.Navigator.Select("rdf:RDF/rss:item", manager);
@@ -100,14 +105,17 @@
                         }
                     }
 
-                    SyndicationExtensionAdapter itemExtensionAdapter = new SyndicationExtensionAdapter(itemIterator.Current, this.Settings);
+                    SyndicationExtensionAdapter itemExtensionAdapter =
+                        new SyndicationExtensionAdapter(itemIterator.Current, this.Settings);
                     itemExtensionAdapter.Fill(item, manager);
 
                     ((Collection<RssItem>)resource.Channel.Items).Add(item);
                 }
             }
 
-            SyndicationExtensionAdapter feedExtensionAdapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
+            SyndicationExtensionAdapter feedExtensionAdapter = new SyndicationExtensionAdapter(
+                this.Navigator.SelectSingleNode("rdf:RDF", manager),
+                this.Settings);
             feedExtensionAdapter.Fill(resource, manager);
         }
 
@@ -122,7 +130,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillChannel(
+            RssChannel channel,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(channel, "channel");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -167,7 +179,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillImage(
+            RssImage image,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(image, "image");
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -219,7 +235,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillTextInput(
+            RssTextInput textInput,
+            XPathNavigator navigator,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(textInput, "textInput");
             Guard.ArgumentNotNull(navigator, "navigator");

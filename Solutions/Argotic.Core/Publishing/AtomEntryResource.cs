@@ -7,18 +7,18 @@
     using System.Threading;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Data.Adapters;
     using Argotic.Extensions;
     using Argotic.Extensions.Core;
-    using Argotic.Net;
     using Argotic.Syndication;
 
     /// <summary>
     /// Represents a resource whose IRI is listed in a <see cref="AtomFeed"/> and uses <see cref="AtomEntry"/> as its representation.
     /// </summary>
     /// <seealso cref="AtomEntry"/>
-    [Serializable()]
+    [Serializable]
     public class AtomEntryResource : AtomEntry
     {
         /// <summary>
@@ -39,7 +39,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class.
         /// </summary>
-        public AtomEntryResource() : base()
+        public AtomEntryResource()
+            : base()
         {
         }
 
@@ -54,7 +55,8 @@
         /// </param>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn) : base(id, title, updatedOn)
+        public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn)
+            : base(id, title, updatedOn)
         {
         }
 
@@ -73,7 +75,8 @@
         /// </param>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn) : this(id, title, updatedOn)
+        public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn)
+            : this(id, title, updatedOn)
         {
             this.EditedOn = editedOn;
         }
@@ -94,7 +97,13 @@
         /// <param name="isDraft">A value indicating if client has requested to control the visibility of the entry.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft) : this(id, title, updatedOn, editedOn)
+        public AtomEntryResource(
+            AtomId id,
+            AtomTextConstruct title,
+            DateTime updatedOn,
+            DateTime editedOn,
+            bool isDraft)
+            : this(id, title, updatedOn, editedOn)
         {
             this.IsDraft = isDraft;
         }
@@ -114,17 +123,17 @@
         {
             get
             {
-                return entryResourceEditedOn;
+                return this.entryResourceEditedOn;
             }
 
             set
             {
-                entryResourceEditedOn = value;
+                this.entryResourceEditedOn = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
+        /// Gets or sets a value indicating whether client has requested to control the visibility of this entry.
         /// </summary>
         /// <value><b>true</b> if the client is requesting to control the visibility of this entry; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
@@ -132,12 +141,143 @@
         {
             get
             {
-                return entryResourceIsDraft;
+                return this.entryResourceIsDraft;
             }
 
             set
             {
-                entryResourceIsDraft = value;
+                this.entryResourceIsDraft = value;
+            }
+        }
+
+        /// <summary>
+        /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
+        /// </summary>
+        /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+        /// <remarks>
+        ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+        public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+        {
+            base.Load(source, settings);
+
+            AtomPublishingEditedSyndicationExtension editedExtension =
+                this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as
+                    AtomPublishingEditedSyndicationExtension;
+            if (editedExtension != null)
+            {
+                this.EditedOn = editedExtension.Context.EditedOn;
+            }
+
+            AtomPublishingControlSyndicationExtension controlExtension =
+                this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as
+                    AtomPublishingControlSyndicationExtension;
+            if (controlExtension != null)
+            {
+                this.IsDraft = controlExtension.Context.IsDraft;
+            }
+        }
+
+        /// <summary>
+        /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
+        /// </summary>
+        /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
+        /// <param name="credentials">
+        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
+        /// </param>
+        /// <param name="proxy">
+        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
+        /// </param>
+        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+        /// <remarks>
+        ///     <para>
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <description>
+        ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
+        ///                 </description>
+        ///             </item>
+        ///             <item>
+        ///                 <description>
+        ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
+        ///                 </description>
+        ///             </item>
+        ///             <item>
+        ///                 <description>
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
+        ///                 </description>
+        ///             </item>
+        ///             <item>
+        ///                 <description>
+        ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+        ///                 </description>
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+        public new void Load(
+            Uri source,
+            ICredentials credentials,
+            IWebProxy proxy,
+            SyndicationResourceLoadSettings settings)
+        {
+            this.Load(source, new WebRequestOptions(credentials, proxy), settings);
+        }
+
+        /// <summary>
+        /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
+        /// </summary>
+        /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
+        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+        /// <remarks>
+        ///     <para>
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <description>
+        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
+        ///                 </description>
+        ///             </item>
+        ///             <item>
+        ///                 <description>
+        ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+        ///                 </description>
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+        public new void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+        {
+            base.Load(source, options, settings);
+
+            AtomPublishingEditedSyndicationExtension editedExtension =
+                this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as
+                    AtomPublishingEditedSyndicationExtension;
+            if (editedExtension != null)
+            {
+                this.EditedOn = editedExtension.Context.EditedOn;
+            }
+
+            AtomPublishingControlSyndicationExtension controlExtension =
+                this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as
+                    AtomPublishingControlSyndicationExtension;
+            if (controlExtension != null)
+            {
+                this.IsDraft = controlExtension.Context.IsDraft;
             }
         }
 
@@ -166,7 +306,12 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
+        public new void LoadAsync(
+            Uri source,
+            SyndicationResourceLoadSettings settings,
+            ICredentials credentials,
+            IWebProxy proxy,
+            object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -191,7 +336,11 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
+        public new void LoadAsync(
+            Uri source,
+            SyndicationResourceLoadSettings settings,
+            WebRequestOptions options,
+            object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
 
@@ -210,12 +359,19 @@
             this.AsyncLoadHasBeenCancelled = false;
 
             asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-            asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
+            asyncHttpWebRequest.Timeout = Convert.ToInt32(
+                settings.Timeout.TotalMilliseconds,
+                System.Globalization.NumberFormatInfo.InvariantInfo);
 
             object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
-            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                result.AsyncWaitHandle,
+                new WaitOrTimerCallback(this.AsyncTimeoutCallback),
+                state,
+                settings.Timeout,
+                true);
         }
 
         /// <summary>
@@ -234,6 +390,46 @@
 
                 asyncHttpWebRequest.Abort();
             }
+        }
+
+        /// <summary>
+        /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
+        /// </summary>
+        /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="AtomEntry"/> instance.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
+        public new void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+        {
+            Guard.ArgumentNotNull(writer, "writer");
+            Guard.ArgumentNotNull(settings, "settings");
+
+            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
+            if (this.EditedOn != DateTime.MinValue)
+            {
+                if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
+                {
+                    AtomPublishingEditedSyndicationExtension editedExtension =
+                        new AtomPublishingEditedSyndicationExtension();
+                    editedExtension.Context.EditedOn = this.EditedOn;
+                    this.AddExtension(editedExtension);
+                }
+            }
+
+            if (this.IsDraft)
+            {
+                if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
+                {
+                    AtomPublishingControlSyndicationExtension controlExtension =
+                        new AtomPublishingControlSyndicationExtension();
+                    controlExtension.Context.IsDraft = this.IsDraft;
+                    this.AddExtension(controlExtension);
+                }
+            }
+
+            base.Save(writer, settings);
         }
 
         /// <summary>
@@ -286,25 +482,35 @@
                                 }
                                 else
                                 {
-                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(
+                                        source,
+                                        options,
+                                        settings.CharacterEncoding);
                                 }
 
-                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(
+                                    navigator,
+                                    settings);
                                 adapter.Fill(entry, SyndicationContentFormat.Atom);
 
-                                AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+                                AtomPublishingEditedSyndicationExtension editedExtension =
+                                    entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as
+                                        AtomPublishingEditedSyndicationExtension;
                                 if (editedExtension != null)
                                 {
                                     entry.EditedOn = editedExtension.Context.EditedOn;
                                 }
 
-                                AtomPublishingControlSyndicationExtension controlExtension = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+                                AtomPublishingControlSyndicationExtension controlExtension =
+                                    entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as
+                                        AtomPublishingControlSyndicationExtension;
                                 if (controlExtension != null)
                                 {
                                     entry.IsDraft = controlExtension.Context.IsDraft;
                                 }
 
-                                entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                                entry.OnEntryLoaded(
+                                    new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
@@ -330,163 +536,6 @@
             }
 
             this.LoadOperationInProgress = false;
-        }
-
-        /// <summary>
-        /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-        /// <remarks>
-        ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-        public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
-        {
-            base.Load(source, settings);
-
-            AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-            if (editedExtension != null)
-            {
-                this.EditedOn = editedExtension.Context.EditedOn;
-            }
-
-            AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-            if (controlExtension != null)
-            {
-                this.IsDraft = controlExtension.Context.IsDraft;
-            }
-        }
-
-        /// <summary>
-        /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-        /// <param name="credentials">
-        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-        /// </param>
-        /// <param name="proxy">
-        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-        /// </param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-        /// <remarks>
-        ///     <para>
-        ///         <list type="bullet">
-        ///             <item>
-        ///                 <description>
-        ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-        ///                 </description>
-        ///             </item>
-        ///             <item>
-        ///                 <description>
-        ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-        ///                 </description>
-        ///             </item>
-        ///             <item>
-        ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
-        ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-        ///                 </description>
-        ///             </item>
-        ///             <item>
-        ///                 <description>
-        ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-        ///                 </description>
-        ///             </item>
-        ///         </list>
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-        public new void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
-        {
-            this.Load(source, new WebRequestOptions(credentials, proxy), settings);
-        }
-
-        /// <summary>
-        /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-        /// <remarks>
-        ///     <para>
-        ///         <list type="bullet">
-        ///             <item>
-        ///                 <description>
-        ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
-        ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-        ///                 </description>
-        ///             </item>
-        ///             <item>
-        ///                 <description>
-        ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-        ///                 </description>
-        ///             </item>
-        ///         </list>
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-        /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-        public new void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
-        {
-            base.Load(source, options, settings);
-
-            AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-            if (editedExtension != null)
-            {
-                this.EditedOn = editedExtension.Context.EditedOn;
-            }
-
-            AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-            if (controlExtension != null)
-            {
-                this.IsDraft = controlExtension.Context.IsDraft;
-            }
-        }
-
-        /// <summary>
-        /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="AtomEntry"/> instance.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
-        public new void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNull(settings, "settings");
-
-            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
-
-            if(this.EditedOn != DateTime.MinValue)
-            {
-                if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
-                {
-                    AtomPublishingEditedSyndicationExtension editedExtension = new AtomPublishingEditedSyndicationExtension();
-                    editedExtension.Context.EditedOn = this.EditedOn;
-                    this.AddExtension(editedExtension);
-                }
-            }
-
-            if(this.IsDraft)
-            {
-                if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
-                {
-                    AtomPublishingControlSyndicationExtension controlExtension = new AtomPublishingControlSyndicationExtension();
-                    controlExtension.Context.IsDraft = this.IsDraft;
-                    this.AddExtension(controlExtension);
-                }
-            }
-
-            base.Save(writer, settings);
         }
     }
 }

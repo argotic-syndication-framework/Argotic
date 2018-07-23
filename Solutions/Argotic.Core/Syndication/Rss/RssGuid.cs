@@ -6,6 +6,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
@@ -16,30 +17,27 @@
     /// <remarks>
     ///     <para>A publisher <i>should</i> provide a guid with each item.</para>
     ///     <para>
-    ///         A <see cref="RssGuid"/> enables an aggregator to detect when an item has been received previously and does not need to be presented to a user again. 
-    ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the guid's value <b>must</b> be 
-    ///         the permanent URL of the web page associated with the item. Otherwise the guid may employ any syntax the feed's publisher 
+    ///         A <see cref="RssGuid"/> enables an aggregator to detect when an item has been received previously and does not need to be presented to a user again.
+    ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the guid's value <b>must</b> be
+    ///         the permanent URL of the web page associated with the item. Otherwise the guid may employ any syntax the feed's publisher
     ///         has devised for ensuring the uniqueness of the string.
     ///     </para>
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssGuid class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssGuidExample.cs" 
-    ///             region="RssGuid" 
+    ///         <code
+    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssGuidExample.cs"
+    ///             region="RssGuid"
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public class RssGuid : IComparable, IExtensibleSyndicationObject
     {
-
-        /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-        /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
         /// <summary>
         /// Private member to hold a string value that uniquely identifies the item.
         /// </summary>
@@ -51,11 +49,15 @@
         private bool guidIsPermalink = true;
 
         /// <summary>
+        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
+        /// </summary>
+        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RssGuid"/> class.
         /// </summary>
         public RssGuid()
         {
-
         }
 
         /// <summary>
@@ -76,7 +78,8 @@
         /// <param name="isPermanentUrl"><b>true</b> if the <paramref name="value"/> represents a permanent URL of a web page; otherwise <b>false</b>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public RssGuid(string value, bool isPermanentUrl) : this(value)
+        public RssGuid(string value, bool isPermanentUrl)
+            : this(value)
         {
             this.IsPermanentLink = isPermanentUrl;
         }
@@ -93,23 +96,23 @@
         {
             get
             {
-                if (objectSyndicationExtensions == null)
+                if (this.objectSyndicationExtensions == null)
                 {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
 
-                return objectSyndicationExtensions;
+                return this.objectSyndicationExtensions;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
+                this.objectSyndicationExtensions = value;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
         /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
         public bool HasExtensions
@@ -121,23 +124,23 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the guid represents a permanent URL of a web page associated with this item.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the guid represents a permanent URL of a web page associated with this item.
         /// </summary>
         /// <value><b>true</b> if the guid <see cref="RssGuid.Value">value</see> represents a permanent URL of a web page; otherwise <b>false</b>.</value>
         /// <remarks>
-        ///     If set to <b>false</b>, the guid may employ any syntax the feed's publisher has devised for ensuring the uniqueness of the string, 
+        ///     If set to <b>false</b>, the guid may employ any syntax the feed's publisher has devised for ensuring the uniqueness of the string,
         ///     such as the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a> described in RFC 4151.
         /// </remarks>
         public bool IsPermanentLink
         {
             get
             {
-                return guidIsPermalink;
+                return this.guidIsPermalink;
             }
 
             set
             {
-                guidIsPermalink = value;
+                this.guidIsPermalink = value;
             }
         }
 
@@ -147,12 +150,12 @@
         /// <value>A string value that uniquely identifies this item.</value>
         /// <remarks>
         ///     <para>
-        ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the <see cref="RssGuid.Value"/> property <b>must</b> be 
-        ///         the permanent URL of the web page associated with this item. Otherwise the <see cref="RssGuid.Value"/> property may employ any syntax the feed's publisher 
+        ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the <see cref="RssGuid.Value"/> property <b>must</b> be
+        ///         the permanent URL of the web page associated with this item. Otherwise the <see cref="RssGuid.Value"/> property may employ any syntax the feed's publisher
         ///         has devised for ensuring the uniqueness of the string.
         ///     </para>
         ///     <para>
-        ///         When choosing to employ a syntax for ensuring the uniqueness of the string, the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a> 
+        ///         When choosing to employ a syntax for ensuring the uniqueness of the string, the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a>
         ///         described in RFC 4151 is recommended.
         ///     </para>
         /// </remarks>
@@ -162,14 +165,85 @@
         {
             get
             {
-                return guidIdentifier;
+                return this.guidIdentifier;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                guidIdentifier = value.Trim();
+                this.guidIdentifier = value.Trim();
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(RssGuid first, RssGuid second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(RssGuid first, RssGuid second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(RssGuid first, RssGuid second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(RssGuid first, RssGuid second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -189,6 +263,55 @@
         }
 
         /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            RssGuid value = obj as RssGuid;
+
+            if (value != null)
+            {
+                int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
+                result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RssGuid))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
         /// </summary>
         /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -196,8 +319,8 @@
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -209,25 +332,14 @@
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
-            }
+            char[] charArray = this.ToString().ToCharArray();
 
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -243,7 +355,7 @@
         {
             bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
+            if (source.HasAttributes)
             {
                 string permalinkAttribute = source.GetAttribute("isPermaLink", string.Empty);
 
@@ -258,7 +370,7 @@
                 }
             }
 
-            if(!string.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
                 this.Value = source.Value;
                 wasLoaded = true;
@@ -291,20 +403,25 @@
         }
 
         /// <summary>
-        /// Saves the current <see cref="RssGuid"/> to the specified <see cref="XmlWriter"/>.
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("guid");
+            bool wasRemoved = false;
+            Guard.ArgumentNotNull(extension, "extension");
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
+            {
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
+            }
 
-            writer.WriteAttributeString("isPermaLink", this.IsPermanentLink ? "true" : "false");
-            writer.WriteValue(this.Value);
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
-
-            writer.WriteEndElement();
+            return wasRemoved;
         }
 
         /// <summary>
@@ -316,14 +433,14 @@
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.ConformanceLevel = ConformanceLevel.Fragment;
                 settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
@@ -338,128 +455,20 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="RssGuid"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
-            {
-                return 1;
-            }
+            Guard.ArgumentNotNull(writer, "writer");
+            writer.WriteStartElement("guid");
 
-            RssGuid value = obj as RssGuid;
+            writer.WriteAttributeString("isPermaLink", this.IsPermanentLink ? "true" : "false");
+            writer.WriteValue(this.Value);
+            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
-            if (value != null)
-            {
-                int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-                result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is RssGuid))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(RssGuid first, RssGuid second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            writer.WriteEndElement();
         }
     }
 }

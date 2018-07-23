@@ -2,8 +2,10 @@
 {
     using System;
     using System.Globalization;
+    using System.Reflection;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
@@ -12,11 +14,10 @@
     /// <remarks>This utility class is not intended for use outside the Web Log Markup Language (BlogML) syndication entities within the framework.</remarks>
     internal static class BlogMLUtility
     {
-
         /// <summary>
         /// Private member to hold the Web Log Markup Language (BlogML) 2.0 namespace identifier.
         /// </summary>
-        private const string BLOGML_NAMESPACE = "http://www.blogml.com/2006/09/BlogML";
+        private const string InternalBlogmlNamespace = "http://www.blogml.com/2006/09/BlogML";
 
         /// <summary>
         /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
@@ -26,7 +27,7 @@
         {
             get
             {
-                return BLOGML_NAMESPACE;
+                return InternalBlogmlNamespace;
             }
         }
 
@@ -38,19 +39,23 @@
         public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
         {
             string name = string.Empty;
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
                 {
-                    BlogMLApprovalStatus approvalStatus = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    BlogMLApprovalStatus approvalStatus =
+                        (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                     if (approvalStatus == status)
                     {
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(
+                            typeof(EnumerationMetadataAttribute),
+                            false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata =
+                                customAttributes[0] as EnumerationMetadataAttribute;
 
                             name = enumerationMetadata.AlternateValue;
                             break;
@@ -74,18 +79,24 @@
         {
             BlogMLApprovalStatus approvalStatus = BlogMLApprovalStatus.None;
             Guard.ArgumentNotNullOrEmptyString(value, "value");
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
                 {
                     BlogMLApprovalStatus status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(
+                        typeof(EnumerationMetadataAttribute),
+                        false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                        EnumerationMetadataAttribute enumerationMetadata =
+                            customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (string.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(
+                                value,
+                                enumerationMetadata.AlternateValue,
+                                StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             approvalStatus = status;
                             break;
@@ -124,7 +135,7 @@
             result = result | string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
             result = result | source.LastModifiedOn.CompareTo(target.LastModifiedOn);
 
-            if(source.Title != null && target.Title != null)
+            if (source.Title != null && target.Title != null)
             {
                 result = result | source.Title.CompareTo(target.Title);
             }
@@ -151,7 +162,9 @@
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
+            manager.AddNamespace(
+                "blog",
+                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : InternalBlogmlNamespace);
 
             return manager;
         }
@@ -169,7 +182,7 @@
             bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
-            XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
+            XmlNamespaceManager manager = CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
                 string idAttribute = source.GetAttribute("id", string.Empty);
@@ -191,7 +204,11 @@
                         target.CreatedOn = createdOn;
                         wasLoaded = true;
                     }
-                    else if (DateTime.TryParse(dateCreatedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out createdOn))
+                    else if (DateTime.TryParse(
+                        dateCreatedAttribute,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None,
+                        out createdOn))
                     {
                         target.CreatedOn = createdOn;
                         wasLoaded = true;
@@ -206,7 +223,11 @@
                         target.LastModifiedOn = modifiedOn;
                         wasLoaded = true;
                     }
-                    else if (DateTime.TryParse(dateModifiedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out modifiedOn))
+                    else if (DateTime.TryParse(
+                        dateModifiedAttribute,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None,
+                        out modifiedOn))
                     {
                         target.LastModifiedOn = modifiedOn;
                         wasLoaded = true;
@@ -215,7 +236,7 @@
 
                 if (!string.IsNullOrEmpty(approvedAttribute))
                 {
-                    BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
+                    BlogMLApprovalStatus status = ApprovalStatusByValue(approvedAttribute);
                     if (status != BlogMLApprovalStatus.None)
                     {
                         target.ApprovalStatus = status;
@@ -251,13 +272,16 @@
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
+        public static bool FillCommonObject(
+            IBlogMLCommonObject target,
+            XPathNavigator source,
+            SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
+            XmlNamespaceManager manager = CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
                 string idAttribute = source.GetAttribute("id", string.Empty);
@@ -279,7 +303,11 @@
                         target.CreatedOn = createdOn;
                         wasLoaded = true;
                     }
-                    else if (DateTime.TryParse(dateCreatedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out createdOn))
+                    else if (DateTime.TryParse(
+                        dateCreatedAttribute,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None,
+                        out createdOn))
                     {
                         target.CreatedOn = createdOn;
                         wasLoaded = true;
@@ -294,7 +322,11 @@
                         target.LastModifiedOn = modifiedOn;
                         wasLoaded = true;
                     }
-                    else if (DateTime.TryParse(dateModifiedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out modifiedOn))
+                    else if (DateTime.TryParse(
+                        dateModifiedAttribute,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None,
+                        out modifiedOn))
                     {
                         target.LastModifiedOn = modifiedOn;
                         wasLoaded = true;
@@ -303,7 +335,7 @@
 
                 if (!string.IsNullOrEmpty(approvedAttribute))
                 {
-                    BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
+                    BlogMLApprovalStatus status = ApprovalStatusByValue(approvedAttribute);
                     if (status != BlogMLApprovalStatus.None)
                     {
                         target.ApprovalStatus = status;
@@ -348,17 +380,21 @@
 
             if (source.CreatedOn != DateTime.MinValue)
             {
-                writer.WriteAttributeString("date-created", SyndicationDateTimeUtility.ToRfc3339DateTime(source.CreatedOn));
+                writer.WriteAttributeString(
+                    "date-created",
+                    SyndicationDateTimeUtility.ToRfc3339DateTime(source.CreatedOn));
             }
 
             if (source.LastModifiedOn != DateTime.MinValue)
             {
-                writer.WriteAttributeString("date-modified", SyndicationDateTimeUtility.ToRfc3339DateTime(source.LastModifiedOn));
+                writer.WriteAttributeString(
+                    "date-modified",
+                    SyndicationDateTimeUtility.ToRfc3339DateTime(source.LastModifiedOn));
             }
 
             if (source.ApprovalStatus != BlogMLApprovalStatus.None)
             {
-                writer.WriteAttributeString("approved", BlogMLUtility.ApprovalStatusAsString(source.ApprovalStatus));
+                writer.WriteAttributeString("approved", ApprovalStatusAsString(source.ApprovalStatus));
             }
         }
 

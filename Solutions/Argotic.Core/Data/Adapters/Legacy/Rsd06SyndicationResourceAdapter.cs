@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication.Specialized;
@@ -19,7 +20,10 @@
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 0.6 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rsd")]
     public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -32,7 +36,8 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -47,7 +52,8 @@
 
             XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
+            XPathNavigator serviceNavigator =
+                RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
 
             if (serviceNavigator == null)
             {
@@ -57,9 +63,18 @@
 
             if (serviceNavigator != null)
             {
-                XPathNavigator engineNameNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
-                XPathNavigator engineLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
-                XPathNavigator homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
+                XPathNavigator engineNameNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:engineName",
+                    manager);
+                XPathNavigator engineLinkNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:engineLink",
+                    manager);
+                XPathNavigator homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:homePageLink",
+                    manager);
                 XPathNodeIterator apiIterator = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
                 if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
@@ -113,7 +128,9 @@
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager), this.Settings);
+            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(
+                RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager),
+                this.Settings);
             adapter.Fill(resource, manager);
         }
     }

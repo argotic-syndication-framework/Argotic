@@ -25,13 +25,6 @@
         bool Load(XPathNavigator source);
 
         /// <summary>
-        /// Saves the current <see cref="IXmlRpcValue"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        void WriteTo(XmlWriter writer);
-
-        /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.</returns>
@@ -39,5 +32,12 @@
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
         string ToString();
+
+        /// <summary>
+        /// Saves the current <see cref="IXmlRpcValue"/> to the specified <see cref="XmlWriter"/>.
+        /// </summary>
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        void WriteTo(XmlWriter writer);
     }
 }

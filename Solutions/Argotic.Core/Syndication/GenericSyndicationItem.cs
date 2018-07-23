@@ -2,25 +2,20 @@
 {
     using System;
     using System.Collections.ObjectModel;
+
     using Argotic.Common;
 
     /// <summary>
     /// Represents a format agnostic view of the discrete content for a syndication feed.
     /// </summary>
     /// <seealso cref="GenericSyndicationFeed.Items"/>
-    [Serializable()]
+    [Serializable]
     public class GenericSyndicationItem : IComparable
     {
-
         /// <summary>
-        /// Private member to hold the title of the syndication item.
+        /// Private member to hold the collection of categories associated with the item.
         /// </summary>
-        private string itemTitle = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the summary of the syndication item.
-        /// </summary>
-        private string itemSummary = string.Empty;
+        private Collection<GenericSyndicationCategory> itemCategories = new Collection<GenericSyndicationCategory>();
 
         /// <summary>
         /// Private member to hold the publication date of the item.
@@ -28,9 +23,14 @@
         private DateTime itemPublishedOn = DateTime.MinValue;
 
         /// <summary>
-        /// Private member to hold the collection of categories associated with the item.
+        /// Private member to hold the summary of the syndication item.
         /// </summary>
-        private Collection<GenericSyndicationCategory> itemCategories = new Collection<GenericSyndicationCategory>();
+        private string itemSummary = string.Empty;
+
+        /// <summary>
+        /// Private member to hold the title of the syndication item.
+        /// </summary>
+        private string itemTitle = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
@@ -58,18 +58,18 @@
         /// Gets the categories associated with this item.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
         /// </value>
         public Collection<GenericSyndicationCategory> Categories
         {
             get
             {
-                if (itemCategories == null)
+                if (this.itemCategories == null)
                 {
-                    itemCategories = new Collection<GenericSyndicationCategory>();
+                    this.itemCategories = new Collection<GenericSyndicationCategory>();
                 }
 
-                return itemCategories;
+                return this.itemCategories;
             }
         }
 
@@ -77,19 +77,19 @@
         /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.
         /// </summary>
         /// <value>
-        ///     A <see cref="DateTime"/> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item. 
+        ///     A <see cref="DateTime"/> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item.
         ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that publication date was specified.
         /// </value>
         /// <remarks>
-        ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="PublishedOn"/> will represent 
-        ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>, 
+        ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="PublishedOn"/> will represent
+        ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
         ///     the <see cref="AtomEntry.UpdatedOn"/> property value will be used if present.
         /// </remarks>
         public DateTime PublishedOn
         {
             get
             {
-                return itemPublishedOn;
+                return this.itemPublishedOn;
             }
         }
 
@@ -97,19 +97,19 @@
         /// Gets a short summary, abstract, or excerpt for this item.
         /// </summary>
         /// <value>
-        ///     A short summary, abstract, or excerpt for this item. 
+        ///     A short summary, abstract, or excerpt for this item.
         ///     The default value is an <b>empty</b> string, which indicates that no excerpt was specified.
         /// </value>
         /// <remarks>
-        ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="Summary"/> will represent 
-        ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>, 
+        ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="Summary"/> will represent
+        ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
         ///     the <see cref="AtomEntry.Content"/> property value will be used if present.
         /// </remarks>
         public string Summary
         {
             get
             {
-                return itemSummary;
+                return this.itemSummary;
             }
         }
 
@@ -117,27 +117,86 @@
         /// Gets the human-readable title for this item.
         /// </summary>
         /// <value>
-        ///     The human-readable title for this item. 
+        ///     The human-readable title for this item.
         ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
         /// </value>
         public string Title
         {
             get
             {
-                return itemTitle;
+                return this.itemTitle;
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable representation for the current instance.
-        /// </remarks>
-        public override string ToString()
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(GenericSyndicationItem first, GenericSyndicationItem second)
         {
-            return string.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty);
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(GenericSyndicationItem first, GenericSyndicationItem second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(GenericSyndicationItem first, GenericSyndicationItem second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(GenericSyndicationItem first, GenericSyndicationItem second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -165,7 +224,13 @@
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -181,7 +246,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -196,74 +261,20 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(GenericSyndicationItem first, GenericSyndicationItem second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable representation for the current instance.
+        /// </remarks>
+        public override string ToString()
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(GenericSyndicationItem first, GenericSyndicationItem second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(GenericSyndicationItem first, GenericSyndicationItem second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(GenericSyndicationItem first, GenericSyndicationItem second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            return string.Format(
+                null,
+                "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})",
+                this.Title,
+                this.Summary,
+                this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty);
         }
 
         /// <summary>
@@ -277,31 +288,31 @@
 
             if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
             {
-                itemTitle = entry.Title.Content.Trim();
+                this.itemTitle = entry.Title.Content.Trim();
             }
 
             if (entry.PublishedOn != DateTime.MinValue)
             {
-                itemPublishedOn = entry.PublishedOn;
+                this.itemPublishedOn = entry.PublishedOn;
             }
             else if (entry.UpdatedOn != DateTime.MinValue)
             {
-                itemPublishedOn = entry.UpdatedOn;
+                this.itemPublishedOn = entry.UpdatedOn;
             }
 
             if (entry.Summary != null && !string.IsNullOrEmpty(entry.Summary.Content))
             {
-                itemSummary = entry.Summary.Content.Trim();
+                this.itemSummary = entry.Summary.Content.Trim();
             }
             else if (entry.Content != null && !string.IsNullOrEmpty(entry.Content.Content))
             {
-                itemSummary = entry.Content.Content.Trim();
+                this.itemSummary = entry.Content.Content.Trim();
             }
 
             foreach (AtomCategory category in entry.Categories)
             {
                 GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
-                itemCategories.Add(genericCategory);
+                this.itemCategories.Add(genericCategory);
             }
         }
 
@@ -315,23 +326,23 @@
             Guard.ArgumentNotNull(item, "item");
             if (!string.IsNullOrEmpty(item.Title))
             {
-                itemTitle = item.Title.Trim();
+                this.itemTitle = item.Title.Trim();
             }
 
             if (item.PublicationDate != DateTime.MinValue)
             {
-                itemPublishedOn = item.PublicationDate;
+                this.itemPublishedOn = item.PublicationDate;
             }
 
             if (!string.IsNullOrEmpty(item.Description))
             {
-                itemSummary = item.Description.Trim();
+                this.itemSummary = item.Description.Trim();
             }
 
             foreach (RssCategory category in item.Categories)
             {
                 GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
-                itemCategories.Add(genericCategory);
+                this.itemCategories.Add(genericCategory);
             }
         }
     }

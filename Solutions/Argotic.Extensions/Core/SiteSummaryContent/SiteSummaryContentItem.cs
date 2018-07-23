@@ -1,28 +1,28 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a single version of the content for its parent item.
     /// </summary>
     /// <seealso cref="SiteSummaryContentSyndicationExtensionContext.Items"/>
-    [Serializable()]
+    [Serializable]
     public class SiteSummaryContentItem : IComparable
     {
-
         /// <summary>
         /// Private member to hold the textual content of the item.
         /// </summary>
-        private string itemContent  = String.Empty;
+        private string itemContent = string.Empty;
+
         /// <summary>
         /// Private member to hold a URI representing the format of the item.
         /// </summary>
         private Uri itemFormat;
+
         /// <summary>
         /// Private member to hold a URI representing the encoding of the item.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The textual or entity encoded content of this item.</value>
         /// <remarks>
-        ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped. 
+        ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
@@ -61,13 +61,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return itemContent;
+                return this.itemContent;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                itemContent = value.Trim();
+                this.itemContent = value.Trim();
             }
         }
 
@@ -83,12 +83,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return itemEncoding;
+                return this.itemEncoding;
             }
 
             set
             {
-                itemEncoding = value;
+                this.itemEncoding = value;
             }
         }
 
@@ -101,171 +101,14 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return itemFormat;
+                return this.itemFormat;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                itemFormat = value;
+                this.itemFormat = value;
             }
-        }
-
-        /// <summary>
-        /// Loads this <see cref="SiteSummaryContentItem"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SiteSummaryContentItem"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded              = false;
-            Guard.ArgumentNotNull(source, "source");
-            SiteSummaryContentSyndicationExtension extension    = new SiteSummaryContentSyndicationExtension();
-            XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
-            if (source.HasChildren)
-            {
-                XPathNavigator formatNavigator      = source.SelectSingleNode("content:format", manager);
-                XPathNavigator encodingNavigator    = source.SelectSingleNode("content:encoding", manager);
-
-                if (formatNavigator != null)
-                {
-                    Uri format;
-                    if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out format))
-                    {
-                        this.Format = format;
-                        wasLoaded   = true;
-                    }
-                }
-
-                if (encodingNavigator != null)
-                {
-                    Uri encoding;
-                    if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out encoding))
-                    {
-                        this.Encoding   = encoding;
-                        wasLoaded       = true;
-                    }
-                }
-            }
-
-            if(!String.IsNullOrEmpty(source.Value))
-            {
-                this.Content    = source.Value;
-                wasLoaded       = true;
-            }
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="SiteSummaryContentItem"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            SiteSummaryContentSyndicationExtension extension    = new SiteSummaryContentSyndicationExtension();
-            writer.WriteStartElement("item", extension.XmlNamespace);
-
-            writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : String.Empty);
-
-            if(this.Encoding != null)
-            {
-                writer.WriteElementString("encoding", extension.XmlNamespace, this.Encoding.ToString());
-            }
-
-            writer.WriteCData(this.Content);
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SiteSummaryContentItem"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SiteSummaryContentItem"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-            SiteSummaryContentItem value  = obj as SiteSummaryContentItem;
-
-            if (value != null)
-            {
-                int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-                result      = result | Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is SiteSummaryContentItem))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -316,7 +159,7 @@ namespace Argotic.Extensions.Core
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -336,7 +179,165 @@ namespace Argotic.Extensions.Core
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Loads this <see cref="SiteSummaryContentItem"/> using the supplied <see cref="XPathNavigator"/>.
+        /// </summary>
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SiteSummaryContentItem"/>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
+        {
+            bool wasLoaded = false;
+            Guard.ArgumentNotNull(source, "source");
+            SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+            XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
+            if (source.HasChildren)
+            {
+                XPathNavigator formatNavigator = source.SelectSingleNode("content:format", manager);
+                XPathNavigator encodingNavigator = source.SelectSingleNode("content:encoding", manager);
+
+                if (formatNavigator != null)
+                {
+                    Uri format;
+                    if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out format))
+                    {
+                        this.Format = format;
+                        wasLoaded = true;
+                    }
+                }
+
+                if (encodingNavigator != null)
+                {
+                    Uri encoding;
+                    if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out encoding))
+                    {
+                        this.Encoding = encoding;
+                        wasLoaded = true;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(source.Value))
+            {
+                this.Content = source.Value;
+                wasLoaded = true;
+            }
+
+            return wasLoaded;
+        }
+
+        /// <summary>
+        /// Saves the current <see cref="SiteSummaryContentItem"/> to the specified <see cref="XmlWriter"/>.
+        /// </summary>
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
+        {
+            Guard.ArgumentNotNull(writer, "writer");
+            SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+            writer.WriteStartElement("item", extension.XmlNamespace);
+
+            writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : string.Empty);
+
+            if (this.Encoding != null)
+            {
+                writer.WriteElementString("encoding", extension.XmlNamespace, this.Encoding.ToString());
+            }
+
+            writer.WriteCData(this.Content);
+
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            SiteSummaryContentItem value = obj as SiteSummaryContentItem;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+                result = result | Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SiteSummaryContentItem))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

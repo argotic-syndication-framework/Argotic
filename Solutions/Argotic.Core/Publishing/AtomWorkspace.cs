@@ -7,6 +7,7 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
     using Argotic.Syndication;
@@ -29,7 +30,7 @@
     ///         In addition, a <see cref="AtomMemberResources">collection</see> <i>may</i> appear in more than one <see cref="AtomWorkspace">workspace</see>.
     ///     </para>
     /// </remarks>
-    [Serializable()]
+    [Serializable]
     public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
     {
         /// <summary>
@@ -48,14 +49,14 @@
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
-        /// Private member to hold a human-readable title for the workspace.
-        /// </summary>
-        private AtomTextConstruct workspaceTitle = new AtomTextConstruct();
-
-        /// <summary>
         /// Private member to hold the collections associated to this workspace.
         /// </summary>
         private IEnumerable<AtomMemberResources> workspaceCollections;
+
+        /// <summary>
+        /// Private member to hold a human-readable title for the workspace.
+        /// </summary>
+        private AtomTextConstruct workspaceTitle = new AtomTextConstruct();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomWorkspace"/> class.
@@ -75,10 +76,10 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AtomWorkspace"/> class using the supplied <see cref="AtomTextConstruct"/> and <see cref="Collection{AtomMemberResources}"/>.
+        /// Initializes a new instance of the <see cref="AtomWorkspace"/> class using the supplied <see cref="AtomTextConstruct"/> and <see cref="Collection{T}"/>.
         /// </summary>
         /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the workspace.</param>
-        /// <param name="collections"></param>
+        /// <param name="collections">The collections.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
@@ -89,6 +90,139 @@
             foreach (AtomMemberResources collection in collections)
             {
                 this.AddCollection(collection);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the base URI other than the base URI of the document or external entity.
+        /// </summary>
+        /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+        /// <remarks>
+        ///     <para>
+        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
+        ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+        /// </remarks>
+        public Uri BaseUri
+        {
+            get
+            {
+                return this.commonObjectBaseUri;
+            }
+
+            set
+            {
+                this.commonObjectBaseUri = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the collections of resources available for editing that are associated with this workspace.
+        /// </summary>
+        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects that represent the collections of resources available for editing that are associated with this workspace.</value>
+        /// <remarks>
+        ///     <para>This <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects is internally represented as a <see cref="Collection{T}"/> collection.</para>
+        ///     <para>The <see cref="Collections"/> for the <see cref="AtomWorkspace"/> can contain zero or more <see cref="AtomMemberResources"/> objects.</para>
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public IEnumerable<AtomMemberResources> Collections
+        {
+            get
+            {
+                if (this.workspaceCollections == null)
+                {
+                    this.workspaceCollections = new Collection<AtomMemberResources>();
+                }
+
+                return this.workspaceCollections;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.workspaceCollections = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the syndication extensions applied to this syndication entity.
+        /// </summary>
+        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+        /// <remarks>
+        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public IEnumerable<ISyndicationExtension> Extensions
+        {
+            get
+            {
+                if (this.objectSyndicationExtensions == null)
+                {
+                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                }
+
+                return this.objectSyndicationExtensions;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.objectSyndicationExtensions = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// </summary>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        public bool HasExtensions
+        {
+            get
+            {
+                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the natural or formal language in which the content is written.
+        /// </summary>
+        /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+        /// <remarks>
+        ///     <para>
+        ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+        ///     </para>
+        /// </remarks>
+        public CultureInfo Language
+        {
+            get
+            {
+                return this.commonObjectLanguage;
+            }
+
+            set
+            {
+                this.commonObjectLanguage = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets information that conveys a human-readable title for this workspace.
+        /// </summary>
+        /// <value>
+        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this workspace.
+        ///     The default value is an empty <see cref="AtomTextConstruct"/>.
+        /// </value>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        public AtomTextConstruct Title
+        {
+            get
+            {
+                return this.workspaceTitle;
+            }
+
+            set
+            {
+                Guard.ArgumentNotNull(value, "value");
+                this.workspaceTitle = value;
             }
         }
 
@@ -115,199 +249,74 @@
         }
 
         /// <summary>
-        /// Gets or sets the base URI other than the base URI of the document or external entity.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
-        /// <remarks>
-        ///     <para>
-        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-        ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
-        /// </remarks>
-        public Uri BaseUri
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(AtomWorkspace first, AtomWorkspace second)
         {
-            get
+            if (Equals(first, null) && Equals(second, null))
             {
-                return commonObjectBaseUri;
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
             }
 
-            set
-            {
-                commonObjectBaseUri = value;
-            }
+            return first.Equals(second);
         }
 
         /// <summary>
-        /// Gets or sets the natural or formal language in which the content is written.
+        /// Determines if first operand is greater than second operand.
         /// </summary>
-        /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
-        /// <remarks>
-        ///     <para>
-        ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
-        ///     </para>
-        /// </remarks>
-        public CultureInfo Language
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(AtomWorkspace first, AtomWorkspace second)
         {
-            get
+            if (Equals(first, null) && Equals(second, null))
             {
-                return commonObjectLanguage;
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
             }
 
-            set
-            {
-                commonObjectLanguage = value;
-            }
+            return first.CompareTo(second) > 0;
         }
 
         /// <summary>
-        /// Gets or sets the syndication extensions applied to this syndication entity.
+        /// Determines if operands are not equal.
         /// </summary>
-        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-        /// <remarks>
-        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public IEnumerable<ISyndicationExtension> Extensions
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(AtomWorkspace first, AtomWorkspace second)
         {
-            get
-            {
-                if (objectSyndicationExtensions == null)
-                {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return objectSyndicationExtensions;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
-            }
+            return !(first == second);
         }
 
         /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// Determines if first operand is less than second operand.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(AtomWorkspace first, AtomWorkspace second)
         {
-            get
+            if (Equals(first, null) && Equals(second, null))
             {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
+                return false;
             }
-        }
-
-        /// <summary>
-        /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool AddExtension(ISyndicationExtension extension)
-        {
-            bool wasAdded = false;
-
-            Guard.ArgumentNotNull(extension, "extension");
-
-            ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded = true;
-
-            return wasAdded;
-        }
-
-        /// <summary>
-        /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-        /// </summary>
-        /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-        /// <returns>
-        ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-        /// </returns>
-        /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-        ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
-        public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
-        {
-            Guard.ArgumentNotNull(match, "match");
-
-            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
-            return list.Find(match);
-        }
-
-        /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
-        {
-            bool wasRemoved = false;
-
-            Guard.ArgumentNotNull(extension, "extension");
-
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
+            else if (Equals(first, null) && !Equals(second, null))
             {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved = true;
+                return true;
             }
 
-            return wasRemoved;
-        }
-
-        /// <summary>
-        /// Gets or sets the collections of resources available for editing that are associated with this workspace.
-        /// </summary>
-        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects that represent the collections of resources available for editing that are associated with this workspace.</value>
-        /// <remarks>
-        ///     <para>This <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects is internally represented as a <see cref="Collection{T}"/> collection.</para>
-        ///     <para>The <see cref="Collections"/> for the <see cref="AtomWorkspace"/> can contain zero or more <see cref="AtomMemberResources"/> objects.</para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public IEnumerable<AtomMemberResources> Collections
-        {
-            get
-            {
-                if (workspaceCollections == null)
-                {
-                    workspaceCollections = new Collection<AtomMemberResources>();
-                }
-
-                return workspaceCollections;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                workspaceCollections = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets information that conveys a human-readable title for this workspace.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this workspace.
-        ///     The default value is an empty <see cref="AtomTextConstruct"/>.
-        /// </value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomTextConstruct Title
-        {
-            get
-            {
-                return workspaceTitle;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                workspaceTitle = value;
-            }
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -329,7 +338,9 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
+        public static int CompareSequence(
+            Collection<AtomMemberResources> source,
+            Collection<AtomMemberResources> target)
         {
             int result = 0;
 
@@ -374,6 +385,76 @@
         }
 
         /// <summary>
+        /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// </summary>
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool AddExtension(ISyndicationExtension extension)
+        {
+            bool wasAdded = false;
+
+            Guard.ArgumentNotNull(extension, "extension");
+
+            ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
+            wasAdded = true;
+
+            return wasAdded;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            AtomWorkspace value = obj as AtomWorkspace;
+
+            if (value != null)
+            {
+                int result = this.Title.CompareTo(value.Title);
+                result = result | CompareSequence(
+                             (Collection<AtomMemberResources>)this.Collections,
+                             (Collection<AtomMemberResources>)value.Collections);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is AtomWorkspace))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
         /// Searches for a collection that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Collections"/> of the workspace.
         /// </summary>
         /// <param name="match">The <see cref="Predicate{AtomMemberResources}"/> delegate that defines the conditions of the <see cref="AtomMemberResources"/> to search for.</param>
@@ -392,6 +473,38 @@
 
             List<AtomMemberResources> list = new List<AtomMemberResources>(this.Collections);
             return list.Find(match);
+        }
+
+        /// <summary>
+        /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
+        /// </summary>
+        /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
+        /// <returns>
+        ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
+        /// </returns>
+        /// <remarks>
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
+        ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+        {
+            Guard.ArgumentNotNull(match, "match");
+
+            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+            return list.Find(match);
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -416,7 +529,7 @@
                 wasLoaded = true;
             }
 
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
                 XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
                 XPathNodeIterator collectionIterator = source.Select("app:collection", manager);
@@ -498,6 +611,60 @@
         }
 
         /// <summary>
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// </summary>
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
+        {
+            bool wasRemoved = false;
+
+            Guard.ArgumentNotNull(extension, "extension");
+
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
+            {
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
+            }
+
+            return wasRemoved;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
         /// Saves the current <see cref="AtomWorkspace"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
@@ -514,7 +681,7 @@
                 this.Title.WriteTo(writer, "title");
             }
 
-            foreach(AtomMemberResources collection in this.Collections)
+            foreach (AtomMemberResources collection in this.Collections)
             {
                 collection.WriteTo(writer);
             }
@@ -522,162 +689,6 @@
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            AtomWorkspace value = obj as AtomWorkspace;
-
-            if (value != null)
-            {
-                int result = this.Title.CompareTo(value.Title);
-                result = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
-                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is AtomWorkspace))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(AtomWorkspace first, AtomWorkspace second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(AtomWorkspace first, AtomWorkspace second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(AtomWorkspace first, AtomWorkspace second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(AtomWorkspace first, AtomWorkspace second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

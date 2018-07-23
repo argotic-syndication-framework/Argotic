@@ -4,20 +4,23 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
     /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-    [Serializable()]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Opml")]
+    [Serializable]
     public class OpmlWindow : IComparable
     {
-
         /// <summary>
-        /// Private member to hold pixel location of the top edge of the window.
+        /// Private member to hold pixel location of the bottom edge of the window.
         /// </summary>
-        private int windowTop = int.MinValue;
+        private int windowBottom = int.MinValue;
 
         /// <summary>
         /// Private member to hold pixel location of the left edge of the window.
@@ -25,21 +28,20 @@
         private int windowLeft = int.MinValue;
 
         /// <summary>
-        /// Private member to hold pixel location of the bottom edge of the window.
-        /// </summary>
-        private int windowBottom = int.MinValue;
-
-        /// <summary>
         /// Private member to hold pixel location of the right edge of the window.
         /// </summary>
         private int windowRight = int.MinValue;
+
+        /// <summary>
+        /// Private member to hold pixel location of the top edge of the window.
+        /// </summary>
+        private int windowTop = int.MinValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
         /// </summary>
         public OpmlWindow()
         {
-
         }
 
         /// <summary>
@@ -65,12 +67,12 @@
         {
             get
             {
-                return windowBottom;
+                return this.windowBottom;
             }
 
             set
             {
-                windowBottom = value;
+                this.windowBottom = value;
             }
         }
 
@@ -82,12 +84,12 @@
         {
             get
             {
-                return windowLeft;
+                return this.windowLeft;
             }
 
             set
             {
-                windowLeft = value;
+                this.windowLeft = value;
             }
         }
 
@@ -99,12 +101,12 @@
         {
             get
             {
-                return windowRight;
+                return this.windowRight;
             }
 
             set
             {
-                windowRight = value;
+                this.windowRight = value;
             }
         }
 
@@ -116,133 +118,84 @@
         {
             get
             {
-                return windowTop;
+                return this.windowTop;
             }
 
             set
             {
-                windowTop = value;
+                this.windowTop = value;
             }
         }
 
         /// <summary>
-        /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
+        /// Determines if operands are equal.
         /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="OpmlWindow"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlHead"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(OpmlWindow first, OpmlWindow second)
         {
-            bool wasLoaded = false;
-            Guard.ArgumentNotNull(source, "source");
-            XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
-            XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
-            XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
-            XPathNavigator windowRightNavigator = source.SelectSingleNode("windowRight");
-
-            if (windowTopNavigator != null)
+            if (Equals(first, null) && Equals(second, null))
             {
-                int top;
-                if (int.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out top))
-                {
-                    this.Top = top;
-                    wasLoaded = true;
-                }
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
             }
 
-            if (windowLeftNavigator != null)
-            {
-                int left;
-                if (int.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out left))
-                {
-                    this.Left = left;
-                    wasLoaded = true;
-                }
-            }
-
-            if (windowBottomNavigator != null)
-            {
-                int bottom;
-                if (int.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out bottom))
-                {
-                    this.Bottom = bottom;
-                    wasLoaded = true;
-                }
-            }
-
-            if (windowRightNavigator != null)
-            {
-                int right;
-                if (int.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out right))
-                {
-                    this.Right = right;
-                    wasLoaded = true;
-                }
-            }
-
-            return wasLoaded;
+            return first.Equals(second);
         }
 
         /// <summary>
-        /// Saves the current <see cref="OpmlWindow"/> to the specified <see cref="XmlWriter"/>.
+        /// Determines if first operand is greater than second operand.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(OpmlWindow first, OpmlWindow second)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            if(this.Top != int.MinValue)
+            if (Equals(first, null) && Equals(second, null))
             {
-                writer.WriteElementString("windowTop", this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
             }
 
-            if (this.Left != int.MinValue)
-            {
-                writer.WriteElementString("windowLeft", this.Left.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Bottom != int.MinValue)
-            {
-                writer.WriteElementString("windowBottom", this.Bottom.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            }
-
-            if (this.Right != int.MinValue)
-            {
-                writer.WriteElementString("windowRight", this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            }
+            return first.CompareTo(second) > 0;
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.
+        /// Determines if operands are not equal.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(OpmlWindow first, OpmlWindow second)
         {
-            using(MemoryStream stream = new MemoryStream())
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(OpmlWindow first, OpmlWindow second)
+        {
+            if (Equals(first, null) && Equals(second, null))
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
+                return false;
             }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -271,7 +224,13 @@
             }
             else
             {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
             }
         }
 
@@ -287,7 +246,7 @@
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -302,74 +261,147 @@
         }
 
         /// <summary>
-        /// Determines if operands are equal.
+        /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(OpmlWindow first, OpmlWindow second)
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="OpmlWindow"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlHead"/>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            bool wasLoaded = false;
+            Guard.ArgumentNotNull(source, "source");
+            XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
+            XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
+            XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
+            XPathNavigator windowRightNavigator = source.SelectSingleNode("windowRight");
+
+            if (windowTopNavigator != null)
             {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
+                int top;
+                if (int.TryParse(
+                    windowTopNavigator.Value,
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.NumberFormatInfo.InvariantInfo,
+                    out top))
+                {
+                    this.Top = top;
+                    wasLoaded = true;
+                }
             }
 
-            return first.Equals(second);
+            if (windowLeftNavigator != null)
+            {
+                int left;
+                if (int.TryParse(
+                    windowLeftNavigator.Value,
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.NumberFormatInfo.InvariantInfo,
+                    out left))
+                {
+                    this.Left = left;
+                    wasLoaded = true;
+                }
+            }
+
+            if (windowBottomNavigator != null)
+            {
+                int bottom;
+                if (int.TryParse(
+                    windowBottomNavigator.Value,
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.NumberFormatInfo.InvariantInfo,
+                    out bottom))
+                {
+                    this.Bottom = bottom;
+                    wasLoaded = true;
+                }
+            }
+
+            if (windowRightNavigator != null)
+            {
+                int right;
+                if (int.TryParse(
+                    windowRightNavigator.Value,
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.NumberFormatInfo.InvariantInfo,
+                    out right))
+                {
+                    this.Right = right;
+                    wasLoaded = true;
+                }
+            }
+
+            return wasLoaded;
         }
 
         /// <summary>
-        /// Determines if operands are not equal.
+        /// Returns a <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(OpmlWindow first, OpmlWindow second)
+        /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
         {
-            return !(first == second);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
-        /// Determines if first operand is less than second operand.
+        /// Saves the current <see cref="OpmlWindow"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(OpmlWindow first, OpmlWindow second)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            Guard.ArgumentNotNull(writer, "writer");
+            if (this.Top != int.MinValue)
             {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(OpmlWindow first, OpmlWindow second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
+                writer.WriteElementString(
+                    "windowTop",
+                    this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            return (first.CompareTo(second) > 0);
+            if (this.Left != int.MinValue)
+            {
+                writer.WriteElementString(
+                    "windowLeft",
+                    this.Left.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Bottom != int.MinValue)
+            {
+                writer.WriteElementString(
+                    "windowBottom",
+                    this.Bottom.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (this.Right != int.MinValue)
+            {
+                writer.WriteElementString(
+                    "windowRight",
+                    this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
 
     /// <summary>
@@ -19,18 +20,18 @@
     ///         />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public class XmlRpcResponse : IComparable
     {
-        /// <summary>
-        /// Private member to hold the response value that was returned for the remote procedure call.
-        /// </summary>
-        private IXmlRpcValue responseParameter;
-
         /// <summary>
         /// Private member to hold the response fault information.
         /// </summary>
         private XmlRpcStructureValue responseFault;
+
+        /// <summary>
+        /// Private member to hold the response value that was returned for the remote procedure call.
+        /// </summary>
+        private IXmlRpcValue responseParameter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class.
@@ -48,7 +49,7 @@
         {
             Guard.ArgumentNotNull(parameter, "parameter");
 
-            responseParameter = parameter;
+            this.responseParameter = parameter;
         }
 
         /// <summary>
@@ -60,7 +61,7 @@
         {
             Guard.ArgumentNotNull(fault, "fault");
 
-            responseFault = fault;
+            this.responseFault = fault;
         }
 
         /// <summary>
@@ -72,11 +73,13 @@
         {
             XmlRpcStructureValue faultStructure = new XmlRpcStructureValue();
             XmlRpcStructureMember codeMember = new XmlRpcStructureMember("faultCode", new XmlRpcScalarValue(faultCode));
-            XmlRpcStructureMember stringMember = new XmlRpcStructureMember("faultString", new XmlRpcScalarValue(faultMessage));
+            XmlRpcStructureMember stringMember = new XmlRpcStructureMember(
+                "faultString",
+                new XmlRpcScalarValue(faultMessage));
             faultStructure.Members.Add(codeMember);
             faultStructure.Members.Add(stringMember);
 
-            responseFault = faultStructure;
+            this.responseFault = faultStructure;
         }
 
         /// <summary>
@@ -93,11 +96,21 @@
 
             if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
             {
-                throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "The WebResponse content type is invalid. Content type of the response was {0}",
+                        response.ContentType),
+                    "response");
             }
             else if (response.ContentLength <= 0)
             {
-                throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "The WebResponse content length is invalid. Content length was {0}. ",
+                        response.ContentLength),
+                    "response");
             }
 
             using (Stream stream = response.GetResponseStream())
@@ -136,7 +149,7 @@
         {
             get
             {
-                return responseFault;
+                return this.responseFault;
             }
         }
 
@@ -152,8 +165,173 @@
         {
             get
             {
-                return responseParameter;
+                return this.responseParameter;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(XmlRpcResponse first, XmlRpcResponse second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(XmlRpcResponse first, XmlRpcResponse second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(XmlRpcResponse first, XmlRpcResponse second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(XmlRpcResponse first, XmlRpcResponse second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            XmlRpcResponse value = obj as XmlRpcResponse;
+
+            if (value != null)
+            {
+                int result = 0;
+
+                if (this.Fault != null)
+                {
+                    if (value.Fault != null)
+                    {
+                        result = result | this.Fault.CompareTo(value.Fault);
+                    }
+                    else
+                    {
+                        result = result | 1;
+                    }
+                }
+                else if (value.Fault != null)
+                {
+                    result = result | -1;
+                }
+
+                if (this.Parameter != null)
+                {
+                    if (value.Parameter != null)
+                    {
+                        result = result | string.Compare(
+                                     this.Parameter.ToString(),
+                                     value.Parameter.ToString(),
+                                     StringComparison.Ordinal);
+                    }
+                    else
+                    {
+                        result = result | 1;
+                    }
+                }
+                else if (value.Parameter != null)
+                {
+                    result = result | -1;
+                }
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is XmlRpcResponse))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -184,7 +362,7 @@
                         IXmlRpcValue value;
                         if (XmlRpcClient.TryParseValue(valueNavigator, out value))
                         {
-                            responseParameter = value;
+                            this.responseParameter = value;
                             wasLoaded = true;
                         }
                     }
@@ -198,7 +376,7 @@
                         XmlRpcStructureValue structure = new XmlRpcStructureValue();
                         if (structure.Load(structNavigator))
                         {
-                            responseFault = structure;
+                            this.responseFault = structure;
                             wasLoaded = true;
                         }
                     }
@@ -206,6 +384,36 @@
             }
 
             return wasLoaded;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
@@ -219,7 +427,7 @@
 
             writer.WriteStartElement("methodResponse");
 
-            if(this.Parameter != null)
+            if (this.Parameter != null)
             {
                 writer.WriteStartElement("params");
                 writer.WriteStartElement("param");
@@ -236,192 +444,6 @@
             }
 
             writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            XmlRpcResponse value = obj as XmlRpcResponse;
-
-            if (value != null)
-            {
-                int result = 0;
-
-                if(this.Fault != null)
-                {
-                    if (value.Fault != null)
-                    {
-                        result = result | this.Fault.CompareTo(value.Fault);
-                    }
-                    else
-                    {
-                        result = result | 1;
-                    }
-                }
-                else if(value.Fault != null)
-                {
-                    result = result | -1;
-                }
-
-                if (this.Parameter != null)
-                {
-                    if (value.Parameter != null)
-                    {
-                        result = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
-                    }
-                    else
-                    {
-                        result = result | 1;
-                    }
-                }
-                else if (value.Parameter != null)
-                {
-                    result = result | -1;
-                }
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is XmlRpcResponse))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(XmlRpcResponse first, XmlRpcResponse second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(XmlRpcResponse first, XmlRpcResponse second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(XmlRpcResponse first, XmlRpcResponse second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(XmlRpcResponse first, XmlRpcResponse second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

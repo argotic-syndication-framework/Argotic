@@ -1,16 +1,15 @@
-﻿using System;
-using System.Net;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-namespace Argotic.Examples
+﻿namespace Argotic.Examples
 {
+    using System;
+    using System.Net;
+    using Argotic.Common;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Contains the code examples for the <see cref="GenericSyndicationFeed"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class. 
+    ///     This class contains all of the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     public static class GenericSyndicationFeedExample
@@ -22,7 +21,7 @@ namespace Argotic.Examples
         {
             GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
-            foreach(GenericSyndicationCategory category in feed.Categories)
+            foreach (GenericSyndicationCategory category in feed.Categories)
             {
                 if (string.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -47,7 +46,7 @@ namespace Argotic.Examples
                 }
             }
 
-            if(feed.Format == SyndicationContentFormat.Rss)
+            if (feed.Format == SyndicationContentFormat.Rss)
             {
                 RssFeed rssFeed = feed.Resource as RssFeed;
                 if (rssFeed != null)
@@ -80,6 +79,7 @@ namespace Argotic.Examples
                 }
             }
         }
+
         /// <summary>
         /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
         /// </summary>

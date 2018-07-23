@@ -1,18 +1,18 @@
-﻿using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Xml;
+    using Argotic.Extensions.Core;
+    using Argotic.Syndication;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
-    ///This is a test class for ITunesSyndicationExtensionTest and is intended
-    ///to contain all ITunesSyndicationExtensionTest Unit Tests
-    ///</summary>
-    [TestClass()]
+    /// This is a test class for ITunesSyndicationExtensionTest and is intended
+    /// to contain all ITunesSyndicationExtensionTest Unit Tests
+    /// </summary>
+    [TestClass]
     public class ITunesSyndicationExtensionTest
     {
 
@@ -38,25 +38,26 @@ namespace Argotic.Extensions.Tests
         private TestContext testContextInstance;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        /// Gets or sets the test context which provides
+        /// information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext
         {
             get
             {
-                return testContextInstance;
+                return this.testContextInstance;
             }
+
             set
             {
-                testContextInstance = value;
+                this.testContextInstance = value;
             }
         }
 
         /// <summary>
-        ///A test for ITunesSyndicationExtension Constructor
-        ///</summary>
-        [TestMethod()]
+        /// A test for ITunesSyndicationExtension Constructor
+        /// </summary>
+        [TestMethod]
         public void ITunesSyndicationExtensionConstructorTest()
         {
             ITunesSyndicationExtension target = new ITunesSyndicationExtension();
@@ -65,13 +66,13 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for CompareTo
-        ///</summary>
-        [TestMethod()]
+        /// A test for CompareTo
+        /// </summary>
+        [TestMethod]
         public void ITunes_CompareToTest()
         {
-            ITunesSyndicationExtension target = CreateExtension1();
-            object obj = CreateExtension1();
+            ITunesSyndicationExtension target = this.CreateExtension1();
+            object obj = this.CreateExtension1();
             int expected = 0;
             int actual;
             actual = target.CompareTo(obj);
@@ -79,9 +80,9 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for ConvertDecimalToDegreesMinutesSeconds
-        ///</summary>
-        [TestMethod()]
+        /// A test for ConvertDecimalToDegreesMinutesSeconds
+        /// </summary>
+        [TestMethod]
         public void ITunes_ExplicitMaterialAsStringTest()
         {
             var value = ITunesExplicitMaterial.Clean;
@@ -91,9 +92,9 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for ConvertDegreesMinutesSecondsToDecimal
-        ///</summary>
-        [TestMethod()]
+        /// A test for ConvertDegreesMinutesSecondsToDecimal
+        /// </summary>
+        [TestMethod]
         public void ITunes_ExplicitMaterialByNameTest()
         {
             var expected = ITunesExplicitMaterial.Clean;
@@ -102,13 +103,13 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for Equals
-        ///</summary>
-        [TestMethod()]
+        /// A test for Equals
+        /// </summary>
+        [TestMethod]
         public void ITunes_EqualsTest()
         {
-            ITunesSyndicationExtension target = CreateExtension1();
-            object obj = CreateExtension1();
+            ITunesSyndicationExtension target = this.CreateExtension1();
+            object obj = this.CreateExtension1();
             bool expected = true;
             bool actual;
             actual = target.Equals(obj);
@@ -116,12 +117,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for GetHashCode
-        ///</summary>
+        /// A test for GetHashCode
+        /// </summary>
         [TestMethod, Ignore]
         public void ITunes_GetHashCodeTest()
         {
-            ITunesSyndicationExtension target = CreateExtension1();
+            ITunesSyndicationExtension target = this.CreateExtension1();
             int expected = -765758449;
             int actual;
             actual = target.GetHashCode();
@@ -129,8 +130,8 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for Load
-        ///</summary>
+        /// A test for Load
+        /// </summary>
         [TestMethod, Ignore]
         public void ITunes_LoadTest()
         {
@@ -167,7 +168,7 @@ namespace Argotic.Extensions.Tests
         [TestMethod]
         public void ITunes_CreateXmlTest()
         {
-            var itunes = CreateExtension1();
+            var itunes = this.CreateExtension1();
 
             var actual = ExtensionTestUtil.AddExtensionToXml(itunes);
             string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
@@ -185,10 +186,6 @@ namespace Argotic.Extensions.Tests
                 RssFeed feed = new RssFeed();
                 feed.Load(reader);
 
-                //				 Assert.IsTrue(feed.Channel.HasExtensions);
-                //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
-                //						 typeof(ITunesSyndicationExtension));
-
                 Assert.AreEqual(1, feed.Channel.Items.Count());
                 var item = feed.Channel.Items.Single();
                 Assert.IsTrue(item.HasExtensions);
@@ -202,12 +199,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for MatchByType
-        ///</summary>
-        [TestMethod()]
+        /// A test for MatchByType
+        /// </summary>
+        [TestMethod]
         public void ITunes_MatchByTypeTest()
         {
-            ISyndicationExtension extension = CreateExtension1();
+            ISyndicationExtension extension = this.CreateExtension1();
             bool expected = true;
             bool actual;
             actual = ITunesSyndicationExtension.MatchByType(extension);
@@ -215,12 +212,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for ToString
-        ///</summary>
-        [TestMethod()]
+        /// A test for ToString
+        /// </summary>
+        [TestMethod]
         public void ITunes_ToStringTest()
         {
-            ITunesSyndicationExtension target = CreateExtension1();
+            ITunesSyndicationExtension target = this.CreateExtension1();
             string expected = nycText;
             string actual;
             actual = target.ToString();
@@ -228,97 +225,96 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for WriteTo
-        ///</summary>
-        [TestMethod()]
+        /// A test for WriteTo
+        /// </summary>
+        [TestMethod]
         public void ITunes_WriteToTest()
         {
             using (var sw = new StringWriter())
             using (XmlWriter writer = new XmlTextWriter(sw))
             {
 
-                var target = CreateExtension1();
+                var target = this.CreateExtension1();
                 target.WriteTo(writer);
                 var output = sw.ToString();
-                Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+                Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", string.Empty).Replace(Environment.NewLine, string.Empty), output.Replace(Environment.NewLine, string.Empty));
             }
         }
 
         /// <summary>
-        ///A test for op_Equality
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_Equality
+        /// </summary>
+        [TestMethod]
         public void ITunes_op_EqualityTest_Failure()
         {
-            ITunesSyndicationExtension first = CreateExtension1();
-            ITunesSyndicationExtension second = CreateExtension2();
+            ITunesSyndicationExtension first = this.CreateExtension1();
+            ITunesSyndicationExtension second = this.CreateExtension2();
             bool expected = false;
             bool actual;
-            actual = (first == second);
+            actual = first == second;
             Assert.AreEqual(expected, actual);
         }
 
         public void ITunes_op_EqualityTest_Success()
         {
-            ITunesSyndicationExtension first = CreateExtension1();
-            ITunesSyndicationExtension second = CreateExtension1();
+            ITunesSyndicationExtension first = this.CreateExtension1();
+            ITunesSyndicationExtension second = this.CreateExtension1();
             bool expected = true;
             bool actual;
-            actual = (first == second);
+            actual = first == second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_GreaterThan
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_GreaterThan
+        /// </summary>
+        [TestMethod]
         public void ITunes_op_GreaterThanTest()
         {
-            ITunesSyndicationExtension first = CreateExtension1();
-            ITunesSyndicationExtension second = CreateExtension2();
+            ITunesSyndicationExtension first = this.CreateExtension1();
+            ITunesSyndicationExtension second = this.CreateExtension2();
             bool expected = false;
             bool actual = false;
-            actual = (first > second);
+            actual = first > second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_Inequality
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_Inequality
+        /// </summary>
+        [TestMethod]
         public void ITunes_op_InequalityTest()
         {
-            ITunesSyndicationExtension first = CreateExtension1();
-            ITunesSyndicationExtension second = CreateExtension2();
+            ITunesSyndicationExtension first = this.CreateExtension1();
+            ITunesSyndicationExtension second = this.CreateExtension2();
             bool expected = true;
-            bool actual = (first != second);
+            bool actual = first != second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_LessThan
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_LessThan
+        /// </summary>
+        [TestMethod]
         public void ITunes_op_LessThanTest()
         {
-            ITunesSyndicationExtension first = CreateExtension1();
-            ITunesSyndicationExtension second = CreateExtension2();
+            ITunesSyndicationExtension first = this.CreateExtension1();
+            ITunesSyndicationExtension second = this.CreateExtension2();
             bool expected = true;
             bool actual;
-            actual = (first < second);
+            actual = first < second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for Context
-        ///</summary>
-        [TestMethod(), Ignore]
+        /// A test for Context
+        /// </summary>
+        [TestMethod, Ignore]
         public void ITunes_ContextTest()
         {
-            ITunesSyndicationExtension target = CreateExtension1();
+            ITunesSyndicationExtension target = this.CreateExtension1();
             ITunesSyndicationExtensionContext expected = CreateContext1();
             ITunesSyndicationExtensionContext actual;
-            //			target.Context = expected;
             actual = target.Context;
             var b = actual.Equals(expected);
             Assert.AreEqual(expected, actual);
@@ -368,8 +364,6 @@ namespace Argotic.Extensions.Tests
         public static ITunesSyndicationExtensionContext CreateContext1()
         {
             var nyc = new ITunesSyndicationExtensionContext();
-            //nyc.Latitude = 40;
-            //nyc.Longitude = -74;
             return nyc;
         }
     }

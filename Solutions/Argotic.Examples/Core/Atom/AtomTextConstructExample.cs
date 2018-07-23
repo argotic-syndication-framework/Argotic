@@ -35,7 +35,7 @@
             entry.Title = new AtomTextConstruct("Atom-Powered Robots Run Amok");
             entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
-            //  Provide summary as entity escaped html
+            // Provide summary as entity escaped html
             AtomTextConstruct summary = new AtomTextConstruct();
             summary.Content = "AT&amp;amp;T bought &lt;b&gt;by SBC&lt;/b&gt;!";
             summary.TextType = AtomTextConstructType.Html;

@@ -27,10 +27,10 @@
             feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
             feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-            //  Identify the author of the feed
+            // Identify the author of the feed
             feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-            //  Identify the contributors to the feed
+            // Identify the contributors to the feed
             feed.Contributors.Add(new AtomPersonConstruct("Jane Doe"));
 
             AtomPersonConstruct contributor = new AtomPersonConstruct();
@@ -47,7 +47,7 @@
 
             entry.Summary = new AtomTextConstruct("Some text.");
 
-            //  Identify the author of the entry
+            // Identify the author of the entry
             entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));
 
             feed.AddEntry(entry);

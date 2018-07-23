@@ -85,7 +85,7 @@
 
             document.AddProfile(workProfile);
 
-            //  Define application specific data
+            // Define application specific data
             ApmlApplication sampleApplication = new ApmlApplication("sample.com");
             sampleApplication.Data = "<SampleAppEl />";
 

@@ -1,20 +1,20 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
-using System.Linq;
-using System.Xml.XPath;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Extensions.Core;
+    using Argotic.Syndication;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
-    ///This is a test class for PheedSyndicationExtensionTest and is intended
-    ///to contain all PheedSyndicationExtensionTest Unit Tests
-    ///</summary>
-    [TestClass()]
+    /// This is a test class for PheedSyndicationExtensionTest and is intended
+    /// to contain all PheedSyndicationExtensionTest Unit Tests
+    /// </summary>
+    [TestClass]
     public class PheedSyndicationExtensionTest
     {
         const string namespc = @"xmlns:photo=""http://www.pheed.com/pheed/""";
@@ -28,25 +28,26 @@ namespace Argotic.Extensions.Tests
         private TestContext testContextInstance;
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        /// Gets or sets the test context which provides
+        /// information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext
         {
             get
             {
-                return testContextInstance;
+                return this.testContextInstance;
             }
+
             set
             {
-                testContextInstance = value;
+                this.testContextInstance = value;
             }
         }
 
         /// <summary>
-        ///A test for PheedSyndicationExtension Constructor
-        ///</summary>
-        [TestMethod()]
+        /// A test for PheedSyndicationExtension Constructor
+        /// </summary>
+        [TestMethod]
         public void PheedSyndicationExtensionConstructorTest()
         {
             PheedSyndicationExtension target = new PheedSyndicationExtension();
@@ -55,13 +56,13 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for CompareTo
-        ///</summary>
-        [TestMethod()]
+        /// A test for CompareTo
+        /// </summary>
+        [TestMethod]
         public void Pheed_CompareToTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
-            object obj = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
+            object obj = this.CreateExtension1();
             int expected = 0;
             int actual;
             actual = target.CompareTo(obj);
@@ -69,13 +70,13 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for Equals
-        ///</summary>
-        [TestMethod()]
+        /// A test for Equals
+        /// </summary>
+        [TestMethod]
         public void Pheed_EqualsTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
-            object obj = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
+            object obj = this.CreateExtension1();
             bool expected = true;
             bool actual;
             actual = target.Equals(obj);
@@ -83,12 +84,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for GetHashCode
-        ///</summary>
+        /// A test for GetHashCode
+        /// </summary>
         [TestMethod, Ignore]
         public void Pheed_GetHashCodeTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
             int expected = -1671096665;
             int actual;
             actual = target.GetHashCode();
@@ -96,8 +97,8 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for Load
-        ///</summary>
+        /// A test for Load
+        /// </summary>
         [TestMethod, Ignore]
         public void Pheed_LoadTest()
         {
@@ -155,10 +156,6 @@ namespace Argotic.Extensions.Tests
                 RssFeed feed = new RssFeed();
                 feed.Load(reader);
 
-                //				 Assert.IsTrue(feed.Channel.HasExtensions);
-                //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
-                //						 typeof(PheedSyndicationExtension));
-
                 Assert.AreEqual(1, feed.Channel.Items.Count());
                 var item = feed.Channel.Items.Single();
                 Assert.IsTrue(item.HasExtensions);
@@ -172,12 +169,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for MatchByType
-        ///</summary>
-        [TestMethod()]
+        /// A test for MatchByType
+        /// </summary>
+        [TestMethod]
         public void Pheed_MatchByTypeTest()
         {
-            ISyndicationExtension extension = CreateExtension1();
+            ISyndicationExtension extension = this.CreateExtension1();
             bool expected = true;
             bool actual;
             actual = PheedSyndicationExtension.MatchByType(extension);
@@ -185,12 +182,12 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for ToString
-        ///</summary>
-        [TestMethod()]
+        /// A test for ToString
+        /// </summary>
+        [TestMethod]
         public void Pheed_ToStringTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
             string expected = nycText;
             string actual;
             actual = target.ToString();
@@ -198,97 +195,96 @@ namespace Argotic.Extensions.Tests
         }
 
         /// <summary>
-        ///A test for WriteTo
-        ///</summary>
-        [TestMethod()]
+        /// A test for WriteTo
+        /// </summary>
+        [TestMethod]
         public void Pheed_WriteToTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
             using (var sw = new StringWriter())
             using (XmlWriter writer = new XmlTextWriter(sw))
             {
 
                 target.WriteTo(writer);
                 var output = sw.ToString();
-                Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+                Assert.AreEqual(nycText.Replace(Environment.NewLine, string.Empty), output.Replace(Environment.NewLine, string.Empty));
             }
         }
 
         /// <summary>
-        ///A test for op_Equality
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_Equality
+        /// </summary>
+        [TestMethod]
         public void Pheed_op_EqualityTest_Failure()
         {
-            PheedSyndicationExtension first = CreateExtension1();
-            PheedSyndicationExtension second = CreateExtension2();
+            PheedSyndicationExtension first = this.CreateExtension1();
+            PheedSyndicationExtension second = this.CreateExtension2();
             bool expected = false;
             bool actual;
-            actual = (first == second);
+            actual = first == second;
             Assert.AreEqual(expected, actual);
         }
 
         public void Pheed_op_EqualityTest_Success()
         {
-            PheedSyndicationExtension first = CreateExtension1();
-            PheedSyndicationExtension second = CreateExtension1();
+            PheedSyndicationExtension first = this.CreateExtension1();
+            PheedSyndicationExtension second = this.CreateExtension1();
             bool expected = true;
             bool actual;
-            actual = (first == second);
+            actual = first == second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_GreaterThan
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_GreaterThan
+        /// </summary>
+        [TestMethod]
         public void Pheed_op_GreaterThanTest()
         {
-            PheedSyndicationExtension first = CreateExtension1();
-            PheedSyndicationExtension second = CreateExtension2();
+            PheedSyndicationExtension first = this.CreateExtension1();
+            PheedSyndicationExtension second = this.CreateExtension2();
             bool expected = false;
             bool actual = false;
-            actual = (first > second);
+            actual = first > second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_Inequality
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_Inequality
+        /// </summary>
+        [TestMethod]
         public void Pheed_op_InequalityTest()
         {
-            PheedSyndicationExtension first = CreateExtension1();
-            PheedSyndicationExtension second = CreateExtension2();
+            PheedSyndicationExtension first = this.CreateExtension1();
+            PheedSyndicationExtension second = this.CreateExtension2();
             bool expected = true;
-            bool actual = (first != second);
+            bool actual = first != second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for op_LessThan
-        ///</summary>
-        [TestMethod()]
+        /// A test for op_LessThan
+        /// </summary>
+        [TestMethod]
         public void Pheed_op_LessThanTest()
         {
-            PheedSyndicationExtension first = CreateExtension1();
-            PheedSyndicationExtension second = CreateExtension2();
+            PheedSyndicationExtension first = this.CreateExtension1();
+            PheedSyndicationExtension second = this.CreateExtension2();
             bool expected = true;
             bool actual;
-            actual = (first < second);
+            actual = first < second;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        ///A test for Context
-        ///</summary>
-        [TestMethod(), Ignore]
+        /// A test for Context
+        /// </summary>
+        [TestMethod, Ignore]
         public void Pheed_ContextTest()
         {
-            PheedSyndicationExtension target = CreateExtension1();
+            PheedSyndicationExtension target = this.CreateExtension1();
             PheedSyndicationExtensionContext expected = CreateContext1();
             PheedSyndicationExtensionContext actual;
-            //			target.Context = expected;
             actual = target.Context;
             var b = actual.Equals(expected);
             Assert.AreEqual(expected, actual);

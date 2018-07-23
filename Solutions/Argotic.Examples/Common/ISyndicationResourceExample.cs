@@ -12,7 +12,9 @@
     /// Example implementation of the <see cref="ISyndicationResource"/> interface.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+#pragma warning disable SA1649 // File name should match first type name
     public class MyCustomRssFeed : ISyndicationResource
+#pragma warning restore SA1649 // File name should match first type name
     {
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
@@ -25,6 +27,11 @@
         private static Version feedVersion = new Version(3, 0);
 
         /// <summary>
+        /// Private member to hold HTTP web request used by asynchronous load operations.
+        /// </summary>
+        private static WebRequest asyncHttpWebRequest;
+
+        /// <summary>
         /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         private bool resourceAsyncLoadCancelled;
@@ -33,11 +40,6 @@
         /// Private member to hold a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         private bool resourceIsLoading;
-
-        /// <summary>
-        /// Private member to hold HTTP web request used by asynchronous load operations.
-        /// </summary>
-        private static WebRequest asyncHttpWebRequest;
 
         /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
@@ -64,7 +66,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
         internal bool AsyncLoadHasBeenCancelled
@@ -81,7 +83,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the syndication resource is in the process of loading.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
         internal bool LoadOperationInProgress
@@ -481,8 +483,7 @@
             writer.WriteStartElement("rss");
             writer.WriteAttributeString("version", this.Version.ToString());
 
-            //  Code to write XML representation of custom syndication resource to the supplied writer would go here
-
+            // Code to write XML representation of custom syndication resource to the supplied writer would go here
             writer.WriteEndElement();
         }
 
@@ -677,7 +678,7 @@
                                     navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                                 }
 
-                                //  Code to load the syndication resource using the XPathNavigator would go here.
+                                // Code to load the syndication resource using the XPathNavigator would go here.
                                 //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed;
                                 //  otherwise you would utilize the feed's Load method.
                                 feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
@@ -727,7 +728,7 @@
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
 
-            //  Code to load the syndication resource using the XPathNavigator would go here.
+            // Code to load the syndication resource using the XPathNavigator would go here.
             //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed;
             //  otherwise you would utilize the feed's Load method.
             this.OnFeedLoaded(eventData);

@@ -91,7 +91,7 @@
             {
                 if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process channel items published in the last week
+                    // Process channel items published in the last week
                 }
             }
         }
@@ -134,7 +134,7 @@
             {
                 if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process channel items published in the last week
+                    // Process channel items published in the last week
                 }
             }
         }
@@ -154,7 +154,7 @@
                 {
                     if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
                     {
-                        //  Process channel items published in the last week
+                        // Process channel items published in the last week
                     }
                 }
             }
@@ -181,7 +181,7 @@
                     {
                         if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
                         {
-                            //  Process channel items published in the last week
+                            // Process channel items published in the last week
                         }
                     }
                 }
@@ -202,7 +202,7 @@
             {
                 if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process channel items published in the last week
+                    // Process channel items published in the last week
                 }
             }
         }
@@ -214,8 +214,7 @@
         {
             RssFeed feed = new RssFeed();
 
-            //  Modify feed state using public properties and methods
-
+            // Modify feed state using public properties and methods
             using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
             {
                 feed.Save(stream);
@@ -229,8 +228,7 @@
         {
             RssFeed feed = new RssFeed();
 
-            //  Modify feed state using public properties and methods
-
+            // Modify feed state using public properties and methods
             using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

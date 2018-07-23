@@ -37,7 +37,7 @@
 
             entry.Summary = new AtomTextConstruct("Some text.");
 
-            //  Define the complete content of the entry
+            // Define the complete content of the entry
             entry.Content = new AtomContent("Powered by <b>Argotic</b>!", "xhtml");
 
             feed.AddEntry(entry);

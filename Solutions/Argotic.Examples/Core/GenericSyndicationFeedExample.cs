@@ -25,7 +25,7 @@
             {
                 if (string.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    //  Process feed category
+                    // Process feed category
                 }
             }
 
@@ -34,14 +34,14 @@
             {
                 if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process generic item's published in the last week
+                    // Process generic item's published in the last week
                 }
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
                     if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        //  Process item category
+                        // Process item category
                     }
                 }
             }
@@ -51,7 +51,7 @@
                 RssFeed rssFeed = feed.Resource as RssFeed;
                 if (rssFeed != null)
                 {
-                    //  Process RSS format specific information
+                    // Process RSS format specific information
                 }
             }
         }
@@ -67,14 +67,14 @@
             {
                 if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process generic item's published in the last week
+                    // Process generic item's published in the last week
                 }
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
                     if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        //  Process item category
+                        // Process item category
                     }
                 }
             }
@@ -94,14 +94,14 @@
             {
                 if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
                 {
-                    //  Process generic item's published in the last week
+                    // Process generic item's published in the last week
                 }
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
                     if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        //  Process item category
+                        // Process item category
                     }
                 }
             }

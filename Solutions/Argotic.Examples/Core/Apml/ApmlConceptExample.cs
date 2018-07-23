@@ -30,7 +30,7 @@
             ApmlProfile homeProfile = new ApmlProfile();
             homeProfile.Name = "Home";
 
-            //  Define the implicit concepts associated with this profile
+            // Define the implicit concepts associated with this profile
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
@@ -57,7 +57,7 @@
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
 
-            //  Define the explicit concepts associated with this profile
+            // Define the explicit concepts associated with this profile
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
             ApmlSource techCrunchSource = new ApmlSource();
@@ -74,7 +74,7 @@
             ApmlProfile workProfile = new ApmlProfile();
             workProfile.Name = "Work";
 
-            //  Define the explicit concepts associated with this profile
+            // Define the explicit concepts associated with this profile
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
             ApmlSource workTechCrunchSource = new ApmlSource();

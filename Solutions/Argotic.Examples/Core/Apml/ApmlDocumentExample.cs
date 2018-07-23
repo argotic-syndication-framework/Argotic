@@ -34,7 +34,7 @@
             ApmlProfile homeProfile = new ApmlProfile();
             homeProfile.Name = "Home";
 
-            //  Provide the implicit data associated with this profile
+            // Provide the implicit data associated with this profile
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
@@ -61,7 +61,7 @@
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
 
-            //  Provide the explicit data associated with this profile
+            // Provide the explicit data associated with this profile
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
             ApmlSource techCrunchSource = new ApmlSource();
@@ -78,7 +78,7 @@
             ApmlProfile workProfile = new ApmlProfile();
             workProfile.Name = "Work";
 
-            //  Provide the explicit data associated with this profile
+            // Provide the explicit data associated with this profile
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
             ApmlSource workTechCrunchSource = new ApmlSource();
@@ -109,7 +109,7 @@
             {
                 if (profile.Name == document.DefaultProfileName)
                 {
-                    //  Perform some processing on the attention profile
+                    // Perform some processing on the attention profile
                     break;
                 }
             }
@@ -153,7 +153,7 @@
             {
                 if (profile.Name == document.DefaultProfileName)
                 {
-                    //  Perform some processing on the attention profile
+                    // Perform some processing on the attention profile
                     break;
                 }
             }
@@ -174,7 +174,7 @@
                 {
                     if (profile.Name == document.DefaultProfileName)
                     {
-                        //  Perform some processing on the attention profile
+                        // Perform some processing on the attention profile
                         break;
                     }
                 }
@@ -202,7 +202,7 @@
                     {
                         if (profile.Name == document.DefaultProfileName)
                         {
-                            //  Perform some processing on the attention profile
+                            // Perform some processing on the attention profile
                             break;
                         }
                     }
@@ -224,7 +224,7 @@
             {
                 if (profile.Name == document.DefaultProfileName)
                 {
-                    //  Perform some processing on the attention profile
+                    // Perform some processing on the attention profile
                     break;
                 }
             }
@@ -237,8 +237,7 @@
         {
             ApmlDocument document = new ApmlDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 document.Save(stream);
@@ -252,8 +251,7 @@
         {
             ApmlDocument document = new ApmlDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

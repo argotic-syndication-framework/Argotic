@@ -26,7 +26,7 @@
 
             feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
 
-            //  Identify a related web resource for the feed
+            // Identify a related web resource for the feed
             feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
             feed.Authors.Add(new AtomPersonConstruct("John Doe"));
@@ -39,7 +39,7 @@
 
             entry.Summary = new AtomTextConstruct("Some text.");
 
-            //  Identify a related web resource for the entry
+            // Identify a related web resource for the entry
             entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
 
             feed.AddEntry(entry);

@@ -37,7 +37,7 @@
 
             entry.Summary = new AtomTextConstruct("Some text.");
 
-            //  Entry was copied from another feed, so preserve source meta-data
+            // Entry was copied from another feed, so preserve source meta-data
             AtomSource source = new AtomSource();
             source.Id = new AtomId(new Uri("http://example2.org/"));
             source.Title = new AtomTextConstruct("Fourty-Two");

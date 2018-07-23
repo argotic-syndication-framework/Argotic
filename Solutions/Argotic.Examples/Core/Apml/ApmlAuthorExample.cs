@@ -53,7 +53,7 @@
             apmlSpecSource.From = "GatheringTool.com";
             apmlSpecSource.UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
 
-            //  Identify the author of the implicit source
+            // Identify the author of the implicit source
             apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
@@ -66,7 +66,7 @@
             techCrunchSource.Value = 0.4m;
             techCrunchSource.MimeType = "application/rss+xml";
 
-            //  Identify the author of the explicit source
+            // Identify the author of the explicit source
             techCrunchSource.Authors.Add(new ApmlAuthor("ExplicitSample", 0.5m));
 
             homeProfile.ExplicitSources.Add(techCrunchSource);
@@ -84,7 +84,7 @@
             workTechCrunchSource.Value = 0.4m;
             workTechCrunchSource.MimeType = "application/atom+xml";
 
-            //  Identify the author of the explicit source
+            // Identify the author of the explicit source
             workTechCrunchSource.Authors.Add(new ApmlAuthor("ProfessionalBlogger", 0.5m));
 
             homeProfile.ExplicitSources.Add(workTechCrunchSource);

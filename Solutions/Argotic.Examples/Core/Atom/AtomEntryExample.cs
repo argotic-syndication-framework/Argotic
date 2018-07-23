@@ -42,7 +42,7 @@
 
             if (entry.PublishedOn >= DateTime.Today)
             {
-                //  Perform some processing on the entry
+                // Perform some processing on the entry
             }
         }
 
@@ -82,7 +82,7 @@
 
             if (entry.UpdatedOn >= DateTime.Today)
             {
-                //  Perform some processing on the entry
+                // Perform some processing on the entry
             }
         }
 
@@ -99,7 +99,7 @@
 
                 if (entry.UpdatedOn >= DateTime.Today)
                 {
-                    //  Perform some processing on the entry
+                    // Perform some processing on the entry
                 }
             }
         }
@@ -123,7 +123,7 @@
 
                     if (entry.UpdatedOn >= DateTime.Today)
                     {
-                        //  Perform some processing on the entry
+                        // Perform some processing on the entry
                     }
                 }
             }
@@ -141,7 +141,7 @@
 
             if (entry.UpdatedOn >= DateTime.Today)
             {
-                //  Perform some processing on the entry
+                // Perform some processing on the entry
             }
         }
 
@@ -152,8 +152,7 @@
         {
             AtomEntry entry = new AtomEntry();
 
-            //  Modify entry state using public properties and methods
-
+            // Modify entry state using public properties and methods
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 entry.Save(stream);
@@ -167,8 +166,7 @@
         {
             AtomEntry entry = new AtomEntry();
 
-            //  Modify entry state using public properties and methods
-
+            // Modify entry state using public properties and methods
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

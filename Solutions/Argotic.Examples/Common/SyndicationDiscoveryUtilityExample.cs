@@ -36,8 +36,7 @@
         /// </summary>
         public static void SourceReferencesTargetExample()
         {
-            //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
-
+            // Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
             Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
             Uri target = new Uri("http://www.wikimindmap.org/");
 
@@ -157,7 +156,7 @@
 
             if (SyndicationDiscoveryUtility.IsPingbackEnabled(source))
             {
-                //  Parse source for Pingback information
+                // Parse source for Pingback information
             }
         }
 
@@ -176,7 +175,6 @@
                 Argotic.Net.XmlRpcMessage message = new Argotic.Net.XmlRpcMessage();
 
                 // Build the Pingback XML-RPC message to be sent
-
                 client.Send(message);
             }
         }
@@ -209,8 +207,7 @@
                 Argotic.Net.TrackbackClient client = new Argotic.Net.TrackbackClient(endpoint.PingUrl);
                 Argotic.Net.TrackbackMessage message = new Argotic.Net.TrackbackMessage();
 
-                //  Build Trackback url-encoded message to be sent
-
+                // Build Trackback url-encoded message to be sent
                 client.Send(message);
             }
         }

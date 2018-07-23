@@ -45,7 +45,7 @@
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
-            //  Define the implicit source associated to this profile
+            // Define the implicit source associated to this profile
             ApmlSource apmlSpecSource = new ApmlSource();
             apmlSpecSource.Key = "http://feeds.feedburner.com/apmlspec";
             apmlSpecSource.Name = "APML.org";
@@ -59,7 +59,7 @@
 
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
-            //  Define the explicit source associated to this profile
+            // Define the explicit source associated to this profile
             ApmlSource techCrunchSource = new ApmlSource();
             techCrunchSource.Key = "http://feeds.feedburner.com/TechCrunch";
             techCrunchSource.Name = "Techcrunch";
@@ -76,7 +76,7 @@
 
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
-            //  Define the explicit source associated to this profile
+            // Define the explicit source associated to this profile
             ApmlSource workTechCrunchSource = new ApmlSource();
             workTechCrunchSource.Key = "http://feeds.feedburner.com/TechCrunch";
             workTechCrunchSource.Name = "Techcrunch";

@@ -25,7 +25,7 @@
             document.EngineLink = new Uri("http://www.blogmunging.com/");
             document.Homepage = new Uri("http://www.userdomain.com/");
 
-            //  Identify supported services using well known names
+            // Identify supported services using well known names
             document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
             document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
             document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));

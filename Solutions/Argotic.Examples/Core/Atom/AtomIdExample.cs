@@ -20,7 +20,7 @@
         {
             AtomFeed feed = new AtomFeed();
 
-            //  Identifies the feed using a universally unique and permanent URI
+            // Identifies the feed using a universally unique and permanent URI
             feed.Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
 
             feed.Title = new AtomTextConstruct("Example Feed");
@@ -33,7 +33,7 @@
 
             AtomEntry entry = new AtomEntry();
 
-            //  Identifies the entry using a universally unique and permanent URI
+            // Identifies the entry using a universally unique and permanent URI
             entry.Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
 
             entry.Title = new AtomTextConstruct("Atom-Powered Robots Run Amok");

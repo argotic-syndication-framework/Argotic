@@ -55,7 +55,7 @@
             {
                 if (entry.PublishedOn >= DateTime.Today)
                 {
-                    //  Perform some processing on the feed entry
+                    // Perform some processing on the feed entry
                 }
             }
         }
@@ -98,7 +98,7 @@
             {
                 if (entry.PublishedOn >= DateTime.Today)
                 {
-                    //  Perform some processing on the feed entry
+                    // Perform some processing on the feed entry
                 }
             }
         }
@@ -118,7 +118,7 @@
                 {
                     if (entry.PublishedOn >= DateTime.Today)
                     {
-                        //  Perform some processing on the feed entry
+                        // Perform some processing on the feed entry
                     }
                 }
             }
@@ -145,7 +145,7 @@
                     {
                         if (entry.PublishedOn >= DateTime.Today)
                         {
-                            //  Perform some processing on the feed entry
+                            // Perform some processing on the feed entry
                         }
                     }
                 }
@@ -166,7 +166,7 @@
             {
                 if (entry.PublishedOn >= DateTime.Today)
                 {
-                    //  Perform some processing on the feed entry
+                    // Perform some processing on the feed entry
                 }
             }
         }
@@ -178,8 +178,7 @@
         {
             AtomFeed feed = new AtomFeed();
 
-            //  Modify feed state using public properties and methods
-
+            // Modify feed state using public properties and methods
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
             {
                 feed.Save(stream);
@@ -193,8 +192,7 @@
         {
             AtomFeed feed = new AtomFeed();
 
-            //  Modify feed state using public properties and methods
-
+            // Modify feed state using public properties and methods
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

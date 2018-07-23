@@ -27,7 +27,7 @@
             document.Head.EmailAddress = "sample@apml.org";
             document.Head.CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
 
-            //  Create home attention profile
+            // Create home attention profile
             ApmlProfile homeProfile = new ApmlProfile();
             homeProfile.Name = "Home";
 
@@ -70,7 +70,7 @@
 
             document.AddProfile(homeProfile);
 
-            //  Create work attention profile
+            // Create work attention profile
             ApmlProfile workProfile = new ApmlProfile();
             workProfile.Name = "Work";
 

@@ -108,7 +108,7 @@
             {
                 if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
                 {
-                    //  Perform some processing on the blog post
+                    // Perform some processing on the blog post
                 }
             }
         }
@@ -151,7 +151,7 @@
             {
                 if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
                 {
-                    //  Perform some processing on the blog post
+                    // Perform some processing on the blog post
                 }
             }
         }
@@ -171,7 +171,7 @@
                 {
                     if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
                     {
-                        //  Perform some processing on the blog post
+                        // Perform some processing on the blog post
                     }
                 }
             }
@@ -198,7 +198,7 @@
                     {
                         if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
                         {
-                            //  Perform some processing on the blog post
+                            // Perform some processing on the blog post
                         }
                     }
                 }
@@ -219,7 +219,7 @@
             {
                 if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
                 {
-                    //  Perform some processing on the blog post
+                    // Perform some processing on the blog post
                 }
             }
         }
@@ -231,8 +231,7 @@
         {
             BlogMLDocument document = new BlogMLDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 document.Save(stream);
@@ -246,8 +245,7 @@
         {
             BlogMLDocument document = new BlogMLDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

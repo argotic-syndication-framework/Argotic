@@ -40,7 +40,7 @@
 
             entry.Summary = new AtomTextConstruct("Some text.");
 
-            //  Categorize the feed entry
+            // Categorize the feed entry
             AtomCategory entryCategory = new AtomCategory();
             entryCategory.Label = "Baseball";
             entryCategory.Scheme = new Uri("http://example.org/scheme/category");

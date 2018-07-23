@@ -29,7 +29,7 @@
 
             feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-            //  Provide iconic visual identification for the feed
+            // Provide iconic visual identification for the feed
             feed.Icon = new AtomIcon(new Uri("/icon.jpg"));
 
             AtomEntry entry = new AtomEntry();

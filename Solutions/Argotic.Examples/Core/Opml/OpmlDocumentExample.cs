@@ -49,7 +49,7 @@
             {
                 if (outline.IsSubscriptionListOutline)
                 {
-                    //  Process outline information
+                    // Process outline information
                 }
             }
         }
@@ -92,7 +92,7 @@
             {
                 if (outline.IsSubscriptionListOutline)
                 {
-                    //  Process outline information
+                    // Process outline information
                 }
             }
         }
@@ -112,7 +112,7 @@
                 {
                     if (outline.IsSubscriptionListOutline)
                     {
-                        //  Process outline information
+                        // Process outline information
                     }
                 }
             }
@@ -139,7 +139,7 @@
                     {
                         if (outline.IsSubscriptionListOutline)
                         {
-                            //  Process outline information
+                            // Process outline information
                         }
                     }
                 }
@@ -160,7 +160,7 @@
             {
                 if (outline.IsSubscriptionListOutline)
                 {
-                    //  Process outline information
+                    // Process outline information
                 }
             }
         }
@@ -172,8 +172,7 @@
         {
             OpmlDocument document = new OpmlDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 document.Save(stream);
@@ -187,8 +186,7 @@
         {
             OpmlDocument document = new OpmlDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

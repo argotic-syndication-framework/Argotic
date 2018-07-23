@@ -53,7 +53,7 @@
             {
                 if (api.IsPreferred)
                 {
-                    //  Perform some processing on the application programming interface
+                    // Perform some processing on the application programming interface
                     break;
                 }
             }
@@ -97,7 +97,7 @@
             {
                 if (api.IsPreferred)
                 {
-                    //  Perform some processing on the application programming interface
+                    // Perform some processing on the application programming interface
                     break;
                 }
             }
@@ -118,7 +118,7 @@
                 {
                     if (api.IsPreferred)
                     {
-                        //  Perform some processing on the application programming interface
+                        // Perform some processing on the application programming interface
                         break;
                     }
                 }
@@ -146,7 +146,7 @@
                     {
                         if (api.IsPreferred)
                         {
-                            //  Perform some processing on the application programming interface
+                            // Perform some processing on the application programming interface
                             break;
                         }
                     }
@@ -168,7 +168,7 @@
             {
                 if (api.IsPreferred)
                 {
-                    //  Perform some processing on the application programming interface
+                    // Perform some processing on the application programming interface
                     break;
                 }
             }
@@ -181,8 +181,7 @@
         {
             RsdDocument document = new RsdDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 document.Save(stream);
@@ -196,8 +195,7 @@
         {
             RsdDocument document = new RsdDocument();
 
-            //  Modify document state using public properties and methods
-
+            // Modify document state using public properties and methods
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();

@@ -29,7 +29,7 @@
 
             feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-            //  Identify the software used to generate the feed
+            // Identify the software used to generate the feed
             AtomGenerator generator = new AtomGenerator("Example Toolkit");
             generator.Uri = new Uri("/myblog.php");
             generator.Version = "1.0";

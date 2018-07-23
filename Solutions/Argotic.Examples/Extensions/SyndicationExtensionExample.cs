@@ -4,13 +4,15 @@
     using System.IO;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Extensions;
 
 #pragma warning disable SA1649 // File name should match first type name
-                              /// <summary>
-                              /// Provides a simple example of a custom syndication extension.
-                              /// </summary>
+
+    /// <summary>
+    /// Provides a simple example of a custom syndication extension.
+    /// </summary>
     public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 #pragma warning restore SA1649 // File name should match first type name
     {
@@ -23,7 +25,13 @@
         /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
         /// </summary>
         public MyCustomSyndicationExtension()
-            : base("myPrefix", "http://www.example.com/2008/03/custom", new Version("1.0"), new Uri("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
+            : base(
+                "myPrefix",
+                "http://www.example.com/2008/03/custom",
+                new Version("1.0"),
+                new Uri("http://www.example.com/spec"),
+                "My Extension",
+                "Example of a custom syndication extension.")
         {
             // Class state initialized by abstract SyndicationExtension base class
         }
@@ -60,16 +68,36 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            else if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
 
             return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+            else if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
         }
 
         /// <summary>
@@ -91,36 +119,16 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            else if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
 
             return first.CompareTo(second) < 0;
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.CompareTo(second) > 0;
         }
 
         /// <summary>
@@ -142,6 +150,82 @@
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            MyCustomSyndicationExtension value = obj as MyCustomSyndicationExtension;
+
+            if (value != null)
+            {
+                // Base class properties
+                int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(
+                             this.Documentation,
+                             value.Documentation,
+                             UriComponents.AbsoluteUri,
+                             UriFormat.SafeUnescaped,
+                             StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Version.CompareTo(value.Version);
+                result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+                result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+
+                // Custom extension properties
+                result = result | string.Compare(
+                             this.MyAttribute,
+                             value.MyAttribute,
+                             StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(
+                    string.Format(
+                        null,
+                        "obj is not of type {0}, type was found to be '{1}'.",
+                        this.GetType().FullName,
+                        obj.GetType().FullName),
+                    "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is MyCustomSyndicationExtension))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -187,25 +271,6 @@
         }
 
         /// <summary>
-        /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public override void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-
-            writer.WriteStartElement("CustomExtension", this.XmlNamespace);
-
-            if (!string.IsNullOrEmpty(this.MyAttribute))
-            {
-                writer.WriteAttributeString("someAttribute", this.MyAttribute);
-            }
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.</returns>
@@ -236,65 +301,22 @@
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public override void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
+            Guard.ArgumentNotNull(writer, "writer");
+
+            writer.WriteStartElement("CustomExtension", this.XmlNamespace);
+
+            if (!string.IsNullOrEmpty(this.MyAttribute))
             {
-                return 1;
+                writer.WriteAttributeString("someAttribute", this.MyAttribute);
             }
 
-            MyCustomSyndicationExtension value = obj as MyCustomSyndicationExtension;
-
-            if (value != null)
-            {
-                // Base class properties
-                int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result = result | this.Version.CompareTo(value.Version);
-                result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-                result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
-
-                // Custom extension properties
-                result = result | string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is MyCustomSyndicationExtension))
-            {
-                return false;
-            }
-
-            return this.CompareTo(obj) == 0;
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
+            writer.WriteEndElement();
         }
     }
 }

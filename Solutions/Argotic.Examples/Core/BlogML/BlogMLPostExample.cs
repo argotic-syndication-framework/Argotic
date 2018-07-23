@@ -67,7 +67,7 @@
             category3.Title = new BlogMLTextConstruct("Category 3");
             document.Categories.Add(category3);
 
-            //  Create a blog entry
+            // Create a blog entry
             BlogMLPost post = new BlogMLPost();
             post.Id = "34";
             post.CreatedOn = new DateTime(2006, 9, 5, 3, 19, 0);

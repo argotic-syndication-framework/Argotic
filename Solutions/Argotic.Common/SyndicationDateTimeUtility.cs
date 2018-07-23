@@ -1,9 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Globalization;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Provides methods for generating and parsing date-time information exposed by syndicated content. This class cannot be inherited.
     /// </summary>
@@ -47,7 +47,7 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static string ToRfc3339DateTime(DateTime utcDateTime)
         {
-            DateTimeFormatInfo dateTimeFormat   = CultureInfo.InvariantCulture.DateTimeFormat;
+            DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
 
             if (utcDateTime.Kind == DateTimeKind.Local)
             {
@@ -72,19 +72,19 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static bool TryParseRfc3339DateTime(string value, out DateTime result)
         {
-            DateTimeFormatInfo dateTimeFormat   = CultureInfo.InvariantCulture.DateTimeFormat;
-            string[] formats                    = new string[15];
+            DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
+            string[] formats = new string[15];
 
-            formats[0]  = dateTimeFormat.SortableDateTimePattern;
-            formats[1]  = dateTimeFormat.UniversalSortableDateTimePattern;
-            formats[2]  = "yyyy'-'MM'-'dd'T'HH:mm:ss'Z'";
-            formats[3]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.f'Z'";
-            formats[4]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.ff'Z'";
-            formats[5]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.fff'Z'";
-            formats[6]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffff'Z'";
-            formats[7]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffff'Z'";
-            formats[8]  = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffff'Z'";
-            formats[9]  = "yyyy'-'MM'-'dd'T'HH:mm:sszzz";
+            formats[0] = dateTimeFormat.SortableDateTimePattern;
+            formats[1] = dateTimeFormat.UniversalSortableDateTimePattern;
+            formats[2] = "yyyy'-'MM'-'dd'T'HH:mm:ss'Z'";
+            formats[3] = "yyyy'-'MM'-'dd'T'HH:mm:ss.f'Z'";
+            formats[4] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ff'Z'";
+            formats[5] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fff'Z'";
+            formats[6] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffff'Z'";
+            formats[7] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffff'Z'";
+            formats[8] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffff'Z'";
+            formats[9] = "yyyy'-'MM'-'dd'T'HH:mm:sszzz";
             formats[10] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffzzz";
             formats[11] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffzzz";
             formats[12] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffzzz";
@@ -231,7 +231,7 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static string ToRfc822DateTime(DateTime dateTime)
         {
-            DateTimeFormatInfo dateTimeFormat   = CultureInfo.InvariantCulture.DateTimeFormat;
+            DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
 
             return dateTime.ToString(dateTimeFormat.RFC1123Pattern, dateTimeFormat);
         }
@@ -250,8 +250,8 @@ namespace Argotic.Common
         public static bool TryParseRfc822DateTime(string value, out DateTime result)
         {
             // patterns from http://stackoverflow.com/questions/284775/how-do-i-parse-and-convert-datetimes-to-the-rfc-822-date-time-format
-            DateTimeFormatInfo dateTimeFormat   = CultureInfo.InvariantCulture.DateTimeFormat;
-            string[] formats                    = new string[36];
+            DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
+            string[] formats = new string[36];
 
             // two-digit day, four-digit year patterns
             formats[0] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffffff zzzz";

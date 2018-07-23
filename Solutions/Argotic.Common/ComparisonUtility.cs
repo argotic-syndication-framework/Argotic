@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Provides methods for performing logical comparison operations. This class cannot be inherited.
     /// </summary>
@@ -34,7 +34,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -79,7 +79,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<int> source, Collection<int> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -124,7 +124,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<long> source, Collection<long> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -170,7 +170,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -179,7 +179,7 @@ namespace Argotic.Common
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | String.Compare(source[i], target[i], comparisonType);
+                    result = result | String.Compare(source[i], target[i], comparisonType);
                 }
             }
             else if (source.Count > target.Count)
@@ -261,7 +261,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -352,7 +352,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target, StringComparison comparisonType)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -363,7 +363,7 @@ namespace Argotic.Common
                 {
                     if (target.ContainsKey(key))
                     {
-                        result  = result | String.Compare(source[key], target[key], comparisonType);
+                        result = result | String.Compare(source[key], target[key], comparisonType);
                     }
                     else
                     {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Net;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Provides data for the <see cref="ISyndicationResource.Loaded"/> event.
     /// </summary>
@@ -20,7 +20,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
-        private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments  = new SyndicationResourceLoadedEventArgs();
+        private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new SyndicationResourceLoadedEventArgs();
         /// <summary>
         /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
         /// </summary>
@@ -55,7 +55,7 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNull(data, "data");
 
-            eventNavigator  = data.CreateNavigator();
+            eventNavigator = data.CreateNavigator();
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNull(source, "source");
 
-            eventSource         = source;
-            eventOptions        = new WebRequestOptions(credentials, proxy);
+            eventSource = source;
+            eventOptions = new WebRequestOptions(credentials, proxy);
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNull(source, "source");
 
-            eventSource         = source;
-            eventOptions        = options ?? new WebRequestOptions();
+            eventSource = source;
+            eventOptions = options ?? new WebRequestOptions();
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state) : this(data, source, credentials, proxy)
         {
-            eventUserToken  = state;
+            eventUserToken = state;
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state) : this(data, source, options)
         {
-            eventUserToken  = state;
+            eventUserToken = state;
         }
 
         /// <summary>
@@ -236,11 +236,11 @@ namespace Argotic.Common
         /// </remarks>
         public override string ToString()
         {
-            string source       = this.Source != null ? this.Source.ToString() : String.Empty;
-            string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+            string source = this.Source != null ? this.Source.ToString() : String.Empty;
+            string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+            string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+            string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+            string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
 
             return String.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
         }
@@ -258,13 +258,13 @@ namespace Argotic.Common
                 return 1;
             }
 
-            SyndicationResourceLoadedEventArgs value  = obj as SyndicationResourceLoadedEventArgs;
+            SyndicationResourceLoadedEventArgs value = obj as SyndicationResourceLoadedEventArgs;
 
             if (value != null)
             {
-                int result  = 0;
-                result      = result | String.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                int result = 0;
+                result = result | String.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
@@ -295,7 +295,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

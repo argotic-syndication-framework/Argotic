@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Allows an object to implement a syndication resource by representing a set of properties, methods, indexers and events common to web content syndication resources.
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+
     /// <summary>
     /// Associates IANA MIME media type information with a target element. This class cannot be inherited.
     /// </summary>
@@ -15,7 +15,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the MIME media type name.
         /// </summary>
-        private string mimeMediaTypeName    = String.Empty;
+        private string mimeMediaTypeName = String.Empty;
         /// <summary>
         /// Private member to hold the MIME media sub-type name.
         /// </summary>
@@ -137,13 +137,13 @@ namespace Argotic.Common
                 return 1;
             }
 
-            MimeMediaTypeAttribute value  = obj as MimeMediaTypeAttribute;
+            MimeMediaTypeAttribute value = obj as MimeMediaTypeAttribute;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+                int result = String.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
+                result = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | String.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
@@ -174,7 +174,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

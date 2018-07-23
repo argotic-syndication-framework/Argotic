@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object persisted by the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method.
     /// </summary>
@@ -14,7 +14,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
-        private Encoding characterEncoding                      = Encoding.UTF8;
+        private Encoding characterEncoding = Encoding.UTF8;
         /// <summary>
         /// Private member to hold a value indicating if write/save operations should attempt to minimize the size of the resulting output.
         /// </summary>
@@ -26,7 +26,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
-        private bool syndicationExtensionAutodetectionEnabled   = true;
+        private bool syndicationExtensionAutodetectionEnabled = true;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
@@ -142,14 +142,14 @@ namespace Argotic.Common
                 return 1;
             }
 
-            SyndicationResourceSaveSettings value  = obj as SyndicationResourceSaveSettings;
+            SyndicationResourceSaveSettings value = obj as SyndicationResourceSaveSettings;
 
             if (value != null)
             {
-                int result  = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
-                result      = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-                result      = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+                int result = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
+                result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+                result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
 
                 return result;
             }
@@ -180,7 +180,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

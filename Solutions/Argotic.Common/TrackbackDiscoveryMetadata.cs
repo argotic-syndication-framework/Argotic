@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Represents metadata about a web log entry that allows clients to auto-discover the TrackBack ping URL for that entry.
     /// </summary>
@@ -15,19 +15,19 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the XML namespace for Resource Description Framework (RDF) entities.
         /// </summary>
-        private const string RDF_NAMESPACE          = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+        private const string RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
         /// <summary>
         /// Private member to hold the XML namespace for Dublin Core entities.
         /// </summary>
-        private const string DUBLIN_CORE_NAMESPACE  = "http://purl.org/dc/elements/1.1/";
+        private const string DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/elements/1.1/";
         /// <summary>
         /// Private member to hold the XML namespace for Trackback entities.
         /// </summary>
-        private const string TRACKBACK_NAMESPACE    = "http://madskills.com/public/xml/rss/module/trackback/";
+        private const string TRACKBACK_NAMESPACE = "http://madskills.com/public/xml/rss/module/trackback/";
         /// <summary>
         /// Private member to hold the title of the discoverable web log entry.
         /// </summary>
-        private string trackbackDiscoveryTitle  = String.Empty;
+        private string trackbackDiscoveryTitle = String.Empty;
         /// <summary>
         /// Private member to hold Resource Description Framework entity reference.
         /// </summary>
@@ -130,7 +130,7 @@ namespace Argotic.Common
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (String.IsNullOrEmpty(value))
                 {
                     trackbackDiscoveryTitle = String.Empty;
                 }
@@ -152,7 +152,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator navigator)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             XmlNamespaceManager manager = null;
 
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -166,10 +166,10 @@ namespace Argotic.Common
 
             if (descriptionNavigator != null && descriptionNavigator.HasAttributes)
             {
-                string aboutAttribute       = descriptionNavigator.GetAttribute("about", RDF_NAMESPACE);
-                string identifierAttribute  = descriptionNavigator.GetAttribute("identifier", DUBLIN_CORE_NAMESPACE);
-                string titleAttribute       = descriptionNavigator.GetAttribute("title", DUBLIN_CORE_NAMESPACE);
-                string pingAttribute        = descriptionNavigator.GetAttribute("ping", TRACKBACK_NAMESPACE);
+                string aboutAttribute = descriptionNavigator.GetAttribute("about", RDF_NAMESPACE);
+                string identifierAttribute = descriptionNavigator.GetAttribute("identifier", DUBLIN_CORE_NAMESPACE);
+                string titleAttribute = descriptionNavigator.GetAttribute("title", DUBLIN_CORE_NAMESPACE);
+                string pingAttribute = descriptionNavigator.GetAttribute("ping", TRACKBACK_NAMESPACE);
 
                 if (String.IsNullOrEmpty(pingAttribute))
                 {
@@ -181,8 +181,8 @@ namespace Argotic.Common
                     Uri about;
                     if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out about))
                     {
-                        this.About  = about;
-                        wasLoaded   = true;
+                        this.About = about;
+                        wasLoaded = true;
                     }
                 }
 
@@ -192,14 +192,14 @@ namespace Argotic.Common
                     if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out identifier))
                     {
                         this.Identifier = identifier;
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
                 }
 
                 if (!String.IsNullOrEmpty(titleAttribute))
                 {
-                    this.Title  = titleAttribute;
-                    wasLoaded   = true;
+                    this.Title = titleAttribute;
+                    wasLoaded = true;
                 }
 
                 if (!String.IsNullOrEmpty(pingAttribute))
@@ -207,8 +207,8 @@ namespace Argotic.Common
                     Uri ping;
                     if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out ping))
                     {
-                        this.PingUrl    = ping;
-                        wasLoaded       = true;
+                        this.PingUrl = ping;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -250,19 +250,19 @@ namespace Argotic.Common
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
 
                 stream.Seek(0, SeekOrigin.Begin);
 
-                using(StreamReader reader = new StreamReader(stream))
+                using (StreamReader reader = new StreamReader(stream))
                 {
                     return reader.ReadToEnd();
                 }
@@ -282,14 +282,14 @@ namespace Argotic.Common
                 return 1;
             }
 
-            TrackbackDiscoveryMetadata value  = obj as TrackbackDiscoveryMetadata;
+            TrackbackDiscoveryMetadata value = obj as TrackbackDiscoveryMetadata;
 
             if (value != null)
             {
-                int result  = Uri.Compare(this.About, value.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Identifier, value.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.PingUrl, value.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                int result = Uri.Compare(this.About, value.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Identifier, value.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.PingUrl, value.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
@@ -320,7 +320,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

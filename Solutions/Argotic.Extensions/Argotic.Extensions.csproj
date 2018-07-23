@@ -1,5 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common.netstandard2_0.proj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
@@ -16,6 +16,10 @@
     <Authors />
     <Company />
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />

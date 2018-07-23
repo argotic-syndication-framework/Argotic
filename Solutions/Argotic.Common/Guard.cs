@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+
     /// <summary>
     /// Provides common validation methods shared across the framework entities. This class cannot be inherited.
     /// </summary>
@@ -33,7 +33,7 @@ namespace Argotic.Common
         /// </remarks>
         public static void ArgumentNotNullOrEmptyString(string value, string name)
         {
-            if(String.IsNullOrEmpty(value))
+            if (String.IsNullOrEmpty(value))
             {
                 throw new ArgumentNullException(name);
             }

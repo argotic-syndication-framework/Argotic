@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+
     /// <summary>
     /// Associates enumeration field description information with a target element. This class cannot be inherited.
     /// </summary>
@@ -12,11 +12,11 @@ namespace Argotic.Common
         /// <summary>
         ///  Private member to hold the display name for the attributed field.
         /// </summary>
-        private string enumMetadataDisplayName      = String.Empty;
+        private string enumMetadataDisplayName = String.Empty;
         /// <summary>
         /// Private member to hold the alterate textual value for the attributed field.
         /// </summary>
-        private string enumMetadataAlternateValue   = String.Empty;
+        private string enumMetadataAlternateValue = String.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
@@ -98,12 +98,12 @@ namespace Argotic.Common
                 return 1;
             }
 
-            EnumerationMetadataAttribute value  = obj as EnumerationMetadataAttribute;
+            EnumerationMetadataAttribute value = obj as EnumerationMetadataAttribute;
 
             if (value != null)
             {
-                int result  = String.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
-                result      = result | String.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
+                int result = String.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
+                result = result | String.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
@@ -134,7 +134,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

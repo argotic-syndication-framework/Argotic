@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Text;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object loaded by the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method.
     /// </summary>
@@ -14,7 +14,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
-        private Encoding characterEncoding                      = Encoding.UTF8;
+        private Encoding characterEncoding = Encoding.UTF8;
         /// <summary>
         /// Private member to hold a value indicating the maximum number of resource entities to retrieve from a syndication resource.
         /// </summary>
@@ -22,7 +22,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold a value that specifies the amount of time after which a asynchronous load operation call times out.
         /// </summary>
-        private TimeSpan requestTimeout                         = TimeSpan.FromSeconds(15);
+        private TimeSpan requestTimeout = TimeSpan.FromSeconds(15);
         /// <summary>
         /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
         /// </summary>
@@ -30,7 +30,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
-        private bool syndicationExtensionAutodetectionEnabled   = true;
+        private bool syndicationExtensionAutodetectionEnabled = true;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
@@ -183,15 +183,15 @@ namespace Argotic.Common
                 return 1;
             }
 
-            SyndicationResourceLoadSettings value  = obj as SyndicationResourceLoadSettings;
+            SyndicationResourceLoadSettings value = obj as SyndicationResourceLoadSettings;
 
             if (value != null)
             {
-                int result  = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
-                result      = result | this.Timeout.CompareTo(value.Timeout);
-                result      = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-                result      = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+                int result = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
+                result = result | this.Timeout.CompareTo(value.Timeout);
+                result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+                result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
 
                 return result;
             }
@@ -222,7 +222,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

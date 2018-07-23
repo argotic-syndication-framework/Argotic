@@ -1,8 +1,8 @@
-﻿using System;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Represents a discoverable syndication endpoint that is being broadcast by a web resource.
     /// </summary>
@@ -12,11 +12,11 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the content MIME type of the syndication endpoint.
         /// </summary>
-        private string endpointMediaType    = String.Empty;
+        private string endpointMediaType = String.Empty;
         /// <summary>
         /// Private member to hold the title of the syndication endpoint.
         /// </summary>
-        private string endpointTitle        = String.Empty;
+        private string endpointTitle = String.Empty;
         /// <summary>
         /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
         /// </summary>
@@ -39,8 +39,8 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType)
         {
-            this.ContentType    = contentType;
-            this.Source         = source;
+            this.ContentType = contentType;
+            this.Source = source;
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
         {
-            this.ContentType    = contentType;
-            this.Source         = source;
-            this.Title          = title;
+            this.ContentType = contentType;
+            this.Source = source;
+            this.Title = title;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Argotic.Common
         {
             get
             {
-                SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+                SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
                 if (String.IsNullOrEmpty(this.ContentType))
                 {
@@ -84,16 +84,16 @@ namespace Argotic.Common
                         if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                         {
                             SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                            object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+                            object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
 
                             if (customAttributes != null && customAttributes.Length > 0)
                             {
-                                MimeMediaTypeAttribute mediaType    = customAttributes[0] as MimeMediaTypeAttribute;
-                                string contentType                  = String.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
+                                MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
+                                string contentType = String.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
 
                                 if (String.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
                                 {
-                                    syndicationFormat   = format;
+                                    syndicationFormat = format;
                                     break;
                                 }
                             }
@@ -123,7 +123,7 @@ namespace Argotic.Common
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-                endpointMediaType   = value.Trim();
+                endpointMediaType = value.Trim();
             }
         }
 
@@ -144,7 +144,7 @@ namespace Argotic.Common
             {
                 Guard.ArgumentNotNull(value, "value");
 
-                endpointSource  = value;
+                endpointSource = value;
             }
         }
 
@@ -162,13 +162,13 @@ namespace Argotic.Common
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (String.IsNullOrEmpty(value))
                 {
-                    endpointTitle   = String.Empty;
+                    endpointTitle = String.Empty;
                 }
                 else
                 {
-                    endpointTitle   = value.Trim();
+                    endpointTitle = value.Trim();
                 }
             }
         }
@@ -210,13 +210,13 @@ namespace Argotic.Common
                 return 1;
             }
 
-            DiscoverableSyndicationEndpoint value  = obj as DiscoverableSyndicationEndpoint;
+            DiscoverableSyndicationEndpoint value = obj as DiscoverableSyndicationEndpoint;
 
             if (value != null)
             {
-                int result  = String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                int result = String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
@@ -247,7 +247,7 @@ namespace Argotic.Common
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

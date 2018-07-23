@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Collections;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Net;
+    using System.Text.RegularExpressions;
+    using System.Web;
+    using System.Xml;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Provides methods for extracting peer-to-peer auto-discovery and resource information from syndicated content. This class cannot be inherited.
     /// </summary>
@@ -18,7 +18,7 @@ namespace Argotic.Common
         /// <summary>
         /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
         /// </summary>
-        private static string frameworkUserAgent    = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+        private static string frameworkUserAgent = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
         /// <summary>
         /// Gets the raw user agent string used by the framework when sending web requests.
@@ -42,7 +42,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static SyndicationContentFormat SyndicationContentFormatByName(string name)
         {
-            SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+            SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
@@ -51,7 +51,7 @@ namespace Argotic.Common
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
                     SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
@@ -134,11 +134,11 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNull(stream, "stream");
 
-            XmlReaderSettings settings  = new XmlReaderSettings();
-            settings.IgnoreComments     = true;
-            settings.IgnoreWhitespace   = true;
+            XmlReaderSettings settings = new XmlReaderSettings();
+            settings.IgnoreComments = true;
+            settings.IgnoreWhitespace = true;
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
+            using (XmlReader reader = XmlReader.Create(stream, settings))
             {
                 return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
             }
@@ -155,21 +155,21 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
         {
-            SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+            SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
             Guard.ArgumentNotNull(reader, "reader");
 
-            XmlDocument document    = new XmlDocument();
+            XmlDocument document = new XmlDocument();
             document.Load(reader);
 
-            string rootElementName  = document.DocumentElement.LocalName;
+            string rootElementName = document.DocumentElement.LocalName;
 
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
                     SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
@@ -198,26 +198,26 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
         {
-            SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
-            XPathNavigator source                       = null;
+            SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
+            XPathNavigator source = null;
 
             Guard.ArgumentNotNull(navigator, "navigator");
 
-            source  = navigator.CreateNavigator();
+            source = navigator.CreateNavigator();
             if (String.IsNullOrEmpty(source.LocalName))
             {
                 source.MoveToRoot();
                 source.MoveToChild(XPathNodeType.Element);
             }
 
-            string rootElementName  = source.LocalName;
+            string rootElementName = source.LocalName;
 
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
                     SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
@@ -244,32 +244,32 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         private static Hashtable ExtractHtmlAttributes(string content)
         {
-            Hashtable hashtable     = new Hashtable();
-            Regex attributePattern  = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
+            Hashtable hashtable = new Hashtable();
+            Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-            MatchCollection attributes  = attributePattern.Matches(content);
+            MatchCollection attributes = attributePattern.Matches(content);
 
             foreach (Match attribute in attributes)
             {
                 if (attribute.Groups != null && attribute.Groups.Count > 0)
                 {
-                    string name     = attribute.Groups[1].Value;
-                    string value    = String.Empty;
+                    string name = attribute.Groups[1].Value;
+                    string value = String.Empty;
 
                     if (!String.IsNullOrEmpty(name))
                     {
-                        value       = attribute.Groups[2].Value;
+                        value = attribute.Groups[2].Value;
                     }
                     else
                     {
-                        name        = attribute.Groups[3].Value;
-                        value       = attribute.Groups[4].Value;
+                        name = attribute.Groups[3].Value;
+                        value = attribute.Groups[4].Value;
                     }
 
-                    name            = name.ToUpperInvariant().Trim();
-                    value           = value.Trim();
+                    name = name.ToUpperInvariant().Trim();
+                    value = value.Trim();
 
                     if (!hashtable.ContainsKey(name))
                     {
@@ -291,14 +291,14 @@ namespace Argotic.Common
         public static Collection<Uri> ExtractUrls(string content)
         {
             Collection<Uri> results = new Collection<Uri>();
-            Regex linkPattern       = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
-            Regex anchorPattern     = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
+            Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+            Regex anchorPattern = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
             MatchCollection links = linkPattern.Matches(content);
 
-            foreach(Match link in links)
+            foreach (Match link in links)
             {
                 Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
@@ -401,7 +401,7 @@ namespace Argotic.Common
             {
                 if (response != null)
                 {
-                    using(Stream stream = response.GetResponseStream())
+                    using (Stream stream = response.GetResponseStream())
                     {
                         using (StreamReader reader = new StreamReader(stream))
                         {
@@ -461,7 +461,7 @@ namespace Argotic.Common
         /// </remarks>
         public static bool UriExists(Uri uri, ICredentials credentials)
         {
-            bool uriExists  = false;
+            bool uriExists = false;
 
             if (uri == null)
             {
@@ -474,13 +474,13 @@ namespace Argotic.Common
                 {
                     if (response != null && response.ContentLength > 0)
                     {
-                        uriExists   = true;
+                        uriExists = true;
                     }
                 }
             }
             catch (WebException)
             {
-                uriExists   = false;
+                uriExists = false;
             }
 
             return uriExists;
@@ -521,7 +521,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
         {
-            HttpWebResponse response    = null;
+            HttpWebResponse response = null;
 
             if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, credentials, out response))
             {
@@ -564,7 +564,7 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
         {
-            HttpWebResponse response    = null;
+            HttpWebResponse response = null;
 
             if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, options, out response))
             {
@@ -619,13 +619,13 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
         {
-            bool sourceHasBeenModified  = false;
+            bool sourceHasBeenModified = false;
 
             Guard.ArgumentNotNull(source, "source");
 
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.UserAgent           = frameworkUserAgent;
-            httpRequest.IfModifiedSince     = lastModified;
+            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+            httpRequest.UserAgent = frameworkUserAgent;
+            httpRequest.IfModifiedSince = lastModified;
             httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
             new WebRequestOptions(credentials).ApplyOptions(httpRequest);
 
@@ -635,15 +635,15 @@ namespace Argotic.Common
 
                 if (DateTime.Compare(response.LastModified, lastModified) != 0)
                 {
-                    sourceHasBeenModified   = true;
+                    sourceHasBeenModified = true;
                 }
             }
             catch (WebException webException)
             {
                 if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
                 {
-                    sourceHasBeenModified   = false;
-                    response                = null;
+                    sourceHasBeenModified = false;
+                    response = null;
                 }
                 else
                 {
@@ -693,31 +693,31 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
         {
-            bool sourceHasBeenModified  = false;
+            bool sourceHasBeenModified = false;
 
             Guard.ArgumentNotNull(source, "source");
 
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.UserAgent           = frameworkUserAgent;
-            httpRequest.IfModifiedSince     = lastModified;
+            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+            httpRequest.UserAgent = frameworkUserAgent;
+            httpRequest.IfModifiedSince = lastModified;
             httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
             if (options != null) options.ApplyOptions(httpRequest);
 
             try
             {
-                response    = (HttpWebResponse)httpRequest.GetResponse();
+                response = (HttpWebResponse)httpRequest.GetResponse();
 
                 if (DateTime.Compare(response.LastModified, lastModified) != 0)
                 {
-                    sourceHasBeenModified   = true;
+                    sourceHasBeenModified = true;
                 }
             }
             catch (WebException webException)
             {
                 if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
                 {
-                    sourceHasBeenModified   = false;
-                    response                = null;
+                    sourceHasBeenModified = false;
+                    response = null;
                 }
                 else
                 {
@@ -744,20 +744,20 @@ namespace Argotic.Common
         public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
         {
             Collection<DiscoverableSyndicationEndpoint> results = new Collection<DiscoverableSyndicationEndpoint>();
-            Regex linkPattern                                   = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+            Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-            MatchCollection links   = linkPattern.Matches(content);
+            MatchCollection links = linkPattern.Matches(content);
 
-            foreach(Match link in links)
+            foreach (Match link in links)
             {
                 Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
                 if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL") && linkAttributes.ContainsKey("TYPE"))
                 {
                     string href = (string)linkAttributes["HREF"];
-                    string rel  = (string)linkAttributes["REL"];
+                    string rel = (string)linkAttributes["REL"];
                     string type = (string)linkAttributes["TYPE"];
 
                     if (String.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
@@ -765,19 +765,19 @@ namespace Argotic.Common
                         Uri url;
                         if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out url))
                         {
-                            DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint();
-                            endpoint.Source                             = url;
+                            DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+                            endpoint.Source = url;
                             if (!String.IsNullOrEmpty(type))
                             {
-                                endpoint.ContentType                    = type;
+                                endpoint.ContentType = type;
                             }
 
                             if (linkAttributes.ContainsKey("TITLE"))
                             {
-                                string title        = (string)linkAttributes["TITLE"];
+                                string title = (string)linkAttributes["TITLE"];
                                 if (!String.IsNullOrEmpty(title))
                                 {
-                                    endpoint.Title  = title;
+                                    endpoint.Title = title;
                                 }
                             }
 
@@ -900,34 +900,34 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static HtmlAnchor ExtractPingbackNotificationServer(string content)
         {
-            HtmlAnchor pingbackAnchor   = null;
-            Regex linkPattern           = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+            HtmlAnchor pingbackAnchor = null;
+            Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-            MatchCollection links   = linkPattern.Matches(content);
+            MatchCollection links = linkPattern.Matches(content);
 
-            foreach(Match link in links)
+            foreach (Match link in links)
             {
                 Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
                 if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL"))
                 {
                     string href = (string)linkAttributes["HREF"];
-                    string rel  = (string)linkAttributes["REL"];
+                    string rel = (string)linkAttributes["REL"];
 
                     if (String.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         Uri uri;
                         if (Uri.TryCreate(href, UriKind.Absolute, out uri))
                         {
-                            pingbackAnchor      = new HtmlAnchor();
+                            pingbackAnchor = new HtmlAnchor();
                             pingbackAnchor.HRef = href;
                             pingbackAnchor.Attributes.Add("rel", rel);
 
                             if (linkAttributes.ContainsKey("TYPE"))
                             {
-                                string type     = (string)linkAttributes["TYPE"];
+                                string type = (string)linkAttributes["TYPE"];
                                 if (!String.IsNullOrEmpty(type))
                                 {
                                     pingbackAnchor.Attributes.Add("type", type);
@@ -935,10 +935,10 @@ namespace Argotic.Common
                             }
                             if (linkAttributes.ContainsKey("TITLE"))
                             {
-                                string title    = (string)linkAttributes["TITLE"];
+                                string title = (string)linkAttributes["TITLE"];
                                 if (!String.IsNullOrEmpty(title))
                                 {
-                                    pingbackAnchor.Title    = title;
+                                    pingbackAnchor.Title = title;
                                 }
                             }
                         }
@@ -1048,7 +1048,7 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
         {
-            bool isPingbackEnabled      = false;
+            bool isPingbackEnabled = false;
 
             Guard.ArgumentNotNull(uri, "uri");
 
@@ -1063,15 +1063,15 @@ namespace Argotic.Common
                 {
                     for (int i = 0; i < webResponse.Headers.Count; i++)
                     {
-                        string name     = webResponse.Headers.Keys[i];
-                        string value    = webResponse.Headers[i];
+                        string name = webResponse.Headers.Keys[i];
+                        string value = webResponse.Headers[i];
 
                         if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Uri pingbackXmlRpcServer;
-                            if(Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
+                            if (Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
                             {
-                                isPingbackEnabled   = true;
+                                isPingbackEnabled = true;
                             }
                             break;
                         }
@@ -1086,7 +1086,7 @@ namespace Argotic.Common
 
                         if (link != null)
                         {
-                            isPingbackEnabled   = true;
+                            isPingbackEnabled = true;
                         }
                     }
                 }
@@ -1201,7 +1201,7 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
         {
-            Uri pingbackXmlRpcServer    = null;
+            Uri pingbackXmlRpcServer = null;
 
             Guard.ArgumentNotNull(uri, "uri");
 
@@ -1216,15 +1216,15 @@ namespace Argotic.Common
                 {
                     for (int i = 0; i < webResponse.Headers.Count; i++)
                     {
-                        string name     = webResponse.Headers.Keys[i];
-                        string value    = webResponse.Headers[i];
+                        string name = webResponse.Headers.Keys[i];
+                        string value = webResponse.Headers[i];
 
                         if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Uri url;
-                            if(Uri.TryCreate(value, UriKind.Absolute, out url))
+                            if (Uri.TryCreate(value, UriKind.Absolute, out url))
                             {
-                                pingbackXmlRpcServer    = url;
+                                pingbackXmlRpcServer = url;
                             }
                             break;
                         }
@@ -1242,7 +1242,7 @@ namespace Argotic.Common
                             Uri href;
                             if (Uri.TryCreate(link.HRef, UriKind.Absolute, out href))
                             {
-                                pingbackXmlRpcServer    = href;
+                                pingbackXmlRpcServer = href;
                             }
                         }
                     }
@@ -1268,9 +1268,9 @@ namespace Argotic.Common
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
         {
-            Collection<TrackbackDiscoveryMetadata> results  = new Collection<TrackbackDiscoveryMetadata>();
-            Regex rdfPattern                                = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-            XmlNamespaceManager manager                     = new XmlNamespaceManager(new NameTable());
+            Collection<TrackbackDiscoveryMetadata> results = new Collection<TrackbackDiscoveryMetadata>();
+            Regex rdfPattern = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
@@ -1278,16 +1278,16 @@ namespace Argotic.Common
             manager.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
             manager.AddNamespace("trackback", "http://madskills.com/public/xml/rss/module/trackback/");
 
-            MatchCollection embeddedRdfs    = rdfPattern.Matches(content);
+            MatchCollection embeddedRdfs = rdfPattern.Matches(content);
 
             foreach (Match embeddedRdf in embeddedRdfs)
             {
                 using (StringReader reader = new StringReader(embeddedRdf.Value))
                 {
-                    XPathDocument document      = new XPathDocument(reader);
-                    XPathNavigator navigator    = document.CreateNavigator();
+                    XPathDocument document = new XPathDocument(reader);
+                    XPathNavigator navigator = document.CreateNavigator();
 
-                    TrackbackDiscoveryMetadata trackbackMetadata    = new TrackbackDiscoveryMetadata();
+                    TrackbackDiscoveryMetadata trackbackMetadata = new TrackbackDiscoveryMetadata();
                     if (trackbackMetadata.Load(navigator))
                     {
                         results.Add(trackbackMetadata);
@@ -1315,7 +1315,7 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNull(stream, "stream");
 
-            using(StreamReader reader = new StreamReader(stream))
+            using (StreamReader reader = new StreamReader(stream))
             {
                 return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
             }

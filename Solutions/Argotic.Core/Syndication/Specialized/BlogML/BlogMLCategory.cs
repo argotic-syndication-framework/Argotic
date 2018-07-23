@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents an categorization taxonomy for published content.
     /// </summary>
@@ -20,35 +19,43 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Private member to hold the title of the web log entity.
         /// </summary>
-        private BlogMLTextConstruct commonObjectBaseTitle           = new BlogMLTextConstruct();
+        private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
+
         /// <summary>
         /// Private member to hold a unique identifier for the  web log entity.
         /// </summary>
-        private string commonObjectBaseId                           = String.Empty;
+        private string commonObjectBaseId = string.Empty;
+
         /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was created.
         /// </summary>
-        private DateTime commonObjectBaseCreatedOn                  = DateTime.MinValue;
+        private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was last modified.
         /// </summary>
-        private DateTime commonObjectBaseLastModifiedOn             = DateTime.MinValue;
+        private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a value indicating the web log entity approval status.
         /// </summary>
         private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the reference key to the parent of the category.
         /// </summary>
-        private string categoryParentIdentifier                     = String.Empty;
+        private string categoryParentIdentifier = string.Empty;
+
         /// <summary>
         /// Private member to hold the description of the category.
         /// </summary>
-        private string categoryDescription                          = String.Empty;
+        private string categoryDescription = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
         /// </summary>
@@ -56,6 +63,7 @@ namespace Argotic.Syndication.Specialized
         {
 
         }
+
         /// <summary>
         /// Gets or sets the approval status of this web log entity.
         /// </summary>
@@ -112,9 +120,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    commonObjectBaseId = String.Empty;
+                    commonObjectBaseId = string.Empty;
                 }
                 else
                 {
@@ -164,6 +172,7 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseTitle = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -180,6 +189,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -201,6 +211,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the description of this category.
         /// </summary>
@@ -214,9 +225,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    categoryDescription = String.Empty;
+                    categoryDescription = string.Empty;
                 }
                 else
                 {
@@ -238,9 +249,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    categoryParentIdentifier = String.Empty;
+                    categoryParentIdentifier = string.Empty;
                 }
                 else
                 {
@@ -248,6 +259,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -256,10 +268,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -300,11 +312,12 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="BlogMLCategory"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -316,27 +329,28 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (BlogMLUtility.FillCommonObject(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
+
             if(source.HasAttributes)
             {
-                string parentRefAttribute   = source.GetAttribute("parentref", String.Empty);
-                string descriptionAttribute = source.GetAttribute("description", String.Empty);
+                string parentRefAttribute = source.GetAttribute("parentref", string.Empty);
+                string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-                if (!String.IsNullOrEmpty(parentRefAttribute))
+                if (!string.IsNullOrEmpty(parentRefAttribute))
                 {
-                    this.ParentId       = parentRefAttribute;
-                    wasLoaded           = true;
+                    this.ParentId = parentRefAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(descriptionAttribute))
+                if (!string.IsNullOrEmpty(descriptionAttribute))
                 {
-                    this.Description    = descriptionAttribute;
-                    wasLoaded           = true;
+                    this.Description = descriptionAttribute;
+                    wasLoaded = true;
                 }
             }
 
@@ -356,30 +370,32 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
             if (BlogMLUtility.FillCommonObject(this, source, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
+
             if(source.HasAttributes)
             {
-                string parentRefAttribute   = source.GetAttribute("parentref", String.Empty);
-                string descriptionAttribute = source.GetAttribute("description", String.Empty);
+                string parentRefAttribute = source.GetAttribute("parentref", string.Empty);
+                string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-                if (!String.IsNullOrEmpty(parentRefAttribute))
+                if (!string.IsNullOrEmpty(parentRefAttribute))
                 {
-                    this.ParentId       = parentRefAttribute;
-                    wasLoaded           = true;
+                    this.ParentId = parentRefAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(descriptionAttribute))
+                if (!string.IsNullOrEmpty(descriptionAttribute))
                 {
-                    this.Description    = descriptionAttribute;
-                    wasLoaded           = true;
+                    this.Description = descriptionAttribute;
+                    wasLoaded = true;
                 }
             }
+
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -397,12 +413,12 @@ namespace Argotic.Syndication.Specialized
             writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
             BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-            if (!String.IsNullOrEmpty(this.ParentId))
+            if (!string.IsNullOrEmpty(this.ParentId))
             {
                 writer.WriteAttributeString("parentref", this.ParentId);
             }
 
-            if(!String.IsNullOrEmpty(this.Description))
+            if(!string.IsNullOrEmpty(this.Description))
             {
                 writer.WriteAttributeString("description", this.Description);
             }
@@ -412,10 +428,11 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLCategory"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLCategory"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -423,9 +440,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -441,6 +458,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -453,29 +471,30 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            BlogMLCategory value  = obj as BlogMLCategory;
+
+            BlogMLCategory value = obj as BlogMLCategory;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | BlogMLUtility.CompareCommonObjects(this, value);
+                result = result | BlogMLUtility.CompareCommonObjects(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is BlogMLCategory))
             {
@@ -491,7 +510,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

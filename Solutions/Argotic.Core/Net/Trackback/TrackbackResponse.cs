@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the response to a Trackback ping request.
     /// </summary>
@@ -28,6 +27,7 @@ namespace Argotic.Net
         /// Private member to hold a value indicating if the the Trackback ping request failed.
         /// </summary>
         private bool responseHasError;
+
         /// <summary>
         /// Private member to hold information about the cause of the Trackback ping request failure.
         /// </summary>
@@ -56,7 +56,7 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNullOrEmptyString(errorMessage, "errorMessage");
 
-            responseErrorMessage    = errorMessage;
+            responseErrorMessage = errorMessage;
         }
 
         /// <summary>
@@ -71,30 +71,30 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(response, "response");
 
-            if (String.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
+            if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
             {
-                throw new ArgumentException(String.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
+                throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
             }
             else if (response.ContentLength <= 0)
             {
-                throw new ArgumentException(String.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
+                throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
             }
 
             using (Stream stream = response.GetResponseStream())
             {
-                XmlReaderSettings settings              = new XmlReaderSettings();
-                settings.ConformanceLevel               = ConformanceLevel.Document;
-                settings.IgnoreComments                 = true;
-                settings.IgnoreProcessingInstructions   = true;
-                settings.IgnoreWhitespace               = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ConformanceLevel = ConformanceLevel.Document;
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+                settings.IgnoreWhitespace = true;
                 settings.DtdProcessing = DtdProcessing.Ignore;
 
                 using (XmlReader reader = XmlReader.Create(stream, settings))
                 {
-                    XPathDocument document  = new XPathDocument(reader);
-                    XPathNavigator source   = document.CreateNavigator();
+                    XPathDocument document = new XPathDocument(reader);
+                    XPathNavigator source = document.CreateNavigator();
 
-                    XPathNavigator responseNavigator    = source.SelectSingleNode("response");
+                    XPathNavigator responseNavigator = source.SelectSingleNode("response");
                     if (responseNavigator != null)
                     {
                         this.Load(responseNavigator);
@@ -138,33 +138,33 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if (source.HasChildren)
             {
-                XPathNavigator errorNavigator   = source.SelectSingleNode("error");
+                XPathNavigator errorNavigator = source.SelectSingleNode("error");
                 XPathNavigator messageNavigator = source.SelectSingleNode("message");
 
                 if (errorNavigator != null)
                 {
-                    if(String.Compare(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+                    if(string.Compare(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        responseHasError    = false;
-                        wasLoaded           = true;
+                        responseHasError = false;
+                        wasLoaded = true;
                     }
-                    else if(String.Compare(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if(string.Compare(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        responseHasError    = true;
-                        wasLoaded           = true;
+                        responseHasError = true;
+                        wasLoaded = true;
                     }
                 }
 
                 if (messageNavigator != null)
                 {
-                    responseErrorMessage    = !String.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : String.Empty;
-                    wasLoaded               = true;
+                    responseErrorMessage = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
+                    wasLoaded = true;
                 }
             }
 
@@ -182,7 +182,7 @@ namespace Argotic.Net
 
             writer.WriteStartElement("response");
 
-            if (!String.IsNullOrEmpty(this.ErrorMessage))
+            if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
                 writer.WriteElementString("error", "1");
                 writer.WriteElementString("message", this.ErrorMessage);
@@ -196,9 +196,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -206,9 +206,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -238,27 +238,27 @@ namespace Argotic.Net
                 return 1;
             }
 
-            TrackbackResponse value  = obj as TrackbackResponse;
+            TrackbackResponse value = obj as TrackbackResponse;
 
             if (value != null)
             {
-                int result  = String.Compare(this.ErrorMessage, value.ErrorMessage, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.HasError.CompareTo(value.HasError);
+                int result = string.Compare(this.ErrorMessage, value.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+                result = result | this.HasError.CompareTo(value.HasError);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is TrackbackResponse))
             {
@@ -274,7 +274,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

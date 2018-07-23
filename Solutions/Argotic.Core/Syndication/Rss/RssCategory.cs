@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a category or tag to which a <see cref="RssFeed"/> or <see cref="RssItem"/> belongs.
     /// </summary>
@@ -32,14 +31,17 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a slash-delimited string that identifies a hierarchical position in the taxonomy.
         /// </summary>
-        private string categoryValue    = String.Empty;
+        private string categoryValue = string.Empty;
+
         /// <summary>
         /// Private member to hold a value that identifies the taxonomy in which the category is placed.
         /// </summary>
-        private string categoryDomain   = String.Empty;
+        private string categoryDomain = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssCategory"/> class.
         /// </summary>
@@ -54,7 +56,7 @@ namespace Argotic.Syndication
         /// <param name="value">A slash-delimited string that identifies a hierarchical position in the taxonomy.</param>
         public RssCategory(string value)
         {
-            this.Value  = value;
+            this.Value = value;
         }
 
         /// <summary>
@@ -77,10 +79,10 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(value, "value");
             if (value.Count > 0)
             {
-                string[] hierarchy  = new string[value.Count];
+                string[] hierarchy = new string[value.Count];
                 value.CopyTo(hierarchy, 0);
 
-                this.Value  = String.Join("/", hierarchy);
+                this.Value = string.Join("/", hierarchy);
             }
         }
 
@@ -94,6 +96,7 @@ namespace Argotic.Syndication
         {
             this.Domain = domain;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -110,6 +113,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -131,6 +135,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets a string that identifies the taxonomy in which the category is placed.
         /// </summary>
@@ -144,13 +149,13 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    categoryDomain  = String.Empty;
+                    categoryDomain = string.Empty;
                 }
                 else
                 {
-                    categoryDomain  = value.Trim();
+                    categoryDomain = value.Trim();
                 }
             }
         }
@@ -171,16 +176,17 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    categoryValue   = String.Empty;
+                    categoryValue = string.Empty;
                 }
                 else
                 {
-                    categoryValue   = value.Trim();
+                    categoryValue = value.Trim();
                 }
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -189,10 +195,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -233,11 +239,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="RssCategory"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -249,21 +256,21 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            if (!String.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Value  = source.Value;
-                wasLoaded   = true;
+                this.Value = source.Value;
+                wasLoaded = true;
             }
 
             if(source.HasAttributes)
             {
-                string domain   = source.GetAttribute("domain", String.Empty);
-                if(!String.IsNullOrEmpty(domain))
+                string domain = source.GetAttribute("domain", string.Empty);
+                if(!string.IsNullOrEmpty(domain))
                 {
                     this.Domain = domain;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -283,10 +290,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -303,7 +310,7 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(writer, "writer");
             writer.WriteStartElement("category");
 
-            if(!String.IsNullOrEmpty(this.Domain))
+            if(!string.IsNullOrEmpty(this.Domain))
             {
                 writer.WriteAttributeString("domain", this.Domain);
             }
@@ -313,10 +320,11 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssCategory"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssCategory"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssCategory"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssCategory"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -324,9 +332,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -342,6 +350,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -354,27 +363,28 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssCategory value  = obj as RssCategory;
+
+            RssCategory value = obj as RssCategory;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssCategory))
             {
@@ -390,7 +400,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

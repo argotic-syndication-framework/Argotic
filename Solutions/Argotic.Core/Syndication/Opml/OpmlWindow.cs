@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
     /// </summary>
@@ -18,19 +17,23 @@ namespace Argotic.Syndication
         /// <summary>
         /// Private member to hold pixel location of the top edge of the window.
         /// </summary>
-        private int windowTop       = Int32.MinValue;
+        private int windowTop = int.MinValue;
+
         /// <summary>
         /// Private member to hold pixel location of the left edge of the window.
         /// </summary>
-        private int windowLeft      = Int32.MinValue;
+        private int windowLeft = int.MinValue;
+
         /// <summary>
         /// Private member to hold pixel location of the bottom edge of the window.
         /// </summary>
-        private int windowBottom    = Int32.MinValue;
+        private int windowBottom = int.MinValue;
+
         /// <summary>
         /// Private member to hold pixel location of the right edge of the window.
         /// </summary>
-        private int windowRight     = Int32.MinValue;
+        private int windowRight = int.MinValue;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
         /// </summary>
@@ -48,15 +51,16 @@ namespace Argotic.Syndication
         /// <param name="right">The pixel location of the right edge of this window.</param>
         public OpmlWindow(int top, int left, int bottom, int right)
         {
-            this.Bottom     = bottom;
-            this.Left       = left;
-            this.Right      = right;
-            this.Top        = top;
+            this.Bottom = bottom;
+            this.Left = left;
+            this.Right = right;
+            this.Top = top;
         }
+
         /// <summary>
         /// Gets or sets the pixel location of the bottom edge of this window.
         /// </summary>
-        /// <value>The pixel location of the bottom edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
+        /// <value>The pixel location of the bottom edge of this window. The default value is <see cref="int.MinValue"/>, which indicates no pixel location was specified.</value>
         public int Bottom
         {
             get
@@ -73,7 +77,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the pixel location of the left edge of this window.
         /// </summary>
-        /// <value>The pixel location of the left edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
+        /// <value>The pixel location of the left edge of this window. The default value is <see cref="int.MinValue"/>, which indicates no pixel location was specified.</value>
         public int Left
         {
             get
@@ -90,7 +94,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the pixel location of the right edge of this window.
         /// </summary>
-        /// <value>The pixel location of the right edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
+        /// <value>The pixel location of the right edge of this window. The default value is <see cref="int.MinValue"/>, which indicates no pixel location was specified.</value>
         public int Right
         {
             get
@@ -107,7 +111,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the pixel location of the top edge of this window.
         /// </summary>
-        /// <value>The pixel location of the top edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
+        /// <value>The pixel location of the top edge of this window. The default value is <see cref="int.MinValue"/>, which indicates no pixel location was specified.</value>
         public int Top
         {
             get
@@ -120,6 +124,7 @@ namespace Argotic.Syndication
                 windowTop = value;
             }
         }
+
         /// <summary>
         /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -131,50 +136,50 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            XPathNavigator windowTopNavigator       = source.SelectSingleNode("windowTop");
-            XPathNavigator windowLeftNavigator      = source.SelectSingleNode("windowLeft");
-            XPathNavigator windowBottomNavigator    = source.SelectSingleNode("windowBottom");
-            XPathNavigator windowRightNavigator     = source.SelectSingleNode("windowRight");
+            XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
+            XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
+            XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
+            XPathNavigator windowRightNavigator = source.SelectSingleNode("windowRight");
 
             if (windowTopNavigator != null)
             {
                 int top;
-                if (Int32.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out top))
+                if (int.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out top))
                 {
-                    this.Top    = top;
-                    wasLoaded   = true;
+                    this.Top = top;
+                    wasLoaded = true;
                 }
             }
 
             if (windowLeftNavigator != null)
             {
                 int left;
-                if (Int32.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out left))
+                if (int.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out left))
                 {
-                    this.Left   = left;
-                    wasLoaded   = true;
+                    this.Left = left;
+                    wasLoaded = true;
                 }
             }
 
             if (windowBottomNavigator != null)
             {
                 int bottom;
-                if (Int32.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out bottom))
+                if (int.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out bottom))
                 {
                     this.Bottom = bottom;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (windowRightNavigator != null)
             {
                 int right;
-                if (Int32.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out right))
+                if (int.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out right))
                 {
-                    this.Right  = right;
-                    wasLoaded   = true;
+                    this.Right = right;
+                    wasLoaded = true;
                 }
             }
 
@@ -189,30 +194,31 @@ namespace Argotic.Syndication
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
-            if(this.Top != Int32.MinValue)
+            if(this.Top != int.MinValue)
             {
                 writer.WriteElementString("windowTop", this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            if (this.Left != Int32.MinValue)
+            if (this.Left != int.MinValue)
             {
                 writer.WriteElementString("windowLeft", this.Left.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            if (this.Bottom != Int32.MinValue)
+            if (this.Bottom != int.MinValue)
             {
                 writer.WriteElementString("windowBottom", this.Bottom.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            if (this.Right != Int32.MinValue)
+            if (this.Right != int.MinValue)
             {
                 writer.WriteElementString("windowRight", this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="OpmlWindow"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlWindow"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -220,9 +226,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -238,6 +244,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -250,29 +257,30 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            OpmlWindow value  = obj as OpmlWindow;
+
+            OpmlWindow value = obj as OpmlWindow;
 
             if (value != null)
             {
-                int result  = this.Bottom.CompareTo(value.Bottom);
-                result      = result | this.Left.CompareTo(value.Left);
-                result      = result | this.Right.CompareTo(value.Right);
-                result      = result | this.Top.CompareTo(value.Top);
+                int result = this.Bottom.CompareTo(value.Bottom);
+                result = result | this.Left.CompareTo(value.Left);
+                result = result | this.Right.CompareTo(value.Right);
+                result = result | this.Top.CompareTo(value.Top);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is OpmlWindow))
             {
@@ -288,7 +296,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

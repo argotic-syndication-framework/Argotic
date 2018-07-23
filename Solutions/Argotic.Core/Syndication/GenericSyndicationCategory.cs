@@ -1,9 +1,8 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a format agnostic view of a syndication category.
     /// </summary>
@@ -16,11 +15,13 @@ namespace Argotic.Syndication
         /// <summary>
         /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
         /// </summary>
-        private string categoryTerm     = String.Empty;
+        private string categoryTerm = string.Empty;
+
         /// <summary>
         /// Private member to hold a string that identifies the categorization scheme.
         /// </summary>
-        private string categoryScheme   = String.Empty;
+        private string categoryScheme = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
         /// </summary>
@@ -30,7 +31,7 @@ namespace Argotic.Syndication
         public GenericSyndicationCategory(string term)
         {
             Guard.ArgumentNotNullOrEmptyString(term, "term");
-            categoryTerm    = term;
+            categoryTerm = term;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public GenericSyndicationCategory(string term, string scheme) : this(term)
         {
-            categoryScheme  = scheme;
+            categoryScheme = scheme;
         }
 
         /// <summary>
@@ -56,16 +57,16 @@ namespace Argotic.Syndication
 
             if (category.Scheme != null)
             {
-                categoryScheme  = category.Scheme.ToString();
+                categoryScheme = category.Scheme.ToString();
             }
 
-            if (!String.IsNullOrEmpty(category.Term))
+            if (!string.IsNullOrEmpty(category.Term))
             {
-                categoryTerm    = category.Term.Trim();
+                categoryTerm = category.Term.Trim();
             }
-            else if (!String.IsNullOrEmpty(category.Label))
+            else if (!string.IsNullOrEmpty(category.Label))
             {
-                categoryTerm    = category.Label.Trim();
+                categoryTerm = category.Label.Trim();
             }
         }
 
@@ -77,16 +78,17 @@ namespace Argotic.Syndication
         public GenericSyndicationCategory(RssCategory category)
         {
             Guard.ArgumentNotNull(category, "category");
-            if(!String.IsNullOrEmpty(category.Domain))
+            if(!string.IsNullOrEmpty(category.Domain))
             {
-                categoryScheme  = category.Domain.Trim();
+                categoryScheme = category.Domain.Trim();
             }
 
-            if (!String.IsNullOrEmpty(category.Value))
+            if (!string.IsNullOrEmpty(category.Value))
             {
-                categoryTerm    = category.Value.Trim();
+                categoryTerm = category.Value.Trim();
             }
         }
+
         /// <summary>
         /// Gets a string that identifies the categorization scheme.
         /// </summary>
@@ -110,17 +112,19 @@ namespace Argotic.Syndication
                 return categoryTerm;
             }
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
         /// <remarks>
         ///     This method returns a human-readable representation for the current instance.
         /// </remarks>
         public override string ToString()
         {
-            return String.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
+            return string.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -133,27 +137,28 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            GenericSyndicationCategory value  = obj as GenericSyndicationCategory;
+
+            GenericSyndicationCategory value = obj as GenericSyndicationCategory;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Scheme, value.Scheme, StringComparison.Ordinal);
-                result      = result | String.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Scheme, value.Scheme, StringComparison.Ordinal);
+                result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is GenericSyndicationCategory))
             {
@@ -169,7 +174,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

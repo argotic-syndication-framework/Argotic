@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Data.Adapters;
-using Argotic.Extensions;
-using Argotic.Syndication;
-
-namespace Argotic.Publishing
+﻿namespace Argotic.Publishing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Data.Adapters;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a list of categories available to be used when categorizing web resources.
     /// </summary>
@@ -39,47 +38,58 @@ namespace Argotic.Publishing
         /// <summary>
         /// Private member to hold the syndication format for this syndication resource.
         /// </summary>
-        private static SyndicationContentFormat documentFormat  = SyndicationContentFormat.AtomCategoryDocument;
+        private static SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
+
         /// <summary>
         /// Private member to hold the version of the syndication format for this syndication resource conforms to.
         /// </summary>
-        private static Version documentVersion                  = new Version(1, 0);
+        private static Version documentVersion = new Version(1, 0);
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         private bool resourceAsyncLoadCancelled;
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         private bool resourceIsLoading;
+
         /// <summary>
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
+
         /// <summary>
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the categories associated to this document.
         /// </summary>
         private IEnumerable<AtomCategory> documentCategories;
+
         /// <summary>
         /// Private member to hold an IRI that identifies a categorization scheme that categories may inherit from.
         /// </summary>
         private Uri documentScheme;
+
         /// <summary>
         /// Private member to hold an IRI that identifies the location of the document.
         /// </summary>
         private Uri documentResourceLocation;
+
         /// <summary>
         /// Private member to hold a value indicating whether the document represents a fixed or open set of categories.
         /// </summary>
@@ -113,7 +123,7 @@ namespace Argotic.Publishing
         /// <param name="href">A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the location of the document.</param>
         public AtomCategoryDocument(Uri href)
         {
-            this.Uri    = href;
+            this.Uri = href;
         }
 
         /// <summary>
@@ -123,8 +133,8 @@ namespace Argotic.Publishing
         /// <param name="scheme">A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the categorization scheme used by the document.</param>
         public AtomCategoryDocument(bool isFixed, Uri scheme)
         {
-            this.IsFixed    = isFixed;
-            this.Scheme     = scheme;
+            this.IsFixed = isFixed;
+            this.Scheme = scheme;
         }
 
         /// <summary>
@@ -232,6 +242,7 @@ namespace Argotic.Publishing
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -262,12 +273,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -311,7 +322,7 @@ namespace Argotic.Publishing
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -353,6 +364,7 @@ namespace Argotic.Publishing
                 {
                     documentCategories = new Collection<AtomCategory>();
                 }
+
                 return documentCategories;
             }
 
@@ -508,7 +520,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<AtomCategoryDocument> source, Collection<AtomCategoryDocument> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -517,7 +529,7 @@ namespace Argotic.Publishing
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -645,17 +657,17 @@ namespace Argotic.Publishing
         ///     <para>The <see cref="AtomCategoryDocument"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, object userToken)
         {
             this.LoadAsync(source, null, userToken);
         }
@@ -669,17 +681,17 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
@@ -699,17 +711,17 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -724,23 +736,23 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
 
             if (settings == null)
             {
-                settings    = new SyndicationResourceLoadSettings();
+                settings = new SyndicationResourceLoadSettings();
             }
 
             if (this.LoadOperationInProgress)
@@ -748,14 +760,14 @@ namespace Argotic.Publishing
                 throw new InvalidOperationException();
             }
 
-            this.LoadOperationInProgress    = true;
+            this.LoadOperationInProgress = true;
 
-            this.AsyncLoadHasBeenCancelled  = false;
+            this.AsyncLoadHasBeenCancelled = false;
 
-            asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+            asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
             asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+            object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
@@ -765,7 +777,7 @@ namespace Argotic.Publishing
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation.
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation.
         ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
@@ -773,7 +785,7 @@ namespace Argotic.Publishing
         {
             if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
             {
-                this.AsyncLoadHasBeenCancelled  = true;
+                this.AsyncLoadHasBeenCancelled = true;
 
                 asyncHttpWebRequest.Abort();
             }
@@ -785,23 +797,23 @@ namespace Argotic.Publishing
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncLoadCallback(IAsyncResult result)
         {
-            System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-            XPathNavigator navigator                    = null;
-            WebRequest httpWebRequest                   = null;
-            AtomCategoryDocument document               = null;
-            Uri source                                  = null;
-            WebRequestOptions options                   = null;
-            SyndicationResourceLoadSettings settings    = null;
+            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+            XPathNavigator navigator = null;
+            WebRequest httpWebRequest = null;
+            AtomCategoryDocument document = null;
+            Uri source = null;
+            WebRequestOptions options = null;
+            SyndicationResourceLoadSettings settings = null;
 
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                document            = parameters[1] as AtomCategoryDocument;
-                source              = parameters[2] as Uri;
-                settings            = parameters[3] as SyndicationResourceLoadSettings;
-                options             = parameters[4] as WebRequestOptions;
-                object userToken    = parameters[5];
+                httpWebRequest = parameters[0] as WebRequest;
+                document = parameters[1] as AtomCategoryDocument;
+                source = parameters[2] as Uri;
+                settings = parameters[3] as SyndicationResourceLoadSettings;
+                options = parameters[4] as WebRequestOptions;
+                object userToken = parameters[5];
 
                 if (document != null)
                 {
@@ -811,28 +823,28 @@ namespace Argotic.Publishing
                     {
                         if (settings != null)
                         {
-                            encoding    = settings.CharacterEncoding;
+                            encoding = settings.CharacterEncoding;
                         }
 
                         using (StreamReader streamReader = new StreamReader(stream, encoding))
                         {
-                            XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                            readerSettings.IgnoreComments       = true;
-                            readerSettings.IgnoreWhitespace     = true;
+                            XmlReaderSettings readerSettings = new XmlReaderSettings();
+                            readerSettings.IgnoreComments = true;
+                            readerSettings.IgnoreWhitespace = true;
                             readerSettings.DtdProcessing = DtdProcessing.Ignore;
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
                                 if (encoding == System.Text.Encoding.UTF8)
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                                 }
                                 else
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                                 }
 
-                                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(document, SyndicationContentFormat.AtomCategoryDocument);
 
                                 document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
@@ -860,7 +872,7 @@ namespace Argotic.Publishing
                 }
             }
 
-            this.LoadOperationInProgress    = false;
+            this.LoadOperationInProgress = false;
         }
 
         /// <summary>
@@ -871,12 +883,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddCategory(AtomCategory category)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(category, "category");
 
             ((Collection<AtomCategory>)this.Categories).Add(category);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -920,7 +932,7 @@ namespace Argotic.Publishing
             if (((Collection<AtomCategory>)this.Categories).Contains(category))
             {
                 ((Collection<AtomCategory>)this.Categories).Remove(category);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -938,9 +950,9 @@ namespace Argotic.Publishing
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Document;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Document;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = false;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -951,7 +963,7 @@ namespace Argotic.Publishing
 
                 stream.Seek(0, SeekOrigin.Begin);
 
-                XPathDocument document  = new XPathDocument(stream);
+                XPathDocument document = new XPathDocument(stream);
                 return document.CreateNavigator();
             }
         }
@@ -988,10 +1000,10 @@ namespace Argotic.Publishing
 
             if (settings == null)
             {
-                settings    = new SyndicationResourceLoadSettings();
+                settings = new SyndicationResourceLoadSettings();
             }
 
-            XPathNavigator navigator    = source.CreateNavigator();
+            XPathNavigator navigator = source.CreateNavigator();
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
 
@@ -1207,7 +1219,7 @@ namespace Argotic.Publishing
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
-            XPathNavigator navigator    = null;
+            XPathNavigator navigator = null;
 
             Guard.ArgumentNotNull(source, "source");
 
@@ -1218,11 +1230,11 @@ namespace Argotic.Publishing
 
             if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
             {
-                navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
             }
             else
             {
-                navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
             }
 
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
@@ -1252,13 +1264,13 @@ namespace Argotic.Publishing
 
             if (settings == null)
             {
-                settings    = new SyndicationResourceSaveSettings();
+                settings = new SyndicationResourceSaveSettings();
             }
 
-            XmlWriterSettings writerSettings    = new XmlWriterSettings();
-            writerSettings.OmitXmlDeclaration   = false;
-            writerSettings.Indent               = !settings.MinimizeOutputSize;
-            writerSettings.Encoding             = settings.CharacterEncoding;
+            XmlWriterSettings writerSettings = new XmlWriterSettings();
+            writerSettings.OmitXmlDeclaration = false;
+            writerSettings.Indent = !settings.MinimizeOutputSize;
+            writerSettings.Encoding = settings.CharacterEncoding;
 
             using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
             {
@@ -1304,6 +1316,7 @@ namespace Argotic.Publishing
                     SyndicationExtensionAdapter.FillExtensionTypes(category, settings.SupportedExtensions);
                 }
             }
+
             SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
             AtomUtility.WriteCommonObjectAttributes(this, writer);
@@ -1352,16 +1365,16 @@ namespace Argotic.Publishing
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
 
-            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(this, SyndicationContentFormat.AtomCategoryDocument);
 
             this.OnDocumentLoaded(eventData);
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomCategoryDocument"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomCategoryDocument"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomCategoryDocument"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomCategoryDocument"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -1369,9 +1382,9 @@ namespace Argotic.Publishing
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -1401,30 +1414,30 @@ namespace Argotic.Publishing
                 return 1;
             }
 
-            AtomCategoryDocument value  = obj as AtomCategoryDocument;
+            AtomCategoryDocument value = obj as AtomCategoryDocument;
 
             if (value != null)
             {
-                int result  = this.IsFixed.CompareTo(value.IsFixed);
-                result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                int result = this.IsFixed.CompareTo(value.IsFixed);
+                result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomCategoryDocument))
             {
@@ -1440,7 +1453,7 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

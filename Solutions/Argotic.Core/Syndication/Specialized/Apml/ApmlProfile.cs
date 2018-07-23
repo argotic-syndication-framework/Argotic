@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents an attention profile that can be associated to an <see cref="ApmlDocument"/>.
     /// </summary>
@@ -31,32 +30,39 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the unique name of the profile.
         /// </summary>
-        private string profileName  = String.Empty;
+        private string profileName = string.Empty;
+
         /// <summary>
         /// Private member to hold the implicit concepts of the profile.
         /// </summary>
         private Collection<ApmlConcept> profileImplicitConcepts;
+
         /// <summary>
         /// Private member to hold the explicit concepts of the profile.
         /// </summary>
         private Collection<ApmlConcept> profileExplicitConcepts;
+
         /// <summary>
         /// Private member to hold the implicit sources of the profile.
         /// </summary>
         private Collection<ApmlSource> profileImplicitSources;
+
         /// <summary>
         /// Private member to hold the explicit sources of the profile.
         /// </summary>
         private Collection<ApmlSource> profileExplicitSources;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlProfile"/> class.
         /// </summary>
         public ApmlProfile()
         {
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -73,6 +79,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -94,6 +101,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the explicit concepts of this profile.
         /// </summary>
@@ -106,6 +114,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     profileExplicitConcepts = new Collection<ApmlConcept>();
                 }
+
                 return profileExplicitConcepts;
             }
         }
@@ -122,6 +131,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     profileExplicitSources = new Collection<ApmlSource>();
                 }
+
                 return profileExplicitSources;
             }
         }
@@ -138,6 +148,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     profileImplicitConcepts = new Collection<ApmlConcept>();
                 }
+
                 return profileImplicitConcepts;
             }
         }
@@ -154,6 +165,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     profileImplicitSources = new Collection<ApmlSource>();
                 }
+
                 return profileImplicitSources;
             }
         }
@@ -177,6 +189,7 @@ namespace Argotic.Syndication.Specialized
                 profileName = value.Trim();
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -185,10 +198,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -230,11 +243,12 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Compares two specified <see cref="Collection{ApmlConcept}"/> collections.
         /// </summary>
@@ -256,7 +270,7 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<ApmlConcept> source, Collection<ApmlConcept> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -264,7 +278,7 @@ namespace Argotic.Syndication.Specialized
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -322,6 +336,7 @@ namespace Argotic.Syndication.Specialized
 
             return result;
         }
+
         /// <summary>
         /// Loads this <see cref="ApmlProfile"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -333,27 +348,27 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
-                string nameAttribute    = source.GetAttribute("name", String.Empty);
-                if (!String.IsNullOrEmpty(nameAttribute))
+                string nameAttribute = source.GetAttribute("name", string.Empty);
+                if (!string.IsNullOrEmpty(nameAttribute))
                 {
-                    this.Name   = nameAttribute;
-                    wasLoaded   = true;
+                    this.Name = nameAttribute;
+                    wasLoaded = true;
                 }
             }
 
             if(source.HasChildren)
             {
-                XPathNavigator implicitDataNavigator    = source.SelectSingleNode("apml:ImplicitData", manager);
-                XPathNavigator explicitDataNavigator    = source.SelectSingleNode("apml:ExplicitData", manager);
+                XPathNavigator implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
+                XPathNavigator explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
                 if (implicitDataNavigator != null)
                 {
-                    XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                    XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                     if (conceptsIterator != null && conceptsIterator.Count > 0)
                     {
                         while (conceptsIterator.MoveNext())
@@ -362,21 +377,21 @@ namespace Argotic.Syndication.Specialized
                             if (concept.Load(conceptsIterator.Current))
                             {
                                 this.ImplicitConcepts.Add(concept);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
 
-                    XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                    XPathNodeIterator sourcesIterator = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                     if (sourcesIterator != null && sourcesIterator.Count > 0)
                     {
                         while (sourcesIterator.MoveNext())
                         {
-                            ApmlSource attentionSource  = new ApmlSource();
+                            ApmlSource attentionSource = new ApmlSource();
                             if (attentionSource.Load(sourcesIterator.Current))
                             {
                                 this.ImplicitSources.Add(attentionSource);
-                                wasLoaded               = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -384,7 +399,7 @@ namespace Argotic.Syndication.Specialized
 
                 if (explicitDataNavigator != null)
                 {
-                    XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                    XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                     if (conceptsIterator != null && conceptsIterator.Count > 0)
                     {
                         while (conceptsIterator.MoveNext())
@@ -393,21 +408,21 @@ namespace Argotic.Syndication.Specialized
                             if (concept.Load(conceptsIterator.Current))
                             {
                                 this.ExplicitConcepts.Add(concept);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
 
-                    XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                    XPathNodeIterator sourcesIterator = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                     if (sourcesIterator != null && sourcesIterator.Count > 0)
                     {
                         while (sourcesIterator.MoveNext())
                         {
-                            ApmlSource attentionSource  = new ApmlSource();
+                            ApmlSource attentionSource = new ApmlSource();
                             if (attentionSource.Load(sourcesIterator.Current))
                             {
                                 this.ExplicitSources.Add(attentionSource);
-                                wasLoaded               = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -430,28 +445,28 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
             XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
-                string nameAttribute    = source.GetAttribute("name", String.Empty);
-                if (!String.IsNullOrEmpty(nameAttribute))
+                string nameAttribute = source.GetAttribute("name", string.Empty);
+                if (!string.IsNullOrEmpty(nameAttribute))
                 {
-                    this.Name   = nameAttribute;
-                    wasLoaded   = true;
+                    this.Name = nameAttribute;
+                    wasLoaded = true;
                 }
             }
 
             if(source.HasChildren)
             {
-                XPathNavigator implicitDataNavigator    = source.SelectSingleNode("apml:ImplicitData", manager);
-                XPathNavigator explicitDataNavigator    = source.SelectSingleNode("apml:ExplicitData", manager);
+                XPathNavigator implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
+                XPathNavigator explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
                 if (implicitDataNavigator != null)
                 {
-                    XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                    XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                     if (conceptsIterator != null && conceptsIterator.Count > 0)
                     {
                         while (conceptsIterator.MoveNext())
@@ -460,21 +475,21 @@ namespace Argotic.Syndication.Specialized
                             if (concept.Load(conceptsIterator.Current, settings))
                             {
                                 this.ImplicitConcepts.Add(concept);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
 
-                    XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                    XPathNodeIterator sourcesIterator = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                     if (sourcesIterator != null && sourcesIterator.Count > 0)
                     {
                         while (sourcesIterator.MoveNext())
                         {
-                            ApmlSource attentionSource  = new ApmlSource();
+                            ApmlSource attentionSource = new ApmlSource();
                             if (attentionSource.Load(sourcesIterator.Current, settings))
                             {
                                 this.ImplicitSources.Add(attentionSource);
-                                wasLoaded               = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -482,7 +497,7 @@ namespace Argotic.Syndication.Specialized
 
                 if (explicitDataNavigator != null)
                 {
-                    XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                    XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                     if (conceptsIterator != null && conceptsIterator.Count > 0)
                     {
                         while (conceptsIterator.MoveNext())
@@ -491,26 +506,27 @@ namespace Argotic.Syndication.Specialized
                             if (concept.Load(conceptsIterator.Current, settings))
                             {
                                 this.ExplicitConcepts.Add(concept);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
 
-                    XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                    XPathNodeIterator sourcesIterator = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                     if (sourcesIterator != null && sourcesIterator.Count > 0)
                     {
                         while (sourcesIterator.MoveNext())
                         {
-                            ApmlSource attentionSource  = new ApmlSource();
+                            ApmlSource attentionSource = new ApmlSource();
                             if (attentionSource.Load(sourcesIterator.Current, settings))
                             {
                                 this.ExplicitSources.Add(attentionSource);
-                                wasLoaded               = true;
+                                wasLoaded = true;
                             }
                         }
                     }
                 }
             }
+
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -540,6 +556,7 @@ namespace Argotic.Syndication.Specialized
                     {
                         concept.WriteTo(writer);
                     }
+
                     writer.WriteEndElement();
                 }
 
@@ -550,6 +567,7 @@ namespace Argotic.Syndication.Specialized
                     {
                         source.WriteTo(writer);
                     }
+
                     writer.WriteEndElement();
                 }
 
@@ -567,6 +585,7 @@ namespace Argotic.Syndication.Specialized
                     {
                         concept.WriteTo(writer);
                     }
+
                     writer.WriteEndElement();
                 }
 
@@ -577,19 +596,22 @@ namespace Argotic.Syndication.Specialized
                     {
                         source.WriteTo(writer);
                     }
+
                     writer.WriteEndElement();
                 }
 
                 writer.WriteEndElement();
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="ApmlProfile"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="ApmlProfile"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlProfile"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlProfile"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -597,9 +619,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -615,6 +637,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -627,30 +650,31 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            ApmlProfile value  = obj as ApmlProfile;
+
+            ApmlProfile value = obj as ApmlProfile;
 
             if (value != null)
             {
-                int result  = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
-                result      = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
-                result      = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
-                result      = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                int result = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
+                result = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
+                result = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
+                result = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is ApmlProfile))
             {
@@ -666,7 +690,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents the author of a <see cref="ApmlSource"/>.
     /// </summary>
@@ -31,22 +30,27 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the unique key for the author.
         /// </summary>
-        private string authorKey            = String.Empty;
+        private string authorKey = string.Empty;
+
         /// <summary>
         /// Private member to hold the decimal score of the author.
         /// </summary>
-        private decimal authorValue         = Decimal.MinValue;
+        private decimal authorValue = decimal.MinValue;
+
         /// <summary>
         /// Private member to hold the name of the entity that contributed the author.
         /// </summary>
-        private string authorFrom           = String.Empty;
+        private string authorFrom = string.Empty;
+
         /// <summary>
         /// Private member to hold a date indicating the last time the author was updated.
         /// </summary>
-        private DateTime authorUpdatedOn    = DateTime.MinValue;
+        private DateTime authorUpdatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlAuthor"/> class.
         /// </summary>
@@ -71,8 +75,8 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
         public ApmlAuthor(string key, decimal value)
         {
-            this.Key        = key;
-            this.Value      = value;
+            this.Key = key;
+            this.Value = value;
         }
 
         /// <summary>
@@ -96,9 +100,10 @@ namespace Argotic.Syndication.Specialized
         public ApmlAuthor(string key, decimal value, string from, DateTime utcUpdatedOn) : this(key, value)
         {
             Guard.ArgumentNotNullOrEmptyString(from, "from");
-            this.From       = from;
-            this.UpdatedOn  = utcUpdatedOn;
+            this.From = from;
+            this.UpdatedOn = utcUpdatedOn;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -115,6 +120,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -136,6 +142,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the name of the entity that contributed this author.
         /// </summary>
@@ -149,9 +156,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    authorFrom = String.Empty;
+                    authorFrom = string.Empty;
                 }
                 else
                 {
@@ -215,11 +222,12 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                Guard.ArgumentNotLessThan(value, "value", Decimal.MinusOne);
-                Guard.ArgumentNotGreaterThan(value, "value", Decimal.One);
+                Guard.ArgumentNotLessThan(value, "value", decimal.MinusOne);
+                Guard.ArgumentNotGreaterThan(value, "value", decimal.One);
                 authorValue = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -228,10 +236,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -272,11 +280,12 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="ApmlAuthor"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -288,47 +297,47 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
-                string keyAttribute     = source.GetAttribute("key", String.Empty);
-                string valueAttribute   = source.GetAttribute("value", String.Empty);
-                string fromAttribute    = source.GetAttribute("from", String.Empty);
-                string updatedAttribute = source.GetAttribute("updated", String.Empty);
+                string keyAttribute = source.GetAttribute("key", string.Empty);
+                string valueAttribute = source.GetAttribute("value", string.Empty);
+                string fromAttribute = source.GetAttribute("from", string.Empty);
+                string updatedAttribute = source.GetAttribute("updated", string.Empty);
 
-                if (!String.IsNullOrEmpty(keyAttribute))
+                if (!string.IsNullOrEmpty(keyAttribute))
                 {
-                    this.Key    = keyAttribute;
-                    wasLoaded   = true;
+                    this.Key = keyAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(valueAttribute))
+                if (!string.IsNullOrEmpty(valueAttribute))
                 {
                     decimal value;
-                    if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out value))
+                    if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out value))
                     {
-                        if (value >= Decimal.MinusOne && value <= Decimal.One)
+                        if (value >= decimal.MinusOne && value <= decimal.One)
                         {
-                            this.Value  = value;
-                            wasLoaded   = true;
+                            this.Value = value;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                if (!String.IsNullOrEmpty(fromAttribute))
+                if (!string.IsNullOrEmpty(fromAttribute))
                 {
-                    this.From   = fromAttribute;
-                    wasLoaded   = true;
+                    this.From = fromAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(updatedAttribute))
+                if (!string.IsNullOrEmpty(updatedAttribute))
                 {
                     DateTime updatedOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out updatedOn))
                     {
-                        this.UpdatedOn  = updatedOn;
-                        wasLoaded       = true;
+                        this.UpdatedOn = updatedOn;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -349,10 +358,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -372,7 +381,7 @@ namespace Argotic.Syndication.Specialized
             writer.WriteAttributeString("key", this.Key);
             writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
 
-            if (!String.IsNullOrEmpty(this.From))
+            if (!string.IsNullOrEmpty(this.From))
             {
                 writer.WriteAttributeString("from", this.From);
             }
@@ -381,14 +390,16 @@ namespace Argotic.Syndication.Specialized
             {
                 writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="ApmlAuthor"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="ApmlAuthor"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlAuthor"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlAuthor"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -396,9 +407,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -414,6 +425,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -426,29 +438,30 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            ApmlAuthor value  = obj as ApmlAuthor;
+
+            ApmlAuthor value = obj as ApmlAuthor;
 
             if (value != null)
             {
-                int result  = String.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
-                result      = result | this.Value.CompareTo(value.Value);
+                int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+                result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+                result = result | this.Value.CompareTo(value.Value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is ApmlAuthor))
             {
@@ -464,7 +477,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

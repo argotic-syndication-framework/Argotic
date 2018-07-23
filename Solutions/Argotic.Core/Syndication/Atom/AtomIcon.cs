@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents an image that provides iconic visual identification for an <see cref="AtomFeed"/>.
     /// </summary>
@@ -34,14 +33,17 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold an IRI that identifies an image that provides iconic visual identification for the feed.
         /// </summary>
@@ -63,8 +65,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomIcon(Uri uri)
         {
-            this.Uri    = uri;
+            this.Uri = uri;
         }
+
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -108,6 +111,7 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -124,6 +128,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -145,6 +150,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets an IRI that identifies an image that provides iconic visual identification for this feed.
         /// </summary>
@@ -167,6 +173,7 @@ namespace Argotic.Syndication
                 iconUri = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -175,10 +182,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -219,11 +226,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="AtomIcon"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -235,19 +243,20 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
-            if (!String.IsNullOrEmpty(source.Value))
+
+            if (!string.IsNullOrEmpty(source.Value))
             {
                 Uri uri;
                 if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out uri))
                 {
-                    this.Uri    = uri;
-                    wasLoaded   = true;
+                    this.Uri = uri;
+                    wasLoaded = true;
                 }
             }
 
@@ -267,10 +276,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -288,15 +297,16 @@ namespace Argotic.Syndication
             writer.WriteStartElement("icon", AtomUtility.AtomNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-            writer.WriteString(this.Uri != null ? this.Uri.ToString() : String.Empty);
+            writer.WriteString(this.Uri != null ? this.Uri.ToString() : string.Empty);
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomIcon"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomIcon"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomIcon"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomIcon"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -304,9 +314,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -322,6 +332,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -334,28 +345,29 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            AtomIcon value  = obj as AtomIcon;
+
+            AtomIcon value = obj as AtomIcon;
 
             if (value != null)
             {
-                int result  = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomIcon))
             {
@@ -371,7 +383,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

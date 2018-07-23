@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Data.Adapters;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Data.Adapters;
+
     /// <summary>
     /// Represents a format agnostic view of a syndication feed.
     /// </summary>
@@ -34,46 +33,57 @@ namespace Argotic.Syndication
         /// Private member to hold the underlying syndication resource that is being absratracted by this generic feed.
         /// </summary>
         private ISyndicationResource feedResource;
+
         /// <summary>
         /// Private member to hold the type of syndication format that the syndication feed implements.
         /// </summary>
-        private SyndicationContentFormat feedFormat                     = SyndicationContentFormat.None;
+        private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
+
         /// <summary>
         /// Private member to hold the title of the syndication feed.
         /// </summary>
-        private string feedTitle                                        = String.Empty;
+        private string feedTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold the description of the syndication feed.
         /// </summary>
-        private string feedDescription                                  = String.Empty;
+        private string feedDescription = string.Empty;
+
         /// <summary>
         /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
         /// </summary>
-        private DateTime feedLastUpdatedOn                              = DateTime.MinValue;
+        private DateTime feedLastUpdatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the feed content is written.
         /// </summary>
         private CultureInfo feedLanguage;
+
         /// <summary>
         /// Private member to hold the collection of categories associated with the feed.
         /// </summary>
-        private Collection<GenericSyndicationCategory> feedCategories   = new Collection<GenericSyndicationCategory>();
+        private Collection<GenericSyndicationCategory> feedCategories = new Collection<GenericSyndicationCategory>();
+
         /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
-        private IEnumerable<GenericSyndicationItem> feedItems           = new Collection<GenericSyndicationItem>();
+        private IEnumerable<GenericSyndicationItem> feedItems = new Collection<GenericSyndicationItem>();
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         private bool resourceAsyncLoadCancelled;
+
         /// <summary>
         /// Private member to hold a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         private bool resourceIsLoading;
+
         /// <summary>
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationFeed"/> class.
         /// </summary>
@@ -116,6 +126,7 @@ namespace Argotic.Syndication
                 {
                     feedCategories = new Collection<GenericSyndicationCategory>();
                 }
+
                 return feedCategories;
             }
         }
@@ -165,6 +176,7 @@ namespace Argotic.Syndication
                 {
                     feedItems = new Collection<GenericSyndicationItem>();
                 }
+
                 return feedItems;
             }
         }
@@ -228,6 +240,7 @@ namespace Argotic.Syndication
                 return feedTitle;
             }
         }
+
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
@@ -283,7 +296,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<GenericSyndicationCategory> source, Collection<GenericSyndicationCategory> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -291,7 +304,7 @@ namespace Argotic.Syndication
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -305,6 +318,7 @@ namespace Argotic.Syndication
 
             return result;
         }
+
         /// <summary>
         /// Creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>.
         /// </summary>
@@ -408,14 +422,15 @@ namespace Argotic.Syndication
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static GenericSyndicationFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
-            GenericSyndicationFeed syndicationResource  = new GenericSyndicationFeed();
+            GenericSyndicationFeed syndicationResource = new GenericSyndicationFeed();
             Guard.ArgumentNotNull(source, "source");
             syndicationResource.Load(source, options, settings);
 
             return syndicationResource;
         }
+
         /// <summary>
-        /// Loads the syndication resource from the specified <see cref="String"/>.
+        /// Loads the syndication resource from the specified <see cref="string"/>.
         /// </summary>
         /// <param name="str">The <b>String</b> used to load the syndication resource.</param>
         /// <remarks>
@@ -424,7 +439,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to a supported syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
-        public void Load(String str)
+        public void Load(string str)
         {
             Guard.ArgumentNotNull(str, "string");
             XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(str);
@@ -460,15 +475,16 @@ namespace Argotic.Syndication
         public void Load(Stream stream, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(stream, "stream");
-            XPathNavigator navigator    = null;
+            XPathNavigator navigator = null;
             if (settings != null)
             {
-                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
             }
             else
             {
-                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(stream);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
             }
+
             this.Load(navigator, settings == null ? new SyndicationResourceLoadSettings() : settings, new SyndicationResourceLoadedEventArgs(navigator));
         }
 
@@ -627,20 +643,22 @@ namespace Argotic.Syndication
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
-            XPathNavigator navigator    = null;
+            XPathNavigator navigator = null;
             Guard.ArgumentNotNull(source, "source");
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
             }
+
             if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
             {
-                navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
             }
             else
             {
-                navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
             }
+
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
 
@@ -652,38 +670,38 @@ namespace Argotic.Syndication
         public void Parse(AtomFeed feed)
         {
             Guard.ArgumentNotNull(feed, "feed");
-            feedResource            = feed;
-            feedFormat              = SyndicationContentFormat.Atom;
+            feedResource = feed;
+            feedFormat = SyndicationContentFormat.Atom;
 
-            if (feed.Title != null && !String.IsNullOrEmpty(feed.Title.Content))
+            if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
             {
-                feedTitle           = feed.Title.Content;
+                feedTitle = feed.Title.Content;
             }
 
-            if (feed.Subtitle != null && !String.IsNullOrEmpty(feed.Title.Content))
+            if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
             {
-                feedDescription     = feed.Subtitle.Content;
+                feedDescription = feed.Subtitle.Content;
             }
 
             if (feed.UpdatedOn != DateTime.MinValue)
             {
-                feedLastUpdatedOn   = feed.UpdatedOn;
+                feedLastUpdatedOn = feed.UpdatedOn;
             }
 
             if(feed.Language != null)
             {
-                feedLanguage        = feed.Language;
+                feedLanguage = feed.Language;
             }
 
             foreach(AtomCategory category in feed.Categories)
             {
-                GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
                 feedCategories.Add(genericCategory);
             }
 
             foreach(AtomEntry entry in feed.Entries)
             {
-                GenericSyndicationItem genericItem  = new GenericSyndicationItem(entry);
+                GenericSyndicationItem genericItem = new GenericSyndicationItem(entry);
                 ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
             }
         }
@@ -696,38 +714,38 @@ namespace Argotic.Syndication
         public void Parse(RssFeed feed)
         {
             Guard.ArgumentNotNull(feed, "feed");
-            feedResource            = feed;
-            feedFormat              = SyndicationContentFormat.Rss;
+            feedResource = feed;
+            feedFormat = SyndicationContentFormat.Rss;
 
-            if (!String.IsNullOrEmpty(feed.Channel.Title))
+            if (!string.IsNullOrEmpty(feed.Channel.Title))
             {
-                feedTitle           = feed.Channel.Title;
+                feedTitle = feed.Channel.Title;
             }
 
-            if (!String.IsNullOrEmpty(feed.Channel.Description))
+            if (!string.IsNullOrEmpty(feed.Channel.Description))
             {
-                feedDescription     = feed.Channel.Description;
+                feedDescription = feed.Channel.Description;
             }
 
             if (feed.Channel.LastBuildDate != DateTime.MinValue)
             {
-                feedLastUpdatedOn   = feed.Channel.LastBuildDate;
+                feedLastUpdatedOn = feed.Channel.LastBuildDate;
             }
 
             if (feed.Channel.Language != null)
             {
-                feedLanguage        = feed.Channel.Language;
+                feedLanguage = feed.Channel.Language;
             }
 
             foreach (RssCategory category in feed.Channel.Categories)
             {
-                GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
                 feedCategories.Add(genericCategory);
             }
 
             foreach (RssItem item in feed.Channel.Items)
             {
-                GenericSyndicationItem genericItem  = new GenericSyndicationItem(item);
+                GenericSyndicationItem genericItem = new GenericSyndicationItem(item);
                 ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
             }
         }
@@ -745,6 +763,7 @@ namespace Argotic.Syndication
             feedResource = opmlDocument;
             feedFormat = SyndicationContentFormat.Opml;
         }
+
         /// <summary>
         /// Loads this <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/>.
         /// </summary>
@@ -754,16 +773,16 @@ namespace Argotic.Syndication
         ///     <para>The <see cref="RssFeed"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
+        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
         ///         <code 
@@ -776,7 +795,7 @@ namespace Argotic.Syndication
         ///         />
         ///     </code>
         /// </example>
-        public void LoadAsync(Uri source, Object userToken)
+        public void LoadAsync(Uri source, object userToken)
         {
             this.LoadAsync(source, null, userToken);
         }
@@ -790,17 +809,17 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before 
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
         }
@@ -820,17 +839,17 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -845,36 +864,38 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, 
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
             if (settings == null)
             {
-                settings    = new SyndicationResourceLoadSettings();
+                settings = new SyndicationResourceLoadSettings();
             }
+
             if (this.LoadOperationInProgress)
             {
                 throw new InvalidOperationException();
             }
-            this.LoadOperationInProgress    = true;
-            this.AsyncLoadHasBeenCancelled  = false;
+
+            this.LoadOperationInProgress = true;
+            this.AsyncLoadHasBeenCancelled = false;
 
             
-            asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+            asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
             asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
             
-            object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+            object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
         }
@@ -883,7 +904,7 @@ namespace Argotic.Syndication
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation. 
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation. 
         ///     If there is a load operation in progress, this method releases resources used to execute the load operation. 
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
@@ -891,32 +912,33 @@ namespace Argotic.Syndication
         {
             if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
             {
-                this.AsyncLoadHasBeenCancelled  = true;
+                this.AsyncLoadHasBeenCancelled = true;
                 asyncHttpWebRequest.Abort();
             }
         }
+
         /// <summary>
         /// Called when a corresponding asynchronous load operation completes.
         /// </summary>
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncLoadCallback(IAsyncResult result)
         {
-            System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-            XPathNavigator navigator                    = null;
-            WebRequest httpWebRequest                   = null;
-            GenericSyndicationFeed feed                 = null;
-            Uri source                                  = null;
-            WebRequestOptions options                   = null;
-            SyndicationResourceLoadSettings settings    = null;
+            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+            XPathNavigator navigator = null;
+            WebRequest httpWebRequest = null;
+            GenericSyndicationFeed feed = null;
+            Uri source = null;
+            WebRequestOptions options = null;
+            SyndicationResourceLoadSettings settings = null;
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                feed                = parameters[1] as GenericSyndicationFeed;
-                source              = parameters[2] as Uri;
-                settings            = parameters[3] as SyndicationResourceLoadSettings;
-                options             = parameters[4] as WebRequestOptions;
-                object userToken    = parameters[5];
+                httpWebRequest = parameters[0] as WebRequest;
+                feed = parameters[1] as GenericSyndicationFeed;
+                source = parameters[2] as Uri;
+                settings = parameters[3] as SyndicationResourceLoadSettings;
+                options = parameters[4] as WebRequestOptions;
+                object userToken = parameters[5];
                 if (feed != null)
                 {
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
@@ -924,49 +946,52 @@ namespace Argotic.Syndication
                     {
                         if (settings != null)
                         {
-                            encoding    = settings.CharacterEncoding;
+                            encoding = settings.CharacterEncoding;
                         }
 
                         using (StreamReader streamReader = new StreamReader(stream, encoding))
                         {
-                            XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                            readerSettings.IgnoreComments       = true;
-                            readerSettings.IgnoreWhitespace     = true;
+                            XmlReaderSettings readerSettings = new XmlReaderSettings();
+                            readerSettings.IgnoreComments = true;
+                            readerSettings.IgnoreWhitespace = true;
                             readerSettings.DtdProcessing = DtdProcessing.Ignore;
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
                                 if (encoding == System.Text.Encoding.UTF8)
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                                 }
                                 else
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                                 }
-                                SyndicationResourceMetadata metadata    = new SyndicationResourceMetadata(navigator);
+
+                                SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
 
                                 if (metadata.Format == SyndicationContentFormat.Atom)
                                 {
-                                    AtomFeed atomFeed                   = new AtomFeed();
-                                    SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                    AtomFeed atomFeed = new AtomFeed();
+                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                     adapter.Fill(atomFeed, SyndicationContentFormat.Atom);
 
                                     feed.Parse(atomFeed);
                                 }
                                 else if (metadata.Format == SyndicationContentFormat.Rss)
                                 {
-                                    RssFeed rssFeed                     = new RssFeed();
-                                    SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                    RssFeed rssFeed = new RssFeed();
+                                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                     adapter.Fill(rssFeed, SyndicationContentFormat.Rss);
 
                                     feed.Parse(rssFeed);
                                 }
+
                                 feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
-                    feed.LoadOperationInProgress    = false;
+
+                    feed.LoadOperationInProgress = false;
                 }
             }
         }
@@ -985,8 +1010,10 @@ namespace Argotic.Syndication
                     asyncHttpWebRequest.Abort();
                 }
             }
-            this.LoadOperationInProgress    = false;
+
+            this.LoadOperationInProgress = false;
         }
+
         /// <summary>
         /// Loads the generic syndication feed using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
@@ -1005,20 +1032,20 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
-            SyndicationResourceMetadata metadata    = new SyndicationResourceMetadata(navigator);
+            SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
 
             if (metadata.Format == SyndicationContentFormat.Atom)
             {
-                AtomFeed feed                       = new AtomFeed();
-                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                AtomFeed feed = new AtomFeed();
+                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                 adapter.Fill(feed, SyndicationContentFormat.Atom);
 
                 this.Parse(feed);
             }
             else if (metadata.Format == SyndicationContentFormat.Rss)
             {
-                RssFeed feed                        = new RssFeed();
-                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                RssFeed feed = new RssFeed();
+                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                 adapter.Fill(feed, SyndicationContentFormat.Rss);
 
                 this.Parse(feed);
@@ -1031,6 +1058,7 @@ namespace Argotic.Syndication
 
                 this.Parse(opmlDoc);
             }
+
             this.OnFeedLoaded(eventData);
         }
     }

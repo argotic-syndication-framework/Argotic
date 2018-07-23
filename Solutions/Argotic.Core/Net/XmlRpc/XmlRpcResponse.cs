@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the response to an XML remote procedure call.
     /// </summary>
@@ -27,6 +26,7 @@ namespace Argotic.Net
         /// Private member to hold the response value that was returned for the remote procedure call.
         /// </summary>
         private IXmlRpcValue responseParameter;
+
         /// <summary>
         /// Private member to hold the response fault information.
         /// </summary>
@@ -48,7 +48,7 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(parameter, "parameter");
 
-            responseParameter   = parameter;
+            responseParameter = parameter;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(fault, "fault");
 
-            responseFault   = fault;
+            responseFault = fault;
         }
 
         /// <summary>
@@ -71,12 +71,12 @@ namespace Argotic.Net
         public XmlRpcResponse(int faultCode, string faultMessage)
         {
             XmlRpcStructureValue faultStructure = new XmlRpcStructureValue();
-            XmlRpcStructureMember codeMember    = new XmlRpcStructureMember("faultCode", new XmlRpcScalarValue(faultCode));
-            XmlRpcStructureMember stringMember  = new XmlRpcStructureMember("faultString", new XmlRpcScalarValue(faultMessage));
+            XmlRpcStructureMember codeMember = new XmlRpcStructureMember("faultCode", new XmlRpcScalarValue(faultCode));
+            XmlRpcStructureMember stringMember = new XmlRpcStructureMember("faultString", new XmlRpcScalarValue(faultMessage));
             faultStructure.Members.Add(codeMember);
             faultStructure.Members.Add(stringMember);
 
-            responseFault   = faultStructure;
+            responseFault = faultStructure;
         }
 
         /// <summary>
@@ -91,30 +91,30 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(response, "response");
 
-            if (String.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
+            if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
             {
-                throw new ArgumentException(String.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
+                throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
             }
             else if (response.ContentLength <= 0)
             {
-                throw new ArgumentException(String.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
+                throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
             }
 
             using (Stream stream = response.GetResponseStream())
             {
-                XmlReaderSettings settings              = new XmlReaderSettings();
-                settings.ConformanceLevel               = ConformanceLevel.Document;
-                settings.IgnoreComments                 = true;
-                settings.IgnoreProcessingInstructions   = true;
-                settings.IgnoreWhitespace               = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ConformanceLevel = ConformanceLevel.Document;
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+                settings.IgnoreWhitespace = true;
                 settings.DtdProcessing = DtdProcessing.Ignore;
 
                 using (XmlReader reader = XmlReader.Create(stream, settings))
                 {
-                    XPathDocument document  = new XPathDocument(reader);
-                    XPathNavigator source   = document.CreateNavigator();
+                    XPathDocument document = new XPathDocument(reader);
+                    XPathNavigator source = document.CreateNavigator();
 
-                    XPathNavigator methodResponseNavigator  = source.SelectSingleNode("methodResponse");
+                    XPathNavigator methodResponseNavigator = source.SelectSingleNode("methodResponse");
                     if (methodResponseNavigator != null)
                     {
                         this.Load(methodResponseNavigator);
@@ -167,39 +167,39 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if (source.HasChildren)
             {
-                XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
-                XPathNavigator faultNavigator       = source.SelectSingleNode("fault");
+                XPathNavigator parametersNavigator = source.SelectSingleNode("params");
+                XPathNavigator faultNavigator = source.SelectSingleNode("fault");
 
                 if (parametersNavigator != null)
                 {
-                    XPathNavigator valueNavigator   = parametersNavigator.SelectSingleNode("param/value");
+                    XPathNavigator valueNavigator = parametersNavigator.SelectSingleNode("param/value");
                     if (valueNavigator != null)
                     {
                         IXmlRpcValue value;
                         if (XmlRpcClient.TryParseValue(valueNavigator, out value))
                         {
-                            responseParameter   = value;
-                            wasLoaded           = true;
+                            responseParameter = value;
+                            wasLoaded = true;
                         }
                     }
                 }
 
                 if (faultNavigator != null)
                 {
-                    XPathNavigator structNavigator  = faultNavigator.SelectSingleNode("value");
+                    XPathNavigator structNavigator = faultNavigator.SelectSingleNode("value");
                     if (structNavigator != null)
                     {
-                        XmlRpcStructureValue structure  = new XmlRpcStructureValue();
+                        XmlRpcStructureValue structure = new XmlRpcStructureValue();
                         if (structure.Load(structNavigator))
                         {
-                            responseFault   = structure;
-                            wasLoaded       = true;
+                            responseFault = structure;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -239,9 +239,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -249,9 +249,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -281,58 +281,58 @@ namespace Argotic.Net
                 return 1;
             }
 
-            XmlRpcResponse value  = obj as XmlRpcResponse;
+            XmlRpcResponse value = obj as XmlRpcResponse;
 
             if (value != null)
             {
-                int result  = 0;
+                int result = 0;
 
                 if(this.Fault != null)
                 {
                     if (value.Fault != null)
                     {
-                        result  = result | this.Fault.CompareTo(value.Fault);
+                        result = result | this.Fault.CompareTo(value.Fault);
                     }
                     else
                     {
-                        result  = result | 1;
+                        result = result | 1;
                     }
                 }
                 else if(value.Fault != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Parameter != null)
                 {
                     if (value.Parameter != null)
                     {
-                        result  = result | String.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
+                        result = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
                     }
                     else
                     {
-                        result  = result | 1;
+                        result = result | 1;
                     }
                 }
                 else if (value.Parameter != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is XmlRpcResponse))
             {
@@ -348,7 +348,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

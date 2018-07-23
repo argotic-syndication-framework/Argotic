@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a means of uniquely identifying a <see cref="RssItem"/>.
     /// </summary>
@@ -40,14 +39,17 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a string value that uniquely identifies the item.
         /// </summary>
-        private string guidIdentifier   = String.Empty;
+        private string guidIdentifier = string.Empty;
+
         /// <summary>
         /// Private member to hold a value indicating if the guid represents a permanent URL.
         /// </summary>
-        private bool guidIsPermalink    = true;
+        private bool guidIsPermalink = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssGuid"/> class.
         /// </summary>
@@ -64,7 +66,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public RssGuid(string value)
         {
-            this.Value  = value;
+            this.Value = value;
         }
 
         /// <summary>
@@ -76,8 +78,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public RssGuid(string value, bool isPermanentUrl) : this(value)
         {
-            this.IsPermanentLink    = isPermanentUrl;
+            this.IsPermanentLink = isPermanentUrl;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -94,6 +97,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -115,6 +119,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets a value indicating if the guid represents a permanent URL of a web page associated with this item.
         /// </summary>
@@ -166,6 +171,7 @@ namespace Argotic.Syndication
                 guidIdentifier = value.Trim();
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -174,10 +180,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -218,7 +224,7 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -241,21 +247,21 @@ namespace Argotic.Syndication
             {
                 string permalinkAttribute = source.GetAttribute("isPermaLink", string.Empty);
 
-                if (!String.IsNullOrEmpty(permalinkAttribute))
+                if (!string.IsNullOrEmpty(permalinkAttribute))
                 {
                     bool isPermaLink;
-                    if (Boolean.TryParse(permalinkAttribute, out isPermaLink))
+                    if (bool.TryParse(permalinkAttribute, out isPermaLink))
                     {
-                        this.IsPermanentLink    = isPermaLink;
-                        wasLoaded               = true;
+                        this.IsPermanentLink = isPermaLink;
+                        wasLoaded = true;
                     }
                 }
             }
 
-            if(!String.IsNullOrEmpty(source.Value))
+            if(!string.IsNullOrEmpty(source.Value))
             {
-                this.Value  = source.Value;
-                wasLoaded   = true;
+                this.Value = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -274,10 +280,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -300,10 +306,11 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssGuid"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssGuid"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssGuid"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssGuid"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -311,9 +318,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -329,6 +336,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -341,27 +349,28 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssGuid value  = obj as RssGuid;
+
+            RssGuid value = obj as RssGuid;
 
             if (value != null)
             {
-                int result  = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-                result      = result | String.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+                int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
+                result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssGuid))
             {
@@ -377,7 +386,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

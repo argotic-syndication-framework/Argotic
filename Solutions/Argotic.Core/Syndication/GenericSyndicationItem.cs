@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a format agnostic view of the discrete content for a syndication feed.
     /// </summary>
@@ -16,19 +15,23 @@ namespace Argotic.Syndication
         /// <summary>
         /// Private member to hold the title of the syndication item.
         /// </summary>
-        private string itemTitle                                        = String.Empty;
+        private string itemTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold the summary of the syndication item.
         /// </summary>
-        private string itemSummary                                      = String.Empty;
+        private string itemSummary = string.Empty;
+
         /// <summary>
         /// Private member to hold the publication date of the item.
         /// </summary>
-        private DateTime itemPublishedOn                                = DateTime.MinValue;
+        private DateTime itemPublishedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold the collection of categories associated with the item.
         /// </summary>
-        private Collection<GenericSyndicationCategory> itemCategories   = new Collection<GenericSyndicationCategory>();
+        private Collection<GenericSyndicationCategory> itemCategories = new Collection<GenericSyndicationCategory>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -50,6 +53,7 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(item, "item");
             this.LoadFrom(item);
         }
+
         /// <summary>
         /// Gets the categories associated with this item.
         /// </summary>
@@ -62,8 +66,9 @@ namespace Argotic.Syndication
             {
                 if (itemCategories == null)
                 {
-                    itemCategories  = new Collection<GenericSyndicationCategory>();
+                    itemCategories = new Collection<GenericSyndicationCategory>();
                 }
+
                 return itemCategories;
             }
         }
@@ -122,17 +127,19 @@ namespace Argotic.Syndication
                 return itemTitle;
             }
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
         /// <remarks>
         ///     This method returns a human-readable representation for the current instance.
         /// </remarks>
         public override string ToString()
         {
-            return String.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : String.Empty);
+            return string.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty);
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -145,28 +152,29 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            GenericSyndicationItem value  = obj as GenericSyndicationItem;
+
+            GenericSyndicationItem value = obj as GenericSyndicationItem;
 
             if (value != null)
             {
-                int result  = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
-                result      = result | String.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                int result = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
+                result = result | string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is GenericSyndicationItem))
             {
@@ -182,7 +190,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }
@@ -257,6 +265,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
+
         /// <summary>
         /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.
         /// </summary>
@@ -266,9 +275,9 @@ namespace Argotic.Syndication
         {
             Guard.ArgumentNotNull(entry, "entry");
 
-            if (entry.Title != null && !String.IsNullOrEmpty(entry.Title.Content))
+            if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
             {
-                itemTitle       = entry.Title.Content.Trim();
+                itemTitle = entry.Title.Content.Trim();
             }
 
             if (entry.PublishedOn != DateTime.MinValue)
@@ -280,18 +289,18 @@ namespace Argotic.Syndication
                 itemPublishedOn = entry.UpdatedOn;
             }
 
-            if (entry.Summary != null && !String.IsNullOrEmpty(entry.Summary.Content))
+            if (entry.Summary != null && !string.IsNullOrEmpty(entry.Summary.Content))
             {
-                itemSummary     = entry.Summary.Content.Trim();
+                itemSummary = entry.Summary.Content.Trim();
             }
-            else if (entry.Content != null && !String.IsNullOrEmpty(entry.Content.Content))
+            else if (entry.Content != null && !string.IsNullOrEmpty(entry.Content.Content))
             {
-                itemSummary     = entry.Content.Content.Trim();
+                itemSummary = entry.Content.Content.Trim();
             }
 
             foreach (AtomCategory category in entry.Categories)
             {
-                GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
                 itemCategories.Add(genericCategory);
             }
         }
@@ -304,9 +313,9 @@ namespace Argotic.Syndication
         private void LoadFrom(RssItem item)
         {
             Guard.ArgumentNotNull(item, "item");
-            if (!String.IsNullOrEmpty(item.Title))
+            if (!string.IsNullOrEmpty(item.Title))
             {
-                itemTitle       = item.Title.Trim();
+                itemTitle = item.Title.Trim();
             }
 
             if (item.PublicationDate != DateTime.MinValue)
@@ -314,14 +323,14 @@ namespace Argotic.Syndication
                 itemPublishedOn = item.PublicationDate;
             }
 
-            if (!String.IsNullOrEmpty(item.Description))
+            if (!string.IsNullOrEmpty(item.Description))
             {
-                itemSummary     = item.Description.Trim();
+                itemSummary = item.Description.Trim();
             }
 
             foreach (RssCategory category in item.Categories)
             {
-                GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+                GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
                 itemCategories.Add(genericCategory);
             }
         }

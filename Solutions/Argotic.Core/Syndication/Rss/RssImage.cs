@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a graphical logo for an <see cref="RssFeed"/>.
     /// </summary>
@@ -31,46 +30,57 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the URL of the web site represented by the image.
         /// </summary>
         private Uri imageLink;
+
         /// <summary>
         /// Private member to hold character data that provides a human-readable description of the image.
         /// </summary>
-        private string imageTitle           = String.Empty;
+        private string imageTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold the URL of the image.
         /// </summary>
         private Uri imageUrl;
+
         /// <summary>
         /// Private member to hold character data that provides a human-readable characterization of the site linked to the image.
         /// </summary>
-        private string imageDescription = String.Empty;
+        private string imageDescription = string.Empty;
+
         /// <summary>
         /// Private member to hold the height, in pixels, of the image.
         /// </summary>
-        private int imageHeight             = Int32.MinValue;
+        private int imageHeight = int.MinValue;
+
         /// <summary>
         /// Private member to hold the width, in pixels, of the image.
         /// </summary>
-        private int imageWidth              = Int32.MinValue;
+        private int imageWidth = int.MinValue;
+
         /// <summary>
         /// Private member to hold maximum permissible height of an image.
         /// </summary>
-        private const int MAX_HEIGHT        = 400;
+        private const int MAX_HEIGHT = 400;
+
         /// <summary>
         /// Private member to hold maximum permissible width of an image.
         /// </summary>
-        private const int MAX_WIDTH         = 144;
+        private const int MAX_WIDTH = 144;
+
         /// <summary>
         /// Private member to hold default height of an image.
         /// </summary>
-        private const int DEFAULT_HEIGHT    = 31;
+        private const int DEFAULT_HEIGHT = 31;
+
         /// <summary>
         /// Private member to hold default width of an image.
         /// </summary>
-        private const int DEFAULT_WIDTH     = 88;
+        private const int DEFAULT_WIDTH = 88;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssImage"/> class.
         /// </summary>
@@ -92,10 +102,11 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
         public RssImage(Uri link, string title, Uri url)
         {
-            this.Link   = link;
-            this.Title  = title;
-            this.Url    = url;
+            this.Link = link;
+            this.Title = title;
+            this.Url = url;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -112,6 +123,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -133,6 +145,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets the default height that should be assumed for images that do not explicitly define a height.
         /// </summary>
@@ -180,6 +193,7 @@ namespace Argotic.Syndication
                 return MAX_WIDTH;
             }
         }
+
         /// <summary>
         /// Gets or sets character data that provides a human-readable characterization of the site linked to this image.
         /// </summary>
@@ -196,9 +210,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    imageDescription = String.Empty;
+                    imageDescription = string.Empty;
                 }
                 else
                 {
@@ -210,7 +224,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the height of this image.
         /// </summary>
-        /// <value>The height, in pixels, of this image. The default value is <see cref="Int32.MinValue"/>, which indicates no height was specified.</value>
+        /// <value>The height, in pixels, of this image. The default value is <see cref="int.MinValue"/>, which indicates no height was specified.</value>
         /// <remarks>
         ///     If no height is specified for the image, the image is assumed to be 31 pixels tall.
         /// </remarks>
@@ -300,7 +314,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the width of this image.
         /// </summary>
-        /// <value>The width, in pixels, of this image. The default value is <see cref="Int32.MinValue"/>, which indicates no width was specified.</value>
+        /// <value>The width, in pixels, of this image. The default value is <see cref="int.MinValue"/>, which indicates no width was specified.</value>
         /// <remarks>
         ///     If no width is specified for the image, the image is assumed to be 88 pixels wide.
         /// </remarks>
@@ -318,6 +332,7 @@ namespace Argotic.Syndication
                 imageWidth = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -326,10 +341,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -370,11 +385,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="RssImage"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -387,65 +403,69 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
-            XPathNavigator linkNavigator    = source.SelectSingleNode("link", manager);
-            XPathNavigator titleNavigator   = source.SelectSingleNode("title", manager);
-            XPathNavigator urlNavigator     = source.SelectSingleNode("url", manager);
+            XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
+            XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+            XPathNavigator urlNavigator = source.SelectSingleNode("url", manager);
 
             XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-            XPathNavigator heightNavigator      = source.SelectSingleNode("height", manager);
-            XPathNavigator widthNavigator       = source.SelectSingleNode("width", manager);
+            XPathNavigator heightNavigator = source.SelectSingleNode("height", manager);
+            XPathNavigator widthNavigator = source.SelectSingleNode("width", manager);
 
             if (linkNavigator != null)
             {
                 Uri link;
                 if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
                 {
-                    this.Link   = link;
-                    wasLoaded   = true;
+                    this.Link = link;
+                    wasLoaded = true;
                 }
             }
+
             if (titleNavigator != null)
             {
-                if (!String.IsNullOrEmpty(titleNavigator.Value))
+                if (!string.IsNullOrEmpty(titleNavigator.Value))
                 {
-                    this.Title  = titleNavigator.Value;
-                    wasLoaded   = true;
+                    this.Title = titleNavigator.Value;
+                    wasLoaded = true;
                 }
             }
+
             if (urlNavigator != null)
             {
                 Uri url;
                 if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
 
             if (descriptionNavigator != null)
             {
-                this.Description    = descriptionNavigator.Value;
-                wasLoaded           = true;
+                this.Description = descriptionNavigator.Value;
+                wasLoaded = true;
             }
+
             if (heightNavigator != null)
             {
                 int height;
-                if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out height))
+                if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out height))
                 {
                     this.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
+
             if (widthNavigator != null)
             {
                 int width;
-                if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out width))
+                if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out width))
                 {
-                    this.Width  = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
-                    wasLoaded   = true;
+                    this.Width = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
+                    wasLoaded = true;
                 }
             }
 
@@ -465,10 +485,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -485,30 +505,34 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(writer, "writer");
             writer.WriteStartElement("image");
 
-            writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : String.Empty);
+            writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
             writer.WriteElementString("title", this.Title);
-            writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : String.Empty);
+            writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-            if(!String.IsNullOrEmpty(this.Description))
+            if(!string.IsNullOrEmpty(this.Description))
             {
                 writer.WriteElementString("description", this.Description);
             }
-            if (this.Height != Int32.MinValue)
+
+            if (this.Height != int.MinValue)
             {
                 writer.WriteElementString("height", this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
-            if (this.Width != Int32.MinValue)
+
+            if (this.Width != int.MinValue)
             {
                 writer.WriteElementString("width", this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssImage"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssImage"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssImage"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssImage"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -516,9 +540,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -534,6 +558,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -546,31 +571,32 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssImage value  = obj as RssImage;
+
+            RssImage value = obj as RssImage;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Height.CompareTo(value.Height);
-                result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Width.CompareTo(value.Width);
+                int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Height.CompareTo(value.Height);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Width.CompareTo(value.Width);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssImage))
             {
@@ -586,7 +612,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

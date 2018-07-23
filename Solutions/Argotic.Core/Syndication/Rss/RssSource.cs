@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents the source feed that an <see cref="RssItem"/> was republished from.
     /// </summary>
@@ -31,14 +30,17 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the title of the source feed.
         /// </summary>
-        private string sourceTitle  = String.Empty;
+        private string sourceTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold the URL of the source feed.
         /// </summary>
         private Uri sourceUrl;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssSource"/> class.
         /// </summary>
@@ -53,7 +55,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
         public RssSource(Uri url)
         {
-            this.Url    = url;
+            this.Url = url;
         }
 
         /// <summary>
@@ -64,8 +66,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
         public RssSource(Uri url, string title) : this(url)
         {
-            this.Title  = title;
+            this.Title = title;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -82,6 +85,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -103,6 +107,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the title of the source feed.
         /// </summary>
@@ -138,6 +143,7 @@ namespace Argotic.Syndication
                 sourceUrl = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -146,10 +152,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -190,11 +196,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="RssSource"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -206,27 +213,27 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if(source.HasAttributes)
             {
-                string urlAttribute     = source.GetAttribute("url", String.Empty);
+                string urlAttribute = source.GetAttribute("url", string.Empty);
 
-                if (!String.IsNullOrEmpty(urlAttribute))
+                if (!string.IsNullOrEmpty(urlAttribute))
                 {
                     Uri url;
                     if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
                     {
-                        this.Url        = url;
-                        wasLoaded       = true;
+                        this.Url = url;
+                        wasLoaded = true;
                     }
                 }
             }
 
-            if (!String.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Title  = source.Value;
-                wasLoaded   = true;
+                this.Title = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -245,10 +252,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -265,20 +272,22 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(writer, "writer");
             writer.WriteStartElement("source");
 
-            writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : String.Empty);
+            writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-            if(!String.IsNullOrEmpty(this.Title))
+            if(!string.IsNullOrEmpty(this.Title))
             {
                 writer.WriteValue(this.Title);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssSource"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssSource"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssSource"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssSource"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -286,9 +295,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -304,6 +313,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -316,27 +326,28 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssSource value  = obj as RssSource;
+
+            RssSource value = obj as RssSource;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssSource))
             {
@@ -352,7 +363,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

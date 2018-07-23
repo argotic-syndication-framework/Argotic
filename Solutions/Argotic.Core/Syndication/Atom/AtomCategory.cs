@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents information about a category associated with a <see cref="AtomEntry"/> or <see cref="AtomFeed"/>.
     /// </summary>
@@ -31,26 +30,31 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a string that identifies the category to which the entry or feed belongs.
         /// </summary>
-        private string categoryTerm     = String.Empty;
+        private string categoryTerm = string.Empty;
+
         /// <summary>
         /// Private member to hold an IRI that identifies a categorization scheme.
         /// </summary>
         private Uri categoryScheme;
+
         /// <summary>
         /// Private member to hold a human-readable label for display in end-user applications.
         /// </summary>
-        private string categoryLabel    = String.Empty;
+        private string categoryLabel = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomCategory"/> class.
@@ -67,7 +71,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public AtomCategory(string term)
         {
-            this.Term   = term;
+            this.Term = term;
         }
 
         /// <summary>
@@ -130,6 +134,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -171,9 +176,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    categoryLabel = String.Empty;
+                    categoryLabel = string.Empty;
                 }
                 else
                 {
@@ -231,12 +236,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -280,7 +285,7 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -297,41 +302,41 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if(source.HasAttributes)
             {
-                string termAttribute    = source.GetAttribute("term", String.Empty);
-                string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
-                string labelAttribute   = source.GetAttribute("label", String.Empty);
+                string termAttribute = source.GetAttribute("term", string.Empty);
+                string schemeAttribute = source.GetAttribute("scheme", string.Empty);
+                string labelAttribute = source.GetAttribute("label", string.Empty);
 
-                if(!String.IsNullOrEmpty(termAttribute))
+                if(!string.IsNullOrEmpty(termAttribute))
                 {
-                    this.Term   = termAttribute;
-                    wasLoaded   = true;
+                    this.Term = termAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(schemeAttribute))
+                if (!string.IsNullOrEmpty(schemeAttribute))
                 {
                     Uri scheme;
                     if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
                     {
                         this.Scheme = scheme;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(labelAttribute))
+                if (!string.IsNullOrEmpty(labelAttribute))
                 {
-                    this.Label  = labelAttribute;
-                    wasLoaded   = true;
+                    this.Label = labelAttribute;
+                    wasLoaded = true;
                 }
             }
 
@@ -351,12 +356,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -383,7 +388,7 @@ namespace Argotic.Syndication
                 writer.WriteAttributeString("scheme", this.Scheme.ToString());
             }
 
-            if(!String.IsNullOrEmpty(this.Label))
+            if(!string.IsNullOrEmpty(this.Label))
             {
                 writer.WriteAttributeString("label", this.Label);
             }
@@ -394,9 +399,9 @@ namespace Argotic.Syndication
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomCategory"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomCategory"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomCategory"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomCategory"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -404,9 +409,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -436,30 +441,30 @@ namespace Argotic.Syndication
                 return 1;
             }
 
-            AtomCategory value  = obj as AtomCategory;
+            AtomCategory value = obj as AtomCategory;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomCategory))
             {
@@ -475,7 +480,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

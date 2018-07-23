@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents an agent used to generate an <see cref="AtomFeed"/>, for debugging and other purposes.
     /// </summary>
@@ -30,26 +29,31 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold an IRI that is relevant to the generating agent.
         /// </summary>
         private Uri generatorUri;
+
         /// <summary>
         /// Private member to hold the version of the generating agent.
         /// </summary>
         private string generatorVersion;
+
         /// <summary>
         /// Private member to hold a human-readable name for the generating agent.
         /// </summary>
-        private string generatorText    = String.Empty;
+        private string generatorText = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomGenerator"/> class.
@@ -66,7 +70,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public AtomGenerator(string content)
         {
-            this.Content    = content;
+            this.Content = content;
         }
 
         /// <summary>
@@ -129,6 +133,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -208,9 +213,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    generatorVersion = String.Empty;
+                    generatorVersion = string.Empty;
                 }
                 else
                 {
@@ -227,12 +232,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -276,7 +281,7 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -293,41 +298,41 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if(source.HasAttributes)
             {
-                string uriAttribute     = source.GetAttribute("uri", String.Empty);
-                string versionAttribute = source.GetAttribute("version", String.Empty);
+                string uriAttribute = source.GetAttribute("uri", string.Empty);
+                string versionAttribute = source.GetAttribute("version", string.Empty);
 
-                if (!String.IsNullOrEmpty(uriAttribute))
+                if (!string.IsNullOrEmpty(uriAttribute))
                 {
                     Uri uri;
                     if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out uri))
                     {
-                        this.Uri    = uri;
-                        wasLoaded   = true;
+                        this.Uri = uri;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(versionAttribute))
+                if (!string.IsNullOrEmpty(versionAttribute))
                 {
-                    this.Version    = versionAttribute;
-                    wasLoaded       = true;
+                    this.Version = versionAttribute;
+                    wasLoaded = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Content        = source.Value;
-                wasLoaded           = true;
+                this.Content = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -346,12 +351,12 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -376,7 +381,7 @@ namespace Argotic.Syndication
                 writer.WriteAttributeString("uri", this.Uri.ToString());
             }
 
-            if (!String.IsNullOrEmpty(this.Version))
+            if (!string.IsNullOrEmpty(this.Version))
             {
                 writer.WriteAttributeString("version", this.Version);
             }
@@ -389,9 +394,9 @@ namespace Argotic.Syndication
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomGenerator"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomGenerator"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomGenerator"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomGenerator"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -399,9 +404,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -431,30 +436,30 @@ namespace Argotic.Syndication
                 return 1;
             }
 
-            AtomGenerator value  = obj as AtomGenerator;
+            AtomGenerator value = obj as AtomGenerator;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomGenerator))
             {
@@ -470,7 +475,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

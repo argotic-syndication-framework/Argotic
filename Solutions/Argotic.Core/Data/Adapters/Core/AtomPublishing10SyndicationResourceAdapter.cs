@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Publishing;
-using Argotic.Syndication;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Publishing;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="AtomServiceDocument"/> or <see cref="AtomCategoryDocument"/>.
     /// </summary>
@@ -46,9 +45,9 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:categories", manager);
+            XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:categories", manager);
             if (documentNavigator != null)
             {
                 AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
@@ -57,37 +56,37 @@ namespace Argotic.Data.Adapters
                 {
                     if (documentNavigator.HasAttributes)
                     {
-                        string fixedAttribute   = documentNavigator.GetAttribute("fixed", String.Empty);
-                        string schemeAttribute  = documentNavigator.GetAttribute("scheme", String.Empty);
-                        string hrefAttribute    = documentNavigator.GetAttribute("href", String.Empty);
+                        string fixedAttribute = documentNavigator.GetAttribute("fixed", string.Empty);
+                        string schemeAttribute = documentNavigator.GetAttribute("scheme", string.Empty);
+                        string hrefAttribute = documentNavigator.GetAttribute("href", string.Empty);
 
-                        if (!String.IsNullOrEmpty(fixedAttribute))
+                        if (!string.IsNullOrEmpty(fixedAttribute))
                         {
-                            if (String.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                            if (string.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                             {
-                                resource.IsFixed    = true;
+                                resource.IsFixed = true;
                             }
-                            else if (String.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                            else if (string.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
                             {
-                                resource.IsFixed    = false;
+                                resource.IsFixed = false;
                             }
                         }
 
-                        if (!String.IsNullOrEmpty(schemeAttribute))
+                        if (!string.IsNullOrEmpty(schemeAttribute))
                         {
                             Uri scheme;
                             if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
                             {
-                                resource.Scheme     = scheme;
+                                resource.Scheme = scheme;
                             }
                         }
 
-                        if (!String.IsNullOrEmpty(hrefAttribute))
+                        if (!string.IsNullOrEmpty(hrefAttribute))
                         {
                             Uri href;
                             if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
                             {
-                                resource.Uri        = href;
+                                resource.Uri = href;
                             }
                         }
                     }
@@ -100,7 +99,7 @@ namespace Argotic.Data.Adapters
                         {
                             while (categoryIterator.MoveNext())
                             {
-                                AtomCategory category   = new AtomCategory();
+                                AtomCategory category = new AtomCategory();
                                 if (category.Load(categoryIterator.Current, this.Settings))
                                 {
                                     resource.AddCategory(category);
@@ -124,9 +123,9 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:service", manager);
+            XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:service", manager);
             if (documentNavigator != null)
             {
                 AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);

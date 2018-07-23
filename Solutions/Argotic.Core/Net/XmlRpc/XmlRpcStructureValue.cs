@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a remote procedure parameter value that is typically used to encapsulate small groups of related variables.
     /// </summary>
@@ -41,7 +40,7 @@ namespace Argotic.Net
             {
                 while (iterator.MoveNext())
                 {
-                    XmlRpcStructureMember member    = new XmlRpcStructureMember();
+                    XmlRpcStructureMember member = new XmlRpcStructureMember();
                     if (member.Load(iterator.Current))
                     {
                         this.Members.Add(member);
@@ -68,13 +67,13 @@ namespace Argotic.Net
             {
                 Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-                XmlRpcStructureMember result    = null;
+                XmlRpcStructureMember result = null;
 
                 foreach (XmlRpcStructureMember member in this.Members)
                 {
-                    if (String.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        result  = member;
+                        result = member;
                         break;
                     }
                 }
@@ -89,8 +88,8 @@ namespace Argotic.Net
 
                 for (int i = 0; i < this.Members.Count; i++)
                 {
-                    XmlRpcStructureMember member    = this.Members[i];
-                    if (String.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
+                    XmlRpcStructureMember member = this.Members[i];
+                    if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         this.Members[i] = value;
                         break;
@@ -114,6 +113,7 @@ namespace Argotic.Net
                 {
                     structureMembers = new Collection<XmlRpcStructureMember>();
                 }
+
                 return structureMembers;
             }
         }
@@ -139,7 +139,7 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<XmlRpcStructureMember> source, Collection<XmlRpcStructureMember> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -148,10 +148,10 @@ namespace Argotic.Net
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    XmlRpcStructureMember member    = source[i];
+                    XmlRpcStructureMember member = source[i];
                     if (!target.Contains(member))
                     {
-                        result  = -1;
+                        result = -1;
                         break;
                     }
                 }
@@ -179,22 +179,22 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if(source.HasChildren)
             {
-                XPathNodeIterator memberIterator    = source.Select("struct/member");
+                XPathNodeIterator memberIterator = source.Select("struct/member");
                 if (memberIterator != null && memberIterator.Count > 0)
                 {
                     while (memberIterator.MoveNext())
                     {
-                        XmlRpcStructureMember member   = new XmlRpcStructureMember();
+                        XmlRpcStructureMember member = new XmlRpcStructureMember();
                         if (member.Load(memberIterator.Current))
                         {
                             this.Members.Add(member);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -219,15 +219,16 @@ namespace Argotic.Net
             {
                 member.WriteTo(writer);
             }
+
             writer.WriteEndElement();
 
             writer.WriteEndElement();
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcStructureValue"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcStructureValue"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcStructureValue"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcStructureValue"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -235,9 +236,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -267,26 +268,26 @@ namespace Argotic.Net
                 return 1;
             }
 
-            XmlRpcStructureValue value  = obj as XmlRpcStructureValue;
+            XmlRpcStructureValue value = obj as XmlRpcStructureValue;
 
             if (value != null)
             {
-                int result  = XmlRpcStructureValue.CompareSequence(this.Members, value.Members);
+                int result = XmlRpcStructureValue.CompareSequence(this.Members, value.Members);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is XmlRpcStructureValue))
             {
@@ -302,7 +303,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

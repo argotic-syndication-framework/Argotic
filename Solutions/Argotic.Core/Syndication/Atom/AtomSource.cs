@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents the meta-data of the source feed that an <see cref="AtomEntry"/> was copied from.
     /// </summary>
@@ -43,62 +42,77 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the collection of authors of the source.
         /// </summary>
         private Collection<AtomPersonConstruct> sourceAuthors;
+
         /// <summary>
         /// Private member to hold the collection of categories associated with the source.
         /// </summary>
         private Collection<AtomCategory> sourceCategories;
+
         /// <summary>
         /// Private member to hold the collection of contributors of the source.
         /// </summary>
         private Collection<AtomPersonConstruct> sourceContributors;
+
         /// <summary>
         /// Private member to hold the agent used to generate the source.
         /// </summary>
         private AtomGenerator sourceGenerator;
+
         /// <summary>
         /// Private member to hold an image that provides iconic visual identification for the source.
         /// </summary>
         private AtomIcon sourceIcon;
+
         /// <summary>
         /// Private member to hold a permanent, universally unique identifier for the source.
         /// </summary>
         private AtomId sourceId;
+
         /// <summary>
         /// Private member to hold eferences from the source to one or more Web resources.
         /// </summary>
         private Collection<AtomLink> sourceLinks;
+
         /// <summary>
         /// Private member to hold an image that provides visual identification for the source.
         /// </summary>
         private AtomLogo sourceLogo;
+
         /// <summary>
         /// Private member to hold information about rights held in and over the source.
         /// </summary>
         private AtomTextConstruct sourceRights;
+
         /// <summary>
         /// Private member to hold inofmration that conveys a human-readable description or subtitle for the source.
         /// </summary>
         private AtomTextConstruct sourceSubtitle;
+
         /// <summary>
         /// Private member to hold information that conveys a human-readable title for the source.
         /// </summary>
         private AtomTextConstruct sourceTitle;
+
         /// <summary>
         /// Private member to hold a value indicating the most recent instant in time when the source was modified in a way the publisher considers significant.
         /// </summary>
-        private DateTime sourceUpdatedOn    = DateTime.MinValue;
+        private DateTime sourceUpdatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomSource"/> class.
         /// </summary>
@@ -118,10 +132,11 @@ namespace Argotic.Syndication
         /// </param>
         public AtomSource(AtomId id, AtomTextConstruct title, DateTime utcUpdatedOn)
         {
-            this.Id         = id;
-            this.Title      = title;
-            this.UpdatedOn  = utcUpdatedOn;
+            this.Id = id;
+            this.Title = title;
+            this.UpdatedOn = utcUpdatedOn;
         }
+
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -165,6 +180,7 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -181,6 +197,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -202,6 +219,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the authors of this source.
         /// </summary>
@@ -214,6 +232,7 @@ namespace Argotic.Syndication
                 {
                     sourceAuthors = new Collection<AtomPersonConstruct>();
                 }
+
                 return sourceAuthors;
             }
         }
@@ -230,6 +249,7 @@ namespace Argotic.Syndication
                 {
                     sourceCategories = new Collection<AtomCategory>();
                 }
+
                 return sourceCategories;
             }
         }
@@ -246,6 +266,7 @@ namespace Argotic.Syndication
                 {
                     sourceContributors = new Collection<AtomPersonConstruct>();
                 }
+
                 return sourceContributors;
             }
         }
@@ -316,6 +337,7 @@ namespace Argotic.Syndication
                 {
                     sourceLinks = new Collection<AtomLink>();
                 }
+
                 return sourceLinks;
             }
         }
@@ -416,6 +438,7 @@ namespace Argotic.Syndication
                 sourceUpdatedOn = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -424,10 +447,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -468,11 +491,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="AtomSource"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -484,32 +508,33 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
-            XPathNavigator idNavigator              = source.SelectSingleNode("atom:id", manager);
-            XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
-            XPathNavigator updatedNavigator         = source.SelectSingleNode("atom:updated", manager);
+
+            XPathNavigator idNavigator = source.SelectSingleNode("atom:id", manager);
+            XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
+            XPathNavigator updatedNavigator = source.SelectSingleNode("atom:updated", manager);
 
             if (idNavigator != null)
             {
-                this.Id         = new AtomId();
+                this.Id = new AtomId();
                 if (this.Id.Load(idNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (titleNavigator != null)
             {
-                this.Title      = new AtomTextConstruct();
+                this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -518,19 +543,19 @@ namespace Argotic.Syndication
                 DateTime updatedOn;
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out updatedOn))
                 {
-                    this.UpdatedOn  = updatedOn;
-                    wasLoaded       = true;
+                    this.UpdatedOn = updatedOn;
+                    wasLoaded = true;
                 }
             }
 
             if(this.LoadOptionals(source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if (this.LoadCollections(source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -549,10 +574,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -629,14 +654,16 @@ namespace Argotic.Syndication
             {
                 link.WriteTo(writer);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomSource"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomSource"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomSource"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomSource"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -644,9 +671,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -662,6 +689,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -674,97 +702,98 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            AtomSource value  = obj as AtomSource;
+
+            AtomSource value = obj as AtomSource;
 
             if (value != null)
             {
-                int result  = AtomFeed.CompareSequence(this.Authors, value.Authors);
-                result      = result | AtomFeed.CompareSequence(this.Categories, value.Categories);
-                result      = result | AtomFeed.CompareSequence(this.Contributors, value.Contributors);
+                int result = AtomFeed.CompareSequence(this.Authors, value.Authors);
+                result = result | AtomFeed.CompareSequence(this.Categories, value.Categories);
+                result = result | AtomFeed.CompareSequence(this.Contributors, value.Contributors);
 
                 if (this.Generator != null)
                 {
-                    result  = result | this.Generator.CompareTo(value.Generator);
+                    result = result | this.Generator.CompareTo(value.Generator);
                 }
                 else if(value.Generator != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Icon != null)
                 {
-                    result  = result | this.Icon.CompareTo(value.Icon);
+                    result = result | this.Icon.CompareTo(value.Icon);
                 }
                 else if(value.Icon != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Id != null)
                 {
-                    result  = result | this.Id.CompareTo(value.Id);
+                    result = result | this.Id.CompareTo(value.Id);
                 }
                 else if(value.Id != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
-                result      = result | AtomFeed.CompareSequence(this.Links, value.Links);
+                result = result | AtomFeed.CompareSequence(this.Links, value.Links);
                 
                 if (this.Logo != null)
                 {
-                    result  = result | this.Logo.CompareTo(value.Logo);
+                    result = result | this.Logo.CompareTo(value.Logo);
                 }
                 else if(value.Logo != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Rights != null)
                 {
-                    result  = result | this.Rights.CompareTo(value.Rights);
+                    result = result | this.Rights.CompareTo(value.Rights);
                 }
                 else if(value.Rights != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Subtitle != null)
                 {
-                    result  = result | this.Subtitle.CompareTo(value.Subtitle);
+                    result = result | this.Subtitle.CompareTo(value.Subtitle);
                 }
                 else if (value.Subtitle != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Title != null)
                 {
-                    result  = result | this.Title.CompareTo(value.Title);
+                    result = result | this.Title.CompareTo(value.Title);
                 }
                 else if (value.Title != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
-                result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+                result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomSource))
             {
@@ -780,7 +809,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }
@@ -869,23 +898,23 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            XPathNodeIterator authorIterator        = source.Select("atom:author", manager);
-            XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
-            XPathNodeIterator categoryIterator      = source.Select("atom:category", manager);
-            XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
+            XPathNodeIterator authorIterator = source.Select("atom:author", manager);
+            XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
+            XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
+            XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
             if (authorIterator != null && authorIterator.Count > 0)
             {
                 while (authorIterator.MoveNext())
                 {
-                    AtomPersonConstruct author  = new AtomPersonConstruct();
+                    AtomPersonConstruct author = new AtomPersonConstruct();
                     if (author.Load(authorIterator.Current))
                     {
                         this.Authors.Add(author);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -894,11 +923,11 @@ namespace Argotic.Syndication
             {
                 while (categoryIterator.MoveNext())
                 {
-                    AtomCategory category   = new AtomCategory();
+                    AtomCategory category = new AtomCategory();
                     if (category.Load(categoryIterator.Current))
                     {
                         this.Categories.Add(category);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -911,7 +940,7 @@ namespace Argotic.Syndication
                     if (contributor.Load(contributorIterator.Current))
                     {
                         this.Contributors.Add(contributor);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -920,11 +949,11 @@ namespace Argotic.Syndication
             {
                 while (linkIterator.MoveNext())
                 {
-                    AtomLink link   = new AtomLink();
+                    AtomLink link = new AtomLink();
                     if (link.Load(linkIterator.Current))
                     {
                         this.Links.Add(link);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -945,57 +974,57 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            XPathNavigator generatorNavigator       = source.SelectSingleNode("atom:generator", manager);
-            XPathNavigator iconNavigator            = source.SelectSingleNode("atom:icon", manager);
-            XPathNavigator logoNavigator            = source.SelectSingleNode("atom:logo", manager);
-            XPathNavigator rightsNavigator          = source.SelectSingleNode("atom:rights", manager);
-            XPathNavigator subtitleNavigator        = source.SelectSingleNode("atom:subtitle", manager);
+            XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
+            XPathNavigator iconNavigator = source.SelectSingleNode("atom:icon", manager);
+            XPathNavigator logoNavigator = source.SelectSingleNode("atom:logo", manager);
+            XPathNavigator rightsNavigator = source.SelectSingleNode("atom:rights", manager);
+            XPathNavigator subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
 
             if (generatorNavigator != null)
             {
-                this.Generator  = new AtomGenerator();
+                this.Generator = new AtomGenerator();
                 if (this.Generator.Load(generatorNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (iconNavigator != null)
             {
-                this.Icon       = new AtomIcon();
+                this.Icon = new AtomIcon();
                 if (this.Icon.Load(iconNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (logoNavigator != null)
             {
-                this.Logo       = new AtomLogo();
+                this.Logo = new AtomLogo();
                 if (this.Logo.Load(logoNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (rightsNavigator != null)
             {
-                this.Rights     = new AtomTextConstruct();
+                this.Rights = new AtomTextConstruct();
                 if (this.Rights.Load(rightsNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (subtitleNavigator != null)
             {
-                this.Subtitle   = new AtomTextConstruct();
+                this.Subtitle = new AtomTextConstruct();
                 if (this.Subtitle.Load(subtitleNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 

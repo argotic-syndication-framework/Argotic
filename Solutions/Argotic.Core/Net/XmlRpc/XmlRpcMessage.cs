@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a remote procedure call that can be sent using the <see cref="XmlRpcClient"/> class.
     /// </summary>
@@ -26,15 +25,17 @@ namespace Argotic.Net
         /// <summary>
         /// Private member to hold the name of the method to be called.
         /// </summary>
-        private string messageMethodName    = String.Empty;
+        private string messageMethodName = string.Empty;
+
         /// <summary>
         /// Private member to hold the method parameters.
         /// </summary>
         private Collection<IXmlRpcValue> messageParameters;
+
         /// <summary>
         /// Private member to hold the character encoding of the message.
         /// </summary>
-        private Encoding messageEncoding    = Encoding.UTF8;
+        private Encoding messageEncoding = Encoding.UTF8;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
@@ -107,7 +108,7 @@ namespace Argotic.Net
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                messageMethodName   = value.Trim();
+                messageMethodName = value.Trim();
             }
         }
 
@@ -126,6 +127,7 @@ namespace Argotic.Net
                 {
                     messageParameters = new Collection<IXmlRpcValue>();
                 }
+
                 return messageParameters;
             }
         }
@@ -151,7 +153,7 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -160,10 +162,10 @@ namespace Argotic.Net
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    IXmlRpcValue value  = source[i];
+                    IXmlRpcValue value = source[i];
                     if(!target.Contains(value))
                     {
-                        result  = -1;
+                        result = -1;
                         break;
                     }
                 }
@@ -197,13 +199,13 @@ namespace Argotic.Net
 
             if (source.HasChildren)
             {
-                XPathNavigator methodNameNavigator  = source.SelectSingleNode("methodName");
-                XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
+                XPathNavigator methodNameNavigator = source.SelectSingleNode("methodName");
+                XPathNavigator parametersNavigator = source.SelectSingleNode("params");
 
-                if (methodNameNavigator != null && !String.IsNullOrEmpty(methodNameNavigator.Value))
+                if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
                 {
                     this.MethodName = methodNameNavigator.Value;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
 
                 if (parametersNavigator != null)
@@ -217,7 +219,7 @@ namespace Argotic.Net
                             if (XmlRpcClient.TryParseValue(valueIterator.Current, out value))
                             {
                                 this.Parameters.Add(value);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -249,6 +251,7 @@ namespace Argotic.Net
                     value.WriteTo(writer);
                     writer.WriteEndElement();
                 }
+
                 writer.WriteEndElement();
             }
 
@@ -256,9 +259,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -266,9 +269,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -298,28 +301,28 @@ namespace Argotic.Net
                 return 1;
             }
 
-            XmlRpcMessage value  = obj as XmlRpcMessage;
+            XmlRpcMessage value = obj as XmlRpcMessage;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
-                result      = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
+                int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
+                result = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is XmlRpcMessage))
             {
@@ -335,7 +338,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

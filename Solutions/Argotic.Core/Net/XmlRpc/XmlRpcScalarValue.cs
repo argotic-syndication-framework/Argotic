@@ -1,13 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a scalar remote procedure parameter value.
     /// </summary>
@@ -20,10 +19,11 @@ namespace Argotic.Net
         /// Private member to hold the value of the parameter.
         /// </summary>
         private object scalarParameterValue;
+
         /// <summary>
         /// Private member to hold the type of scalar value the parameter represents.
         /// </summary>
-        private XmlRpcScalarValueType scalarParameterType   = XmlRpcScalarValueType.None;
+        private XmlRpcScalarValueType scalarParameterType = XmlRpcScalarValueType.None;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
@@ -45,8 +45,8 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(value, "value");
 
-            this.ValueType  = XmlRpcScalarValueType.Base64;
-            this.Value      = value;
+            this.ValueType = XmlRpcScalarValueType.Base64;
+            this.Value = value;
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Argotic.Net
         /// </remarks>
         public XmlRpcScalarValue(bool value)
         {
-            this.ValueType  = XmlRpcScalarValueType.Boolean;
-            this.Value      = value;
+            this.ValueType = XmlRpcScalarValueType.Boolean;
+            this.Value = value;
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace Argotic.Net
         /// </remarks>
         public XmlRpcScalarValue(DateTime value)
         {
-            this.ValueType  = XmlRpcScalarValueType.DateTime;
-            this.Value      = value;
+            this.ValueType = XmlRpcScalarValueType.DateTime;
+            this.Value = value;
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace Argotic.Net
         /// </remarks>
         public XmlRpcScalarValue(double value)
         {
-            this.ValueType  = XmlRpcScalarValueType.Double;
-            this.Value      = value;
+            this.ValueType = XmlRpcScalarValueType.Double;
+            this.Value = value;
         }
 
         /// <summary>
@@ -101,8 +101,8 @@ namespace Argotic.Net
         /// </remarks>
         public XmlRpcScalarValue(int value)
         {
-            this.ValueType  = XmlRpcScalarValueType.Integer;
-            this.Value      = value;
+            this.ValueType = XmlRpcScalarValueType.Integer;
+            this.Value = value;
         }
 
         /// <summary>
@@ -115,14 +115,14 @@ namespace Argotic.Net
         /// </remarks>
         public XmlRpcScalarValue(string value)
         {
-            this.ValueType  = XmlRpcScalarValueType.String;
-            this.Value      = !String.IsNullOrEmpty(value) ? value : String.Empty;
+            this.ValueType = XmlRpcScalarValueType.String;
+            this.Value = !string.IsNullOrEmpty(value) ? value : string.Empty;
         }
 
         /// <summary>
         /// Gets or sets the value of this parameter.
         /// </summary>
-        /// <value>A <see cref="Object"/> that represents the value of this parameter.</value>
+        /// <value>A <see cref="object"/> that represents the value of this parameter.</value>
         /// <remarks>
         ///     <para>The <paramref name="value"/> should represent a <see cref="Type"/> that is appropriate for this parameter's <see cref="ValueType"/>.</para>
         /// </remarks>
@@ -177,7 +177,7 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
@@ -185,34 +185,35 @@ namespace Argotic.Net
             {
                 if (source.MoveToFirstChild())
                 {
-                    XmlRpcScalarValueType type  = XmlRpcScalarValueType.None;
-                    if (String.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                    XmlRpcScalarValueType type = XmlRpcScalarValueType.None;
+                    if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
-                        type    = XmlRpcScalarValueType.Integer;
+                        type = XmlRpcScalarValueType.Integer;
                     }
                     else
                     {
-                        type    = XmlRpcClient.ScalarTypeByName(source.Name);
+                        type = XmlRpcClient.ScalarTypeByName(source.Name);
                     }
 
                     if (type != XmlRpcScalarValueType.None)
                     {
-                        this.ValueType      = type;
-                        if(!String.IsNullOrEmpty(source.Value))
+                        this.ValueType = type;
+                        if(!string.IsNullOrEmpty(source.Value))
                         {
-                            this.Value      = XmlRpcScalarValue.StringAsValue(type, source.Value);
+                            this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
                         }
-                        wasLoaded           = true;
+
+                        wasLoaded = true;
                     }
                 }
             }
             else
             {
-                if (!String.IsNullOrEmpty(source.Value))
+                if (!string.IsNullOrEmpty(source.Value))
                 {
-                    this.Value  = source.Value;
-                    wasLoaded   = true;
+                    this.Value = source.Value;
+                    wasLoaded = true;
                 }
             }
 
@@ -238,16 +239,16 @@ namespace Argotic.Net
             }
             else
             {
-                writer.WriteString(this.Value != null ? this.Value.ToString() : String.Empty);
+                writer.WriteString(this.Value != null ? this.Value.ToString() : string.Empty);
             }
 
             writer.WriteEndElement();
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -255,9 +256,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -287,26 +288,26 @@ namespace Argotic.Net
                 return 1;
             }
 
-            XmlRpcScalarValue value  = obj as XmlRpcScalarValue;
+            XmlRpcScalarValue value = obj as XmlRpcScalarValue;
 
             if (value != null)
             {
-                int result  = String.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
+                int result = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is XmlRpcScalarValue))
             {
@@ -322,7 +323,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }
@@ -399,47 +400,48 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Returns an <see cref="Object"/> that represents the converted value for the specified <see cref="XmlRpcScalarValueType"/>.
+        /// Returns an <see cref="object"/> that represents the converted value for the specified <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
         /// <param name="type">The <see cref="XmlRpcScalarValueType"/> that indicates the expected data type for the scalar value.</param>
         /// <param name="scalar">The string representation of the scalar value.</param>
-        /// <returns>An <see cref="Object"/> that represents the converted value for the specified <paramref name="type"/> and <paramref name="scalar"/>.</returns>
+        /// <returns>An <see cref="object"/> that represents the converted value for the specified <paramref name="type"/> and <paramref name="scalar"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
         private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
         {
-            object result   = String.Empty;
+            object result = string.Empty;
 
             Guard.ArgumentNotNullOrEmptyString(scalar, "scalar");
 
             switch (type)
             {
                 case XmlRpcScalarValueType.Base64:
-                    result      = Convert.FromBase64String(scalar);
+                    result = Convert.FromBase64String(scalar);
                     break;
 
                 case XmlRpcScalarValueType.Boolean:
                     bool boolean;
                     if (XmlRpcClient.TryParseBoolean(scalar, out boolean))
                     {
-                        result  = boolean;
+                        result = boolean;
                     }
+
                     break;
 
                 case XmlRpcScalarValueType.DateTime:
-                    result      = SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar);
+                    result = SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar);
                     break;
 
                 case XmlRpcScalarValueType.Double:
-                    result      = Double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
+                    result = double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.Integer:
-                    result      = Int32.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
+                    result = int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.String:
-                    result      = scalar.Trim();
+                    result = scalar.Trim();
                     break;
             }
 
@@ -454,11 +456,11 @@ namespace Argotic.Net
         /// <returns>The string representation of the current instance's <see cref="Value"/>, based on its <see cref="ValueType"/>.</returns>
         private static string ValueAsString(XmlRpcScalarValueType type, object scalar)
         {
-            string value    = String.Empty;
+            string value = string.Empty;
 
             if (scalar == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             switch (type)
@@ -467,32 +469,33 @@ namespace Argotic.Net
                     byte[] data = scalar as byte[];
                     if (data != null)
                     {
-                        value   = Convert.ToBase64String(data, Base64FormattingOptions.None);
+                        value = Convert.ToBase64String(data, Base64FormattingOptions.None);
                     }
                     else
                     {
-                        value   = Convert.ToString(scalar, CultureInfo.InvariantCulture);
+                        value = Convert.ToString(scalar, CultureInfo.InvariantCulture);
                     }
+
                     break;
 
                 case XmlRpcScalarValueType.Boolean:
-                    value   = Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0";
+                    value = Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0";
                     break;
 
                 case XmlRpcScalarValueType.DateTime:
-                    value   = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
+                    value = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
                     break;
 
                 case XmlRpcScalarValueType.Double:
-                    value   = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                    value = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.Integer:
-                    value   = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                    value = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
                     break;
 
                 case XmlRpcScalarValueType.String:
-                    value   = Convert.ToString(scalar, CultureInfo.InvariantCulture).Trim();
+                    value = Convert.ToString(scalar, CultureInfo.InvariantCulture).Trim();
                     break;
             }
 

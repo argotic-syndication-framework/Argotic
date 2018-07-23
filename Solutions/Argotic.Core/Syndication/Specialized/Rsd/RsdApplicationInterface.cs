@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a discoverable application programming interface (API) that provides services to web log clients.
     /// </summary>
@@ -30,34 +29,42 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the name of the application interface.
         /// </summary>
-        private string interfaceName        = String.Empty;
+        private string interfaceName = string.Empty;
+
         /// <summary>
         /// Private member to hold a value indicating if the application interface is preferred.
         /// </summary>
         private bool interfaceIsPreferred;
+
         /// <summary>
         /// Private member to hold the communication endpoint of the application interface.
         /// </summary>
         private Uri interfaceLink;
+
         /// <summary>
         /// Private member to hold custom data that is passed to the application interface.
         /// </summary>
-        private string interfaceWeblogId    = String.Empty;
+        private string interfaceWeblogId = string.Empty;
+
         /// <summary>
         /// Private member to hold the location of the documentation for the application interface.
         /// </summary>
         private Uri interfaceDocumentation;
+
         /// <summary>
         /// Private member to hold human readable text that explains the features and settings for the application interface.
         /// </summary>
-        private string interfaceNotes       = String.Empty;
+        private string interfaceNotes = string.Empty;
+
         /// <summary>
         /// Private member to hold service specific settings for the application interface.
         /// </summary>
         private Dictionary<string, string> interfaceSettings;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RsdApplicationInterface"/> class.
         /// </summary>
@@ -77,11 +84,12 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference (Nothing in Visual Basic).</exception>
         public RsdApplicationInterface(string name, Uri link, bool isPreferred, string weblogId)
         {
-            this.IsPreferred    = isPreferred;
-            this.Link           = link;
-            this.Name           = name;
-            this.WeblogId       = weblogId;
+            this.IsPreferred = isPreferred;
+            this.Link = link;
+            this.Name = name;
+            this.WeblogId = weblogId;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -98,6 +106,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -119,6 +128,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the location of the documentation for this application interface.
         /// </summary>
@@ -231,9 +241,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    interfaceNotes = String.Empty;
+                    interfaceNotes = string.Empty;
                 }
                 else
                 {
@@ -254,6 +264,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     interfaceSettings = new Dictionary<string, string>();
                 }
+
                 return interfaceSettings;
             }
         }
@@ -271,9 +282,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    interfaceWeblogId = String.Empty;
+                    interfaceWeblogId = string.Empty;
                 }
                 else
                 {
@@ -290,10 +301,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -334,7 +345,7 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -351,86 +362,86 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
-                string nameAttribute        = source.GetAttribute("name", String.Empty);
-                string preferredAttribute   = source.GetAttribute("preferred", String.Empty);
-                string apiLinkAttribute     = source.GetAttribute("apiLink", String.Empty);
-                string blogIdAttribute      = source.GetAttribute("blogID", String.Empty);
+                string nameAttribute = source.GetAttribute("name", string.Empty);
+                string preferredAttribute = source.GetAttribute("preferred", string.Empty);
+                string apiLinkAttribute = source.GetAttribute("apiLink", string.Empty);
+                string blogIdAttribute = source.GetAttribute("blogID", string.Empty);
 
-                if (!String.IsNullOrEmpty(nameAttribute))
+                if (!string.IsNullOrEmpty(nameAttribute))
                 {
-                    this.Name   = nameAttribute;
-                    wasLoaded   = true;
+                    this.Name = nameAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(preferredAttribute))
+                if (!string.IsNullOrEmpty(preferredAttribute))
                 {
                     bool isPreferred;
-                    if (Boolean.TryParse(preferredAttribute, out isPreferred))
+                    if (bool.TryParse(preferredAttribute, out isPreferred))
                     {
-                        this.IsPreferred    = isPreferred;
-                        wasLoaded           = true;
+                        this.IsPreferred = isPreferred;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(apiLinkAttribute))
+                if (!string.IsNullOrEmpty(apiLinkAttribute))
                 {
                     Uri link;
                     if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out link))
                     {
-                        this.Link   = link;
-                        wasLoaded   = true;
+                        this.Link = link;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(blogIdAttribute))
+                if (!string.IsNullOrEmpty(blogIdAttribute))
                 {
-                    this.WeblogId   = blogIdAttribute;
-                    wasLoaded       = true;
+                    this.WeblogId = blogIdAttribute;
+                    wasLoaded = true;
                 }
             }
 
             if (source.HasChildren)
             {
-                XPathNavigator settingsNavigator        = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+                XPathNavigator settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
                 if (settingsNavigator != null)
                 {
-                    XPathNavigator docsNavigator        = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
-                    XPathNavigator notesNavigator       = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
-                    XPathNodeIterator settingIterator   = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
+                    XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
+                    XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
+                    XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
                     if (docsNavigator != null)
                     {
                         Uri documentation;
                         if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out documentation))
                         {
-                            this.Documentation  = documentation;
-                            wasLoaded           = true;
+                            this.Documentation = documentation;
+                            wasLoaded = true;
                         }
                     }
 
                     if (notesNavigator != null)
                     {
-                        this.Notes  = notesNavigator.Value;
-                        wasLoaded   = true;
+                        this.Notes = notesNavigator.Value;
+                        wasLoaded = true;
                     }
 
                     if (settingIterator != null && settingIterator.Count > 0)
                     {
                         while (settingIterator.MoveNext())
                         {
-                            string settingName  = settingIterator.Current.GetAttribute("name", String.Empty);
+                            string settingName = settingIterator.Current.GetAttribute("name", string.Empty);
                             string settingValue = settingIterator.Current.Value;
 
                             if(!this.Settings.ContainsKey(settingName))
                             {
                                 this.Settings.Add(settingName, settingValue);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -453,10 +464,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -475,10 +486,10 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteAttributeString("name", this.Name);
             writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
-            writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : String.Empty);
+            writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);
             writer.WriteAttributeString("blogID", this.WeblogId);
 
-            if(this.Documentation != null || !String.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
+            if(this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
             {
                 writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
 
@@ -487,7 +498,7 @@ namespace Argotic.Syndication.Specialized
                     writer.WriteElementString("docs", RsdUtility.RsdNamespace, this.Documentation.ToString());
                 }
 
-                if (!String.IsNullOrEmpty(this.Notes))
+                if (!string.IsNullOrEmpty(this.Notes))
                 {
                     writer.WriteElementString("notes", RsdUtility.RsdNamespace, this.Notes);
                 }
@@ -502,15 +513,16 @@ namespace Argotic.Syndication.Specialized
 
                 writer.WriteEndElement();
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -518,9 +530,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -549,32 +561,33 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            RsdApplicationInterface value  = obj as RsdApplicationInterface;
+
+            RsdApplicationInterface value = obj as RsdApplicationInterface;
 
             if (value != null)
             {
-                int result  = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.IsPreferred.CompareTo(value.IsPreferred);
-                result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-                result      = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-                result      = result | String.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+                int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | this.IsPreferred.CompareTo(value.IsPreferred);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
+                result = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RsdApplicationInterface))
             {
@@ -590,7 +603,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

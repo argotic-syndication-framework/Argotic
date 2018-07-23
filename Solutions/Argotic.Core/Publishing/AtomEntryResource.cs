@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Data.Adapters;
-using Argotic.Net;
-using Argotic.Syndication;
-using Argotic.Extensions;
-using Argotic.Extensions.Core;
-
-namespace Argotic.Publishing
+﻿namespace Argotic.Publishing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Data.Adapters;
+    using Argotic.Extensions;
+    using Argotic.Extensions.Core;
+    using Argotic.Net;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a resource whose IRI is listed in a <see cref="AtomFeed"/> and uses <see cref="AtomEntry"/> as its representation.
     /// </summary>
@@ -26,10 +25,12 @@ namespace Argotic.Publishing
         /// Private member to hold HTTP web request used by asynchronous load operations.
         /// </summary>
         private static WebRequest asyncHttpWebRequest;
+
         /// <summary>
         /// Private member to hold the last time the entry was edited. If the entry has not been edited yet, indicates the time the entry was created.
         /// </summary>
-        private DateTime entryResourceEditedOn  = DateTime.MinValue;
+        private DateTime entryResourceEditedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
         /// </summary>
@@ -74,7 +75,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn) : this(id, title, updatedOn)
         {
-            this.EditedOn   = editedOn;
+            this.EditedOn = editedOn;
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft) : this(id, title, updatedOn, editedOn)
         {
-            this.IsDraft    = isDraft;
+            this.IsDraft = isDraft;
         }
 
         /// <summary>
@@ -155,17 +156,17 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="AtomEntry.Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -180,23 +181,23 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="AtomEntry.Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
 
             if (settings == null)
             {
-                settings    = new SyndicationResourceLoadSettings();
+                settings = new SyndicationResourceLoadSettings();
             }
 
             if (this.LoadOperationInProgress)
@@ -204,14 +205,14 @@ namespace Argotic.Publishing
                 throw new InvalidOperationException();
             }
 
-            this.LoadOperationInProgress    = true;
+            this.LoadOperationInProgress = true;
 
-            this.AsyncLoadHasBeenCancelled  = false;
+            this.AsyncLoadHasBeenCancelled = false;
 
-            asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+            asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
             asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+            object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
@@ -221,7 +222,7 @@ namespace Argotic.Publishing
         /// Cancels an asynchronous operation to load this syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="AtomEntry.LoadAsync(Uri, Object)"/> operation.
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="AtomEntry.LoadAsync(Uri, object)"/> operation.
         ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>
@@ -241,23 +242,23 @@ namespace Argotic.Publishing
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncLoadCallback(IAsyncResult result)
         {
-            System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-            XPathNavigator navigator                    = null;
-            WebRequest httpWebRequest                   = null;
-            AtomEntryResource entry                     = null;
-            Uri source                                  = null;
-            WebRequestOptions options                   = null;
-            SyndicationResourceLoadSettings settings    = null;
+            System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+            XPathNavigator navigator = null;
+            WebRequest httpWebRequest = null;
+            AtomEntryResource entry = null;
+            Uri source = null;
+            WebRequestOptions options = null;
+            SyndicationResourceLoadSettings settings = null;
 
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                entry               = parameters[1] as AtomEntryResource;
-                source              = parameters[2] as Uri;
-                settings            = parameters[3] as SyndicationResourceLoadSettings;
-                options             = parameters[4] as WebRequestOptions;
-                object userToken    = parameters[5];
+                httpWebRequest = parameters[0] as WebRequest;
+                entry = parameters[1] as AtomEntryResource;
+                source = parameters[2] as Uri;
+                settings = parameters[3] as SyndicationResourceLoadSettings;
+                options = parameters[4] as WebRequestOptions;
+                object userToken = parameters[5];
 
                 if (entry != null)
                 {
@@ -267,40 +268,40 @@ namespace Argotic.Publishing
                     {
                         if (settings != null)
                         {
-                            encoding    = settings.CharacterEncoding;
+                            encoding = settings.CharacterEncoding;
                         }
 
                         using (StreamReader streamReader = new StreamReader(stream, encoding))
                         {
-                            XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                            readerSettings.IgnoreComments       = true;
-                            readerSettings.IgnoreWhitespace     = true;
+                            XmlReaderSettings readerSettings = new XmlReaderSettings();
+                            readerSettings.IgnoreComments = true;
+                            readerSettings.IgnoreWhitespace = true;
                             readerSettings.DtdProcessing = DtdProcessing.Ignore;
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
                                 if (encoding == System.Text.Encoding.UTF8)
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                                 }
                                 else
                                 {
-                                    navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                    navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                                 }
 
-                                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(entry, SyndicationContentFormat.Atom);
 
-                                AtomPublishingEditedSyndicationExtension editedExtension    = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+                                AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
                                 if (editedExtension != null)
                                 {
-                                    entry.EditedOn  = editedExtension.Context.EditedOn;
+                                    entry.EditedOn = editedExtension.Context.EditedOn;
                                 }
 
-                                AtomPublishingControlSyndicationExtension controlExtension  = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+                                AtomPublishingControlSyndicationExtension controlExtension = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
                                 if (controlExtension != null)
                                 {
-                                    entry.IsDraft   = controlExtension.Context.IsDraft;
+                                    entry.IsDraft = controlExtension.Context.IsDraft;
                                 }
 
                                 entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
@@ -308,7 +309,7 @@ namespace Argotic.Publishing
                         }
                     }
 
-                    entry.LoadOperationInProgress    = false;
+                    entry.LoadOperationInProgress = false;
                 }
             }
         }
@@ -328,7 +329,7 @@ namespace Argotic.Publishing
                 }
             }
 
-            this.LoadOperationInProgress    = false;
+            this.LoadOperationInProgress = false;
         }
 
         /// <summary>
@@ -346,16 +347,16 @@ namespace Argotic.Publishing
         {
             base.Load(source, settings);
 
-            AtomPublishingEditedSyndicationExtension editedExtension    = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+            AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
             if (editedExtension != null)
             {
-                this.EditedOn   = editedExtension.Context.EditedOn;
+                this.EditedOn = editedExtension.Context.EditedOn;
             }
 
-            AtomPublishingControlSyndicationExtension controlExtension  = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+            AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
             if (controlExtension != null)
             {
-                this.IsDraft    = controlExtension.Context.IsDraft;
+                this.IsDraft = controlExtension.Context.IsDraft;
             }
         }
 
@@ -437,16 +438,16 @@ namespace Argotic.Publishing
         {
             base.Load(source, options, settings);
 
-            AtomPublishingEditedSyndicationExtension editedExtension    = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+            AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
             if (editedExtension != null)
             {
-                this.EditedOn   = editedExtension.Context.EditedOn;
+                this.EditedOn = editedExtension.Context.EditedOn;
             }
 
-            AtomPublishingControlSyndicationExtension controlExtension  = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+            AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
             if (controlExtension != null)
             {
-                this.IsDraft    = controlExtension.Context.IsDraft;
+                this.IsDraft = controlExtension.Context.IsDraft;
             }
         }
 
@@ -463,14 +464,14 @@ namespace Argotic.Publishing
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNull(settings, "settings");
 
-            List<ISyndicationExtension> list    = new List<ISyndicationExtension>(this.Extensions);
+            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
 
             if(this.EditedOn != DateTime.MinValue)
             {
                 if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
                 {
-                    AtomPublishingEditedSyndicationExtension editedExtension    = new AtomPublishingEditedSyndicationExtension();
-                    editedExtension.Context.EditedOn                            = this.EditedOn;
+                    AtomPublishingEditedSyndicationExtension editedExtension = new AtomPublishingEditedSyndicationExtension();
+                    editedExtension.Context.EditedOn = this.EditedOn;
                     this.AddExtension(editedExtension);
                 }
             }
@@ -479,8 +480,8 @@ namespace Argotic.Publishing
             {
                 if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
                 {
-                    AtomPublishingControlSyndicationExtension controlExtension  = new AtomPublishingControlSyndicationExtension();
-                    controlExtension.Context.IsDraft                            = this.IsDraft;
+                    AtomPublishingControlSyndicationExtension controlExtension = new AtomPublishingControlSyndicationExtension();
+                    controlExtension.Context.IsDraft = this.IsDraft;
                     this.AddExtension(controlExtension);
                 }
             }

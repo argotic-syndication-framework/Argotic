@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a person, corporation, or similar entity.
     /// </summary>
@@ -30,26 +29,32 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a human-readable name for the person.
         /// </summary>
-        private string personConstructName              = String.Empty;
+        private string personConstructName = string.Empty;
+
         /// <summary>
         /// Private member to hold an IRI associated with the person.
         /// </summary>
         private Uri personConstructUri;
+
         /// <summary>
         /// Private member to hold an e-mail address associated with the person.
         /// </summary>
-        private string personConstructEmailAddress      = String.Empty;
+        private string personConstructEmailAddress = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPersonConstruct"/> class.
         /// </summary>
@@ -66,8 +71,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public AtomPersonConstruct(string name)
         {
-            this.Name   = name;
+            this.Name = name;
         }
+
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -111,6 +117,7 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -127,6 +134,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -148,6 +156,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the e-mail address associated with this entity.
         /// </summary>
@@ -164,9 +173,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    personConstructEmailAddress = String.Empty;
+                    personConstructEmailAddress = string.Empty;
                 }
                 else
                 {
@@ -218,6 +227,7 @@ namespace Argotic.Syndication
                 personConstructUri = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -226,10 +236,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -270,11 +280,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="AtomPersonConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -286,21 +297,22 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
-            XPathNavigator nameNavigator    = source.SelectSingleNode("atom:name", manager);
-            XPathNavigator uriNavigator     = source.SelectSingleNode("atom:uri", manager);
-            XPathNavigator emailNavigator   = source.SelectSingleNode("atom:email", manager);
+
+            XPathNavigator nameNavigator = source.SelectSingleNode("atom:name", manager);
+            XPathNavigator uriNavigator = source.SelectSingleNode("atom:uri", manager);
+            XPathNavigator emailNavigator = source.SelectSingleNode("atom:email", manager);
 
             if (nameNavigator != null)
             {
-                this.Name           = nameNavigator.Value;
-                wasLoaded           = true;
+                this.Name = nameNavigator.Value;
+                wasLoaded = true;
             }
 
             if (uriNavigator != null)
@@ -308,15 +320,15 @@ namespace Argotic.Syndication
                 Uri uri;
                 if (Uri.TryCreate(uriNavigator.Value, UriKind.RelativeOrAbsolute, out uri))
                 {
-                    this.Uri        = uri;
-                    wasLoaded       = true;
+                    this.Uri = uri;
+                    wasLoaded = true;
                 }
             }
 
             if (emailNavigator != null)
             {
-                this.EmailAddress   = emailNavigator.Value;
-                wasLoaded           = true;
+                this.EmailAddress = emailNavigator.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -335,10 +347,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -367,18 +379,20 @@ namespace Argotic.Syndication
                 writer.WriteElementString("uri", AtomUtility.AtomNamespace, this.Uri.ToString());
             }
 
-            if(!String.IsNullOrEmpty(this.EmailAddress))
+            if(!string.IsNullOrEmpty(this.EmailAddress))
             {
                 writer.WriteElementString("email", AtomUtility.AtomNamespace, this.EmailAddress);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomPersonConstruct"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomPersonConstruct"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomPersonConstruct"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomPersonConstruct"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance, with a generic element name of <i>PersonConstruct</i>.
         /// </remarks>
@@ -386,9 +400,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -404,6 +418,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -416,30 +431,31 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            AtomPersonConstruct value  = obj as AtomPersonConstruct;
+
+            AtomPersonConstruct value = obj as AtomPersonConstruct;
 
             if (value != null)
             {
-                int result  = String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomPersonConstruct))
             {
@@ -455,7 +471,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

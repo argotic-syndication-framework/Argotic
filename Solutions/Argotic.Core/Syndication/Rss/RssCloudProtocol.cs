@@ -1,9 +1,8 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the message format utilized by a web service that implements the RssCloud application programming interface.
     /// </summary>

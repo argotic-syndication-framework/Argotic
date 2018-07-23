@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents the meta-data necessary for monitoring updates to an <see cref="RssFeed"/> using a web service that implements the RssCloud application programming interface.
     /// </summary>
@@ -34,26 +33,32 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the host name or IP address of the web service that monitors updates to the feed.
         /// </summary>
-        private string cloudDomain              = String.Empty;
+        private string cloudDomain = string.Empty;
+
         /// <summary>
         /// Private member to hold the web service's path.
         /// </summary>
-        private string cloudPath                = String.Empty;
+        private string cloudPath = string.Empty;
+
         /// <summary>
         /// Private member to hold the web service's TCP port.
         /// </summary>
-        private int cloudPort                   = 80;
+        private int cloudPort = 80;
+
         /// <summary>
         /// Private member to hold the protocol utilized by the web service.
         /// </summary>
-        private RssCloudProtocol cloudProtocol  = RssCloudProtocol.XmlRpc;
+        private RssCloudProtocol cloudProtocol = RssCloudProtocol.XmlRpc;
+
         /// <summary>
         /// Private member to hold message format the web service employs.
         /// </summary>
-        private string cloudRegisterProcedure   = String.Empty;
+        private string cloudRegisterProcedure = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssCloud"/> class.
         /// </summary>
@@ -79,12 +84,13 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is an empty string.</exception>
         public RssCloud(string domain, string path, int port, RssCloudProtocol protocol, string registerProcedure)
         {
-            this.Domain             = domain;
-            this.Path               = path;
-            this.Port               = port;
-            this.Protocol           = protocol;
-            this.RegisterProcedure  = registerProcedure;
+            this.Domain = domain;
+            this.Path = path;
+            this.Port = port;
+            this.Protocol = protocol;
+            this.RegisterProcedure = registerProcedure;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -101,6 +107,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -122,6 +129,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the host name or IP address of the web service that monitors updates to a feed.
         /// </summary>
@@ -200,8 +208,9 @@ namespace Argotic.Syndication
             {
                 if (value == RssCloudProtocol.None)
                 {
-                    throw new ArgumentException(String.Format(null, "The specified cloud protocol of {0} is invalid.", value), "value");
+                    throw new ArgumentException(string.Format(null, "The specified cloud protocol of {0} is invalid.", value), "value");
                 }
+
                 cloudProtocol = value;
             }
         }
@@ -225,6 +234,7 @@ namespace Argotic.Syndication
                 cloudRegisterProcedure = value.Trim();
             }
         }
+
         /// <summary>
         /// Returns the cloud protocol identifier for the supplied <see cref="RssCloudProtocol"/>.
         /// </summary>
@@ -240,22 +250,22 @@ namespace Argotic.Syndication
         /// </example>
         public static string CloudProtocolAsString(RssCloudProtocol protocol)
         {
-            string name = String.Empty;
+            string name = string.Empty;
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(RssCloudProtocol))
                 {
-                    RssCloudProtocol cloudProtocol  = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    RssCloudProtocol cloudProtocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                     if (cloudProtocol == protocol)
                     {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
                             EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                            name    = enumerationMetadata.AlternateValue;
+                            name = enumerationMetadata.AlternateValue;
                             break;
                         }
                     }
@@ -283,22 +293,22 @@ namespace Argotic.Syndication
         /// </example>
         public static RssCloudProtocol CloudProtocolByName(string name)
         {
-            RssCloudProtocol cloudProtocol  = RssCloudProtocol.None;
+            RssCloudProtocol cloudProtocol = RssCloudProtocol.None;
             Guard.ArgumentNotNullOrEmptyString(name, "name");
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(RssCloudProtocol))
                 {
-                    RssCloudProtocol protocol   = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    RssCloudProtocol protocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            cloudProtocol   = protocol;
+                            cloudProtocol = protocol;
                             break;
                         }
                     }
@@ -307,6 +317,7 @@ namespace Argotic.Syndication
 
             return cloudProtocol;
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -315,10 +326,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -359,11 +370,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="RssCloud"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -375,55 +387,55 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
-                string domain               = source.GetAttribute("domain", String.Empty);
-                string path                 = source.GetAttribute("path", String.Empty);
-                string port                 = source.GetAttribute("port", String.Empty);
-                string protocol             = source.GetAttribute("protocol", String.Empty);
-                string registerProcedure    = source.GetAttribute("registerProcedure", String.Empty);
+                string domain = source.GetAttribute("domain", string.Empty);
+                string path = source.GetAttribute("path", string.Empty);
+                string port = source.GetAttribute("port", string.Empty);
+                string protocol = source.GetAttribute("protocol", string.Empty);
+                string registerProcedure = source.GetAttribute("registerProcedure", string.Empty);
 
-                if (!String.IsNullOrEmpty(domain))
+                if (!string.IsNullOrEmpty(domain))
                 {
-                    this.Domain             = domain;
-                    wasLoaded               = true;
+                    this.Domain = domain;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(path))
+                if (!string.IsNullOrEmpty(path))
                 {
-                    this.Path               = path;
-                    wasLoaded               = true;
+                    this.Path = path;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(port))
+                if (!string.IsNullOrEmpty(port))
                 {
                     int tcpPort;
-                    if (Int32.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out tcpPort))
+                    if (int.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out tcpPort))
                     {
                         if (tcpPort > 0)
                         {
-                            this.Port       = tcpPort;
-                            wasLoaded       = true;
+                            this.Port = tcpPort;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                if (!String.IsNullOrEmpty(protocol))
+                if (!string.IsNullOrEmpty(protocol))
                 {
-                    RssCloudProtocol serviceProtocol    = RssCloud.CloudProtocolByName(protocol);
+                    RssCloudProtocol serviceProtocol = RssCloud.CloudProtocolByName(protocol);
                     if (serviceProtocol != RssCloudProtocol.None)
                     {
-                        this.Protocol       = serviceProtocol;
-                        wasLoaded           = true;
+                        this.Protocol = serviceProtocol;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(registerProcedure))
+                if (!string.IsNullOrEmpty(registerProcedure))
                 {
-                    this.RegisterProcedure  = registerProcedure;
-                    wasLoaded               = true;
+                    this.RegisterProcedure = registerProcedure;
+                    wasLoaded = true;
                 }
             }
 
@@ -443,10 +455,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -472,10 +484,11 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssCloud"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssCloud"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssCloud"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssCloud"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -483,9 +496,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -501,6 +514,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -513,30 +527,31 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssCloud value  = obj as RssCloud;
+
+            RssCloud value = obj as RssCloud;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Port.CompareTo(value.Port);
-                result      = result | this.Protocol.CompareTo(value.Protocol);
-                result      = result | String.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Port.CompareTo(value.Port);
+                result = result | this.Protocol.CompareTo(value.Protocol);
+                result = result | string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssCloud))
             {
@@ -552,7 +567,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

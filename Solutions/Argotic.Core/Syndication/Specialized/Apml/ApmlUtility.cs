@@ -1,10 +1,9 @@
-﻿using System;
-using System.Xml;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Xml;
+    using Argotic.Common;
+
     /// <summary>
     /// Provides methods that comprise common utility features shared across the Attention Profiling Markup Language (APML) syndication entities. This class cannot be inherited.
     /// </summary>
@@ -15,7 +14,8 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Private member to hold the Attention Profiling Markup Language (APML) 0.6 namespace identifier.
         /// </summary>
-        private const string APML_NAMESPACE  = "http://www.apml.org/apml-0.6";
+        private const string APML_NAMESPACE = "http://www.apml.org/apml-0.6";
+
         /// <summary>
         /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
         /// </summary>
@@ -27,6 +27,7 @@ namespace Argotic.Syndication.Specialized
                 return APML_NAMESPACE;
             }
         }
+
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Attention Profiling Markup Language (APML) syndication entities.
         /// </summary>
@@ -38,7 +39,7 @@ namespace Argotic.Syndication.Specialized
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("apml", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : APML_NAMESPACE);
+            manager.AddNamespace("apml", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : APML_NAMESPACE);
 
             return manager;
         }

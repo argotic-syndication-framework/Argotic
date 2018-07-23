@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Text;
-using System.Web;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Text;
+    using System.Web;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a Trackback ping request that can be sent using the <see cref="TrackbackClient"/> class.
     /// </summary>
@@ -26,19 +25,23 @@ namespace Argotic.Net
         /// <summary>
         /// Private member to hold the character encoding of the message.
         /// </summary>
-        private Encoding messageEncoding    = Encoding.UTF8;
+        private Encoding messageEncoding = Encoding.UTF8;
+
         /// <summary>
         /// Private member to hold the title of the entry.
         /// </summary>
-        private string messageTitle         = String.Empty;
+        private string messageTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold an excerpt of the entry.
         /// </summary>
-        private string messageExcerpt       = String.Empty;
+        private string messageExcerpt = string.Empty;
+
         /// <summary>
         /// Private member to hold the name of the weblog to which the entry was posted.
         /// </summary>
-        private string messageWeblogName    = String.Empty;
+        private string messageWeblogName = string.Empty;
+
         /// <summary>
         /// Private member to hold the permalink for the entry.
         /// </summary>
@@ -62,7 +65,7 @@ namespace Argotic.Net
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "permalink")]
         public TrackbackMessage(Uri permalink)
         {
-            this.Permalink  = permalink;
+            this.Permalink = permalink;
         }
 
         /// <summary>
@@ -100,9 +103,9 @@ namespace Argotic.Net
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    messageExcerpt = String.Empty;
+                    messageExcerpt = string.Empty;
                 }
                 else
                 {
@@ -150,9 +153,9 @@ namespace Argotic.Net
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    messageTitle = String.Empty;
+                    messageTitle = string.Empty;
                 }
                 else
                 {
@@ -177,9 +180,9 @@ namespace Argotic.Net
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    messageWeblogName = String.Empty;
+                    messageWeblogName = string.Empty;
                 }
                 else
                 {
@@ -205,39 +208,39 @@ namespace Argotic.Net
 
             if (source.Count > 0)
             {
-                foreach (String parameterName in source.AllKeys)
+                foreach (string parameterName in source.AllKeys)
                 {
-                    if (String.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         Uri url;
                         if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out url))
                         {
-                            this.Permalink  = url;
-                            wasLoaded       = true;
+                            this.Permalink = url;
+                            wasLoaded = true;
                         }
                     }
-                    else if (String.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        if (!String.IsNullOrEmpty(source[parameterName]))
+                        if (!string.IsNullOrEmpty(source[parameterName]))
                         {
-                            this.Title  = source[parameterName];
-                            wasLoaded   = true;
+                            this.Title = source[parameterName];
+                            wasLoaded = true;
                         }
                     }
-                    else if (String.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        if (!String.IsNullOrEmpty(source[parameterName]))
+                        if (!string.IsNullOrEmpty(source[parameterName]))
                         {
-                            this.Excerpt    = source[parameterName];
-                            wasLoaded       = true;
+                            this.Excerpt = source[parameterName];
+                            wasLoaded = true;
                         }
                     }
-                    else if (String.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        if (!String.IsNullOrEmpty(source[parameterName]))
+                        if (!string.IsNullOrEmpty(source[parameterName]))
                         {
                             this.WeblogName = source[parameterName];
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -255,28 +258,28 @@ namespace Argotic.Net
         {
             Guard.ArgumentNotNull(writer, "writer");
 
-            writer.Write(String.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : String.Empty));
+            writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
 
-            if(!String.IsNullOrEmpty(this.Title))
+            if(!string.IsNullOrEmpty(this.Title))
             {
-                writer.Write(String.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
+                writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
             }
 
-            if (!String.IsNullOrEmpty(this.WeblogName))
+            if (!string.IsNullOrEmpty(this.WeblogName))
             {
-                writer.Write(String.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
+                writer.Write(string.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
             }
 
-            if (!String.IsNullOrEmpty(this.Excerpt))
+            if (!string.IsNullOrEmpty(this.Excerpt))
             {
-                writer.Write(String.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
+                writer.Write(string.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
         /// <remarks>
         ///     This method returns the URL-encoded representation for the current instance.
         /// </remarks>
@@ -311,30 +314,30 @@ namespace Argotic.Net
                 return 1;
             }
 
-            TrackbackMessage value  = obj as TrackbackMessage;
+            TrackbackMessage value = obj as TrackbackMessage;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is TrackbackMessage))
             {
@@ -350,7 +353,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

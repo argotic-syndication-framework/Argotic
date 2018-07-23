@@ -1,12 +1,11 @@
-﻿using System;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Provides methods that comprise common utility features shared across the Atom syndication entities. This class cannot be inherited.
     /// </summary>
@@ -17,19 +16,23 @@ namespace Argotic.Syndication
         /// <summary>
         /// Private member to hold the Atom 1.0 namespace identifier.
         /// </summary>
-        private const string ATOM_NAMESPACE     = "http://www.w3.org/2005/Atom";
+        private const string ATOM_NAMESPACE = "http://www.w3.org/2005/Atom";
+
         /// <summary>
         /// Private member to hold the Atom Publishing Protocol 1.0 namespace identifier.
         /// </summary>
-        private const string ATOMPUB_NAMESPACE  = "http://www.w3.org/2007/app";
+        private const string ATOMPUB_NAMESPACE = "http://www.w3.org/2007/app";
+
         /// <summary>
         /// Private member to hold the XHTML namespace identifier.
         /// </summary>
-        private const string XHTML_NAMESPACE    = "http://www.w3.org/1999/xhtml";
+        private const string XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+
         /// <summary>
         /// Private member to hold the XML 1.1 namespace identifier.
         /// </summary>
-        private const string XML_NAMESPACE      = "http://www.w3.org/XML/1998/namespace";
+        private const string XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace";
+
         /// <summary>
         /// Gets the XML namespace URI for the Atom 1.0 specification.
         /// </summary>
@@ -65,6 +68,7 @@ namespace Argotic.Syndication
                 return XHTML_NAMESPACE;
             }
         }
+
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
         /// </summary>
@@ -76,7 +80,7 @@ namespace Argotic.Syndication
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("atom", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
+            manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
             manager.AddNamespace("app", ATOMPUB_NAMESPACE);
             manager.AddNamespace("xhtml", XHTML_NAMESPACE);
 
@@ -91,7 +95,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjectAttributes(IAtomCommonObjectAttributes source, IAtomCommonObjectAttributes target)
         {
-            int result  = 0;
+            int result = 0;
             if (source == null && target == null)
             {
                 return 0;
@@ -104,11 +108,12 @@ namespace Argotic.Syndication
             {
                 return -1;
             }
-            result  = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            string sourceLanguageName   = source.Language != null ? source.Language.Name : String.Empty;
-            string targetLanguageName   = target.Language != null ? target.Language.Name : String.Empty;
-            result                      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+
+            string sourceLanguageName = source.Language != null ? source.Language.Name : string.Empty;
+            string targetLanguageName = target.Language != null ? target.Language.Name : string.Empty;
+            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -123,28 +128,29 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
             string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
-            if (!String.IsNullOrEmpty(xmlBaseAttribute))
+            if (!string.IsNullOrEmpty(xmlBaseAttribute))
             {
                 Uri baseUri;
                 if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out baseUri))
                 {
-                    target.BaseUri  = baseUri;
-                    wasLoaded       = true;
+                    target.BaseUri = baseUri;
+                    wasLoaded = true;
                 }
             }
+
             string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml"));
-            if (!String.IsNullOrEmpty(xmlLangAttribute))
+            if (!string.IsNullOrEmpty(xmlLangAttribute))
             {
                 try
                 {
-                    CultureInfo language    = new CultureInfo(source.XmlLang);
-                    target.Language         = language;
-                    wasLoaded               = true;
+                    CultureInfo language = new CultureInfo(source.XmlLang);
+                    target.Language = language;
+                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -170,6 +176,7 @@ namespace Argotic.Syndication
             {
                 writer.WriteAttributeString("xml", "base", XML_NAMESPACE, source.BaseUri.ToString());
             }
+
             if (source.Language != null)
             {
                 writer.WriteAttributeString("xml", "lang", XML_NAMESPACE, source.Language.Name);

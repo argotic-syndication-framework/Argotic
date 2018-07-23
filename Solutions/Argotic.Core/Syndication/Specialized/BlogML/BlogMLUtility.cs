@@ -1,12 +1,11 @@
-﻿using System;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Provides methods that comprise common utility features shared across the Web Log Markup Language (BlogML) syndication entities. This class cannot be inherited.
     /// </summary>
@@ -17,7 +16,8 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Private member to hold the Web Log Markup Language (BlogML) 2.0 namespace identifier.
         /// </summary>
-        private const string BLOGML_NAMESPACE  = "http://www.blogml.com/2006/09/BlogML";
+        private const string BLOGML_NAMESPACE = "http://www.blogml.com/2006/09/BlogML";
+
         /// <summary>
         /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
         /// </summary>
@@ -29,6 +29,7 @@ namespace Argotic.Syndication.Specialized
                 return BLOGML_NAMESPACE;
             }
         }
+
         /// <summary>
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
         /// </summary>
@@ -36,7 +37,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>The approval status identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
         {
-            string name = String.Empty;
+            string name = string.Empty;
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
@@ -45,13 +46,13 @@ namespace Argotic.Syndication.Specialized
 
                     if (approvalStatus == status)
                     {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
                             EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                            name    = enumerationMetadata.AlternateValue;
+                            name = enumerationMetadata.AlternateValue;
                             break;
                         }
                     }
@@ -78,15 +79,15 @@ namespace Argotic.Syndication.Specialized
                 if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
                 {
                     BlogMLApprovalStatus status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            approvalStatus  = status;
+                            approvalStatus = status;
                             break;
                         }
                     }
@@ -104,7 +105,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
         public static int CompareCommonObjects(IBlogMLCommonObject source, IBlogMLCommonObject target)
         {
-            int result  = 0;
+            int result = 0;
             if (source == null && target == null)
             {
                 return 0;
@@ -117,22 +118,23 @@ namespace Argotic.Syndication.Specialized
             {
                 return -1;
             }
-            result  = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
-            result  = result | source.CreatedOn.CompareTo(target.CreatedOn);
-            result  = result | String.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
-            result  = result | source.LastModifiedOn.CompareTo(target.LastModifiedOn);
+
+            result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
+            result = result | source.CreatedOn.CompareTo(target.CreatedOn);
+            result = result | string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
+            result = result | source.LastModifiedOn.CompareTo(target.LastModifiedOn);
 
             if(source.Title != null && target.Title != null)
             {
-                result  = result | source.Title.CompareTo(target.Title);
+                result = result | source.Title.CompareTo(target.Title);
             }
             else if (source.Title != null && target.Title == null)
             {
-                result  = result | 1;
+                result = result | 1;
             }
             else if (source.Title == null && target.Title != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             return result;
@@ -149,7 +151,7 @@ namespace Argotic.Syndication.Specialized
             XmlNamespaceManager manager = null;
             Guard.ArgumentNotNull(nameTable, "nameTable");
             manager = new XmlNamespaceManager(nameTable);
-            manager.AddNamespace("blog", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
+            manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
             return manager;
         }
@@ -164,74 +166,74 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
-                string idAttribute              = source.GetAttribute("id", String.Empty);
-                string dateCreatedAttribute     = source.GetAttribute("date-created", String.Empty);
-                string dateModifiedAttribute    = source.GetAttribute("date-modified", String.Empty);
-                string approvedAttribute        = source.GetAttribute("approved", String.Empty);
+                string idAttribute = source.GetAttribute("id", string.Empty);
+                string dateCreatedAttribute = source.GetAttribute("date-created", string.Empty);
+                string dateModifiedAttribute = source.GetAttribute("date-modified", string.Empty);
+                string approvedAttribute = source.GetAttribute("approved", string.Empty);
 
-                if (!String.IsNullOrEmpty(idAttribute))
+                if (!string.IsNullOrEmpty(idAttribute))
                 {
-                    target.Id                   = idAttribute;
-                    wasLoaded                   = true;
+                    target.Id = idAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(dateCreatedAttribute))
+                if (!string.IsNullOrEmpty(dateCreatedAttribute))
                 {
                     DateTime createdOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
                     {
-                        target.CreatedOn        = createdOn;
-                        wasLoaded               = true;
+                        target.CreatedOn = createdOn;
+                        wasLoaded = true;
                     }
                     else if (DateTime.TryParse(dateCreatedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out createdOn))
                     {
-                        target.CreatedOn        = createdOn;
-                        wasLoaded               = true;
+                        target.CreatedOn = createdOn;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(dateModifiedAttribute))
+                if (!string.IsNullOrEmpty(dateModifiedAttribute))
                 {
                     DateTime modifiedOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out modifiedOn))
                     {
-                        target.LastModifiedOn   = modifiedOn;
-                        wasLoaded               = true;
+                        target.LastModifiedOn = modifiedOn;
+                        wasLoaded = true;
                     }
                     else if (DateTime.TryParse(dateModifiedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out modifiedOn))
                     {
-                        target.LastModifiedOn   = modifiedOn;
-                        wasLoaded               = true;
+                        target.LastModifiedOn = modifiedOn;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(approvedAttribute))
+                if (!string.IsNullOrEmpty(approvedAttribute))
                 {
                     BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
                     if (status != BlogMLApprovalStatus.None)
                     {
-                        target.ApprovalStatus   = status;
-                        wasLoaded               = true;
+                        target.ApprovalStatus = status;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (source.HasChildren)
             {
-                XPathNavigator titleNavigator   = source.SelectSingleNode("blog:title", manager);
+                XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
                 if (titleNavigator != null)
                 {
-                    BlogMLTextConstruct title   = new BlogMLTextConstruct();
+                    BlogMLTextConstruct title = new BlogMLTextConstruct();
                     if (title.Load(titleNavigator))
                     {
-                        target.Title    = title;
-                        wasLoaded       = true;
+                        target.Title = title;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -251,75 +253,75 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(target, "target");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
             if (source.HasAttributes)
             {
-                string idAttribute              = source.GetAttribute("id", String.Empty);
-                string dateCreatedAttribute     = source.GetAttribute("date-created", String.Empty);
-                string dateModifiedAttribute    = source.GetAttribute("date-modified", String.Empty);
-                string approvedAttribute        = source.GetAttribute("approved", String.Empty);
+                string idAttribute = source.GetAttribute("id", string.Empty);
+                string dateCreatedAttribute = source.GetAttribute("date-created", string.Empty);
+                string dateModifiedAttribute = source.GetAttribute("date-modified", string.Empty);
+                string approvedAttribute = source.GetAttribute("approved", string.Empty);
 
-                if (!String.IsNullOrEmpty(idAttribute))
+                if (!string.IsNullOrEmpty(idAttribute))
                 {
-                    target.Id                   = idAttribute;
-                    wasLoaded                   = true;
+                    target.Id = idAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(dateCreatedAttribute))
+                if (!string.IsNullOrEmpty(dateCreatedAttribute))
                 {
                     DateTime createdOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
                     {
-                        target.CreatedOn        = createdOn;
-                        wasLoaded               = true;
+                        target.CreatedOn = createdOn;
+                        wasLoaded = true;
                     }
                     else if (DateTime.TryParse(dateCreatedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out createdOn))
                     {
-                        target.CreatedOn        = createdOn;
-                        wasLoaded               = true;
+                        target.CreatedOn = createdOn;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(dateModifiedAttribute))
+                if (!string.IsNullOrEmpty(dateModifiedAttribute))
                 {
                     DateTime modifiedOn;
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out modifiedOn))
                     {
-                        target.LastModifiedOn   = modifiedOn;
-                        wasLoaded               = true;
+                        target.LastModifiedOn = modifiedOn;
+                        wasLoaded = true;
                     }
                     else if (DateTime.TryParse(dateModifiedAttribute, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out modifiedOn))
                     {
-                        target.LastModifiedOn   = modifiedOn;
-                        wasLoaded               = true;
+                        target.LastModifiedOn = modifiedOn;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(approvedAttribute))
+                if (!string.IsNullOrEmpty(approvedAttribute))
                 {
                     BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
                     if (status != BlogMLApprovalStatus.None)
                     {
-                        target.ApprovalStatus   = status;
-                        wasLoaded               = true;
+                        target.ApprovalStatus = status;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (source.HasChildren)
             {
-                XPathNavigator titleNavigator   = source.SelectSingleNode("blog:title", manager);
+                XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
                 if (titleNavigator != null)
                 {
-                    BlogMLTextConstruct title   = new BlogMLTextConstruct();
+                    BlogMLTextConstruct title = new BlogMLTextConstruct();
                     if (title.Load(titleNavigator, settings))
                     {
-                        target.Title    = title;
-                        wasLoaded       = true;
+                        target.Title = title;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -339,7 +341,7 @@ namespace Argotic.Syndication.Specialized
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(writer, "writer");
 
-            if (!String.IsNullOrEmpty(source.Id))
+            if (!string.IsNullOrEmpty(source.Id))
             {
                 writer.WriteAttributeString("id", source.Id);
             }

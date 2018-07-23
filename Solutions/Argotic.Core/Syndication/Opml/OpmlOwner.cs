@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the owner of an <see cref="OpmlDocument"/>.
     /// </summary>
@@ -18,15 +17,18 @@ namespace Argotic.Syndication
         /// <summary>
         /// Private member to hold the name of the owner of the document.
         /// </summary>
-        private string ownerName    = String.Empty;
+        private string ownerName = string.Empty;
+
         /// <summary>
         /// Private member to hold email address of the owner of the document.
         /// </summary>
-        private string ownerEmail   = String.Empty;
+        private string ownerEmail = string.Empty;
+
         /// <summary>
         /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
         /// </summary>
         private Uri ownerId;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOwner"/> class.
         /// </summary>
@@ -41,7 +43,7 @@ namespace Argotic.Syndication
         /// <param name="name">The name of the owner of this document.</param>
         public OpmlOwner(string name)
         {
-            this.Name   = name;
+            this.Name = name;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace Argotic.Syndication
         /// <param name="emailAddress">The email address of the owner of this document.</param>
         public OpmlOwner(string name, string emailAddress) : this(name)
         {
-            this.EmailAddress   = emailAddress;
+            this.EmailAddress = emailAddress;
         }
 
         /// <summary>
@@ -65,8 +67,9 @@ namespace Argotic.Syndication
         /// </param>
         public OpmlOwner(string name, string emailAddress, Uri id) : this(name, emailAddress)
         {
-            this.Id             = id;
+            this.Id = id;
         }
+
         /// <summary>
         /// Gets or sets the email address of the owner of this document.
         /// </summary>
@@ -80,9 +83,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    ownerEmail = String.Empty;
+                    ownerEmail = string.Empty;
                 }
                 else
                 {
@@ -127,16 +130,17 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    ownerName   = String.Empty;
+                    ownerName = string.Empty;
                 }
                 else
                 {
-                    ownerName   = value.Trim();
+                    ownerName = value.Trim();
                 }
             }
         }
+
         /// <summary>
         /// Loads this <see cref="OpmlOwner"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -148,22 +152,22 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            XPathNavigator ownerNameNavigator   = source.SelectSingleNode("ownerName");
-            XPathNavigator ownerEmailNavigator  = source.SelectSingleNode("ownerEmail");
-            XPathNavigator ownerIdNavigator     = source.SelectSingleNode("ownerId");
+            XPathNavigator ownerNameNavigator = source.SelectSingleNode("ownerName");
+            XPathNavigator ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
+            XPathNavigator ownerIdNavigator = source.SelectSingleNode("ownerId");
 
             if (ownerNameNavigator != null)
             {
-                this.Name           = ownerNameNavigator.Value;
-                wasLoaded           = true;
+                this.Name = ownerNameNavigator.Value;
+                wasLoaded = true;
             }
 
             if (ownerEmailNavigator != null)
             {
-                this.EmailAddress   = ownerEmailNavigator.Value;
-                wasLoaded           = true;
+                this.EmailAddress = ownerEmailNavigator.Value;
+                wasLoaded = true;
             }
 
             if (ownerIdNavigator != null)
@@ -171,8 +175,8 @@ namespace Argotic.Syndication
                 Uri id;
                 if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out id))
                 {
-                    this.Id     = id;
-                    wasLoaded   = true;
+                    this.Id = id;
+                    wasLoaded = true;
                 }
             }
 
@@ -187,12 +191,12 @@ namespace Argotic.Syndication
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
-            if(!String.IsNullOrEmpty(this.Name))
+            if(!string.IsNullOrEmpty(this.Name))
             {
                 writer.WriteElementString("ownerName", this.Name);
             }
 
-            if (!String.IsNullOrEmpty(this.EmailAddress))
+            if (!string.IsNullOrEmpty(this.EmailAddress))
             {
                 writer.WriteElementString("ownerEmail", this.EmailAddress);
             }
@@ -202,10 +206,11 @@ namespace Argotic.Syndication
                 writer.WriteElementString("ownerId", this.Id.ToString());
             }
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOwner"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlOwner"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -213,9 +218,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -231,6 +236,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -243,28 +249,29 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            OpmlOwner value  = obj as OpmlOwner;
+
+            OpmlOwner value = obj as OpmlOwner;
 
             if (value != null)
             {
-                int result  = String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is OpmlOwner))
             {
@@ -280,7 +287,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

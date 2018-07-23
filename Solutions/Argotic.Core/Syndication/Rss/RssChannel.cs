@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents information about the meta-data and contents associated to an <see cref="RssFeed"/>.
     /// </summary>
@@ -32,90 +31,112 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the URL of the web site associated with the feed.
         /// </summary>
         private Uri channelLink;
+
         /// <summary>
         /// Private member to hold character data that provides the name of the feed.
         /// </summary>
-        private string channelTitle             = String.Empty;
+        private string channelTitle = string.Empty;
+
         /// <summary>
         /// Private member to hold character data that provides a human-readable characterization or summary of the feed.
         /// </summary>
-        private string channelDescription       = String.Empty;
+        private string channelDescription = string.Empty;
+
         /// <summary>
         /// Private member to hold categories or tags to which the channel belongs.
         /// </summary>
         private Collection<RssCategory> channelCategories;
+
         /// <summary>
         /// Private member to hold meta-data necessary for monitoring updates to a feed using a web service that implements the RssCloud application programming interface.
         /// </summary>
         private RssCloud channelCloud;
+
         /// <summary>
         /// Private member to hold the human-readable copyright statement that applies to the feed.
         /// </summary>
-        private string channelCopyrightNotice   = String.Empty;
+        private string channelCopyrightNotice = string.Empty;
+
         /// <summary>
         /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
         /// </summary>
         private static Uri channelDocumentation = new Uri("http://www.rssboard.org/rss-specification");
+
         /// <summary>
         /// Private member to hold a value that credits the software that created the feed.
         /// </summary>
-        private string channelGenerator         = String.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
+        private string channelGenerator = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
+
         /// <summary>
         /// Private member to hold the graphical logo for the feed.
         /// </summary>
         private RssImage channelImage;
+
         /// <summary>
         /// Private member to hold the natural language employed in the feed.
         /// </summary>
         private CultureInfo channelLanguage;
+
         /// <summary>
         /// Private member to hold the last date and time the content of the feed was updated.
         /// </summary>
-        private DateTime channelLastBuildDate   = DateTime.MinValue;
+        private DateTime channelLastBuildDate = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold the e-mail address of the person to contact regarding the editorial content of the feed.
         /// </summary>
-        private string channelManagingEditor    = String.Empty;
+        private string channelManagingEditor = string.Empty;
+
         /// <summary>
         /// Private member to hold the publication date and time of the feed's content.
         /// </summary>
         private DateTime channelPublicationDate = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold an advisory label for the content in a feed.
         /// </summary>
-        private string channelRating            = String.Empty;
+        private string channelRating = string.Empty;
+
         /// <summary>
         /// Private member to hold the days of the week during which the feed is not updated.
         /// </summary>
         private Collection<DayOfWeek> channelSkipDays;
+
         /// <summary>
         /// Private member to hold the hours of the day during which the feed is not updated.
         /// </summary>
         private Collection<int> channelSkipHours;
+
         /// <summary>
         /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
         /// </summary>
         private RssTextInput channelTextInput;
+
         /// <summary>
         /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
         /// </summary>
-        private int channelTimeToLive           = Int32.MinValue;
+        private int channelTimeToLive = int.MinValue;
+
         /// <summary>
         /// Private member to hold the e-mail address of the person to contact about technical issues regarding the feed.
         /// </summary>
-        private string channelWebmaster         = String.Empty;
+        private string channelWebmaster = string.Empty;
+
         /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
         private IEnumerable<RssItem> channelItems;
+
         /// <summary>
         /// Private member to hold a URL that points to where the feed can be retrieved from.
         /// </summary>
         private Uri channelSelfLink;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RssChannel"/> class.
         /// </summary>
@@ -138,10 +159,11 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="description"/> is an empty string.</exception>
         public RssChannel(Uri link, string title, string description)
         {
-            this.Link           = link;
-            this.Title          = title;
-            this.Description    = description;
+            this.Link = link;
+            this.Title = title;
+            this.Description = description;
         }
+
         /// <summary>
         /// Gets or sets the <see cref="RssItem"/> at the specified index.
         /// </summary>
@@ -163,6 +185,7 @@ namespace Argotic.Syndication
                 ((Collection<RssItem>)this.Items)[index] = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -179,6 +202,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -200,6 +224,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets the categories or tags to which this channel belongs.
         /// </summary>
@@ -214,6 +239,7 @@ namespace Argotic.Syndication
                 {
                     channelCategories = new Collection<RssCategory>();
                 }
+
                 return channelCategories;
             }
         }
@@ -255,9 +281,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    channelCopyrightNotice = String.Empty;
+                    channelCopyrightNotice = string.Empty;
                 }
                 else
                 {
@@ -314,9 +340,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    channelGenerator = String.Empty;
+                    channelGenerator = string.Empty;
                 }
                 else
                 {
@@ -360,6 +386,7 @@ namespace Argotic.Syndication
                 {
                     channelItems = new Collection<RssItem>();
                 }
+
                 return channelItems;
             }
 
@@ -449,9 +476,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    channelManagingEditor = String.Empty;
+                    channelManagingEditor = string.Empty;
                 }
                 else
                 {
@@ -502,13 +529,13 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    channelRating   = String.Empty;
+                    channelRating = string.Empty;
                 }
                 else
                 {
-                    channelRating   = value.Trim();
+                    channelRating = value.Trim();
                 }
             }
         }
@@ -555,6 +582,7 @@ namespace Argotic.Syndication
                 {
                     channelSkipDays = new Collection<DayOfWeek>();
                 }
+
                 return channelSkipDays;
             }
         }
@@ -562,7 +590,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets the hours of the day during which this feed is not updated.
         /// </summary>
-        /// <value>A <see cref="Collection{T}"/> collection of <see cref="Int32"/> objects that indicate the hours of the day during which this feed is not updated.</value>
+        /// <value>A <see cref="Collection{T}"/> collection of <see cref="int"/> objects that indicate the hours of the day during which this feed is not updated.</value>
         /// <remarks>
         ///     Values from 0 to 23 are permitted, with 0 representing midnight. Integer values within this collection <b>must not</b> be duplicated.
         /// </remarks>
@@ -574,6 +602,7 @@ namespace Argotic.Syndication
                 {
                     channelSkipHours = new Collection<int>();
                 }
+
                 return channelSkipHours;
             }
         }
@@ -603,7 +632,7 @@ namespace Argotic.Syndication
         /// </summary>
         /// <value>
         ///     The maximum number of minutes to cache the data before an aggregator should request it again. 
-        ///     The default value is <see cref="Int32.MinValue"/>, which indicates no time-to-live was specified.
+        ///     The default value is <see cref="int.MinValue"/>, which indicates no time-to-live was specified.
         /// </value>
         /// <remarks>
         ///     Aggregators that support this property <i>should</i> treat it as a publisher's suggestion of a feed's update frequency, not a hard rule.
@@ -660,9 +689,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    channelWebmaster = String.Empty;
+                    channelWebmaster = string.Empty;
                 }
                 else
                 {
@@ -670,6 +699,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -678,10 +708,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -722,11 +752,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Compares two specified <see cref="Collection{RssItem}"/> collections.
         /// </summary>
@@ -748,7 +779,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<RssItem> source, Collection<RssItem> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -756,7 +787,7 @@ namespace Argotic.Syndication
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -770,6 +801,7 @@ namespace Argotic.Syndication
 
             return result;
         }
+
         /// <summary>
         /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -797,19 +829,19 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
             XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-            XPathNavigator descriptionNavigator     = source.SelectSingleNode("description", manager);
-            XPathNavigator linkNavigator            = source.SelectSingleNode("link", manager);
-            XPathNavigator titleNavigator           = source.SelectSingleNode("title", manager);
+            XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
+            XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
+            XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
 
-            if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+            if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
             {
-                this.Description    = descriptionNavigator.Value;
-                wasLoaded           = true;
+                this.Description = descriptionNavigator.Value;
+                wasLoaded = true;
             }
 
             if (linkNavigator != null)
@@ -817,30 +849,31 @@ namespace Argotic.Syndication
                 Uri link;
                 if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
                 {
-                    this.Link       = link;
-                    wasLoaded       = true;
+                    this.Link = link;
+                    wasLoaded = true;
                 }
             }
 
-            if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+            if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
             {
-                this.Title          = titleNavigator.Value;
-                wasLoaded           = true;
+                this.Title = titleNavigator.Value;
+                wasLoaded = true;
             }
+
             if (this.LoadOptionals(source, manager, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if (this.LoadCollections(source, manager, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
 
             if (this.LoadProfile(source, manager, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
@@ -859,7 +892,7 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNull(writer, "writer");
             writer.WriteStartElement("channel");
             writer.WriteElementString("title", this.Title);
-            writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : String.Empty);
+            writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
             writer.WriteElementString("description", this.Description);
 
             if(this.Cloud != null)
@@ -867,14 +900,14 @@ namespace Argotic.Syndication
                 this.Cloud.WriteTo(writer);
             }
 
-            if(!String.IsNullOrEmpty(this.Copyright))
+            if(!string.IsNullOrEmpty(this.Copyright))
             {
                 writer.WriteElementString("copyright", this.Copyright);
             }
 
             writer.WriteElementString("docs", RssChannel.Documentation.ToString());
 
-            if (!String.IsNullOrEmpty(this.Generator))
+            if (!string.IsNullOrEmpty(this.Generator))
             {
                 writer.WriteElementString("generator", this.Generator);
             }
@@ -894,7 +927,7 @@ namespace Argotic.Syndication
                 writer.WriteElementString("lastBuildDate", SyndicationDateTimeUtility.ToRfc822DateTime(this.LastBuildDate));
             }
 
-            if (!String.IsNullOrEmpty(this.ManagingEditor))
+            if (!string.IsNullOrEmpty(this.ManagingEditor))
             {
                 writer.WriteElementString("managingEditor", this.ManagingEditor);
             }
@@ -904,7 +937,7 @@ namespace Argotic.Syndication
                 writer.WriteElementString("pubDate", SyndicationDateTimeUtility.ToRfc822DateTime(this.PublicationDate));
             }
 
-            if (!String.IsNullOrEmpty(this.Rating))
+            if (!string.IsNullOrEmpty(this.Rating))
             {
                 writer.WriteElementString("rating", this.Rating);
             }
@@ -914,12 +947,12 @@ namespace Argotic.Syndication
                 this.TextInput.WriteTo(writer);
             }
 
-            if (this.TimeToLive != Int32.MinValue)
+            if (this.TimeToLive != int.MinValue)
             {
                 writer.WriteElementString("ttl", this.TimeToLive.ToString(NumberFormatInfo.InvariantInfo));
             }
 
-            if (!String.IsNullOrEmpty(this.Webmaster))
+            if (!string.IsNullOrEmpty(this.Webmaster))
             {
                 writer.WriteElementString("webMaster", this.Webmaster);
             }
@@ -931,6 +964,7 @@ namespace Argotic.Syndication
                 {
                     writer.WriteElementString("day", day.ToString());
                 }
+
                 writer.WriteEndElement();
             }
 
@@ -941,6 +975,7 @@ namespace Argotic.Syndication
                 {
                     writer.WriteElementString("hour", hour.ToString(NumberFormatInfo.InvariantInfo));
                 }
+
                 writer.WriteEndElement();
             }
 
@@ -967,6 +1002,7 @@ namespace Argotic.Syndication
 
             writer.WriteEndElement();
         }
+
         /// <summary>
         /// Adds the supplied <see cref="RssItem"/> to the current instance's <see cref="Items"/> collection.
         /// </summary>
@@ -975,10 +1011,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddItem(RssItem item)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(item, "item");
             ((Collection<RssItem>)this.Items).Add(item);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -1000,11 +1036,12 @@ namespace Argotic.Syndication
             if (((Collection<RssItem>)this.Items).Contains(item))
             {
                 ((Collection<RssItem>)this.Items).Remove(item);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads the collection elements of this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -1025,24 +1062,24 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
-            XPathNodeIterator categoryIterator  = source.Select("category", manager);
-            XPathNodeIterator skipDaysIterator  = source.Select("skipDays/day", manager);
+            XPathNodeIterator categoryIterator = source.Select("category", manager);
+            XPathNodeIterator skipDaysIterator = source.Select("skipDays/day", manager);
             XPathNodeIterator skipHoursIterator = source.Select("skipHours/hour", manager);
-            XPathNodeIterator itemIterator      = source.Select("item", manager);
+            XPathNodeIterator itemIterator = source.Select("item", manager);
 
             if (categoryIterator != null && categoryIterator.Count > 0)
             {
                 while (categoryIterator.MoveNext())
                 {
-                    RssCategory category    = new RssCategory();
+                    RssCategory category = new RssCategory();
                     if (category.Load(categoryIterator.Current, settings))
                     {
                         this.Categories.Add(category);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -1051,15 +1088,15 @@ namespace Argotic.Syndication
             {
                 while (skipDaysIterator.MoveNext())
                 {
-                    if (!String.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                    if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
                     {
                         try
                         {
-                            DayOfWeek day   = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
+                            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
                             if (!this.SkipDays.Contains(day))
                             {
                                 this.SkipDays.Add(day);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                         catch (ArgumentException)
@@ -1075,12 +1112,12 @@ namespace Argotic.Syndication
                 while (skipHoursIterator.MoveNext())
                 {
                     int hour;
-                    if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hour))
+                    if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hour))
                     {
                         if (!this.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
                         {
                             this.SkipHours.Add(hour);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                         else
                         {
@@ -1095,7 +1132,7 @@ namespace Argotic.Syndication
                 int counter = 0;
                 while (itemIterator.MoveNext())
                 {
-                    RssItem item    = new RssItem();
+                    RssItem item = new RssItem();
                     counter++;
 
                     if (item.Load(itemIterator.Current, settings))
@@ -1106,7 +1143,7 @@ namespace Argotic.Syndication
                         }
 
                         ((Collection<RssItem>)this.Items).Add(item);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -1128,62 +1165,62 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
-            XPathNavigator cloudNavigator           = source.SelectSingleNode("cloud", manager);
-            XPathNavigator copyrightNavigator       = source.SelectSingleNode("copyright", manager);
-            XPathNavigator generatorNavigator       = source.SelectSingleNode("generator", manager);
-            XPathNavigator imageNavigator           = source.SelectSingleNode("image", manager);
-            XPathNavigator languageNavigator        = source.SelectSingleNode("language", manager);
-            XPathNavigator lastBuildDateNavigator   = source.SelectSingleNode("lastBuildDate", manager);
-            XPathNavigator managingEditorNavigator  = source.SelectSingleNode("managingEditor", manager);
-            XPathNavigator publicationNavigator     = source.SelectSingleNode("pubDate", manager);
-            XPathNavigator ratingNavigator          = source.SelectSingleNode("rating", manager);
-            XPathNavigator textInputNavigator       = source.SelectSingleNode("textInput", manager);
-            XPathNavigator timeToLiveNavigator      = source.SelectSingleNode("ttl", manager);
-            XPathNavigator webMasterNavigator       = source.SelectSingleNode("webMaster", manager);
+            XPathNavigator cloudNavigator = source.SelectSingleNode("cloud", manager);
+            XPathNavigator copyrightNavigator = source.SelectSingleNode("copyright", manager);
+            XPathNavigator generatorNavigator = source.SelectSingleNode("generator", manager);
+            XPathNavigator imageNavigator = source.SelectSingleNode("image", manager);
+            XPathNavigator languageNavigator = source.SelectSingleNode("language", manager);
+            XPathNavigator lastBuildDateNavigator = source.SelectSingleNode("lastBuildDate", manager);
+            XPathNavigator managingEditorNavigator = source.SelectSingleNode("managingEditor", manager);
+            XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
+            XPathNavigator ratingNavigator = source.SelectSingleNode("rating", manager);
+            XPathNavigator textInputNavigator = source.SelectSingleNode("textInput", manager);
+            XPathNavigator timeToLiveNavigator = source.SelectSingleNode("ttl", manager);
+            XPathNavigator webMasterNavigator = source.SelectSingleNode("webMaster", manager);
 
             if (cloudNavigator != null)
             {
-                RssCloud cloud  = new RssCloud();
+                RssCloud cloud = new RssCloud();
                 if (cloud.Load(cloudNavigator, settings))
                 {
-                    this.Cloud      = cloud;
-                    wasLoaded       = true;
+                    this.Cloud = cloud;
+                    wasLoaded = true;
                 }
             }
 
             if (copyrightNavigator != null)
             {
-                this.Copyright      = copyrightNavigator.Value;
-                wasLoaded           = true;
+                this.Copyright = copyrightNavigator.Value;
+                wasLoaded = true;
             }
 
             if (generatorNavigator != null)
             {
-                this.Generator      = generatorNavigator.Value;
-                wasLoaded           = true;
+                this.Generator = generatorNavigator.Value;
+                wasLoaded = true;
             }
 
             if (imageNavigator != null)
             {
-                RssImage image  = new RssImage();
+                RssImage image = new RssImage();
                 if (image.Load(imageNavigator, settings))
                 {
-                    this.Image      = image;
-                    wasLoaded       = true;
+                    this.Image = image;
+                    wasLoaded = true;
                 }
             }
 
-            if (languageNavigator != null && !String.IsNullOrEmpty(languageNavigator.Value))
+            if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
             {
                 try
                 {
-                    CultureInfo language    = new CultureInfo(languageNavigator.Value);
-                    this.Language           = language;
-                    wasLoaded               = true;
+                    CultureInfo language = new CultureInfo(languageNavigator.Value);
+                    this.Language = language;
+                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -1196,15 +1233,15 @@ namespace Argotic.Syndication
                 DateTime lastBuildDate;
                 if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out lastBuildDate))
                 {
-                    this.LastBuildDate  = lastBuildDate;
-                    wasLoaded           = true;
+                    this.LastBuildDate = lastBuildDate;
+                    wasLoaded = true;
                 }
             }
 
             if (managingEditorNavigator != null)
             {
-                this.ManagingEditor     = managingEditorNavigator.Value;
-                wasLoaded               = true;
+                this.ManagingEditor = managingEditorNavigator.Value;
+                wasLoaded = true;
             }
 
             if (publicationNavigator != null)
@@ -1212,15 +1249,15 @@ namespace Argotic.Syndication
                 DateTime publicationDate;
                 if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
                 {
-                    this.PublicationDate    = publicationDate;
-                    wasLoaded               = true;
+                    this.PublicationDate = publicationDate;
+                    wasLoaded = true;
                 }
             }
 
             if (ratingNavigator != null)
             {
-                this.Rating             = ratingNavigator.Value;
-                wasLoaded               = true;
+                this.Rating = ratingNavigator.Value;
+                wasLoaded = true;
             }
 
             if (textInputNavigator != null)
@@ -1228,25 +1265,25 @@ namespace Argotic.Syndication
                 RssTextInput textInput = new RssTextInput();
                 if (textInput.Load(textInputNavigator, settings))
                 {
-                    this.TextInput      = textInput;
-                    wasLoaded           = true;
+                    this.TextInput = textInput;
+                    wasLoaded = true;
                 }
             }
 
             if (timeToLiveNavigator != null)
             {
                 int timeToLive;
-                if (Int32.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out timeToLive))
+                if (int.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out timeToLive))
                 {
-                    this.TimeToLive     = timeToLive;
-                    wasLoaded           = true;
+                    this.TimeToLive = timeToLive;
+                    wasLoaded = true;
                 }
             }
 
             if (webMasterNavigator != null)
             {
-                this.Webmaster          = webMasterNavigator.Value;
-                wasLoaded               = true;
+                this.Webmaster = webMasterNavigator.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -1266,11 +1303,11 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
-            XPathNodeIterator atomLinkIterator      = source.Select("atom:link", manager);
+            XPathNodeIterator atomLinkIterator = source.Select("atom:link", manager);
 
             if (atomLinkIterator != null && atomLinkIterator.Count > 0)
             {
@@ -1278,19 +1315,20 @@ namespace Argotic.Syndication
                 {
                     if (atomLinkIterator.Current.HasAttributes)
                     {
-                        string relAttribute     = atomLinkIterator.Current.GetAttribute("rel", String.Empty);
-                        if (String.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
+                        string relAttribute = atomLinkIterator.Current.GetAttribute("rel", string.Empty);
+                        if (string.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            string hrefAttribute    = atomLinkIterator.Current.GetAttribute("href", String.Empty);
-                            if (!String.IsNullOrEmpty(hrefAttribute))
+                            string hrefAttribute = atomLinkIterator.Current.GetAttribute("href", string.Empty);
+                            if (!string.IsNullOrEmpty(hrefAttribute))
                             {
                                 Uri atomLink;
                                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out atomLink))
                                 {
-                                    this.SelfLink   = atomLink;
-                                    wasLoaded       = true;
+                                    this.SelfLink = atomLink;
+                                    wasLoaded = true;
                                 }
                             }
+
                             break;
                         }
                     }
@@ -1299,10 +1337,11 @@ namespace Argotic.Syndication
 
             return wasLoaded;
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssChannel"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RssChannel"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssChannel"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RssChannel"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -1310,9 +1349,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -1328,6 +1367,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -1340,84 +1380,85 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            RssChannel value  = obj as RssChannel;
+
+            RssChannel value = obj as RssChannel;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.LastBuildDate.CompareTo(value.LastBuildDate);
-                result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.PublicationDate.CompareTo(value.PublicationDate);
-                result      = result | String.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.TimeToLive.CompareTo(value.TimeToLive);
-                result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+                result = result | this.LastBuildDate.CompareTo(value.LastBuildDate);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
+                result = result | this.PublicationDate.CompareTo(value.PublicationDate);
+                result = result | string.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
+                result = result | this.TimeToLive.CompareTo(value.TimeToLive);
+                result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
 
                 if (this.Cloud != null)
                 {
-                    result  = result | this.Cloud.CompareTo(value.Cloud);
+                    result = result | this.Cloud.CompareTo(value.Cloud);
                 }
                 else if (this.Cloud == null && value.Cloud != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Image != null)
                 {
-                    result  = result | this.Image.CompareTo(value.Image);
+                    result = result | this.Image.CompareTo(value.Image);
                 }
                 else if (this.Image == null && value.Image != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.Language != null)
                 {
                     if (value.Language != null)
                     {
-                        result  = result | String.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
+                        result = result | string.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
                     }
                     else
                     {
-                        result  = result | 1;
+                        result = result | 1;
                     }
                 }
                 else if (this.Language == null && value.Language != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
                 if (this.TextInput != null)
                 {
-                    result  = result | this.TextInput.CompareTo(value.TextInput);
+                    result = result | this.TextInput.CompareTo(value.TextInput);
                 }
                 else if (this.TextInput == null && value.TextInput != null)
                 {
-                    result  = result | -1;
+                    result = result | -1;
                 }
 
-                result      = result | RssFeed.CompareSequence(this.Categories, value.Categories);
-                result      = result | RssChannel.CompareSequence((Collection<RssItem>)this.Items, (Collection<RssItem>)value.Items);
-                result      = result | ComparisonUtility.CompareSequence(this.SkipDays, value.SkipDays);
-                result      = result | ComparisonUtility.CompareSequence(this.SkipHours, value.SkipHours);
+                result = result | RssFeed.CompareSequence(this.Categories, value.Categories);
+                result = result | RssChannel.CompareSequence((Collection<RssItem>)this.Items, (Collection<RssItem>)value.Items);
+                result = result | ComparisonUtility.CompareSequence(this.SkipDays, value.SkipDays);
+                result = result | ComparisonUtility.CompareSequence(this.SkipHours, value.SkipHours);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is RssChannel))
             {
@@ -1433,7 +1474,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

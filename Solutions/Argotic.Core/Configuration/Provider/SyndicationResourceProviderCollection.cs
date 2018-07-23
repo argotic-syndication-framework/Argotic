@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration.Provider;
-
-namespace Argotic.Configuration.Provider
+﻿namespace Argotic.Configuration.Provider
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration.Provider;
+
     /// <summary>
     /// Represents a collection of provider objects that inherit from <see cref="SyndicationResourceProvider"/>.
     /// </summary>
@@ -43,12 +43,13 @@ namespace Argotic.Configuration.Provider
                 bool itemExists = false;
                 foreach (SyndicationResourceProvider provider in this)
                 {
-                    if (String.Compare(provider.Name, item.Name, StringComparison.Ordinal) == 0)
+                    if (string.Compare(provider.Name, item.Name, StringComparison.Ordinal) == 0)
                     {
-                        itemExists  = true;
+                        itemExists = true;
                         break;
                     }
                 }
+
                 return itemExists;
             }
             else

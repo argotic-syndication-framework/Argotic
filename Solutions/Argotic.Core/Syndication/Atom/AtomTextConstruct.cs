@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents human-readable text.
     /// </summary>
@@ -30,22 +29,27 @@ namespace Argotic.Syndication
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the entity encoding utilized by the human-readable text.
         /// </summary>
         private AtomTextConstructType textConstructType = AtomTextConstructType.None;
+
         /// <summary>
         /// Private member to hold the content of the human-readable text.
         /// </summary>
-        private string textConstructContent             = String.Empty;
+        private string textConstructContent = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomTextConstruct"/> class.
         /// </summary>
@@ -63,8 +67,9 @@ namespace Argotic.Syndication
         /// </remarks>
         public AtomTextConstruct(string content)
         {
-            this.Content    = content;
+            this.Content = content;
         }
+
         /// <summary>
         /// Gets or sets the base URI other than the base URI of the document or external entity.
         /// </summary>
@@ -108,6 +113,7 @@ namespace Argotic.Syndication
                 commonObjectLanguage = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -124,6 +130,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -145,6 +152,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the content of this human-readable text.
         /// </summary>
@@ -161,9 +169,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    textConstructContent = String.Empty;
+                    textConstructContent = string.Empty;
                 }
                 else
                 {
@@ -188,9 +196,10 @@ namespace Argotic.Syndication
 
             set
             {
-                textConstructType   = value;
+                textConstructType = value;
             }
         }
+
         /// <summary>
         /// Returns the text construct identifier for the supplied <see cref="AtomTextConstructType"/>.
         /// </summary>
@@ -204,7 +213,7 @@ namespace Argotic.Syndication
         /// </example>
         public static string ConstructTypeAsString(AtomTextConstructType type)
         {
-            string name = String.Empty;
+            string name = string.Empty;
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(AtomTextConstructType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(AtomTextConstructType))
@@ -213,13 +222,13 @@ namespace Argotic.Syndication
 
                     if (constructType == type)
                     {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
                             EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                            name    = enumerationMetadata.AlternateValue;
+                            name = enumerationMetadata.AlternateValue;
                             break;
                         }
                     }
@@ -252,14 +261,14 @@ namespace Argotic.Syndication
             {
                 if (fieldInfo.FieldType == typeof(AtomTextConstructType))
                 {
-                    AtomTextConstructType type  = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    AtomTextConstructType type = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             constructType = type;
                             break;
@@ -270,6 +279,7 @@ namespace Argotic.Syndication
 
             return constructType;
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -278,10 +288,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -322,11 +332,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="AtomTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -338,45 +349,46 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
+
             if (source.HasAttributes)
             {
-                string typeAttribute    = source.GetAttribute("type", String.Empty);
-                if (!String.IsNullOrEmpty(typeAttribute))
+                string typeAttribute = source.GetAttribute("type", string.Empty);
+                if (!string.IsNullOrEmpty(typeAttribute))
                 {
                     AtomTextConstructType type = AtomTextConstruct.ConstructTypeByName(typeAttribute);
                     if (type != AtomTextConstructType.None)
                     {
-                        this.TextType   = type;
-                        wasLoaded       = true;
+                        this.TextType = type;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if(this.TextType == AtomTextConstructType.Xhtml)
             {
-                XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
-                if (xhtmlDivNavigator != null && !String.IsNullOrEmpty(xhtmlDivNavigator.Value))
+                XPathNavigator xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
+                if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
                 {
-                    this.Content    = xhtmlDivNavigator.Value;
-                    wasLoaded       = true;
+                    this.Content = xhtmlDivNavigator.Value;
+                    wasLoaded = true;
                 }
             }
-            else if (this.TextType == AtomTextConstructType.Html && !String.IsNullOrEmpty(source.InnerXml))
+            else if (this.TextType == AtomTextConstructType.Html && !string.IsNullOrEmpty(source.InnerXml))
             {
-                this.Content    = source.InnerXml;
-                wasLoaded       = true;
+                this.Content = source.InnerXml;
+                wasLoaded = true;
             }
-            else if (!String.IsNullOrEmpty(source.Value))
+            else if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Content    = source.Value;
-                wasLoaded       = true;
+                this.Content = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -395,10 +407,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -420,7 +432,7 @@ namespace Argotic.Syndication
             writer.WriteStartElement(elementName, AtomUtility.AtomNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-            if (this.TextType == AtomTextConstructType.Xhtml && String.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
+            if (this.TextType == AtomTextConstructType.Xhtml && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
             {
                 writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
             }
@@ -440,14 +452,16 @@ namespace Argotic.Syndication
             {
                 writer.WriteString(this.Content);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomTextConstruct"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomTextConstruct"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomTextConstruct"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomTextConstruct"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance, with a generic element name of <i>TextConstruct</i>.
         /// </remarks>
@@ -455,9 +469,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -473,6 +487,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -485,29 +500,30 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            AtomTextConstruct value  = obj as AtomTextConstruct;
+
+            AtomTextConstruct value = obj as AtomTextConstruct;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.TextType.CompareTo(value.TextType);
+                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+                result = result | this.TextType.CompareTo(value.TextType);
 
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomTextConstruct))
             {
@@ -523,7 +539,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

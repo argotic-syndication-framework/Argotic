@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a product or service data that can be associated to an <see cref="ApmlDocument"/>.
     /// </summary>
@@ -31,14 +30,17 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the unique name for the application.
         /// </summary>
-        private string applicationName  = String.Empty;
+        private string applicationName = string.Empty;
+
         /// <summary>
         /// Private member to hold the textual data of the application.
         /// </summary>
-        private string applicationData  = String.Empty;
+        private string applicationData = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApmlApplication"/> class.
         /// </summary>
@@ -55,8 +57,9 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public ApmlApplication(string name)
         {
-            this.Name   = name;
+            this.Name = name;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -73,6 +76,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -94,6 +98,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the textual data of this application.
         /// </summary>
@@ -110,9 +115,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    applicationData = String.Empty;
+                    applicationData = string.Empty;
                 }
                 else
                 {
@@ -140,6 +145,7 @@ namespace Argotic.Syndication.Specialized
                 applicationName = value.Trim();
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -148,10 +154,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -192,11 +198,12 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -208,23 +215,23 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
-                string nameAttribute    = source.GetAttribute("name", String.Empty);
+                string nameAttribute = source.GetAttribute("name", string.Empty);
 
-                if (!String.IsNullOrEmpty(nameAttribute))
+                if (!string.IsNullOrEmpty(nameAttribute))
                 {
-                    this.Name   = nameAttribute;
-                    wasLoaded   = true;
+                    this.Name = nameAttribute;
+                    wasLoaded = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Data   = source.Value;
-                wasLoaded   = true;
+                this.Data = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -243,10 +250,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -265,18 +272,20 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteAttributeString("name", this.Name);
 
-            if (!String.IsNullOrEmpty(this.Data))
+            if (!string.IsNullOrEmpty(this.Data))
             {
                 writer.WriteString(this.Data);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="ApmlApplication"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="ApmlApplication"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlApplication"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlApplication"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -284,9 +293,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -302,6 +311,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -314,27 +324,28 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            ApmlApplication value  = obj as ApmlApplication;
+
+            ApmlApplication value = obj as ApmlApplication;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is ApmlApplication))
             {
@@ -350,7 +361,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

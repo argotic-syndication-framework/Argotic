@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-using Argotic.Extensions;
-
-namespace Argotic.Publishing
+﻿namespace Argotic.Publishing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a server-defined group of <see cref="AtomMemberResources"/> objects that describe member resources.
     /// </summary>
@@ -37,18 +36,22 @@ namespace Argotic.Publishing
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a human-readable title for the workspace.
         /// </summary>
-        private AtomTextConstruct workspaceTitle    = new AtomTextConstruct();
+        private AtomTextConstruct workspaceTitle = new AtomTextConstruct();
+
         /// <summary>
         /// Private member to hold the collections associated to this workspace.
         /// </summary>
@@ -68,7 +71,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomWorkspace(AtomTextConstruct title)
         {
-            this.Title  = title;
+            this.Title = title;
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
         {
-            this.Title  = title;
+            this.Title = title;
 
             Guard.ArgumentNotNull(collections, "collections");
             foreach (AtomMemberResources collection in collections)
@@ -171,6 +174,7 @@ namespace Argotic.Publishing
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -201,12 +205,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -250,7 +254,7 @@ namespace Argotic.Publishing
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -273,6 +277,7 @@ namespace Argotic.Publishing
                 {
                     workspaceCollections = new Collection<AtomMemberResources>();
                 }
+
                 return workspaceCollections;
             }
 
@@ -326,7 +331,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -335,7 +340,7 @@ namespace Argotic.Publishing
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -358,12 +363,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddCollection(AtomMemberResources collection)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(collection, "collection");
 
             ((Collection<AtomMemberResources>)this.Collections).Add(collection);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -400,7 +405,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
@@ -413,15 +418,15 @@ namespace Argotic.Publishing
 
             if(source.HasChildren)
             {
-                XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
-                XPathNodeIterator collectionIterator    = source.Select("app:collection", manager);
+                XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
+                XPathNodeIterator collectionIterator = source.Select("app:collection", manager);
 
                 if (titleNavigator != null)
                 {
-                    this.Title  = new AtomTextConstruct();
+                    this.Title = new AtomTextConstruct();
                     if (this.Title.Load(titleNavigator))
                     {
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
@@ -429,11 +434,11 @@ namespace Argotic.Publishing
                 {
                     while (collectionIterator.MoveNext())
                     {
-                        AtomMemberResources collection   = new AtomMemberResources();
+                        AtomMemberResources collection = new AtomMemberResources();
                         if (collection.Load(collectionIterator.Current))
                         {
                             this.AddCollection(collection);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -460,7 +465,7 @@ namespace Argotic.Publishing
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -486,7 +491,7 @@ namespace Argotic.Publishing
             if (((Collection<AtomMemberResources>)this.Collections).Contains(collection))
             {
                 ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -520,9 +525,9 @@ namespace Argotic.Publishing
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomWorkspace"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -530,9 +535,9 @@ namespace Argotic.Publishing
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -562,28 +567,28 @@ namespace Argotic.Publishing
                 return 1;
             }
 
-            AtomWorkspace value  = obj as AtomWorkspace;
+            AtomWorkspace value = obj as AtomWorkspace;
 
             if (value != null)
             {
-                int result  = this.Title.CompareTo(value.Title);
-                result      = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                int result = this.Title.CompareTo(value.Title);
+                result = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomWorkspace))
             {
@@ -599,7 +604,7 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

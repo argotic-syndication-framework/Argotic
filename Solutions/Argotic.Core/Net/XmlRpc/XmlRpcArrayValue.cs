@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a remote procedure parameter value that represents a collection of data elements.
     /// </summary>
@@ -65,6 +64,7 @@ namespace Argotic.Net
                 {
                     arrayValues = new Collection<IXmlRpcValue>();
                 }
+
                 return arrayValues;
             }
         }
@@ -80,13 +80,13 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
             if(source.HasChildren)
             {
-                XPathNavigator dataNavigator    = source.SelectSingleNode("array/data");
+                XPathNavigator dataNavigator = source.SelectSingleNode("array/data");
                 if (dataNavigator != null && dataNavigator.HasChildren)
                 {
                     XPathNodeIterator valueIterator = dataNavigator.Select("value");
@@ -98,7 +98,7 @@ namespace Argotic.Net
                             if (XmlRpcClient.TryParseValue(valueIterator.Current, out value))
                             {
                                 this.Values.Add(value);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -126,6 +126,7 @@ namespace Argotic.Net
             {
                 value.WriteTo(writer);
             }
+
             writer.WriteEndElement();
 
             writer.WriteEndElement();
@@ -134,9 +135,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcArrayValue"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcArrayValue"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -144,9 +145,9 @@ namespace Argotic.Net
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -176,26 +177,26 @@ namespace Argotic.Net
                 return 1;
             }
 
-            XmlRpcArrayValue value  = obj as XmlRpcArrayValue;
+            XmlRpcArrayValue value = obj as XmlRpcArrayValue;
 
             if (value != null)
             {
-                int result  = XmlRpcMessage.CompareSequence(this.Values, value.Values);
+                int result = XmlRpcMessage.CompareSequence(this.Values, value.Values);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is XmlRpcArrayValue))
             {
@@ -211,7 +212,7 @@ namespace Argotic.Net
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

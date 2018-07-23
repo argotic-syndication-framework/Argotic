@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-using Argotic.Extensions;
-
-namespace Argotic.Publishing
+﻿namespace Argotic.Publishing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Describes the location and capabilities of a discoverable resource that contains a set of member resources.
     /// </summary>
@@ -41,26 +40,32 @@ namespace Argotic.Publishing
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold an IRI that identifies the location of the collection.
         /// </summary>
         private Uri collectionResourceLocation;
+
         /// <summary>
         /// Private member to hold a human-readable title for the collection.
         /// </summary>
-        private AtomTextConstruct collectionTitle   = new AtomTextConstruct();
+        private AtomTextConstruct collectionTitle = new AtomTextConstruct();
+
         /// <summary>
         /// Private member to hold a list of categories that can be applied to members of the collection.
         /// </summary>
         private Collection<AtomCategoryDocument> collectionCategories;
+
         /// <summary>
         /// Private member to hold
         /// </summary>
@@ -83,8 +88,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
         public AtomMemberResources(Uri href, AtomTextConstruct title) : this()
         {
-            this.Uri    = href;
-            this.Title  = title;
+            this.Uri = href;
+            this.Title = title;
         }
 
         /// <summary>
@@ -147,6 +152,7 @@ namespace Argotic.Publishing
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -177,12 +183,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -226,7 +232,7 @@ namespace Argotic.Publishing
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -257,6 +263,7 @@ namespace Argotic.Publishing
                 {
                     collectionAcceptedMediaRanges = new Collection<AtomAcceptedMediaRange>();
                 }
+
                 return collectionAcceptedMediaRanges;
             }
         }
@@ -279,6 +286,7 @@ namespace Argotic.Publishing
                 {
                     collectionCategories = new Collection<AtomCategoryDocument>();
                 }
+
                 return collectionCategories;
             }
         }
@@ -349,7 +357,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -358,7 +366,7 @@ namespace Argotic.Publishing
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -447,8 +455,8 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
         public static AtomLink CreateEditMediaLink(Uri href, string contentType)
         {
-            AtomLink link       = AtomMemberResources.CreateEditMediaLink(href);
-            link.ContentType    = contentType;
+            AtomLink link = AtomMemberResources.CreateEditMediaLink(href);
+            link.ContentType = contentType;
             return link;
         }
 
@@ -479,8 +487,8 @@ namespace Argotic.Publishing
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateMemberEntryEditMediaLink(System.Uri,System.String)")]
         public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
         {
-            AtomLink link           = AtomMemberResources.CreateEditMediaLink(href, contentType);
-            link.ContentLanguage    = contentLanguage;
+            AtomLink link = AtomMemberResources.CreateEditMediaLink(href, contentType);
+            link.ContentLanguage = contentLanguage;
             return link;
         }
 
@@ -577,11 +585,11 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(IXPathNavigable source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
-            XPathNavigator navigator    = source.CreateNavigator();
+            XPathNavigator navigator = source.CreateNavigator();
 
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -592,31 +600,31 @@ namespace Argotic.Publishing
 
             if (navigator.HasAttributes)
             {
-                string hrefAttribute    = navigator.GetAttribute("href", String.Empty);
+                string hrefAttribute = navigator.GetAttribute("href", string.Empty);
 
-                if (!String.IsNullOrEmpty(hrefAttribute))
+                if (!string.IsNullOrEmpty(hrefAttribute))
                 {
                     Uri href;
                     if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
                     {
-                        this.Uri    = href;
-                        wasLoaded   = true;
+                        this.Uri = href;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (navigator.HasChildren)
             {
-                XPathNavigator titleNavigator           = navigator.SelectSingleNode("atom:title", manager);
-                XPathNodeIterator acceptIterator        = navigator.Select("app:accept", manager);
-                XPathNodeIterator categoriesIterator    = navigator.Select("app:categories", manager);
+                XPathNavigator titleNavigator = navigator.SelectSingleNode("atom:title", manager);
+                XPathNodeIterator acceptIterator = navigator.Select("app:accept", manager);
+                XPathNodeIterator categoriesIterator = navigator.Select("app:categories", manager);
 
                 if (titleNavigator != null)
                 {
-                    this.Title  = new AtomTextConstruct();
+                    this.Title = new AtomTextConstruct();
                     if (this.Title.Load(titleNavigator))
                     {
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
@@ -624,11 +632,11 @@ namespace Argotic.Publishing
                 {
                     while (acceptIterator.MoveNext())
                     {
-                        AtomAcceptedMediaRange mediaRange   = new AtomAcceptedMediaRange();
+                        AtomAcceptedMediaRange mediaRange = new AtomAcceptedMediaRange();
                         if (mediaRange.Load(acceptIterator.Current))
                         {
                             this.Accepts.Add(mediaRange);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -639,7 +647,7 @@ namespace Argotic.Publishing
                     {
                         AtomCategoryDocument categories = new AtomCategoryDocument();
                         categories.Load(categoriesIterator.Current);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -665,7 +673,7 @@ namespace Argotic.Publishing
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -701,6 +709,7 @@ namespace Argotic.Publishing
             {
                 settings = new SyndicationResourceLoadSettings();
             }
+
             XPathDocument document = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator(), settings);
@@ -744,9 +753,9 @@ namespace Argotic.Publishing
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomMemberResources"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomMemberResources"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomMemberResources"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomMemberResources"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -754,9 +763,9 @@ namespace Argotic.Publishing
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -786,29 +795,29 @@ namespace Argotic.Publishing
                 return 1;
             }
 
-            AtomMemberResources value  = obj as AtomMemberResources;
+            AtomMemberResources value = obj as AtomMemberResources;
 
             if (value != null)
             {
-                int result  = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Title.CompareTo(value.Title);
-                result      = result | AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
-                result      = result | AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
+                int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Title.CompareTo(value.Title);
+                result = result | AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
+                result = result | AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomMemberResources))
             {
@@ -824,7 +833,7 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

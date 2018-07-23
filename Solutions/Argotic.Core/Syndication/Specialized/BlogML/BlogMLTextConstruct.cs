@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents machine or human readable text.
     /// </summary>
@@ -21,18 +20,22 @@ namespace Argotic.Syndication.Specialized
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the content of the text.
         /// </summary>
-        private string textConstructContent                 = String.Empty;
+        private string textConstructContent = string.Empty;
+
         /// <summary>
         /// Private member to hold entity encoding utilized by the text.
         /// </summary>
-        private BlogMLContentType textConstructType         = BlogMLContentType.None;
+        private BlogMLContentType textConstructType = BlogMLContentType.None;
+
         /// <summary>
         /// Private member to hold a value indicating if the text construct escapes content using a CDATA block.
         /// </summary>
-        private bool textConstructEscapesContent            = true;
+        private bool textConstructEscapesContent = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLTextConstruct"/> class.
         /// </summary>
@@ -50,8 +53,8 @@ namespace Argotic.Syndication.Specialized
         /// </remarks>
         public BlogMLTextConstruct(string content)
         {
-            this.Content        = content;
-            this.ContentType    = BlogMLContentType.Text;
+            this.Content = content;
+            this.ContentType = BlogMLContentType.Text;
         }
 
         /// <summary>
@@ -65,8 +68,8 @@ namespace Argotic.Syndication.Specialized
         /// </remarks>
         public BlogMLTextConstruct(string content, BlogMLContentType encoding)
         {
-            this.Content        = content;
-            this.ContentType    = encoding;
+            this.Content = content;
+            this.ContentType = encoding;
         }
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -120,9 +124,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    textConstructContent = String.Empty;
+                    textConstructContent = string.Empty;
                 }
                 else
                 {
@@ -147,7 +151,7 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                textConstructType   = value;
+                textConstructType = value;
             }
         }
 
@@ -173,6 +177,7 @@ namespace Argotic.Syndication.Specialized
                 textConstructEscapesContent = value;
             }
         }
+
         /// <summary>
         /// Returns the text construct identifier for the supplied <see cref="BlogMLContentType"/>.
         /// </summary>
@@ -188,7 +193,7 @@ namespace Argotic.Syndication.Specialized
         /// </example>
         public static string ConstructTypeAsString(BlogMLContentType type)
         {
-            string name = String.Empty;
+            string name = string.Empty;
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLContentType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLContentType))
@@ -197,13 +202,13 @@ namespace Argotic.Syndication.Specialized
 
                     if (constructType == type)
                     {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
                             EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                            name    = enumerationMetadata.AlternateValue;
+                            name = enumerationMetadata.AlternateValue;
                             break;
                         }
                     }
@@ -237,16 +242,16 @@ namespace Argotic.Syndication.Specialized
             {
                 if (fieldInfo.FieldType == typeof(BlogMLContentType))
                 {
-                    BlogMLContentType type      = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    BlogMLContentType type = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            constructType   = type;
+                            constructType = type;
                             break;
                         }
                     }
@@ -264,10 +269,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -308,7 +313,7 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -325,26 +330,26 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
-                string typeAttribute    = source.GetAttribute("type", String.Empty);
-                if (!String.IsNullOrEmpty(typeAttribute))
+                string typeAttribute = source.GetAttribute("type", string.Empty);
+                if (!string.IsNullOrEmpty(typeAttribute))
                 {
-                    BlogMLContentType type  = BlogMLTextConstruct.ConstructTypeByName(typeAttribute);
+                    BlogMLContentType type = BlogMLTextConstruct.ConstructTypeByName(typeAttribute);
                     if (type != BlogMLContentType.None)
                     {
-                        this.ContentType   = type;
-                        wasLoaded       = true;
+                        this.ContentType = type;
+                        wasLoaded = true;
                     }
                 }
             }
 
-            if (!String.IsNullOrEmpty(source.Value))
+            if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Content    = source.Value;
-                wasLoaded       = true;
+                this.Content = source.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -363,10 +368,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -392,7 +397,7 @@ namespace Argotic.Syndication.Specialized
                 writer.WriteAttributeString("type", BlogMLTextConstruct.ConstructTypeAsString(this.ContentType));
             }
 
-            if (!String.IsNullOrEmpty(this.Content))
+            if (!string.IsNullOrEmpty(this.Content))
             {
                 if(this.EscapeContent)
                 {
@@ -403,15 +408,16 @@ namespace Argotic.Syndication.Specialized
                     writer.WriteString(this.Content);
                 }
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLTextConstruct"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLTextConstruct"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLTextConstruct"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLTextConstruct"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance, with a generic element name of <i>TextConstruct</i>.
         /// </remarks>
@@ -419,9 +425,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -450,27 +456,28 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            BlogMLTextConstruct value  = obj as BlogMLTextConstruct;
+
+            BlogMLTextConstruct value = obj as BlogMLTextConstruct;
 
             if (value != null)
             {
-                int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.ContentType.CompareTo(value.ContentType);
+                int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+                result = result | this.ContentType.CompareTo(value.ContentType);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is BlogMLTextConstruct))
             {
@@ -486,7 +493,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

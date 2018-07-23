@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a discrete entity within an <see cref="OpmlDocument"/>.
     /// </summary>
@@ -31,38 +30,47 @@ namespace Argotic.Syndication
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the textual content of the outline.
         /// </summary>
-        private string outlineText          = String.Empty;
+        private string outlineText = string.Empty;
+
         /// <summary>
         /// Private member to hold a value indicating how the outline's attributes are interpreted.
         /// </summary>
-        private string outlineType          = String.Empty;
+        private string outlineType = string.Empty;
+
         /// <summary>
         /// Private member to hold a value indicating whether the outline is commented or not.
         /// </summary>
         private bool outlineIsCommented;
+
         /// <summary>
         /// Private member to hold a value indicating whether a breakpoint is set on the outline.
         /// </summary>
         private bool outlineHasBreakpointSet;
+
         /// <summary>
         /// Private member to hold a date-time that indicates when the outline was created.
         /// </summary>
-        private DateTime outlineCreatedOn   = DateTime.MinValue;
+        private DateTime outlineCreatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a collection that describes the categorization taxonomy applied to the outline.
         /// </summary>
         private Collection<string> outlineCategories;
+
         /// <summary>
         /// Private member to hold a collection of key/value pairs that represent custom attributes applied to the outline.
         /// </summary>
         private Dictionary<string, string> outlineAttributes;
+
         /// <summary>
         /// Private member to hold a collection of outlines that are children of the outline.
         /// </summary>
         private Collection<OpmlOutline> outlineSubordinateOutlines;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
         /// </summary>
@@ -82,8 +90,9 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
         public OpmlOutline(string text)
         {
-            this.Text   = text;
+            this.Text = text;
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -100,6 +109,7 @@ namespace Argotic.Syndication
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -121,6 +131,7 @@ namespace Argotic.Syndication
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets a collection of key/value string pairs that represent custom attributes applied to this outline.
         /// </summary>
@@ -137,6 +148,7 @@ namespace Argotic.Syndication
                 {
                     outlineAttributes = new Dictionary<string, string>();
                 }
+
                 return outlineAttributes;
             }
         }
@@ -157,6 +169,7 @@ namespace Argotic.Syndication
                 {
                     outlineCategories = new Collection<string>();
                 }
+
                 return outlineCategories;
             }
         }
@@ -174,9 +187,9 @@ namespace Argotic.Syndication
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    outlineType = String.Empty;
+                    outlineType = string.Empty;
                 }
                 else
                 {
@@ -257,7 +270,7 @@ namespace Argotic.Syndication
         {
             get
             {
-                return (String.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
+                return (string.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
             }
         }
 
@@ -270,7 +283,7 @@ namespace Argotic.Syndication
         {
             get
             {
-                return (String.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
+                return (string.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
             }
         }
 
@@ -286,6 +299,7 @@ namespace Argotic.Syndication
                 {
                     outlineSubordinateOutlines = new Collection<OpmlOutline>();
                 }
+
                 return outlineSubordinateOutlines;
             }
         }
@@ -312,6 +326,7 @@ namespace Argotic.Syndication
                 outlineText = value.Trim();
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -320,10 +335,10 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -364,11 +379,12 @@ namespace Argotic.Syndication
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -380,7 +396,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
@@ -389,13 +405,14 @@ namespace Argotic.Syndication
                 {
                     if (this.LoadAttribute(attributesNavigator))
                     {
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
+
                     while (attributesNavigator.MoveToNextAttribute())
                     {
                         if (this.LoadAttribute(attributesNavigator))
                         {
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -412,7 +429,7 @@ namespace Argotic.Syndication
                         if (outline.Load(outlinesIterator.Current))
                         {
                             this.Outlines.Add(outline);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -434,7 +451,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             if (source.HasAttributes)
             {
@@ -443,13 +460,14 @@ namespace Argotic.Syndication
                 {
                     if (this.LoadAttribute(attributesNavigator))
                     {
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
+
                     while (attributesNavigator.MoveToNextAttribute())
                     {
                         if (this.LoadAttribute(attributesNavigator))
                         {
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -466,11 +484,12 @@ namespace Argotic.Syndication
                         if (outline.Load(outlinesIterator.Current, settings))
                         {
                             this.Outlines.Add(outline);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
             }
+
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -489,7 +508,7 @@ namespace Argotic.Syndication
 
             writer.WriteAttributeString("text", this.Text);
 
-            if (!String.IsNullOrEmpty(this.ContentType))
+            if (!string.IsNullOrEmpty(this.ContentType))
             {
                 writer.WriteAttributeString("type", this.ContentType);
             }
@@ -514,7 +533,7 @@ namespace Argotic.Syndication
                 string[] categories = new string[this.Categories.Count];
                 this.Categories.CopyTo(categories, 0);
 
-                writer.WriteAttributeString("category", String.Join(",", categories));
+                writer.WriteAttributeString("category", string.Join(",", categories));
             }
 
             if (this.Attributes.Count > 0)
@@ -529,10 +548,12 @@ namespace Argotic.Syndication
             {
                 outline.WriteTo(writer);
             }
+
             SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
             writer.WriteEndElement();
         }
+
         /// <summary>
         /// Compares two specified <see cref="Collection{OpmlOutline}"/> collections.
         /// </summary>
@@ -554,7 +575,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
         {
-            int result  = 0;
+            int result = 0;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -562,7 +583,7 @@ namespace Argotic.Syndication
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result  = result | source[i].CompareTo(target[i]);
+                    result = result | source[i].CompareTo(target[i]);
                 }
             }
             else if (source.Count > target.Count)
@@ -605,7 +626,7 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNullOrEmptyString(text, "text");
             Guard.ArgumentNotNull(url, "url");
 
-            outline.Text            = text;
+            outline.Text = text;
             if (url.ToString().EndsWith(".opml", StringComparison.OrdinalIgnoreCase))
             {
                 outline.ContentType = "include";
@@ -614,6 +635,7 @@ namespace Argotic.Syndication
             {
                 outline.ContentType = "link";
             }
+
             outline.Attributes.Add("url", url.ToString());
 
             return outline;
@@ -643,7 +665,7 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference (Nothing in Visual Basic).</exception>
         public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
         {
-            return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, String.Empty, String.Empty, String.Empty, null);
+            return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, string.Empty, string.Empty, string.Empty, null);
         }
 
         /// <summary>
@@ -684,7 +706,7 @@ namespace Argotic.Syndication
             Guard.ArgumentNotNullOrEmptyString(type, "type");
             Guard.ArgumentNotNull(xmlUrl, "xmlUrl");
 
-            outline.Text        = text;
+            outline.Text = text;
             outline.ContentType = type;
             outline.Attributes.Add("xmlUrl", xmlUrl.ToString());
 
@@ -693,17 +715,17 @@ namespace Argotic.Syndication
                 outline.Attributes.Add("htmlUrl", htmlUrl.ToString());
             }
 
-            if (!String.IsNullOrEmpty(version))
+            if (!string.IsNullOrEmpty(version))
             {
                 outline.Attributes.Add("version", version.Trim());
             }
 
-            if (!String.IsNullOrEmpty(title))
+            if (!string.IsNullOrEmpty(title))
             {
                 outline.Attributes.Add("title", title.Trim());
             }
 
-            if (!String.IsNullOrEmpty(description))
+            if (!string.IsNullOrEmpty(description))
             {
                 outline.Attributes.Add("description", description.Trim());
             }
@@ -715,10 +737,11 @@ namespace Argotic.Syndication
 
             return outline;
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOutline"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOutline"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlOutline"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlOutline"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -726,9 +749,9 @@ namespace Argotic.Syndication
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -744,6 +767,7 @@ namespace Argotic.Syndication
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -756,34 +780,35 @@ namespace Argotic.Syndication
             {
                 return 1;
             }
-            OpmlOutline value  = obj as OpmlOutline;
+
+            OpmlOutline value = obj as OpmlOutline;
 
             if (value != null)
             {
-                int result  = String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.CreatedOn.CompareTo(value.CreatedOn);
-                result      = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
-                result      = result | this.IsCommented.CompareTo(value.IsCommented);
-                result      = result | String.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+                result = result | this.CreatedOn.CompareTo(value.CreatedOn);
+                result = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
+                result = result | this.IsCommented.CompareTo(value.IsCommented);
+                result = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
-                result      = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-                result      = result | OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
+                result = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
+                result = result | OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
                 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is OpmlOutline))
             {
@@ -799,7 +824,7 @@ namespace Argotic.Syndication
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }
@@ -874,6 +899,7 @@ namespace Argotic.Syndication
 
             return (first.CompareTo(second) > 0);
         }
+
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using attributes defined on the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -884,52 +910,52 @@ namespace Argotic.Syndication
         /// <exception cref="ArgumentNullException">The <paramref name="attribute"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadAttribute(XPathNavigator attribute)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(attribute, "attribute");
 
-            if (String.IsNullOrEmpty(attribute.Value))
+            if (string.IsNullOrEmpty(attribute.Value))
             {
                 return false;
             }
 
-            if (String.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                this.Text   = attribute.Value;
-                wasLoaded   = true;
+                this.Text = attribute.Value;
+                wasLoaded = true;
             }
-            else if (String.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (string.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                this.ContentType    = attribute.Value;
-                wasLoaded           = true;
+                this.ContentType = attribute.Value;
+                wasLoaded = true;
             }
-            else if (String.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (string.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 bool isComment;
-                if (Boolean.TryParse(attribute.Value, out isComment))
+                if (bool.TryParse(attribute.Value, out isComment))
                 {
-                    this.IsCommented    = isComment;
-                    wasLoaded           = true;
+                    this.IsCommented = isComment;
+                    wasLoaded = true;
                 }
             }
-            else if (String.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (string.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 bool isBreakpoint;
-                if (Boolean.TryParse(attribute.Value, out isBreakpoint))
+                if (bool.TryParse(attribute.Value, out isBreakpoint))
                 {
-                    this.HasBreakpoint  = isBreakpoint;
-                    wasLoaded           = true;
+                    this.HasBreakpoint = isBreakpoint;
+                    wasLoaded = true;
                 }
             }
-            else if (String.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (string.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 DateTime created;
                 if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out created))
                 {
-                    this.CreatedOn  = created;
-                    wasLoaded       = true;
+                    this.CreatedOn = created;
+                    wasLoaded = true;
                 }
             }
-            else if (String.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (string.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 if (attribute.Value.Contains(","))
                 {
@@ -943,6 +969,7 @@ namespace Argotic.Syndication
                 {
                     this.Categories.Add(attribute.Value);
                 }
+
                 wasLoaded = true;
             }
             else

@@ -263,6 +263,38 @@
             <value>The title of the syndication endpoint.</value>
             <remarks>This property will be empty if no title attribute was assigned to the syndication endpoint link.</remarks>
         </member>
+        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
+            <summary>
+            Determines if operands are equal.
+            </summary>
+            <param name="first">Operand to be compared.</param>
+            <param name="second">Operand to compare to.</param>
+            <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
+            <summary>
+            Determines if operands are not equal.
+            </summary>
+            <param name="first">Operand to be compared.</param>
+            <param name="second">Operand to compare to.</param>
+            <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
+            <summary>
+            Determines if first operand is less than second operand.
+            </summary>
+            <param name="first">Operand to be compared.</param>
+            <param name="second">Operand to compare to.</param>
+            <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
+            <summary>
+            Determines if first operand is greater than second operand.
+            </summary>
+            <param name="first">Operand to be compared.</param>
+            <param name="second">Operand to compare to.</param>
+            <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        </member>
         <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator">
             <summary>
             Initializes a read-only <see cref="T:System.Xml.XPath.XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="P:Argotic.Common.DiscoverableSyndicationEndpoint.Source">endpoint location</see>.
@@ -299,38 +331,6 @@
             Returns a hash code for the current instance.
             </summary>
             <returns>A 32-bit signed integer hash code.</returns>
-        </member>
-        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
-            <summary>
-            Determines if operands are equal.
-            </summary>
-            <param name="first">Operand to be compared.</param>
-            <param name="second">Operand to compare to.</param>
-            <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
-            <summary>
-            Determines if operands are not equal.
-            </summary>
-            <param name="first">Operand to be compared.</param>
-            <param name="second">Operand to compare to.</param>
-            <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
-            <summary>
-            Determines if first operand is less than second operand.
-            </summary>
-            <param name="first">Operand to be compared.</param>
-            <param name="second">Operand to compare to.</param>
-            <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)">
-            <summary>
-            Determines if first operand is greater than second operand.
-            </summary>
-            <param name="first">Operand to be compared.</param>
-            <param name="second">Operand to compare to.</param>
-            <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         </member>
         <member name="T:Argotic.Common.EnumerationMetadataAttribute">
             <summary>
@@ -1104,36 +1104,6 @@
             </summary>
             <value>The MIME media sub-type name for the attributed field.</value>
         </member>
-        <member name="M:Argotic.Common.MimeMediaTypeAttribute.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.MimeMediaTypeAttribute"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.MimeMediaTypeAttribute"/>.</returns>
-            <remarks>
-                This method returns a human-readable string for the current instance.
-            </remarks>
-        </member>
-        <member name="M:Argotic.Common.MimeMediaTypeAttribute.CompareTo(System.Object)">
-            <summary>
-            Compares the current instance with another object of the same type.
-            </summary>
-            <param name="obj">An object to compare with this instance.</param>
-            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
-        </member>
-        <member name="M:Argotic.Common.MimeMediaTypeAttribute.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
-            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.MimeMediaTypeAttribute.GetHashCode">
-            <summary>
-            Returns a hash code for the current instance.
-            </summary>
-            <returns>A 32-bit signed integer hash code.</returns>
-        </member>
         <member name="M:Argotic.Common.MimeMediaTypeAttribute.op_Equality(Argotic.Common.MimeMediaTypeAttribute,Argotic.Common.MimeMediaTypeAttribute)">
             <summary>
             Determines if operands are equal.
@@ -1165,6 +1135,36 @@
             <param name="first">Operand to be compared.</param>
             <param name="second">Operand to compare to.</param>
             <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.MimeMediaTypeAttribute.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.MimeMediaTypeAttribute"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.MimeMediaTypeAttribute"/>.</returns>
+            <remarks>
+                This method returns a human-readable string for the current instance.
+            </remarks>
+        </member>
+        <member name="M:Argotic.Common.MimeMediaTypeAttribute.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
+        </member>
+        <member name="M:Argotic.Common.MimeMediaTypeAttribute.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
+            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.MimeMediaTypeAttribute.GetHashCode">
+            <summary>
+            Returns a hash code for the current instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
         </member>
         <member name="T:Argotic.Common.SyndicationContentFormat">
             <summary>
@@ -1427,6 +1427,14 @@
             <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.</returns>
             <exception cref="T:System.ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
             <exception cref="T:System.ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+            <example>
+                <code lang="cs" title="The following code example demonstrates the usage of the SourceReferencesTarget method.">
+                    <code
+                        source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+                        region="SourceReferencesTarget(Uri source, Uri target)"
+                    />
+                </code>
+            </example>
         </member>
         <member name="M:Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)">
             <summary>
@@ -2689,36 +2697,6 @@
             <exception cref="T:System.ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
             <exception cref="T:System.ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
         </member>
-        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceLoadSettings"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceLoadSettings"/>.</returns>
-            <remarks>
-                This method returns a human-readable string for the current instance.
-            </remarks>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.CompareTo(System.Object)">
-            <summary>
-            Compares the current instance with another object of the same type.
-            </summary>
-            <param name="obj">An object to compare with this instance.</param>
-            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
-            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.GetHashCode">
-            <summary>
-            Returns a hash code for the current instance.
-            </summary>
-            <returns>A 32-bit signed integer hash code.</returns>
-        </member>
         <member name="M:Argotic.Common.SyndicationResourceLoadSettings.op_Equality(Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.SyndicationResourceLoadSettings)">
             <summary>
             Determines if operands are equal.
@@ -2750,6 +2728,36 @@
             <param name="first">Operand to be compared.</param>
             <param name="second">Operand to compare to.</param>
             <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceLoadSettings"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceLoadSettings"/>.</returns>
+            <remarks>
+                This method returns a human-readable string for the current instance.
+            </remarks>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
+            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceLoadSettings.GetHashCode">
+            <summary>
+            Returns a hash code for the current instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
         </member>
         <member name="T:Argotic.Common.SyndicationResourceMetadata">
             <summary>
@@ -3068,36 +3076,6 @@
                 During a save operation, each of these syndication extension types is instantiated and used to write the prefixed XML namespace declarations on the root syndication resource entity.
             </remarks>
         </member>
-        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceSaveSettings"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceSaveSettings"/>.</returns>
-            <remarks>
-                This method returns a human-readable string for the current instance.
-            </remarks>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.CompareTo(System.Object)">
-            <summary>
-            Compares the current instance with another object of the same type.
-            </summary>
-            <param name="obj">An object to compare with this instance.</param>
-            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
-            </summary>
-            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
-            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        </member>
-        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.GetHashCode">
-            <summary>
-            Returns a hash code for the current instance.
-            </summary>
-            <returns>A 32-bit signed integer hash code.</returns>
-        </member>
         <member name="M:Argotic.Common.SyndicationResourceSaveSettings.op_Equality(Argotic.Common.SyndicationResourceSaveSettings,Argotic.Common.SyndicationResourceSaveSettings)">
             <summary>
             Determines if operands are equal.
@@ -3129,6 +3107,36 @@
             <param name="first">Operand to be compared.</param>
             <param name="second">Operand to compare to.</param>
             <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceSaveSettings"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Argotic.Common.SyndicationResourceSaveSettings"/>.</returns>
+            <remarks>
+                This method returns a human-readable string for the current instance.
+            </remarks>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+            <exception cref="T:System.ArgumentException">The <paramref name="obj"/> is not the expected <see cref="T:System.Type"/>.</exception>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current instance.</param>
+            <returns><b>true</b> if the specified <see cref="T:System.Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        </member>
+        <member name="M:Argotic.Common.SyndicationResourceSaveSettings.GetHashCode">
+            <summary>
+            Returns a hash code for the current instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
         </member>
         <member name="T:Argotic.Common.TrackbackDiscoveryMetadata">
             <summary>

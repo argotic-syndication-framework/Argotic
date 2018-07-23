@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Security.Permissions;
-using System.Threading;
-
-using Argotic.Common;
-using Argotic.Configuration;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Argotic.Common;
+    using Argotic.Configuration;
+
     /// <summary>
     /// Allows applications to send and received notification pings by using the Trackback peer-to-peer notification protocol.
     /// </summary>
@@ -33,30 +32,37 @@ namespace Argotic.Net
         /// Private member to hold the location of the host computer that client Trackback pings will be sent to.
         /// </summary>
         private Uri clientHost;
+
         /// <summary>
         /// Private member to hold information such as the application name, version, host operating system, and language.
         /// </summary>
-        private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
+        private string clientUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
+
         /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions clientOptions = new WebRequestOptions();
+
         /// <summary>
         /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
         /// </summary>
-        private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
+        private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
+
         /// <summary>
         /// Private member to hold a value that indictaes if the client sends default credentials when making an Trackback ping request.
         /// </summary>
         private bool clientUsesDefaultCredentials;
+
         /// <summary>
         /// Private member to hold a value indicating if the client is in the process of sending an Trackback ping request.
         /// </summary>
         private bool clientIsSending;
+
         /// <summary>
         /// Private member to hold a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
         private bool clientAsyncSendCancelled;
+
         /// <summary>
         /// Private member to hold Trackback web request used by asynchronous send operations.
         /// </summary>
@@ -78,7 +84,7 @@ namespace Argotic.Net
         public TrackbackClient(Uri host)
         {
             this.Initialize();
-            this.Host   = host;
+            this.Host = host;
         }
 
         /// <summary>
@@ -91,13 +97,13 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
         public TrackbackClient(Uri host, string userAgent) : this(host)
         {
-            this.UserAgent  = userAgent;
+            this.UserAgent = userAgent;
         }
 
         /// <summary>
         /// Occurs when an asynchronous Trackback ping request send operation completes.
         /// </summary>
-        /// <seealso cref="SendAsync(TrackbackMessage, Object)"/>
+        /// <seealso cref="SendAsync(TrackbackMessage, object)"/>
         public event EventHandler<TrackbackMessageSentEventArgs> SendCompleted;
 
         /// <summary>
@@ -117,7 +123,7 @@ namespace Argotic.Net
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
         protected virtual void OnMessageSent(TrackbackMessageSentEventArgs e)
         {
-            EventHandler<TrackbackMessageSentEventArgs> handler    = null;
+            EventHandler<TrackbackMessageSentEventArgs> handler = null;
 
             handler = this.SendCompleted;
 
@@ -217,13 +223,13 @@ namespace Argotic.Net
                 }
                 else
                 {
-                    clientTimeout   = value;
+                    clientTimeout = value;
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
+        /// Gets or sets a <see cref="bool"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
         /// </summary>
         /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
@@ -315,33 +321,33 @@ namespace Argotic.Net
         /// <param name="result">The result of the asynchronous operation.</param>
         private static void AsyncSendCallback(IAsyncResult result)
         {
-            TrackbackResponse response      = null;
-            WebRequest httpWebRequest       = null;
-            TrackbackClient client          = null;
-            Uri host                        = null;
-            TrackbackMessage message        = null;
-            WebRequestOptions options       = null;
-            object userToken                = null;
+            TrackbackResponse response = null;
+            WebRequest httpWebRequest = null;
+            TrackbackClient client = null;
+            Uri host = null;
+            TrackbackMessage message = null;
+            WebRequestOptions options = null;
+            object userToken = null;
 
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                client              = parameters[1] as TrackbackClient;
-                host                = parameters[2] as Uri;
-                message             = parameters[3] as TrackbackMessage;
-                options             = parameters[4] as WebRequestOptions;
-                userToken           = parameters[5];
+                httpWebRequest = parameters[0] as WebRequest;
+                client = parameters[1] as TrackbackClient;
+                host = parameters[2] as Uri;
+                message = parameters[3] as TrackbackMessage;
+                options = parameters[4] as WebRequestOptions;
+                userToken = parameters[5];
 
                 if (client != null)
                 {
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                    response    = new TrackbackResponse(httpWebResponse);
+                    response = new TrackbackResponse(httpWebResponse);
 
                     client.OnMessageSent(new TrackbackMessageSentEventArgs(host, message, response, options, userToken));
 
-                    client.SendOperationInProgress  = false;
+                    client.SendOperationInProgress = false;
                 }
             }
         }
@@ -361,7 +367,7 @@ namespace Argotic.Net
                 }
             }
 
-            this.SendOperationInProgress    = false;
+            this.SendOperationInProgress = false;
         }
 
         /// <summary>
@@ -371,27 +377,27 @@ namespace Argotic.Net
         /// <returns>A <see cref="TrackbackResponse"/> that represents the server's response to the Trackback ping request.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
+        /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, object)"/> call in progress.</exception>
         public TrackbackResponse Send(TrackbackMessage message)
         {
-            TrackbackResponse response   = null;
+            TrackbackResponse response = null;
 
             Guard.ArgumentNotNull(message, "message");
 
             if(this.Host == null)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
             }
             else if (this.SendOperationInProgress)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
             }
 
-            WebRequest webRequest   = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
+            WebRequest webRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
             using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
             {
-                response    = new TrackbackResponse(webResponse);
+                response = new TrackbackResponse(webResponse);
             }
 
             return response;
@@ -406,32 +412,32 @@ namespace Argotic.Net
         /// <remarks>
         ///     <para>
         ///         To receive notification when the Trackback ping request has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event.
-        ///         You can cancel a <see cref="SendAsync(TrackbackMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="SendAsync(TrackbackMessage, object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
-        //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-        public void SendAsync(TrackbackMessage message, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, object)"/> call in progress.</exception>
+        // [HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
+        public void SendAsync(TrackbackMessage message, object userToken)
         {
             Guard.ArgumentNotNull(message, "message");
 
             if (this.Host == null)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
             }
             else if (this.SendOperationInProgress)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
             }
 
-            this.SendOperationInProgress    = true;
-            this.AsyncSendHasBeenCancelled  = false;
+            this.SendOperationInProgress = true;
+            this.AsyncSendHasBeenCancelled = false;
 
             asyncHttpWebRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-            object[] state      = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
+            object[] state = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
 
             ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
@@ -441,7 +447,7 @@ namespace Argotic.Net
         /// Cancels an asynchronous operation to send an Trackback ping request.
         /// </summary>
         /// <remarks>
-        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(TrackbackMessage, Object)"/> operation.
+        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(TrackbackMessage, object)"/> operation.
         ///     If there is an Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
         ///     If there is no send operation pending, this method does nothing.
         /// </remarks>
@@ -449,7 +455,7 @@ namespace Argotic.Net
         {
             if (this.SendOperationInProgress && !this.AsyncSendHasBeenCancelled)
             {
-                this.AsyncSendHasBeenCancelled  = true;
+                this.AsyncSendHasBeenCancelled = true;
                 asyncHttpWebRequest.Abort();
             }
         }
@@ -470,7 +476,7 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         private static WebRequest CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
         {
-            HttpWebRequest httpRequest  = null;
+            HttpWebRequest httpRequest = null;
             byte[] payloadData;
 
             Guard.ArgumentNotNull(host, "host");
@@ -489,16 +495,16 @@ namespace Argotic.Net
                 }
             }
 
-            httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
-            httpRequest.Method              = "POST";
-            httpRequest.ContentLength       = payloadData.Length;
-            httpRequest.ContentType         = String.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
-            httpRequest.UserAgent           = userAgent;
+            httpRequest = (HttpWebRequest)HttpWebRequest.Create(host);
+            httpRequest.Method = "POST";
+            httpRequest.ContentLength = payloadData.Length;
+            httpRequest.ContentType = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
+            httpRequest.UserAgent = userAgent;
             if (options != null) options.ApplyOptions(httpRequest);
 
             if(useDefaultCredentials)
             {
-                httpRequest.Credentials     = CredentialCache.DefaultCredentials;
+                httpRequest.Credentials = CredentialCache.DefaultCredentials;
             }
 
             using (Stream stream = httpRequest.GetRequestStream())
@@ -515,32 +521,32 @@ namespace Argotic.Net
         /// <seealso cref="XmlRpcClientSection"/>
         private void Initialize()
         {
-            TrackbackClientSection clientConfiguration  = PrivilegedConfigurationManager.GetTracbackClientSection();
+            TrackbackClientSection clientConfiguration = PrivilegedConfigurationManager.GetTracbackClientSection();
 
             if (clientConfiguration != null)
             {
                 if(clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
                 {
-                    this.Timeout    = clientConfiguration.Timeout;
+                    this.Timeout = clientConfiguration.Timeout;
                 }
 
-                if (!String.IsNullOrEmpty(clientConfiguration.UserAgent))
+                if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
                 {
-                    this.UserAgent  = clientConfiguration.UserAgent;
+                    this.UserAgent = clientConfiguration.UserAgent;
                 }
 
                 if (clientConfiguration.Network != null)
                 {
-                    this.UseDefaultCredentials  = clientConfiguration.Network.DefaultCredentials;
+                    this.UseDefaultCredentials = clientConfiguration.Network.DefaultCredentials;
 
                     if (clientConfiguration.Network.Credential != null)
                     {
-                        this.Credentials    = clientConfiguration.Network.Credential;
+                        this.Credentials = clientConfiguration.Network.Credential;
                     }
 
                     if (clientConfiguration.Network.Host != null)
                     {
-                        this.Host   = clientConfiguration.Network.Host;
+                        this.Host = clientConfiguration.Network.Host;
                     }
                 }
             }

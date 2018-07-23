@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using System.Globalization;
+
     /// <summary>
     /// Allows an object to implement common Atom entity attributes by representing a set of properties, methods, indexers and events common to Atom syndication resources.
     /// </summary>

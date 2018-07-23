@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-using Argotic.Extensions;
-
-namespace Argotic.Publishing
+﻿namespace Argotic.Publishing
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a media range as defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616: Hypertext Transfer Protocol</a> that
     /// specifies a type of representation that can be added to a <see cref="AtomMemberResources"/>.
@@ -40,18 +39,21 @@ namespace Argotic.Publishing
         /// Private member to hold the base URI other than the base URI of the document or external entity.
         /// </summary>
         private Uri commonObjectBaseUri;
+
         /// <summary>
         /// Private member to hold the natural or formal language in which the content is written.
         /// </summary>
         private CultureInfo commonObjectLanguage;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the value of the accepted media range.
         /// </summary>
-        private string acceptedMediaRangeValue  = String.Empty;
+        private string acceptedMediaRangeValue = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
@@ -129,6 +131,7 @@ namespace Argotic.Publishing
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -159,12 +162,12 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
 
             Guard.ArgumentNotNull(extension, "extension");
 
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -208,7 +211,7 @@ namespace Argotic.Publishing
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
@@ -262,9 +265,9 @@ namespace Argotic.Publishing
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    acceptedMediaRangeValue = String.Empty;
+                    acceptedMediaRangeValue = string.Empty;
                 }
                 else
                 {
@@ -284,7 +287,7 @@ namespace Argotic.Publishing
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
 
             Guard.ArgumentNotNull(source, "source");
 
@@ -293,8 +296,8 @@ namespace Argotic.Publishing
                 wasLoaded = true;
             }
 
-            this.MediaRange = !String.IsNullOrEmpty(source.Value) ? source.Value.Trim() : String.Empty;
-            wasLoaded       = true;
+            this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
+            wasLoaded = true;
 
             return wasLoaded;
         }
@@ -317,7 +320,7 @@ namespace Argotic.Publishing
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
 
-            wasLoaded   = this.Load(source);
+            wasLoaded = this.Load(source);
 
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -337,7 +340,7 @@ namespace Argotic.Publishing
             writer.WriteStartElement("accept", AtomUtility.AtomPublishingNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-            if(!String.IsNullOrEmpty(this.MediaRange))
+            if(!string.IsNullOrEmpty(this.MediaRange))
             {
                 writer.WriteString(this.MediaRange);
             }
@@ -348,9 +351,9 @@ namespace Argotic.Publishing
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -358,9 +361,9 @@ namespace Argotic.Publishing
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -390,27 +393,27 @@ namespace Argotic.Publishing
                 return 1;
             }
 
-            AtomAcceptedMediaRange value  = obj as AtomAcceptedMediaRange;
+            AtomAcceptedMediaRange value = obj as AtomAcceptedMediaRange;
 
             if (value != null)
             {
-                int result  = String.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+                int result = string.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
+                result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is AtomAcceptedMediaRange))
             {
@@ -426,7 +429,7 @@ namespace Argotic.Publishing
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

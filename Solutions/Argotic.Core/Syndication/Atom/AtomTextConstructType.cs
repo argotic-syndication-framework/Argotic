@@ -1,9 +1,8 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication
+﻿namespace Argotic.Syndication
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the entity encoding utilized by human-readable text constructs. 
     /// </summary>
@@ -18,24 +17,24 @@ namespace Argotic.Syndication
         /// No entity-encoding type specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
         /// Indicates that the human-readable text is Hyper-Text Markup Language (HTML) encoded.
         /// </summary>
         [EnumerationMetadata(DisplayName = "HTML", AlternateValue = "html")]
-        Html    = 1,
+        Html = 1,
 
         /// <summary>
         /// Indicates that the human-readable text is not encoded per a specific entity scheme.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Text", AlternateValue = "text")]
-        Text    = 2,
+        Text = 2,
 
         /// <summary>
         /// Indicates that the human-readable text is Extensible Hyper-Text Markup Language (XHTML) encoded.
         /// </summary>
         [EnumerationMetadata(DisplayName = "XHTML", AlternateValue = "xhtml")]
-        Xhtml   = 3
+        Xhtml = 3
     }
 }

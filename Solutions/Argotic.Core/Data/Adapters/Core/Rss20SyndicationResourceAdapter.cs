@@ -1,13 +1,12 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="RssFeed"/>.
     /// </summary>
@@ -45,9 +44,9 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("rss", manager);
+            XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
             if (feedNavigator != null)
             {

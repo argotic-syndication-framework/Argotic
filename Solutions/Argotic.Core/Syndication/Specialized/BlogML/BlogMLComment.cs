@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a post comment.
     /// </summary>
@@ -21,39 +20,48 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Private member to hold the title of the web log entity.
         /// </summary>
-        private BlogMLTextConstruct commonObjectBaseTitle           = new BlogMLTextConstruct();
+        private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
+
         /// <summary>
         /// Private member to hold a unique identifier for the  web log entity.
         /// </summary>
-        private string commonObjectBaseId                           = String.Empty;
+        private string commonObjectBaseId = string.Empty;
+
         /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was created.
         /// </summary>
-        private DateTime commonObjectBaseCreatedOn                  = DateTime.MinValue;
+        private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a date-time indicating when the  web log entity information was last modified.
         /// </summary>
-        private DateTime commonObjectBaseLastModifiedOn             = DateTime.MinValue;
+        private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
+
         /// <summary>
         /// Private member to hold a value indicating the web log entity approval status.
         /// </summary>
         private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
+
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold the textual content of the comment.
         /// </summary>
-        private BlogMLTextConstruct commentContent                  = new BlogMLTextConstruct();
+        private BlogMLTextConstruct commentContent = new BlogMLTextConstruct();
+
         /// <summary>
         /// Private member to hold the author's name for the comment.
         /// </summary>
-        private string commentUserName                              = String.Empty;
+        private string commentUserName = string.Empty;
+
         /// <summary>
         /// Private member to hold the author's email address for the comment.
         /// </summary>
-        private string commentUserEmailAddress                      = String.Empty;
+        private string commentUserEmailAddress = string.Empty;
+
         /// <summary>
         /// Private member to hold the author's homepage or web log address for the comment.
         /// </summary>
@@ -65,6 +73,7 @@ namespace Argotic.Syndication.Specialized
         public BlogMLComment()
         {
         }
+
         /// <summary>
         /// Gets or sets the approval status of this web log entity.
         /// </summary>
@@ -121,9 +130,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    commonObjectBaseId = String.Empty;
+                    commonObjectBaseId = string.Empty;
                 }
                 else
                 {
@@ -173,6 +182,7 @@ namespace Argotic.Syndication.Specialized
                 commonObjectBaseTitle = value;
             }
         }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -189,6 +199,7 @@ namespace Argotic.Syndication.Specialized
                 {
                     objectSyndicationExtensions = new Collection<ISyndicationExtension>();
                 }
+
                 return objectSyndicationExtensions;
             }
 
@@ -210,6 +221,7 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
+
         /// <summary>
         /// Gets or sets the content of this comment.
         /// </summary>
@@ -242,9 +254,9 @@ namespace Argotic.Syndication.Specialized
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if(string.IsNullOrEmpty(value))
                 {
-                    commentUserEmailAddress = String.Empty;
+                    commentUserEmailAddress = string.Empty;
                 }
                 else
                 {
@@ -289,6 +301,7 @@ namespace Argotic.Syndication.Specialized
                 commentUserUrl = value;
             }
         }
+
         /// <summary>
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
@@ -297,10 +310,10 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
             Guard.ArgumentNotNull(extension, "extension");
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
         }
@@ -341,11 +354,12 @@ namespace Argotic.Syndication.Specialized
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
+                wasRemoved = true;
             }
 
             return wasRemoved;
         }
+
         /// <summary>
         /// Loads this <see cref="BlogMLComment"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -357,38 +371,39 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
             if (BlogMLUtility.FillCommonObject(this, source))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
+
             if(source.HasAttributes)
             {
-                string userNameAttribute    = source.GetAttribute("user-name", String.Empty);
-                string userEmailAttribute   = source.GetAttribute("user-email", String.Empty);
-                string userUrlAttribute     = source.GetAttribute("user-url", String.Empty);
+                string userNameAttribute = source.GetAttribute("user-name", string.Empty);
+                string userEmailAttribute = source.GetAttribute("user-email", string.Empty);
+                string userUrlAttribute = source.GetAttribute("user-url", string.Empty);
 
-                if (!String.IsNullOrEmpty(userNameAttribute))
+                if (!string.IsNullOrEmpty(userNameAttribute))
                 {
-                    this.UserName   = userNameAttribute;
-                    wasLoaded       = true;
+                    this.UserName = userNameAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(userEmailAttribute))
+                if (!string.IsNullOrEmpty(userEmailAttribute))
                 {
-                    this.UserEmailAddress   = userEmailAttribute;
-                    wasLoaded               = true;
+                    this.UserEmailAddress = userEmailAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(userUrlAttribute))
+                if (!string.IsNullOrEmpty(userUrlAttribute))
                 {
                     Uri url;
                     if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out url))
                     {
-                        this.UserUrl    = url;
-                        wasLoaded       = true;
+                        this.UserUrl = url;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -401,8 +416,8 @@ namespace Argotic.Syndication.Specialized
                     BlogMLTextConstruct content = new BlogMLTextConstruct();
                     if (content.Load(contentNavigator))
                     {
-                        this.Content    = content;
-                        wasLoaded       = true;
+                        this.Content = content;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -423,41 +438,41 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
 
             if (BlogMLUtility.FillCommonObject(this, source, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if(source.HasAttributes)
             {
-                string userNameAttribute    = source.GetAttribute("user-name", String.Empty);
-                string userEmailAttribute   = source.GetAttribute("user-email", String.Empty);
-                string userUrlAttribute     = source.GetAttribute("user-url", String.Empty);
+                string userNameAttribute = source.GetAttribute("user-name", string.Empty);
+                string userEmailAttribute = source.GetAttribute("user-email", string.Empty);
+                string userUrlAttribute = source.GetAttribute("user-url", string.Empty);
 
-                if (!String.IsNullOrEmpty(userNameAttribute))
+                if (!string.IsNullOrEmpty(userNameAttribute))
                 {
-                    this.UserName   = userNameAttribute;
-                    wasLoaded       = true;
+                    this.UserName = userNameAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(userEmailAttribute))
+                if (!string.IsNullOrEmpty(userEmailAttribute))
                 {
-                    this.UserEmailAddress   = userEmailAttribute;
-                    wasLoaded               = true;
+                    this.UserEmailAddress = userEmailAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(userUrlAttribute))
+                if (!string.IsNullOrEmpty(userUrlAttribute))
                 {
                     Uri url;
                     if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out url))
                     {
-                        this.UserUrl    = url;
-                        wasLoaded       = true;
+                        this.UserUrl = url;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -470,8 +485,8 @@ namespace Argotic.Syndication.Specialized
                     BlogMLTextConstruct content = new BlogMLTextConstruct();
                     if (content.Load(contentNavigator))
                     {
-                        this.Content    = content;
-                        wasLoaded       = true;
+                        this.Content = content;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -495,7 +510,7 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteAttributeString("user-name", this.UserName);
 
-            if(!String.IsNullOrEmpty(this.UserEmailAddress))
+            if(!string.IsNullOrEmpty(this.UserEmailAddress))
             {
                 writer.WriteAttributeString("user-email", this.UserEmailAddress);
             }
@@ -511,10 +526,11 @@ namespace Argotic.Syndication.Specialized
 
             writer.WriteEndElement();
         }
+
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLComment"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLComment"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -522,9 +538,9 @@ namespace Argotic.Syndication.Specialized
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -540,6 +556,7 @@ namespace Argotic.Syndication.Specialized
                 }
             }
         }
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -552,31 +569,32 @@ namespace Argotic.Syndication.Specialized
             {
                 return 1;
             }
-            BlogMLComment value  = obj as BlogMLComment;
+
+            BlogMLComment value = obj as BlogMLComment;
 
             if (value != null)
             {
-                int result  = this.Content.CompareTo(value.Content);
-                result      = result | String.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.UserUrl, value.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                int result = this.Content.CompareTo(value.Content);
+                result = result | string.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.UserUrl, value.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-                result      = result | BlogMLUtility.CompareCommonObjects(this, value);
+                result = result | BlogMLUtility.CompareCommonObjects(this, value);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is BlogMLComment))
             {
@@ -592,7 +610,7 @@ namespace Argotic.Syndication.Specialized
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="OpmlDocument"/>.
     /// </summary>
@@ -46,18 +45,18 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("opml", manager);
+            XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
             if (documentNavigator != null)
             {
-                XPathNavigator headNavigator    = documentNavigator.SelectSingleNode("head", manager);
+                XPathNavigator headNavigator = documentNavigator.SelectSingleNode("head", manager);
                 if (headNavigator != null)
                 {
                     resource.Head.Load(headNavigator, this.Settings);
                 }
 
-                XPathNodeIterator outlineIterator   = documentNavigator.Select("body/outline", manager);
+                XPathNodeIterator outlineIterator = documentNavigator.Select("body/outline", manager);
                 if (outlineIterator != null && outlineIterator.Count > 0)
                 {
                     int counter = 0;

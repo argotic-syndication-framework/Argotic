@@ -27,16 +27,10 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlDocument class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-    ///             region="ApmlDocument"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="ApmlDocument" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
     [Serializable]
     public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
@@ -81,16 +75,6 @@
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
         /// </summary>
         public ApmlDocument()
@@ -112,12 +96,7 @@
         {
             get
             {
-                if (this.documentApplications == null)
-                {
-                    this.documentApplications = new Collection<ApmlApplication>();
-                }
-
-                return this.documentApplications;
+                return this.documentApplications ?? (this.documentApplications = new Collection<ApmlApplication>());
             }
         }
 
@@ -153,12 +132,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -172,13 +146,7 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return documentFormat;
-            }
-        }
+        public SyndicationContentFormat Format => documentFormat;
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -242,47 +210,19 @@
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return documentVersion;
-            }
-        }
+        public Version Version => documentVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="ApmlProfile"/> at the specified index.
@@ -319,7 +259,7 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs"
         ///             region="Create(Uri source)"
         ///         />
         ///     </code>
@@ -393,11 +333,7 @@
         /// <returns>An <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        public static ApmlDocument Create(
-            Uri source,
-            ICredentials credentials,
-            IWebProxy proxy,
-            SyndicationResourceLoadSettings settings)
+        public static ApmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
             return Create(source, new WebRequestOptions(credentials, proxy), settings);
         }
@@ -411,13 +347,12 @@
         /// <returns>An <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        public static ApmlDocument Create(
-            Uri source,
-            WebRequestOptions options,
-            SyndicationResourceLoadSettings settings)
+        public static ApmlDocument Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
             ApmlDocument syndicationResource = new ApmlDocument();
+
             Guard.ArgumentNotNull(source, "source");
+
             syndicationResource.Load(source, options, settings);
 
             return syndicationResource;
@@ -432,7 +367,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -448,6 +385,7 @@
         public bool AddProfile(ApmlProfile profile)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(profile, "profile");
 
             ((Collection<ApmlProfile>)this.Profiles).Add(profile);
@@ -468,10 +406,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Document;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = false;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Document, Indent = true, OmitXmlDeclaration = false };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -502,7 +437,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -518,10 +455,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Load(IXPathNavigable source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Load(IXPathNavigable source)" />
         ///     </code>
         /// </example>
         public void Load(IXPathNavigable source)
@@ -543,6 +477,7 @@
         public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(source, "source");
+
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
@@ -564,10 +499,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Load(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Load(Stream stream)" />
         ///     </code>
         /// </example>
         public void Load(Stream stream)
@@ -589,13 +521,14 @@
         public void Load(Stream stream, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(stream, "stream");
+
             if (settings != null)
             {
                 this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
             }
             else
             {
-                this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
+                this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), null);
             }
         }
 
@@ -611,10 +544,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Load(XmlReader reader)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Load(XmlReader reader)" />
         ///     </code>
         /// </example>
         public void Load(XmlReader reader)
@@ -675,10 +605,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
@@ -707,9 +634,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Load(Uri source, WebRequestOptions options)"
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Load(Uri source, WebRequestOptions options)"
         ///         />
         ///     </code>
         /// </example>
@@ -760,11 +685,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-        public void Load(
-            Uri source,
-            ICredentials credentials,
-            IWebProxy proxy,
-            SyndicationResourceLoadSettings settings)
+        public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
@@ -799,7 +720,9 @@
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
             XPathNavigator navigator = null;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
@@ -838,14 +761,8 @@
         /// <exception cref="InvalidOperationException">This <see cref="ApmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="LoadAsync(Uri source, Object userToken)"
-        ///         />
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="LoadAsync(Uri source, Object userToken)" />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" />
         ///     </code>
         /// </example>
         public void LoadAsync(Uri source, object userToken)
@@ -932,13 +849,10 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="ApmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public void LoadAsync(
-            Uri source,
-            SyndicationResourceLoadSettings settings,
-            WebRequestOptions options,
-            object userToken)
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
+
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
@@ -953,18 +867,11 @@
             this.AsyncLoadHasBeenCancelled = false;
 
             asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-            asyncHttpWebRequest.Timeout = Convert.ToInt32(
-                settings.Timeout.TotalMilliseconds,
-                System.Globalization.NumberFormatInfo.InvariantInfo);
+            asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
             object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-            ThreadPool.RegisterWaitForSingleObject(
-                result.AsyncWaitHandle,
-                new WaitOrTimerCallback(this.AsyncTimeoutCallback),
-                state,
-                settings.Timeout,
-                true);
+            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(this.AsyncTimeoutCallback), state, settings.Timeout, true);
         }
 
         /// <summary>
@@ -996,7 +903,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -1037,10 +946,7 @@
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Save(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Save(Stream stream)" />
         ///     </code>
         /// </example>
         public void Save(Stream stream)
@@ -1052,7 +958,7 @@
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ApmlDocument"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance. This value can be <b>null</b>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
@@ -1064,10 +970,8 @@
                 settings = new SyndicationResourceSaveSettings();
             }
 
-            XmlWriterSettings writerSettings = new XmlWriterSettings();
-            writerSettings.OmitXmlDeclaration = false;
-            writerSettings.Indent = !settings.MinimizeOutputSize;
-            writerSettings.Encoding = settings.CharacterEncoding;
+            XmlWriterSettings writerSettings =
+                new XmlWriterSettings { OmitXmlDeclaration = false, Indent = !settings.MinimizeOutputSize, Encoding = settings.CharacterEncoding };
 
             using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
             {
@@ -1083,15 +987,13 @@
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlDocumentExample.cs"
-        ///             region="Save(XmlWriter writer)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" region="Save(XmlWriter writer)" />
         ///     </code>
         /// </example>
         public void Save(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             this.Save(writer, new SyndicationResourceSaveSettings());
         }
 
@@ -1099,7 +1001,7 @@
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ApmlDocument"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
@@ -1107,6 +1009,7 @@
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNull(settings, "settings");
+
             writer.WriteStartElement("APML", ApmlUtility.ApmlNamespace);
             writer.WriteAttributeString("version", this.Version.ToString());
 
@@ -1202,10 +1105,7 @@
             EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
             handler = this.Loaded;
 
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            handler?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1221,6 +1121,7 @@
             Uri source = null;
             WebRequestOptions options = null;
             SyndicationResourceLoadSettings settings = null;
+
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
@@ -1230,9 +1131,11 @@
                 settings = parameters[3] as SyndicationResourceLoadSettings;
                 options = parameters[4] as WebRequestOptions;
                 object userToken = parameters[5];
+
                 if (document != null)
                 {
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
+
                     using (Stream stream = httpWebResponse.GetResponseStream())
                     {
                         if (settings != null)
@@ -1242,10 +1145,8 @@
 
                         using (StreamReader streamReader = new StreamReader(stream, encoding))
                         {
-                            XmlReaderSettings readerSettings = new XmlReaderSettings();
-                            readerSettings.IgnoreComments = true;
-                            readerSettings.IgnoreWhitespace = true;
-                            readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                            XmlReaderSettings readerSettings =
+                                new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true, DtdProcessing = DtdProcessing.Ignore };
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
@@ -1264,9 +1165,9 @@
                                 SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(
                                     navigator,
                                     settings);
+
                                 adapter.Fill(document, SyndicationContentFormat.Apml);
-                                document.OnDocumentLoaded(
-                                    new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                                document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
@@ -1285,10 +1186,7 @@
         {
             if (timedOut)
             {
-                if (asyncHttpWebRequest != null)
-                {
-                    asyncHttpWebRequest.Abort();
-                }
+                asyncHttpWebRequest?.Abort();
             }
 
             this.LoadOperationInProgress = false;
@@ -1307,14 +1205,12 @@
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-        private void Load(
-            XPathNavigator navigator,
-            SyndicationResourceLoadSettings settings,
-            SyndicationResourceLoadedEventArgs eventData)
+        private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         {
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
+
             SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(this, SyndicationContentFormat.Apml);
             this.OnDocumentLoaded(eventData);

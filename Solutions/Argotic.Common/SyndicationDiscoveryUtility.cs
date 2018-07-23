@@ -3,10 +3,11 @@
     using System;
     using System.Collections;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net;
+    using System.Reflection;
     using System.Text.RegularExpressions;
-    using System.Web;
     using System.Xml;
     using System.Xml.XPath;
 
@@ -18,7 +19,7 @@
         /// <summary>
         /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
         /// </summary>
-        private static string frameworkUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+        private static string frameworkUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
         /// <summary>
         /// Gets the raw user agent string used by the framework when sending web requests.
@@ -46,7 +47,7 @@
 
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
@@ -81,14 +82,14 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the SyndicationContentFormatGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="SyndicationContentFormatGet(Uri source)"
         ///         />
         ///     </code>
         /// </example>
         public static SyndicationContentFormat SyndicationContentFormatGet(Uri source)
         {
-            return SyndicationDiscoveryUtility.SyndicationContentFormatGet(source, null);
+            return SyndicationContentFormatGet(source, null);
         }
 
         /// <summary>
@@ -112,12 +113,10 @@
             {
                 if (response != null)
                 {
-                    return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
+                    return SyndicationContentFormatGet(response.GetResponseStream());
                 }
-                else
-                {
-                    return SyndicationContentFormat.None;
-                }
+
+                return SyndicationContentFormat.None;
             }
         }
 
@@ -140,7 +139,7 @@
 
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {
-                return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
+                return SyndicationContentFormatGet(reader);
             }
         }
 
@@ -164,7 +163,7 @@
 
             string rootElementName = document.DocumentElement.LocalName;
 
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
@@ -212,7 +211,7 @@
 
             string rootElementName = source.LocalName;
 
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+            foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                 {
@@ -254,7 +253,7 @@
 
             foreach (Match link in links)
             {
-                Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+                Hashtable linkAttributes = ExtractHtmlAttributes(link.Value);
 
                 if (linkAttributes.ContainsKey("HREF"))
                 {
@@ -270,7 +269,7 @@
 
             foreach (Match anchor in anchors)
             {
-                Hashtable anchorAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(anchor.Value);
+                Hashtable anchorAttributes = ExtractHtmlAttributes(anchor.Value);
 
                 if (anchorAttributes.ContainsKey("HREF"))
                 {
@@ -328,7 +327,7 @@
         /// </example>
         public static bool SourceReferencesTarget(Uri source, Uri target)
         {
-            return SyndicationDiscoveryUtility.SourceReferencesTarget(source, target, null);
+            return SourceReferencesTarget(source, target, null);
         }
 
         /// <summary>
@@ -358,7 +357,7 @@
                     {
                         using (StreamReader reader = new StreamReader(stream))
                         {
-                            Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
+                            Collection<Uri> links = ExtractUrls(reader.ReadToEnd());
 
                             if (links != null && links.Count > 0)
                             {
@@ -390,14 +389,14 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the UriExists method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="UriExists(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
         public static bool UriExists(Uri uri)
         {
-            return SyndicationDiscoveryUtility.UriExists(uri, null);
+            return UriExists(uri, null);
         }
 
         /// <summary>
@@ -450,14 +449,14 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConditionalGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="ConditionalGet(Uri source, DateTime lastModified, string entityTag)"
         ///         />
         ///     </code>
         /// </example>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag)
         {
-            return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions());
+            return ConditionalGet(source, lastModified, entityTag, new WebRequestOptions());
         }
 
         /// <summary>
@@ -476,14 +475,12 @@
         {
             HttpWebResponse response = null;
 
-            if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, credentials, out response))
+            if (TryConditionalGet(source, lastModified, entityTag, credentials, out response))
             {
                 return response;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>
@@ -503,7 +500,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy)
         {
-            return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy));
+            return ConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy));
         }
 
         /// <summary>
@@ -519,14 +516,12 @@
         {
             HttpWebResponse response = null;
 
-            if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, options, out response))
+            if (TryConditionalGet(source, lastModified, entityTag, options, out response))
             {
                 return response;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>
@@ -544,14 +539,14 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the TryConditionalGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out WebResponse response)"
         ///         />
         ///     </code>
         /// </example>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out HttpWebResponse response)
         {
-            return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(), out response);
+            return TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(), out response);
         }
 
         /// <summary>
@@ -628,7 +623,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy, out HttpWebResponse response)
         {
-            return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy), out response);
+            return TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy), out response);
         }
 
         /// <summary>
@@ -708,7 +703,7 @@
 
             foreach (Match link in links)
             {
-                Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+                Hashtable linkAttributes = ExtractHtmlAttributes(link.Value);
 
                 if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL") && linkAttributes.ContainsKey("TYPE"))
                 {
@@ -764,7 +759,7 @@
 
             using (StreamReader reader = new StreamReader(stream))
             {
-                return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
+                return ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
             }
         }
 
@@ -783,14 +778,14 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateDiscoverableSyndicationEndpoints method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocateDiscoverableSyndicationEndpoints(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
         public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri)
         {
-            return SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(uri, null);
+            return LocateDiscoverableSyndicationEndpoints(uri, null);
         }
 
         /// <summary>
@@ -823,17 +818,17 @@
 
                 using (Stream stream = webResponse.GetResponseStream())
                 {
-                    return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
+                    return ExtractDiscoverableSyndicationEndpoints(stream);
                 }
             }
         }
 
         /// <summary>
-        /// Extracts a <see cref="HtmlAnchor"/> that represents a pingback auto-discovery link from the supplied HTML markup.
+        /// Extracts a <see cref="Link"/> that represents a pingback auto-discovery link from the supplied HTML markup.
         /// </summary>
         /// <param name="content">The HTML markup to parse.</param>
         /// <returns>
-        ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="content"/>.
+        ///     A <see cref="Link"/> that represents the pingback auto-discovery link extracted from the <paramref name="content"/>.
         ///     If no pingback auto-discovery link was found, returns <b>null</b>.
         /// </returns>
         /// <remarks>
@@ -842,7 +837,7 @@
         ///         &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
         ///     </para>
         ///     <para>
-        ///         The <see cref="HtmlAnchor"/> that is returned will have an <i>Href</i> property that points to the
+        ///         The <see cref="Link"/> that is returned will have an <i>Href</i> property that points to the
         ///         absolute URI of the pingback XML-RPC server, and a <i>rel</i> attribute of pingback.
         ///         The <i>Title</i> property and <i>type</i> attribute will also be extracted if available.
         ///     </para>
@@ -853,10 +848,10 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
-        public static HtmlAnchor ExtractPingbackNotificationServer(string content)
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+        public static Link ExtractPingbackNotificationServer(string content)
         {
-            HtmlAnchor pingbackAnchor = null;
+            Link pingbackAnchor = null;
             Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
@@ -865,7 +860,7 @@
 
             foreach (Match link in links)
             {
-                Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+                Hashtable linkAttributes = ExtractHtmlAttributes(link.Value);
 
                 if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL"))
                 {
@@ -877,7 +872,7 @@
                         Uri uri;
                         if (Uri.TryCreate(href, UriKind.Absolute, out uri))
                         {
-                            pingbackAnchor = new HtmlAnchor();
+                            pingbackAnchor = new Link();
                             pingbackAnchor.HRef = href;
                             pingbackAnchor.Attributes.Add("rel", rel);
 
@@ -948,15 +943,15 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the IsPingbackEnabled method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="IsPingbackEnabled(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static bool IsPingbackEnabled(Uri uri)
         {
-            return SyndicationDiscoveryUtility.IsPingbackEnabled(uri, null);
+            return IsPingbackEnabled(uri, null);
         }
 
         /// <summary>
@@ -1002,7 +997,7 @@
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
         {
             bool isPingbackEnabled = false;
@@ -1040,7 +1035,7 @@
                 {
                     using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                     {
-                        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
+                        Link link = ExtractPingbackNotificationServer(reader.ReadToEnd());
 
                         if (link != null)
                         {
@@ -1098,15 +1093,15 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocatePingbackNotificationServer method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocatePingbackNotificationServer(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static Uri LocatePingbackNotificationServer(Uri uri)
         {
-            return SyndicationDiscoveryUtility.LocatePingbackNotificationServer(uri, null);
+            return LocatePingbackNotificationServer(uri, null);
         }
 
         /// <summary>
@@ -1156,7 +1151,7 @@
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
         {
             Uri pingbackXmlRpcServer = null;
@@ -1194,7 +1189,7 @@
                 {
                     using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
                     {
-                        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
+                        Link link = ExtractPingbackNotificationServer(reader.ReadToEnd());
 
                         if (link != null)
                         {
@@ -1224,7 +1219,7 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
         {
             Collection<TrackbackDiscoveryMetadata> results = new Collection<TrackbackDiscoveryMetadata>();
@@ -1269,14 +1264,14 @@
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
         {
             Guard.ArgumentNotNull(stream, "stream");
 
             using (StreamReader reader = new StreamReader(stream))
             {
-                return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
+                return ExtractTrackbackNotificationServers(reader.ReadToEnd());
             }
         }
 
@@ -1323,15 +1318,15 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the IsTrackbackEnabled method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="IsTrackbackEnabled(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static bool IsTrackbackEnabled(Uri uri)
         {
-            return SyndicationDiscoveryUtility.IsTrackbackEnabled(uri, null);
+            return IsTrackbackEnabled(uri, null);
         }
 
         /// <summary>
@@ -1378,12 +1373,12 @@
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
         {
             Guard.ArgumentNotNull(uri, "uri");
 
-            return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0;
+            return LocateTrackbackNotificationServers(uri, credentials).Count > 0;
         }
 
         /// <summary>
@@ -1401,15 +1396,15 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateTrackbackNotificationServers method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocateTrackbackNotificationServers(Uri uri)"
         ///         />
         ///     </code>
         /// </example>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri)
         {
-            return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, null);
+            return LocateTrackbackNotificationServers(uri, null);
         }
 
         /// <summary>
@@ -1429,7 +1424,7 @@
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
         {
             Guard.ArgumentNotNull(uri, "uri");
@@ -1443,7 +1438,7 @@
 
                 using (Stream stream = webResponse.GetResponseStream())
                 {
-                    return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
+                    return ExtractTrackbackNotificationServers(stream);
                 }
             }
         }

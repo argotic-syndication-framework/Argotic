@@ -1,6 +1,7 @@
 ﻿namespace Argotic.Common
 {
     using System;
+    using System.Reflection;
     using System.Xml.XPath;
 
     /// <summary>
@@ -79,25 +80,23 @@
                 {
                     return SyndicationContentFormat.None;
                 }
-                else
+
+                foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
                 {
-                    foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+                    if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                     {
-                        if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
+                        SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+
+                        if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                            object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+                            MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
+                            string contentType = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
 
-                            if (customAttributes != null && customAttributes.Length > 0)
+                            if (string.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
                             {
-                                MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
-                                string contentType = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
-
-                                if (string.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
-                                {
-                                    syndicationFormat = format;
-                                    break;
-                                }
+                                syndicationFormat = format;
+                                break;
                             }
                         }
                     }
@@ -183,11 +182,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -214,11 +214,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -234,11 +235,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -293,10 +295,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>

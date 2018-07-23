@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.Text;
     using System.Xml.XPath;
 
@@ -30,13 +31,6 @@
         /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
         /// </summary>
         private Collection<Type> supportedSyndicationExtensions;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
-        /// </summary>
-        public SyndicationResourceLoadSettings()
-        {
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
@@ -136,14 +130,13 @@
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else if (value > TimeSpan.FromDays(365))
+
+                if (value > TimeSpan.FromDays(365))
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else
-                {
-                    this.requestTimeout = value;
-                }
+
+                this.requestTimeout = value;
             }
         }
 
@@ -155,11 +148,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceLoadSettings first, SyndicationResourceLoadSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -186,11 +180,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceLoadSettings first, SyndicationResourceLoadSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -206,11 +201,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceLoadSettings first, SyndicationResourceLoadSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -227,7 +223,7 @@
         /// </remarks>
         public override string ToString()
         {
-            return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(NumberFormatInfo.InvariantInfo));
         }
 
         /// <summary>
@@ -255,10 +251,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>

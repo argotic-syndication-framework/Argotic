@@ -13,7 +13,7 @@
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ISyndicationResource interface.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\ISyndicationResourceExample.cs"
+    ///             source="..\..\Argotic.Examples\Common\ISyndicationResourceExample.cs"
     ///         />
     ///     </code>
     /// </example>
@@ -464,7 +464,7 @@
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
         /// <remarks>
         ///     <para>
         ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
@@ -499,7 +499,7 @@
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ISyndicationResource"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance.</param>
         /// <remarks>
         ///     Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="XmlWriter"/> using the <see cref="SyndicationResourceSaveSettings"/>.
         /// </remarks>

@@ -13,7 +13,8 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 

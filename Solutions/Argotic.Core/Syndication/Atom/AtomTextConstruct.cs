@@ -17,25 +17,12 @@
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomTextConstruct class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomTextConstructExample.cs"
-    ///             region="AtomTextConstruct"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomTextConstructExample.cs" region="AtomTextConstruct" />
     ///     </code>
     /// </example>
     [Serializable]
     public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
     {
-        /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -45,11 +32,6 @@
         /// Private member to hold the content of the human-readable text.
         /// </summary>
         private string textConstructContent = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the entity encoding utilized by the human-readable text.
-        /// </summary>
-        private AtomTextConstructType textConstructType = AtomTextConstructType.None;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomTextConstruct"/> class.
@@ -79,18 +61,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets the content of this human-readable text.
@@ -108,14 +79,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.textConstructContent = string.Empty;
-                }
-                else
-                {
-                    this.textConstructContent = value.Trim();
-                }
+                this.textConstructContent = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -131,12 +95,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -167,18 +126,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the entity encoding utilized by this human-readable text.
@@ -187,18 +135,7 @@
         ///     An <see cref="AtomTextConstructType"/> enumeration value that represents the entity encoding utilized by this human-readable text.
         ///     The default value is <see cref="AtomTextConstructType.None"/>.
         /// </value>
-        public AtomTextConstructType TextType
-        {
-            get
-            {
-                return this.textConstructType;
-            }
-
-            set
-            {
-                this.textConstructType = value;
-            }
-        }
+        public AtomTextConstructType TextType { get; set; } = AtomTextConstructType.None;
 
         /// <summary>
         /// Determines if operands are equal.
@@ -212,7 +149,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -232,7 +170,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -263,7 +202,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -289,19 +229,15 @@
             {
                 if (fieldInfo.FieldType == typeof(AtomTextConstructType))
                 {
-                    AtomTextConstructType constructType =
-                        (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    AtomTextConstructType constructType = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                     if (constructType == type)
                     {
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(
-                            typeof(EnumerationMetadataAttribute),
-                            false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata =
-                                customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
                             name = enumerationMetadata.AlternateValue;
                             break;
@@ -337,17 +273,13 @@
                 if (fieldInfo.FieldType == typeof(AtomTextConstructType))
                 {
                     AtomTextConstructType type = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(
-                        typeof(EnumerationMetadataAttribute),
-                        false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
-                        EnumerationMetadataAttribute enumerationMetadata =
-                            customAttributes[0] as EnumerationMetadataAttribute;
+                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase)
-                            == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             constructType = type;
                             break;
@@ -399,16 +331,14 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
         }
 
         /// <summary>
@@ -469,8 +399,11 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
+
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
                 wasLoaded = true;
@@ -479,9 +412,11 @@
             if (source.HasAttributes)
             {
                 string typeAttribute = source.GetAttribute("type", string.Empty);
+
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
                     AtomTextConstructType type = ConstructTypeByName(typeAttribute);
+
                     if (type != AtomTextConstructType.None)
                     {
                         this.TextType = type;
@@ -493,6 +428,7 @@
             if (this.TextType == AtomTextConstructType.Xhtml)
             {
                 XPathNavigator xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
+
                 if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
                 {
                     this.Content = xhtmlDivNavigator.Value;
@@ -527,8 +463,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -548,7 +486,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -569,10 +509,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -600,11 +537,11 @@
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(elementName, "elementName");
+
             writer.WriteStartElement(elementName, AtomUtility.AtomNamespace);
             AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-            if (this.TextType == AtomTextConstructType.Xhtml
-                && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
+            if (this.TextType == AtomTextConstructType.Xhtml && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
             {
                 writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
             }

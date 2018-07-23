@@ -38,10 +38,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomEntry class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-    ///             region="AtomEntry"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="AtomEntry" />
     ///     </code>
     /// </example>
     [Serializable]
@@ -604,10 +601,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Create(Uri source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Create(Uri source)" />
         ///     </code>
         /// </example>
         public static AtomEntry Create(Uri source)
@@ -789,9 +783,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Load(IXPathNavigable source)"
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Load(IXPathNavigable source)"
         ///         />
         ///     </code>
         /// </example>
@@ -836,10 +828,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Load(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Load(Stream stream)" />
         ///     </code>
         /// </example>
         public void Load(Stream stream)
@@ -884,10 +873,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Load(XmlReader reader)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Load(XmlReader reader)" />
         ///     </code>
         /// </example>
         public void Load(XmlReader reader)
@@ -949,10 +935,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
@@ -981,10 +964,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Load(Uri source, WebRequestOptions options)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Load(Uri source, WebRequestOptions options)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, WebRequestOptions options)
@@ -1114,14 +1094,8 @@
         /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="LoadAsync(Uri source, Object userToken)"
-        ///         />
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="LoadAsync(Uri source, Object userToken)" />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" />
         ///     </code>
         /// </example>
         public void LoadAsync(Uri source, object userToken)
@@ -1296,10 +1270,7 @@
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Save(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Save(Stream stream)" />
         ///     </code>
         /// </example>
         public void Save(Stream stream)
@@ -1311,7 +1282,7 @@
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
@@ -1343,9 +1314,7 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomEntryExample.cs"
-        ///             region="Save(XmlWriter writer)"
-        ///         />
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs" region="Save(XmlWriter writer)" />
         ///     </code>
         /// </example>
         public void Save(XmlWriter writer)
@@ -1359,7 +1328,7 @@
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="AtomEntry"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomEntry"/> instance.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>

@@ -16,16 +16,10 @@
     /// <seealso cref="ApmlDocument.Applications"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlApplication class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlApplicationExample.cs"
-    ///             region="ApmlApplication"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Apml\ApmlApplicationExample.cs" region="ApmlApplication" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
     [Serializable]
     public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     {
@@ -78,14 +72,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.applicationData = string.Empty;
-                }
-                else
-                {
-                    this.applicationData = value.Trim();
-                }
+                this.applicationData = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -101,12 +88,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -160,7 +142,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -180,7 +163,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -211,7 +195,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -228,7 +213,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -257,16 +244,14 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
         }
 
         /// <summary>
@@ -300,7 +285,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -327,7 +314,9 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (source.HasAttributes)
             {
                 string nameAttribute = source.GetAttribute("name", string.Empty);
@@ -362,8 +351,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -383,7 +374,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -404,10 +397,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -431,6 +421,7 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             writer.WriteStartElement("Application", ApmlUtility.ApmlNamespace);
 
             writer.WriteAttributeString("name", this.Name);

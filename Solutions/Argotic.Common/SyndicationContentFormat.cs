@@ -1,6 +1,7 @@
 ﻿namespace Argotic.Common
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Specifies the web content syndication format that the syndicated content conforms to.
@@ -19,7 +20,7 @@
         /// <summary>
         /// Indicates that the syndication resource conforms to the Attention Profiling Markup Language (APML) 1.0 syndication format.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
         [EnumerationMetadata(DisplayName = "APML 1.0", AlternateValue = "APML")]
         [MimeMediaType(Name = "text", SubName = "x-apml", Documentation = "http://www.apml.org")]
         Apml = 1,
@@ -62,7 +63,7 @@
         /// <summary>
         /// Indicates that the syndication resource conforms to the Outline Processor Markup Language (OPML) 2.0 syndication format.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
         [EnumerationMetadata(DisplayName = "OPML 2.0", AlternateValue = "opml")]
         [MimeMediaType(Name = "text", SubName = "x-opml", Documentation = "http://www.opml.org/spec2")]
         Opml = 7,
@@ -70,7 +71,7 @@
         /// <summary>
         /// Indicates that the syndication resource conforms to the Really Simple Discovery (RSD) 1.0 syndication format.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
         [EnumerationMetadata(DisplayName = "RSD 1.0", AlternateValue = "rsd")]
         [MimeMediaType(Name = "application", SubName = "rsd+xml", Documentation = "http://cyber.law.harvard.edu/blogs/gems/tech/rsd.html")]
         Rsd = 8,
@@ -78,7 +79,7 @@
         /// <summary>
         /// Indicates that the syndication resource conforms to the Really Simple Syndication (RSS) 2.0 syndication format.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
         [EnumerationMetadata(DisplayName = "RSS 2.0", AlternateValue = "rss")]
         [MimeMediaType(Name = "application", SubName = "rss+xml", Documentation = "http://www.rssboard.org/rss-specification")]
         Rss = 9,
@@ -86,7 +87,7 @@
         /// <summary>
         /// Indicates that the syndication resource conforms to the Resource Description Framework (RDF) 1.0 syndication format.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rdf")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rdf")]
         [EnumerationMetadata(DisplayName = "RDF 1.0", AlternateValue = "RDF")]
         [MimeMediaType(Name = "application", SubName = "rdf+xml", Documentation = "http://w3.org/TR/2003/WD-rdf-concepts-20030123/#ref-rdf-mime-type")]
         Rdf = 10,

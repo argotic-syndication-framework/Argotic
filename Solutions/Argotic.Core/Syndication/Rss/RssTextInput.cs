@@ -16,16 +16,10 @@
     /// <seealso cref="RssChannel.TextInput"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssTextInput class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssTextInputExample.cs"
-    ///             region="RssTextInput"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rss\RssTextInputExample.cs" region="RssTextInput" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     [Serializable]
     public class RssTextInput : IComparable, IExtensibleSyndicationObject
     {
@@ -115,12 +109,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -217,7 +206,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -237,7 +227,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -268,7 +259,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -285,7 +277,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -310,27 +304,14 @@
             if (value != null)
             {
                 int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result = result | Uri.Compare(
-                             this.Link,
-                             value.Link,
-                             UriComponents.AbsoluteUri,
-                             UriFormat.SafeUnescaped,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -364,7 +345,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -391,7 +374,9 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
             XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
             XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
@@ -409,8 +394,7 @@
 
             if (linkNavigator != null)
             {
-                Uri link;
-                if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+                if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out var link))
                 {
                     this.Link = link;
                     wasLoaded = true;
@@ -452,8 +436,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -473,7 +459,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -494,10 +482,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -521,8 +506,8 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("textInput");
 
+            writer.WriteStartElement("textInput");
             writer.WriteElementString("description", this.Description);
             writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
             writer.WriteElementString("name", this.Name);

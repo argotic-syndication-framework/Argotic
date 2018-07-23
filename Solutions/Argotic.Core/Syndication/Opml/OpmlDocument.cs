@@ -32,16 +32,10 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the OpmlDocument class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-    ///             region="OpmlDocument"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="OpmlDocument" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Opml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
     [Serializable]
     public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
@@ -276,10 +270,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Create(Uri source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Create(Uri source)" />
         ///     </code>
         /// </example>
         public static OpmlDocument Create(Uri source)
@@ -475,10 +466,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Load(IXPathNavigable source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Load(IXPathNavigable source)" />
         ///     </code>
         /// </example>
         public void Load(IXPathNavigable source)
@@ -521,10 +509,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Load(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Load(Stream stream)" />
         ///     </code>
         /// </example>
         public void Load(Stream stream)
@@ -568,10 +553,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Load(XmlReader reader)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Load(XmlReader reader)" />
         ///     </code>
         /// </example>
         public void Load(XmlReader reader)
@@ -632,10 +614,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
@@ -664,10 +643,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Load(Uri source, WebRequestOptions options)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Load(Uri source, WebRequestOptions options)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, WebRequestOptions options)
@@ -795,14 +771,8 @@
         /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="LoadAsync(Uri source, Object userToken)"
-        ///         />
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="LoadAsync(Uri source, Object userToken)" />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" />
         ///     </code>
         /// </example>
         public void LoadAsync(Uri source, object userToken)
@@ -993,10 +963,7 @@
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Save(Stream stream)"
-        ///         />
+        ///         <code  source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Save(Stream stream)" />
         ///     </code>
         /// </example>
         public void Save(Stream stream)
@@ -1008,7 +975,7 @@
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
@@ -1039,10 +1006,7 @@
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlDocumentExample.cs"
-        ///             region="Save(XmlWriter writer)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" region="Save(XmlWriter writer)" />
         ///     </code>
         /// </example>
         public void Save(XmlWriter writer)
@@ -1055,7 +1019,7 @@
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="OpmlDocument"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="OpmlDocument"/> instance.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>

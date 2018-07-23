@@ -6,7 +6,9 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
+    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="StyleCop.Analyzers" Version="1.1.0-beta008" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

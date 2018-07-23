@@ -43,9 +43,7 @@
         /// <returns>A <see cref="SyndicationResourceCreateStatus"/> enumeration value indicating whether the syndication resource was created successfully.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        public abstract SyndicationResourceCreateStatus CreateResource(
-            object providerResourceKey,
-            ISyndicationResource resource);
+        public abstract SyndicationResourceCreateStatus CreateResource(object providerResourceKey, ISyndicationResource resource);
 
         /// <summary>
         /// Removes a resource from the syndication data source.
@@ -104,14 +102,8 @@
         /// </remarks>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="pageIndex"/> is <i>less than</i> zero.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="pageSize"/> is <i>less than or equal to</i> zero.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(
-            "Microsoft.Design",
-            "CA1021:AvoidOutParameters",
-            MessageId = "2#")]
-        public abstract Collection<ISyndicationResource> GetResources(
-            int pageIndex,
-            int pageSize,
-            out int totalRecords);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
+        public abstract Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords);
 
         /// <summary>
         /// Updates information about a syndication resource in the data source.

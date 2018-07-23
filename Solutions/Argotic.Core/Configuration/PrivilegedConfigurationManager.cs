@@ -39,10 +39,7 @@
             {
                 if (configurationManagerSyndicationResourceSyncObject == null)
                 {
-                    Interlocked.CompareExchange(
-                        ref configurationManagerSyndicationResourceSyncObject,
-                        new object(),
-                        null);
+                    Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new object(), null);
                 }
 
                 return configurationManagerSyndicationResourceSyncObject;

@@ -19,10 +19,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the BasicGeocodingSyndicationExtension class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\BasicGeocodingSyndicationExtensionExample.cs"
-    ///             region="BasicGeocodingSyndicationExtension"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Extensions\Core\BasicGeocodingSyndicationExtensionExample.cs" region="BasicGeocodingSyndicationExtension" />
     ///     </code>
     /// </example>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Geocoding")]
@@ -147,6 +144,7 @@
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
+
             if (extension.GetType() == typeof(BasicGeocodingSyndicationExtension))
             {
                 return true;
@@ -176,6 +174,7 @@
             if (degreesAsString.Contains("."))
             {
                 string[] degreesParts = degreesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
                 if (degreesParts.Length == 2)
                 {
                     degreesPart = degreesParts[0];
@@ -185,9 +184,11 @@
                         decimal minutes = decimal.Multiply(fractionalValue, multiplier);
 
                         string minutesAsString = minutes.ToString(NumberFormatInfo.InvariantInfo);
+
                         if (minutesAsString.Contains("."))
                         {
                             string[] minutesParts = minutesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
                             if (minutesParts.Length == 2)
                             {
                                 minutesPart = minutesParts[0];
@@ -219,7 +220,9 @@
             decimal degrees;
             decimal minutes;
             decimal seconds;
+
             Guard.ArgumentNotNullOrEmptyString(degreesMinutesSeconds, "degreesMinutesSeconds");
+
             if (!degreesMinutesSeconds.Contains("°"))
             {
                 throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
@@ -272,8 +275,6 @@
             XPathDocument document = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator());
-
-            // return this.Load(document);
         }
 
         /// <summary>
@@ -294,7 +295,9 @@
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XPathNavigator navigator = source.CreateNavigator();
             wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
             SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
@@ -325,10 +328,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -367,7 +367,6 @@
                 result = result | this.Version.CompareTo(value.Version);
                 result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
                 result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
-
                 result = result | this.Context.Latitude.CompareTo(value.Context.Latitude);
                 result = result | this.Context.Longitude.CompareTo(value.Context.Longitude);
 

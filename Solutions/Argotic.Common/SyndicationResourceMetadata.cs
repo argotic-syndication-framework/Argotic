@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Xml;
     using System.Xml.XPath;
 
@@ -70,11 +72,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -101,11 +104,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -121,11 +125,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -144,8 +149,8 @@
         {
             string format = this.Format.ToString();
             string version = this.Version != null ? this.Version.ToString() : string.Empty;
-            string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+            string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
 
             return string.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
         }
@@ -206,10 +211,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -291,8 +294,8 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "<Pending>")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "<Pending>")]
         protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -306,7 +309,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("APML", manager)) != null || (navigator = resource.SelectSingleNode("apml:APML", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.apml.org/apml-0.6"))
@@ -330,7 +333,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -345,7 +348,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("feed", manager)) != null || (navigator = resource.SelectSingleNode("atom:feed", manager)) != null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
@@ -367,7 +370,7 @@
             }
             else if ((navigator = resource.SelectSingleNode("entry", manager)) != null || (navigator = resource.SelectSingleNode("atom:entry", manager)) != null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
@@ -399,7 +402,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -415,7 +418,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("categories", manager)) != null || (navigator = resource.SelectSingleNode("app:categories", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
@@ -439,7 +442,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -455,7 +458,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("service", manager)) != null || (navigator = resource.SelectSingleNode("app:service", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
@@ -479,7 +482,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseBlogMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -493,7 +496,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("blog", manager)) != null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.blogml.com/2006/09/BlogML"))
@@ -517,7 +520,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -531,7 +534,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("generator", manager)) != null || (navigator = resource.SelectSingleNode("micro:generator", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://www.mozilla.org/microsummaries/0.1"))
@@ -555,7 +558,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseNewsMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -565,7 +568,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("NewsML")) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
 
                 resourceConformsToFormat = true;
                 if (version == null)
@@ -585,7 +588,7 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a OpenSearch Description formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -599,7 +602,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) != null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://a9.com/-/spec/opensearch/1.1/"))
@@ -623,8 +626,8 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -634,7 +637,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("opml")) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
 
                 resourceConformsToFormat = true;
                 if (version == null)
@@ -654,8 +657,8 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -669,7 +672,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("rsd", manager)) != null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://archipelago.phrasewise.com/rsd"))
@@ -698,8 +701,8 @@
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -715,7 +718,7 @@
             version = null;
             if ((navigator = resource.SelectSingleNode("rss", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 resourceConformsToFormat = true;
@@ -726,7 +729,7 @@
             }
             else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) != null)
             {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+                version = GetVersionFromAttribute(navigator, "version");
                 Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
                 if (namespaces.ContainsValue("http://purl.org/rss/1.0/"))
@@ -762,69 +765,69 @@
                 this.Namespaces.Add(prefix, namespaces[prefix]);
             }
 
-            this.Version = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
+            this.Version = GetVersionFromAttribute(resource, "version");
 
-            if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
+            if (TryParseApmlResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.Apml;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version))
+            else if (TryParseAtomResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.Atom;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
+            else if (TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.AtomCategoryDocument;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(resource, out navigator, out version))
+            else if (TryParseAtomPublishingServiceResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.AtomServiceDocument;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseBlogMlResource(resource, out navigator, out version))
+            else if (TryParseBlogMlResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.BlogML;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
+            else if (TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.MicroSummaryGenerator;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseNewsMlResource(resource, out navigator, out version))
+            else if (TryParseNewsMlResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.NewsML;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
+            else if (TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.OpenSearchDescription;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseOpmlResource(resource, out navigator, out version))
+            else if (TryParseOpmlResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.Opml;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseRsdResource(resource, out navigator, out version))
+            else if (TryParseRsdResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.Rsd;
                 this.resourceRootNode = navigator;
                 this.Version = version;
             }
-            else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
+            else if (TryParseRssResource(resource, out navigator, out version))
             {
                 this.Format = SyndicationContentFormat.Rss;
                 this.resourceRootNode = navigator;

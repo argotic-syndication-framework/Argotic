@@ -19,10 +19,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the FeedSynchronizationSyndicationExtension class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\FeedSynchronizationSyndicationExtensionExample.cs"
-    ///             region="FeedSynchronizationSyndicationExtension"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Extensions\Core\FeedSynchronizationSyndicationExtensionExample.cs" region="FeedSynchronizationSyndicationExtension" />
     ///     </code>
     /// </example>
     [Serializable]
@@ -146,6 +143,7 @@
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
+
             if (extension.GetType() == typeof(FeedSynchronizationSyndicationExtension))
             {
                 return true;
@@ -165,7 +163,9 @@
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XPathNavigator navigator = source.CreateNavigator();
             wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
             SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
@@ -196,6 +196,7 @@
         public override void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             this.Context.WriteTo(writer, this.XmlNamespace);
         }
 
@@ -210,10 +211,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -242,7 +240,7 @@
                 return 1;
             }
 
-            FeedSynchronizationSyndicationExtension value = obj as FeedSynchronizationSyndicationExtension;
+            var value = obj as FeedSynchronizationSyndicationExtension;
 
             if (value != null)
             {

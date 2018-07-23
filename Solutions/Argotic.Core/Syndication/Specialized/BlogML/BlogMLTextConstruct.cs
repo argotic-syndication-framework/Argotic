@@ -191,7 +191,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -211,7 +212,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -242,7 +244,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -257,10 +260,7 @@
         /// <returns>The text construct identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeAsString method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLTextConstructExample.cs"
-        ///             region="ConstructTypeAsString(BlogMLContentType type)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" region="ConstructTypeAsString(BlogMLContentType type)" />
         ///     </code>
         /// </example>
         public static string ConstructTypeAsString(BlogMLContentType type)
@@ -270,20 +270,15 @@
             {
                 if (fieldInfo.FieldType == typeof(BlogMLContentType))
                 {
-                    BlogMLContentType constructType = (BlogMLContentType)Enum.Parse(
-                        fieldInfo.FieldType,
-                        fieldInfo.Name);
+                    BlogMLContentType constructType = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                     if (constructType == type)
                     {
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(
-                            typeof(EnumerationMetadataAttribute),
-                            false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata =
-                                customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
                             name = enumerationMetadata.AlternateValue;
                             break;
@@ -305,32 +300,27 @@
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeByName method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLTextConstructExample.cs"
-        ///             region="ConstructTypeByName(string name)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" region="ConstructTypeByName(string name)" />
         ///     </code>
         /// </example>
         public static BlogMLContentType ConstructTypeByName(string name)
         {
             BlogMLContentType constructType = BlogMLContentType.None;
+
             Guard.ArgumentNotNullOrEmptyString(name, "name");
+
             foreach (FieldInfo fieldInfo in typeof(BlogMLContentType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(BlogMLContentType))
                 {
                     BlogMLContentType type = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(
-                        typeof(EnumerationMetadataAttribute),
-                        false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
-                        EnumerationMetadataAttribute enumerationMetadata =
-                            customAttributes[0] as EnumerationMetadataAttribute;
+                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase)
-                            == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             constructType = type;
                             break;
@@ -351,7 +341,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -380,16 +372,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -423,6 +407,7 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
             return list.Find(match);
         }
@@ -450,13 +435,17 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (source.HasAttributes)
             {
                 string typeAttribute = source.GetAttribute("type", string.Empty);
+
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
                     BlogMLContentType type = ConstructTypeByName(typeAttribute);
+
                     if (type != BlogMLContentType.None)
                     {
                         this.ContentType = type;
@@ -488,8 +477,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -509,7 +500,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -530,10 +523,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -561,6 +551,7 @@
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(elementName, "elementName");
+
             writer.WriteStartElement(elementName, BlogMLUtility.BlogMLNamespace);
 
             if (this.ContentType != BlogMLContentType.None)

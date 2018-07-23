@@ -16,16 +16,10 @@
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the OpmlOutline class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlOutlineExample.cs"
-    ///             region="OpmlOutline"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Opml\OpmlOutlineExample.cs" region="OpmlOutline" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Opml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
     [Serializable]
     public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
@@ -43,21 +37,6 @@
         /// Private member to hold a collection that describes the categorization taxonomy applied to the outline.
         /// </summary>
         private Collection<string> outlineCategories;
-
-        /// <summary>
-        /// Private member to hold a date-time that indicates when the outline was created.
-        /// </summary>
-        private DateTime outlineCreatedOn = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold a value indicating whether a breakpoint is set on the outline.
-        /// </summary>
-        private bool outlineHasBreakpointSet;
-
-        /// <summary>
-        /// Private member to hold a value indicating whether the outline is commented or not.
-        /// </summary>
-        private bool outlineIsCommented;
 
         /// <summary>
         /// Private member to hold a collection of outlines that are children of the outline.
@@ -107,12 +86,7 @@
         {
             get
             {
-                if (this.outlineAttributes == null)
-                {
-                    this.outlineAttributes = new Dictionary<string, string>();
-                }
-
-                return this.outlineAttributes;
+                return this.outlineAttributes ?? (this.outlineAttributes = new Dictionary<string, string>());
             }
         }
 
@@ -128,12 +102,7 @@
         {
             get
             {
-                if (this.outlineCategories == null)
-                {
-                    this.outlineCategories = new Collection<string>();
-                }
-
-                return this.outlineCategories;
+                return this.outlineCategories ?? (this.outlineCategories = new Collection<string>());
             }
         }
 
@@ -150,14 +119,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.outlineType = string.Empty;
-                }
-                else
-                {
-                    this.outlineType = value.Trim();
-                }
+                this.outlineType = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -171,18 +133,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return this.outlineCreatedOn;
-            }
-
-            set
-            {
-                this.outlineCreatedOn = value;
-            }
-        }
+        public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -196,12 +147,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -218,18 +164,7 @@
         /// <remarks>
         ///     This property is mainly necessary for outlines used to edit scripts. If it's not present, the value is <b>false</b>.
         /// </remarks>
-        public bool HasBreakpoint
-        {
-            get
-            {
-                return this.outlineHasBreakpointSet;
-            }
-
-            set
-            {
-                this.outlineHasBreakpointSet = value;
-            }
-        }
+        public bool HasBreakpoint { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -250,18 +185,7 @@
         /// <remarks>
         ///     By convention if an outline is commented, all subordinate outlines are considered to also be commented. If it's not present, the value is <b>false</b>.
         /// </remarks>
-        public bool IsCommented
-        {
-            get
-            {
-                return this.outlineIsCommented;
-            }
-
-            set
-            {
-                this.outlineIsCommented = value;
-            }
-        }
+        public bool IsCommented { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this outline represents an inclusion.
@@ -299,12 +223,7 @@
         {
             get
             {
-                if (this.outlineSubordinateOutlines == null)
-                {
-                    this.outlineSubordinateOutlines = new Collection<OpmlOutline>();
-                }
-
-                return this.outlineSubordinateOutlines;
+                return this.outlineSubordinateOutlines ?? (this.outlineSubordinateOutlines = new Collection<OpmlOutline>());
             }
         }
 
@@ -343,7 +262,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -363,7 +283,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -394,7 +315,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -424,6 +346,7 @@
         public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
         {
             int result = 0;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -471,19 +394,12 @@
         public static OpmlOutline CreateInclusionOutline(string text, Uri url)
         {
             OpmlOutline outline = new OpmlOutline();
+
             Guard.ArgumentNotNullOrEmptyString(text, "text");
             Guard.ArgumentNotNull(url, "url");
 
             outline.Text = text;
-            if (url.ToString().EndsWith(".opml", StringComparison.OrdinalIgnoreCase))
-            {
-                outline.ContentType = "include";
-            }
-            else
-            {
-                outline.ContentType = "link";
-            }
-
+            outline.ContentType = url.ToString().EndsWith(".opml", StringComparison.OrdinalIgnoreCase) ? "include" : "link";
             outline.Attributes.Add("url", url.ToString());
 
             return outline;
@@ -513,15 +429,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference (Nothing in Visual Basic).</exception>
         public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
         {
-            return CreateSubscriptionListOutline(
-                text,
-                type,
-                xmlUrl,
-                null,
-                string.Empty,
-                string.Empty,
-                string.Empty,
-                null);
+            return CreateSubscriptionListOutline(text, type, xmlUrl, null, string.Empty, string.Empty, string.Empty, null);
         }
 
         /// <summary>
@@ -555,15 +463,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static OpmlOutline CreateSubscriptionListOutline(
-            string text,
-            string type,
-            Uri xmlUrl,
-            Uri htmlUrl,
-            string version,
-            string title,
-            string description,
-            CultureInfo language)
+        public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
         {
             OpmlOutline outline = new OpmlOutline();
             Guard.ArgumentNotNullOrEmptyString(text, "text");
@@ -611,7 +511,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -641,28 +543,14 @@
                 result = result | this.IsCommented.CompareTo(value.IsCommented);
                 result = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
 
-                result = result | ComparisonUtility.CompareSequence(
-                             this.Attributes,
-                             value.Attributes,
-                             StringComparison.OrdinalIgnoreCase);
-                result = result | ComparisonUtility.CompareSequence(
-                             this.Categories,
-                             value.Categories,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
                 result = result | CompareSequence(this.Outlines, value.Outlines);
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -696,7 +584,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -723,10 +613,13 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (source.HasAttributes)
             {
                 XPathNavigator attributesNavigator = source.CreateNavigator();
+
                 if (attributesNavigator.MoveToFirstAttribute())
                 {
                     if (this.LoadAttribute(attributesNavigator))
@@ -747,11 +640,13 @@
             if (source.HasChildren)
             {
                 XPathNodeIterator outlinesIterator = source.Select("outline");
+
                 if (outlinesIterator != null && outlinesIterator.Count > 0)
                 {
                     while (outlinesIterator.MoveNext())
                     {
                         OpmlOutline outline = new OpmlOutline();
+
                         if (outline.Load(outlinesIterator.Current))
                         {
                             this.Outlines.Add(outline);
@@ -778,10 +673,13 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (source.HasAttributes)
             {
                 XPathNavigator attributesNavigator = source.CreateNavigator();
+
                 if (attributesNavigator.MoveToFirstAttribute())
                 {
                     if (this.LoadAttribute(attributesNavigator))
@@ -802,11 +700,13 @@
             if (source.HasChildren)
             {
                 XPathNodeIterator outlinesIterator = source.Select("outline");
+
                 if (outlinesIterator != null && outlinesIterator.Count > 0)
                 {
                     while (outlinesIterator.MoveNext())
                     {
                         OpmlOutline outline = new OpmlOutline();
+
                         if (outline.Load(outlinesIterator.Current, settings))
                         {
                             this.Outlines.Add(outline);
@@ -834,7 +734,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -855,10 +757,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -882,8 +781,8 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("outline");
 
+            writer.WriteStartElement("outline");
             writer.WriteAttributeString("text", this.Text);
 
             if (!string.IsNullOrEmpty(this.ContentType))
@@ -943,6 +842,7 @@
         private bool LoadAttribute(XPathNavigator attribute)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(attribute, "attribute");
 
             if (string.IsNullOrEmpty(attribute.Value))
@@ -962,8 +862,7 @@
             }
             else if (string.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                bool isComment;
-                if (bool.TryParse(attribute.Value, out isComment))
+                if (bool.TryParse(attribute.Value, out var isComment))
                 {
                     this.IsCommented = isComment;
                     wasLoaded = true;
@@ -971,8 +870,7 @@
             }
             else if (string.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                bool isBreakpoint;
-                if (bool.TryParse(attribute.Value, out isBreakpoint))
+                if (bool.TryParse(attribute.Value, out var isBreakpoint))
                 {
                     this.HasBreakpoint = isBreakpoint;
                     wasLoaded = true;
@@ -980,8 +878,7 @@
             }
             else if (string.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                DateTime created;
-                if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out created))
+                if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out var created))
                 {
                     this.CreatedOn = created;
                     wasLoaded = true;
@@ -991,9 +888,7 @@
             {
                 if (attribute.Value.Contains(","))
                 {
-                    string[] categories = attribute.Value.Split(
-                        ",".ToCharArray(),
-                        StringSplitOptions.RemoveEmptyEntries);
+                    string[] categories = attribute.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     foreach (string category in categories)
                     {
                         this.Categories.Add(category);

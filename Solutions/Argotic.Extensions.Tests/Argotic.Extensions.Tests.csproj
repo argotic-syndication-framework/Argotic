@@ -10,8 +10,9 @@
     <Product>Argotic Syndication Framework</Product>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
-    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>

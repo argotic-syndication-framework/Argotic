@@ -29,25 +29,12 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomSource class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomSourceExample.cs"
-    ///             region="AtomSource"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomSourceExample.cs" region="AtomSource" />
     ///     </code>
     /// </example>
     [Serializable]
     public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-        /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
@@ -69,49 +56,9 @@
         private Collection<AtomPersonConstruct> sourceContributors;
 
         /// <summary>
-        /// Private member to hold the agent used to generate the source.
-        /// </summary>
-        private AtomGenerator sourceGenerator;
-
-        /// <summary>
-        /// Private member to hold an image that provides iconic visual identification for the source.
-        /// </summary>
-        private AtomIcon sourceIcon;
-
-        /// <summary>
-        /// Private member to hold a permanent, universally unique identifier for the source.
-        /// </summary>
-        private AtomId sourceId;
-
-        /// <summary>
         /// Private member to hold eferences from the source to one or more Web resources.
         /// </summary>
         private Collection<AtomLink> sourceLinks;
-
-        /// <summary>
-        /// Private member to hold an image that provides visual identification for the source.
-        /// </summary>
-        private AtomLogo sourceLogo;
-
-        /// <summary>
-        /// Private member to hold information about rights held in and over the source.
-        /// </summary>
-        private AtomTextConstruct sourceRights;
-
-        /// <summary>
-        /// Private member to hold inofmration that conveys a human-readable description or subtitle for the source.
-        /// </summary>
-        private AtomTextConstruct sourceSubtitle;
-
-        /// <summary>
-        /// Private member to hold information that conveys a human-readable title for the source.
-        /// </summary>
-        private AtomTextConstruct sourceTitle;
-
-        /// <summary>
-        /// Private member to hold a value indicating the most recent instant in time when the source was modified in a way the publisher considers significant.
-        /// </summary>
-        private DateTime sourceUpdatedOn = DateTime.MinValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomSource"/> class.
@@ -144,12 +91,7 @@
         {
             get
             {
-                if (this.sourceAuthors == null)
-                {
-                    this.sourceAuthors = new Collection<AtomPersonConstruct>();
-                }
-
-                return this.sourceAuthors;
+                return this.sourceAuthors ?? (this.sourceAuthors = new Collection<AtomPersonConstruct>());
             }
         }
 
@@ -162,18 +104,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets the categories associated with this source.
@@ -183,12 +114,7 @@
         {
             get
             {
-                if (this.sourceCategories == null)
-                {
-                    this.sourceCategories = new Collection<AtomCategory>();
-                }
-
-                return this.sourceCategories;
+                return this.sourceCategories ?? (this.sourceCategories = new Collection<AtomCategory>());
             }
         }
 
@@ -200,12 +126,7 @@
         {
             get
             {
-                if (this.sourceContributors == null)
-                {
-                    this.sourceContributors = new Collection<AtomPersonConstruct>();
-                }
-
-                return this.sourceContributors;
+                return this.sourceContributors ?? (this.sourceContributors = new Collection<AtomPersonConstruct>());
             }
         }
 
@@ -221,12 +142,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -240,18 +156,7 @@
         /// Gets or sets the agent used to generate this source.
         /// </summary>
         /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this source. The default value is a <b>null</b> reference.</value>
-        public AtomGenerator Generator
-        {
-            get
-            {
-                return this.sourceGenerator;
-            }
-
-            set
-            {
-                this.sourceGenerator = value;
-            }
-        }
+        public AtomGenerator Generator { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -272,35 +177,13 @@
         /// <remarks>
         ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
         /// </remarks>
-        public AtomIcon Icon
-        {
-            get
-            {
-                return this.sourceIcon;
-            }
-
-            set
-            {
-                this.sourceIcon = value;
-            }
-        }
+        public AtomIcon Icon { get; set; }
 
         /// <summary>
         /// Gets or sets a permanent, universally unique identifier for this source.
         /// </summary>
         /// <value>A <see cref="AtomId"/> object that represents a permanent, universally unique identifier for this source.</value>
-        public AtomId Id
-        {
-            get
-            {
-                return this.sourceId;
-            }
-
-            set
-            {
-                this.sourceId = value;
-            }
-        }
+        public AtomId Id { get; set; }
 
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
@@ -311,18 +194,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets references from this source to one or more Web resources.
@@ -332,12 +204,7 @@
         {
             get
             {
-                if (this.sourceLinks == null)
-                {
-                    this.sourceLinks = new Collection<AtomLink>();
-                }
-
-                return this.sourceLinks;
+                return this.sourceLinks ?? (this.sourceLinks = new Collection<AtomLink>());
             }
         }
 
@@ -348,18 +215,7 @@
         /// <remarks>
         ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
         /// </remarks>
-        public AtomLogo Logo
-        {
-            get
-            {
-                return this.sourceLogo;
-            }
-
-            set
-            {
-                this.sourceLogo = value;
-            }
-        }
+        public AtomLogo Logo { get; set; }
 
         /// <summary>
         /// Gets or sets information about rights held in and over this source.
@@ -368,52 +224,19 @@
         /// <remarks>
         ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
         /// </remarks>
-        public AtomTextConstruct Rights
-        {
-            get
-            {
-                return this.sourceRights;
-            }
-
-            set
-            {
-                this.sourceRights = value;
-            }
-        }
+        public AtomTextConstruct Rights { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a human-readable description or subtitle for this source.
         /// </summary>
         /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this source.</value>
-        public AtomTextConstruct Subtitle
-        {
-            get
-            {
-                return this.sourceSubtitle;
-            }
-
-            set
-            {
-                this.sourceSubtitle = value;
-            }
-        }
+        public AtomTextConstruct Subtitle { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a human-readable title for this source.
         /// </summary>
         /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this source.</value>
-        public AtomTextConstruct Title
-        {
-            get
-            {
-                return this.sourceTitle;
-            }
-
-            set
-            {
-                this.sourceTitle = value;
-            }
-        }
+        public AtomTextConstruct Title { get; set; }
 
         /// <summary>
         /// Gets or sets a date-time indicating the most recent instant in time when this source was modified in a way the publisher considers significant.
@@ -425,18 +248,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime UpdatedOn
-        {
-            get
-            {
-                return this.sourceUpdatedOn;
-            }
-
-            set
-            {
-                this.sourceUpdatedOn = value;
-            }
-        }
+        public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Determines if operands are equal.
@@ -450,7 +262,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -470,7 +283,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -501,7 +315,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -617,16 +432,14 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
         }
 
         /// <summary>
@@ -660,7 +473,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -688,7 +503,9 @@
         {
             bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
+
             XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
+
             if (AtomUtility.FillCommonObjectAttributes(this, source))
             {
                 wasLoaded = true;
@@ -701,6 +518,7 @@
             if (idNavigator != null)
             {
                 this.Id = new AtomId();
+
                 if (this.Id.Load(idNavigator))
                 {
                     wasLoaded = true;
@@ -710,6 +528,7 @@
             if (titleNavigator != null)
             {
                 this.Title = new AtomTextConstruct();
+
                 if (this.Title.Load(titleNavigator))
                 {
                     wasLoaded = true;
@@ -719,6 +538,7 @@
             if (updatedNavigator != null)
             {
                 DateTime updatedOn;
+
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out updatedOn))
                 {
                     this.UpdatedOn = updatedOn;
@@ -753,8 +573,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -774,7 +596,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -795,10 +619,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -907,8 +728,10 @@
         private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
+
             XPathNodeIterator authorIterator = source.Select("atom:author", manager);
             XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
             XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
@@ -919,6 +742,7 @@
                 while (authorIterator.MoveNext())
                 {
                     AtomPersonConstruct author = new AtomPersonConstruct();
+
                     if (author.Load(authorIterator.Current))
                     {
                         this.Authors.Add(author);
@@ -932,6 +756,7 @@
                 while (categoryIterator.MoveNext())
                 {
                     AtomCategory category = new AtomCategory();
+
                     if (category.Load(categoryIterator.Current))
                     {
                         this.Categories.Add(category);
@@ -945,6 +770,7 @@
                 while (contributorIterator.MoveNext())
                 {
                     AtomPersonConstruct contributor = new AtomPersonConstruct();
+
                     if (contributor.Load(contributorIterator.Current))
                     {
                         this.Contributors.Add(contributor);
@@ -958,6 +784,7 @@
                 while (linkIterator.MoveNext())
                 {
                     AtomLink link = new AtomLink();
+
                     if (link.Load(linkIterator.Current))
                     {
                         this.Links.Add(link);
@@ -983,8 +810,10 @@
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
+
             XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
             XPathNavigator iconNavigator = source.SelectSingleNode("atom:icon", manager);
             XPathNavigator logoNavigator = source.SelectSingleNode("atom:logo", manager);
@@ -994,6 +823,7 @@
             if (generatorNavigator != null)
             {
                 this.Generator = new AtomGenerator();
+
                 if (this.Generator.Load(generatorNavigator))
                 {
                     wasLoaded = true;
@@ -1003,6 +833,7 @@
             if (iconNavigator != null)
             {
                 this.Icon = new AtomIcon();
+
                 if (this.Icon.Load(iconNavigator))
                 {
                     wasLoaded = true;
@@ -1012,6 +843,7 @@
             if (logoNavigator != null)
             {
                 this.Logo = new AtomLogo();
+
                 if (this.Logo.Load(logoNavigator))
                 {
                     wasLoaded = true;
@@ -1021,6 +853,7 @@
             if (rightsNavigator != null)
             {
                 this.Rights = new AtomTextConstruct();
+
                 if (this.Rights.Load(rightsNavigator))
                 {
                     wasLoaded = true;
@@ -1030,6 +863,7 @@
             if (subtitleNavigator != null)
             {
                 this.Subtitle = new AtomTextConstruct();
+
                 if (this.Subtitle.Load(subtitleNavigator))
                 {
                     wasLoaded = true;

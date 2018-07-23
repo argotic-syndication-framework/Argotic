@@ -20,10 +20,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssCloud class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssCloudExample.cs"
-    ///             region="RssCloud"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" region="RssCloud" />
     ///     </code>
     /// </example>
     [Serializable]
@@ -253,7 +250,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -273,7 +271,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -304,7 +303,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -319,10 +319,7 @@
         /// <returns>The cloud protocol identifier for the supplied <paramref name="protocol"/>, otherwise returns an empty string.</returns>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the CloudProtocolAsString method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssCloudExample.cs"
-        ///             region="CloudProtocolAsString(RssCloudProtocol protocol)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" region="CloudProtocolAsString(RssCloudProtocol protocol)" />
         ///     </code>
         /// </example>
         public static string CloudProtocolAsString(RssCloudProtocol protocol)
@@ -365,10 +362,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the CloudProtocolByName method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssCloudExample.cs"
-        ///             region="CloudProtocolByName(string name)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" region="CloudProtocolByName(string name)" />
         ///     </code>
         /// </example>
         public static RssCloudProtocol CloudProtocolByName(string name)
@@ -446,16 +440,14 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
         }
 
         /// <summary>

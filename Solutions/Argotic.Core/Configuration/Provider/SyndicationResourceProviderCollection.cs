@@ -64,10 +64,8 @@
 
                 return itemExists;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         /// <summary>
@@ -110,10 +108,8 @@
                 this.Remove(item.Name);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }

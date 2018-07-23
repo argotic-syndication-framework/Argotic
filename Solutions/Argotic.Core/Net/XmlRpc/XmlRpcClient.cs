@@ -25,10 +25,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
-    ///             region="XmlRpcClient"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" region="XmlRpcClient" />
     ///     </code>
     /// </example>
     public class XmlRpcClient
@@ -182,14 +179,13 @@
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else if (value > TimeSpan.FromDays(365))
+
+                if (value > TimeSpan.FromDays(365))
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else
-                {
-                    this.clientTimeout = value;
-                }
+
+                this.clientTimeout = value;
             }
         }
 
@@ -502,7 +498,8 @@
                         "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}",
                         message));
             }
-            else if (this.SendOperationInProgress)
+
+            if (this.SendOperationInProgress)
             {
                 throw new InvalidOperationException(
                     string.Format(
@@ -554,7 +551,8 @@
                         "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}",
                         message));
             }
-            else if (this.SendOperationInProgress)
+
+            if (this.SendOperationInProgress)
             {
                 throw new InvalidOperationException(
                     string.Format(
@@ -622,26 +620,27 @@
                 result = true;
                 return true;
             }
-            else if (string.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+
+            if (string.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 result = false;
                 return true;
             }
-            else if (string.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
+
+            if (string.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 result = true;
                 return true;
             }
-            else if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
+
+            if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 result = false;
                 return true;
             }
-            else
-            {
-                result = false;
-                return false;
-            }
+
+            result = false;
+            return false;
         }
 
         /// <summary>

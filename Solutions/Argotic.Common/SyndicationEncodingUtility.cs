@@ -32,7 +32,7 @@
 
             Guard.ArgumentNotNullOrEmptyString(xml, "xml");
 
-            string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
+            string safeXml = RemoveInvalidXmlHexadecimalCharacters(xml);
 
             using (StringReader reader = new StringReader(safeXml))
             {
@@ -64,13 +64,13 @@
 
             Guard.ArgumentNotNull(stream, "stream");
 
-            buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
+            buffer = GetStreamBytes(stream);
 
-            encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
+            encoding = GetXmlEncoding(buffer);
 
             using (MemoryStream memoryStream = new MemoryStream(buffer))
             {
-                return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
+                return CreateSafeNavigator(memoryStream, encoding);
             }
         }
 
@@ -93,7 +93,7 @@
 
             using (StreamReader reader = new StreamReader(stream, encoding))
             {
-                return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
+                return CreateSafeNavigator(reader.ReadToEnd());
             }
         }
 
@@ -111,7 +111,7 @@
         {
             Guard.ArgumentNotNull(reader, "reader");
 
-            return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
+            return CreateSafeNavigator(reader.ReadToEnd());
         }
 
         /// <summary>
@@ -134,7 +134,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
+            return CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
         }
 
         /// <summary>
@@ -150,7 +150,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options)
         {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            return CreateSafeNavigator(source, options, null);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
         {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
+            return CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@
         {
             Guard.ArgumentNotNull(source, "source");
 
-            using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options))
+            using (WebResponse response = CreateWebResponse(source, options))
             {
                 Stream stream = null;
                 HttpWebResponse httpResponse = response as HttpWebResponse;
@@ -230,12 +230,10 @@
 
                 if (encoding != null)
                 {
-                    return SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding);
+                    return CreateSafeNavigator(stream, encoding);
                 }
-                else
-                {
-                    return SyndicationEncodingUtility.CreateSafeNavigator(stream);
-                }
+
+                return CreateSafeNavigator(stream);
             }
         }
 
@@ -258,7 +256,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            return SyndicationEncodingUtility.CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
+            return CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
         }
 
         /// <summary>
@@ -317,7 +315,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
         {
-            return SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
+            return CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
         }
 
         /// <summary>
@@ -336,7 +334,7 @@
 
             Guard.ArgumentNotNull(source, "source");
 
-            WebRequest webRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
+            WebRequest webRequest = CreateWebRequest(source, options);
             if (webRequest != null)
             {
                 response = webRequest.GetResponse();
@@ -382,8 +380,8 @@
 
             Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
 
-            decodedResult = System.Web.HttpUtility.HtmlDecode(escapedValue);
-            decodedResult = System.Web.HttpUtility.UrlDecode(decodedResult);
+            decodedResult = HttpUtility.HtmlDecode(escapedValue);
+            decodedResult = HttpUtility.UrlDecode(decodedResult);
 
             return decodedResult;
         }
@@ -490,7 +488,7 @@
 
             using (MemoryStream stream = new MemoryStream(data))
             {
-                return SyndicationEncodingUtility.GetXmlEncoding(stream);
+                return GetXmlEncoding(stream);
             }
         }
 
@@ -509,7 +507,7 @@
 
             using (StreamReader reader = new StreamReader(stream))
             {
-                return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
+                return GetXmlEncoding(reader.ReadToEnd());
             }
         }
 

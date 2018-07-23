@@ -19,10 +19,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the FeedRankSyndicationExtension class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\FeedRankSyndicationExtensionExample.cs"
-    ///             region="FeedRankSyndicationExtension"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Extensions\Core\FeedRankSyndicationExtensionExample.cs" region="FeedRankSyndicationExtension" />
     ///     </code>
     /// </example>
     [Serializable]
@@ -146,14 +143,8 @@
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
-            if (extension.GetType() == typeof(FeedRankSyndicationExtension))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return extension.GetType() == typeof(FeedRankSyndicationExtension);
         }
 
         /// <summary>
@@ -165,7 +156,9 @@
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XPathNavigator navigator = source.CreateNavigator();
             wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
             SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
@@ -183,6 +176,7 @@
         public override bool Load(XmlReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
+
             XPathDocument document = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator());
@@ -196,6 +190,7 @@
         public override void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             this.Context.WriteTo(writer, this.XmlNamespace);
         }
 
@@ -210,10 +205,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -252,7 +244,6 @@
                 result = result | this.Version.CompareTo(value.Version);
                 result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
                 result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
-
                 result = result | Uri.Compare(this.Context.Domain, value.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
                 result = result | Uri.Compare(this.Context.Scheme, value.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);

@@ -16,10 +16,7 @@
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the BlogMLPost class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
-    ///             region="BlogMLPost"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" region="BlogMLPost" />
     ///     </code>
     /// </example>
     [Serializable]
@@ -498,7 +495,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -518,7 +516,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -549,7 +548,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -740,10 +740,7 @@
         /// <returns>The post type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeAsString method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
-        ///             region="PostTypeAsString(BlogMLPostType type)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" region="PostTypeAsString(BlogMLPostType type)" />
         ///     </code>
         /// </example>
         public static string PostTypeAsString(BlogMLPostType type)
@@ -757,14 +754,11 @@
 
                     if (postType == type)
                     {
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(
-                            typeof(EnumerationMetadataAttribute),
-                            false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata =
-                                customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
                             name = enumerationMetadata.AlternateValue;
                             break;
@@ -786,10 +780,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeByName method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLPostExample.cs"
-        ///             region="PostTypeByName(string name)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" region="PostTypeByName(string name)" />
         ///     </code>
         /// </example>
         public static BlogMLPostType PostTypeByName(string name)
@@ -857,14 +848,8 @@
             if (value != null)
             {
                 int result = CompareSequence(this.Attachments, value.Attachments);
-                result = result | ComparisonUtility.CompareSequence(
-                             this.Authors,
-                             value.Authors,
-                             StringComparison.OrdinalIgnoreCase);
-                result = result | ComparisonUtility.CompareSequence(
-                             this.Categories,
-                             value.Categories,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
                 result = result | CompareSequence(this.Comments, value.Comments);
                 result = result | this.Content.CompareTo(value.Content);
 
@@ -888,28 +873,15 @@
 
                 result = result | this.PostType.CompareTo(value.PostType);
                 result = result | CompareSequence(this.Trackbacks, value.Trackbacks);
-                result = result | Uri.Compare(
-                             this.Url,
-                             value.Url,
-                             UriComponents.AbsoluteUri,
-                             UriFormat.SafeUnescaped,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
 
                 result = result | BlogMLUtility.CompareCommonObjects(this, value);
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -943,7 +915,9 @@
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
+
             List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+
             return list.Find(match);
         }
 
@@ -972,6 +946,7 @@
             bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
+
             if (BlogMLUtility.FillCommonObject(this, source))
             {
                 wasLoaded = true;
@@ -985,8 +960,7 @@
 
                 if (!string.IsNullOrEmpty(postUrlAttribute))
                 {
-                    Uri url;
-                    if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                    if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out var url))
                     {
                         this.Url = url;
                         wasLoaded = true;
@@ -996,6 +970,7 @@
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
                     BlogMLPostType type = PostTypeByName(typeAttribute);
+
                     if (type != BlogMLPostType.None)
                     {
                         this.PostType = type;
@@ -1019,6 +994,7 @@
                 if (contentNavigator != null)
                 {
                     BlogMLTextConstruct content = new BlogMLTextConstruct();
+
                     if (content.Load(contentNavigator))
                     {
                         this.Content = content;
@@ -1029,6 +1005,7 @@
                 if (postNameNavigator != null)
                 {
                     BlogMLTextConstruct name = new BlogMLTextConstruct();
+
                     if (name.Load(postNameNavigator))
                     {
                         this.Name = name;
@@ -1039,6 +1016,7 @@
                 if (excerptNavigator != null)
                 {
                     BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
+
                     if (excerpt.Load(excerptNavigator))
                     {
                         this.Excerpt = excerpt;
@@ -1069,9 +1047,12 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
+
             if (BlogMLUtility.FillCommonObject(this, source, settings))
             {
                 wasLoaded = true;
@@ -1085,8 +1066,7 @@
 
                 if (!string.IsNullOrEmpty(postUrlAttribute))
                 {
-                    Uri url;
-                    if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                    if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out var url))
                     {
                         this.Url = url;
                         wasLoaded = true;
@@ -1096,6 +1076,7 @@
                 if (!string.IsNullOrEmpty(typeAttribute))
                 {
                     BlogMLPostType type = PostTypeByName(typeAttribute);
+
                     if (type != BlogMLPostType.None)
                     {
                         this.PostType = type;
@@ -1119,6 +1100,7 @@
                 if (contentNavigator != null)
                 {
                     BlogMLTextConstruct content = new BlogMLTextConstruct();
+
                     if (content.Load(contentNavigator, settings))
                     {
                         this.Content = content;
@@ -1129,6 +1111,7 @@
                 if (postNameNavigator != null)
                 {
                     BlogMLTextConstruct name = new BlogMLTextConstruct();
+
                     if (name.Load(postNameNavigator, settings))
                     {
                         this.Name = name;
@@ -1139,6 +1122,7 @@
                 if (excerptNavigator != null)
                 {
                     BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
+
                     if (excerpt.Load(excerptNavigator, settings))
                     {
                         this.Excerpt = excerpt;
@@ -1170,7 +1154,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -1191,10 +1177,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -1218,6 +1201,7 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             writer.WriteStartElement("post", BlogMLUtility.BlogMLNamespace);
             BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -1255,6 +1239,7 @@
             if (this.Categories.Count > 0)
             {
                 writer.WriteStartElement("categories", BlogMLUtility.BlogMLNamespace);
+
                 foreach (string category in this.Categories)
                 {
                     writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
@@ -1268,6 +1253,7 @@
             if (this.Comments.Count > 0)
             {
                 writer.WriteStartElement("comments", BlogMLUtility.BlogMLNamespace);
+
                 foreach (BlogMLComment comment in this.Comments)
                 {
                     comment.WriteTo(writer);
@@ -1279,6 +1265,7 @@
             if (this.Trackbacks.Count > 0)
             {
                 writer.WriteStartElement("trackbacks", BlogMLUtility.BlogMLNamespace);
+
                 foreach (BlogMLTrackback trackback in this.Trackbacks)
                 {
                     trackback.WriteTo(writer);
@@ -1290,6 +1277,7 @@
             if (this.Attachments.Count > 0)
             {
                 writer.WriteStartElement("attachments", BlogMLUtility.BlogMLNamespace);
+
                 foreach (BlogMLAttachment attachment in this.Attachments)
                 {
                     attachment.WriteTo(writer);
@@ -1301,6 +1289,7 @@
             if (this.Authors.Count > 0)
             {
                 writer.WriteStartElement("authors", BlogMLUtility.BlogMLNamespace);
+
                 foreach (string author in this.Authors)
                 {
                     writer.WriteStartElement("author", BlogMLUtility.BlogMLNamespace);
@@ -1331,9 +1320,11 @@
         private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(post, "post");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
+
             XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
             XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
             XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);
@@ -1345,6 +1336,7 @@
                 while (categoriesIterator.MoveNext())
                 {
                     string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+
                     if (!string.IsNullOrEmpty(referenceId))
                     {
                         post.Categories.Add(referenceId);
@@ -1358,6 +1350,7 @@
                 while (commentsIterator.MoveNext())
                 {
                     BlogMLComment comment = new BlogMLComment();
+
                     if (comment.Load(commentsIterator.Current))
                     {
                         post.Comments.Add(comment);
@@ -1371,6 +1364,7 @@
                 while (trackbacksIterator.MoveNext())
                 {
                     BlogMLTrackback trackback = new BlogMLTrackback();
+
                     if (trackback.Load(trackbacksIterator.Current))
                     {
                         post.Trackbacks.Add(trackback);
@@ -1384,6 +1378,7 @@
                 while (attachmentsIterator.MoveNext())
                 {
                     BlogMLAttachment attachment = new BlogMLAttachment();
+
                     if (attachment.Load(attachmentsIterator.Current))
                     {
                         post.Attachments.Add(attachment);
@@ -1397,6 +1392,7 @@
                 while (authorsIterator.MoveNext())
                 {
                     string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
+
                     if (!string.IsNullOrEmpty(referenceId))
                     {
                         post.Authors.Add(referenceId);
@@ -1429,10 +1425,12 @@
             SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(post, "post");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
+
             XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
             XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
             XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);
@@ -1444,6 +1442,7 @@
                 while (categoriesIterator.MoveNext())
                 {
                     string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+
                     if (!string.IsNullOrEmpty(referenceId))
                     {
                         post.Categories.Add(referenceId);
@@ -1457,6 +1456,7 @@
                 while (commentsIterator.MoveNext())
                 {
                     BlogMLComment comment = new BlogMLComment();
+
                     if (comment.Load(commentsIterator.Current, settings))
                     {
                         post.Comments.Add(comment);
@@ -1470,6 +1470,7 @@
                 while (trackbacksIterator.MoveNext())
                 {
                     BlogMLTrackback trackback = new BlogMLTrackback();
+
                     if (trackback.Load(trackbacksIterator.Current, settings))
                     {
                         post.Trackbacks.Add(trackback);
@@ -1483,6 +1484,7 @@
                 while (attachmentsIterator.MoveNext())
                 {
                     BlogMLAttachment attachment = new BlogMLAttachment();
+
                     if (attachment.Load(attachmentsIterator.Current, settings))
                     {
                         post.Attachments.Add(attachment);
@@ -1496,6 +1498,7 @@
                 while (authorsIterator.MoveNext())
                 {
                     string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
+
                     if (!string.IsNullOrEmpty(referenceId))
                     {
                         post.Authors.Add(referenceId);

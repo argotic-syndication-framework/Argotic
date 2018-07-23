@@ -84,11 +84,13 @@
             {
                 return 0;
             }
-            else if (source != null && target == null)
+
+            if (source != null && target == null)
             {
                 return 1;
             }
-            else if (source == null && target != null)
+
+            if (source == null && target != null)
             {
                 return -1;
             }

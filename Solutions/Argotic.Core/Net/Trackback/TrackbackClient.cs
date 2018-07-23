@@ -19,10 +19,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackClient class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs"
-    ///             region="TrackbackClient"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs" region="TrackbackClient" />
     ///     </code>
     /// </example>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -182,14 +179,13 @@
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else if (value > TimeSpan.FromDays(365))
+
+                if (value > TimeSpan.FromDays(365))
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else
-                {
-                    this.clientTimeout = value;
-                }
+
+                this.clientTimeout = value;
             }
         }
 
@@ -269,7 +265,8 @@
                         "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}",
                         message));
             }
-            else if (this.SendOperationInProgress)
+
+            if (this.SendOperationInProgress)
             {
                 throw new InvalidOperationException(
                     string.Format(
@@ -321,7 +318,8 @@
                         "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}",
                         message));
             }
-            else if (this.SendOperationInProgress)
+
+            if (this.SendOperationInProgress)
             {
                 throw new InvalidOperationException(
                     string.Format(

@@ -17,33 +17,17 @@
     /// <seealso cref="RssFeed"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssChannel class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssChannelExample.cs"
-    ///             region="RssChannel"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rss\RssChannelExample.cs" region="RssChannel" />
     ///     </code>
     /// </example>
     [Serializable]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
     public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
-        /// <summary>
-        /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
-        /// </summary>
-        private static Uri channelDocumentation = new Uri("http://www.rssboard.org/rss-specification");
-
         /// <summary>
         /// Private member to hold categories or tags to which the channel belongs.
         /// </summary>
         private Collection<RssCategory> channelCategories;
-
-        /// <summary>
-        /// Private member to hold meta-data necessary for monitoring updates to a feed using a web service that implements the RssCloud application programming interface.
-        /// </summary>
-        private RssCloud channelCloud;
 
         /// <summary>
         /// Private member to hold the human-readable copyright statement that applies to the feed.
@@ -64,24 +48,9 @@
             System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
 
         /// <summary>
-        /// Private member to hold the graphical logo for the feed.
-        /// </summary>
-        private RssImage channelImage;
-
-        /// <summary>
         /// Private member to hold the collection of items that comprise the distinct content published in the feed.
         /// </summary>
         private IEnumerable<RssItem> channelItems;
-
-        /// <summary>
-        /// Private member to hold the natural language employed in the feed.
-        /// </summary>
-        private CultureInfo channelLanguage;
-
-        /// <summary>
-        /// Private member to hold the last date and time the content of the feed was updated.
-        /// </summary>
-        private DateTime channelLastBuildDate = DateTime.MinValue;
 
         /// <summary>
         /// Private member to hold the URL of the web site associated with the feed.
@@ -94,19 +63,9 @@
         private string channelManagingEditor = string.Empty;
 
         /// <summary>
-        /// Private member to hold the publication date and time of the feed's content.
-        /// </summary>
-        private DateTime channelPublicationDate = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold an advisory label for the content in a feed.
         /// </summary>
         private string channelRating = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a URL that points to where the feed can be retrieved from.
-        /// </summary>
-        private Uri channelSelfLink;
 
         /// <summary>
         /// Private member to hold the days of the week during which the feed is not updated.
@@ -117,16 +76,6 @@
         /// Private member to hold the hours of the day during which the feed is not updated.
         /// </summary>
         private Collection<int> channelSkipHours;
-
-        /// <summary>
-        /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
-        /// </summary>
-        private RssTextInput channelTextInput;
-
-        /// <summary>
-        /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
-        /// </summary>
-        private int channelTimeToLive = int.MinValue;
 
         /// <summary>
         /// Private member to hold character data that provides the name of the feed.
@@ -172,13 +121,7 @@
         /// Gets the URL of the RSS specification implemented by the software that created this feed.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of the RSS specification implemented by the software that created this feed.</value>
-        public static Uri Documentation
-        {
-            get
-            {
-                return channelDocumentation;
-            }
-        }
+        public static Uri Documentation { get; } = new Uri("http://www.rssboard.org/rss-specification");
 
         /// <summary>
         /// Gets the categories or tags to which this channel belongs.
@@ -190,12 +133,7 @@
         {
             get
             {
-                if (this.channelCategories == null)
-                {
-                    this.channelCategories = new Collection<RssCategory>();
-                }
-
-                return this.channelCategories;
+                return this.channelCategories ?? (this.channelCategories = new Collection<RssCategory>());
             }
         }
 
@@ -207,18 +145,7 @@
         ///     updates to this feed using a web service that implements the RssCloud application programming interface.
         ///     The default value is a <b>null</b> reference.
         /// </value>
-        public RssCloud Cloud
-        {
-            get
-            {
-                return this.channelCloud;
-            }
-
-            set
-            {
-                this.channelCloud = value;
-            }
-        }
+        public RssCloud Cloud { get; set; }
 
         /// <summary>
         /// Gets or sets the human-readable copyright statement that applies to this feed.
@@ -236,14 +163,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.channelCopyrightNotice = string.Empty;
-                }
-                else
-                {
-                    this.channelCopyrightNotice = value.Trim();
-                }
+                this.channelCopyrightNotice = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -282,12 +202,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -310,14 +225,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.channelGenerator = string.Empty;
-                }
-                else
-                {
-                    this.channelGenerator = value.Trim();
-                }
+                this.channelGenerator = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -339,18 +247,7 @@
         /// <value>
         ///     A <see cref="RssImage"/> object that represents the graphical logo for this feed. The default value is a <b>null</b> reference.
         /// </value>
-        public RssImage Image
-        {
-            get
-            {
-                return this.channelImage;
-            }
-
-            set
-            {
-                this.channelImage = value;
-            }
-        }
+        public RssImage Image { get; set; }
 
         /// <summary>
         /// Gets or sets the distinct content published in this feed.
@@ -364,12 +261,7 @@
         {
             get
             {
-                if (this.channelItems == null)
-                {
-                    this.channelItems = new Collection<RssItem>();
-                }
-
-                return this.channelItems;
+                return this.channelItems ?? (this.channelItems = new Collection<RssItem>());
             }
 
             set
@@ -387,18 +279,7 @@
         ///     The language <b>must</b> be identified using one of the <a href="http://www.rssboard.org/rss-language-codes">RSS language codes</a>
         ///     or a <a href="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">W3C language code</a>.
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.channelLanguage;
-            }
-
-            set
-            {
-                this.channelLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the last date and time the content of this feed was updated.
@@ -407,18 +288,7 @@
         ///     A <see cref="DateTime"/> object that represents the last date and time the content of this feed was updated.
         ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no last build date was specified.
         /// </value>
-        public DateTime LastBuildDate
-        {
-            get
-            {
-                return this.channelLastBuildDate;
-            }
-
-            set
-            {
-                this.channelLastBuildDate = value;
-            }
-        }
+        public DateTime LastBuildDate { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the URL of the web site associated with this feed.
@@ -458,14 +328,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.channelManagingEditor = string.Empty;
-                }
-                else
-                {
-                    this.channelManagingEditor = value.Trim();
-                }
+                this.channelManagingEditor = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -479,18 +342,7 @@
         /// <remarks>
         ///     Publishers of daily, weekly or monthly periodicals can use this element to associate feed items with the date they most recently went to press.
         /// </remarks>
-        public DateTime PublicationDate
-        {
-            get
-            {
-                return this.channelPublicationDate;
-            }
-
-            set
-            {
-                this.channelPublicationDate = value;
-            }
-        }
+        public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets an advisory label for the content in this feed.
@@ -511,14 +363,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.channelRating = string.Empty;
-                }
-                else
-                {
-                    this.channelRating = value.Trim();
-                }
+                this.channelRating = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -536,18 +381,7 @@
         ///         See <a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Profile</a> for more information.
         ///     </para>
         /// </remarks>
-        public Uri SelfLink
-        {
-            get
-            {
-                return this.channelSelfLink;
-            }
-
-            set
-            {
-                this.channelSelfLink = value;
-            }
-        }
+        public Uri SelfLink { get; set; }
 
         /// <summary>
         /// Gets the days of the week during which this feed is not updated.
@@ -560,12 +394,7 @@
         {
             get
             {
-                if (this.channelSkipDays == null)
-                {
-                    this.channelSkipDays = new Collection<DayOfWeek>();
-                }
-
-                return this.channelSkipDays;
+                return this.channelSkipDays ?? (this.channelSkipDays = new Collection<DayOfWeek>());
             }
         }
 
@@ -580,12 +409,7 @@
         {
             get
             {
-                if (this.channelSkipHours == null)
-                {
-                    this.channelSkipHours = new Collection<int>();
-                }
-
-                return this.channelSkipHours;
+                return this.channelSkipHours ?? (this.channelSkipHours = new Collection<int>());
             }
         }
 
@@ -596,18 +420,7 @@
         ///     A <see cref="TextInput"/> object that represents a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI).
         ///     The default value is a <b>null</b> reference.
         /// </value>
-        public RssTextInput TextInput
-        {
-            get
-            {
-                return this.channelTextInput;
-            }
-
-            set
-            {
-                this.channelTextInput = value;
-            }
-        }
+        public RssTextInput TextInput { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of minutes to cache the data before a client should request it again.
@@ -619,18 +432,7 @@
         /// <remarks>
         ///     Aggregators that support this property <i>should</i> treat it as a publisher's suggestion of a feed's update frequency, not a hard rule.
         /// </remarks>
-        public int TimeToLive
-        {
-            get
-            {
-                return this.channelTimeToLive;
-            }
-
-            set
-            {
-                this.channelTimeToLive = value;
-            }
-        }
+        public int TimeToLive { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets character data that provides the name of this feed.
@@ -671,14 +473,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.channelWebmaster = string.Empty;
-                }
-                else
-                {
-                    this.channelWebmaster = value.Trim();
-                }
+                this.channelWebmaster = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -716,7 +511,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -736,7 +532,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -767,7 +564,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -797,6 +595,7 @@
         public static int CompareSequence(Collection<RssItem> source, Collection<RssItem> target)
         {
             int result = 0;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
 
@@ -828,7 +627,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -844,6 +645,7 @@
         public bool AddItem(RssItem item)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(item, "item");
             ((Collection<RssItem>)this.Items).Add(item);
             wasAdded = true;
@@ -869,18 +671,10 @@
             if (value != null)
             {
                 int result = string.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(
-                             this.Description,
-                             value.Description,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
                 result = result | this.LastBuildDate.CompareTo(value.LastBuildDate);
-                result = result | Uri.Compare(
-                             this.Link,
-                             value.Link,
-                             UriComponents.AbsoluteUri,
-                             UriFormat.SafeUnescaped,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(
                              this.ManagingEditor,
                              value.ManagingEditor,
@@ -913,10 +707,7 @@
                 {
                     if (value.Language != null)
                     {
-                        result = result | string.Compare(
-                                     this.Language.Name,
-                                     value.Language.Name,
-                                     StringComparison.OrdinalIgnoreCase);
+                        result = result | string.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
                     }
                     else
                     {
@@ -944,16 +735,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -1030,10 +813,13 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+
             XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
             XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
             XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
@@ -1093,7 +879,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -1115,6 +903,7 @@
         public bool RemoveItem(RssItem item)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(item, "item");
 
             if (((Collection<RssItem>)this.Items).Contains(item))
@@ -1137,10 +926,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -1164,6 +950,7 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
+
             writer.WriteStartElement("channel");
             writer.WriteElementString("title", this.Title);
             writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
@@ -1236,6 +1023,7 @@
             if (this.SkipDays.Count > 0)
             {
                 writer.WriteStartElement("skipDays");
+
                 foreach (DayOfWeek day in this.SkipDays)
                 {
                     writer.WriteElementString("day", day.ToString());
@@ -1247,6 +1035,7 @@
             if (this.SkipHours.Count > 0)
             {
                 writer.WriteStartElement("skipHours");
+
                 foreach (int hour in this.SkipHours)
                 {
                     writer.WriteElementString("hour", hour.ToString(NumberFormatInfo.InvariantInfo));
@@ -1316,6 +1105,7 @@
                 while (categoryIterator.MoveNext())
                 {
                     RssCategory category = new RssCategory();
+
                     if (category.Load(categoryIterator.Current, settings))
                     {
                         this.Categories.Add(category);
@@ -1332,10 +1122,8 @@
                     {
                         try
                         {
-                            DayOfWeek day = (DayOfWeek)Enum.Parse(
-                                typeof(DayOfWeek),
-                                skipDaysIterator.Current.Value,
-                                true);
+                            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
+
                             if (!this.SkipDays.Contains(day))
                             {
                                 this.SkipDays.Add(day);
@@ -1344,9 +1132,7 @@
                         }
                         catch (ArgumentException)
                         {
-                            System.Diagnostics.Trace.TraceWarning(
-                                "RssChannel unable to determine DayOfWeek with a name of {0}.",
-                                skipDaysIterator.Current.Value);
+                            System.Diagnostics.Trace.TraceWarning("RssChannel unable to determine DayOfWeek with a name of {0}.", skipDaysIterator.Current.Value);
                         }
                     }
                 }
@@ -1356,12 +1142,7 @@
             {
                 while (skipHoursIterator.MoveNext())
                 {
-                    int hour;
-                    if (int.TryParse(
-                        skipHoursIterator.Current.Value,
-                        NumberStyles.Integer,
-                        NumberFormatInfo.InvariantInfo,
-                        out hour))
+                    if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out var hour))
                     {
                         if (!this.SkipHours.Contains(hour) && hour >= 0 && hour <= 23)
                         {
@@ -1370,9 +1151,7 @@
                         }
                         else
                         {
-                            System.Diagnostics.Trace.TraceWarning(
-                                "RssChannel unable to add duplicate or out-of-range skip hour with a value of {0}.",
-                                hour);
+                            System.Diagnostics.Trace.TraceWarning("RssChannel unable to add duplicate or out-of-range skip hour with a value of {0}.", hour);
                         }
                     }
                 }
@@ -1414,15 +1193,14 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        private bool LoadOptionals(
-            XPathNavigator source,
-            XmlNamespaceManager manager,
-            SyndicationResourceLoadSettings settings)
+        private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
+
             XPathNavigator cloudNavigator = source.SelectSingleNode("cloud", manager);
             XPathNavigator copyrightNavigator = source.SelectSingleNode("copyright", manager);
             XPathNavigator generatorNavigator = source.SelectSingleNode("generator", manager);
@@ -1439,6 +1217,7 @@
             if (cloudNavigator != null)
             {
                 RssCloud cloud = new RssCloud();
+
                 if (cloud.Load(cloudNavigator, settings))
                 {
                     this.Cloud = cloud;
@@ -1461,6 +1240,7 @@
             if (imageNavigator != null)
             {
                 RssImage image = new RssImage();
+
                 if (image.Load(imageNavigator, settings))
                 {
                     this.Image = image;
@@ -1487,6 +1267,7 @@
             if (lastBuildDateNavigator != null)
             {
                 DateTime lastBuildDate;
+
                 if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out lastBuildDate))
                 {
                     this.LastBuildDate = lastBuildDate;
@@ -1502,8 +1283,7 @@
 
             if (publicationNavigator != null)
             {
-                DateTime publicationDate;
-                if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
+                if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out var publicationDate))
                 {
                     this.PublicationDate = publicationDate;
                     wasLoaded = true;
@@ -1528,12 +1308,7 @@
 
             if (timeToLiveNavigator != null)
             {
-                int timeToLive;
-                if (int.TryParse(
-                    timeToLiveNavigator.Value,
-                    NumberStyles.Integer,
-                    NumberFormatInfo.InvariantInfo,
-                    out timeToLive))
+                if (int.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out var timeToLive))
                 {
                     this.TimeToLive = timeToLive;
                     wasLoaded = true;
@@ -1561,15 +1336,14 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        private bool LoadProfile(
-            XPathNavigator source,
-            XmlNamespaceManager manager,
-            SyndicationResourceLoadSettings settings)
+        private bool LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
+
             XPathNodeIterator atomLinkIterator = source.Select("atom:link", manager);
 
             if (atomLinkIterator != null && atomLinkIterator.Count > 0)
@@ -1579,13 +1353,14 @@
                     if (atomLinkIterator.Current.HasAttributes)
                     {
                         string relAttribute = atomLinkIterator.Current.GetAttribute("rel", string.Empty);
+
                         if (string.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             string hrefAttribute = atomLinkIterator.Current.GetAttribute("href", string.Empty);
+
                             if (!string.IsNullOrEmpty(hrefAttribute))
                             {
-                                Uri atomLink;
-                                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out atomLink))
+                                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out var atomLink))
                                 {
                                     this.SelfLink = atomLink;
                                     wasLoaded = true;

@@ -8,7 +8,7 @@
     /// <remarks>
     ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false)]
     [Serializable]
     public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     {
@@ -26,14 +26,6 @@
         /// Private member to hold a URI that points to the documentation the describes the MIME media type.
         /// </summary>
         private Uri mimeMediaDocumentation;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MimeMediaTypeAttribute"/> class.
-        /// </summary>
-        public MimeMediaTypeAttribute()
-            : base()
-        {
-        }
 
         /// <summary>
         /// Gets or sets a URI that points to the documentation the describes the MIME media type for the attributed field.
@@ -123,11 +115,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(MimeMediaTypeAttribute first, MimeMediaTypeAttribute second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -154,11 +147,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(MimeMediaTypeAttribute first, MimeMediaTypeAttribute second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -174,11 +168,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(MimeMediaTypeAttribute first, MimeMediaTypeAttribute second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -195,7 +190,7 @@
         /// </remarks>
         public override string ToString()
         {
-            return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
+            return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation : string.Empty);
         }
 
         /// <summary>
@@ -221,10 +216,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>

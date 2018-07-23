@@ -4,11 +4,11 @@
 
 #pragma warning disable SA1600 // Elements should be documented
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-    public class HtmlAnchor
+    public class Link
     {
         public string HRef { get; set; }
 
-        public Dictionary<string, string> Attributes { get; set; }
+        public Dictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();
 
         public string Title { get; set; }
     }

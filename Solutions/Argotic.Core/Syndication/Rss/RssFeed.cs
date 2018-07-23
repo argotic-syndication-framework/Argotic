@@ -28,10 +28,7 @@
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RssFeed class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-    ///             region="RssFeed"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="RssFeed" />
     ///     </code>
     /// </example>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -362,10 +359,7 @@
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Create(Uri source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Create(Uri source)" />
         ///     </code>
         /// </example>
         public static RssFeed Create(Uri source)
@@ -542,10 +536,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Load(IXPathNavigable source)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Load(IXPathNavigable source)" />
         ///     </code>
         /// </example>
         public void Load(IXPathNavigable source)
@@ -588,10 +579,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Load(Stream stream)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Load(Stream stream)" />
         ///     </code>
         /// </example>
         public void Load(Stream stream)
@@ -635,10 +623,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Load(XmlReader reader)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Load(XmlReader reader)" />
         ///     </code>
         /// </example>
         public void Load(XmlReader reader)
@@ -699,10 +684,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
@@ -731,10 +713,7 @@
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="Load(Uri source, WebRequestOptions options)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="Load(Uri source, WebRequestOptions options)" />
         ///     </code>
         /// </example>
         public void Load(Uri source, WebRequestOptions options)
@@ -784,11 +763,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
-        public void Load(
-            Uri source,
-            ICredentials credentials,
-            IWebProxy proxy,
-            SyndicationResourceLoadSettings settings)
+        public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
             this.Load(source, new WebRequestOptions(credentials, proxy), settings);
         }
@@ -823,20 +798,15 @@
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
             XPathNavigator navigator = null;
+
             Guard.ArgumentNotNull(source, "source");
+
             if (settings == null)
             {
                 settings = new SyndicationResourceLoadSettings();
             }
 
-            if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
-            {
-                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-            }
-            else
-            {
-                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-            }
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding);
 
             this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
         }
@@ -862,14 +832,8 @@
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="LoadAsync(Uri source, Object userToken)"
-        ///         />
-        ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
-        ///             region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
-        ///         />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="LoadAsync(Uri source, Object userToken)" />
+        ///         <code source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs" region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" />
         ///     </code>
         /// </example>
         public void LoadAsync(Uri source, object userToken)
@@ -926,12 +890,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public void LoadAsync(
-            Uri source,
-            SyndicationResourceLoadSettings settings,
-            ICredentials credentials,
-            IWebProxy proxy,
-            object userToken)
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
         {
             this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
         }
@@ -956,11 +915,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
-        public void LoadAsync(
-            Uri source,
-            SyndicationResourceLoadSettings settings,
-            WebRequestOptions options,
-            object userToken)
+        public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
         {
             Guard.ArgumentNotNull(source, "source");
             if (settings == null)
@@ -977,18 +932,11 @@
             this.AsyncLoadHasBeenCancelled = false;
 
             asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-            asyncHttpWebRequest.Timeout = Convert.ToInt32(
-                settings.Timeout.TotalMilliseconds,
-                System.Globalization.NumberFormatInfo.InvariantInfo);
+            asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
             object[] state = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-            ThreadPool.RegisterWaitForSingleObject(
-                result.AsyncWaitHandle,
-                new WaitOrTimerCallback(this.AsyncTimeoutCallback),
-                state,
-                settings.Timeout,
-                true);
+            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(this.AsyncTimeoutCallback), state, settings.Timeout, true);
         }
 
         /// <summary>
@@ -1020,7 +968,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -1039,7 +989,7 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs"
         ///             region="Save(Stream stream)"
         ///         />
         ///     </code>
@@ -1053,7 +1003,7 @@
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="RssFeed"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="RssFeed"/> instance. This value can be <b>null</b>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
@@ -1065,10 +1015,8 @@
                 settings = new SyndicationResourceSaveSettings();
             }
 
-            XmlWriterSettings writerSettings = new XmlWriterSettings();
-            writerSettings.OmitXmlDeclaration = false;
-            writerSettings.Indent = !settings.MinimizeOutputSize;
-            writerSettings.Encoding = settings.CharacterEncoding;
+            XmlWriterSettings writerSettings =
+                new XmlWriterSettings { OmitXmlDeclaration = false, Indent = !settings.MinimizeOutputSize, Encoding = settings.CharacterEncoding };
 
             using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
             {
@@ -1085,7 +1033,7 @@
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Rss\RssFeedExample.cs"
         ///             region="Save(XmlWriter writer)"
         ///         />
         ///     </code>
@@ -1100,7 +1048,7 @@
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/> using the supplied <see cref="SyndicationResourceSaveSettings"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="RssFeed"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="RssFeed"/> instance.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
@@ -1120,6 +1068,7 @@
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Channel, settings.SupportedExtensions);
+
                 if (this.Channel.Cloud != null)
                 {
                     SyndicationExtensionAdapter.FillExtensionTypes(this.Channel.Cloud, settings.SupportedExtensions);
@@ -1132,9 +1081,7 @@
 
                 if (this.Channel.TextInput != null)
                 {
-                    SyndicationExtensionAdapter.FillExtensionTypes(
-                        this.Channel.TextInput,
-                        settings.SupportedExtensions);
+                    SyndicationExtensionAdapter.FillExtensionTypes(this.Channel.TextInput, settings.SupportedExtensions);
                 }
 
                 foreach (RssCategory category in this.Channel.Categories)
@@ -1189,10 +1136,7 @@
             EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
             handler = this.Loaded;
 
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            handler?.Invoke(this, e);
         }
 
         /// <summary>
@@ -1208,6 +1152,7 @@
             Uri source = null;
             WebRequestOptions options = null;
             SyndicationResourceLoadSettings settings = null;
+
             if (result.IsCompleted)
             {
                 object[] parameters = (object[])result.AsyncState;
@@ -1217,9 +1162,11 @@
                 settings = parameters[3] as SyndicationResourceLoadSettings;
                 options = parameters[4] as WebRequestOptions;
                 object userToken = parameters[5];
+
                 if (feed != null)
                 {
                     WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
+
                     using (Stream stream = httpWebResponse.GetResponseStream())
                     {
                         if (settings != null)
@@ -1229,10 +1176,8 @@
 
                         using (StreamReader streamReader = new StreamReader(stream, encoding))
                         {
-                            XmlReaderSettings readerSettings = new XmlReaderSettings();
-                            readerSettings.IgnoreComments = true;
-                            readerSettings.IgnoreWhitespace = true;
-                            readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                            XmlReaderSettings readerSettings =
+                                new XmlReaderSettings { IgnoreComments = true, IgnoreWhitespace = true, DtdProcessing = DtdProcessing.Ignore };
 
                             using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                             {
@@ -1248,12 +1193,9 @@
                                         settings.CharacterEncoding);
                                 }
 
-                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(
-                                    navigator,
-                                    settings);
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(feed, SyndicationContentFormat.Rss);
-                                feed.OnFeedLoaded(
-                                    new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                                feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
                     }
@@ -1272,10 +1214,7 @@
         {
             if (timedOut)
             {
-                if (asyncHttpWebRequest != null)
-                {
-                    asyncHttpWebRequest.Abort();
-                }
+                asyncHttpWebRequest?.Abort();
             }
 
             this.LoadOperationInProgress = false;
@@ -1294,14 +1233,12 @@
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        private void Load(
-            XPathNavigator navigator,
-            SyndicationResourceLoadSettings settings,
-            SyndicationResourceLoadedEventArgs eventData)
+        private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         {
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNull(settings, "settings");
             Guard.ArgumentNotNull(eventData, "eventData");
+
             SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(this, SyndicationContentFormat.Rss);
             this.OnFeedLoaded(eventData);

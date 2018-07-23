@@ -1,8 +1,8 @@
 ﻿namespace Argotic.Common
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Provides methods for generating and parsing date-time information exposed by syndicated content. This class cannot be inherited.
@@ -22,21 +22,19 @@
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as a RFC-3339 formatted date.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static DateTime ParseRfc3339DateTime(string value)
         {
             DateTime result = DateTime.MinValue;
 
             Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(value, out result))
+            if (TryParseRfc3339DateTime(value, out result))
             {
                 return result;
             }
-            else
-            {
-                throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
-            }
+
+            throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
         }
 
         /// <summary>
@@ -44,7 +42,7 @@
         /// </summary>
         /// <param name="utcDateTime">The UTC <see cref="DateTime"/> object to convert.</param>
         /// <returns>A string that contains the RFC-3339 date string representation of the supplied <see cref="DateTime"/> object.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static string ToRfc3339DateTime(DateTime utcDateTime)
         {
             DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -53,10 +51,8 @@
             {
                 return utcDateTime.ToString("yyyy'-'MM'-'dd'T'HH:mm:ss.ffzzz", dateTimeFormat);
             }
-            else
-            {
-                return utcDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.ff'Z'", dateTimeFormat);
-            }
+
+            return utcDateTime.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.ff'Z'", dateTimeFormat);
         }
 
         /// <summary>
@@ -69,7 +65,7 @@
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static bool TryParseRfc3339DateTime(string value, out DateTime result)
         {
             DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -108,21 +104,19 @@
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as a RFC-822 formatted date.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static DateTime ParseRfc822DateTime(string value)
         {
             DateTime result = DateTime.MinValue;
 
             Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(value, out result))
+            if (TryParseRfc822DateTime(value, out result))
             {
                 return result;
             }
-            else
-            {
-                throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
-            }
+
+            throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
         }
 
         /// <summary>
@@ -130,7 +124,7 @@
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> object to convert.</param>
         /// <returns>A string that contains the RFC-822 date string representation of the supplied <see cref="DateTime"/> object.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static string ToRfc822DateTime(DateTime dateTime)
         {
             DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -148,7 +142,7 @@
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static bool TryParseRfc822DateTime(string value, out DateTime result)
         {
             // patterns from http://stackoverflow.com/questions/284775/how-do-i-parse-and-convert-datetimes-to-the-rfc-822-date-time-format
@@ -207,12 +201,12 @@
                 return false;
             }
 
-            if (DateTime.TryParseExact(SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value), formats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result))
+            if (DateTime.TryParseExact(ReplaceRfc822TimeZoneWithOffset(value), formats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result))
             {
                 return true;
             }
 
-            if (DateTime.TryParse(SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value), out result))
+            if (DateTime.TryParse(ReplaceRfc822TimeZoneWithOffset(value), out result))
             {
                 return true;
             }

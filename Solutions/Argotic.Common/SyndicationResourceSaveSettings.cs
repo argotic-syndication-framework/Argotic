@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.IO;
     using System.Text;
 
@@ -30,13 +31,6 @@
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         private bool syndicationExtensionAutodetectionEnabled = true;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
-        /// </summary>
-        public SyndicationResourceSaveSettings()
-        {
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
@@ -129,11 +123,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -160,11 +155,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -180,11 +176,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -201,7 +198,7 @@
         /// </remarks>
         public override string ToString()
         {
-            return string.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            return string.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(NumberFormatInfo.InvariantInfo));
         }
 
         /// <summary>
@@ -228,10 +225,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>

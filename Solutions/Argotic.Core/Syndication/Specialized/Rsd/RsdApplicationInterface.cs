@@ -16,29 +16,13 @@
     /// <seealso cref="RsdDocument.Interfaces"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RsdApplicationInterface class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdApplicationInterfaceExample.cs"
-    ///             region="RsdApplicationInterface"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rsd\RsdApplicationInterfaceExample.cs" region="RsdApplicationInterface" />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(
-        "Microsoft.Naming",
-        "CA1704:IdentifiersShouldBeSpelledCorrectly",
-        MessageId = "Rsd")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
     [Serializable]
     public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     {
-        /// <summary>
-        /// Private member to hold the location of the documentation for the application interface.
-        /// </summary>
-        private Uri interfaceDocumentation;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the application interface is preferred.
-        /// </summary>
-        private bool interfaceIsPreferred;
-
         /// <summary>
         /// Private member to hold the communication endpoint of the application interface.
         /// </summary>
@@ -98,18 +82,7 @@
         /// Gets or sets the location of the documentation for this application interface.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
-        public Uri Documentation
-        {
-            get
-            {
-                return this.interfaceDocumentation;
-            }
-
-            set
-            {
-                this.interfaceDocumentation = value;
-            }
-        }
+        public Uri Documentation { get; set; }
 
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -123,12 +96,7 @@
         {
             get
             {
-                if (this.objectSyndicationExtensions == null)
-                {
-                    this.objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-
-                return this.objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
@@ -154,18 +122,7 @@
         /// Gets or sets a value indicating whether gets or sets a value indicating if this application interface is preferred.
         /// </summary>
         /// <value><b>true</b> if this application interface is the preferred service; otherwise <b>false</b>.</value>
-        public bool IsPreferred
-        {
-            get
-            {
-                return this.interfaceIsPreferred;
-            }
-
-            set
-            {
-                this.interfaceIsPreferred = value;
-            }
-        }
+        public bool IsPreferred { get; set; }
 
         /// <summary>
         /// Gets or sets the communication endpoint of this application interface.
@@ -245,14 +202,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.interfaceNotes = string.Empty;
-                }
-                else
-                {
-                    this.interfaceNotes = value.Trim();
-                }
+                this.interfaceNotes = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -264,12 +214,7 @@
         {
             get
             {
-                if (this.interfaceSettings == null)
-                {
-                    this.interfaceSettings = new Dictionary<string, string>();
-                }
-
-                return this.interfaceSettings;
+                return this.interfaceSettings ?? (this.interfaceSettings = new Dictionary<string, string>());
             }
         }
 
@@ -286,14 +231,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.interfaceWeblogId = string.Empty;
-                }
-                else
-                {
-                    this.interfaceWeblogId = value.Trim();
-                }
+                this.interfaceWeblogId = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -309,7 +247,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -329,7 +268,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -360,7 +300,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -377,7 +318,9 @@
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
             wasAdded = true;
 
@@ -401,39 +344,18 @@
 
             if (value != null)
             {
-                int result = Uri.Compare(
-                    this.Documentation,
-                    value.Documentation,
-                    UriComponents.AbsoluteUri,
-                    UriFormat.SafeUnescaped,
-                    StringComparison.OrdinalIgnoreCase);
+                int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | this.IsPreferred.CompareTo(value.IsPreferred);
-                result = result | Uri.Compare(
-                             this.Link,
-                             value.Link,
-                             UriComponents.AbsoluteUri,
-                             UriFormat.SafeUnescaped,
-                             StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
                 result = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-                result = result | ComparisonUtility.CompareSequence(
-                             this.Settings,
-                             value.Settings,
-                             StringComparison.Ordinal);
+                result = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
                 result = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>
@@ -494,8 +416,11 @@
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(source.NameTable);
+
             if (source.HasAttributes)
             {
                 string nameAttribute = source.GetAttribute("name", string.Empty);
@@ -538,28 +463,17 @@
 
             if (source.HasChildren)
             {
-                XPathNavigator settingsNavigator =
-                    RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+                XPathNavigator settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
                 if (settingsNavigator != null)
                 {
-                    XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(
-                        settingsNavigator,
-                        "rsd:docs",
-                        manager);
-                    XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(
-                        settingsNavigator,
-                        "rsd:notes",
-                        manager);
-                    XPathNodeIterator settingIterator = RsdUtility.SelectSafe(
-                        settingsNavigator,
-                        "rsd:setting",
-                        manager);
+                    XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
+                    XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
+                    XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
                     if (docsNavigator != null)
                     {
-                        Uri documentation;
-                        if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out documentation))
+                        if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out var documentation))
                         {
                             this.Documentation = documentation;
                             wasLoaded = true;
@@ -606,8 +520,10 @@
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
+
             wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
@@ -627,7 +543,9 @@
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
                 ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -648,10 +566,7 @@
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.ConformanceLevel = ConformanceLevel.Fragment;
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
@@ -675,8 +590,8 @@
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("api", RsdUtility.RsdNamespace);
 
+            writer.WriteStartElement("api", RsdUtility.RsdNamespace);
             writer.WriteAttributeString("name", this.Name);
             writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
             writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);

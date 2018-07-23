@@ -1,6 +1,7 @@
 ﻿namespace Argotic.Common
 {
     using System;
+    using System.Globalization;
     using System.Net;
     using System.Xml.XPath;
 
@@ -233,11 +234,12 @@
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -264,11 +266,12 @@
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -284,11 +287,12 @@
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -306,10 +310,10 @@
         public override string ToString()
         {
             string source = this.Source != null ? this.Source.ToString() : string.Empty;
-            string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-            string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+            string data = this.Data != null ? this.Data.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string state = this.State != null ? this.State.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
 
             return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
         }
@@ -337,10 +341,8 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
 
         /// <summary>

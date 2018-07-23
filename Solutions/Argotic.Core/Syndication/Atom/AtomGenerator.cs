@@ -17,34 +17,16 @@
     /// <seealso cref="AtomFeed.Generator"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomGenerator class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomGeneratorExample.cs"
-    ///             region="AtomGenerator"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Atom\AtomGeneratorExample.cs" region="AtomGenerator" />
     ///     </code>
     /// </example>
     [Serializable]
     public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
         /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
-        /// <summary>
         /// Private member to hold a human-readable name for the generating agent.
         /// </summary>
         private string generatorText = string.Empty;
-
-        /// <summary>
-        /// Private member to hold an IRI that is relevant to the generating agent.
-        /// </summary>
-        private Uri generatorUri;
 
         /// <summary>
         /// Private member to hold the version of the generating agent.
@@ -83,18 +65,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets a human-readable name for the generating agent.
@@ -167,18 +138,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets an IRI that is relevant to the generating agent.
@@ -188,18 +148,7 @@
         ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
         ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
         /// </remarks>
-        public Uri Uri
-        {
-            get
-            {
-                return this.generatorUri;
-            }
-
-            set
-            {
-                this.generatorUri = value;
-            }
-        }
+        public Uri Uri { get; set; }
 
         /// <summary>
         /// Gets or sets the version of the generating agent.
@@ -237,7 +186,8 @@
             {
                 return true;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -257,7 +207,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -288,7 +239,8 @@
             {
                 return false;
             }
-            else if (Equals(first, null) && !Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
@@ -344,16 +296,14 @@
 
                 return result;
             }
-            else
-            {
-                throw new ArgumentException(
-                    string.Format(
-                        null,
-                        "obj is not of type {0}, type was found to be '{1}'.",
-                        this.GetType().FullName,
-                        obj.GetType().FullName),
-                    "obj");
-            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
         }
 
         /// <summary>

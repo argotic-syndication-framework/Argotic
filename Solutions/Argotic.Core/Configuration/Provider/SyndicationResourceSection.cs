@@ -12,14 +12,13 @@
         /// <summary>
         /// Private member to hold the default provider configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty ConfigurationSectionDefaultProviderProperty =
-            new ConfigurationProperty(
-                "defaultProvider",
-                typeof(string),
-                "XmlSyndicationResourceProvider",
-                new StringConverter(),
-                new StringValidator(1),
-                ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionDefaultProviderProperty = new ConfigurationProperty(
+            "defaultProvider",
+            typeof(string),
+            "XmlSyndicationResourceProvider",
+            new StringConverter(),
+            new StringValidator(1),
+            ConfigurationPropertyOptions.None);
 
         /// <summary>
         /// Private member to hold the providers configuration property for the section.
@@ -33,8 +32,7 @@
         /// <summary>
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
-        private static ConfigurationPropertyCollection configurationSectionProperties =
-            new ConfigurationPropertyCollection();
+        private static ConfigurationPropertyCollection configurationSectionProperties = new ConfigurationPropertyCollection();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSection"/> class.
@@ -53,10 +51,7 @@
         ///     The <see cref="DefaultProvider"/> must match a named value in the <b>providers</b> subsection of the <b>syndication</b> section of the configuration file.
         ///     An empty string ("") is not a valid value for the <see cref="DefaultProvider"/> property.
         /// </remarks>
-        [ConfigurationProperty(
-            "defaultProvider",
-            DefaultValue = "XmlSyndicationResourceProvider",
-            Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty("defaultProvider", DefaultValue = "XmlSyndicationResourceProvider", Options = ConfigurationPropertyOptions.None)]
         [StringValidator(MinLength = 1)]
         public string DefaultProvider
         {

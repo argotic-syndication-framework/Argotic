@@ -14,12 +14,13 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <ApplicationIcon>Argotic.ico</ApplicationIcon>
     <Authors>Brian William Kuhn, endjin</Authors>
-    <Company />
-    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

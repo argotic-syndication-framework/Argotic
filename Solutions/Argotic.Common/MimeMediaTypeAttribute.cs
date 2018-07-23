@@ -9,17 +9,19 @@
     ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    [Serializable()]
+    [Serializable]
     public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     {
         /// <summary>
         /// Private member to hold the MIME media type name.
         /// </summary>
-        private string mimeMediaTypeName = String.Empty;
+        private string mimeMediaTypeName = string.Empty;
+
         /// <summary>
         /// Private member to hold the MIME media sub-type name.
         /// </summary>
-        private string mimeMediaSubTypeName = String.Empty;
+        private string mimeMediaSubTypeName = string.Empty;
+
         /// <summary>
         /// Private member to hold a URI that points to the documentation the describes the MIME media type.
         /// </summary>
@@ -28,7 +30,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMediaTypeAttribute"/> class.
         /// </summary>
-        public MimeMediaTypeAttribute() : base()
+        public MimeMediaTypeAttribute()
+            : base()
         {
         }
 
@@ -40,25 +43,25 @@
         {
             get
             {
-                return mimeMediaDocumentation != null ? mimeMediaDocumentation.ToString() : String.Empty;
+                return this.mimeMediaDocumentation != null ? this.mimeMediaDocumentation.ToString() : string.Empty;
             }
 
             set
             {
                 if (value == null)
                 {
-                    mimeMediaDocumentation = null;
+                    this.mimeMediaDocumentation = null;
                 }
                 else
                 {
                     Uri url;
                     if (Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out url))
                     {
-                        mimeMediaDocumentation = url;
+                        this.mimeMediaDocumentation = url;
                     }
                     else
                     {
-                        mimeMediaDocumentation = null;
+                        this.mimeMediaDocumentation = null;
                     }
                 }
             }
@@ -72,18 +75,18 @@
         {
             get
             {
-                return mimeMediaTypeName;
+                return this.mimeMediaTypeName;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    mimeMediaTypeName = String.Empty;
+                    this.mimeMediaTypeName = string.Empty;
                 }
                 else
                 {
-                    mimeMediaTypeName = value.Trim();
+                    this.mimeMediaTypeName = value.Trim();
                 }
             }
         }
@@ -96,32 +99,32 @@
         {
             get
             {
-                return mimeMediaSubTypeName;
+                return this.mimeMediaSubTypeName;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    mimeMediaSubTypeName = String.Empty;
+                    this.mimeMediaSubTypeName = string.Empty;
                 }
                 else
                 {
-                    mimeMediaSubTypeName = value.Trim();
+                    this.mimeMediaSubTypeName = value.Trim();
                 }
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
         /// <remarks>
         ///     This method returns a human-readable string for the current instance.
         /// </remarks>
         public override string ToString()
         {
-            return String.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : String.Empty);
+            return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
         }
 
         /// <summary>
@@ -141,31 +144,31 @@
 
             if (value != null)
             {
-                int result = String.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-                result = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result = result | String.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is MimeMediaTypeAttribute))
             {
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -227,7 +230,7 @@
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -247,7 +250,7 @@
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
         }
     }
 }

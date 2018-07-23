@@ -33,7 +33,7 @@
         /// </remarks>
         public static void ArgumentNotNullOrEmptyString(string value, string name)
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 throw new ArgumentNullException(name);
             }

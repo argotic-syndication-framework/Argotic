@@ -24,7 +24,7 @@ namespace Argotic.Examples
 
             foreach(GenericSyndicationCategory category in feed.Categories)
             {
-                if (String.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     //  Process feed category
                 }
@@ -40,7 +40,7 @@ namespace Argotic.Examples
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         //  Process item category
                     }
@@ -73,7 +73,7 @@ namespace Argotic.Examples
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         //  Process item category
                     }
@@ -86,7 +86,7 @@ namespace Argotic.Examples
         public static void LoadUriExample()
         {
             GenericSyndicationFeed feed = new GenericSyndicationFeed();
-            Uri source                  = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
+            Uri source = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
 
             feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -99,7 +99,7 @@ namespace Argotic.Examples
 
                 foreach (GenericSyndicationCategory category in item.Categories)
                 {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         //  Process item category
                     }

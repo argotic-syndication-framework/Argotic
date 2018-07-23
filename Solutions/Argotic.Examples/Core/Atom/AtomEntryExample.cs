@@ -25,13 +25,13 @@ namespace Argotic.Examples
         {
             AtomEntry entry = new AtomEntry();
 
-            entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-            entry.Title     = new AtomTextConstruct("Atom Entry Document");
+            entry.Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
+            entry.Title = new AtomTextConstruct("Atom Entry Document");
             entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
             entry.Authors.Add(new AtomPersonConstruct("John Doe"));
             entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
-            entry.Summary   = new AtomTextConstruct("A stand-alone Atom Entry Document.");
+            entry.Summary = new AtomTextConstruct("A stand-alone Atom Entry Document.");
         }
         /// <summary>
         /// Provides example code for the AtomEntry.Create(Uri) method
@@ -63,7 +63,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
             if(e.State != null)
             {
@@ -74,9 +74,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source    = new XPathDocument("http://example.org/blog/1234");
+            XPathDocument source = new XPathDocument("http://example.org/blog/1234");
 
-            AtomEntry entry         = new AtomEntry();
+            AtomEntry entry = new AtomEntry();
             entry.Load(source);
 
             if (entry.UpdatedOn >= DateTime.Today)
@@ -112,9 +112,9 @@ namespace Argotic.Examples
 
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
 
                 using(XmlReader reader = XmlReader.Create(stream, settings))
                 {
@@ -134,7 +134,7 @@ namespace Argotic.Examples
         public static void LoadUriExample()
         {
             AtomEntry entry = new AtomEntry();
-            Uri source      = new Uri("http://example.org/blog/1234");
+            Uri source = new Uri("http://example.org/blog/1234");
 
             entry.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -170,8 +170,8 @@ namespace Argotic.Examples
 
             using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
                 {

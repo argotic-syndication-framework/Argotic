@@ -20,6 +20,13 @@
     public interface ISyndicationResource
     {
         /// <summary>
+        /// Occurs when the syndication resource state has been changed by a load operation.
+        /// </summary>
+        /// <seealso cref="ISyndicationResource.Load(IXPathNavigable)"/>
+        /// <seealso cref="ISyndicationResource.Load(XmlReader)"/>
+        event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+
+        /// <summary>
         /// Gets the <see cref="SyndicationContentFormat"/> that the resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that the resource implements.</value>
@@ -36,13 +43,6 @@
         {
             get;
         }
-
-        /// <summary>
-        /// Occurs when the syndication resource state has been changed by a load operation.
-        /// </summary>
-        /// <seealso cref="ISyndicationResource.Load(IXPathNavigable)"/>
-        /// <seealso cref="ISyndicationResource.Load(XmlReader)"/>
-        event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
 
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ISyndicationResource"/>.
@@ -348,17 +348,17 @@
         ///     <para>The <see cref="ISyndicationResource"/> should be loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        void LoadAsync(Uri source, Object userToken);
+        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        void LoadAsync(Uri source, object userToken);
 
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -370,17 +370,17 @@
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>, you must wait for the load operation to complete before
+        ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken);
+        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken);
 
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
@@ -398,17 +398,17 @@
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken);
+        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken);
 
         /// <summary>
         /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
@@ -421,23 +421,23 @@
         ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
         ///     <para>
         ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
         ///     </para>
         ///     <para>
-        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+        ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/>,
+        ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, object)"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken);
+        /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, object)"/> call in progress.</exception>
+        void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken);
 
         /// <summary>
         /// Cancels an asynchronous operation to load the syndication resource.
         /// </summary>
         /// <remarks>
-        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation.
+        ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, object)"/> operation.
         ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
         ///     If there is no load operation pending, this method does nothing.
         /// </remarks>

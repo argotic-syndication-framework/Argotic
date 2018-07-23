@@ -19,9 +19,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void ConstructTypeAsStringExample()
         {
-            string contentType  = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
+            string contentType = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
 
-            if (String.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
             {
             }
         }
@@ -31,7 +31,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void ConstructTypeByNameExample()
         {
-            BlogMLContentType contentType   = BlogMLTextConstruct.ConstructTypeByName("html");
+            BlogMLContentType contentType = BlogMLTextConstruct.ConstructTypeByName("html");
 
             if (contentType == BlogMLContentType.Html)
             {

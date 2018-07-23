@@ -19,11 +19,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
-            feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-            feed.Title      = new AtomTextConstruct("Example Feed");
-            feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+            feed.Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
+            feed.Title = new AtomTextConstruct("Example Feed");
+            feed.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
             feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
             feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
@@ -31,15 +31,15 @@ namespace Argotic.Examples
             feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
             //  Provide iconic visual identification for the feed
-            feed.Icon       = new AtomIcon(new Uri("/icon.jpg"));
+            feed.Icon = new AtomIcon(new Uri("/icon.jpg"));
 
             AtomEntry entry = new AtomEntry();
 
-            entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-            entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
+            entry.Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
+            entry.Title = new AtomTextConstruct("Atom-Powered Robots Run Amok");
             entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
-            entry.Summary   = new AtomTextConstruct("Some text.");
+            entry.Summary = new AtomTextConstruct("Some text.");
 
             feed.AddEntry(entry);
         }

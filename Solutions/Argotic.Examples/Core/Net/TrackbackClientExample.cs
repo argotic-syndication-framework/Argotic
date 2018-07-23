@@ -21,18 +21,18 @@ namespace Argotic.Examples
         public static void ClassExample()
         {
             // Initialize the Trackback peer-to-peer notification protocol client
-            TrackbackClient client      = new TrackbackClient();
-            client.Host                 = new Uri("http://www.example.com/trackback/5");
+            TrackbackClient client = new TrackbackClient();
+            client.Host = new Uri("http://www.example.com/trackback/5");
 
             // Construct the trackback message to be sent
-            TrackbackMessage message    = new TrackbackMessage(new Uri("http://www.bar.com/"));
-            message.Encoding            = Encoding.UTF8;
-            message.WeblogName          = "Foo";
-            message.Title               = "Foo Bar";
-            message.Excerpt             = "My Excerpt";
+            TrackbackMessage message = new TrackbackMessage(new Uri("http://www.bar.com/"));
+            message.Encoding = Encoding.UTF8;
+            message.WeblogName = "Foo";
+            message.Title = "Foo Bar";
+            message.Excerpt = "My Excerpt";
 
             // Send a synchronous trackback ping
-            TrackbackResponse response  = client.Send(message);
+            TrackbackResponse response = client.Send(message);
 
             // Verify response to the trackback ping
             if (response != null)

@@ -7,7 +7,7 @@
     /// </summary>
     /// <seealso cref="EnumerationMetadataAttribute"/>
     /// <seealso cref="MimeMediaTypeAttribute"/>
-    [Serializable()]
+    [Serializable]
     public enum SyndicationContentFormat
     {
         /// <summary>
@@ -103,6 +103,6 @@
         /// </summary>
         [EnumerationMetadata(DisplayName = "Atom Publishing Service 1.0", AlternateValue = "service")]
         [MimeMediaType(Name = "application", SubName = "atomsvc+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomsvc")]
-        AtomServiceDocument = 12
+        AtomServiceDocument = 12,
     }
 }

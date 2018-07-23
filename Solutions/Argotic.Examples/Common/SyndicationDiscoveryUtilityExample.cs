@@ -22,9 +22,9 @@ namespace Argotic.Examples
         public static void SyndicationContentFormatGetExample()
         {
             SyndicationContentFormat format = SyndicationContentFormat.None;
-            Uri url                         = new Uri("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
+            Uri url = new Uri("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
 
-            format                          = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
+            format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
 
             if (format != SyndicationContentFormat.None)
             {
@@ -39,8 +39,8 @@ namespace Argotic.Examples
         {
             //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
 
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
-            Uri target  = new Uri("http://www.wikimindmap.org/");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Uri target = new Uri("http://www.wikimindmap.org/");
 
             if (SyndicationDiscoveryUtility.SourceReferencesTarget(source, target))
             {
@@ -53,7 +53,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void UriExistsExample()
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/");
 
             if (SyndicationDiscoveryUtility.UriExists(source))
             {
@@ -66,19 +66,19 @@ namespace Argotic.Examples
         /// </summary>
         public static void ConditionalGetExample()
         {
-            Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
+            Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
             DateTime lastModified;
             string entityTag;
 
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.AllowAutoRedirect   = true;
-            httpRequest.KeepAlive           = true;
-            httpRequest.UserAgent           = "Some User Agent 1.0.0.0";
+            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+            httpRequest.AllowAutoRedirect = true;
+            httpRequest.KeepAlive = true;
+            httpRequest.UserAgent = "Some User Agent 1.0.0.0";
 
-            HttpWebResponse httpResponse    = (HttpWebResponse)httpRequest.GetResponse();
+            HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
 
-            lastModified    = httpResponse.LastModified;
-            entityTag       = httpResponse.Headers[HttpResponseHeader.ETag];
+            lastModified = httpResponse.LastModified;
+            entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
 
             /*
                 Typically the consumer would store the modification date and entity tag information for the resource,
@@ -98,18 +98,18 @@ namespace Argotic.Examples
         /// </summary>
         public static void TryConditionalGetExample()
         {
-            Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
+            Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
             DateTime lastModified;
             string entityTag;
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.AllowAutoRedirect   = true;
-            httpRequest.KeepAlive           = true;
-            httpRequest.UserAgent           = "Some User Agent 1.0.0.0";
+            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+            httpRequest.AllowAutoRedirect = true;
+            httpRequest.KeepAlive = true;
+            httpRequest.UserAgent = "Some User Agent 1.0.0.0";
 
-            HttpWebResponse httpResponse    = (HttpWebResponse)httpRequest.GetResponse();
+            HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
 
-            lastModified    = httpResponse.LastModified;
-            entityTag       = httpResponse.Headers[HttpResponseHeader.ETag];
+            lastModified = httpResponse.LastModified;
+            entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
 
             /*
                 Typically the consumer would store the modification date and entity tag information for the resource,
@@ -130,16 +130,16 @@ namespace Argotic.Examples
         /// </summary>
         public static void LocateDiscoverableSyndicationEndpointsExample()
         {
-            Uri source  = new Uri("http://www.dotnetrocks.com/");
+            Uri source = new Uri("http://www.dotnetrocks.com/");
             Collection<DiscoverableSyndicationEndpoint> endpoints;
 
-            endpoints   = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
+            endpoints = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
 
             foreach(DiscoverableSyndicationEndpoint endpoint in endpoints)
             {
                 if (endpoint.ContentFormat == SyndicationContentFormat.Rss)
                 {
-                    RssFeed feed    = RssFeed.Create(endpoint.Source);
+                    RssFeed feed = RssFeed.Create(endpoint.Source);
                     if(feed.Channel.HasExtensions)
                     {
                         // Process feed extensions
@@ -154,7 +154,7 @@ namespace Argotic.Examples
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static void IsPingbackEnabledExample()
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
             if (SyndicationDiscoveryUtility.IsPingbackEnabled(source))
             {
@@ -168,13 +168,13 @@ namespace Argotic.Examples
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static void LocatePingbackNotificationServerExample()
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
-            Uri pingbackServer  = SyndicationDiscoveryUtility.LocatePingbackNotificationServer(source);
+            Uri pingbackServer = SyndicationDiscoveryUtility.LocatePingbackNotificationServer(source);
             if (pingbackServer != null)
             {
-                Argotic.Net.XmlRpcClient client     = new Argotic.Net.XmlRpcClient(pingbackServer);
-                Argotic.Net.XmlRpcMessage message   = new Argotic.Net.XmlRpcMessage();
+                Argotic.Net.XmlRpcClient client = new Argotic.Net.XmlRpcClient(pingbackServer);
+                Argotic.Net.XmlRpcMessage message = new Argotic.Net.XmlRpcMessage();
 
                 // Build the Pingback XML-RPC message to be sent
 
@@ -188,7 +188,7 @@ namespace Argotic.Examples
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static void IsTrackbackEnabledExample()
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
             if (SyndicationDiscoveryUtility.IsTrackbackEnabled(source))
             {
@@ -202,13 +202,13 @@ namespace Argotic.Examples
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static void LocateTrackbackNotificationServersExample()
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
-            Collection<TrackbackDiscoveryMetadata> endpoints    = SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(source);
+            Collection<TrackbackDiscoveryMetadata> endpoints = SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(source);
             foreach(TrackbackDiscoveryMetadata endpoint in endpoints)
             {
                 Argotic.Net.TrackbackClient client = new Argotic.Net.TrackbackClient(endpoint.PingUrl);
-                Argotic.Net.TrackbackMessage message    = new Argotic.Net.TrackbackMessage();
+                Argotic.Net.TrackbackMessage message = new Argotic.Net.TrackbackMessage();
 
                 //  Build Trackback url-encoded message to be sent
 

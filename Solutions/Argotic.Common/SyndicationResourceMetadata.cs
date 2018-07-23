@@ -8,25 +8,28 @@
     /// <summary>
     /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SyndicationResourceMetadata : IComparable
     {
         /// <summary>
         /// Private member to hold the syndication content format that the syndication resource conforms to.
         /// </summary>
         private SyndicationContentFormat resourceFormat = SyndicationContentFormat.None;
+
         /// <summary>
         /// Private member to hold the XML namespaces declared in the syndication resource's root element.
         /// </summary>
         private Dictionary<string, string> resourceNamespaces = new Dictionary<string, string>();
+
         /// <summary>
         /// Private member to hold the version of the syndication specification that the resource conforms to.
         /// </summary>
         private Version resourceVersion;
+
         /// <summary>
         /// Private member to hold a XPath navigator that can be used to navigate the root element of the syndication resource.
         /// </summary>
-        [NonSerialized()]
+        [NonSerialized]
         private XPathNavigator resourceRootNode;
 
         /// <summary>
@@ -42,7 +45,7 @@
         }
 
         /// <summary>
-        /// Gets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
+        /// Gets or sets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
         /// </summary>
         /// <value>
         ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to.
@@ -52,12 +55,12 @@
         {
             get
             {
-                return resourceFormat;
+                return this.resourceFormat;
             }
 
             protected set
             {
-                resourceFormat = value;
+                this.resourceFormat = value;
             }
         }
 
@@ -69,7 +72,7 @@
         {
             get
             {
-                return resourceNamespaces;
+                return this.resourceNamespaces;
             }
         }
 
@@ -81,7 +84,7 @@
         {
             get
             {
-                return resourceRootNode;
+                return this.resourceRootNode;
             }
         }
 
@@ -93,8 +96,184 @@
         {
             get
             {
-                return resourceVersion;
+                return this.resourceVersion;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return true;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return false;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return false;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
+        /// </remarks>
+        public override string ToString()
+        {
+            string format = this.Format.ToString();
+            string version = this.Version != null ? this.Version.ToString() : string.Empty;
+            string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+            string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+
+            return string.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            SyndicationResourceMetadata value = obj as SyndicationResourceMetadata;
+
+            if (value != null)
+            {
+                int result = this.Format.CompareTo(value.Format);
+
+                if (this.Version != null)
+                {
+                    result = result | this.Version.CompareTo(value.Version);
+                }
+                else if (value.Version != null)
+                {
+                    result = result | -1;
+                }
+
+                if (this.Namespaces != null && value.Namespaces != null)
+                {
+                    result = result | ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
+                }
+                else if (this.Namespaces != null && value.Namespaces == null)
+                {
+                    result = result | 1;
+                }
+                else if (this.Namespaces == null && value.Namespaces != null)
+                {
+                    result = result | -1;
+                }
+
+                if (this.Resource != null && value.Resource != null)
+                {
+                    result = result | string.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
+                }
+                else if (this.Resource != null && value.Resource == null)
+                {
+                    result = result | 1;
+                }
+                else if (this.Resource == null && value.Resource != null)
+                {
+                    result = result | -1;
+                }
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SyndicationResourceMetadata))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -113,9 +292,9 @@
             Guard.ArgumentNotNull(navigator, "navigator");
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            string value = navigator.GetAttribute(name, String.Empty);
+            string value = navigator.GetAttribute(name, string.Empty);
 
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 try
                 {
@@ -151,7 +330,7 @@
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "<Pending>")]
         protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
@@ -339,7 +518,7 @@
         /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+        protected static bool TryParseBlogMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
             XmlNamespaceManager manager = null;
@@ -415,7 +594,7 @@
         /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+        protected static bool TryParseNewsMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
             bool resourceConformsToFormat = false;
 
@@ -539,9 +718,9 @@
                         version = new Version(1, 0);
                     }
                 }
-                else if (String.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
+                else if (string.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
                 {
-                    //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
+                    // Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
                     resourceConformsToFormat = true;
                 }
             }
@@ -618,259 +797,83 @@
             Dictionary<string, string> namespaces = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
             foreach (string prefix in namespaces.Keys)
             {
-                resourceNamespaces.Add(prefix, namespaces[prefix]);
+                this.resourceNamespaces.Add(prefix, namespaces[prefix]);
             }
 
-            resourceVersion = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
+            this.resourceVersion = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
 
             if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.Apml;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.Apml;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.Atom;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.Atom;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.AtomCategoryDocument;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.AtomCategoryDocument;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.AtomServiceDocument;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.AtomServiceDocument;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
-            else if (SyndicationResourceMetadata.TryParseBlogMLResource(resource, out navigator, out version))
+            else if (SyndicationResourceMetadata.TryParseBlogMlResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.BlogML;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.BlogML;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.MicroSummaryGenerator;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.MicroSummaryGenerator;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
-            else if (SyndicationResourceMetadata.TryParseNewsMLResource(resource, out navigator, out version))
+            else if (SyndicationResourceMetadata.TryParseNewsMlResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.NewsML;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.NewsML;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.OpenSearchDescription;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.OpenSearchDescription;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseOpmlResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.Opml;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.Opml;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseRsdResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.Rsd;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.Rsd;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
             {
-                resourceFormat = SyndicationContentFormat.Rss;
-                resourceRootNode = navigator;
-                resourceVersion = version;
+                this.resourceFormat = SyndicationContentFormat.Rss;
+                this.resourceRootNode = navigator;
+                this.resourceVersion = version;
             }
             else
             {
-                resourceFormat = SyndicationContentFormat.None;
-                resourceRootNode = null;
-                resourceVersion = null;
+                this.resourceFormat = SyndicationContentFormat.None;
+                this.resourceRootNode = null;
+                this.resourceVersion = null;
             }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-        /// </remarks>
-        public override string ToString()
-        {
-            string format = this.Format.ToString();
-            string version = this.Version != null ? this.Version.ToString() : String.Empty;
-            string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-
-            return String.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            SyndicationResourceMetadata value = obj as SyndicationResourceMetadata;
-
-            if (value != null)
-            {
-                int result = this.Format.CompareTo(value.Format);
-
-                if (this.Version != null)
-                {
-                    result = result | this.Version.CompareTo(value.Version);
-                }
-                else if (value.Version != null)
-                {
-                    result = result | -1;
-                }
-
-                if (this.Namespaces != null && value.Namespaces != null)
-                {
-                    result = result | ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
-                }
-                else if (this.Namespaces != null && value.Namespaces == null)
-                {
-                    result = result | 1;
-                }
-                else if (this.Namespaces == null && value.Namespaces != null)
-                {
-                    result = result | -1;
-                }
-
-                if (this.Resource != null && value.Resource != null)
-                {
-                    result = result | String.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
-                }
-                else if (this.Resource != null && value.Resource == null)
-                {
-                    result = result | 1;
-                }
-                else if (this.Resource == null && value.Resource != null)
-                {
-                    result = result | -1;
-                }
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is SyndicationResourceMetadata))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

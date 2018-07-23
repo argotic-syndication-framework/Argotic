@@ -17,7 +17,7 @@ namespace Argotic.Examples
         /// <summary>
         /// Private member to hold the value of the custom syndication extension's attribute.
         /// </summary>
-        private string customExtensionAttribute = String.Empty;
+        private string customExtensionAttribute = string.Empty;
         /// <summary>
         /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
         /// </summary>
@@ -39,9 +39,9 @@ namespace Argotic.Examples
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    customExtensionAttribute = String.Empty;
+                    customExtensionAttribute = string.Empty;
                 }
                 else
                 {
@@ -77,20 +77,20 @@ namespace Argotic.Examples
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public override bool Load(IXPathNavigable source)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
-            XPathNavigator navigator    = source.CreateNavigator();
+            XPathNavigator navigator = source.CreateNavigator();
             if (navigator.HasAttributes)
             {
-                string myAttribute      = navigator.GetAttribute("someAttribute", String.Empty);
-                if (!String.IsNullOrEmpty(myAttribute))
+                string myAttribute = navigator.GetAttribute("someAttribute", string.Empty);
+                if (!string.IsNullOrEmpty(myAttribute))
                 {
-                    this.MyAttribute    = myAttribute;
-                    wasLoaded           = true;
+                    this.MyAttribute = myAttribute;
+                    wasLoaded = true;
                 }
             }
 
-            SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+            SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
             this.OnExtensionLoaded(args);
 
             return wasLoaded;
@@ -106,7 +106,7 @@ namespace Argotic.Examples
         {
             Guard.ArgumentNotNull(reader, "reader");
 
-            XPathDocument document  = new XPathDocument(reader);
+            XPathDocument document = new XPathDocument(reader);
 
             return this.Load(document.CreateNavigator());
         }
@@ -122,7 +122,7 @@ namespace Argotic.Examples
 
             writer.WriteStartElement("CustomExtension", this.XmlNamespace);
 
-            if(!String.IsNullOrEmpty(this.MyAttribute))
+            if(!string.IsNullOrEmpty(this.MyAttribute))
             {
                 writer.WriteAttributeString("someAttribute", this.MyAttribute);
             }
@@ -130,9 +130,9 @@ namespace Argotic.Examples
             writer.WriteEndElement();
         }
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
@@ -140,9 +140,9 @@ namespace Argotic.Examples
         {
             using(MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
@@ -170,42 +170,42 @@ namespace Argotic.Examples
             {
                 return 1;
             }
-            MyCustomSyndicationExtension value  = obj as MyCustomSyndicationExtension;
+            MyCustomSyndicationExtension value = obj as MyCustomSyndicationExtension;
 
             if (value != null)
             {
                 // Base class properties
-                int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.Version.CompareTo(value.Version);
-                result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-                result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+                int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | this.Version.CompareTo(value.Version);
+                result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+                result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
                 // Custom extension properties
-                result      = result | String.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
 
                 return result;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is MyCustomSyndicationExtension))
             {
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Argotic.Examples
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
         {
-            char[] charArray    = this.ToString().ToCharArray();
+            char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
         }
@@ -267,7 +267,7 @@ namespace Argotic.Examples
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Argotic.Examples
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
         }
     }
 }

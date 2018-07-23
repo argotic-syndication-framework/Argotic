@@ -20,17 +20,17 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            RssFeed feed    = new RssFeed();
+            RssFeed feed = new RssFeed();
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+            feed.Channel.Title = "Dallas Times-Herald";
+            feed.Channel.Link = new Uri("http://dallas.example.com");
+            feed.Channel.Description = "Current headlines from the Dallas Times-Herald newspaper";
 
-            RssImage image              = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-            image.Description           = "Read the Dallas Times-Herald";
-            image.Height                = 32;
-            image.Width                 = 96;
-            feed.Channel.Image          = image;
+            RssImage image = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
+            image.Description = "Read the Dallas Times-Herald";
+            image.Height = 32;
+            image.Width = 96;
+            feed.Channel.Image = image;
         }
     }
 }

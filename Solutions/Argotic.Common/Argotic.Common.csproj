@@ -15,6 +15,7 @@
     <ApplicationIcon>Argotic.ico</ApplicationIcon>
     <Authors>Brian William Kuhn, endjin</Authors>
     <Company />
+    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

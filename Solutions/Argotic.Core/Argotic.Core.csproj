@@ -13,6 +13,7 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

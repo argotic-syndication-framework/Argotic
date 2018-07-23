@@ -35,7 +35,7 @@
             }
             else
             {
-                throw new FormatException(String.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
+                throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
             }
         }
 
@@ -91,111 +91,13 @@
             formats[13] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffffzzz";
             formats[14] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffffzzz";
 
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 result = DateTime.MinValue;
                 return false;
             }
 
             return DateTime.TryParseExact(value, formats, dateTimeFormat, DateTimeStyles.AdjustToUniversal, out result);
-        }
-
-        /// <summary>
-        /// Replaces the RFC-822 time-zone component with its offset equivalent.
-        /// </summary>
-        /// <param name="value">A string containing a RFC-822 formatted date to convert.</param>
-        /// <returns>A string containing a RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
-        private static string ReplaceRfc822TimeZoneWithOffset(string value)
-        {
-            string zoneRepresentedAsLocalDifferential = String.Empty;
-
-            if (String.IsNullOrEmpty(value))
-            {
-                throw new ArgumentNullException("s");
-            }
-
-            if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" UT") + 1)), "+00:00");
-            }
-            else if (value.EndsWith(" GMT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" GMT") + 1)), "+00:00");
-            }
-            else if (value.Contains(" GMT"))
-            {
-                int GMT_index = value.LastIndexOf(" GMT");
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (GMT_index + 1)), value.Substring(GMT_index + 4, value.Length - GMT_index - 4));
-            }
-            else if (value.EndsWith(" EST", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" EST") + 1)), "-05:00");
-            }
-            else if (value.EndsWith(" EDT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" EDT") + 1)), "-04:00");
-            }
-            else if (value.EndsWith(" CST", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" CST") + 1)), "-06:00");
-            }
-            else if (value.EndsWith(" CDT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" CDT") + 1)), "-05:00");
-            }
-            else if (value.EndsWith(" MST", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" MST") + 1)), "-07:00");
-            }
-            else if (value.EndsWith(" MDT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" MDT") + 1)), "-06:00");
-            }
-            else if (value.EndsWith(" PST", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" PST") + 1)), "-08:00");
-            }
-            else if (value.EndsWith(" PDT", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" PDT") + 1)), "-07:00");
-            }
-            else if (value.EndsWith(" Z", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" Z") + 1)), "+00:00");
-            }
-            else if (value.EndsWith(" A", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" A") + 1)), "-01:00");
-            }
-            else if (value.EndsWith(" M", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" M") + 1)), "-12:00");
-            }
-            else if (value.EndsWith(" N", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" N") + 1)), "+01:00");
-            }
-            else if (value.EndsWith(" Y", StringComparison.OrdinalIgnoreCase))
-            {
-                zoneRepresentedAsLocalDifferential = String.Concat(value.Substring(0, (value.LastIndexOf(" Y") + 1)), "+12:00");
-            }
-            else if (value.EndsWith("CET", StringComparison.OrdinalIgnoreCase))
-			{
-				return String.Format(null, "{0}+1:00", value.TrimEnd("CET".ToCharArray()));
-			}
-            else if (value.EndsWith("CEST", StringComparison.OrdinalIgnoreCase))
-			{
-				return String.Format(null, "{0}+2:00", value.TrimEnd("CEST".ToCharArray()));
-			}
-            else
-            {
-                zoneRepresentedAsLocalDifferential = value;
-            }
-
-            return zoneRepresentedAsLocalDifferential;
         }
 
         /// <summary>
@@ -219,7 +121,7 @@
             }
             else
             {
-                throw new FormatException(String.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
+                throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
             }
         }
 
@@ -299,7 +201,7 @@
             formats[34] = DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern;
             formats[35] = dateTimeFormat.RFC1123Pattern;
 
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 result = DateTime.MinValue;
                 return false;
@@ -309,12 +211,111 @@
             {
                 return true;
             }
+
             if (DateTime.TryParse(SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value), out result))
             {
                 return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Replaces the RFC-822 time-zone component with its offset equivalent.
+        /// </summary>
+        /// <param name="value">A string containing a RFC-822 formatted date to convert.</param>
+        /// <returns>A string containing a RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+        /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
+        private static string ReplaceRfc822TimeZoneWithOffset(string value)
+        {
+            string zoneRepresentedAsLocalDifferential = string.Empty;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("s");
+            }
+
+            if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" UT") + 1), "+00:00");
+            }
+            else if (value.EndsWith(" GMT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" GMT") + 1), "+00:00");
+            }
+            else if (value.Contains(" GMT"))
+            {
+                int gmtIndex = value.LastIndexOf(" GMT");
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, gmtIndex + 1), value.Substring(gmtIndex + 4, value.Length - gmtIndex - 4));
+            }
+            else if (value.EndsWith(" EST", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" EST") + 1), "-05:00");
+            }
+            else if (value.EndsWith(" EDT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" EDT") + 1), "-04:00");
+            }
+            else if (value.EndsWith(" CST", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" CST") + 1), "-06:00");
+            }
+            else if (value.EndsWith(" CDT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" CDT") + 1), "-05:00");
+            }
+            else if (value.EndsWith(" MST", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" MST") + 1), "-07:00");
+            }
+            else if (value.EndsWith(" MDT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" MDT") + 1), "-06:00");
+            }
+            else if (value.EndsWith(" PST", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" PST") + 1), "-08:00");
+            }
+            else if (value.EndsWith(" PDT", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" PDT") + 1), "-07:00");
+            }
+            else if (value.EndsWith(" Z", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" Z") + 1), "+00:00");
+            }
+            else if (value.EndsWith(" A", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" A") + 1), "-01:00");
+            }
+            else if (value.EndsWith(" M", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" M") + 1), "-12:00");
+            }
+            else if (value.EndsWith(" N", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" N") + 1), "+01:00");
+            }
+            else if (value.EndsWith(" Y", StringComparison.OrdinalIgnoreCase))
+            {
+                zoneRepresentedAsLocalDifferential = string.Concat(value.Substring(0, value.LastIndexOf(" Y") + 1), "+12:00");
+            }
+            else if (value.EndsWith("CET", StringComparison.OrdinalIgnoreCase))
+            {
+                return string.Format(null, "{0}+1:00", value.TrimEnd("CET".ToCharArray()));
+            }
+            else if (value.EndsWith("CEST", StringComparison.OrdinalIgnoreCase))
+            {
+                return string.Format(null, "{0}+2:00", value.TrimEnd("CEST".ToCharArray()));
+            }
+            else
+            {
+                zoneRepresentedAsLocalDifferential = value;
+            }
+
+            return zoneRepresentedAsLocalDifferential;
         }
     }
 }

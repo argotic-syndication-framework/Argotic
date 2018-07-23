@@ -24,20 +24,20 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            RsdDocument document    = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
-            document.EngineName     = "Blog Munging CMS";
-            document.EngineLink     = new Uri("http://www.blogmunging.com/");
-            document.Homepage       = new Uri("http://www.userdomain.com/");
+            document.EngineName = "Blog Munging CMS";
+            document.EngineLink = new Uri("http://www.blogmunging.com/");
+            document.Homepage = new Uri("http://www.userdomain.com/");
 
             document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
             document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
             document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
             document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-            RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, String.Empty);
-            conversantApi.Documentation             = new Uri("http://www.conversant.com/docs/api/");
-            conversantApi.Notes                     = "Additional explanation here.";
+            RsdApplicationInterface conversantApi = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty);
+            conversantApi.Documentation = new Uri("http://www.conversant.com/docs/api/");
+            conversantApi.Notes = "Additional explanation here.";
             conversantApi.Settings.Add("service-specific-setting", "a value");
             conversantApi.Settings.Add("another-setting", "another value");
             document.AddInterface(conversantApi);
@@ -47,7 +47,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            RsdDocument document    = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
+            RsdDocument document = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
             
             foreach(RsdApplicationInterface api in document.Interfaces)
             {
@@ -63,7 +63,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -75,7 +75,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
             if(e.State != null)
             {
@@ -86,9 +86,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
+            XPathDocument source = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
 
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
             document.Load(source);
 
             foreach (RsdApplicationInterface api in document.Interfaces)
@@ -106,7 +106,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
             {
@@ -128,13 +128,13 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
 
                 using(XmlReader reader = XmlReader.Create(stream, settings))
                 {
@@ -157,8 +157,8 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            RsdDocument document   = new RsdDocument();
-            Uri source              = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
+            RsdDocument document = new RsdDocument();
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
 
             document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -177,7 +177,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
             //  Modify document state using public properties and methods
 
@@ -192,14 +192,14 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            RsdDocument document   = new RsdDocument();
+            RsdDocument document = new RsdDocument();
 
             //  Modify document state using public properties and methods
 
             using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
                 {

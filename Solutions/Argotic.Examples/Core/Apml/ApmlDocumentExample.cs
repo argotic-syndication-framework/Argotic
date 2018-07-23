@@ -24,16 +24,16 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            ApmlDocument document       = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
             document.DefaultProfileName = "Work";
 
-            document.Head.Title         = "Example APML file for apml.org";
-            document.Head.Generator     = "Written by Hand";
-            document.Head.EmailAddress  = "sample@apml.org";
-            document.Head.CreatedOn     = new DateTime(2007, 3, 11, 13, 55, 0);
+            document.Head.Title = "Example APML file for apml.org";
+            document.Head.Generator = "Written by Hand";
+            document.Head.EmailAddress = "sample@apml.org";
+            document.Head.CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
 
-            ApmlProfile homeProfile     = new ApmlProfile();
-            homeProfile.Name            = "Home";
+            ApmlProfile homeProfile = new ApmlProfile();
+            homeProfile.Name = "Home";
 
             //  Provide the implicit data associated with this profile
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
@@ -51,13 +51,13 @@ namespace Argotic.Examples
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
             homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
-            ApmlSource apmlSpecSource   = new ApmlSource();
-            apmlSpecSource.Key          = "http://feeds.feedburner.com/apmlspec";
-            apmlSpecSource.Name         = "APML.org";
-            apmlSpecSource.Value        = 1.00m;
-            apmlSpecSource.MimeType     = "application/rss+xml";
-            apmlSpecSource.From         = "GatheringTool.com";
-            apmlSpecSource.UpdatedOn    = new DateTime(2007, 3, 11, 13, 55, 0);
+            ApmlSource apmlSpecSource = new ApmlSource();
+            apmlSpecSource.Key = "http://feeds.feedburner.com/apmlspec";
+            apmlSpecSource.Name = "APML.org";
+            apmlSpecSource.Value = 1.00m;
+            apmlSpecSource.MimeType = "application/rss+xml";
+            apmlSpecSource.From = "GatheringTool.com";
+            apmlSpecSource.UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
             apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
@@ -66,35 +66,35 @@ namespace Argotic.Examples
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
             ApmlSource techCrunchSource = new ApmlSource();
-            techCrunchSource.Key        = "http://feeds.feedburner.com/TechCrunch";
-            techCrunchSource.Name       = "Techcrunch";
-            techCrunchSource.Value      = 0.4m;
-            techCrunchSource.MimeType   = "application/rss+xml";
+            techCrunchSource.Key = "http://feeds.feedburner.com/TechCrunch";
+            techCrunchSource.Name = "Techcrunch";
+            techCrunchSource.Value = 0.4m;
+            techCrunchSource.MimeType = "application/rss+xml";
             techCrunchSource.Authors.Add(new ApmlAuthor("ExplicitSample", 0.5m));
 
             homeProfile.ExplicitSources.Add(techCrunchSource);
 
             document.AddProfile(homeProfile);
 
-            ApmlProfile workProfile     = new ApmlProfile();
-            workProfile.Name            = "Work";
+            ApmlProfile workProfile = new ApmlProfile();
+            workProfile.Name = "Work";
 
             //  Provide the explicit data associated with this profile
             homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
             ApmlSource workTechCrunchSource = new ApmlSource();
-            workTechCrunchSource.Key        = "http://feeds.feedburner.com/TechCrunch";
-            workTechCrunchSource.Name       = "Techcrunch";
-            workTechCrunchSource.Value      = 0.4m;
-            workTechCrunchSource.MimeType   = "application/atom+xml";
+            workTechCrunchSource.Key = "http://feeds.feedburner.com/TechCrunch";
+            workTechCrunchSource.Name = "Techcrunch";
+            workTechCrunchSource.Value = 0.4m;
+            workTechCrunchSource.MimeType = "application/atom+xml";
             workTechCrunchSource.Authors.Add(new ApmlAuthor("ProfessionalBlogger", 0.5m));
 
             homeProfile.ExplicitSources.Add(workTechCrunchSource);
 
             document.AddProfile(workProfile);
 
-            ApmlApplication sampleApplication   = new ApmlApplication("sample.com");
-            sampleApplication.Data              = "<SampleAppEl />";
+            ApmlApplication sampleApplication = new ApmlApplication("sample.com");
+            sampleApplication.Data = "<SampleAppEl />";
 
             document.Applications.Add(sampleApplication);
         }
@@ -103,7 +103,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            ApmlDocument document   = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
+            ApmlDocument document = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
 
             foreach (ApmlProfile profile in document.Profiles)
             {
@@ -119,7 +119,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -131,7 +131,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
             if(e.State != null)
             {
@@ -142,9 +142,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source    = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+            XPathDocument source = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
             document.Load(source);
 
             foreach (ApmlProfile profile in document.Profiles)
@@ -162,7 +162,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
 
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
             {
@@ -184,13 +184,13 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
 
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
 
                 using(XmlReader reader = XmlReader.Create(stream, settings))
                 {
@@ -213,8 +213,8 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            ApmlDocument document   = new ApmlDocument();
-            Uri source              = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+            ApmlDocument document = new ApmlDocument();
+            Uri source = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
             document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -233,7 +233,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
 
             //  Modify document state using public properties and methods
 
@@ -248,14 +248,14 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            ApmlDocument document   = new ApmlDocument();
+            ApmlDocument document = new ApmlDocument();
 
             //  Modify document state using public properties and methods
 
             using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
                 {

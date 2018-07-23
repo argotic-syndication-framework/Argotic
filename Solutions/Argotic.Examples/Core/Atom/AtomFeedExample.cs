@@ -23,11 +23,11 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
-            feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-            feed.Title      = new AtomTextConstruct("Example Feed");
-            feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+            feed.Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
+            feed.Title = new AtomTextConstruct("Example Feed");
+            feed.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
             feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
             feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
@@ -36,11 +36,11 @@ namespace Argotic.Examples
 
             AtomEntry entry = new AtomEntry();
 
-            entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-            entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
+            entry.Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
+            entry.Title = new AtomTextConstruct("Atom-Powered Robots Run Amok");
             entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
 
-            entry.Summary   = new AtomTextConstruct("Some text.");
+            entry.Summary = new AtomTextConstruct("Some text.");
 
             feed.AddEntry(entry);
         }
@@ -49,7 +49,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            AtomFeed feed   = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
+            AtomFeed feed = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
             
             foreach(AtomEntry entry in feed.Entries)
             {
@@ -64,7 +64,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
             feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
@@ -76,7 +76,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
             if(e.State != null)
             {
@@ -87,9 +87,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source    = new XPathDocument("http://news.google.com/?output=atom");
+            XPathDocument source = new XPathDocument("http://news.google.com/?output=atom");
 
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
             feed.Load(source);
 
             foreach (AtomEntry entry in feed.Entries)
@@ -106,7 +106,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
             {
@@ -127,13 +127,13 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
 
                 using(XmlReader reader = XmlReader.Create(stream, settings))
                 {
@@ -155,8 +155,8 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            AtomFeed feed   = new AtomFeed();
-            Uri source      = new Uri("http://news.google.com/?output=atom");
+            AtomFeed feed = new AtomFeed();
+            Uri source = new Uri("http://news.google.com/?output=atom");
 
             feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -174,7 +174,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
             //  Modify feed state using public properties and methods
 
@@ -189,14 +189,14 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            AtomFeed feed   = new AtomFeed();
+            AtomFeed feed = new AtomFeed();
 
             //  Modify feed state using public properties and methods
 
             using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
                 {

@@ -11,6 +11,7 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,10 @@
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
     <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="StyleCop.Analyzers" Version="1.1.0-beta008" />
   </ItemGroup>
 
 </Project>

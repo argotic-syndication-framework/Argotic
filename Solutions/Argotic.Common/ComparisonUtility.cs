@@ -179,7 +179,7 @@
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result = result | String.Compare(source[i], target[i], comparisonType);
+                    result = result | string.Compare(source[i], target[i], comparisonType);
                 }
             }
             else if (source.Count > target.Count)
@@ -224,7 +224,7 @@
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result = result | String.Compare(source[i].FullName, target[i].FullName, StringComparison.Ordinal);
+                    result = result | string.Compare(source[i].FullName, target[i].FullName, StringComparison.Ordinal);
                 }
             }
             else if (source.Count > target.Count)
@@ -315,7 +315,7 @@
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    result = result | String.Compare(source[i].OuterXml, target[i].OuterXml, StringComparison.Ordinal);
+                    result = result | string.Compare(source[i].OuterXml, target[i].OuterXml, StringComparison.Ordinal);
                 }
             }
             else if (source.Count > target.Count)
@@ -363,7 +363,7 @@
                 {
                     if (target.ContainsKey(key))
                     {
-                        result = result | String.Compare(source[key], target[key], comparisonType);
+                        result = result | string.Compare(source[key], target[key], comparisonType);
                     }
                     else
                     {

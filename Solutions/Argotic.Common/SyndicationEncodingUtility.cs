@@ -281,8 +281,8 @@
 
             if (source.IsAbsoluteUri)
             {
-                if (String.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
-                    String.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
+                    string.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     HttpWebRequest httpRequest = (HttpWebRequest)request;
                     httpRequest.UserAgent = SyndicationDiscoveryUtility.FrameworkUserAgent;
@@ -290,7 +290,11 @@
                 }
             }
 
-            if (options != null) options.ApplyOptions(request);
+            if (options != null)
+            {
+                options.ApplyOptions(request);
+            }
+
             return request;
         }
 
@@ -374,7 +378,7 @@
         /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
         public static string DecodeHtmlEscapedString(string escapedValue)
         {
-            string decodedResult = String.Empty;
+            string decodedResult = string.Empty;
 
             Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
 
@@ -401,7 +405,7 @@
         public static string EncodeInvalidXmlHexadecimalCharacters(string content)
         {
             Regex invalidXmlUnicodeCharacters = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
-            string encodedContent = String.Empty;
+            string encodedContent = string.Empty;
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
@@ -416,6 +420,7 @@
             return encodedContent;
         }
 
+#pragma warning disable 1587
         /// <summary>
         /// Extracts the character encoding for the content type of the supplied <see cref="HttpRequest"/>.
         /// </summary>
@@ -425,6 +430,7 @@
         ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
+#pragma warning restore 1587
         /*public static Encoding GetCharacterEncoding(HttpRequest request)
         {
             Encoding contentEncoding    = null;
@@ -565,7 +571,7 @@
 
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-            return invalidXmlHexadecimalCharacters.Replace(content, String.Empty);
+            return invalidXmlHexadecimalCharacters.Replace(content, string.Empty);
         }
 
         /// <summary>
@@ -577,18 +583,18 @@
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static string EncodeSafeDirectoryName(string name)
         {
-            string directoryName = String.Empty;
+            string directoryName = string.Empty;
 
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            directoryName = name.Replace("\\", String.Empty);
-            directoryName = directoryName.Replace("/", String.Empty);
-            directoryName = directoryName.Replace(":", String.Empty);
-            directoryName = directoryName.Replace("*", String.Empty);
-            directoryName = directoryName.Replace("?", String.Empty);
-            directoryName = directoryName.Replace("<", String.Empty);
-            directoryName = directoryName.Replace(">", String.Empty);
-            directoryName = directoryName.Replace("|", String.Empty);
+            directoryName = name.Replace("\\", string.Empty);
+            directoryName = directoryName.Replace("/", string.Empty);
+            directoryName = directoryName.Replace(":", string.Empty);
+            directoryName = directoryName.Replace("*", string.Empty);
+            directoryName = directoryName.Replace("?", string.Empty);
+            directoryName = directoryName.Replace("<", string.Empty);
+            directoryName = directoryName.Replace(">", string.Empty);
+            directoryName = directoryName.Replace("|", string.Empty);
 
             return directoryName;
         }

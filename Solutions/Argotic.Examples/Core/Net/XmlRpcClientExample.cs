@@ -21,11 +21,11 @@ namespace Argotic.Examples
         {
             // Initialize the XML-RPC client
             XmlRpcClient client = new XmlRpcClient();
-            client.Host         = new Uri("http://bob.example.net/xmlrpcserver");
+            client.Host = new Uri("http://bob.example.net/xmlrpcserver");
 
             // Construct a Pingback peer-to-peer notification XML-RPC message
-            XmlRpcMessage message   = new XmlRpcMessage("pingback.ping");
-            message.Encoding        = Encoding.UTF8;
+            XmlRpcMessage message = new XmlRpcMessage("pingback.ping");
+            message.Encoding = Encoding.UTF8;
             message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
             message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
 
@@ -37,8 +37,8 @@ namespace Argotic.Examples
             {
                 if (response.Fault != null)
                 {
-                    XmlRpcStructureMember faultCode     = response.Fault["faultCode"];
-                    XmlRpcStructureMember faultMessage  = response.Fault["faultString"];
+                    XmlRpcStructureMember faultCode = response.Fault["faultCode"];
+                    XmlRpcStructureMember faultMessage = response.Fault["faultString"];
 
                     if (faultCode != null && faultMessage != null)
                     {
@@ -47,7 +47,7 @@ namespace Argotic.Examples
                 }
                 else
                 {
-                    XmlRpcScalarValue successInformation    = response.Parameter as XmlRpcScalarValue;
+                    XmlRpcScalarValue successInformation = response.Parameter as XmlRpcScalarValue;
                     if (successInformation != null)
                     {
                         // Pingback request was successful, return should be a string containing information the server deems useful.

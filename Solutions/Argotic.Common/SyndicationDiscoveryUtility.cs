@@ -18,7 +18,7 @@
         /// <summary>
         /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
         /// </summary>
-        private static string frameworkUserAgent = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+        private static string frameworkUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
         /// <summary>
         /// Gets the raw user agent string used by the framework when sending web requests.
@@ -57,7 +57,7 @@
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             syndicationFormat = format;
                             break;
@@ -175,7 +175,7 @@
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             syndicationFormat = format;
                             break;
@@ -204,7 +204,7 @@
             Guard.ArgumentNotNull(navigator, "navigator");
 
             source = navigator.CreateNavigator();
-            if (String.IsNullOrEmpty(source.LocalName))
+            if (string.IsNullOrEmpty(source.LocalName))
             {
                 source.MoveToRoot();
                 source.MoveToChild(XPathNodeType.Element);
@@ -223,7 +223,7 @@
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             syndicationFormat = format;
                             break;
@@ -233,52 +233,6 @@
             }
 
             return syndicationFormat;
-        }
-
-        /// <summary>
-        /// Returns a <see cref="Hashtable"/> of the HTML attribute name/value pairs for the supplied content.
-        /// </summary>
-        /// <param name="content">The HTML content to parse.</param>
-        /// <returns>A <see cref="Hashtable"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        private static Hashtable ExtractHtmlAttributes(string content)
-        {
-            Hashtable hashtable = new Hashtable();
-            Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
-
-            Guard.ArgumentNotNullOrEmptyString(content, "content");
-
-            MatchCollection attributes = attributePattern.Matches(content);
-
-            foreach (Match attribute in attributes)
-            {
-                if (attribute.Groups != null && attribute.Groups.Count > 0)
-                {
-                    string name = attribute.Groups[1].Value;
-                    string value = String.Empty;
-
-                    if (!String.IsNullOrEmpty(name))
-                    {
-                        value = attribute.Groups[2].Value;
-                    }
-                    else
-                    {
-                        name = attribute.Groups[3].Value;
-                        value = attribute.Groups[4].Value;
-                    }
-
-                    name = name.ToUpperInvariant().Trim();
-                    value = value.Trim();
-
-                    if (!hashtable.ContainsKey(name))
-                    {
-                        hashtable.Add(name, value);
-                    }
-                }
-            }
-
-            return hashtable;
         }
 
         /// <summary>
@@ -331,6 +285,7 @@
             return results;
         }
 
+#pragma warning disable 1587
         /// <summary>
         /// Returns a <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
         /// </summary>
@@ -340,6 +295,7 @@
         ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
+#pragma warning restore 1587
         /*public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
         {
             Uri baseUri = null;
@@ -701,7 +657,10 @@
             httpRequest.UserAgent = frameworkUserAgent;
             httpRequest.IfModifiedSince = lastModified;
             httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
-            if (options != null) options.ApplyOptions(httpRequest);
+            if (options != null)
+            {
+                options.ApplyOptions(httpRequest);
+            }
 
             try
             {
@@ -760,14 +719,14 @@
                     string rel = (string)linkAttributes["REL"];
                     string type = (string)linkAttributes["TYPE"];
 
-                    if (String.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         Uri url;
                         if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out url))
                         {
                             DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
                             endpoint.Source = url;
-                            if (!String.IsNullOrEmpty(type))
+                            if (!string.IsNullOrEmpty(type))
                             {
                                 endpoint.ContentType = type;
                             }
@@ -775,7 +734,7 @@
                             if (linkAttributes.ContainsKey("TITLE"))
                             {
                                 string title = (string)linkAttributes["TITLE"];
-                                if (!String.IsNullOrEmpty(title))
+                                if (!string.IsNullOrEmpty(title))
                                 {
                                     endpoint.Title = title;
                                 }
@@ -877,7 +836,7 @@
         /// </summary>
         /// <param name="content">The HTML markup to parse.</param>
         /// <returns>
-        ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="html"/>.
+        ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="content"/>.
         ///     If no pingback auto-discovery link was found, returns <b>null</b>.
         /// </returns>
         /// <remarks>
@@ -916,7 +875,7 @@
                     string href = (string)linkAttributes["HREF"];
                     string rel = (string)linkAttributes["REL"];
 
-                    if (String.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         Uri uri;
                         if (Uri.TryCreate(href, UriKind.Absolute, out uri))
@@ -928,15 +887,16 @@
                             if (linkAttributes.ContainsKey("TYPE"))
                             {
                                 string type = (string)linkAttributes["TYPE"];
-                                if (!String.IsNullOrEmpty(type))
+                                if (!string.IsNullOrEmpty(type))
                                 {
                                     pingbackAnchor.Attributes.Add("type", type);
                                 }
                             }
+
                             if (linkAttributes.ContainsKey("TITLE"))
                             {
                                 string title = (string)linkAttributes["TITLE"];
-                                if (!String.IsNullOrEmpty(title))
+                                if (!string.IsNullOrEmpty(title))
                                 {
                                     pingbackAnchor.Title = title;
                                 }
@@ -1066,13 +1026,14 @@
                         string name = webResponse.Headers.Keys[i];
                         string value = webResponse.Headers[i];
 
-                        if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Uri pingbackXmlRpcServer;
                             if (Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
                             {
                                 isPingbackEnabled = true;
                             }
+
                             break;
                         }
                     }
@@ -1219,13 +1180,14 @@
                         string name = webResponse.Headers.Keys[i];
                         string value = webResponse.Headers[i];
 
-                        if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             Uri url;
                             if (Uri.TryCreate(value, UriKind.Absolute, out url))
                             {
                                 pingbackXmlRpcServer = url;
                             }
+
                             break;
                         }
                     }
@@ -1424,7 +1386,7 @@
         {
             Guard.ArgumentNotNull(uri, "uri");
 
-            return (SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0);
+            return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0;
         }
 
         /// <summary>
@@ -1487,6 +1449,52 @@
                     return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns a <see cref="Hashtable"/> of the HTML attribute name/value pairs for the supplied content.
+        /// </summary>
+        /// <param name="content">The HTML content to parse.</param>
+        /// <returns>A <see cref="Hashtable"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+        private static Hashtable ExtractHtmlAttributes(string content)
+        {
+            Hashtable hashtable = new Hashtable();
+            Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
+
+            Guard.ArgumentNotNullOrEmptyString(content, "content");
+
+            MatchCollection attributes = attributePattern.Matches(content);
+
+            foreach (Match attribute in attributes)
+            {
+                if (attribute.Groups != null && attribute.Groups.Count > 0)
+                {
+                    string name = attribute.Groups[1].Value;
+                    string value = string.Empty;
+
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        value = attribute.Groups[2].Value;
+                    }
+                    else
+                    {
+                        name = attribute.Groups[3].Value;
+                        value = attribute.Groups[4].Value;
+                    }
+
+                    name = name.ToUpperInvariant().Trim();
+                    value = value.Trim();
+
+                    if (!hashtable.ContainsKey(name))
+                    {
+                        hashtable.Add(name, value);
+                    }
+                }
+            }
+
+            return hashtable;
         }
     }
 }

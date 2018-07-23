@@ -8,25 +8,29 @@
     /// <summary>
     /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object loaded by the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public sealed class SyndicationResourceLoadSettings : IComparable
     {
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
         private Encoding characterEncoding = Encoding.UTF8;
+
         /// <summary>
         /// Private member to hold a value indicating the maximum number of resource entities to retrieve from a syndication resource.
         /// </summary>
         private int maximumEntitiesToRetrieve;
+
         /// <summary>
         /// Private member to hold a value that specifies the amount of time after which a asynchronous load operation call times out.
         /// </summary>
         private TimeSpan requestTimeout = TimeSpan.FromSeconds(15);
+
         /// <summary>
         /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
         /// </summary>
         private Collection<Type> supportedSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
@@ -40,7 +44,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         /// <value>
         ///     <b>true</b> if the syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on a syndication resource; otherwise <b>false</b>.
@@ -54,12 +58,12 @@
         {
             get
             {
-                return syndicationExtensionAutodetectionEnabled;
+                return this.syndicationExtensionAutodetectionEnabled;
             }
 
             set
             {
-                syndicationExtensionAutodetectionEnabled = value;
+                this.syndicationExtensionAutodetectionEnabled = value;
             }
         }
 
@@ -72,13 +76,13 @@
         {
             get
             {
-                return characterEncoding;
+                return this.characterEncoding;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                characterEncoding = value;
+                this.characterEncoding = value;
             }
         }
 
@@ -95,13 +99,13 @@
         {
             get
             {
-                return maximumEntitiesToRetrieve;
+                return this.maximumEntitiesToRetrieve;
             }
 
             set
             {
                 Guard.ArgumentNotLessThan(value, "value", 0);
-                maximumEntitiesToRetrieve = value;
+                this.maximumEntitiesToRetrieve = value;
             }
         }
 
@@ -120,11 +124,12 @@
         {
             get
             {
-                if (supportedSyndicationExtensions == null)
+                if (this.supportedSyndicationExtensions == null)
                 {
-                    supportedSyndicationExtensions = new Collection<Type>();
+                    this.supportedSyndicationExtensions = new Collection<Type>();
                 }
-                return supportedSyndicationExtensions;
+
+                return this.supportedSyndicationExtensions;
             }
         }
 
@@ -138,7 +143,7 @@
         {
             get
             {
-                return requestTimeout;
+                return this.requestTimeout;
             }
 
             set
@@ -153,21 +158,21 @@
                 }
                 else
                 {
-                    requestTimeout = value;
+                    this.requestTimeout = value;
                 }
             }
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
         /// <remarks>
         ///     This method returns a human-readable string for the current instance.
         /// </remarks>
         public override string ToString()
         {
-            return String.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
         /// <summary>
@@ -187,7 +192,7 @@
 
             if (value != null)
             {
-                int result = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+                int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
                 result = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
                 result = result | this.Timeout.CompareTo(value.Timeout);
                 result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
@@ -197,23 +202,23 @@
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
             }
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
         /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
         {
             if (!(obj is SyndicationResourceLoadSettings))
             {
                 return false;
             }
 
-            return (this.CompareTo(obj) == 0);
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -275,7 +280,7 @@
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -295,7 +300,7 @@
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
         }
     }
 }

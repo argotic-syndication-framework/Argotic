@@ -20,13 +20,13 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            RssFeed feed    = new RssFeed();
+            RssFeed feed = new RssFeed();
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+            feed.Channel.Title = "Dallas Times-Herald";
+            feed.Channel.Link = new Uri("http://dallas.example.com");
+            feed.Channel.Description = "Current headlines from the Dallas Times-Herald newspaper";
 
-            feed.Channel.Cloud          = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+            feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
         }
         /// <summary>
         /// Provides example code for the RssCloud.CloudProtocolAsString(RssCloudProtocol) method
@@ -35,7 +35,7 @@ namespace Argotic.Examples
         {
             string protocol = RssCloud.CloudProtocolAsString(RssCloudProtocol.XmlRpc);    // xml-rpc
 
-            if (String.Compare(protocol, "xml-rpc", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(protocol, "xml-rpc", StringComparison.OrdinalIgnoreCase) == 0)
             {
             }
         }
@@ -45,7 +45,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void ProtocolByNameExample()
         {
-            RssCloudProtocol protocol   = RssCloud.CloudProtocolByName("xml-rpc");
+            RssCloudProtocol protocol = RssCloud.CloudProtocolByName("xml-rpc");
 
             if (protocol == RssCloudProtocol.XmlRpc)
             {

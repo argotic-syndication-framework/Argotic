@@ -15,6 +15,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors />
     <Company />
+    <CodeAnalysisRuleSet>$(SolutionDir)/StyleCop.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

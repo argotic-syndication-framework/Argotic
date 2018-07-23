@@ -24,16 +24,16 @@ namespace Argotic.Examples
         /// </summary>
         public static void ClassExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
-            document.Head.Title                 = "Example OPML List";
-            document.Head.CreatedOn             = new DateTime(2005, 6, 18, 12, 11, 52);
-            document.Head.ModifiedOn            = new DateTime(2005, 7, 2, 21, 42, 48);
-            document.Head.Owner                 = new OpmlOwner("John Doe", "john.doe@example.com");
-            document.Head.VerticalScrollState   = 1;
-            document.Head.Window                = new OpmlWindow(61, 304, 562, 842);
+            document.Head.Title = "Example OPML List";
+            document.Head.CreatedOn = new DateTime(2005, 6, 18, 12, 11, 52);
+            document.Head.ModifiedOn = new DateTime(2005, 7, 2, 21, 42, 48);
+            document.Head.Owner = new OpmlOwner("John Doe", "john.doe@example.com");
+            document.Head.VerticalScrollState = 1;
+            document.Head.Window = new OpmlWindow(61, 304, 562, 842);
 
-            OpmlOutline containerOutline    = new OpmlOutline("Feeds");
+            OpmlOutline containerOutline = new OpmlOutline("Feeds");
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
             containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
@@ -43,7 +43,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void CreateExample()
         {
-            OpmlDocument document   = OpmlDocument.Create(new Uri("http://blog.oppositionallydefiant.com/opml.axd"));
+            OpmlDocument document = OpmlDocument.Create(new Uri("http://blog.oppositionallydefiant.com/opml.axd"));
 
             foreach (OpmlOutline outline in document.Outlines)
             {
@@ -59,7 +59,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadAsyncExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -71,7 +71,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
         {
             if (e.State != null)
             {
@@ -82,9 +82,9 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/opml.axd");
+            XPathDocument source = new XPathDocument("http://blog.oppositionallydefiant.com/opml.axd");
 
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
             document.Load(source);
 
             foreach (OpmlOutline outline in document.Outlines)
@@ -101,7 +101,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadStreamExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
             {
@@ -122,13 +122,13 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadXmlReaderExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.IgnoreComments = true;
+                settings.IgnoreWhitespace = true;
 
                 using(XmlReader reader = XmlReader.Create(stream, settings))
                 {
@@ -150,8 +150,8 @@ namespace Argotic.Examples
         /// </summary>
         public static void LoadUriExample()
         {
-            OpmlDocument document   = new OpmlDocument();
-            Uri source              = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
+            OpmlDocument document = new OpmlDocument();
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
 
             document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -169,7 +169,7 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveStreamExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
             //  Modify document state using public properties and methods
 
@@ -184,14 +184,14 @@ namespace Argotic.Examples
         /// </summary>
         public static void SaveXmlWriterExample()
         {
-            OpmlDocument document   = new OpmlDocument();
+            OpmlDocument document = new OpmlDocument();
 
             //  Modify document state using public properties and methods
 
             using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
 
                 using(XmlWriter writer = XmlWriter.Create(stream, settings))
                 {

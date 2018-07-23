@@ -42,16 +42,6 @@
         private string acceptedMediaRangeValue = string.Empty;
 
         /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
-        /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
@@ -105,18 +95,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -166,18 +145,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the value of this accepted media range.

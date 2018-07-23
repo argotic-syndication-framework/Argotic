@@ -12,21 +12,6 @@
     public class SyndicationResourceMetadata : IComparable
     {
         /// <summary>
-        /// Private member to hold the syndication content format that the syndication resource conforms to.
-        /// </summary>
-        private SyndicationContentFormat resourceFormat = SyndicationContentFormat.None;
-
-        /// <summary>
-        /// Private member to hold the XML namespaces declared in the syndication resource's root element.
-        /// </summary>
-        private Dictionary<string, string> resourceNamespaces = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Private member to hold the version of the syndication specification that the resource conforms to.
-        /// </summary>
-        private Version resourceVersion;
-
-        /// <summary>
         /// Private member to hold a XPath navigator that can be used to navigate the root element of the syndication resource.
         /// </summary>
         [NonSerialized]
@@ -51,30 +36,13 @@
         ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to.
         ///     If the syndication content format is unable to be determined, returns <see cref="SyndicationContentFormat.None"/>.
         /// </value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return this.resourceFormat;
-            }
-
-            protected set
-            {
-                this.resourceFormat = value;
-            }
-        }
+        public SyndicationContentFormat Format { get; protected set; } = SyndicationContentFormat.None;
 
         /// <summary>
         /// Gets a dictionary of the XML namespaces declared in the syndication resource.
         /// </summary>
         /// <value>A dictionary of the resource's XML namespaces, keyed off of the namespace prefix. If no XML namespaces are declared on the root element of the resource, returns an empty dictionary.</value>
-        public Dictionary<string, string> Namespaces
-        {
-            get
-            {
-                return this.resourceNamespaces;
-            }
-        }
+        public Dictionary<string, string> Namespaces { get; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
@@ -92,13 +60,7 @@
         /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
         /// </summary>
         /// <value>The version number of the syndication specification that the resource conforms to. If format version is unable to be determined, returns <b>null</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return this.resourceVersion;
-            }
-        }
+        public Version Version { get; private set; }
 
         /// <summary>
         /// Determines if operands are equal.
@@ -797,82 +759,82 @@
             Dictionary<string, string> namespaces = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
             foreach (string prefix in namespaces.Keys)
             {
-                this.resourceNamespaces.Add(prefix, namespaces[prefix]);
+                this.Namespaces.Add(prefix, namespaces[prefix]);
             }
 
-            this.resourceVersion = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
+            this.Version = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
 
             if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.Apml;
+                this.Format = SyndicationContentFormat.Apml;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.Atom;
+                this.Format = SyndicationContentFormat.Atom;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.AtomCategoryDocument;
+                this.Format = SyndicationContentFormat.AtomCategoryDocument;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.AtomServiceDocument;
+                this.Format = SyndicationContentFormat.AtomServiceDocument;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseBlogMlResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.BlogML;
+                this.Format = SyndicationContentFormat.BlogML;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.MicroSummaryGenerator;
+                this.Format = SyndicationContentFormat.MicroSummaryGenerator;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseNewsMlResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.NewsML;
+                this.Format = SyndicationContentFormat.NewsML;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.OpenSearchDescription;
+                this.Format = SyndicationContentFormat.OpenSearchDescription;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseOpmlResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.Opml;
+                this.Format = SyndicationContentFormat.Opml;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseRsdResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.Rsd;
+                this.Format = SyndicationContentFormat.Rsd;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
             {
-                this.resourceFormat = SyndicationContentFormat.Rss;
+                this.Format = SyndicationContentFormat.Rss;
                 this.resourceRootNode = navigator;
-                this.resourceVersion = version;
+                this.Version = version;
             }
             else
             {
-                this.resourceFormat = SyndicationContentFormat.None;
+                this.Format = SyndicationContentFormat.None;
                 this.resourceRootNode = null;
-                this.resourceVersion = null;
+                this.Version = null;
             }
         }
     }

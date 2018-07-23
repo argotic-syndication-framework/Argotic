@@ -16,10 +16,6 @@
     [Serializable]
     public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
-        /// <summary>
-        /// Private member to hold the type of scalar value the parameter represents.
-        /// </summary>
-        private XmlRpcScalarValueType scalarParameterType = XmlRpcScalarValueType.None;
 
         /// <summary>
         /// Private member to hold the value of the parameter.
@@ -154,18 +150,7 @@
         /// </remarks>
         /// <seealso cref="XmlRpcClient.ScalarTypeAsString(XmlRpcScalarValueType)"/>
         /// <seealso cref="XmlRpcClient.ScalarTypeByName(string)"/>
-        public XmlRpcScalarValueType ValueType
-        {
-            get
-            {
-                return this.scalarParameterType;
-            }
-
-            set
-            {
-                this.scalarParameterType = value;
-            }
-        }
+        public XmlRpcScalarValueType ValueType { get; set; } = XmlRpcScalarValueType.None;
 
         /// <summary>
         /// Determines if operands are equal.

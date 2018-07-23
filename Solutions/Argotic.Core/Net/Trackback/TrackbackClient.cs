@@ -37,19 +37,9 @@
         private static WebRequest asyncHttpWebRequest;
 
         /// <summary>
-        /// Private member to hold a value indicating if the client asynchronous send operation was cancelled.
-        /// </summary>
-        private bool clientAsyncSendCancelled;
-
-        /// <summary>
         /// Private member to hold the location of the host computer that client Trackback pings will be sent to.
         /// </summary>
         private Uri clientHost;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the client is in the process of sending an Trackback ping request.
-        /// </summary>
-        private bool clientIsSending;
 
         /// <summary>
         /// Private member to hold the web request options.
@@ -68,11 +58,6 @@
             null,
             "Argotic-Syndication-Framework/{0}",
             System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
-
-        /// <summary>
-        /// Private member to hold a value that indictaes if the client sends default credentials when making an Trackback ping request.
-        /// </summary>
-        private bool clientUsesDefaultCredentials;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClient"/> class.
@@ -228,18 +213,7 @@
         ///         and the <see cref="Credentials"/> property has not been set, then Trackback pings are sent to the server anonymously.
         ///     </para>
         /// </remarks>
-        public bool UseDefaultCredentials
-        {
-            get
-            {
-                return this.clientUsesDefaultCredentials;
-            }
-
-            set
-            {
-                this.clientUsesDefaultCredentials = value;
-            }
-        }
+        public bool UseDefaultCredentials { get; set; }
 
         /// <summary>
         /// Gets or sets information such as the client application name, version, host operating system, and language.
@@ -265,35 +239,13 @@
         /// Gets or sets a value indicating whether gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if client asynchronous send operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncSendHasBeenCancelled
-        {
-            get
-            {
-                return this.clientAsyncSendCancelled;
-            }
-
-            set
-            {
-                this.clientAsyncSendCancelled = value;
-            }
-        }
+        internal bool AsyncSendHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the client is in the process of sending an Trackback ping request.
         /// </summary>
         /// <value><b>true</b> if client is in the process of sending an Trackback ping request, otherwise <b>false</b>.</value>
-        internal bool SendOperationInProgress
-        {
-            get
-            {
-                return this.clientIsSending;
-            }
-
-            set
-            {
-                this.clientIsSending = value;
-            }
-        }
+        internal bool SendOperationInProgress { get; set; }
 
         /// <summary>
         /// Sends the specified message to a Trackback server to execute an Trackback ping request.

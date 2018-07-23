@@ -17,34 +17,9 @@
     public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     {
         /// <summary>
-        /// Private member to hold instance of event with no event data.
-        /// </summary>
-        private static readonly XmlRpcMessageSentEventArgs EmptyEventArguments = new XmlRpcMessageSentEventArgs();
-
-        /// <summary>
-        /// Private member to hold the location of the host computer that the remote procedure call was sent to.
-        /// </summary>
-        private Uri eventHost;
-
-        /// <summary>
-        /// Private member to hold the remote procedure call payload that was sent.
-        /// </summary>
-        private XmlRpcMessage eventMessage;
-
-        /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions eventOptions = new WebRequestOptions();
-
-        /// <summary>
-        /// Private member to hold the response to the remote procedure call.
-        /// </summary>
-        private XmlRpcResponse eventResponse;
-
-        /// <summary>
-        /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
-        /// </summary>
-        private object eventUserToken;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.
@@ -77,11 +52,11 @@
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            this.eventHost = host;
-            this.eventMessage = message;
-            this.eventResponse = response;
+            this.Host = host;
+            this.Message = message;
+            this.Response = response;
             this.eventOptions = new WebRequestOptions(credentials, proxy);
-            this.eventUserToken = state;
+            this.State = state;
         }
 
         /// <summary>
@@ -106,11 +81,11 @@
             Guard.ArgumentNotNull(message, "message");
             Guard.ArgumentNotNull(response, "response");
 
-            this.eventHost = host;
-            this.eventMessage = message;
-            this.eventResponse = response;
+            this.Host = host;
+            this.Message = message;
+            this.Response = response;
             this.eventOptions = options ?? new WebRequestOptions();
-            this.eventUserToken = state;
+            this.State = state;
         }
 
         /// <summary>
@@ -118,13 +93,7 @@
         /// </summary>
         /// <value>An uninitialized instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.</value>
         /// <remarks>The value of Empty is a read-only instance of <see cref="XmlRpcMessageSentEventArgs"/> equivalent to the result of calling the <see cref="XmlRpcMessageSentEventArgs()"/> constructor.</remarks>
-        public static new XmlRpcMessageSentEventArgs Empty
-        {
-            get
-            {
-                return EmptyEventArguments;
-            }
-        }
+        public static new XmlRpcMessageSentEventArgs Empty { get; } = new XmlRpcMessageSentEventArgs();
 
         /// <summary>
         /// Gets the authentication credentials utilized by the client when making the remote procedure call.
@@ -147,13 +116,7 @@
         /// <value>
         ///     A <see cref="Uri"/> that represents the URL of the host computer used for the XML-RPC transaction.
         /// </value>
-        public Uri Host
-        {
-            get
-            {
-                return this.eventHost;
-            }
-        }
+        public Uri Host { get; }
 
         /// <summary>
         /// Gets the remote procedure call payload that was sent.
@@ -161,13 +124,7 @@
         /// <value>
         ///     An <see cref="XmlRpcMessage"/> that represents the remote procedure call payload.
         /// </value>
-        public XmlRpcMessage Message
-        {
-            get
-            {
-                return this.eventMessage;
-            }
-        }
+        public XmlRpcMessage Message { get; }
 
         /// <summary>
         /// Gets the web proxy utilized by the client to proxy the remote procedure call.
@@ -190,13 +147,7 @@
         /// <value>
         ///     An <see cref="XmlRpcResponse"/> that represents the response to the remote procedure call.
         /// </value>
-        public XmlRpcResponse Response
-        {
-            get
-            {
-                return this.eventResponse;
-            }
-        }
+        public XmlRpcResponse Response { get; }
 
         /// <summary>
         /// Gets an <see cref="object"/> containing state information that was passed to the asynchronous send operation.
@@ -204,13 +155,7 @@
         /// <value>
         ///     A <see cref="object"/> containing state information that was passed to the asynchronous send operation. If no user token provided, returns <b>null</b>.
         /// </value>
-        public object State
-        {
-            get
-            {
-                return this.eventUserToken;
-            }
-        }
+        public object State { get; }
 
         /// <summary>
         /// Determines if operands are equal.

@@ -27,16 +27,6 @@
         private static WebRequest asyncHttpWebRequest;
 
         /// <summary>
-        /// Private member to hold the last time the entry was edited. If the entry has not been edited yet, indicates the time the entry was created.
-        /// </summary>
-        private DateTime entryResourceEditedOn = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
-        /// </summary>
-        private bool entryResourceIsDraft;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntryResource"/> class.
         /// </summary>
         public AtomEntryResource()
@@ -119,36 +109,14 @@
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
         /// <seealso cref="AtomPublishingEditedSyndicationExtension"/>
-        public DateTime EditedOn
-        {
-            get
-            {
-                return this.entryResourceEditedOn;
-            }
-
-            set
-            {
-                this.entryResourceEditedOn = value;
-            }
-        }
+        public DateTime EditedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets a value indicating whether client has requested to control the visibility of this entry.
         /// </summary>
         /// <value><b>true</b> if the client is requesting to control the visibility of this entry; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
-        public bool IsDraft
-        {
-            get
-            {
-                return this.entryResourceIsDraft;
-            }
-
-            set
-            {
-                this.entryResourceIsDraft = value;
-            }
-        }
+        public bool IsDraft { get; set; }
 
         /// <summary>
         /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.

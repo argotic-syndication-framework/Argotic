@@ -58,49 +58,14 @@
         private static Version documentVersion = new Version(1, 0);
 
         /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
-        /// <summary>
         /// Private member to hold the categories associated to this document.
         /// </summary>
         private IEnumerable<AtomCategory> documentCategories;
 
         /// <summary>
-        /// Private member to hold a value indicating whether the document represents a fixed or open set of categories.
-        /// </summary>
-        private bool documentIsFixed;
-
-        /// <summary>
-        /// Private member to hold an IRI that identifies the location of the document.
-        /// </summary>
-        private Uri documentResourceLocation;
-
-        /// <summary>
-        /// Private member to hold an IRI that identifies a categorization scheme that categories may inherit from.
-        /// </summary>
-        private Uri documentScheme;
-
-        /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomCategoryDocument"/> class.
@@ -175,18 +140,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets the categories associated with this document.
@@ -251,42 +205,19 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return documentFormat;
-            }
-        }
+        public SyndicationContentFormat Format => documentFormat;
 
         /// <summary>
         /// Gets a value indicating whether this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
         /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-            }
-        }
+        public bool HasExtensions => ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
 
         /// <summary>
         /// Gets or sets a value indicating whether this document represents a fixed or open set of categories.
         /// </summary>
         /// <value><b>true</b> if this document represents a fixed set of categories; otherwise <b>false</b>.</value>
-        public bool IsFixed
-        {
-            get
-            {
-                return this.documentIsFixed;
-            }
-
-            set
-            {
-                this.documentIsFixed = value;
-            }
-        }
+        public bool IsFixed { get; set; }
 
         /// <summary>
         /// Gets or sets the natural or formal language in which the content is written.
@@ -297,18 +228,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets an IRI that identifies the categorization scheme used by this document.
@@ -321,18 +241,7 @@
         ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
         ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
         /// </remarks>
-        public Uri Scheme
-        {
-            get
-            {
-                return this.documentScheme;
-            }
-
-            set
-            {
-                this.documentScheme = value;
-            }
-        }
+        public Uri Scheme { get; set; }
 
         /// <summary>
         /// Gets or sets an IRI that identifies the location of this <see cref="AtomCategoryDocument"/>.
@@ -346,64 +255,25 @@
         ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
         ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
         /// </remarks>
-        public Uri Uri
-        {
-            get
-            {
-                return this.documentResourceLocation;
-            }
-
-            set
-            {
-                this.documentResourceLocation = value;
-            }
-        }
+        public Uri Uri { get; set; }
 
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return documentVersion;
-            }
-        }
+        public Version Version => documentVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="AtomCategory"/> at the specified index.

@@ -32,11 +32,6 @@
         private Collection<Type> supportedSyndicationExtensions;
 
         /// <summary>
-        /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
-        /// </summary>
-        private bool syndicationExtensionAutodetectionEnabled = true;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
         /// </summary>
         public SyndicationResourceLoadSettings()
@@ -54,18 +49,7 @@
         ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added
         ///     to the <see cref="SupportedExtensions"/> collection prior to the load operation execution.
         /// </remarks>
-        public bool AutoDetectExtensions
-        {
-            get
-            {
-                return this.syndicationExtensionAutodetectionEnabled;
-            }
-
-            set
-            {
-                this.syndicationExtensionAutodetectionEnabled = value;
-            }
-        }
+        public bool AutoDetectExtensions { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the character encoding to use when parsing a syndication resource.

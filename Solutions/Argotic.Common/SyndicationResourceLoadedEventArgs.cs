@@ -29,11 +29,6 @@
         private XPathNavigator eventNavigator;
 
         /// <summary>
-        /// Private member to hold the URI that the syndication resource information was retrieved from.
-        /// </summary>
-        private Uri eventSource;
-
-        /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions eventOptions = new WebRequestOptions();
@@ -83,7 +78,7 @@
         {
             Guard.ArgumentNotNull(source, "source");
 
-            this.eventSource = source;
+            this.Source = source;
             this.eventOptions = new WebRequestOptions(credentials, proxy);
         }
 
@@ -102,7 +97,7 @@
         {
             Guard.ArgumentNotNull(source, "source");
 
-            this.eventSource = source;
+            this.Source = source;
             this.eventOptions = options ?? new WebRequestOptions();
         }
 
@@ -212,13 +207,7 @@
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
-        public Uri Source
-        {
-            get
-            {
-                return this.eventSource;
-            }
-        }
+        public Uri Source { get; }
 
         /// <summary>
         /// Gets an <see cref="object"/> containing state information that was passed to the asynchronous load operation.

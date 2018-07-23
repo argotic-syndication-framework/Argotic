@@ -13,46 +13,8 @@ namespace Argotic.Common
     [Serializable]
     public class WebRequestOptions
     {
-        private AuthenticationLevel? authenticationLevel;
         [NonSerialized]
         private RequestCachePolicy cachePolicy;
-        private string connectionGroupName;
-        private ICredentials credentials;
-        private WebHeaderCollection headers;
-        private TokenImpersonationLevel? impersonationLevel;
-        private bool? preAuthenticate;
-        private IWebProxy proxy;
-        private int? timeout;
-        private bool? useDefaultCredentials;
-
-        private long? contentOffset;
-        private bool? enableSsl;
-        private string renameTo;
-        private bool? useBinary;
-        private bool? usePassive;
-
-        private string accept;
-        private bool? allowAutoRedirect;
-        private bool? allowWriteStreamBuffering;
-        private DecompressionMethods? automaticDecompression;
-        private string connection;
-        private HttpContinueDelegate continueDelegate;
-        private CookieContainer cookieContainer;
-        private string expect;
-        private int? maximumAutomaticRedirections;
-        private int? maximumResponseHeadersLength;
-        private string mediaType;
-        private bool? pipelined;
-        private Version protocolVersion;
-        private string referer;
-        private bool? sendChunked;
-        private string transferEncoding;
-        private bool? unsafeAuthenticatedConnectionSharing;
-        private string userAgent;
-
-        private X509CertificateCollection clientCertificates;
-        private bool? keepAlive;
-        private int? readWriteTimeout;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebRequestOptions"/> class.
@@ -84,23 +46,19 @@ namespace Argotic.Common
         /// </param>
         public WebRequestOptions(ICredentials credentials, IWebProxy proxy)
         {
-            this.allowAutoRedirect = true;
-            this.keepAlive = true;
-            this.credentials = credentials;
-            this.proxy = proxy;
+            this.AllowAutoRedirect = true;
+            this.KeepAlive = true;
+            this.Credentials = credentials;
+            this.Proxy = proxy;
 
             if (credentials == null)
             {
-                this.useDefaultCredentials = true;
+                this.UseDefaultCredentials = true;
             }
         }
 
         /// <summary>Gets or sets values indicating the level of authentication and impersonation used for this request.</summary>
-        public AuthenticationLevel? AuthenticationLevel
-        {
-            get { return this.authenticationLevel; }
-            set { this.authenticationLevel = value; }
-        }
+        public AuthenticationLevel? AuthenticationLevel { get; set; }
 
         /// <summary>Gets or sets the cache policy for this request.</summary>
         public RequestCachePolicy CachePolicy
@@ -110,242 +68,106 @@ namespace Argotic.Common
         }
 
         /// <summary>Gets or sets the name of the connection group for the request.</summary>
-        public string ConnectionGroupName
-        {
-            get { return this.connectionGroupName; }
-            set { this.connectionGroupName = value; }
-        }
+        public string ConnectionGroupName { get; set; }
 
         /// <summary>Gets or sets the network credentials used for authenticating the request with the Internet resource.</summary>
-        public ICredentials Credentials
-        {
-            get { return this.credentials; }
-            set { this.credentials = value; }
-        }
+        public ICredentials Credentials { get; set; }
 
         /// <summary>Gets or sets the collection of header name/value pairs associated with the request.</summary>
-        public WebHeaderCollection Headers
-        {
-            get { return this.headers; }
-            set { this.headers = value; }
-        }
+        public WebHeaderCollection Headers { get; set; }
 
         /// <summary>Gets or sets the impersonation level for the current request.</summary>
-        public TokenImpersonationLevel? ImpersonationLevel
-        {
-            get { return this.impersonationLevel; }
-            set { this.impersonationLevel = value; }
-        }
+        public TokenImpersonationLevel? ImpersonationLevel { get; set; }
 
         /// <summary>Gets or sets indicates whether to pre-authenticate the request.</summary>
-        public bool? PreAuthenticate
-        {
-            get { return this.preAuthenticate; }
-            set { this.preAuthenticate = value; }
-        }
+        public bool? PreAuthenticate { get; set; }
 
         /// <summary>Gets or sets the network proxy to use to access this Internet resource.</summary>
-        public IWebProxy Proxy
-        {
-            get { return this.proxy; }
-            set { this.proxy = value; }
-        }
+        public IWebProxy Proxy { get; set; }
 
         /// <summary>Gets or sets the length of time before the request times out.</summary>
-        public int? Timeout
-        {
-            get { return this.timeout; }
-            set { this.timeout = value; }
-        }
+        public int? Timeout { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> value that controls whether <see cref="P:System.Net.CredentialCache.DefaultCredentials"></see> are sent with requests.</summary>
-        public bool? UseDefaultCredentials
-        {
-            get { return this.useDefaultCredentials; }
-            set { this.useDefaultCredentials = value; }
-        }
+        public bool? UseDefaultCredentials { get; set; }
 
         /// <summary>Gets or sets a byte offset into the file being downloaded by this request.</summary>
-        public long? ContentOffset
-        {
-            get { return this.contentOffset; }
-            set { this.contentOffset = value; }
-        }
+        public long? ContentOffset { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> that specifies that an SSL connection should be used.</summary>
-        public bool? EnableSsl
-        {
-            get { return this.enableSsl; }
-            set { this.enableSsl = value; }
-        }
+        public bool? EnableSsl { get; set; }
 
         /// <summary>Gets or sets the new name of a file being renamed.</summary>
-        public string RenameTo
-        {
-            get { return this.renameTo; }
-            set { this.renameTo = value; }
-        }
+        public string RenameTo { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> value that specifies the data type for file transfers.</summary>
-        public bool? UseBinary
-        {
-            get { return this.useBinary; }
-            set { this.useBinary = value; }
-        }
+        public bool? UseBinary { get; set; }
 
         /// <summary>Gets or sets the behavior of a client application's data transfer process.</summary>
-        public bool? UsePassive
-        {
-            get { return this.usePassive; }
-            set { this.usePassive = value; }
-        }
+        public bool? UsePassive { get; set; }
 
         /// <summary>Gets or sets the value of the Accept HTTP header.</summary>
-        public string Accept
-        {
-            get { return this.accept; }
-            set { this.accept = value; }
-        }
+        public string Accept { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether the request should follow redirection responses.</summary>
-        public bool? AllowAutoRedirect
-        {
-            get { return this.allowAutoRedirect; }
-            set { this.allowAutoRedirect = value; }
-        }
+        public bool? AllowAutoRedirect { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to buffer the data sent to the Internet resource.</summary>
-        public bool? AllowWriteStreamBuffering
-        {
-            get { return this.allowWriteStreamBuffering; }
-            set { this.allowWriteStreamBuffering = value; }
-        }
+        public bool? AllowWriteStreamBuffering { get; set; }
 
         /// <summary>Gets or sets the type of decompression that is used.</summary>
-        public DecompressionMethods? AutomaticDecompression
-        {
-            get { return this.automaticDecompression; }
-            set { this.automaticDecompression = value; }
-        }
+        public DecompressionMethods? AutomaticDecompression { get; set; }
 
         /// <summary>Gets or sets the value of the Connection HTTP header.</summary>
-        public string Connection
-        {
-            get { return this.connection; }
-            set { this.connection = value; }
-        }
+        public string Connection { get; set; }
 
         /// <summary>Gets or sets the delegate method called when an HTTP 100-continue response is received from the Internet resource.</summary>
-        public HttpContinueDelegate ContinueDelegate
-        {
-            get { return this.continueDelegate; }
-            set { this.continueDelegate = value; }
-        }
+        public HttpContinueDelegate ContinueDelegate { get; set; }
 
         /// <summary>Gets or sets the cookies associated with the request.</summary>
-        public CookieContainer CookieContainer
-        {
-            get { return this.cookieContainer; }
-            set { this.cookieContainer = value; }
-        }
+        public CookieContainer CookieContainer { get; set; }
 
         /// <summary>Gets or sets the value of the Expect HTTP header.</summary>
-        public string Expect
-        {
-            get { return this.expect; }
-            set { this.expect = value; }
-        }
+        public string Expect { get; set; }
 
         /// <summary>Gets or sets the maximum number of redirects that the request follows.</summary>
-        public int? MaximumAutomaticRedirections
-        {
-            get { return this.maximumAutomaticRedirections; }
-            set { this.maximumAutomaticRedirections = value; }
-        }
+        public int? MaximumAutomaticRedirections { get; set; }
 
         /// <summary>Gets or sets the maximum allowed length of the response headers.</summary>
-        public int? MaximumResponseHeadersLength
-        {
-            get { return this.maximumResponseHeadersLength; }
-            set { this.maximumResponseHeadersLength = value; }
-        }
+        public int? MaximumResponseHeadersLength { get; set; }
 
         /// <summary>Gets or sets the media type of the request.</summary>
-        public string MediaType
-        {
-            get { return this.mediaType; }
-            set { this.mediaType = value; }
-        }
+        public string MediaType { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to pipeline the request to the Internet resource.</summary>
-        public bool? Pipelined
-        {
-            get { return this.pipelined; }
-            set { this.pipelined = value; }
-        }
+        public bool? Pipelined { get; set; }
 
         /// <summary>Gets or sets the version of HTTP to use for the request.</summary>
-        public Version ProtocolVersion
-        {
-            get { return this.protocolVersion; }
-            set { this.protocolVersion = value; }
-        }
+        public Version ProtocolVersion { get; set; }
 
         /// <summary>Gets or sets the value of the Referer HTTP header.</summary>
-        public string Referer
-        {
-            get { return this.referer; }
-            set { this.referer = value; }
-        }
+        public string Referer { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to send data in segments to the Internet resource.</summary>
-        public bool? SendChunked
-        {
-            get { return this.sendChunked; }
-            set { this.sendChunked = value; }
-        }
+        public bool? SendChunked { get; set; }
 
         /// <summary>Gets or sets the value of the Transfer-encoding HTTP header.</summary>
-        public string TransferEncoding
-        {
-            get { return this.transferEncoding; }
-            set { this.transferEncoding = value; }
-        }
+        public string TransferEncoding { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to allow high-speed NTLM-authenticated connection sharing.</summary>
-        public bool? UnsafeAuthenticatedConnectionSharing
-        {
-            get { return this.unsafeAuthenticatedConnectionSharing; }
-            set { this.unsafeAuthenticatedConnectionSharing = value; }
-        }
+        public bool? UnsafeAuthenticatedConnectionSharing { get; set; }
 
         /// <summary>Gets or sets the value of the User-agent HTTP header.</summary>
-        public string UserAgent
-        {
-            get { return this.userAgent; }
-            set { this.userAgent = value; }
-        }
+        public string UserAgent { get; set; }
 
         /// <summary>Gets or sets the collection of security certificates that are associated with this request.</summary>
-        public X509CertificateCollection ClientCertificates
-        {
-            get { return this.clientCertificates; }
-            set { this.clientCertificates = value; }
-        }
+        public X509CertificateCollection ClientCertificates { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to make a persistent connection to the Internet resource.</summary>
-        public bool? KeepAlive
-        {
-            get { return this.keepAlive; }
-            set { this.keepAlive = value; }
-        }
+        public bool? KeepAlive { get; set; }
 
         /// <summary>Gets or sets a time-out when writing to or reading from a stream.</summary>
-        public int? ReadWriteTimeout
-        {
-            get { return this.readWriteTimeout; }
-            set { this.readWriteTimeout = value; }
-        }
+        public int? ReadWriteTimeout { get; set; }
 
         /// <summary>
         /// Applies all options on the current instance to the supplied <see cref="WebRequest"/>.

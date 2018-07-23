@@ -16,7 +16,6 @@
     [Serializable]
     public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
-
         /// <summary>
         /// Private member to hold the value of the parameter.
         /// </summary>

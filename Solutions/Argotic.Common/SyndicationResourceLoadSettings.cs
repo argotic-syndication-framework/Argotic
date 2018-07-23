@@ -164,75 +164,6 @@
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            SyndicationResourceLoadSettings value = obj as SyndicationResourceLoadSettings;
-
-            if (value != null)
-            {
-                int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
-                result = result | this.Timeout.CompareTo(value.Timeout);
-                result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-                result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is SyndicationResourceLoadSettings))
-            {
-                return false;
-            }
-
-            return this.CompareTo(obj) == 0;
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
         /// Determines if operands are equal.
         /// </summary>
         /// <param name="first">Operand to be compared.</param>
@@ -301,6 +232,75 @@
             }
 
             return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            SyndicationResourceLoadSettings value = obj as SyndicationResourceLoadSettings;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
+                result = result | this.Timeout.CompareTo(value.Timeout);
+                result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+                result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SyndicationResourceLoadSettings))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

@@ -176,6 +176,77 @@
         }
 
         /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return true;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return false;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+        {
+            if (object.Equals(first, null) && object.Equals(second, null))
+            {
+                return false;
+            }
+            else if (object.Equals(first, null) && !object.Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
         /// </summary>
         /// <returns>A read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
@@ -252,77 +323,6 @@
             char[] charArray = this.ToString().ToCharArray();
 
             return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return first.CompareTo(second) < 0;
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.CompareTo(second) > 0;
         }
     }
 }

@@ -286,15 +286,16 @@
         }
 
 #pragma warning disable 1587
-        /// <summary>
-        /// Returns a <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
-        /// </summary>
-        /// <param name="request">The <see cref="HttpRequest"/> to generate an absolute base <see cref="Uri"/> for.</param>
-        /// <returns>
-        ///     A <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
-        ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
+#pragma warning disable SA1612 // Element parameter documentation should match element parameters
+                              /// <summary>
+                              /// Returns a <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
+                              /// </summary>
+                              /// <param name="request">The <see cref="HttpRequest"/> to generate an absolute base <see cref="Uri"/> for.</param>
+                              /// <returns>
+                              ///     A <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
+                              ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
+                              /// </returns>
+                              /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
 #pragma warning restore 1587
         /*public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
         {
@@ -330,6 +331,7 @@
         ///     </code>
         /// </example>
         public static bool SourceReferencesTarget(Uri source, Uri target)
+#pragma warning restore SA1612 // Element parameter documentation should match element parameters
         {
             return SyndicationDiscoveryUtility.SourceReferencesTarget(source, target, null);
         }

@@ -116,73 +116,6 @@
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
-        /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            MimeMediaTypeAttribute value = obj as MimeMediaTypeAttribute;
-
-            if (value != null)
-            {
-                int result = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is MimeMediaTypeAttribute))
-            {
-                return false;
-            }
-
-            return this.CompareTo(obj) == 0;
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
         /// Determines if operands are equal.
         /// </summary>
         /// <param name="first">Operand to be compared.</param>
@@ -251,6 +184,73 @@
             }
 
             return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            MimeMediaTypeAttribute value = obj as MimeMediaTypeAttribute;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is MimeMediaTypeAttribute))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

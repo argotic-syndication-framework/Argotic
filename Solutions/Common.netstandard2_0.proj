@@ -1,5 +1,5 @@
 <Project>
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace />
     <DocumentationFile>$(OutputPath)$(TargetFramework.ToLowerInvariant())\$(AssemblyName).xml</DocumentationFile>
@@ -13,7 +13,7 @@
 
   <PropertyGroup>
     <DebugType>Full</DebugType>
-  </PropertyGroup> -->
+  </PropertyGroup> 
   
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />

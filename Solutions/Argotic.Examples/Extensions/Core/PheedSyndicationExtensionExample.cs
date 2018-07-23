@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
 
@@ -12,7 +13,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="PheedSyndicationExtension"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Pheed")]
     public static class PheedSyndicationExtensionExample
     {
         /// <summary>
@@ -26,7 +30,8 @@
             // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
             if (feed.Channel.HasExtensions)
             {
-                PheedSyndicationExtension channelExtension = feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
+                PheedSyndicationExtension channelExtension =
+                    feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
                 if (channelExtension != null)
                 {
                     // Process channel extension
@@ -37,7 +42,8 @@
             {
                 if (item.HasExtensions)
                 {
-                    PheedSyndicationExtension itemExtension = item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
+                    PheedSyndicationExtension itemExtension =
+                        item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
                     if (itemExtension != null)
                     {
                         // Process extension for current item

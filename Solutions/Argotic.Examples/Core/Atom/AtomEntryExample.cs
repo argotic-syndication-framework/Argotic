@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Syndication;
 
@@ -34,11 +35,13 @@
         }
 
         /// <summary>
-        /// Provides example code for the AtomEntry.Create(Uri) method
+        /// Provides example code for the AtomEntry.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
-            AtomEntry entry = AtomEntry.Create(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"));
+            AtomEntry entry = AtomEntry.Create(
+                new Uri(
+                    "http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"));
 
             if (entry.PublishedOn >= DateTime.Today)
             {
@@ -47,7 +50,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
+        /// Provides example code for the LoadAsync(Uri, Object) method.
         /// </summary>
         public static void LoadAsyncExample()
         {
@@ -55,23 +58,14 @@
 
             entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
 
-            entry.LoadAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"), null);
+            entry.LoadAsync(
+                new Uri(
+                    "http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"),
+                null);
         }
 
         /// <summary>
-        /// Handles the <see cref="AtomFeed.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
-        {
-            if (e.State != null)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
+        /// Provides example code for the Load(IXPathNavigable) method.
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
@@ -87,7 +81,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Stream) method
+        /// Provides example code for the Load(Stream) method.
         /// </summary>
         public static void LoadStreamExample()
         {
@@ -105,7 +99,23 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(XmlReader) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
+        /// </summary>
+        public static void LoadUriExample()
+        {
+            AtomEntry entry = new AtomEntry();
+            Uri source = new Uri("http://example.org/blog/1234");
+
+            entry.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+
+            if (entry.UpdatedOn >= DateTime.Today)
+            {
+                // Perform some processing on the entry
+            }
+        }
+
+        /// <summary>
+        /// Provides example code for the Load(XmlReader) method.
         /// </summary>
         public static void LoadXmlReaderExample()
         {
@@ -130,23 +140,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            AtomEntry entry = new AtomEntry();
-            Uri source = new Uri("http://example.org/blog/1234");
-
-            entry.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            if (entry.UpdatedOn >= DateTime.Today)
-            {
-                // Perform some processing on the entry
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
+        /// Provides example code for the Save(Stream) method.
         /// </summary>
         public static void SaveStreamExample()
         {
@@ -160,7 +154,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
+        /// Provides example code for the Save(XmlWriter) method.
         /// </summary>
         public static void SaveXmlWriterExample()
         {
@@ -176,6 +170,18 @@
                 {
                     entry.Save(writer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="AtomFeed.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+        private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+        {
+            if (e.State != null)
+            {
             }
         }
     }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+
     using Argotic.Net;
 
     /// <summary>
@@ -25,8 +26,8 @@
             // Construct a Pingback peer-to-peer notification XML-RPC message
             XmlRpcMessage message = new XmlRpcMessage("pingback.ping");
             message.Encoding = Encoding.UTF8;
-            message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
-            message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
+            message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123")); // sourceURI
+            message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo")); // targetURI
 
             // Send a synchronous pingback ping
             XmlRpcResponse response = client.Send(message);

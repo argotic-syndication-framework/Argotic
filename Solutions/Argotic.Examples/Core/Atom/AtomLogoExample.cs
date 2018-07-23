@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication;
 
     /// <summary>

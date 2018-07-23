@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
 
@@ -12,7 +13,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="PingbackSyndicationExtension"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Pingback")]
     public static class PingbackSyndicationExtensionExample
     {
         /// <summary>
@@ -26,7 +30,9 @@
             // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
             if (feed.Channel.HasExtensions)
             {
-                PingbackSyndicationExtension channelExtension = feed.Channel.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
+                PingbackSyndicationExtension channelExtension =
+                    feed.Channel.FindExtension(
+                        PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
                 if (channelExtension != null)
                 {
                     // Process channel extension
@@ -37,7 +43,8 @@
             {
                 if (item.HasExtensions)
                 {
-                    PingbackSyndicationExtension itemExtension = item.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
+                    PingbackSyndicationExtension itemExtension =
+                        item.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
                     if (itemExtension != null)
                     {
                         // Process extension for current item

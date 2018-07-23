@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication.Specialized;
 
     /// <summary>
@@ -14,11 +14,11 @@
     public static class BlogMLTextConstructExample
     {
         /// <summary>
-        /// Provides example code for the BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType) method
+        /// Provides example code for the BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType) method.
         /// </summary>
         public static void ConstructTypeAsStringExample()
         {
-            string contentType = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
+            string contentType = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html); // html
 
             if (string.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the BlogMLTextConstruct.ConstructTypeByName(string) method
+        /// Provides example code for the BlogMLTextConstruct.ConstructTypeByName(string) method.
         /// </summary>
         public static void ConstructTypeByNameExample()
         {

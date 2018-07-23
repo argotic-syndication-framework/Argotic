@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+
     using Argotic.Net;
 
     /// <summary>
@@ -11,7 +12,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="TrackbackClient"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Trackback")]
     public static class TrackbackClientExample
     {
         /// <summary>

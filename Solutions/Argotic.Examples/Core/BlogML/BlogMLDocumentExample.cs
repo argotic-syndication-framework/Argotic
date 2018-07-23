@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Syndication.Specialized;
 
@@ -80,7 +81,9 @@
             post.PostType = BlogMLPostType.Normal;
             post.Views = "0";
             post.Title = new BlogMLTextConstruct("Sample Blog Post");
-            post.Content = new BlogMLTextConstruct("<p>This is <b>HTML encoded</b> content.&nbsp;</p>", BlogMLContentType.Html);
+            post.Content = new BlogMLTextConstruct(
+                "<p>This is <b>HTML encoded</b> content.&nbsp;</p>",
+                BlogMLContentType.Html);
             post.Name = new BlogMLTextConstruct("Sample Blog Post");
 
             post.Categories.Add("1018");
@@ -98,7 +101,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the BlogMLDocument.Create(Uri) method
+        /// Provides example code for the BlogMLDocument.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
@@ -114,7 +117,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
+        /// Provides example code for the LoadAsync(Uri, Object) method.
         /// </summary>
         public static void LoadAsyncExample()
         {
@@ -126,19 +129,7 @@
         }
 
         /// <summary>
-        /// Handles the <see cref="BlogMLDocument.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
-        {
-            if (e.State != null)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
+        /// Provides example code for the Load(IXPathNavigable) method.
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
@@ -157,7 +148,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Stream) method
+        /// Provides example code for the Load(Stream) method.
         /// </summary>
         public static void LoadStreamExample()
         {
@@ -178,7 +169,26 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(XmlReader) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
+        /// </summary>
+        public static void LoadUriExample()
+        {
+            BlogMLDocument document = new BlogMLDocument();
+            Uri source = new Uri("http://www.example.org/blog/blogML.axd");
+
+            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+
+            foreach (BlogMLPost post in document.Posts)
+            {
+                if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
+                {
+                    // Perform some processing on the blog post
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides example code for the Load(XmlReader) method.
         /// </summary>
         public static void LoadXmlReaderExample()
         {
@@ -206,26 +216,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            BlogMLDocument document = new BlogMLDocument();
-            Uri source = new Uri("http://www.example.org/blog/blogML.axd");
-
-            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (BlogMLPost post in document.Posts)
-            {
-                if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
-                {
-                    // Perform some processing on the blog post
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
+        /// Provides example code for the Save(Stream) method.
         /// </summary>
         public static void SaveStreamExample()
         {
@@ -239,7 +230,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
+        /// Provides example code for the Save(XmlWriter) method.
         /// </summary>
         public static void SaveXmlWriterExample()
         {
@@ -255,6 +246,18 @@
                 {
                     document.Save(writer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="BlogMLDocument.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+        {
+            if (e.State != null)
+            {
             }
         }
     }

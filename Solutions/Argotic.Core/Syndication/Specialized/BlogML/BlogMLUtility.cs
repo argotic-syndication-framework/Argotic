@@ -35,7 +35,7 @@
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
         /// </summary>
         /// <param name="status">The <see cref="BlogMLApprovalStatus"/> to get the text construct identifier for.</param>
-        /// <returns>The approval status identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The approval status identifier for the supplied <paramref name="status"/>, otherwise returns an empty string.</returns>
         public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
         {
             string name = string.Empty;
@@ -73,8 +73,8 @@
         /// <param name="value">The value of the approval status identifier.</param>
         /// <returns>A <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified string, otherwise returns <b>BlogMLApprovalStatus.None</b>.</returns>
         /// <remarks>This method disregards case of specified approval status value.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
         {
             BlogMLApprovalStatus approvalStatus = BlogMLApprovalStatus.None;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
 
@@ -25,7 +26,9 @@
             // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
             if (feed.Channel.HasExtensions)
             {
-                LiveJournalSyndicationExtension channelExtension = feed.Channel.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
+                LiveJournalSyndicationExtension channelExtension =
+                    feed.Channel.FindExtension(LiveJournalSyndicationExtension.MatchByType) as
+                        LiveJournalSyndicationExtension;
                 if (channelExtension != null)
                 {
                     // Process channel extension
@@ -36,7 +39,9 @@
             {
                 if (item.HasExtensions)
                 {
-                    LiveJournalSyndicationExtension itemExtension = item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
+                    LiveJournalSyndicationExtension itemExtension =
+                        item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as
+                            LiveJournalSyndicationExtension;
                     if (itemExtension != null)
                     {
                         // Process extension for current item

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net;
+
     using Argotic.Common;
     using Argotic.Syndication;
 
@@ -19,7 +20,8 @@
         /// </summary>
         public static void ClassExample()
         {
-            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
+            GenericSyndicationFeed feed =
+                GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
             foreach (GenericSyndicationCategory category in feed.Categories)
             {
@@ -57,11 +59,12 @@
         }
 
         /// <summary>
-        /// Provides example code for the GenericSyndicationFeed.Create(Uri) method
+        /// Provides example code for the GenericSyndicationFeed.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
-            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
+            GenericSyndicationFeed feed =
+                GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
             foreach (GenericSyndicationItem item in feed.Items)
             {
@@ -81,7 +84,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
         /// </summary>
         public static void LoadUriExample()
         {

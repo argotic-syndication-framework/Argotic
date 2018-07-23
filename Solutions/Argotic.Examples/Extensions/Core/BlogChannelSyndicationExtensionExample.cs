@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
 
@@ -25,7 +26,9 @@
             // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
             if (feed.Channel.HasExtensions)
             {
-                BlogChannelSyndicationExtension channelExtension = feed.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension;
+                BlogChannelSyndicationExtension channelExtension =
+                    feed.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) as
+                        BlogChannelSyndicationExtension;
                 if (channelExtension != null)
                 {
                     // Process channel extension

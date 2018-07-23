@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Syndication;
 
@@ -45,7 +46,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the AtomFeed.Create(Uri) method
+        /// Provides example code for the AtomFeed.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
@@ -61,7 +62,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
+        /// Provides example code for the LoadAsync(Uri, Object) method.
         /// </summary>
         public static void LoadAsyncExample()
         {
@@ -73,19 +74,7 @@
         }
 
         /// <summary>
-        /// Handles the <see cref="AtomFeed.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
-        {
-            if (e.State != null)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
+        /// Provides example code for the Load(IXPathNavigable) method.
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
@@ -104,7 +93,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Stream) method
+        /// Provides example code for the Load(Stream) method.
         /// </summary>
         public static void LoadStreamExample()
         {
@@ -125,7 +114,26 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(XmlReader) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
+        /// </summary>
+        public static void LoadUriExample()
+        {
+            AtomFeed feed = new AtomFeed();
+            Uri source = new Uri("http://news.google.com/?output=atom");
+
+            feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+
+            foreach (AtomEntry entry in feed.Entries)
+            {
+                if (entry.PublishedOn >= DateTime.Today)
+                {
+                    // Perform some processing on the feed entry
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides example code for the Load(XmlReader) method.
         /// </summary>
         public static void LoadXmlReaderExample()
         {
@@ -153,26 +161,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            AtomFeed feed = new AtomFeed();
-            Uri source = new Uri("http://news.google.com/?output=atom");
-
-            feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (AtomEntry entry in feed.Entries)
-            {
-                if (entry.PublishedOn >= DateTime.Today)
-                {
-                    // Perform some processing on the feed entry
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
+        /// Provides example code for the Save(Stream) method.
         /// </summary>
         public static void SaveStreamExample()
         {
@@ -186,7 +175,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
+        /// Provides example code for the Save(XmlWriter) method.
         /// </summary>
         public static void SaveXmlWriterExample()
         {
@@ -202,6 +191,18 @@
                 {
                     feed.Save(writer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="AtomFeed.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+        private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+        {
+            if (e.State != null)
+            {
             }
         }
     }

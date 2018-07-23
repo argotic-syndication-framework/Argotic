@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Syndication;
 
@@ -15,7 +16,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="OpmlDocument"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Opml")]
     public static class OpmlDocumentExample
     {
         /// <summary>
@@ -33,13 +37,21 @@
             document.Head.Window = new OpmlWindow(61, 304, 562, 842);
 
             OpmlOutline containerOutline = new OpmlOutline("Feeds");
-            containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
-            containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
+            containerOutline.Outlines.Add(
+                OpmlOutline.CreateSubscriptionListOutline(
+                    "Argotic",
+                    "rss",
+                    new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
+            containerOutline.Outlines.Add(
+                OpmlOutline.CreateSubscriptionListOutline(
+                    "Google News",
+                    "feed",
+                    new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
         }
 
         /// <summary>
-        /// Provides example code for the OpmlDocument.Create(Uri) method
+        /// Provides example code for the OpmlDocument.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
@@ -55,7 +67,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
+        /// Provides example code for the LoadAsync(Uri, Object) method.
         /// </summary>
         public static void LoadAsyncExample()
         {
@@ -67,19 +79,7 @@
         }
 
         /// <summary>
-        /// Handles the <see cref="OpmlDocument.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
-        {
-            if (e.State != null)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
+        /// Provides example code for the Load(IXPathNavigable) method.
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
@@ -98,7 +98,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Stream) method
+        /// Provides example code for the Load(Stream) method.
         /// </summary>
         public static void LoadStreamExample()
         {
@@ -119,7 +119,26 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(XmlReader) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
+        /// </summary>
+        public static void LoadUriExample()
+        {
+            OpmlDocument document = new OpmlDocument();
+            Uri source = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
+
+            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+
+            foreach (OpmlOutline outline in document.Outlines)
+            {
+                if (outline.IsSubscriptionListOutline)
+                {
+                    // Process outline information
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides example code for the Load(XmlReader) method.
         /// </summary>
         public static void LoadXmlReaderExample()
         {
@@ -147,26 +166,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            OpmlDocument document = new OpmlDocument();
-            Uri source = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
-
-            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (OpmlOutline outline in document.Outlines)
-            {
-                if (outline.IsSubscriptionListOutline)
-                {
-                    // Process outline information
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
+        /// Provides example code for the Save(Stream) method.
         /// </summary>
         public static void SaveStreamExample()
         {
@@ -180,7 +180,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
+        /// Provides example code for the Save(XmlWriter) method.
         /// </summary>
         public static void SaveXmlWriterExample()
         {
@@ -196,6 +196,18 @@
                 {
                     document.Save(writer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="OpmlDocument.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+        {
+            if (e.State != null)
+            {
             }
         }
     }

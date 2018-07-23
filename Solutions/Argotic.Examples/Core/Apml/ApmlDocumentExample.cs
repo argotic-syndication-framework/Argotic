@@ -5,6 +5,7 @@
     using System.Net;
     using System.Xml;
     using System.Xml.XPath;
+
     using Argotic.Common;
     using Argotic.Syndication.Specialized;
 
@@ -15,7 +16,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="ApmlDocument"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Apml")]
     public static class ApmlDocumentExample
     {
         /// <summary>
@@ -35,20 +39,42 @@
             homeProfile.Name = "Home";
 
             // Provide the implicit data associated with this profile
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("intelligent agents", 0.89m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept(
+                    "content distribution",
+                    0.97m,
+                    "GatheringTool.com",
+                    new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept(
+                    "intelligent agents",
+                    0.89m,
+                    "GatheringTool.com",
+                    new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             ApmlSource apmlSpecSource = new ApmlSource();
             apmlSpecSource.Key = "http://feeds.feedburner.com/apmlspec";
@@ -57,7 +83,8 @@
             apmlSpecSource.MimeType = "application/rss+xml";
             apmlSpecSource.From = "GatheringTool.com";
             apmlSpecSource.UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
-            apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            apmlSpecSource.Authors.Add(
+                new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
 
@@ -99,11 +126,12 @@
         }
 
         /// <summary>
-        /// Provides example code for the ApmlDocument.Create(Uri) method
+        /// Provides example code for the ApmlDocument.Create(Uri) method.
         /// </summary>
         public static void CreateExample()
         {
-            ApmlDocument document = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
+            ApmlDocument document = ApmlDocument.Create(
+                new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
 
             foreach (ApmlProfile profile in document.Profiles)
             {
@@ -116,7 +144,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
+        /// Provides example code for the LoadAsync(Uri, Object) method.
         /// </summary>
         public static void LoadAsyncExample()
         {
@@ -124,27 +152,18 @@
 
             document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-            document.LoadAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"), null);
+            document.LoadAsync(
+                new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"),
+                null);
         }
 
         /// <summary>
-        /// Handles the <see cref="ApmlDocument.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
-        {
-            if (e.State != null)
-            {
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
+        /// Provides example code for the Load(IXPathNavigable) method.
         /// </summary>
         public static void LoadIXPathNavigableExample()
         {
-            XPathDocument source = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+            XPathDocument source =
+                new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
             ApmlDocument document = new ApmlDocument();
             document.Load(source);
@@ -160,7 +179,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Stream) method
+        /// Provides example code for the Load(Stream) method.
         /// </summary>
         public static void LoadStreamExample()
         {
@@ -182,7 +201,27 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(XmlReader) method
+        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method.
+        /// </summary>
+        public static void LoadUriExample()
+        {
+            ApmlDocument document = new ApmlDocument();
+            Uri source = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+
+            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+
+            foreach (ApmlProfile profile in document.Profiles)
+            {
+                if (profile.Name == document.DefaultProfileName)
+                {
+                    // Perform some processing on the attention profile
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides example code for the Load(XmlReader) method.
         /// </summary>
         public static void LoadXmlReaderExample()
         {
@@ -211,27 +250,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            ApmlDocument document = new ApmlDocument();
-            Uri source = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
-
-            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (ApmlProfile profile in document.Profiles)
-            {
-                if (profile.Name == document.DefaultProfileName)
-                {
-                    // Perform some processing on the attention profile
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
+        /// Provides example code for the Save(Stream) method.
         /// </summary>
         public static void SaveStreamExample()
         {
@@ -245,7 +264,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
+        /// Provides example code for the Save(XmlWriter) method.
         /// </summary>
         public static void SaveXmlWriterExample()
         {
@@ -261,6 +280,18 @@
                 {
                     document.Save(writer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="ApmlDocument.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+        private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+        {
+            if (e.State != null)
+            {
             }
         }
     }

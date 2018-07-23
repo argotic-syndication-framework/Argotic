@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication.Specialized;
 
     /// <summary>
@@ -77,7 +77,9 @@
             post.PostType = BlogMLPostType.Normal;
             post.Views = "0";
             post.Title = new BlogMLTextConstruct("Sample Blog Post");
-            post.Content = new BlogMLTextConstruct("<p>This is <b>HTML encoded</b> content.&nbsp;</p>", BlogMLContentType.Html);
+            post.Content = new BlogMLTextConstruct(
+                "<p>This is <b>HTML encoded</b> content.&nbsp;</p>",
+                BlogMLContentType.Html);
             post.Name = new BlogMLTextConstruct("Sample Blog Post");
 
             post.Categories.Add("1018");
@@ -95,11 +97,11 @@
         }
 
         /// <summary>
-        /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method
+        /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method.
         /// </summary>
         public static void PostTypeAsStringExample()
         {
-            string postType = BlogMLPost.PostTypeAsString(BlogMLPostType.Normal);   // normal
+            string postType = BlogMLPost.PostTypeAsString(BlogMLPostType.Normal); // normal
 
             if (string.Compare(postType, "normal", StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -107,7 +109,7 @@
         }
 
         /// <summary>
-        /// Provides example code for the BlogMLPost.PostTypeByName(string) method
+        /// Provides example code for the BlogMLPost.PostTypeByName(string) method.
         /// </summary>
         public static void PostTypeByNameExample()
         {

@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication.Specialized;
 
     /// <summary>
@@ -11,7 +11,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="ApmlApplication"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Apml")]
     public static class ApmlApplicationExample
     {
         /// <summary>
@@ -30,20 +33,42 @@
             ApmlProfile homeProfile = new ApmlProfile();
             homeProfile.Name = "Home";
 
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("intelligent agents", 0.89m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
-            homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept(
+                    "content distribution",
+                    0.97m,
+                    "GatheringTool.com",
+                    new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept(
+                    "intelligent agents",
+                    0.89m,
+                    "GatheringTool.com",
+                    new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            homeProfile.ImplicitConcepts.Add(
+                new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             ApmlSource apmlSpecSource = new ApmlSource();
             apmlSpecSource.Key = "http://feeds.feedburner.com/apmlspec";
@@ -52,7 +77,8 @@
             apmlSpecSource.MimeType = "application/rss+xml";
             apmlSpecSource.From = "GatheringTool.com";
             apmlSpecSource.UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0);
-            apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+            apmlSpecSource.Authors.Add(
+                new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
             homeProfile.ImplicitSources.Add(apmlSpecSource);
 

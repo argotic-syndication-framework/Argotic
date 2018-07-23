@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication;
 
     /// <summary>
@@ -11,7 +11,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="RssImage"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public static class RssImageExample
     {
         /// <summary>
@@ -25,7 +28,10 @@
             feed.Channel.Link = new Uri("http://dallas.example.com");
             feed.Channel.Description = "Current headlines from the Dallas Times-Herald newspaper";
 
-            RssImage image = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
+            RssImage image = new RssImage(
+                new Uri("http://dallas.example.com"),
+                "Dallas Times-Herald",
+                new Uri("http://dallas.example.com/masthead.gif"));
             image.Description = "Read the Dallas Times-Herald";
             image.Height = 32;
             image.Width = 96;

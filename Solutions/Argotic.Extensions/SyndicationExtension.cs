@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Security.Permissions;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -21,7 +20,7 @@
     ///     <para>
     ///         If you choose to not inherit from the <see cref="SyndicationExtension"/> abstract base class, please be aware that the <see cref="SyndicationExtensionAdapter"/> class
     ///         internally calls the <see cref="Activator.CreateInstance(Type)"/> method, and so any custom syndication extension will need to have the
-    ///         appropriate <see cref="SecurityPermissionAttribute"/> and <see cref="ReflectionPermissionAttribute"/> attributes applied as necessary.
+    ///         appropriate SecurityPermissionAttribute and ReflectionPermissionAttribute attributes applied as necessary.
     ///     </para>
     /// </remarks>
     /// <example>

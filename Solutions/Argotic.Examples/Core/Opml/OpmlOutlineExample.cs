@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication;
 
     /// <summary>
@@ -11,7 +11,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="OpmlOutline"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Opml")]
     public static class OpmlOutlineExample
     {
         /// <summary>
@@ -30,8 +33,16 @@
 
             // Create outline that contains child outlines
             OpmlOutline containerOutline = new OpmlOutline("Feeds");
-            containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
-            containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
+            containerOutline.Outlines.Add(
+                OpmlOutline.CreateSubscriptionListOutline(
+                    "Argotic",
+                    "rss",
+                    new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
+            containerOutline.Outlines.Add(
+                OpmlOutline.CreateSubscriptionListOutline(
+                    "Google News",
+                    "feed",
+                    new Uri("http://news.google.com/?output=atom")));
             document.AddOutline(containerOutline);
         }
     }

@@ -1,7 +1,7 @@
 ﻿namespace Argotic.Examples
 {
     using System;
-    using Argotic.Common;
+
     using Argotic.Syndication;
 
     /// <summary>
@@ -11,7 +11,10 @@
     ///     This class contains all of the code examples that are referenced by the <see cref="RssEnclosure"/> class.
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rss")]
     public static class RssEnclosureExample
     {
         /// <summary>
@@ -28,9 +31,11 @@
             RssItem item = new RssItem();
             item.Title = "Seventh Heaven! Ryan Hurls Another No Hitter";
             item.Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-            item.Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
+            item.Description =
+                "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
 
-            item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
+            item.Enclosures.Add(
+                new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
 
             feed.Channel.AddItem(item);
         }

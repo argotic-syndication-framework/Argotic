@@ -1,16 +1,29 @@
 ﻿namespace Argotic.Extensions.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Xml;
+
     using Argotic.Syndication;
 
+    /// <summary>
+    /// Extension test utility.
+    /// </summary>
     internal static class ExtensionTestUtil
     {
+        /// <summary>
+        /// Fill xml string.
+        /// </summary>
+        private const string StrFullXml1 =
+            @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework 2008.0.2.0, http://www.codeplex.com/Argotic</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{1}"
+            + "</item></channel></rss>";
+
+        /// <summary>
+        /// Add extension to xml.
+        /// </summary>
+        /// <param name="ext">The extension.</param>
+        /// <returns>Returns feed.</returns>
         internal static string AddExtensionToXml(SyndicationExtension ext)
         {
             RssFeed feed = new RssFeed(new Uri("http://www.example.com"), "Argotic - Extension Test");
@@ -44,12 +57,15 @@
             }
         }
 
-        private const string strFullXml1 = @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework 2008.0.2.0, http://www.codeplex.com/Argotic</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{1}" +
-                                             "</item></channel></rss>";
-
+        /// <summary>
+        /// Get wrapped xml.
+        /// </summary>
+        /// <param name="namespc">The namespace.</param>
+        /// <param name="strExt">The extension.</param>
+        /// <returns>Returns wrapped xml.</returns>
         internal static string GetWrappedXml(string namespc, string strExt)
         {
-            return string.Format(strFullXml1, namespc, strExt);
+            return string.Format(StrFullXml1, namespc, strExt);
         }
     }
 }

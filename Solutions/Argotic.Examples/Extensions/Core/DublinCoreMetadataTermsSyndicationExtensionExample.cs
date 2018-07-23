@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
 
@@ -25,7 +26,9 @@
             // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
             if (feed.Channel.HasExtensions)
             {
-                DublinCoreMetadataTermsSyndicationExtension channelExtension = feed.Channel.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
+                DublinCoreMetadataTermsSyndicationExtension channelExtension =
+                    feed.Channel.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as
+                        DublinCoreMetadataTermsSyndicationExtension;
                 if (channelExtension != null)
                 {
                     // Process channel extension
@@ -36,7 +39,9 @@
             {
                 if (item.HasExtensions)
                 {
-                    DublinCoreMetadataTermsSyndicationExtension itemExtension = item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
+                    DublinCoreMetadataTermsSyndicationExtension itemExtension =
+                        item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as
+                            DublinCoreMetadataTermsSyndicationExtension;
                     if (itemExtension != null)
                     {
                         // Process extension for current item

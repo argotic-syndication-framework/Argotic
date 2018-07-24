@@ -12,7 +12,6 @@
     [Serializable]
     public class YahooMediaRating : IComparable
     {
-
         /// <summary>
         /// Private member to hold the permissible audience value.
         /// </summary>

@@ -12,7 +12,6 @@
     [Serializable]
     public class SiteSummaryUpdateSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the frequency of updates in relation to the update period.
         /// </summary>

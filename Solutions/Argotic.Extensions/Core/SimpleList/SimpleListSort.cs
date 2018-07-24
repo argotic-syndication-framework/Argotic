@@ -25,7 +25,6 @@
     [Serializable]
     public class SimpleListSort : IComparable
     {
-
         /// <summary>
         /// Private member to hold the name of the sortable property.
         /// </summary>

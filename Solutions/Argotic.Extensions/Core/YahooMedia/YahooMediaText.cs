@@ -20,7 +20,6 @@
     [Serializable]
     public class YahooMediaText : IComparable
     {
-
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
         /// </summary>

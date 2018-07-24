@@ -17,7 +17,6 @@
     [Serializable]
     public class YahooMediaTextConstruct : IComparable
     {
-
         /// <summary>
         /// Private member to hold the content of the human-readable text.
         /// </summary>

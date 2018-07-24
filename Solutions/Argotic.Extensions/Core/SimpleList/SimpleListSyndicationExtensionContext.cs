@@ -12,7 +12,6 @@
     [Serializable]
     public class SimpleListSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold information that allows the client to group or filter on the values of feed properties.
         /// </summary>

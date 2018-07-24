@@ -13,7 +13,6 @@
     [Serializable]
     public class BasicGeocodingSyndicationExtensionContext
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
         /// </summary>

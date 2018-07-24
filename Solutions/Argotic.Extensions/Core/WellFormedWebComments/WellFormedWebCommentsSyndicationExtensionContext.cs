@@ -11,7 +11,6 @@
     [Serializable]
     public class WellFormedWebCommentsSyndicationExtensionContext
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> class.
         /// </summary>

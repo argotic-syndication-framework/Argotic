@@ -11,7 +11,6 @@
     [Serializable]
     public class FeedSynchronizationSyndicationExtensionContext
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtensionContext"/> class.
         /// </summary>

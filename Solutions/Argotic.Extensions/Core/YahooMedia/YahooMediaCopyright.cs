@@ -17,7 +17,6 @@
     [Serializable]
     public class YahooMediaCopyright : IComparable
     {
-
         /// <summary>
         /// Private member to hold the textual copyright notice.
         /// </summary>

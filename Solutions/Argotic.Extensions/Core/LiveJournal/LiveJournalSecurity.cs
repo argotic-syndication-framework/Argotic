@@ -13,7 +13,6 @@
     [Serializable]
     public class LiveJournalSecurity : IComparable
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class.
         /// </summary>

@@ -21,7 +21,6 @@
     [Serializable]
     public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
-
         /// <summary>
         /// Private member to hold the MIME type of the media object.
         /// </summary>

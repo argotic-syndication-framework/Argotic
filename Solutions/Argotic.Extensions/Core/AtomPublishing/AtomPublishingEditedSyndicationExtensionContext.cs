@@ -12,7 +12,6 @@
     [Serializable]
     public class AtomPublishingEditedSyndicationExtensionContext
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
         /// </summary>

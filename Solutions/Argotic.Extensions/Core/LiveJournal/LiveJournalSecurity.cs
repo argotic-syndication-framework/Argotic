@@ -13,15 +13,6 @@
     [Serializable]
     public class LiveJournalSecurity : IComparable
     {
-        /// <summary>
-        /// Private member to hold security type indicator.
-        /// </summary>
-        private LiveJournalSecurityType securityType = LiveJournalSecurityType.Public;
-
-        /// <summary>
-        /// Private member to hold an integer indicating the friend-groups mask.
-        /// </summary>
-        private int securityMask = int.MinValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class.
@@ -54,18 +45,7 @@
         /// Gets or sets the accessibility type.
         /// </summary>
         /// <value>A <see cref="LiveJournalSecurityType"/> enumeration value that represents the access type. The default value is <see cref="LiveJournalSecurityType.Public"/>.</value>
-        public LiveJournalSecurityType Accessibility
-        {
-            get
-            {
-                return this.securityType;
-            }
-
-            set
-            {
-                this.securityType = value;
-            }
-        }
+        public LiveJournalSecurityType Accessibility { get; set; } = LiveJournalSecurityType.Public;
 
         /// <summary>
         /// Gets or sets the friend-groups mask.
@@ -75,18 +55,7 @@
         ///     This property only applies if the <see cref="Accessibility"/> property is <see cref="LiveJournalSecurityType.Friends">friends</see>
         ///     and <b>only</b> if the author of the post is the same as the user who has authenticated the feed request.
         /// </remarks>
-        public int Mask
-        {
-            get
-            {
-                return this.securityMask;
-            }
-
-            set
-            {
-                this.securityMask = value;
-            }
-        }
+        public int Mask { get; set; } = int.MinValue;
 
         /// <summary>
         /// Determines if operands are equal.

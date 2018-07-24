@@ -18,10 +18,6 @@
     [Serializable]
     public class YahooMediaHash : IComparable
     {
-        /// <summary>
-        /// Private member to hold the algorithm used to create the hash.
-        /// </summary>
-        private YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
 
         /// <summary>
         /// Private member to hold the hash value.
@@ -56,18 +52,7 @@
         /// <remarks>
         ///     If no algorithm is specified, it can be assumed that <see cref="YahooMediaHashAlgorithm.MD5"/> was used to create this hash.
         /// </remarks>
-        public YahooMediaHashAlgorithm Algorithm
-        {
-            get
-            {
-                return this.hashAlgorithm;
-            }
-
-            set
-            {
-                this.hashAlgorithm = value;
-            }
-        }
+        public YahooMediaHashAlgorithm Algorithm { get; set; } = YahooMediaHashAlgorithm.None;
 
         /// <summary>
         /// Gets or sets the value of this hash.

@@ -70,16 +70,6 @@
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
 
         /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="OpmlDocument"/> class.
         /// </summary>
         public OpmlDocument()
@@ -124,13 +114,7 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return documentFormat;
-            }
-        }
+        public SyndicationContentFormat Format => documentFormat;
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -194,47 +178,19 @@
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return documentVersion;
-            }
-        }
+        public Version Version => documentVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="OpmlOutline"/> at the specified index.

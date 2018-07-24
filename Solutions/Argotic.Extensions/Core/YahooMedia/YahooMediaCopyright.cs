@@ -17,10 +17,6 @@
     [Serializable]
     public class YahooMediaCopyright : IComparable
     {
-        /// <summary>
-        /// Private member to hold the url for a terms of use page or additional copyright information.
-        /// </summary>
-        private Uri copyrightUrl;
 
         /// <summary>
         /// Private member to hold the textual copyright notice.
@@ -71,18 +67,7 @@
         /// Gets or sets the location of a terms of use page or additional copyright information.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL for a terms of use page or additional copyright information.</value>
-        public Uri Url
-        {
-            get
-            {
-                return this.copyrightUrl;
-            }
-
-            set
-            {
-                this.copyrightUrl = value;
-            }
-        }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

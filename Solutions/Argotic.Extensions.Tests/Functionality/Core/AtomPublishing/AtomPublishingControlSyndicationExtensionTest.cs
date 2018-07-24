@@ -27,24 +27,11 @@
         private const string StrExtXml =
             "<app:control xml:base=\"http://www.example.com/control.html\" xml:lang=\"en-US\"><app:draft>yes</app:draft></app:control>";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return this.testContextInstance;
-            }
-
-            set
-            {
-                this.testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         /// <summary>
         /// Create context.

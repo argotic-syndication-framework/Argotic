@@ -25,10 +25,6 @@
     [Serializable]
     public class SimpleListGroup : IComparable
     {
-        /// <summary>
-        /// Private member to hold the full namespace used in the groupable property.
-        /// </summary>
-        private Uri groupNamespace;
 
         /// <summary>
         /// Private member to hold the name of the groupable property.
@@ -112,18 +108,7 @@
         /// <remarks>
         ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
         /// </remarks>
-        public Uri Namespace
-        {
-            get
-            {
-                return this.groupNamespace;
-            }
-
-            set
-            {
-                this.groupNamespace = value;
-            }
-        }
+        public Uri Namespace { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

@@ -19,11 +19,6 @@
         private string moodContent = string.Empty;
 
         /// <summary>
-        /// Private member to hold a site specific identifier for the current mood.
-        /// </summary>
-        private int moodIdentifier = int.MinValue;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalMood"/> class.
         /// </summary>
         public LiveJournalMood()
@@ -54,18 +49,7 @@
         /// Gets or sets a site specific identifier for this mood.
         /// </summary>
         /// <value>A site specific identifier for this mood. The default value is <see cref="int.MinValue"/>, which indicates no identifier was specified.</value>
-        public int Id
-        {
-            get
-            {
-                return this.moodIdentifier;
-            }
-
-            set
-            {
-                this.moodIdentifier = value;
-            }
-        }
+        public int Id { get; set; } = int.MinValue;
 
         /// <summary>
         /// Determines if operands are equal.

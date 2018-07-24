@@ -93,7 +93,6 @@
     [Serializable]
     public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold an IRI that represents a permanent, universally unique identifier for the entity.
         /// </summary>

@@ -17,26 +17,6 @@
         private string extensionMusic = string.Empty;
 
         /// <summary>
-        /// Private member to hold the current mood.
-        /// </summary>
-        private LiveJournalMood extensionMood;
-
-        /// <summary>
-        /// Private member to hold the access level.
-        /// </summary>
-        private LiveJournalSecurity extensionSecurity;
-
-        /// <summary>
-        /// Private member to hold a value indicating if entry has been preformatted.
-        /// </summary>
-        private bool extensionIsPreformatted;
-
-        /// <summary>
-        /// Private member to hold the associated user picture.
-        /// </summary>
-        private LiveJournalUserPicture extensionUserPicture;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtensionContext"/> class.
         /// </summary>
         public LiveJournalSyndicationExtensionContext()
@@ -50,35 +30,13 @@
         /// <remarks>
         ///     If <b>false</b>, newlines within the entry must be expanded into visual newlines (using the <i>br</i> tag) to be displayed properly.
         /// </remarks>
-        public bool IsPreformatted
-        {
-            get
-            {
-                return this.extensionIsPreformatted;
-            }
-
-            set
-            {
-                this.extensionIsPreformatted = value;
-            }
-        }
+        public bool IsPreformatted { get; set; }
 
         /// <summary>
         /// Gets or sets the current mood.
         /// </summary>
         /// <value>A <see cref="LiveJournalMood"/> object that represents the current mood.</value>
-        public LiveJournalMood Mood
-        {
-            get
-            {
-                return this.extensionMood;
-            }
-
-            set
-            {
-                this.extensionMood = value;
-            }
-        }
+        public LiveJournalMood Mood { get; set; }
 
         /// <summary>
         /// Gets or sets the current music.
@@ -115,18 +73,7 @@
         ///     If absent, the entry is assumed to be <see cref="LiveJournalSecurityType.Public">publicly</see> accessible.
         ///     All feeds requested without authentication will <b>only</b> contain public entries.
         /// </remarks>
-        public LiveJournalSecurity Security
-        {
-            get
-            {
-                return this.extensionSecurity;
-            }
-
-            set
-            {
-                this.extensionSecurity = value;
-            }
-        }
+        public LiveJournalSecurity Security { get; set; }
 
         /// <summary>
         /// Gets or sets theassociated user picture.
@@ -135,18 +82,7 @@
         /// <remarks>
         ///     If omitted, the LiveJournal entry uses the feed-level default picture.
         /// </remarks>
-        public LiveJournalUserPicture UserPicture
-        {
-            get
-            {
-                return this.extensionUserPicture;
-            }
-
-            set
-            {
-                this.extensionUserPicture = value;
-            }
-        }
+        public LiveJournalUserPicture UserPicture { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

@@ -23,11 +23,6 @@
         private string ownerEmail = string.Empty;
 
         /// <summary>
-        /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
-        /// </summary>
-        private Uri ownerId;
-
-        /// <summary>
         /// Private member to hold the name of the owner of the document.
         /// </summary>
         private string ownerName = string.Empty;
@@ -108,18 +103,7 @@
         /// <remarks>
         ///     The owner identifier may also may be used to identify the author. No two authors should have the same identifier.
         /// </remarks>
-        public Uri Id
-        {
-            get
-            {
-                return this.ownerId;
-            }
-
-            set
-            {
-                this.ownerId = value;
-            }
-        }
+        public Uri Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the owner of this document.

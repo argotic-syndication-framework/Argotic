@@ -12,10 +12,6 @@
     [Serializable]
     public class YahooMediaCategory : IComparable
     {
-        /// <summary>
-        /// Private member to hold a URI that identifies the taxonomy scheme.
-        /// </summary>
-        private Uri categoryScheme;
 
         /// <summary>
         /// Private member to hold the human readable label for the category that can be displayed in end user applications.
@@ -49,13 +45,7 @@
         /// Gets the default categorization scheme for media objects.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the categorization scheme for media objects, which has a value of <b>http://search.yahoo.com/mrss/category_schema</b>.</value>
-        public static Uri DefaultScheme
-        {
-            get
-            {
-                return new Uri("http://search.yahoo.com/mrss/category_schema");
-            }
-        }
+        public static Uri DefaultScheme => new Uri("http://search.yahoo.com/mrss/category_schema");
 
         /// <summary>
         /// Gets or sets the categorization taxonomy for this media object.
@@ -109,18 +99,7 @@
         ///     If no categorization scheme is provided, the default scheme can be assumed to be <b>http://search.yahoo.com/mrss/category_schema</b>.
         /// </remarks>
         /// <seealso cref="DefaultScheme"/>
-        public Uri Scheme
-        {
-            get
-            {
-                return this.categoryScheme;
-            }
-
-            set
-            {
-                this.categoryScheme = value;
-            }
-        }
+        public Uri Scheme { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

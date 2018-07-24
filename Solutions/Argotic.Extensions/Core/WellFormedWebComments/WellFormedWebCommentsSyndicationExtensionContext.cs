@@ -11,15 +11,6 @@
     [Serializable]
     public class WellFormedWebCommentsSyndicationExtensionContext
     {
-        /// <summary>
-        /// Private member to hold the URI that comment entries are to be posted to.
-        /// </summary>
-        private Uri extensionComment;
-
-        /// <summary>
-        /// Private member to hold the URI of the syndication feed for comment entries.
-        /// </summary>
-        private Uri extensionCommentFeed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> class.
@@ -32,35 +23,13 @@
         /// Gets or sets the URL that comment entries are to be posted to.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URI that comment entries are to be posted to.</value>
-        public Uri Comments
-        {
-            get
-            {
-                return this.extensionComment;
-            }
-
-            set
-            {
-                this.extensionComment = value;
-            }
-        }
+        public Uri Comments { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the syndication feed for comment entries.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URI of the syndication feed for comment entries.</value>
-        public Uri CommentsFeed
-        {
-            get
-            {
-                return this.extensionCommentFeed;
-            }
-
-            set
-            {
-                this.extensionCommentFeed = value;
-            }
-        }
+        public Uri CommentsFeed { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

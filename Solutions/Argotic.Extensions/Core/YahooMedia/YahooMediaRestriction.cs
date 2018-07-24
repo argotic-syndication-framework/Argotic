@@ -20,15 +20,6 @@
     [Serializable]
     public class YahooMediaRestriction : IComparable
     {
-        /// <summary>
-        /// Private member to hold the type of relationship that the restriction represents.
-        /// </summary>
-        private YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
-
-        /// <summary>
-        /// Private member to hold the type of media that a restriction applies to.
-        /// </summary>
-        private YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
 
         /// <summary>
         /// Private member to hold the entities the restriction applies to.
@@ -78,35 +69,13 @@
         /// Gets or sets the type of media that this restriction applies to.
         /// </summary>
         /// <value>A <see cref="YahooMediaRestrictionType"/> enumeration value that indicates the type of media that this restriction applies to.</value>
-        public YahooMediaRestrictionType EntityType
-        {
-            get
-            {
-                return this.restrictionType;
-            }
-
-            set
-            {
-                this.restrictionType = value;
-            }
-        }
+        public YahooMediaRestrictionType EntityType { get; set; } = YahooMediaRestrictionType.None;
 
         /// <summary>
         /// Gets or sets the type of relationship that this restriction represents.
         /// </summary>
         /// <value>A <see cref="YahooMediaRestrictionRelationship"/> enumeration value that indicates the type of relationship that this restriction represents.</value>
-        public YahooMediaRestrictionRelationship Relationship
-        {
-            get
-            {
-                return this.restrictionRelationship;
-            }
-
-            set
-            {
-                this.restrictionRelationship = value;
-            }
-        }
+        public YahooMediaRestrictionRelationship Relationship { get; set; } = YahooMediaRestrictionRelationship.None;
 
         /// <summary>
         /// Determines if operands are equal.

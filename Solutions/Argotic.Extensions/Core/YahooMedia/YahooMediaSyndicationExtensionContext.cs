@@ -29,16 +29,6 @@
         private Collection<YahooMediaRating> mediaObjectRatings;
 
         /// <summary>
-        /// Private member to hold the title of the syndication entity.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectTitle;
-
-        /// <summary>
-        /// Private member to hold a short description of the syndication entity.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectDescription;
-
-        /// <summary>
         /// Private member to hold the relevant keywords that describe the syndication entity.
         /// </summary>
         private Collection<string> mediaObjectKeywords;
@@ -59,19 +49,9 @@
         private Collection<YahooMediaHash> mediaObjectHashes;
 
         /// <summary>
-        /// Private member to hold a web browser media player console the syndication entity can be accessed through.
-        /// </summary>
-        private YahooMediaPlayer mediaObjectPlayer;
-
-        /// <summary>
         /// Private member to hold the entities that contributed to the creation of the syndication entity.
         /// </summary>
         private Collection<YahooMediaCredit> mediaObjectCredits;
-
-        /// <summary>
-        /// Private member to hold the copyright information for the syndication entity.
-        /// </summary>
-        private YahooMediaCopyright mediaObjectCopyright;
 
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the syndication entity.
@@ -182,18 +162,7 @@
         /// <remarks>
         ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
         /// </remarks>
-        public YahooMediaCopyright Copyright
-        {
-            get
-            {
-                return this.mediaObjectCopyright;
-            }
-
-            set
-            {
-                this.mediaObjectCopyright = value;
-            }
-        }
+        public YahooMediaCopyright Copyright { get; set; }
 
         /// <summary>
         /// Gets the entities that contributed to the creation of this syndication entity.
@@ -226,18 +195,7 @@
         /// <remarks>
         ///     Media object descriptions are typically a sentence in length.
         /// </remarks>
-        public YahooMediaTextConstruct Description
-        {
-            get
-            {
-                return this.mediaObjectDescription;
-            }
-
-            set
-            {
-                this.mediaObjectDescription = value;
-            }
-        }
+        public YahooMediaTextConstruct Description { get; set; }
 
         /// <summary>
         /// Gets the hash digests for this syndication entity.
@@ -289,18 +247,7 @@
         /// Gets or sets a web browser media player console this syndication entity can be accessed through.
         /// </summary>
         /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this syndication entity can be accessed through.</value>
-        public YahooMediaPlayer Player
-        {
-            get
-            {
-                return this.mediaObjectPlayer;
-            }
-
-            set
-            {
-                this.mediaObjectPlayer = value;
-            }
-        }
+        public YahooMediaPlayer Player { get; set; }
 
         /// <summary>
         /// Gets the permissible audiences for this syndication entity.
@@ -397,18 +344,7 @@
         /// Gets or sets the title of this syndication entity.
         /// </summary>
         /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this syndication entity.</value>
-        public YahooMediaTextConstruct Title
-        {
-            get
-            {
-                return this.mediaObjectTitle;
-            }
-
-            set
-            {
-                this.mediaObjectTitle = value;
-            }
-        }
+        public YahooMediaTextConstruct Title { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

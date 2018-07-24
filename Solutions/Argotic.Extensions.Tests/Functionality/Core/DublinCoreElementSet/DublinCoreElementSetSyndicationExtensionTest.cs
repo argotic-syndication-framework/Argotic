@@ -52,24 +52,11 @@
                                                                                    + "<dc:title>Stupid test data</dc:title>"
                                                                                    + "<dc:type>PhysicalObject</dc:type>";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return this.testContextInstance;
-            }
-
-            set
-            {
-                this.testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         /// <summary>
         /// Create context.

@@ -24,11 +24,6 @@
         private string extensionDepartment = string.Empty;
 
         /// <summary>
-        /// Private member to hold the number of comments.
-        /// </summary>
-        private int extensionComments = int.MinValue;
-
-        /// <summary>
         /// Private member to hold the hit parade identifiers.
         /// </summary>
         private Collection<int> extensionHitParade;
@@ -44,18 +39,7 @@
         /// Gets or sets the number of comments.
         /// </summary>
         /// <value>The number of comments. The default value is <see cref="int.MinValue"/>, which indicates that no comment count was specified.</value>
-        public int Comments
-        {
-            get
-            {
-                return this.extensionComments;
-            }
-
-            set
-            {
-                this.extensionComments = value;
-            }
-        }
+        public int Comments { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the name of the department.

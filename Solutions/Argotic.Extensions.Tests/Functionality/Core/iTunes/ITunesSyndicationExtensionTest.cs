@@ -41,24 +41,11 @@
             + "<itunes:duration>00:03:21</itunes:duration><itunes:keywords>loud,good for parties</itunes:keywords><itunes:explicit>clean</itunes:explicit>"
             + "<itunes:category text=\"Rock\" /><itunes:category text=\"Folk\" />";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return this.testContextInstance;
-            }
-
-            set
-            {
-                this.testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         /// <summary>
         /// Create context.

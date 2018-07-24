@@ -25,10 +25,6 @@
     [Serializable]
     public class SimpleListSort : IComparable
     {
-        /// <summary>
-        /// Private member to hold the full namespace used in the sortable property.
-        /// </summary>
-        private Uri sortNamespace;
 
         /// <summary>
         /// Private member to hold the name of the sortable property.
@@ -39,16 +35,6 @@
         /// Private member to hold a human-readable name for the sortable property.
         /// </summary>
         private string sortLabel = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the data-type of the sortable property.
-        /// </summary>
-        private SimpleListDataType sortDataType = SimpleListDataType.None;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the sortable property is the default sort order in the list.
-        /// </summary>
-        private bool sortIsDefault;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleListSort"/> class.
@@ -66,18 +52,7 @@
         /// </remarks>
         /// <seealso cref="DataTypeAsString(SimpleListDataType)"/>
         /// <seealso cref="DataTypeByName(string)"/>
-        public SimpleListDataType DataType
-        {
-            get
-            {
-                return this.sortDataType;
-            }
-
-            set
-            {
-                this.sortDataType = value;
-            }
-        }
+        public SimpleListDataType DataType { get; set; } = SimpleListDataType.None;
 
         /// <summary>
         /// Gets or sets get or sets the name of this sortable property.
@@ -115,18 +90,7 @@
         ///     The items in the list <b>must</b> be already be sorted by the element, meaning the client <b>should not</b> expect to have to resort by this field if it displaying content directly from the list.
         ///     The client <i>should</i> respect only the first <see cref="SimpleListSort"/> that has a <see cref="IsDefault"/> property with a value of <b>true</b> that it encounters.
         /// </remarks>
-        public bool IsDefault
-        {
-            get
-            {
-                return this.sortIsDefault;
-            }
-
-            set
-            {
-                this.sortIsDefault = value;
-            }
-        }
+        public bool IsDefault { get; set; }
 
         /// <summary>
         /// Gets or sets get or sets a human-readable name for this sortable property.
@@ -165,18 +129,7 @@
         /// <remarks>
         ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
         /// </remarks>
-        public Uri Namespace
-        {
-            get
-            {
-                return this.sortNamespace;
-            }
-
-            set
-            {
-                this.sortNamespace = value;
-            }
-        }
+        public Uri Namespace { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

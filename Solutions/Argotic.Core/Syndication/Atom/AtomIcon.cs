@@ -26,7 +26,6 @@
     [Serializable]
     public class AtomIcon : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold an IRI that identifies an image that provides iconic visual identification for the feed.
         /// </summary>

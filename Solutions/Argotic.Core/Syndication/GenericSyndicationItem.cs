@@ -85,13 +85,7 @@
         ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
         ///     the <see cref="AtomEntry.UpdatedOn"/> property value will be used if present.
         /// </remarks>
-        public DateTime PublishedOn
-        {
-            get
-            {
-                return this.itemPublishedOn;
-            }
-        }
+        public DateTime PublishedOn => this.itemPublishedOn;
 
         /// <summary>
         /// Gets a short summary, abstract, or excerpt for this item.
@@ -105,13 +99,7 @@
         ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
         ///     the <see cref="AtomEntry.Content"/> property value will be used if present.
         /// </remarks>
-        public string Summary
-        {
-            get
-            {
-                return this.itemSummary;
-            }
-        }
+        public string Summary => this.itemSummary;
 
         /// <summary>
         /// Gets the human-readable title for this item.
@@ -120,13 +108,7 @@
         ///     The human-readable title for this item.
         ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
         /// </value>
-        public string Title
-        {
-            get
-            {
-                return this.itemTitle;
-            }
-        }
+        public string Title => this.itemTitle;
 
         /// <summary>
         /// Determines if operands are equal.

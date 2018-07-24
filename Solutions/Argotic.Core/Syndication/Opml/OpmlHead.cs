@@ -21,11 +21,6 @@
     public class OpmlHead : IComparable, IExtensibleSyndicationObject
     {
         /// <summary>
-        /// Private member to hold a date-time indicating when the document was created.
-        /// </summary>
-        private DateTime headCreatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the http address of the documentation the OPML document conforms to.
         /// </summary>
         private Uri headDocumentation = new Uri("http://www.opml.org/spec2");
@@ -36,11 +31,6 @@
         private Collection<int> headExpansionState;
 
         /// <summary>
-        /// Private member to hold a date-time indicating when the document was last modified.
-        /// </summary>
-        private DateTime headModifiedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold information that describes the owner of the document.
         /// </summary>
         private OpmlOwner headOwner;
@@ -49,11 +39,6 @@
         /// Private member to hold the title of the document.
         /// </summary>
         private string headTitle = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a number indicating which line of the outline is displayed on the top line of the window.
-        /// </summary>
-        private int headVerticalScrollState = int.MinValue;
 
         /// <summary>
         /// Private member to hold information that describes the pixel locations of the outline window.
@@ -79,18 +64,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return this.headCreatedOn;
-            }
-
-            set
-            {
-                this.headCreatedOn = value;
-            }
-        }
+        public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets the http address of the documentation that this OPML document conforms to.
@@ -98,13 +72,7 @@
         /// <value>
         ///     A <see cref="Uri"/> that represents the http address of the documentation that this OPML document conforms to.
         /// </value>
-        public Uri Documentation
-        {
-            get
-            {
-                return this.headDocumentation;
-            }
-        }
+        public Uri Documentation => this.headDocumentation;
 
         /// <summary>
         /// Gets a collection of line numbers that are expanded within the outline.
@@ -173,18 +141,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime ModifiedOn
-        {
-            get
-            {
-                return this.headModifiedOn;
-            }
-
-            set
-            {
-                this.headModifiedOn = value;
-            }
-        }
+        public DateTime ModifiedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets information that describes the owner of this document.
@@ -241,18 +198,7 @@
         ///     An integer that indicates which line of this outline is displayed on the top line of the window.
         ///     The default value is <see cref="int.MinValue"/>, which indicates that no vertical scroll state was provided.
         /// </value>
-        public int VerticalScrollState
-        {
-            get
-            {
-                return this.headVerticalScrollState;
-            }
-
-            set
-            {
-                this.headVerticalScrollState = value;
-            }
-        }
+        public int VerticalScrollState { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets information that describes the pixel location of the edges of the outline window for this document.

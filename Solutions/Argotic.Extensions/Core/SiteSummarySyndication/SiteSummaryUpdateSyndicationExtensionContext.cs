@@ -12,20 +12,11 @@
     [Serializable]
     public class SiteSummaryUpdateSyndicationExtensionContext
     {
-        /// <summary>
-        /// Private member to hold the period over which the feed format is updated.
-        /// </summary>
-        private SiteSummaryUpdatePeriod extensionUpdatePeriod = SiteSummaryUpdatePeriod.None;
 
         /// <summary>
         /// Private member to hold the frequency of updates in relation to the update period.
         /// </summary>
         private int extensionUpdateFrequency = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold a base date to be used in concert with period and frequency to calculate the publishing schedule.
-        /// </summary>
-        private DateTime extensionUpdateBase = DateTime.MinValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
@@ -44,18 +35,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime Base
-        {
-            get
-            {
-                return this.extensionUpdateBase;
-            }
-
-            set
-            {
-                this.extensionUpdateBase = value;
-            }
-        }
+        public DateTime Base { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the frequency of updates in relation to the update period.
@@ -83,18 +63,7 @@
         ///     A <see cref="SiteSummaryUpdatePeriod"/> enumeration value that indicates the period over which the feed format is updated.
         ///     The default value is <see cref="SiteSummaryUpdatePeriod.None"/>, which indicates that no update period was specified.
         /// </value>
-        public SiteSummaryUpdatePeriod Period
-        {
-            get
-            {
-                return this.extensionUpdatePeriod;
-            }
-
-            set
-            {
-                this.extensionUpdatePeriod = value;
-            }
-        }
+        public SiteSummaryUpdatePeriod Period { get; set; } = SiteSummaryUpdatePeriod.None;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

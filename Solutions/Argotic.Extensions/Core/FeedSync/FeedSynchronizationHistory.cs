@@ -20,11 +20,6 @@
         private int historySequence = 1;
 
         /// <summary>
-        /// Private member to hold the date-time for the device that performed the item modification.
-        /// </summary>
-        private DateTime historyWhen = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the text value that uniquely identifies the endpoint that made the modification.
         /// </summary>
         private string historyBy = string.Empty;
@@ -133,18 +128,7 @@
         ///     </para>
         ///     <para>The <see cref="DateTime"/> value should be provided in Coordinated Universal Time (UTC).</para>
         /// </remarks>
-        public DateTime When
-        {
-            get
-            {
-                return this.historyWhen;
-            }
-
-            set
-            {
-                this.historyWhen = value;
-            }
-        }
+        public DateTime When { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Determines if operands are equal.

@@ -24,11 +24,6 @@
         private string creditRole = string.Empty;
 
         /// <summary>
-        /// Private member to hold the URI that identifies the role scheme.
-        /// </summary>
-        private Uri creditScheme;
-
-        /// <summary>
         /// Private member to hold the name of the entity that contributed to the creation of the media object.
         /// </summary>
         private string creditEntityName = string.Empty;
@@ -58,13 +53,7 @@
         /// <remarks>
         ///     This scheme can be assumed to be the default scheme for <see cref="YahooMediaCredit"/> when no scheme is provided.
         /// </remarks>
-        public static Uri EuropeanBroadcastingUnionRoleScheme
-        {
-            get
-            {
-                return new Uri("urn:ebu");
-            }
-        }
+        public static Uri EuropeanBroadcastingUnionRoleScheme => new Uri("urn:ebu");
 
         /// <summary>
         /// Gets or sets the name of the entity that contributed to this media object.
@@ -123,18 +112,7 @@
         ///     If no rating scheme is provided, the default scheme is <b>urn:ebu</b>.
         /// </remarks>
         /// <seealso cref="EuropeanBroadcastingUnionRoleScheme"/>
-        public Uri Scheme
-        {
-            get
-            {
-                return this.creditScheme;
-            }
-
-            set
-            {
-                this.creditScheme = value;
-            }
-        }
+        public Uri Scheme { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

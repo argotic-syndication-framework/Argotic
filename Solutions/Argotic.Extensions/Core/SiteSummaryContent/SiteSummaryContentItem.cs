@@ -24,11 +24,6 @@
         private Uri itemFormat;
 
         /// <summary>
-        /// Private member to hold a URI representing the encoding of the item.
-        /// </summary>
-        private Uri itemEncoding;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SiteSummaryContentItem"/> class.
         /// </summary>
         public SiteSummaryContentItem()
@@ -40,13 +35,7 @@
         /// </summary>
         /// <value>A <see cref="Uri"/> with a value of <b>http://www.w3.org/TR/REC-xml#dt-wellformed</b> that indicates that the encoding is well-formed XML.</value>
         /// <seealso cref="SiteSummaryContentItem.Encoding"/>
-        public static Uri WellFormedXmlEncoding
-        {
-            get
-            {
-                return new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
-            }
-        }
+        public static Uri WellFormedXmlEncoding => new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
 
         /// <summary>
         /// Gets or sets the textual content of this item.
@@ -79,18 +68,7 @@
         ///     An encoding is a reversable method of including content within syndicated content.
         /// </remarks>
         /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
-        public Uri Encoding
-        {
-            get
-            {
-                return this.itemEncoding;
-            }
-
-            set
-            {
-                this.itemEncoding = value;
-            }
-        }
+        public Uri Encoding { get; set; }
 
         /// <summary>
         /// Gets or sets the format of this item.

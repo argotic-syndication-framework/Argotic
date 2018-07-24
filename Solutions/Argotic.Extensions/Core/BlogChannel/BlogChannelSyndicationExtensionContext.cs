@@ -11,25 +11,6 @@
     [Serializable]
     public class BlogChannelSyndicationExtensionContext
     {
-        /// <summary>
-        /// Private member to hold the URL of an OPML file containing the blogroll for the web site.
-        /// </summary>
-        private Uri extensionBlogRoll;
-
-        /// <summary>
-        /// Private member to hold the URL of an OPML file containing the author's feed subscriptions.
-        /// </summary>
-        private Uri extensionMySubscriptions;
-
-        /// <summary>
-        /// Private member to hold the URL of a weblog that the author is promoting.
-        /// </summary>
-        private Uri extensionBlink;
-
-        /// <summary>
-        /// Private member to hold the URL of the site's changes file.
-        /// </summary>
-        private Uri extensionChanges;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtensionContext"/> class.
@@ -42,35 +23,13 @@
         /// Gets or sets the URL of a weblog that the author is promoting.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of a weblog that the author is promoting.</value>
-        public Uri Blink
-        {
-            get
-            {
-                return this.extensionBlink;
-            }
-
-            set
-            {
-                this.extensionBlink = value;
-            }
-        }
+        public Uri Blink { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the blogroll for the web site.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the blogroll for the web site.</value>
-        public Uri BlogRoll
-        {
-            get
-            {
-                return this.extensionBlogRoll;
-            }
-
-            set
-            {
-                this.extensionBlogRoll = value;
-            }
-        }
+        public Uri BlogRoll { get; set; }
 
         /// <summary>
         /// Gets or sets the URL the web site's change tracking endpoint.
@@ -82,35 +41,13 @@
         ///     If several feeds point to the same changes file, aggregators have to do less polling, resulting in better use of server bandwidth and faster scans.
         ///     See <a href="http://www.xmlrpc.com/weblogsComForRss">http://www.xmlrpc.com/weblogsComForRss</a> for technical details.
         /// </remarks>
-        public Uri Changes
-        {
-            get
-            {
-                return this.extensionChanges;
-            }
-
-            set
-            {
-                this.extensionChanges = value;
-            }
-        }
+        public Uri Changes { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the author's feed subscriptions.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the author's feed subscriptions.</value>
-        public Uri MySubscriptions
-        {
-            get
-            {
-                return this.extensionMySubscriptions;
-            }
-
-            set
-            {
-                this.extensionMySubscriptions = value;
-            }
-        }
+        public Uri MySubscriptions { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

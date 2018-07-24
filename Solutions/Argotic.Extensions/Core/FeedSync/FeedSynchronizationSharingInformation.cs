@@ -28,11 +28,6 @@
         private string sharingInformationUntil = string.Empty;
 
         /// <summary>
-        /// Private member to hold the publisher suggested date-time before which subscribers should read the feed in order to avoid missing item updates.
-        /// </summary>
-        private DateTime sharingInformationExpires = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold.
         /// </summary>
         private Collection<FeedSynchronizationRelatedInformation> sharingInformationRelations;
@@ -78,18 +73,7 @@
         ///     <para>The value for this attribute <i>should</i> be interpreted as a best effort, uncalibrated value.</para>
         ///     <para>The <see cref="DateTime"/> value should be provided in Coordinated Universal Time (UTC).</para>
         /// </remarks>
-        public DateTime ExpiresOn
-        {
-            get
-            {
-                return this.sharingInformationExpires;
-            }
-
-            set
-            {
-                this.sharingInformationExpires = value;
-            }
-        }
+        public DateTime ExpiresOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets the related feeds or locations.

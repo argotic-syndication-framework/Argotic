@@ -27,24 +27,11 @@
             "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
             + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return this.testContextInstance;
-            }
-
-            set
-            {
-                this.testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         /// <summary>
         /// Create context.

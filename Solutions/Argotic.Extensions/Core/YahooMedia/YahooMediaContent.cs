@@ -21,75 +21,11 @@
     [Serializable]
     public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
-        /// <summary>
-        /// Private member to hold the direct url to the media object.
-        /// </summary>
-        private Uri contentUrl;
-
-        /// <summary>
-        /// Private member to hold the number of bytes the media object represents on disk.
-        /// </summary>
-        private long contentFileSize = long.MinValue;
 
         /// <summary>
         /// Private member to hold the MIME type of the media object.
         /// </summary>
         private string contentMimeType = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the type of the media object.
-        /// </summary>
-        private YahooMediaMedium contentMedium = YahooMediaMedium.None;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the media object is the default object in a group.
-        /// </summary>
-        private bool contentIsDefault;
-
-        /// <summary>
-        /// Private member to hold the expressed version of the media object.
-        /// </summary>
-        private YahooMediaExpression contentExpression = YahooMediaExpression.None;
-
-        /// <summary>
-        /// Private member to hold the kilobits per second rate of the media object.
-        /// </summary>
-        private int contentBitrate = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the number of frames per second for the media object.
-        /// </summary>
-        private int contentFramerate = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the number of samples per second taken to create the media object.
-        /// </summary>
-        private decimal contentSamplingrate = decimal.MinValue;
-
-        /// <summary>
-        /// Private member to hold the number of audio channels in the media object.
-        /// </summary>
-        private int contentChannels = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the total play time for the media object.
-        /// </summary>
-        private TimeSpan contentDuration = TimeSpan.MinValue;
-
-        /// <summary>
-        /// Private member to hold the height of the media object.
-        /// </summary>
-        private int contentHeight = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the width of the media object.
-        /// </summary>
-        private int contentWidth = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the primary language encapsulated in the media object.
-        /// </summary>
-        private CultureInfo contentLanguage;
 
         /// <summary>
         /// Private member to hold the permissible audiences for the media object.
@@ -186,35 +122,13 @@
         /// Gets or sets the kilobits per second rate of this media object.
         /// </summary>
         /// <value>The <i>kilobits</i> per second rate of this media object. The default value is <see cref="int.MinValue"/>, which indicates that no bit-rate was specified.</value>
-        public int Bitrate
-        {
-            get
-            {
-                return this.contentBitrate;
-            }
-
-            set
-            {
-                this.contentBitrate = value;
-            }
-        }
+        public int Bitrate { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the number of audio channels in this media object.
         /// </summary>
         /// <value>The number of audio channels in this media object. The default value is <see cref="int.MinValue"/>, which indicates that no audio channels were specified.</value>
-        public int Channels
-        {
-            get
-            {
-                return this.contentChannels;
-            }
-
-            set
-            {
-                this.contentChannels = value;
-            }
-        }
+        public int Channels { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the content type of this media object.
@@ -247,18 +161,7 @@
         /// Gets or sets the total play time for this media object.
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that represents the total playing time for this media object. The default value is <see cref="TimeSpan.MinValue"/>, which indicates that no duration was specified.</value>
-        public TimeSpan Duration
-        {
-            get
-            {
-                return this.contentDuration;
-            }
-
-            set
-            {
-                this.contentDuration = value;
-            }
-        }
+        public TimeSpan Duration { get; set; } = TimeSpan.MinValue;
 
         /// <summary>
         /// Gets or sets the expressed version of this media object.
@@ -267,69 +170,25 @@
         ///     A <see cref="YahooMediaExpression"/> enumeration value that represents the expressed version of this media object.
         ///     The default value is <see cref="YahooMediaExpression.None"/>, which indicates that no expression version was specified.
         /// </value>
-        public YahooMediaExpression Expression
-        {
-            get
-            {
-                return this.contentExpression;
-            }
-
-            set
-            {
-                this.contentExpression = value;
-            }
-        }
+        public YahooMediaExpression Expression { get; set; } = YahooMediaExpression.None;
 
         /// <summary>
         /// Gets or sets the file size of this media object.
         /// </summary>
         /// <value>The number of bytes this media object represents on disk. The default value is <see cref="long.MinValue"/>, which indicates that no file size was specified.</value>
-        public long FileSize
-        {
-            get
-            {
-                return this.contentFileSize;
-            }
-
-            set
-            {
-                this.contentFileSize = value;
-            }
-        }
+        public long FileSize { get; set; } = long.MinValue;
 
         /// <summary>
         /// Gets or sets the number of frames per second for this media object.
         /// </summary>
         /// <value>The number of frames per second for this media object. The default value is <see cref="int.MinValue"/>, which indicates that no frame-rate was specified.</value>
-        public int FrameRate
-        {
-            get
-            {
-                return this.contentFramerate;
-            }
-
-            set
-            {
-                this.contentFramerate = value;
-            }
-        }
+        public int FrameRate { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the height of this media object.
         /// </summary>
         /// <value>The height of this media object, typically in pixels. The default value is <see cref="int.MinValue"/>, which indicates that no height was specified.</value>
-        public int Height
-        {
-            get
-            {
-                return this.contentHeight;
-            }
-
-            set
-            {
-                this.contentHeight = value;
-            }
-        }
+        public int Height { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if this media object is the default object in a group.
@@ -338,18 +197,7 @@
         /// <remarks>
         ///     There should <b>only</b> be one default media object per <see cref="YahooMediaGroup"/>.
         /// </remarks>
-        public bool IsDefault
-        {
-            get
-            {
-                return this.contentIsDefault;
-            }
-
-            set
-            {
-                this.contentIsDefault = value;
-            }
-        }
+        public bool IsDefault { get; set; }
 
         /// <summary>
         /// Gets or sets the primary language encapsulated in this media object.
@@ -363,18 +211,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.contentLanguage;
-            }
-
-            set
-            {
-                this.contentLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the content medium of this media object.
@@ -383,18 +220,7 @@
         ///     A <see cref="YahooMediaMedium"/> enumeration value that represents the type of this media object.
         ///     The default value is <see cref="YahooMediaMedium.None"/>, which indicates that no content medium was specified.
         /// </value>
-        public YahooMediaMedium Medium
-        {
-            get
-            {
-                return this.contentMedium;
-            }
-
-            set
-            {
-                this.contentMedium = value;
-            }
-        }
+        public YahooMediaMedium Medium { get; set; } = YahooMediaMedium.None;
 
         /// <summary>
         /// Gets or sets the number of samples per second taken to create this media object.
@@ -403,52 +229,19 @@
         /// <remarks>
         ///     This property is expressed in thousands of samples per second (kHz).
         /// </remarks>
-        public decimal SamplingRate
-        {
-            get
-            {
-                return this.contentSamplingrate;
-            }
-
-            set
-            {
-                this.contentSamplingrate = value;
-            }
-        }
+        public decimal SamplingRate { get; set; } = decimal.MinValue;
 
         /// <summary>
         /// Gets or sets the location of this media object.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the direct URL to this media object.</value>
-        public Uri Url
-        {
-            get
-            {
-                return this.contentUrl;
-            }
-
-            set
-            {
-                this.contentUrl = value;
-            }
-        }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Gets or sets the width of this media object.
         /// </summary>
         /// <value>The width of this media object, typically in pixels. The default value is <see cref="int.MinValue"/>, which indicates that no width was specified.</value>
-        public int Width
-        {
-            get
-            {
-                return this.contentWidth;
-            }
-
-            set
-            {
-                this.contentWidth = value;
-            }
-        }
+        public int Width { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets a taxonomy that gives an indication of the type of content for this media object.

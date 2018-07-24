@@ -20,25 +20,6 @@
     [Serializable]
     public class YahooMediaText : IComparable
     {
-        /// <summary>
-        /// Private member to hold the type of the embedded text.
-        /// </summary>
-        private YahooMediaTextConstructType textType = YahooMediaTextConstructType.None;
-
-        /// <summary>
-        /// Private member to hold the primary language encapsulated in the media object.
-        /// </summary>
-        private CultureInfo textLanguage;
-
-        /// <summary>
-        /// Private member to hold the start time offset that the text starts being relevant to the media object.
-        /// </summary>
-        private TimeSpan textStart = TimeSpan.MinValue;
-
-        /// <summary>
-        /// Private member to hold the end time offset that the text stops being relevant to the media object.
-        /// </summary>
-        private TimeSpan textEnd = TimeSpan.MinValue;
 
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
@@ -98,18 +79,7 @@
         ///     it is expected that the <see cref="End">end time</see> is either the end of the clip or the start of the next <see cref="YahooMediaText"/> object.
         /// </remarks>
         /// <seealso cref="Start"/>
-        public TimeSpan End
-        {
-            get
-            {
-                return this.textEnd;
-            }
-
-            set
-            {
-                this.textEnd = value;
-            }
-        }
+        public TimeSpan End { get; set; } = TimeSpan.MinValue;
 
         /// <summary>
         /// Gets or sets the primary language encapsulated in this media object.
@@ -123,18 +93,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.textLanguage;
-            }
-
-            set
-            {
-                this.textLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the start time offset that this text starts being relevant to the media object.
@@ -144,18 +103,7 @@
         ///     The default value is <see cref="TimeSpan.MinValue"/>, which indicates that no start time was specified.
         /// </value>
         /// <seealso cref="End"/>
-        public TimeSpan Start
-        {
-            get
-            {
-                return this.textStart;
-            }
-
-            set
-            {
-                this.textStart = value;
-            }
-        }
+        public TimeSpan Start { get; set; } = TimeSpan.MinValue;
 
         /// <summary>
         /// Gets or sets the entity encoding utilized by this embedded text.
@@ -167,18 +115,7 @@
         /// <remarks>
         ///     If no entity encoding is specified, a default value of <see cref="YahooMediaTextConstructType.Plain"/> can be assumed.
         /// </remarks>
-        public YahooMediaTextConstructType TextType
-        {
-            get
-            {
-                return this.textType;
-            }
-
-            set
-            {
-                this.textType = value;
-            }
-        }
+        public YahooMediaTextConstructType TextType { get; set; } = YahooMediaTextConstructType.None;
 
         /// <summary>
         /// Determines if operands are equal.

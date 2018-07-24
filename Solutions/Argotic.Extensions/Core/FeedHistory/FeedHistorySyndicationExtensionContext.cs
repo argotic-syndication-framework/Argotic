@@ -12,15 +12,6 @@
     [Serializable]
     public class FeedHistorySyndicationExtensionContext
     {
-        /// <summary>
-        /// Private member to hold a value indicating if feed contains all of the entries of a logical feed.
-        /// </summary>
-        private bool extensionIsComplete;
-
-        /// <summary>
-        /// Private member to hold feed is a set of linked feed documents that together contain the entries of a logical feed.
-        /// </summary>
-        private bool extensionIsArchive;
 
         /// <summary>
         /// Private member to hold a collection of relations for linked feed documents that together contain the entries of a logical feed.
@@ -38,35 +29,13 @@
         /// Gets or sets a value indicating whether gets or sets a value indicating the feed is a set of linked feed documents that together contain the entries of a logical feed, without any guarantees about the stability of the documents' contents.
         /// </summary>
         /// <value><b>true</b> if feed is a set of linked feed documents that together contain the entries of a logical feed; otherwise returns <b>false</b>.</value>
-        public bool IsArchive
-        {
-            get
-            {
-                return this.extensionIsArchive;
-            }
-
-            set
-            {
-                this.extensionIsArchive = value;
-            }
-        }
+        public bool IsArchive { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating the feed contains all of the entries of a logical feed; any entry not actually in the feed document should not be considered to be part of that feed.
         /// </summary>
         /// <value><b>true</b> if feed contains all of the entries of a logical feed; otherwise returns <b>false</b>.</value>
-        public bool IsComplete
-        {
-            get
-            {
-                return this.extensionIsComplete;
-            }
-
-            set
-            {
-                this.extensionIsComplete = value;
-            }
-        }
+        public bool IsComplete { get; set; }
 
         /// <summary>
         /// Gets a collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.

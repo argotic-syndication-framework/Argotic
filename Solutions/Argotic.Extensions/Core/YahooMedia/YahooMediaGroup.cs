@@ -26,16 +26,6 @@
         private Collection<YahooMediaRating> mediaObjectRatings;
 
         /// <summary>
-        /// Private member to hold the title of the media group.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectTitle;
-
-        /// <summary>
-        /// Private member to hold a short description of the media group.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectDescription;
-
-        /// <summary>
         /// Private member to hold the relevant keywords that describe the media group.
         /// </summary>
         private Collection<string> mediaObjectKeywords;
@@ -56,19 +46,9 @@
         private Collection<YahooMediaHash> mediaObjectHashes;
 
         /// <summary>
-        /// Private member to hold a web browser media player console the media group can be accessed through.
-        /// </summary>
-        private YahooMediaPlayer mediaObjectPlayer;
-
-        /// <summary>
         /// Private member to hold the entities that contributed to the creation of the media group.
         /// </summary>
         private Collection<YahooMediaCredit> mediaObjectCredits;
-
-        /// <summary>
-        /// Private member to hold the copyright information for the media group.
-        /// </summary>
-        private YahooMediaCopyright mediaObjectCopyright;
 
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media group.
@@ -134,18 +114,7 @@
         /// <remarks>
         ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
         /// </remarks>
-        public YahooMediaCopyright Copyright
-        {
-            get
-            {
-                return this.mediaObjectCopyright;
-            }
-
-            set
-            {
-                this.mediaObjectCopyright = value;
-            }
-        }
+        public YahooMediaCopyright Copyright { get; set; }
 
         /// <summary>
         /// Gets the entities that contributed to the creation of this media group.
@@ -178,18 +147,7 @@
         /// <remarks>
         ///     Media object descriptions are typically a sentence in length.
         /// </remarks>
-        public YahooMediaTextConstruct Description
-        {
-            get
-            {
-                return this.mediaObjectDescription;
-            }
-
-            set
-            {
-                this.mediaObjectDescription = value;
-            }
-        }
+        public YahooMediaTextConstruct Description { get; set; }
 
         /// <summary>
         /// Gets the hash digests for this media group.
@@ -241,18 +199,7 @@
         /// Gets or sets a web browser media player console this media group can be accessed through.
         /// </summary>
         /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
-        public YahooMediaPlayer Player
-        {
-            get
-            {
-                return this.mediaObjectPlayer;
-            }
-
-            set
-            {
-                this.mediaObjectPlayer = value;
-            }
-        }
+        public YahooMediaPlayer Player { get; set; }
 
         /// <summary>
         /// Gets the permissible audiences for this media group.
@@ -349,18 +296,7 @@
         /// Gets or sets the title of this media group.
         /// </summary>
         /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
-        public YahooMediaTextConstruct Title
-        {
-            get
-            {
-                return this.mediaObjectTitle;
-            }
-
-            set
-            {
-                this.mediaObjectTitle = value;
-            }
-        }
+        public YahooMediaTextConstruct Title { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

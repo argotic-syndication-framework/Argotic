@@ -12,10 +12,6 @@
     [Serializable]
     public class YahooMediaRating : IComparable
     {
-        /// <summary>
-        /// Private member to hold the URI that identifies the rating scheme.
-        /// </summary>
-        private Uri ratingScheme;
 
         /// <summary>
         /// Private member to hold the permissible audience value.
@@ -44,37 +40,19 @@
         /// Gets the media simple rating scheme adult content rating.
         /// </summary>
         /// <value>The media simple rating scheme <b>adult</b> content rating value.</value>
-        public static string SimpleAdultRating
-        {
-            get
-            {
-                return "adult";
-            }
-        }
+        public static string SimpleAdultRating => "adult";
 
         /// <summary>
         /// Gets the media simple rating scheme non-adult content rating.
         /// </summary>
         /// <value>The media simple rating scheme <b>nonadult</b> content rating value.</value>
-        public static string SimpleNonAdultRating
-        {
-            get
-            {
-                return "nonadult";
-            }
-        }
+        public static string SimpleNonAdultRating => "nonadult";
 
         /// <summary>
         /// Gets the media simple rating scheme.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the media simple rating scheme. The simple scheme has a value of <b>urn:simple</b>.</value>
-        public static Uri SimpleScheme
-        {
-            get
-            {
-                return new Uri("urn:simple");
-            }
-        }
+        public static Uri SimpleScheme => new Uri("urn:simple");
 
         /// <summary>
         /// Gets or sets the permissible audience for this media object.
@@ -106,18 +84,7 @@
         ///     If no rating scheme is provided, the default scheme is <b>urn:simple</b>.
         /// </remarks>
         /// <seealso cref="SimpleScheme"/>
-        public Uri Scheme
-        {
-            get
-            {
-                return this.ratingScheme;
-            }
-
-            set
-            {
-                this.ratingScheme = value;
-            }
-        }
+        public Uri Scheme { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.

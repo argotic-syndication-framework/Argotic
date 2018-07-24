@@ -24,16 +24,6 @@
         private Uri playerUrl;
 
         /// <summary>
-        /// Private member to hold the height of the browser window that the player console should be opened in.
-        /// </summary>
-        private int playerHeight = int.MinValue;
-
-        /// <summary>
-        /// Private member to hold the with of the browser window that the player console should be opened in.
-        /// </summary>
-        private int playerWidth = int.MinValue;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class.
         /// </summary>
         public YahooMediaPlayer()
@@ -68,18 +58,7 @@
         /// Gets or sets the height of the browser window that this player console should be opened in.
         /// </summary>
         /// <value>The height of the browser window that this player console should be opened in. The default value is <see cref="int.MinValue"/>, which indicates that no height was specified.</value>
-        public int Height
-        {
-            get
-            {
-                return this.playerHeight;
-            }
-
-            set
-            {
-                this.playerHeight = value;
-            }
-        }
+        public int Height { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the location of this player console.
@@ -104,18 +83,7 @@
         /// Gets or sets the width of the browser window that this player console should be opened in.
         /// </summary>
         /// <value>The width of the browser window that this player console should be opened in. The default value is <see cref="int.MinValue"/>, which indicates that no width was specified.</value>
-        public int Width
-        {
-            get
-            {
-                return this.playerWidth;
-            }
-
-            set
-            {
-                this.playerWidth = value;
-            }
-        }
+        public int Width { get; set; } = int.MinValue;
 
         /// <summary>
         /// Determines if operands are equal.

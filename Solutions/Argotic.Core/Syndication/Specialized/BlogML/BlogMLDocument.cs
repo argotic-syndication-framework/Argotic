@@ -59,11 +59,6 @@
         private Collection<BlogMLCategory> documentCategories;
 
         /// <summary>
-        /// Private member to hold the creation date of this web log storage media.
-        /// </summary>
-        private DateTime documentCreationDate = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the collection of extended properties for the web log.
         /// </summary>
         private Dictionary<string, string> documentExtendedProperties;
@@ -72,11 +67,6 @@
         /// Private member to hold the collection of posts for the web log.
         /// </summary>
         private IEnumerable<BlogMLPost> documentPosts;
-
-        /// <summary>
-        /// Private member to hold the base URL of the web log.
-        /// </summary>
-        private Uri documentRootUrl;
 
         /// <summary>
         /// Private member to hold the sub-title of the web log.
@@ -92,16 +82,6 @@
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLDocument"/> class.
@@ -205,13 +185,7 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return documentFormat;
-            }
-        }
+        public SyndicationContentFormat Format => documentFormat;
 
         /// <summary>
         /// Gets or sets a date-time indicating when this BlogML document was created.
@@ -223,18 +197,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime GeneratedOn
-        {
-            get
-            {
-                return this.documentCreationDate;
-            }
-
-            set
-            {
-                this.documentCreationDate = value;
-            }
-        }
+        public DateTime GeneratedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -279,18 +242,7 @@
         /// Gets or sets the root URL of this web log.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the base URL of this web log.</value>
-        public Uri RootUrl
-        {
-            get
-            {
-                return this.documentRootUrl;
-            }
-
-            set
-            {
-                this.documentRootUrl = value;
-            }
-        }
+        public Uri RootUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the sub-title of this web log.
@@ -339,47 +291,19 @@
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return documentVersion;
-            }
-        }
+        public Version Version => documentVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="BlogMLPost"/> at the specified index.

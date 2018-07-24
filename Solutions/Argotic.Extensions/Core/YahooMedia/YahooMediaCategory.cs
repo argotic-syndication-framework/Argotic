@@ -12,7 +12,6 @@
     [Serializable]
     public class YahooMediaCategory : IComparable
     {
-
         /// <summary>
         /// Private member to hold the human readable label for the category that can be displayed in end user applications.
         /// </summary>

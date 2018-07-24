@@ -18,7 +18,6 @@
     [Serializable]
     public class YahooMediaHash : IComparable
     {
-
         /// <summary>
         /// Private member to hold the hash value.
         /// </summary>

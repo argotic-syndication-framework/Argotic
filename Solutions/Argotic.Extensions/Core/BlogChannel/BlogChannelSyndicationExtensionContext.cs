@@ -11,7 +11,6 @@
     [Serializable]
     public class BlogChannelSyndicationExtensionContext
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtensionContext"/> class.
         /// </summary>

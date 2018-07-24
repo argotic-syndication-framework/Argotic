@@ -14,7 +14,6 @@
     [Serializable]
     public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingCommonObjectAttributes, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>

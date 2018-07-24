@@ -20,7 +20,6 @@
     [Serializable]
     public class YahooMediaRestriction : IComparable
     {
-
         /// <summary>
         /// Private member to hold the entities the restriction applies to.
         /// </summary>

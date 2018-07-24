@@ -12,7 +12,6 @@
     [Serializable]
     public class FeedHistorySyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold a collection of relations for linked feed documents that together contain the entries of a logical feed.
         /// </summary>

@@ -25,7 +25,6 @@
     [Serializable]
     public class SimpleListGroup : IComparable
     {
-
         /// <summary>
         /// Private member to hold the name of the groupable property.
         /// </summary>

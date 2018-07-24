@@ -1,0 +1,1381 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs
+  commentId: T:Argotic.Net.XmlRpcMessageSentEventArgs
+  id: XmlRpcMessageSentEventArgs
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  - Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,Argotic.Common.WebRequestOptions,System.Object)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo(System.Object)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Equals(System.Object)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Host
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Message
+  - Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+  - Argotic.Net.XmlRpcMessageSentEventArgs.Response
+  - Argotic.Net.XmlRpcMessageSentEventArgs.State
+  - Argotic.Net.XmlRpcMessageSentEventArgs.ToString
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcMessageSentEventArgs
+  nameWithType: XmlRpcMessageSentEventArgs
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlRpcMessageSentEventArgs
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nProvides data for the <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
+  remarks: "\nA <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event occurs whenever the <xref href=\"Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method is called.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class XmlRpcMessageSentEventArgs
+
+          Inherits EventArgs
+
+          Implements IComparable
+  seealso:
+  - linkId: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+    commentId: M:Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  - linkId: Argotic.Net.XmlRpcClient
+    commentId: T:Argotic.Net.XmlRpcClient
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  id: '#ctor'
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcMessageSentEventArgs()
+  nameWithType: XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs()
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 26
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcMessageSentEventArgs\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public XmlRpcMessageSentEventArgs()
+    content.vb: Public Sub New
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  id: '#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,System.Net.ICredentials,System.Net.IWebProxy,System.Object)'
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcMessageSentEventArgs(Uri, XmlRpcMessage, XmlRpcResponse, ICredentials, IWebProxy, Object)
+  nameWithType: XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs(Uri, XmlRpcMessage, XmlRpcResponse, ICredentials, IWebProxy, Object)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs(System.Uri, Argotic.Net.XmlRpcMessage, Argotic.Net.XmlRpcResponse, System.Net.ICredentials, System.Net.IWebProxy, System.Object)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 42
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcMessageSentEventArgs\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied parameters.\n"
+  example: []
+  syntax:
+    content: public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, object state)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for the XML-RPC transaction.
+    - id: message
+      type: Argotic.Net.XmlRpcMessage
+      description: An <xref href="Argotic.Net.XmlRpcMessage" data-throw-if-not-resolved="false"></xref> that represents the remote procedure call payload.
+    - id: response
+      type: Argotic.Net.XmlRpcResponse
+      description: An <xref href="Argotic.Net.XmlRpcResponse" data-throw-if-not-resolved="false"></xref> that represents the response to the remote procedure call.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: A <xref href="System.Net.ICredentials" data-throw-if-not-resolved="false"></xref> that represents the authentication credentials utilized by the client when making the remote procedure call. This parameter may be <strong>null</strong>.
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: A <xref href="System.Net.IWebProxy" data-throw-if-not-resolved="false"></xref> that represents the web proxy utilized by the client to proxy the remote procedure call. This parameter may be <strong>null</strong>.
+    - id: state
+      type: System.Object
+      description: A <xref href="System.Object" data-throw-if-not-resolved="false"></xref> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.
+    content.vb: Public Sub New(host As Uri, message As XmlRpcMessage, response As XmlRpcResponse, credentials As ICredentials, proxy As IWebProxy, state As Object)
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">response</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,Argotic.Common.WebRequestOptions,System.Object)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,Argotic.Common.WebRequestOptions,System.Object)
+  id: '#ctor(System.Uri,Argotic.Net.XmlRpcMessage,Argotic.Net.XmlRpcResponse,Argotic.Common.WebRequestOptions,System.Object)'
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcMessageSentEventArgs(Uri, XmlRpcMessage, XmlRpcResponse, WebRequestOptions, Object)
+  nameWithType: XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs(Uri, XmlRpcMessage, XmlRpcResponse, WebRequestOptions, Object)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs(System.Uri, Argotic.Net.XmlRpcMessage, Argotic.Net.XmlRpcResponse, Argotic.Common.WebRequestOptions, System.Object)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 72
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcMessageSentEventArgs\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied parameters.\n"
+  example: []
+  syntax:
+    content: public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, object state)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for the XML-RPC transaction.
+    - id: message
+      type: Argotic.Net.XmlRpcMessage
+      description: An <xref href="Argotic.Net.XmlRpcMessage" data-throw-if-not-resolved="false"></xref> that represents the remote procedure call payload.
+    - id: response
+      type: Argotic.Net.XmlRpcResponse
+      description: An <xref href="Argotic.Net.XmlRpcResponse" data-throw-if-not-resolved="false"></xref> that represents the response to the remote procedure call.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: state
+      type: System.Object
+      description: A <xref href="System.Object" data-throw-if-not-resolved="false"></xref> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.
+    content.vb: Public Sub New(host As Uri, message As XmlRpcMessage, response As XmlRpcResponse, options As WebRequestOptions, state As Object)
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">response</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+  id: Empty
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: XmlRpcMessageSentEventArgs.Empty
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Empty
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 95
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets represents an syndication resource loaded event with no event data.\n"
+  remarks: The value of Empty is a read-only instance of <xref href="Argotic.Net.XmlRpcMessageSentEventArgs" data-throw-if-not-resolved="false"></xref> equivalent to the result of calling the <xref href="Argotic.Net.XmlRpcMessageSentEventArgs.%23ctor" data-throw-if-not-resolved="false"></xref> constructor.
+  example: []
+  syntax:
+    content: public static XmlRpcMessageSentEventArgs Empty { get; }
+    parameters: []
+    return:
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: An uninitialized instance of the <xref href="Argotic.Net.XmlRpcMessageSentEventArgs" data-throw-if-not-resolved="false"></xref> class.
+    content.vb: Public Shared ReadOnly Property Empty As XmlRpcMessageSentEventArgs
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Empty*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+  id: Credentials
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: XmlRpcMessageSentEventArgs.Credentials
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credentials
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the authentication credentials utilized by the client when making the remote procedure call.\n"
+  example: []
+  syntax:
+    content: public ICredentials Credentials { get; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that represents the authentication credentials utilized by the client when making the remote procedure call.\nIf no credentials were provided, returns <strong>null</strong>.\n"
+    content.vb: Public ReadOnly Property Credentials As ICredentials
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Credentials*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Host
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Host
+  id: Host
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Host
+  nameWithType: XmlRpcMessageSentEventArgs.Host
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Host
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Host
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 118
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the the location of the host computer that the remote procedure call was sent to.\n"
+  example: []
+  syntax:
+    content: public Uri Host { get; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: "\nA <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that represents the URL of the host computer used for the XML-RPC transaction.\n"
+    content.vb: Public ReadOnly Property Host As Uri
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Host*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Message
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Message
+  id: Message
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Message
+  nameWithType: XmlRpcMessageSentEventArgs.Message
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Message
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Message
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 126
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the remote procedure call payload that was sent.\n"
+  example: []
+  syntax:
+    content: public XmlRpcMessage Message { get; }
+    parameters: []
+    return:
+      type: Argotic.Net.XmlRpcMessage
+      description: "\nAn <xref href=\"Argotic.Net.XmlRpcMessage\" data-throw-if-not-resolved=\"false\"></xref> that represents the remote procedure call payload.\n"
+    content.vb: Public ReadOnly Property Message As XmlRpcMessage
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Message*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+  id: Proxy
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Proxy
+  nameWithType: XmlRpcMessageSentEventArgs.Proxy
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Proxy
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 135
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the web proxy utilized by the client to proxy the remote procedure call.\n"
+  example: []
+  syntax:
+    content: public IWebProxy Proxy { get; }
+    parameters: []
+    return:
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that represents the web proxy utilized by the client to proxy the remote procedure call.\nIf no proxy was used, returns <strong>null</strong>.\n"
+    content.vb: Public ReadOnly Property Proxy As IWebProxy
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Proxy*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Response
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.Response
+  id: Response
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Response
+  nameWithType: XmlRpcMessageSentEventArgs.Response
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Response
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Response
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 149
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the response to the remote procedure call.\n"
+  example: []
+  syntax:
+    content: public XmlRpcResponse Response { get; }
+    parameters: []
+    return:
+      type: Argotic.Net.XmlRpcResponse
+      description: "\nAn <xref href=\"Argotic.Net.XmlRpcResponse\" data-throw-if-not-resolved=\"false\"></xref> that represents the response to the remote procedure call.\n"
+    content.vb: Public ReadOnly Property Response As XmlRpcResponse
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Response*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.State
+  commentId: P:Argotic.Net.XmlRpcMessageSentEventArgs.State
+  id: State
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: State
+  nameWithType: XmlRpcMessageSentEventArgs.State
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.State
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: State
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 157
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> containing state information that was passed to the asynchronous send operation.\n"
+  example: []
+  syntax:
+    content: public object State { get; }
+    parameters: []
+    return:
+      type: System.Object
+      description: "\nA <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> containing state information that was passed to the asynchronous send operation. If no user token provided, returns <strong>null</strong>.\n"
+    content.vb: Public ReadOnly Property State As Object
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.State*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  id: op_Equality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Equality(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  nameWithType: XmlRpcMessageSentEventArgs.Equality(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Equality(Argotic.Net.XmlRpcMessageSentEventArgs, Argotic.Net.XmlRpcMessageSentEventArgs)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 165
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As XmlRpcMessageSentEventArgs, second As XmlRpcMessageSentEventArgs) As Boolean
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  id: op_GreaterThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  nameWithType: XmlRpcMessageSentEventArgs.GreaterThan(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.GreaterThan(Argotic.Net.XmlRpcMessageSentEventArgs, Argotic.Net.XmlRpcMessageSentEventArgs)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 186
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As XmlRpcMessageSentEventArgs, second As XmlRpcMessageSentEventArgs) As Boolean
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  id: op_Inequality(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Inequality(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  nameWithType: XmlRpcMessageSentEventArgs.Inequality(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Inequality(Argotic.Net.XmlRpcMessageSentEventArgs, Argotic.Net.XmlRpcMessageSentEventArgs)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 207
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As XmlRpcMessageSentEventArgs, second As XmlRpcMessageSentEventArgs) As Boolean
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  id: op_LessThan(Argotic.Net.XmlRpcMessageSentEventArgs,Argotic.Net.XmlRpcMessageSentEventArgs)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: LessThan(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  nameWithType: XmlRpcMessageSentEventArgs.LessThan(XmlRpcMessageSentEventArgs, XmlRpcMessageSentEventArgs)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.LessThan(Argotic.Net.XmlRpcMessageSentEventArgs, Argotic.Net.XmlRpcMessageSentEventArgs)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 218
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(XmlRpcMessageSentEventArgs first, XmlRpcMessageSentEventArgs second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As XmlRpcMessageSentEventArgs, second As XmlRpcMessageSentEventArgs) As Boolean
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo(System.Object)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: XmlRpcMessageSentEventArgs.CompareTo(Object)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 239
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Equals(System.Object)
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: XmlRpcMessageSentEventArgs.Equals(Object)
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 277
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: XmlRpcMessageSentEventArgs.GetHashCode()
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 291
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.ToString
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.ToString
+  id: ToString
+  parent: Argotic.Net.XmlRpcMessageSentEventArgs
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: XmlRpcMessageSentEventArgs.ToString()
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessageSentEventArgs.cs
+    startLine: 305
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Net.XmlRpcMessageSentEventArgs\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Net.XmlRpcMessageSentEventArgs" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Net.XmlRpcMessageSentEventArgs.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Net.XmlRpcClient.SendCompleted
+  commentId: E:Argotic.Net.XmlRpcClient.SendCompleted
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  commentId: M:Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient
+  commentId: T:Argotic.Net.XmlRpcClient
+  name: XmlRpcClient
+  nameWithType: XmlRpcClient
+  fullName: Argotic.Net.XmlRpcClient
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs
+  commentId: T:Argotic.Net.XmlRpcMessageSentEventArgs
+  parent: Argotic.Net
+  name: XmlRpcMessageSentEventArgs
+  nameWithType: XmlRpcMessageSentEventArgs
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  name: XmlRpcMessageSentEventArgs
+  nameWithType: XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.XmlRpcMessageSentEventArgs
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Net.XmlRpcMessage
+  commentId: T:Argotic.Net.XmlRpcMessage
+  parent: Argotic.Net
+  name: XmlRpcMessage
+  nameWithType: XmlRpcMessage
+  fullName: Argotic.Net.XmlRpcMessage
+- uid: Argotic.Net.XmlRpcResponse
+  commentId: T:Argotic.Net.XmlRpcResponse
+  parent: Argotic.Net
+  name: XmlRpcResponse
+  nameWithType: XmlRpcResponse
+  fullName: Argotic.Net.XmlRpcResponse
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  commentId: M:Argotic.Net.XmlRpcMessageSentEventArgs.#ctor
+  isExternal: true
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Empty*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+  name: Empty
+  nameWithType: XmlRpcMessageSentEventArgs.Empty
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Empty
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Credentials*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+  name: Credentials
+  nameWithType: XmlRpcMessageSentEventArgs.Credentials
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Credentials
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Host*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Host
+  name: Host
+  nameWithType: XmlRpcMessageSentEventArgs.Host
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Host
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Message*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Message
+  name: Message
+  nameWithType: XmlRpcMessageSentEventArgs.Message
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Message
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Proxy*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+  name: Proxy
+  nameWithType: XmlRpcMessageSentEventArgs.Proxy
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Proxy
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Response*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Response
+  name: Response
+  nameWithType: XmlRpcMessageSentEventArgs.Response
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Response
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.State*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.State
+  name: State
+  nameWithType: XmlRpcMessageSentEventArgs.State
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.State
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.op_Equality
+  name: Equality
+  nameWithType: XmlRpcMessageSentEventArgs.Equality
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.op_GreaterThan
+  name: GreaterThan
+  nameWithType: XmlRpcMessageSentEventArgs.GreaterThan
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.GreaterThan
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.op_Inequality
+  name: Inequality
+  nameWithType: XmlRpcMessageSentEventArgs.Inequality
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Inequality
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.op_LessThan
+  name: LessThan
+  nameWithType: XmlRpcMessageSentEventArgs.LessThan
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.LessThan
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo
+  name: CompareTo
+  nameWithType: XmlRpcMessageSentEventArgs.CompareTo
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.Equals*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.Equals
+  name: Equals
+  nameWithType: XmlRpcMessageSentEventArgs.Equals
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode
+  name: GetHashCode
+  nameWithType: XmlRpcMessageSentEventArgs.GetHashCode
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.GetHashCode
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs.ToString*
+  commentId: Overload:Argotic.Net.XmlRpcMessageSentEventArgs.ToString
+  name: ToString
+  nameWithType: XmlRpcMessageSentEventArgs.ToString
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs.ToString

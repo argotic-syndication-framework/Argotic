@@ -1,0 +1,181 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  id: FeedSynchronizationRelatedInformationType
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Aggregated
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Complete
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationRelatedInformationType
+  nameWithType: FeedSynchronizationRelatedInformationType
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedSynchronizationRelatedInformationType
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the type of feed being related.\n"
+  remarks: "\n<p>\n    Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window.\n    These feeds are referred to as <em>partial feeds</em>, whereas feeds containing the complete set of items are referred to as <em>complete feeds</em>.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum FeedSynchronizationRelatedInformationType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum FeedSynchronizationRelatedInformationType
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+    commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+    commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  id: None
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: FeedSynchronizationRelatedInformationType.None
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo relation type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Aggregated
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Aggregated
+  id: Aggregated
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  langs:
+  - csharp
+  - vb
+  name: Aggregated
+  nameWithType: FeedSynchronizationRelatedInformationType.Aggregated
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Aggregated
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Aggregated
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link\" data-throw-if-not-resolved=\"false\"></xref> points to a feed whose contents are being incorporated into this feed by the publisher.\n"
+  example: []
+  syntax:
+    content: Aggregated = 1
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Complete
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Complete
+  id: Complete
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  langs:
+  - csharp
+  - vb
+  name: Complete
+  nameWithType: FeedSynchronizationRelatedInformationType.Complete
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.Complete
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Complete
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformationType.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link\" data-throw-if-not-resolved=\"false\"></xref> points to a feed that contains the complete collection of items for this feed.\n"
+  example: []
+  syntax:
+    content: Complete = 2
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  isExternal: true
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationRelatedInformation
+  nameWithType: FeedSynchronizationRelatedInformation
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationRelatedInformationType
+  nameWithType: FeedSynchronizationRelatedInformationType
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  isExternal: true

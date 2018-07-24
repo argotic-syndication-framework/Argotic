@@ -1,0 +1,560 @@
+### YamlMime:TableOfContent
+- uid: Argotic.Common
+  name: Argotic.Common
+  items:
+  - uid: Argotic.Common.ComparisonUtility
+    name: ComparisonUtility
+  - uid: Argotic.Common.DiscoverableSyndicationEndpoint
+    name: DiscoverableSyndicationEndpoint
+  - uid: Argotic.Common.EnumerationMetadataAttribute
+    name: EnumerationMetadataAttribute
+  - uid: Argotic.Common.Guard
+    name: Guard
+  - uid: Argotic.Common.ISyndicationResource
+    name: ISyndicationResource
+  - uid: Argotic.Common.Link
+    name: Link
+  - uid: Argotic.Common.MimeMediaTypeAttribute
+    name: MimeMediaTypeAttribute
+  - uid: Argotic.Common.SyndicationContentFormat
+    name: SyndicationContentFormat
+  - uid: Argotic.Common.SyndicationDateTimeUtility
+    name: SyndicationDateTimeUtility
+  - uid: Argotic.Common.SyndicationDiscoveryUtility
+    name: SyndicationDiscoveryUtility
+  - uid: Argotic.Common.SyndicationEncodingUtility
+    name: SyndicationEncodingUtility
+  - uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+    name: SyndicationResourceLoadedEventArgs
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+  - uid: Argotic.Common.SyndicationResourceMetadata
+    name: SyndicationResourceMetadata
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+  - uid: Argotic.Common.TrackbackDiscoveryMetadata
+    name: TrackbackDiscoveryMetadata
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+- uid: Argotic.Configuration
+  name: Argotic.Configuration
+  items:
+  - uid: Argotic.Configuration.TrackbackClientNetworkElement
+    name: TrackbackClientNetworkElement
+  - uid: Argotic.Configuration.TrackbackClientSection
+    name: TrackbackClientSection
+  - uid: Argotic.Configuration.XmlRpcClientNetworkElement
+    name: XmlRpcClientNetworkElement
+  - uid: Argotic.Configuration.XmlRpcClientSection
+    name: XmlRpcClientSection
+- uid: Argotic.Configuration.Provider
+  name: Argotic.Configuration.Provider
+  items:
+  - uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+    name: SyndicationResourceCreateStatus
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+    name: SyndicationResourceProviderCollection
+  - uid: Argotic.Configuration.Provider.SyndicationResourceSection
+    name: SyndicationResourceSection
+- uid: Argotic.Data.Adapters
+  name: Argotic.Data.Adapters
+  items:
+  - uid: Argotic.Data.Adapters.Apml06SyndicationResourceAdapter
+    name: Apml06SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Atom03SyndicationResourceAdapter
+    name: Atom03SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Atom10SyndicationResourceAdapter
+    name: Atom10SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.AtomPublishing10SyndicationResourceAdapter
+    name: AtomPublishing10SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.BlogML20SyndicationResourceAdapter
+    name: BlogML20SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Opml20SyndicationResourceAdapter
+    name: Opml20SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rsd06SyndicationResourceAdapter
+    name: Rsd06SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rsd10SyndicationResourceAdapter
+    name: Rsd10SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rss090SyndicationResourceAdapter
+    name: Rss090SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+    name: Rss091SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rss092SyndicationResourceAdapter
+    name: Rss092SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rss10SyndicationResourceAdapter
+    name: Rss10SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.Rss20SyndicationResourceAdapter
+    name: Rss20SyndicationResourceAdapter
+  - uid: Argotic.Data.Adapters.SyndicationResourceAdapter
+    name: SyndicationResourceAdapter
+- uid: Argotic.Examples
+  name: Argotic.Examples
+  items:
+  - uid: Argotic.Examples.ApmlApplicationExample
+    name: ApmlApplicationExample
+  - uid: Argotic.Examples.ApmlAuthorExample
+    name: ApmlAuthorExample
+  - uid: Argotic.Examples.ApmlConceptExample
+    name: ApmlConceptExample
+  - uid: Argotic.Examples.ApmlDocumentExample
+    name: ApmlDocumentExample
+  - uid: Argotic.Examples.ApmlProfileExample
+    name: ApmlProfileExample
+  - uid: Argotic.Examples.ApmlSourceExample
+    name: ApmlSourceExample
+  - uid: Argotic.Examples.AtomCategoryExample
+    name: AtomCategoryExample
+  - uid: Argotic.Examples.AtomContentExample
+    name: AtomContentExample
+  - uid: Argotic.Examples.AtomEntryExample
+    name: AtomEntryExample
+  - uid: Argotic.Examples.AtomFeedExample
+    name: AtomFeedExample
+  - uid: Argotic.Examples.AtomGeneratorExample
+    name: AtomGeneratorExample
+  - uid: Argotic.Examples.AtomIconExample
+    name: AtomIconExample
+  - uid: Argotic.Examples.AtomIdExample
+    name: AtomIdExample
+  - uid: Argotic.Examples.AtomLinkExample
+    name: AtomLinkExample
+  - uid: Argotic.Examples.AtomLogoExample
+    name: AtomLogoExample
+  - uid: Argotic.Examples.AtomPersonConstructExample
+    name: AtomPersonConstructExample
+  - uid: Argotic.Examples.AtomSourceExample
+    name: AtomSourceExample
+  - uid: Argotic.Examples.AtomTextConstructExample
+    name: AtomTextConstructExample
+  - uid: Argotic.Examples.BasicGeocodingSyndicationExtensionExample
+    name: BasicGeocodingSyndicationExtensionExample
+  - uid: Argotic.Examples.BlogChannelSyndicationExtensionExample
+    name: BlogChannelSyndicationExtensionExample
+  - uid: Argotic.Examples.BlogMLDocumentExample
+    name: BlogMLDocumentExample
+  - uid: Argotic.Examples.BlogMLPostExample
+    name: BlogMLPostExample
+  - uid: Argotic.Examples.BlogMLTextConstructExample
+    name: BlogMLTextConstructExample
+  - uid: Argotic.Examples.CreativeCommonsSyndicationExtensionExample
+    name: CreativeCommonsSyndicationExtensionExample
+  - uid: Argotic.Examples.DublinCoreElementSetSyndicationExtensionExample
+    name: DublinCoreElementSetSyndicationExtensionExample
+  - uid: Argotic.Examples.DublinCoreMetadataTermsSyndicationExtensionExample
+    name: DublinCoreMetadataTermsSyndicationExtensionExample
+  - uid: Argotic.Examples.FeedHistorySyndicationExtensionExample
+    name: FeedHistorySyndicationExtensionExample
+  - uid: Argotic.Examples.FeedRankSyndicationExtensionExample
+    name: FeedRankSyndicationExtensionExample
+  - uid: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample
+    name: FeedSynchronizationSyndicationExtensionExample
+  - uid: Argotic.Examples.GenericSyndicationFeedExample
+    name: GenericSyndicationFeedExample
+  - uid: Argotic.Examples.ITunesSyndicationExtensionExample
+    name: ITunesSyndicationExtensionExample
+  - uid: Argotic.Examples.LiveJournalSyndicationExtensionExample
+    name: LiveJournalSyndicationExtensionExample
+  - uid: Argotic.Examples.MyCustomRssFeed
+    name: MyCustomRssFeed
+  - uid: Argotic.Examples.MyCustomSyndicationExtension
+    name: MyCustomSyndicationExtension
+  - uid: Argotic.Examples.OpmlDocumentExample
+    name: OpmlDocumentExample
+  - uid: Argotic.Examples.OpmlOutlineExample
+    name: OpmlOutlineExample
+  - uid: Argotic.Examples.PheedSyndicationExtensionExample
+    name: PheedSyndicationExtensionExample
+  - uid: Argotic.Examples.PingbackSyndicationExtensionExample
+    name: PingbackSyndicationExtensionExample
+  - uid: Argotic.Examples.RsdApplicationInterfaceExample
+    name: RsdApplicationInterfaceExample
+  - uid: Argotic.Examples.RsdDocumentExample
+    name: RsdDocumentExample
+  - uid: Argotic.Examples.RssCategoryExample
+    name: RssCategoryExample
+  - uid: Argotic.Examples.RssChannelExample
+    name: RssChannelExample
+  - uid: Argotic.Examples.RssCloudExample
+    name: RssCloudExample
+  - uid: Argotic.Examples.RssEnclosureExample
+    name: RssEnclosureExample
+  - uid: Argotic.Examples.RssFeedExample
+    name: RssFeedExample
+  - uid: Argotic.Examples.RssGuidExample
+    name: RssGuidExample
+  - uid: Argotic.Examples.RssImageExample
+    name: RssImageExample
+  - uid: Argotic.Examples.RssItemExample
+    name: RssItemExample
+  - uid: Argotic.Examples.RssSourceExample
+    name: RssSourceExample
+  - uid: Argotic.Examples.RssTextInputExample
+    name: RssTextInputExample
+  - uid: Argotic.Examples.SimpleListSyndicationExtensionExample
+    name: SimpleListSyndicationExtensionExample
+  - uid: Argotic.Examples.SiteSummaryContentSyndicationExtensionExample
+    name: SiteSummaryContentSyndicationExtensionExample
+  - uid: Argotic.Examples.SiteSummarySlashSyndicationExtensionExample
+    name: SiteSummarySlashSyndicationExtensionExample
+  - uid: Argotic.Examples.SiteSummaryUpdateSyndicationExtensionExample
+    name: SiteSummaryUpdateSyndicationExtensionExample
+  - uid: Argotic.Examples.SyndicationDiscoveryUtilityExample
+    name: SyndicationDiscoveryUtilityExample
+  - uid: Argotic.Examples.TrackbackClientExample
+    name: TrackbackClientExample
+  - uid: Argotic.Examples.TrackbackSyndicationExtensionExample
+    name: TrackbackSyndicationExtensionExample
+  - uid: Argotic.Examples.WellFormedWebCommentsSyndicationExtensionExample
+    name: WellFormedWebCommentsSyndicationExtensionExample
+  - uid: Argotic.Examples.XmlRpcClientExample
+    name: XmlRpcClientExample
+  - uid: Argotic.Examples.YahooMediaSyndicationExtensionExample
+    name: YahooMediaSyndicationExtensionExample
+- uid: Argotic.Extensions
+  name: Argotic.Extensions
+  items:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject
+    name: IExtensibleSyndicationObject
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+  - uid: Argotic.Extensions.SyndicationExtension
+    name: SyndicationExtension
+  - uid: Argotic.Extensions.SyndicationExtensionAdapter
+    name: SyndicationExtensionAdapter
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+- uid: Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  items:
+  - uid: Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+    name: AtomPublishingControlSyndicationExtension
+  - uid: Argotic.Extensions.Core.AtomPublishingControlSyndicationExtensionContext
+    name: AtomPublishingControlSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+    name: AtomPublishingEditedSyndicationExtension
+  - uid: Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtensionContext
+    name: AtomPublishingEditedSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtension
+    name: BasicGeocodingSyndicationExtension
+  - uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+    name: BasicGeocodingSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.BlogChannelSyndicationExtension
+    name: BlogChannelSyndicationExtension
+  - uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+    name: BlogChannelSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+    name: CreativeCommonsSyndicationExtension
+  - uid: Argotic.Extensions.Core.CreativeCommonsSyndicationExtensionContext
+    name: CreativeCommonsSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+    name: DublinCoreElementSetSyndicationExtension
+  - uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+    name: DublinCoreElementSetSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+    name: DublinCoreMetadataTermsSyndicationExtension
+  - uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+    name: DublinCoreMetadataTermsSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+    name: DublinCoreTypeVocabularies
+  - uid: Argotic.Extensions.Core.FeedHistoryLinkRelation
+    name: FeedHistoryLinkRelation
+  - uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+    name: FeedHistoryLinkRelationType
+  - uid: Argotic.Extensions.Core.FeedHistorySyndicationExtension
+    name: FeedHistorySyndicationExtension
+  - uid: Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext
+    name: FeedHistorySyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.FeedRankSyndicationExtension
+    name: FeedRankSyndicationExtension
+  - uid: Argotic.Extensions.Core.FeedRankSyndicationExtensionContext
+    name: FeedRankSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+    name: FeedSynchronizationConflictPreservationDirective
+  - uid: Argotic.Extensions.Core.FeedSynchronizationHistory
+    name: FeedSynchronizationHistory
+  - uid: Argotic.Extensions.Core.FeedSynchronizationItem
+    name: FeedSynchronizationItem
+  - uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+    name: FeedSynchronizationRelatedInformation
+  - uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+    name: FeedSynchronizationRelatedInformationType
+  - uid: Argotic.Extensions.Core.FeedSynchronizationSharingInformation
+    name: FeedSynchronizationSharingInformation
+  - uid: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension
+    name: FeedSynchronizationSyndicationExtension
+  - uid: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+    name: FeedSynchronizationSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+    name: FeedSynchronizationTombstoneStatus
+  - uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+    name: IAtomPublishingCommonObjectAttributes
+  - uid: Argotic.Extensions.Core.ITunesCategory
+    name: ITunesCategory
+  - uid: Argotic.Extensions.Core.ITunesExplicitMaterial
+    name: ITunesExplicitMaterial
+  - uid: Argotic.Extensions.Core.ITunesOwner
+    name: ITunesOwner
+  - uid: Argotic.Extensions.Core.ITunesSyndicationExtension
+    name: ITunesSyndicationExtension
+  - uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+    name: ITunesSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+    name: IYahooMediaCommonObjectEntities
+  - uid: Argotic.Extensions.Core.LiveJournalMood
+    name: LiveJournalMood
+  - uid: Argotic.Extensions.Core.LiveJournalSecurity
+    name: LiveJournalSecurity
+  - uid: Argotic.Extensions.Core.LiveJournalSecurityType
+    name: LiveJournalSecurityType
+  - uid: Argotic.Extensions.Core.LiveJournalSyndicationExtension
+    name: LiveJournalSyndicationExtension
+  - uid: Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext
+    name: LiveJournalSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.LiveJournalUserPicture
+    name: LiveJournalUserPicture
+  - uid: Argotic.Extensions.Core.PheedSyndicationExtension
+    name: PheedSyndicationExtension
+  - uid: Argotic.Extensions.Core.PheedSyndicationExtensionContext
+    name: PheedSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.PingbackSyndicationExtension
+    name: PingbackSyndicationExtension
+  - uid: Argotic.Extensions.Core.PingbackSyndicationExtensionContext
+    name: PingbackSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.SimpleListDataType
+    name: SimpleListDataType
+  - uid: Argotic.Extensions.Core.SimpleListGroup
+    name: SimpleListGroup
+  - uid: Argotic.Extensions.Core.SimpleListSort
+    name: SimpleListSort
+  - uid: Argotic.Extensions.Core.SimpleListSyndicationExtension
+    name: SimpleListSyndicationExtension
+  - uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+    name: SimpleListSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.SiteSummaryContentItem
+    name: SiteSummaryContentItem
+  - uid: Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension
+    name: SiteSummaryContentSyndicationExtension
+  - uid: Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext
+    name: SiteSummaryContentSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension
+    name: SiteSummarySlashSyndicationExtension
+  - uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+    name: SiteSummarySlashSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+    name: SiteSummaryUpdatePeriod
+  - uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+    name: SiteSummaryUpdateSyndicationExtension
+  - uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+    name: SiteSummaryUpdateSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.TrackbackSyndicationExtension
+    name: TrackbackSyndicationExtension
+  - uid: Argotic.Extensions.Core.TrackbackSyndicationExtensionContext
+    name: TrackbackSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtension
+    name: WellFormedWebCommentsSyndicationExtension
+  - uid: Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtensionContext
+    name: WellFormedWebCommentsSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.YahooMediaCategory
+    name: YahooMediaCategory
+  - uid: Argotic.Extensions.Core.YahooMediaContent
+    name: YahooMediaContent
+  - uid: Argotic.Extensions.Core.YahooMediaCopyright
+    name: YahooMediaCopyright
+  - uid: Argotic.Extensions.Core.YahooMediaCredit
+    name: YahooMediaCredit
+  - uid: Argotic.Extensions.Core.YahooMediaExpression
+    name: YahooMediaExpression
+  - uid: Argotic.Extensions.Core.YahooMediaGroup
+    name: YahooMediaGroup
+  - uid: Argotic.Extensions.Core.YahooMediaHash
+    name: YahooMediaHash
+  - uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+    name: YahooMediaHashAlgorithm
+  - uid: Argotic.Extensions.Core.YahooMediaMedium
+    name: YahooMediaMedium
+  - uid: Argotic.Extensions.Core.YahooMediaPlayer
+    name: YahooMediaPlayer
+  - uid: Argotic.Extensions.Core.YahooMediaRating
+    name: YahooMediaRating
+  - uid: Argotic.Extensions.Core.YahooMediaRestriction
+    name: YahooMediaRestriction
+  - uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+    name: YahooMediaRestrictionRelationship
+  - uid: Argotic.Extensions.Core.YahooMediaRestrictionType
+    name: YahooMediaRestrictionType
+  - uid: Argotic.Extensions.Core.YahooMediaSyndicationExtension
+    name: YahooMediaSyndicationExtension
+  - uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+    name: YahooMediaSyndicationExtensionContext
+  - uid: Argotic.Extensions.Core.YahooMediaText
+    name: YahooMediaText
+  - uid: Argotic.Extensions.Core.YahooMediaTextConstruct
+    name: YahooMediaTextConstruct
+  - uid: Argotic.Extensions.Core.YahooMediaTextConstructType
+    name: YahooMediaTextConstructType
+  - uid: Argotic.Extensions.Core.YahooMediaThumbnail
+    name: YahooMediaThumbnail
+- uid: Argotic.Net
+  name: Argotic.Net
+  items:
+  - uid: Argotic.Net.IXmlRpcValue
+    name: IXmlRpcValue
+  - uid: Argotic.Net.TrackbackClient
+    name: TrackbackClient
+  - uid: Argotic.Net.TrackbackMessage
+    name: TrackbackMessage
+  - uid: Argotic.Net.TrackbackMessageSentEventArgs
+    name: TrackbackMessageSentEventArgs
+  - uid: Argotic.Net.TrackbackResponse
+    name: TrackbackResponse
+  - uid: Argotic.Net.WebContentType
+    name: WebContentType
+  - uid: Argotic.Net.XmlRpcArrayValue
+    name: XmlRpcArrayValue
+  - uid: Argotic.Net.XmlRpcClient
+    name: XmlRpcClient
+  - uid: Argotic.Net.XmlRpcMessage
+    name: XmlRpcMessage
+  - uid: Argotic.Net.XmlRpcMessageSentEventArgs
+    name: XmlRpcMessageSentEventArgs
+  - uid: Argotic.Net.XmlRpcResponse
+    name: XmlRpcResponse
+  - uid: Argotic.Net.XmlRpcScalarValue
+    name: XmlRpcScalarValue
+  - uid: Argotic.Net.XmlRpcScalarValueType
+    name: XmlRpcScalarValueType
+  - uid: Argotic.Net.XmlRpcStructureMember
+    name: XmlRpcStructureMember
+  - uid: Argotic.Net.XmlRpcStructureValue
+    name: XmlRpcStructureValue
+- uid: Argotic.Publishing
+  name: Argotic.Publishing
+  items:
+  - uid: Argotic.Publishing.AtomAcceptedMediaRange
+    name: AtomAcceptedMediaRange
+  - uid: Argotic.Publishing.AtomCategoryDocument
+    name: AtomCategoryDocument
+  - uid: Argotic.Publishing.AtomEntryResource
+    name: AtomEntryResource
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+  - uid: Argotic.Publishing.AtomServiceDocument
+    name: AtomServiceDocument
+  - uid: Argotic.Publishing.AtomWorkspace
+    name: AtomWorkspace
+- uid: Argotic.Syndication
+  name: Argotic.Syndication
+  items:
+  - uid: Argotic.Syndication.AtomCategory
+    name: AtomCategory
+  - uid: Argotic.Syndication.AtomContent
+    name: AtomContent
+  - uid: Argotic.Syndication.AtomEntry
+    name: AtomEntry
+  - uid: Argotic.Syndication.AtomFeed
+    name: AtomFeed
+  - uid: Argotic.Syndication.AtomGenerator
+    name: AtomGenerator
+  - uid: Argotic.Syndication.AtomIcon
+    name: AtomIcon
+  - uid: Argotic.Syndication.AtomId
+    name: AtomId
+  - uid: Argotic.Syndication.AtomLink
+    name: AtomLink
+  - uid: Argotic.Syndication.AtomLogo
+    name: AtomLogo
+  - uid: Argotic.Syndication.AtomPersonConstruct
+    name: AtomPersonConstruct
+  - uid: Argotic.Syndication.AtomSource
+    name: AtomSource
+  - uid: Argotic.Syndication.AtomTextConstruct
+    name: AtomTextConstruct
+  - uid: Argotic.Syndication.AtomTextConstructType
+    name: AtomTextConstructType
+  - uid: Argotic.Syndication.GenericSyndicationCategory
+    name: GenericSyndicationCategory
+  - uid: Argotic.Syndication.GenericSyndicationFeed
+    name: GenericSyndicationFeed
+  - uid: Argotic.Syndication.GenericSyndicationItem
+    name: GenericSyndicationItem
+  - uid: Argotic.Syndication.IAtomCommonObjectAttributes
+    name: IAtomCommonObjectAttributes
+  - uid: Argotic.Syndication.OpmlDocument
+    name: OpmlDocument
+  - uid: Argotic.Syndication.OpmlHead
+    name: OpmlHead
+  - uid: Argotic.Syndication.OpmlOutline
+    name: OpmlOutline
+  - uid: Argotic.Syndication.OpmlOwner
+    name: OpmlOwner
+  - uid: Argotic.Syndication.OpmlWindow
+    name: OpmlWindow
+  - uid: Argotic.Syndication.RssCategory
+    name: RssCategory
+  - uid: Argotic.Syndication.RssChannel
+    name: RssChannel
+  - uid: Argotic.Syndication.RssCloud
+    name: RssCloud
+  - uid: Argotic.Syndication.RssCloudProtocol
+    name: RssCloudProtocol
+  - uid: Argotic.Syndication.RssEnclosure
+    name: RssEnclosure
+  - uid: Argotic.Syndication.RssFeed
+    name: RssFeed
+  - uid: Argotic.Syndication.RssGuid
+    name: RssGuid
+  - uid: Argotic.Syndication.RssImage
+    name: RssImage
+  - uid: Argotic.Syndication.RssItem
+    name: RssItem
+  - uid: Argotic.Syndication.RssSource
+    name: RssSource
+  - uid: Argotic.Syndication.RssTextInput
+    name: RssTextInput
+- uid: Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  items:
+  - uid: Argotic.Syndication.Specialized.ApmlApplication
+    name: ApmlApplication
+  - uid: Argotic.Syndication.Specialized.ApmlAuthor
+    name: ApmlAuthor
+  - uid: Argotic.Syndication.Specialized.ApmlConcept
+    name: ApmlConcept
+  - uid: Argotic.Syndication.Specialized.ApmlDocument
+    name: ApmlDocument
+  - uid: Argotic.Syndication.Specialized.ApmlHead
+    name: ApmlHead
+  - uid: Argotic.Syndication.Specialized.ApmlProfile
+    name: ApmlProfile
+  - uid: Argotic.Syndication.Specialized.ApmlSource
+    name: ApmlSource
+  - uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+    name: BlogMLApprovalStatus
+  - uid: Argotic.Syndication.Specialized.BlogMLAttachment
+    name: BlogMLAttachment
+  - uid: Argotic.Syndication.Specialized.BlogMLAuthor
+    name: BlogMLAuthor
+  - uid: Argotic.Syndication.Specialized.BlogMLCategory
+    name: BlogMLCategory
+  - uid: Argotic.Syndication.Specialized.BlogMLComment
+    name: BlogMLComment
+  - uid: Argotic.Syndication.Specialized.BlogMLContentType
+    name: BlogMLContentType
+  - uid: Argotic.Syndication.Specialized.BlogMLDocument
+    name: BlogMLDocument
+  - uid: Argotic.Syndication.Specialized.BlogMLPost
+    name: BlogMLPost
+  - uid: Argotic.Syndication.Specialized.BlogMLPostType
+    name: BlogMLPostType
+  - uid: Argotic.Syndication.Specialized.BlogMLTextConstruct
+    name: BlogMLTextConstruct
+  - uid: Argotic.Syndication.Specialized.BlogMLTrackback
+    name: BlogMLTrackback
+  - uid: Argotic.Syndication.Specialized.IBlogMLCommonObject
+    name: IBlogMLCommonObject
+  - uid: Argotic.Syndication.Specialized.RsdApplicationInterface
+    name: RsdApplicationInterface
+  - uid: Argotic.Syndication.Specialized.RsdDocument
+    name: RsdDocument

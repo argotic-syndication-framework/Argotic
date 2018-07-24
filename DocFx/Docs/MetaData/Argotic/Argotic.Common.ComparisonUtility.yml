@@ -1,0 +1,1295 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.ComparisonUtility
+  commentId: T:Argotic.Common.ComparisonUtility
+  id: ComparisonUtility
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.StringComparison)
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.DayOfWeek},System.Collections.ObjectModel.Collection{System.DayOfWeek})
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int32},System.Collections.ObjectModel.Collection{System.Int32})
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int64},System.Collections.ObjectModel.Collection{System.Int64})
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.StringComparison)
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Type},System.Collections.ObjectModel.Collection{System.Type})
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Uri},System.Collections.ObjectModel.Collection{System.Uri},System.StringComparison)
+  - Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator},System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator})
+  langs:
+  - csharp
+  - vb
+  name: ComparisonUtility
+  nameWithType: ComparisonUtility
+  fullName: Argotic.Common.ComparisonUtility
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ComparisonUtility
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 13
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nProvides methods for performing logical comparison operations. This class cannot be inherited.\n"
+  remarks: "\nPrimary used within this framework to determine the lexical relationship between generic collections.\n"
+  example: []
+  syntax:
+    content: public static class ComparisonUtility
+    content.vb: Public Module ComparisonUtility
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.DayOfWeek},System.Collections.ObjectModel.Collection{System.DayOfWeek})
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.DayOfWeek},System.Collections.ObjectModel.Collection{System.DayOfWeek})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.DayOfWeek},System.Collections.ObjectModel.Collection{System.DayOfWeek})
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<DayOfWeek>, Collection<DayOfWeek>)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<DayOfWeek>, Collection<DayOfWeek>)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.DayOfWeek>, System.Collections.ObjectModel.Collection<System.DayOfWeek>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.DayOfWeek}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.DayOfWeek}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of DayOfWeek), target As Collection(Of DayOfWeek)) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of DayOfWeek), Collection(Of DayOfWeek))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.DayOfWeek), System.Collections.ObjectModel.Collection(Of System.DayOfWeek))
+  name.vb: CompareSequence(Collection(Of DayOfWeek), Collection(Of DayOfWeek))
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int32},System.Collections.ObjectModel.Collection{System.Int32})
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int32},System.Collections.ObjectModel.Collection{System.Int32})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.Int32},System.Collections.ObjectModel.Collection{System.Int32})
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<Int32>, Collection<Int32>)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<Int32>, Collection<Int32>)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.Int32>, System.Collections.ObjectModel.Collection<System.Int32>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 79
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<int> source, Collection<int> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.Int32}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.Int32}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of Integer), target As Collection(Of Integer)) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of Int32), Collection(Of Int32))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.Int32), System.Collections.ObjectModel.Collection(Of System.Int32))
+  name.vb: CompareSequence(Collection(Of Int32), Collection(Of Int32))
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int64},System.Collections.ObjectModel.Collection{System.Int64})
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int64},System.Collections.ObjectModel.Collection{System.Int64})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.Int64},System.Collections.ObjectModel.Collection{System.Int64})
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<Int64>, Collection<Int64>)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<Int64>, Collection<Int64>)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.Int64>, System.Collections.ObjectModel.Collection<System.Int64>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 124
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<long> source, Collection<long> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.Int64}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.Int64}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of Long), target As Collection(Of Long)) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of Int64), Collection(Of Int64))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.Int64), System.Collections.ObjectModel.Collection(Of System.Int64))
+  name.vb: CompareSequence(Collection(Of Int64), Collection(Of Int64))
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.StringComparison)
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.StringComparison)
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.StringComparison)
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<String>, Collection<String>, StringComparison)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<String>, Collection<String>, StringComparison)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.String>, System.Collections.ObjectModel.Collection<System.String>, System.StringComparison)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 170
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: The second collection.
+    - id: comparisonType
+      type: System.StringComparison
+      description: Specifies the culture, case, and sort rules to be used when determining the lexical relationship.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of String), target As Collection(Of String), comparisonType As StringComparison) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of String), Collection(Of String), StringComparison)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.String), System.Collections.ObjectModel.Collection(Of System.String), System.StringComparison)
+  name.vb: CompareSequence(Collection(Of String), Collection(Of String), StringComparison)
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Type},System.Collections.ObjectModel.Collection{System.Type})
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Type},System.Collections.ObjectModel.Collection{System.Type})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.Type},System.Collections.ObjectModel.Collection{System.Type})
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<Type>, Collection<Type>)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<Type>, Collection<Type>)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.Type>, System.Collections.ObjectModel.Collection<System.Type>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 215
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<Type> source, Collection<Type> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.Type}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.Type}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of Type), target As Collection(Of Type)) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of Type), Collection(Of Type))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.Type), System.Collections.ObjectModel.Collection(Of System.Type))
+  name.vb: CompareSequence(Collection(Of Type), Collection(Of Type))
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Uri},System.Collections.ObjectModel.Collection{System.Uri},System.StringComparison)
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Uri},System.Collections.ObjectModel.Collection{System.Uri},System.StringComparison)
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.Uri},System.Collections.ObjectModel.Collection{System.Uri},System.StringComparison)
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<Uri>, Collection<Uri>, StringComparison)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<Uri>, Collection<Uri>, StringComparison)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.Uri>, System.Collections.ObjectModel.Collection<System.Uri>, System.StringComparison)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 261
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.Uri}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.Uri}
+      description: The second collection.
+    - id: comparisonType
+      type: System.StringComparison
+      description: Specifies the culture, case, and sort rules to be used when determining the lexical relationship.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of Uri), target As Collection(Of Uri), comparisonType As StringComparison) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of Uri), Collection(Of Uri), StringComparison)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.Uri), System.Collections.ObjectModel.Collection(Of System.Uri), System.StringComparison)
+  name.vb: CompareSequence(Collection(Of Uri), Collection(Of Uri), StringComparison)
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator},System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator})
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator},System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator},System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator})
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<XPathNavigator>, Collection<XPathNavigator>)
+  nameWithType: ComparisonUtility.CompareSequence(Collection<XPathNavigator>, Collection<XPathNavigator>)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection<System.Xml.XPath.XPathNavigator>, System.Collections.ObjectModel.Collection<System.Xml.XPath.XPathNavigator>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 306
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<XPathNavigator> source, Collection<XPathNavigator> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of XPathNavigator), target As Collection(Of XPathNavigator)) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Collection(Of XPathNavigator), Collection(Of XPathNavigator))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection(Of System.Xml.XPath.XPathNavigator), System.Collections.ObjectModel.Collection(Of System.Xml.XPath.XPathNavigator))
+  name.vb: CompareSequence(Collection(Of XPathNavigator), Collection(Of XPathNavigator))
+- uid: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.StringComparison)
+  commentId: M:Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.StringComparison)
+  id: CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.StringComparison)
+  parent: Argotic.Common.ComparisonUtility
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Dictionary<String, String>, Dictionary<String, String>, StringComparison)
+  nameWithType: ComparisonUtility.CompareSequence(Dictionary<String, String>, Dictionary<String, String>, StringComparison)
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.String>, System.StringComparison)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/ComparisonUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Common/ComparisonUtility.cs
+    startLine: 352
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares two specified generic dictionaries.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target, StringComparison comparisonType)
+    parameters:
+    - id: source
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: The first collection.
+    - id: target
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: The second collection.
+    - id: comparisonType
+      type: System.StringComparison
+      description: Specifies the culture, case, and sort rules to be used when determining the lexical relationship.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Dictionary(Of String, String), target As Dictionary(Of String, String), comparisonType As StringComparison) As Integer
+  overload: Argotic.Common.ComparisonUtility.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: ComparisonUtility.CompareSequence(Dictionary(Of String, String), Dictionary(Of String, String), StringComparison)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.String), System.StringComparison)
+  name.vb: CompareSequence(Dictionary(Of String, String), Dictionary(Of String, String), StringComparison)
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Common.ComparisonUtility.CompareSequence*
+  commentId: Overload:Argotic.Common.ComparisonUtility.CompareSequence
+  name: CompareSequence
+  nameWithType: ComparisonUtility.CompareSequence
+  fullName: Argotic.Common.ComparisonUtility.CompareSequence
+- uid: System.Collections.ObjectModel.Collection{System.DayOfWeek}
+  commentId: T:System.Collections.ObjectModel.Collection{System.DayOfWeek}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<DayOfWeek>
+  nameWithType: Collection<DayOfWeek>
+  fullName: System.Collections.ObjectModel.Collection<System.DayOfWeek>
+  nameWithType.vb: Collection(Of DayOfWeek)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.DayOfWeek)
+  name.vb: Collection(Of DayOfWeek)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.DayOfWeek
+    name: DayOfWeek
+    nameWithType: DayOfWeek
+    fullName: System.DayOfWeek
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.DayOfWeek
+    name: DayOfWeek
+    nameWithType: DayOfWeek
+    fullName: System.DayOfWeek
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: System.Collections.ObjectModel.Collection{System.Int32}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Int32}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Int32>
+  nameWithType: Collection<Int32>
+  fullName: System.Collections.ObjectModel.Collection<System.Int32>
+  nameWithType.vb: Collection(Of Int32)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Int32)
+  name.vb: Collection(Of Int32)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection{System.Int64}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Int64}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Int64>
+  nameWithType: Collection<Int64>
+  fullName: System.Collections.ObjectModel.Collection<System.Int64>
+  nameWithType.vb: Collection(Of Int64)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Int64)
+  name.vb: Collection(Of Int64)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.StringComparison
+  commentId: T:System.StringComparison
+  parent: System
+  isExternal: true
+  name: StringComparison
+  nameWithType: StringComparison
+  fullName: System.StringComparison
+- uid: System.Collections.ObjectModel.Collection{System.Type}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Type}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Type>
+  nameWithType: Collection<Type>
+  fullName: System.Collections.ObjectModel.Collection<System.Type>
+  nameWithType.vb: Collection(Of Type)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Type)
+  name.vb: Collection(Of Type)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection{System.Uri}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Uri}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Uri>
+  nameWithType: Collection<Uri>
+  fullName: System.Collections.ObjectModel.Collection<System.Uri>
+  nameWithType.vb: Collection(Of Uri)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Uri)
+  name.vb: Collection(Of Uri)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<XPathNavigator>
+  nameWithType: Collection<XPathNavigator>
+  fullName: System.Collections.ObjectModel.Collection<System.Xml.XPath.XPathNavigator>
+  nameWithType.vb: Collection(Of XPathNavigator)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Xml.XPath.XPathNavigator)
+  name.vb: Collection(Of XPathNavigator)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic

@@ -1,0 +1,1120 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.GenericSyndicationCategory
+  commentId: T:Argotic.Syndication.GenericSyndicationCategory
+  id: GenericSyndicationCategory
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.AtomCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.RssCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String)
+  - Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String,System.String)
+  - Argotic.Syndication.GenericSyndicationCategory.CompareTo(System.Object)
+  - Argotic.Syndication.GenericSyndicationCategory.Equals(System.Object)
+  - Argotic.Syndication.GenericSyndicationCategory.GetHashCode
+  - Argotic.Syndication.GenericSyndicationCategory.op_Equality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.op_Inequality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.op_LessThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  - Argotic.Syndication.GenericSyndicationCategory.Scheme
+  - Argotic.Syndication.GenericSyndicationCategory.Term
+  - Argotic.Syndication.GenericSyndicationCategory.ToString
+  langs:
+  - csharp
+  - vb
+  name: GenericSyndicationCategory
+  nameWithType: GenericSyndicationCategory
+  fullName: Argotic.Syndication.GenericSyndicationCategory
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GenericSyndicationCategory
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents a format agnostic view of a syndication category.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class GenericSyndicationCategory : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class GenericSyndicationCategory
+
+          Implements IComparable
+  seealso:
+  - linkId: Argotic.Syndication.GenericSyndicationFeed.Categories
+    commentId: P:Argotic.Syndication.GenericSyndicationFeed.Categories
+  - linkId: Argotic.Syndication.GenericSyndicationItem.Categories
+    commentId: P:Argotic.Syndication.GenericSyndicationItem.Categories
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GenericSyndicationCategory(String)
+  nameWithType: GenericSyndicationCategory.GenericSyndicationCategory(String)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GenericSyndicationCategory(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 30
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.GenericSyndicationCategory\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied term.\n"
+  example: []
+  syntax:
+    content: public GenericSyndicationCategory(string term)
+    parameters:
+    - id: term
+      type: System.String
+      description: A string that identifies the category.
+    content.vb: Public Sub New(term As String)
+  overload: Argotic.Syndication.GenericSyndicationCategory.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">term</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">term</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String,System.String)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.#ctor(System.String,System.String)
+  id: '#ctor(System.String,System.String)'
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GenericSyndicationCategory(String, String)
+  nameWithType: GenericSyndicationCategory.GenericSyndicationCategory(String, String)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GenericSyndicationCategory(System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 43
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.GenericSyndicationCategory\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied term and scheme.\n"
+  example: []
+  syntax:
+    content: public GenericSyndicationCategory(string term, string scheme)
+    parameters:
+    - id: term
+      type: System.String
+      description: A string that identifies this category.
+    - id: scheme
+      type: System.String
+      description: A string that identifies the categorization scheme used by this category.
+    content.vb: Public Sub New(term As String, scheme As String)
+  overload: Argotic.Syndication.GenericSyndicationCategory.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">term</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">term</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.AtomCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.AtomCategory)
+  id: '#ctor(Argotic.Syndication.AtomCategory)'
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GenericSyndicationCategory(AtomCategory)
+  nameWithType: GenericSyndicationCategory.GenericSyndicationCategory(AtomCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GenericSyndicationCategory(Argotic.Syndication.AtomCategory)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 54
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.GenericSyndicationCategory\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomCategory\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public GenericSyndicationCategory(AtomCategory category)
+    parameters:
+    - id: category
+      type: Argotic.Syndication.AtomCategory
+      description: The <xref href="Argotic.Syndication.AtomCategory" data-throw-if-not-resolved="false"></xref> to build an abstraction against.
+    content.vb: Public Sub New(category As AtomCategory)
+  overload: Argotic.Syndication.GenericSyndicationCategory.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">category</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.RssCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.#ctor(Argotic.Syndication.RssCategory)
+  id: '#ctor(Argotic.Syndication.RssCategory)'
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GenericSyndicationCategory(RssCategory)
+  nameWithType: GenericSyndicationCategory.GenericSyndicationCategory(RssCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GenericSyndicationCategory(Argotic.Syndication.RssCategory)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 78
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.GenericSyndicationCategory\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.RssCategory\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public GenericSyndicationCategory(RssCategory category)
+    parameters:
+    - id: category
+      type: Argotic.Syndication.RssCategory
+      description: The <xref href="Argotic.Syndication.RssCategory" data-throw-if-not-resolved="false"></xref> to build an abstraction against.
+    content.vb: Public Sub New(category As RssCategory)
+  overload: Argotic.Syndication.GenericSyndicationCategory.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">category</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.GenericSyndicationCategory.Scheme
+  commentId: P:Argotic.Syndication.GenericSyndicationCategory.Scheme
+  id: Scheme
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: Scheme
+  nameWithType: GenericSyndicationCategory.Scheme
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Scheme
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Scheme
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 96
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a string that identifies the categorization scheme.\n"
+  example: []
+  syntax:
+    content: public string Scheme { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: A string that identifies the categorization scheme used by this category.
+    content.vb: Public ReadOnly Property Scheme As String
+  overload: Argotic.Syndication.GenericSyndicationCategory.Scheme*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.GenericSyndicationCategory.Term
+  commentId: P:Argotic.Syndication.GenericSyndicationCategory.Term
+  id: Term
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: Term
+  nameWithType: GenericSyndicationCategory.Term
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Term
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Term
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 108
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a string that identifies the category.\n"
+  example: []
+  syntax:
+    content: public string Term { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: A string that identifies the category.
+    content.vb: Public ReadOnly Property Term As String
+  overload: Argotic.Syndication.GenericSyndicationCategory.Term*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_Equality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.op_Equality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  id: op_Equality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: Equality(GenericSyndicationCategory, GenericSyndicationCategory)
+  nameWithType: GenericSyndicationCategory.Equality(GenericSyndicationCategory, GenericSyndicationCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Equality(Argotic.Syndication.GenericSyndicationCategory, Argotic.Syndication.GenericSyndicationCategory)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 122
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(GenericSyndicationCategory first, GenericSyndicationCategory second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As GenericSyndicationCategory, second As GenericSyndicationCategory) As Boolean
+  overload: Argotic.Syndication.GenericSyndicationCategory.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  id: op_GreaterThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(GenericSyndicationCategory, GenericSyndicationCategory)
+  nameWithType: GenericSyndicationCategory.GreaterThan(GenericSyndicationCategory, GenericSyndicationCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GreaterThan(Argotic.Syndication.GenericSyndicationCategory, Argotic.Syndication.GenericSyndicationCategory)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 143
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(GenericSyndicationCategory first, GenericSyndicationCategory second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As GenericSyndicationCategory, second As GenericSyndicationCategory) As Boolean
+  overload: Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_Inequality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.op_Inequality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  id: op_Inequality(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: Inequality(GenericSyndicationCategory, GenericSyndicationCategory)
+  nameWithType: GenericSyndicationCategory.Inequality(GenericSyndicationCategory, GenericSyndicationCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Inequality(Argotic.Syndication.GenericSyndicationCategory, Argotic.Syndication.GenericSyndicationCategory)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 164
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(GenericSyndicationCategory first, GenericSyndicationCategory second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As GenericSyndicationCategory, second As GenericSyndicationCategory) As Boolean
+  overload: Argotic.Syndication.GenericSyndicationCategory.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_LessThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.op_LessThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  id: op_LessThan(Argotic.Syndication.GenericSyndicationCategory,Argotic.Syndication.GenericSyndicationCategory)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: LessThan(GenericSyndicationCategory, GenericSyndicationCategory)
+  nameWithType: GenericSyndicationCategory.LessThan(GenericSyndicationCategory, GenericSyndicationCategory)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.LessThan(Argotic.Syndication.GenericSyndicationCategory, Argotic.Syndication.GenericSyndicationCategory)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 175
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(GenericSyndicationCategory first, GenericSyndicationCategory second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.GenericSyndicationCategory
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As GenericSyndicationCategory, second As GenericSyndicationCategory) As Boolean
+  overload: Argotic.Syndication.GenericSyndicationCategory.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.GenericSyndicationCategory.CompareTo(System.Object)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: GenericSyndicationCategory.CompareTo(Object)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 196
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Syndication.GenericSyndicationCategory.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.GenericSyndicationCategory.Equals(System.Object)
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: GenericSyndicationCategory.Equals(Object)
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 227
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Syndication.GenericSyndicationCategory.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.GenericSyndicationCategory.GetHashCode
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: GenericSyndicationCategory.GetHashCode()
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 241
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Syndication.GenericSyndicationCategory.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.GenericSyndicationCategory.ToString
+  commentId: M:Argotic.Syndication.GenericSyndicationCategory.ToString
+  id: ToString
+  parent: Argotic.Syndication.GenericSyndicationCategory
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: GenericSyndicationCategory.ToString()
+  fullName: Argotic.Syndication.GenericSyndicationCategory.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Syndication/GenericSyndicationCategory.cs
+    startLine: 255
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Syndication.GenericSyndicationCategory\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns a human-readable representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Syndication.GenericSyndicationCategory" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Syndication.GenericSyndicationCategory.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Syndication.GenericSyndicationFeed.Categories
+  commentId: P:Argotic.Syndication.GenericSyndicationFeed.Categories
+  isExternal: true
+- uid: Argotic.Syndication.GenericSyndicationItem.Categories
+  commentId: P:Argotic.Syndication.GenericSyndicationItem.Categories
+  isExternal: true
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Syndication.GenericSyndicationCategory
+  commentId: T:Argotic.Syndication.GenericSyndicationCategory
+  parent: Argotic.Syndication
+  name: GenericSyndicationCategory
+  nameWithType: GenericSyndicationCategory
+  fullName: Argotic.Syndication.GenericSyndicationCategory
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Syndication.GenericSyndicationCategory.#ctor*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.#ctor
+  name: GenericSyndicationCategory
+  nameWithType: GenericSyndicationCategory.GenericSyndicationCategory
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GenericSyndicationCategory
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Syndication.AtomCategory
+  commentId: T:Argotic.Syndication.AtomCategory
+  parent: Argotic.Syndication
+  name: AtomCategory
+  nameWithType: AtomCategory
+  fullName: Argotic.Syndication.AtomCategory
+- uid: Argotic.Syndication.RssCategory
+  commentId: T:Argotic.Syndication.RssCategory
+  parent: Argotic.Syndication
+  name: RssCategory
+  nameWithType: RssCategory
+  fullName: Argotic.Syndication.RssCategory
+- uid: Argotic.Syndication.GenericSyndicationCategory.Scheme*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.Scheme
+  name: Scheme
+  nameWithType: GenericSyndicationCategory.Scheme
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Scheme
+- uid: Argotic.Syndication.GenericSyndicationCategory.Term*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.Term
+  name: Term
+  nameWithType: GenericSyndicationCategory.Term
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Term
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_Equality*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.op_Equality
+  name: Equality
+  nameWithType: GenericSyndicationCategory.Equality
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.op_GreaterThan
+  name: GreaterThan
+  nameWithType: GenericSyndicationCategory.GreaterThan
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GreaterThan
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_Inequality*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.op_Inequality
+  name: Inequality
+  nameWithType: GenericSyndicationCategory.Inequality
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Inequality
+- uid: Argotic.Syndication.GenericSyndicationCategory.op_LessThan*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.op_LessThan
+  name: LessThan
+  nameWithType: GenericSyndicationCategory.LessThan
+  fullName: Argotic.Syndication.GenericSyndicationCategory.LessThan
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Syndication.GenericSyndicationCategory.CompareTo*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.CompareTo
+  name: CompareTo
+  nameWithType: GenericSyndicationCategory.CompareTo
+  fullName: Argotic.Syndication.GenericSyndicationCategory.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.GenericSyndicationCategory.Equals*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.Equals
+  name: Equals
+  nameWithType: GenericSyndicationCategory.Equals
+  fullName: Argotic.Syndication.GenericSyndicationCategory.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.GenericSyndicationCategory.GetHashCode*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.GetHashCode
+  name: GetHashCode
+  nameWithType: GenericSyndicationCategory.GetHashCode
+  fullName: Argotic.Syndication.GenericSyndicationCategory.GetHashCode
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.GenericSyndicationCategory.ToString*
+  commentId: Overload:Argotic.Syndication.GenericSyndicationCategory.ToString
+  name: ToString
+  nameWithType: GenericSyndicationCategory.ToString
+  fullName: Argotic.Syndication.GenericSyndicationCategory.ToString

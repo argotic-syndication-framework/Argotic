@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Publishing
+  commentId: N:Argotic.Publishing
+  id: Argotic.Publishing
+  children:
+  - Argotic.Publishing.AtomAcceptedMediaRange
+  - Argotic.Publishing.AtomCategoryDocument
+  - Argotic.Publishing.AtomEntryResource
+  - Argotic.Publishing.AtomMemberResources
+  - Argotic.Publishing.AtomServiceDocument
+  - Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Argotic.Publishing
+  nameWithType: Argotic.Publishing
+  fullName: Argotic.Publishing
+  type: Namespace
+  assemblies:
+  - Argotic.Core
+references:
+- uid: Argotic.Publishing.AtomAcceptedMediaRange
+  commentId: T:Argotic.Publishing.AtomAcceptedMediaRange
+  parent: Argotic.Publishing
+  name: AtomAcceptedMediaRange
+  nameWithType: AtomAcceptedMediaRange
+  fullName: Argotic.Publishing.AtomAcceptedMediaRange
+- uid: Argotic.Publishing.AtomCategoryDocument
+  commentId: T:Argotic.Publishing.AtomCategoryDocument
+  parent: Argotic.Publishing
+  name: AtomCategoryDocument
+  nameWithType: AtomCategoryDocument
+  fullName: Argotic.Publishing.AtomCategoryDocument
+- uid: Argotic.Publishing.AtomEntryResource
+  commentId: T:Argotic.Publishing.AtomEntryResource
+  name: AtomEntryResource
+  nameWithType: AtomEntryResource
+  fullName: Argotic.Publishing.AtomEntryResource
+- uid: Argotic.Publishing.AtomMemberResources
+  commentId: T:Argotic.Publishing.AtomMemberResources
+  parent: Argotic.Publishing
+  name: AtomMemberResources
+  nameWithType: AtomMemberResources
+  fullName: Argotic.Publishing.AtomMemberResources
+- uid: Argotic.Publishing.AtomServiceDocument
+  commentId: T:Argotic.Publishing.AtomServiceDocument
+  parent: Argotic.Publishing
+  name: AtomServiceDocument
+  nameWithType: AtomServiceDocument
+  fullName: Argotic.Publishing.AtomServiceDocument
+- uid: Argotic.Publishing.AtomWorkspace
+  commentId: T:Argotic.Publishing.AtomWorkspace
+  parent: Argotic.Publishing
+  name: AtomWorkspace
+  nameWithType: AtomWorkspace
+  fullName: Argotic.Publishing.AtomWorkspace
+- uid: Argotic.Publishing
+  commentId: N:Argotic.Publishing
+  name: Argotic.Publishing
+  nameWithType: Argotic.Publishing
+  fullName: Argotic.Publishing

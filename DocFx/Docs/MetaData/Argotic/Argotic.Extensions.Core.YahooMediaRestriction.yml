@@ -1,0 +1,1446 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  id: YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaRestriction.#ctor
+  - Argotic.Extensions.Core.YahooMediaRestriction.CompareTo(System.Object)
+  - Argotic.Extensions.Core.YahooMediaRestriction.Entities
+  - Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  - Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)
+  - Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode
+  - Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.YahooMediaRestriction.op_Equality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  - Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  - Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  - Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  - Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+  - Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)
+  - Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName(System.String)
+  - Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)
+  - Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName(System.String)
+  - Argotic.Extensions.Core.YahooMediaRestriction.ToString
+  - Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaRestriction
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 19
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents a means of allowing restrictions to be placed on the aggregator rendering the media in the feed.\n"
+  remarks: "\n<p>\n    Currently, restrictions are based on <strong>distributor</strong> or <strong>country code</strong>.\n    A <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> is purely informational and no obligation can be assumed or implied.\n    Only one <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> object of the same type can be applied to a media object, all others will be ignored.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaRestriction : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaRestriction
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRestriction()
+  nameWithType: YahooMediaRestriction.YahooMediaRestriction()
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.YahooMediaRestriction()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaRestriction()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Entities
+  commentId: P:Argotic.Extensions.Core.YahooMediaRestriction.Entities
+  id: Entities
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Entities
+  nameWithType: YahooMediaRestriction.Entities
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Entities
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Entities
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the entities this restriction applies to.\n"
+  remarks: "\n<p>\n    To allow a producer to explicitly declare their intentions, two literal entity names are reserved: <strong>all</strong> and <strong>none</strong>. These literals can <u>only</u> be used once.\n</p>\n<p>\n    When the restriction <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction.EntityType\" data-throw-if-not-resolved=\"false\"></xref> is <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionType.Uri\" data-throw-if-not-resolved=\"false\"></xref> the elements in this collection should represent distributor <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    When the restriction <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction.EntityType\" data-throw-if-not-resolved=\"false\"></xref> is <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionType.Country\" data-throw-if-not-resolved=\"false\"></xref> the elements in this collection should represent country codes.\n    See <a href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm\">ISO 3166</a> for a listing of the permissible country codes.\n</p>\n"
+  example: []
+  syntax:
+    content: public Collection<string> Entities { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the entities this restriction applies to.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Entities As Collection(Of String)
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.Entities*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  commentId: P:Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  id: EntityType
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: EntityType
+  nameWithType: YahooMediaRestriction.EntityType
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: EntityType
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 80
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the type of media that this restriction applies to.\n"
+  example: []
+  syntax:
+    content: public YahooMediaRestrictionType EntityType { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaRestrictionType" data-throw-if-not-resolved="false"></xref> enumeration value that indicates the type of media that this restriction applies to.
+    content.vb: Public Property EntityType As YahooMediaRestrictionType
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.EntityType*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+  commentId: P:Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+  id: Relationship
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Relationship
+  nameWithType: YahooMediaRestriction.Relationship
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Relationship
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 97
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the type of relationship that this restriction represents.\n"
+  example: []
+  syntax:
+    content: public YahooMediaRestrictionRelationship Relationship { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaRestrictionRelationship" data-throw-if-not-resolved="false"></xref> enumeration value that indicates the type of relationship that this restriction represents.
+    content.vb: Public Property Relationship As YahooMediaRestrictionRelationship
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.Relationship*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_Equality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.op_Equality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  id: op_Equality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Equality(YahooMediaRestriction, YahooMediaRestriction)
+  nameWithType: YahooMediaRestriction.Equality(YahooMediaRestriction, YahooMediaRestriction)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Equality(Argotic.Extensions.Core.YahooMediaRestriction, Argotic.Extensions.Core.YahooMediaRestriction)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 116
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(YahooMediaRestriction first, YahooMediaRestriction second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As YahooMediaRestriction, second As YahooMediaRestriction) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  id: op_Inequality(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Inequality(YahooMediaRestriction, YahooMediaRestriction)
+  nameWithType: YahooMediaRestriction.Inequality(YahooMediaRestriction, YahooMediaRestriction)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Inequality(Argotic.Extensions.Core.YahooMediaRestriction, Argotic.Extensions.Core.YahooMediaRestriction)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 136
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(YahooMediaRestriction first, YahooMediaRestriction second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As YahooMediaRestriction, second As YahooMediaRestriction) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  id: op_LessThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: LessThan(YahooMediaRestriction, YahooMediaRestriction)
+  nameWithType: YahooMediaRestriction.LessThan(YahooMediaRestriction, YahooMediaRestriction)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.LessThan(Argotic.Extensions.Core.YahooMediaRestriction, Argotic.Extensions.Core.YahooMediaRestriction)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 147
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(YahooMediaRestriction first, YahooMediaRestriction second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As YahooMediaRestriction, second As YahooMediaRestriction) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  id: op_GreaterThan(Argotic.Extensions.Core.YahooMediaRestriction,Argotic.Extensions.Core.YahooMediaRestriction)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(YahooMediaRestriction, YahooMediaRestriction)
+  nameWithType: YahooMediaRestriction.GreaterThan(YahooMediaRestriction, YahooMediaRestriction)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.GreaterThan(Argotic.Extensions.Core.YahooMediaRestriction, Argotic.Extensions.Core.YahooMediaRestriction)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 167
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(YahooMediaRestriction first, YahooMediaRestriction second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRestriction
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As YahooMediaRestriction, second As YahooMediaRestriction) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)
+  id: RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: RelationshipAsString(YahooMediaRestrictionRelationship)
+  nameWithType: YahooMediaRestriction.RelationshipAsString(YahooMediaRestrictionRelationship)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationshipAsString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 186
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the relationship identifier for the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionRelationship\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship)
+    parameters:
+    - id: relationship
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaRestrictionRelationship" data-throw-if-not-resolved="false"></xref> to get the relationship identifier for.
+    return:
+      type: System.String
+      description: The relationship identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">relationship</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function RelationshipAsString(relationship As YahooMediaRestrictionRelationship) As String
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName(System.String)
+  id: RelationshipByName(System.String)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: RelationshipByName(String)
+  nameWithType: YahooMediaRestriction.RelationshipByName(String)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationshipByName
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 221
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionRelationship\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified relationship name.\n"
+  remarks: This method disregards case of specified relationship name.
+  example: []
+  syntax:
+    content: public static YahooMediaRestrictionRelationship RelationshipByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the relationship.
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaRestrictionRelationship" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>YahooMediaRestrictionRelationship.None</strong>.
+    content.vb: Public Shared Function RelationshipByName(name As String) As YahooMediaRestrictionRelationship
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)
+  id: RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: RestrictionTypeAsString(YahooMediaRestrictionType)
+  nameWithType: YahooMediaRestriction.RestrictionTypeAsString(YahooMediaRestrictionType)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RestrictionTypeAsString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 253
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the restriction type identifier for the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string RestrictionTypeAsString(YahooMediaRestrictionType type)
+    parameters:
+    - id: type
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaRestrictionType" data-throw-if-not-resolved="false"></xref> to get the restriction type identifier for.
+    return:
+      type: System.String
+      description: The restriction type identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">type</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function RestrictionTypeAsString(type As YahooMediaRestrictionType) As String
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName(System.String)
+  id: RestrictionTypeByName(System.String)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: RestrictionTypeByName(String)
+  nameWithType: YahooMediaRestriction.RestrictionTypeByName(String)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RestrictionTypeByName
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 288
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the <xref href=\"Argotic.Extensions.Core.YahooMediaRestrictionType\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified restriction type name.\n"
+  remarks: This method disregards case of specified restriction type name.
+  example: []
+  syntax:
+    content: public static YahooMediaRestrictionType RestrictionTypeByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the restriction type.
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaRestrictionType" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>YahooMediaRestrictionType.None</strong>.
+    content.vb: Public Shared Function RestrictionTypeByName(name As String) As YahooMediaRestrictionType
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: YahooMediaRestriction.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 324
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaRestriction" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: YahooMediaRestriction.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 384
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.ToString
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: YahooMediaRestriction.ToString()
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 418
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.YahooMediaRestriction" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: YahooMediaRestriction.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 447
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: YahooMediaRestriction.Equals(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 475
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode
+  commentId: M:Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.YahooMediaRestriction
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: YahooMediaRestriction.GetHashCode()
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs
+    startLine: 489
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.#ctor
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction.YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.YahooMediaRestriction
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  commentId: P:Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  isExternal: true
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Entities*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.Entities
+  name: Entities
+  nameWithType: YahooMediaRestriction.Entities
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Entities
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionType
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestrictionType
+  nameWithType: YahooMediaRestrictionType
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.EntityType*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+  name: EntityType
+  nameWithType: YahooMediaRestriction.EntityType
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.EntityType
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestrictionRelationship
+  nameWithType: YahooMediaRestrictionRelationship
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Relationship*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+  name: Relationship
+  nameWithType: YahooMediaRestriction.Relationship
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Relationship
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.op_Equality
+  name: Equality
+  nameWithType: YahooMediaRestriction.Equality
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.op_Inequality
+  name: Inequality
+  nameWithType: YahooMediaRestriction.Inequality
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Inequality
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.op_LessThan
+  name: LessThan
+  nameWithType: YahooMediaRestriction.LessThan
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.LessThan
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.op_GreaterThan
+  name: GreaterThan
+  nameWithType: YahooMediaRestriction.GreaterThan
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.GreaterThan
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString
+  name: RelationshipAsString
+  nameWithType: YahooMediaRestriction.RelationshipAsString
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName
+  name: RelationshipByName
+  nameWithType: YahooMediaRestriction.RelationshipByName
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RelationshipByName
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString
+  name: RestrictionTypeAsString
+  nameWithType: YahooMediaRestriction.RestrictionTypeAsString
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName
+  name: RestrictionTypeByName
+  nameWithType: YahooMediaRestriction.RestrictionTypeByName
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeByName
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.Load
+  name: Load
+  nameWithType: YahooMediaRestriction.Load
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaRestriction.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.ToString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.ToString
+  name: ToString
+  nameWithType: YahooMediaRestriction.ToString
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.CompareTo
+  name: CompareTo
+  nameWithType: YahooMediaRestriction.CompareTo
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.Equals*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.Equals
+  name: Equals
+  nameWithType: YahooMediaRestriction.Equals
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode
+  name: GetHashCode
+  nameWithType: YahooMediaRestriction.GetHashCode
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode

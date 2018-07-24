@@ -1,0 +1,1566 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.WebContentType
+  commentId: T:Argotic.Net.WebContentType
+  id: WebContentType
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.WebContentType.#ctor
+  - Argotic.Net.WebContentType.#ctor(System.String,System.String)
+  - Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String)
+  - Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String,System.Text.Encoding)
+  - Argotic.Net.WebContentType.CharacterSet
+  - Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
+  - Argotic.Net.WebContentType.CompareTo(System.Object)
+  - Argotic.Net.WebContentType.Discriminator
+  - Argotic.Net.WebContentType.Encoding
+  - Argotic.Net.WebContentType.Equals(System.Object)
+  - Argotic.Net.WebContentType.GetHashCode
+  - Argotic.Net.WebContentType.MediaSubtype
+  - Argotic.Net.WebContentType.MediaType
+  - Argotic.Net.WebContentType.op_Equality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  - Argotic.Net.WebContentType.op_GreaterThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  - Argotic.Net.WebContentType.op_Inequality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  - Argotic.Net.WebContentType.op_LessThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  - Argotic.Net.WebContentType.Parameters
+  - Argotic.Net.WebContentType.ToString
+  langs:
+  - csharp
+  - vb
+  name: WebContentType
+  nameWithType: WebContentType
+  fullName: Argotic.Net.WebContentType
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WebContentType
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nRepresents the media type for the content of a <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>See <a href=\"http://www.iana.org/assignments/media-types\">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class WebContentType : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class WebContentType
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Net.WebContentType.#ctor
+  commentId: M:Argotic.Net.WebContentType.#ctor
+  id: '#ctor'
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: WebContentType()
+  nameWithType: WebContentType.WebContentType()
+  fullName: Argotic.Net.WebContentType.WebContentType()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public WebContentType()
+    content.vb: Public Sub New
+  overload: Argotic.Net.WebContentType.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.#ctor(System.String,System.String)
+  commentId: M:Argotic.Net.WebContentType.#ctor(System.String,System.String)
+  id: '#ctor(System.String,System.String)'
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: WebContentType(String, String)
+  nameWithType: WebContentType.WebContentType(String, String)
+  fullName: Argotic.Net.WebContentType.WebContentType(System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 59
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref> class using the specified media type and sub-type.\n"
+  example: []
+  syntax:
+    content: public WebContentType(string mediaType, string mediaSubtype)
+    parameters:
+    - id: mediaType
+      type: System.String
+      description: The top-level media type used to declare the general type of data the media content represents.
+    - id: mediaSubtype
+      type: System.String
+      description: The specific format for the general type of data the media content represents.
+    content.vb: Public Sub New(mediaType As String, mediaSubtype As String)
+  overload: Argotic.Net.WebContentType.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String)
+  commentId: M:Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String)
+  id: '#ctor(System.String,System.String,System.String)'
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: WebContentType(String, String, String)
+  nameWithType: WebContentType.WebContentType(String, String, String)
+  fullName: Argotic.Net.WebContentType.WebContentType(System.String, System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 75
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref> class using the specified media type, sub-type and type discriminator.\n"
+  example: []
+  syntax:
+    content: public WebContentType(string mediaType, string mediaSubtype, string discriminator)
+    parameters:
+    - id: mediaType
+      type: System.String
+      description: The top-level media type used to declare the general type of data the media content represents.
+    - id: mediaSubtype
+      type: System.String
+      description: The specific format for the general type of data the media content represents.
+    - id: discriminator
+      type: System.String
+      description: A string value that provides a means of discriminating the media content.
+    content.vb: Public Sub New(mediaType As String, mediaSubtype As String, discriminator As String)
+  overload: Argotic.Net.WebContentType.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String,System.Text.Encoding)
+  commentId: M:Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String,System.Text.Encoding)
+  id: '#ctor(System.String,System.String,System.String,System.Text.Encoding)'
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: WebContentType(String, String, String, Encoding)
+  nameWithType: WebContentType.WebContentType(String, String, String, Encoding)
+  fullName: Argotic.Net.WebContentType.WebContentType(System.String, System.String, System.String, System.Text.Encoding)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 93
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref> class using the specified media type, sub-type, type discriminator and character encoding.\n"
+  example: []
+  syntax:
+    content: public WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet)
+    parameters:
+    - id: mediaType
+      type: System.String
+      description: The top-level media type used to declare the general type of data the media content represents.
+    - id: mediaSubtype
+      type: System.String
+      description: The specific format for the general type of data the media content represents.
+    - id: discriminator
+      type: System.String
+      description: A string value that provides a means of discriminating the media content.
+    - id: characterSet
+      type: System.Text.Encoding
+      description: A <xref href="Argotic.Net.WebContentType.Encoding" data-throw-if-not-resolved="false"></xref> object that represents the character encoding of the media content.
+    content.vb: Public Sub New(mediaType As String, mediaSubtype As String, discriminator As String, characterSet As Encoding)
+  overload: Argotic.Net.WebContentType.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">characterSet</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.CharacterSet
+  commentId: P:Argotic.Net.WebContentType.CharacterSet
+  id: CharacterSet
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: CharacterSet
+  nameWithType: WebContentType.CharacterSet
+  fullName: Argotic.Net.WebContentType.CharacterSet
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CharacterSet
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the character encoding of this media content.\n"
+  remarks: "\nThe <xref href=\"Argotic.Net.WebContentType.CharacterSet\" data-throw-if-not-resolved=\"false\"></xref> property gets or sets the <em>charset</em> parameter within the <xref href=\"Argotic.Net.WebContentType.Parameters\" data-throw-if-not-resolved=\"false\"></xref> collection.\nSpecifiying <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref> for the character encoding will remove the <em>charset</em> parameter from the <xref href=\"Argotic.Net.WebContentType.Parameters\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public string CharacterSet { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: "\nThe name registered with the <a href=\"http://www.iana.org\">Internet Assigned Numbers Authority</a> (IANA) for the character encoding of this media content.\nIf no character encoding has been specified, returns <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property CharacterSet As String
+  overload: Argotic.Net.WebContentType.CharacterSet*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.Discriminator
+  commentId: P:Argotic.Net.WebContentType.Discriminator
+  id: Discriminator
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Discriminator
+  nameWithType: WebContentType.Discriminator
+  fullName: Argotic.Net.WebContentType.Discriminator
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Discriminator
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 146
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the type discriminator of this media content.\n"
+  remarks: "\nThe <xref href=\"Argotic.Net.WebContentType.Discriminator\" data-throw-if-not-resolved=\"false\"></xref> property gets or sets the <em>type</em> parameter within the <xref href=\"Argotic.Net.WebContentType.Parameters\" data-throw-if-not-resolved=\"false\"></xref> collection.\nThe <em>type</em> parameter can be used to discrimiate between resource representations that share the same <xref href=\"Argotic.Net.WebContentType.MediaType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Net.WebContentType.MediaSubtype\" data-throw-if-not-resolved=\"false\"></xref>.\nSpecifiying <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref> for the type discriminator will remove the <em>type</em> parameter from the <xref href=\"Argotic.Net.WebContentType.Parameters\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public string Discriminator { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: "\nA value that provides a means of discriminating this media content.\nIf no type discriminator has been specified, returns <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property Discriminator As String
+  overload: Argotic.Net.WebContentType.Discriminator*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.Encoding
+  commentId: P:Argotic.Net.WebContentType.Encoding
+  id: Encoding
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Encoding
+  nameWithType: WebContentType.Encoding
+  fullName: Argotic.Net.WebContentType.Encoding
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Encoding
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 177
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the <xref href=\"Argotic.Net.WebContentType.Encoding\" data-throw-if-not-resolved=\"false\"></xref> for the current <xref href=\"Argotic.Net.WebContentType.CharacterSet\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Encoding Encoding { get; }
+    parameters: []
+    return:
+      type: System.Text.Encoding
+      description: "\nA <xref href=\"Argotic.Net.WebContentType.Encoding\" data-throw-if-not-resolved=\"false\"></xref> object that represents the character encoding of this media content.\nIf the <xref href=\"Argotic.Net.WebContentType.CharacterSet\" data-throw-if-not-resolved=\"false\"></xref> is not specified, a <strong>null</strong> reference (Nothing in Visual Basic) is returned.\n"
+    content.vb: Public ReadOnly Property Encoding As Encoding
+  overload: Argotic.Net.WebContentType.Encoding*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <xref href="Argotic.Net.WebContentType.CharacterSet" data-throw-if-not-resolved="false"></xref> is not a valid code page name.
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The code page indicated by <xref href="Argotic.Net.WebContentType.CharacterSet" data-throw-if-not-resolved="false"></xref> is not supported by the underlying platform.
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.WebContentType.MediaSubtype
+  commentId: P:Argotic.Net.WebContentType.MediaSubtype
+  id: MediaSubtype
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: MediaSubtype
+  nameWithType: WebContentType.MediaSubtype
+  fullName: Argotic.Net.WebContentType.MediaSubtype
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MediaSubtype
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 199
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the specific format for the general type of data this media content represents.\n"
+  example: []
+  syntax:
+    content: public string MediaSubtype { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The specific format for the general type of data this media content represents.
+    content.vb: Public Property MediaSubtype As String
+  overload: Argotic.Net.WebContentType.MediaSubtype*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.MediaType
+  commentId: P:Argotic.Net.WebContentType.MediaType
+  id: MediaType
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: MediaType
+  nameWithType: WebContentType.MediaType
+  fullName: Argotic.Net.WebContentType.MediaType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MediaType
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 219
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the top-level media type used to declare the general type of data this media content represents.\n"
+  example: []
+  syntax:
+    content: public string MediaType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The top-level media type used to declare the general type of data this media content represents.
+    content.vb: Public Property MediaType As String
+  overload: Argotic.Net.WebContentType.MediaType*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.Parameters
+  commentId: P:Argotic.Net.WebContentType.Parameters
+  id: Parameters
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Parameters
+  nameWithType: WebContentType.Parameters
+  fullName: Argotic.Net.WebContentType.Parameters
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Parameters
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 242
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets the name/value pairs of additional parameters applied to this media content.\n"
+  remarks: "\nThe <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref> class provides accessors for the commonly used <em>type</em> and <em>charset</em> parameters through the <xref href=\"Argotic.Net.WebContentType.CharacterSet\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Net.WebContentType.Discriminator\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, string> Parameters { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: A <xref href="System.Collections.Generic.Dictionary%602" data-throw-if-not-resolved="false"></xref> collection of strings that represents the name/value pairs of additional parameters applied to this media content.
+    content.vb: Public ReadOnly Property Parameters As Dictionary(Of String, String)
+  overload: Argotic.Net.WebContentType.Parameters*
+  seealso:
+  - linkId: Argotic.Net.WebContentType.CharacterSet
+    commentId: P:Argotic.Net.WebContentType.CharacterSet
+  - linkId: Argotic.Net.WebContentType.Discriminator
+    commentId: P:Argotic.Net.WebContentType.Discriminator
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Net.WebContentType.op_Equality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  commentId: M:Argotic.Net.WebContentType.op_Equality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  id: op_Equality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Equality(WebContentType, WebContentType)
+  nameWithType: WebContentType.Equality(WebContentType, WebContentType)
+  fullName: Argotic.Net.WebContentType.Equality(Argotic.Net.WebContentType, Argotic.Net.WebContentType)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 261
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(WebContentType first, WebContentType second)
+    parameters:
+    - id: first
+      type: Argotic.Net.WebContentType
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.WebContentType
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As WebContentType, second As WebContentType) As Boolean
+  overload: Argotic.Net.WebContentType.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.WebContentType.op_GreaterThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  commentId: M:Argotic.Net.WebContentType.op_GreaterThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  id: op_GreaterThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(WebContentType, WebContentType)
+  nameWithType: WebContentType.GreaterThan(WebContentType, WebContentType)
+  fullName: Argotic.Net.WebContentType.GreaterThan(Argotic.Net.WebContentType, Argotic.Net.WebContentType)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 282
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(WebContentType first, WebContentType second)
+    parameters:
+    - id: first
+      type: Argotic.Net.WebContentType
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.WebContentType
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As WebContentType, second As WebContentType) As Boolean
+  overload: Argotic.Net.WebContentType.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.WebContentType.op_Inequality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  commentId: M:Argotic.Net.WebContentType.op_Inequality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  id: op_Inequality(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Inequality(WebContentType, WebContentType)
+  nameWithType: WebContentType.Inequality(WebContentType, WebContentType)
+  fullName: Argotic.Net.WebContentType.Inequality(Argotic.Net.WebContentType, Argotic.Net.WebContentType)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 303
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(WebContentType first, WebContentType second)
+    parameters:
+    - id: first
+      type: Argotic.Net.WebContentType
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.WebContentType
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As WebContentType, second As WebContentType) As Boolean
+  overload: Argotic.Net.WebContentType.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.WebContentType.op_LessThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  commentId: M:Argotic.Net.WebContentType.op_LessThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  id: op_LessThan(Argotic.Net.WebContentType,Argotic.Net.WebContentType)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: LessThan(WebContentType, WebContentType)
+  nameWithType: WebContentType.LessThan(WebContentType, WebContentType)
+  fullName: Argotic.Net.WebContentType.LessThan(Argotic.Net.WebContentType, Argotic.Net.WebContentType)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 314
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(WebContentType first, WebContentType second)
+    parameters:
+    - id: first
+      type: Argotic.Net.WebContentType
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.WebContentType
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As WebContentType, second As WebContentType) As Boolean
+  overload: Argotic.Net.WebContentType.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
+  commentId: M:Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
+  id: CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Dictionary<String, String>, Dictionary<String, String>)
+  nameWithType: WebContentType.CompareSequence(Dictionary<String, String>, Dictionary<String, String>)
+  fullName: Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary<System.String, System.String>, System.Collections.Generic.Dictionary<System.String, System.String>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 348
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCompares two specified <xref href=\"System.Collections.Generic.Dictionary%602\" data-throw-if-not-resolved=\"false\"></xref> collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target)
+    parameters:
+    - id: source
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: The first collection.
+    - id: target
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Dictionary(Of String, String), target As Dictionary(Of String, String)) As Integer
+  overload: Argotic.Net.WebContentType.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: WebContentType.CompareSequence(Dictionary(Of String, String), Dictionary(Of String, String))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary(Of System.String, System.String), System.Collections.Generic.Dictionary(Of System.String, System.String))
+  name.vb: CompareSequence(Dictionary(Of String, String), Dictionary(Of String, String))
+- uid: Argotic.Net.WebContentType.CompareTo(System.Object)
+  commentId: M:Argotic.Net.WebContentType.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: WebContentType.CompareTo(Object)
+  fullName: Argotic.Net.WebContentType.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 388
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Net.WebContentType.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.WebContentType.Equals(System.Object)
+  commentId: M:Argotic.Net.WebContentType.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: WebContentType.Equals(Object)
+  fullName: Argotic.Net.WebContentType.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 420
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Net.WebContentType.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.WebContentType.GetHashCode
+  commentId: M:Argotic.Net.WebContentType.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: WebContentType.GetHashCode()
+  fullName: Argotic.Net.WebContentType.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 434
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Net.WebContentType.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.WebContentType.ToString
+  commentId: M:Argotic.Net.WebContentType.ToString
+  id: ToString
+  parent: Argotic.Net.WebContentType
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: WebContentType.ToString()
+  fullName: Argotic.Net.WebContentType.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/WebContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Net/WebContentType.cs
+    startLine: 448
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Net.WebContentType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the MIME content type representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Net.WebContentType" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Net.WebContentType.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: System.Net.WebRequest
+  commentId: T:System.Net.WebRequest
+  parent: System.Net
+  isExternal: true
+  name: WebRequest
+  nameWithType: WebRequest
+  fullName: System.Net.WebRequest
+- uid: System.Net.WebResponse
+  commentId: T:System.Net.WebResponse
+  parent: System.Net
+  isExternal: true
+  name: WebResponse
+  nameWithType: WebResponse
+  fullName: System.Net.WebResponse
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Net.WebContentType
+  commentId: T:Argotic.Net.WebContentType
+  parent: Argotic.Net
+  name: WebContentType
+  nameWithType: WebContentType
+  fullName: Argotic.Net.WebContentType
+- uid: Argotic.Net.WebContentType.#ctor*
+  commentId: Overload:Argotic.Net.WebContentType.#ctor
+  name: WebContentType
+  nameWithType: WebContentType.WebContentType
+  fullName: Argotic.Net.WebContentType.WebContentType
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Net.WebContentType.Encoding
+  commentId: P:Argotic.Net.WebContentType.Encoding
+  isExternal: true
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
+  isExternal: true
+  name: Encoding
+  nameWithType: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+- uid: System.String.Empty
+  commentId: F:System.String.Empty
+  isExternal: true
+- uid: Argotic.Net.WebContentType.CharacterSet
+  commentId: P:Argotic.Net.WebContentType.CharacterSet
+  isExternal: true
+- uid: Argotic.Net.WebContentType.Parameters
+  commentId: P:Argotic.Net.WebContentType.Parameters
+  isExternal: true
+- uid: Argotic.Net.WebContentType.CharacterSet*
+  commentId: Overload:Argotic.Net.WebContentType.CharacterSet
+  name: CharacterSet
+  nameWithType: WebContentType.CharacterSet
+  fullName: Argotic.Net.WebContentType.CharacterSet
+- uid: Argotic.Net.WebContentType.Discriminator
+  commentId: P:Argotic.Net.WebContentType.Discriminator
+  isExternal: true
+- uid: Argotic.Net.WebContentType.MediaType
+  commentId: P:Argotic.Net.WebContentType.MediaType
+  isExternal: true
+- uid: Argotic.Net.WebContentType.MediaSubtype
+  commentId: P:Argotic.Net.WebContentType.MediaSubtype
+  isExternal: true
+- uid: Argotic.Net.WebContentType.Discriminator*
+  commentId: Overload:Argotic.Net.WebContentType.Discriminator
+  name: Discriminator
+  nameWithType: WebContentType.Discriminator
+  fullName: Argotic.Net.WebContentType.Discriminator
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Net.WebContentType.Encoding*
+  commentId: Overload:Argotic.Net.WebContentType.Encoding
+  name: Encoding
+  nameWithType: WebContentType.Encoding
+  fullName: Argotic.Net.WebContentType.Encoding
+- uid: Argotic.Net.WebContentType.MediaSubtype*
+  commentId: Overload:Argotic.Net.WebContentType.MediaSubtype
+  name: MediaSubtype
+  nameWithType: WebContentType.MediaSubtype
+  fullName: Argotic.Net.WebContentType.MediaSubtype
+- uid: Argotic.Net.WebContentType.MediaType*
+  commentId: Overload:Argotic.Net.WebContentType.MediaType
+  name: MediaType
+  nameWithType: WebContentType.MediaType
+  fullName: Argotic.Net.WebContentType.MediaType
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.WebContentType.Parameters*
+  commentId: Overload:Argotic.Net.WebContentType.Parameters
+  name: Parameters
+  nameWithType: WebContentType.Parameters
+  fullName: Argotic.Net.WebContentType.Parameters
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Net.WebContentType.op_Equality*
+  commentId: Overload:Argotic.Net.WebContentType.op_Equality
+  name: Equality
+  nameWithType: WebContentType.Equality
+  fullName: Argotic.Net.WebContentType.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Net.WebContentType.op_GreaterThan*
+  commentId: Overload:Argotic.Net.WebContentType.op_GreaterThan
+  name: GreaterThan
+  nameWithType: WebContentType.GreaterThan
+  fullName: Argotic.Net.WebContentType.GreaterThan
+- uid: Argotic.Net.WebContentType.op_Inequality*
+  commentId: Overload:Argotic.Net.WebContentType.op_Inequality
+  name: Inequality
+  nameWithType: WebContentType.Inequality
+  fullName: Argotic.Net.WebContentType.Inequality
+- uid: Argotic.Net.WebContentType.op_LessThan*
+  commentId: Overload:Argotic.Net.WebContentType.op_LessThan
+  name: LessThan
+  nameWithType: WebContentType.LessThan
+  fullName: Argotic.Net.WebContentType.LessThan
+- uid: Argotic.Net.WebContentType.CompareSequence*
+  commentId: Overload:Argotic.Net.WebContentType.CompareSequence
+  name: CompareSequence
+  nameWithType: WebContentType.CompareSequence
+  fullName: Argotic.Net.WebContentType.CompareSequence
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Argotic.Net.WebContentType.CompareTo*
+  commentId: Overload:Argotic.Net.WebContentType.CompareTo
+  name: CompareTo
+  nameWithType: WebContentType.CompareTo
+  fullName: Argotic.Net.WebContentType.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.WebContentType.Equals*
+  commentId: Overload:Argotic.Net.WebContentType.Equals
+  name: Equals
+  nameWithType: WebContentType.Equals
+  fullName: Argotic.Net.WebContentType.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.WebContentType.GetHashCode*
+  commentId: Overload:Argotic.Net.WebContentType.GetHashCode
+  name: GetHashCode
+  nameWithType: WebContentType.GetHashCode
+  fullName: Argotic.Net.WebContentType.GetHashCode
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.WebContentType.ToString*
+  commentId: Overload:Argotic.Net.WebContentType.ToString
+  name: ToString
+  nameWithType: WebContentType.ToString
+  fullName: Argotic.Net.WebContentType.ToString

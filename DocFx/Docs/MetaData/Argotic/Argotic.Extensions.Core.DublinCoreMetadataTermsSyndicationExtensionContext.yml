@@ -1,0 +1,3136 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  id: DublinCoreMetadataTermsSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: DublinCoreMetadataTermsSyndicationExtensionContext
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DublinCoreMetadataTermsSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class DublinCoreMetadataTermsSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class DublinCoreMetadataTermsSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DublinCoreMetadataTermsSyndicationExtensionContext()
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DublinCoreMetadataTermsSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DublinCoreMetadataTermsSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 292
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public DublinCoreMetadataTermsSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  id: Abstract
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Abstract
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Abstract
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 300
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the summary of the resource.\n"
+  example: []
+  syntax:
+    content: public string Abstract { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The summary of the resource.
+    content.vb: Public Property Abstract As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  id: AccessRights
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AccessRights
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AccessRights
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 335
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets information about who can access the resource or an indication of its security status.\n"
+  remarks: "\n<p><xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights\" data-throw-if-not-resolved=\"false\"></xref> may include information regarding access or restrictions based on privacy, security, or other policies.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights\" data-throw-if-not-resolved=\"false\"></xref> property represents a statement about the intellectual property rights (IPR) held in or over a resource,\n    a legal document giving official permission to do something with a resource, or a statement about access rights.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/RightsStatement</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-RightsStatement\">http://dublincore.org/documents/dcmi-terms/#classes-RightsStatement</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string AccessRights { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Information about who can access the resource or an indication of its security status.
+    content.vb: Public Property AccessRights As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  id: AccrualMethod
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AccrualMethod
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AccrualMethod
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 368
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the method by which items are added to a collection.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod\" data-throw-if-not-resolved=\"false\"></xref> property represents the method by which resources are added to a collection.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/MethodOfAccrual</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-MethodOfAccrual\">http://dublincore.org/documents/dcmi-terms/#classes-MethodOfAccrual</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string AccrualMethod { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The method by which items are added to a collection.
+    content.vb: Public Property AccrualMethod As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  id: AccrualPeriodicity
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AccrualPeriodicity
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AccrualPeriodicity
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 401
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the frequency with which items are added to a collection.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity\" data-throw-if-not-resolved=\"false\"></xref> property represents the rate at which something recurs.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Frequency</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Frequency\">http://dublincore.org/documents/dcmi-terms/#classes-Frequency</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string AccrualPeriodicity { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The frequency with which items are added to a collection.
+    content.vb: Public Property AccrualPeriodicity As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  id: AccrualPolicy
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AccrualPolicy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AccrualPolicy
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 434
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets thepolicy governing the addition of items to a collection.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy\" data-throw-if-not-resolved=\"false\"></xref> property represents the plan or course of action by an authority, intended to influence and determine decisions, actions, and other matters.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Policy</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Policy\">http://dublincore.org/documents/dcmi-terms/#classes-Policy</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string AccrualPolicy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The policy governing the addition of items to a collection.
+    content.vb: Public Property AccrualPolicy As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  id: AlternativeTitle
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AlternativeTitle
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AlternativeTitle
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 461
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the alternative name for the resource.\n"
+  remarks: "\nThe distinction between titles and alternative titles is application-specific.\n"
+  example: []
+  syntax:
+    content: public string AlternativeTitle { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The alternative name for the resource.
+    content.vb: Public Property AlternativeTitle As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  id: Audience
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Audience
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Audience
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 494
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the class of entity for whom the resource is intended or useful.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience\" data-throw-if-not-resolved=\"false\"></xref> property represents a group of resources that act or have the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/AgentClass</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-AgentClass\">http://dublincore.org/documents/dcmi-terms/#classes-AgentClass</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Audience { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The class of entity for whom the resource is intended or useful.
+    content.vb: Public Property Audience As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  id: AudienceEducationLevel
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AudienceEducationLevel
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AudienceEducationLevel
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 527
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel\" data-throw-if-not-resolved=\"false\"></xref> property represents a group of resources that act or have the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/AgentClass</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-AgentClass\">http://dublincore.org/documents/dcmi-terms/#classes-AgentClass</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string AudienceEducationLevel { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
+    content.vb: Public Property AudienceEducationLevel As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  id: BibliographicCitation
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: BibliographicCitation
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BibliographicCitation
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 554
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the bibliographic reference for the resource.\n"
+  remarks: "\nRecommended practice is to include sufficient bibliographic detail to identify the resource as unambiguously as possible.\n"
+  example: []
+  syntax:
+    content: public string BibliographicCitation { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The bibliographic reference for the resource.
+    content.vb: Public Property BibliographicCitation As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  id: ConformsTo
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: ConformsTo
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConformsTo
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 587
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the established standard to which the described resource conforms.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo\" data-throw-if-not-resolved=\"false\"></xref> property represents a basis for comparison; a reference point against which other things can be evaluated.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Standard</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Standard\">http://dublincore.org/documents/dcmi-terms/#classes-Standard</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string ConformsTo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The established standard to which the described resource conforms.
+    content.vb: Public Property ConformsTo As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  id: Contributor
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Contributor
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Contributor
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 620
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity responsible for making contributions to the resource.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor\" data-throw-if-not-resolved=\"false\"></xref> property represents a resource that acts or has the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Agent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Agent\">http://dublincore.org/documents/dcmi-terms/#classes-Agent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Contributor { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity responsible for making contributions to the resource.
+    content.vb: Public Property Contributor As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  id: Coverage
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Coverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Coverage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 660
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.\n"
+  remarks: "\n<p>\n    Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates.\n    Temporal topic may be a named period, date, or date range.\n    A jurisdiction may be a named administrative entity or a geographic place to which the resource applies.\n    Recommended best practice is to use a controlled vocabulary such as the <a href=\"http://www.getty.edu/research/tools/vocabulary/tgn/index.html\">Thesaurus of Geographic Names</a>.\n    Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.\n</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage\" data-throw-if-not-resolved=\"false\"></xref> property represents a location, period of time, or jurisdiction.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/LocationPeriodOrJurisdiction</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-LocationPeriodOrJurisdiction\">http://dublincore.org/documents/dcmi-terms/#classes-LocationPeriodOrJurisdiction</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Coverage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
+    content.vb: Public Property Coverage As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  id: Creator
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Creator
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Creator
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 694
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity primarily responsible for making the resource.\n"
+  remarks: "\n<p>Examples of a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator\" data-throw-if-not-resolved=\"false\"></xref> include a person, an organization, or a service. Typically, the name of a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator\" data-throw-if-not-resolved=\"false\"></xref> should be used to indicate the entity.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator\" data-throw-if-not-resolved=\"false\"></xref> property represents a resource that acts or has the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Agent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Agent\">http://dublincore.org/documents/dcmi-terms/#classes-Agent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Creator { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity primarily responsible for making the resource.
+    content.vb: Public Property Creator As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  id: Date
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Date
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 724
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a point or period of time associated with an event in the lifecycle of the resource.\n"
+  remarks: "\nDate may be used to express temporal information at any level of granularity. The <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime Date { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates a point or period of time associated with an event in the lifecycle of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no date was provided.\n"
+    content.vb: Public Property Date As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  id: DateAccepted
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateAccepted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateAccepted
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 750
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date of acceptance of the resource.\n"
+  remarks: "\n<p>The <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).</p>\n<p>\n    Examples of resources to which a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted\" data-throw-if-not-resolved=\"false\"></xref> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).\n</p>\n"
+  example: []
+  syntax:
+    content: public DateTime DateAccepted { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the acceptance date of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no acceptance date was provided.\n"
+    content.vb: Public Property DateAccepted As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  id: DateAvailable
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateAvailable
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateAvailable
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 772
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date that the resource became or will become available.\n"
+  remarks: "\nWhen representing a date-time, it is recommended that the  <a href=\"http://www.ietf.org/rfc/rfc3339.txt\">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used.\nThe value of this property can represent either a single date-time that indicates the period in time the resource became available, or it may represent a delimited date range\nthat indicates the start and end dates that the resource is or will be available.\n"
+  example: []
+  syntax:
+    content: public string DateAvailable { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The date (often a range) that the resource became or will become available.
+    content.vb: Public Property DateAvailable As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  id: DateCopyrighted
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateCopyrighted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateCopyrighted
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 802
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date of copyright of the resource.\n"
+  remarks: "\n<p>The <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).</p>\n"
+  example: []
+  syntax:
+    content: public DateTime DateCopyrighted { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the copyright date of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no copyright date was provided.\n"
+    content.vb: Public Property DateCopyrighted As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  id: DateCreated
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateCreated
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateCreated
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 825
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date of creation of the resource.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime DateCreated { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates creation date of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no creation date was provided.\n"
+    content.vb: Public Property DateCreated As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  id: DateIssued
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateIssued
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateIssued
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 848
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date of issuance of the resource.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime DateIssued { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the formal issuance (e.g., publication) date of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no issuance date was provided.\n"
+    content.vb: Public Property DateIssued As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  id: DateModified
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateModified
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateModified
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 871
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date on which the resource was changed.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime DateModified { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the date on which the resource was changed.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no modification date was provided.\n"
+    content.vb: Public Property DateModified As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  id: DateSubmitted
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateSubmitted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateSubmitted
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 897
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date of submission of the resource.\n"
+  remarks: "\n<p>The <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).</p>\n<p>\n    Examples of resources to which a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted\" data-throw-if-not-resolved=\"false\"></xref> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).\n</p>\n"
+  example: []
+  syntax:
+    content: public DateTime DateSubmitted { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the submission date of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no submission date was provided.\n"
+    content.vb: Public Property DateSubmitted As Date
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  id: DateValid
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DateValid
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateValid
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 919
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the date that the resource is valid for.\n"
+  remarks: "\nWhen representing a date-time, it is recommended that the  <a href=\"http://www.ietf.org/rfc/rfc3339.txt\">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used.\nThe value of this property can represent either a single date-time that indicates the period in time the resource is valid, or it may represent a delimited date range\nthat indicates the start and end dates that the resource is or will be valid.\n"
+  example: []
+  syntax:
+    content: public string DateValid { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The date (often a range) of validity of a resource.
+    content.vb: Public Property DateValid As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  id: Description
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 946
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets an account of the resource.\n"
+  remarks: "\n<xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description\" data-throw-if-not-resolved=\"false\"></xref> may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.\n"
+  example: []
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: An account of the resource.
+    content.vb: Public Property Description As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  id: Extent
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Extent
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extent
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 980
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the size or duration of the resource.\n"
+  remarks: "\n<p>Examples include a number of pages, a specification of length, width, and breadth, or a period in hours, minutes, and seconds.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent\" data-throw-if-not-resolved=\"false\"></xref> property represents a dimension or extent, or a time taken to play or execute.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/SizeOrDuration</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-SizeOrDuration\">http://dublincore.org/documents/dcmi-terms/#classes-SizeOrDuration</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Extent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The size or duration of the resource.
+    content.vb: Public Property Extent As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  id: Format
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Format
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Format
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1017
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the file format, physical medium, or dimensions of the resource.\n"
+  remarks: "\n<p>\n    Examples of dimensions include size and duration. Recommended best practice is to use a controlled vocabulary such as\n    the list of <a href=\"http://www.iana.org/assignments/media-types/\">Internet Media Types</a>.\n</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format\" data-throw-if-not-resolved=\"false\"></xref> property represents a media type or extent.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/MediaTypeOrExtent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-MediaTypeOrExtent\">http://dublincore.org/documents/dcmi-terms/#classes-MediaTypeOrExtent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Format { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The file format, physical medium, or dimensions of the resource.
+    content.vb: Public Property Format As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  id: HasFormat
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: HasFormat
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasFormat
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1044
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is substantially the same as the pre-existing described resource, but in another format.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string HasFormat { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is substantially the same as the pre-existing described resource, but in another format.
+    content.vb: Public Property HasFormat As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  id: HasPart
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: HasPart
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasPart
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1071
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is included either physically or logically in the described resource.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string HasPart { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is included either physically or logically in the described resource.
+    content.vb: Public Property HasPart As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  id: HasVersion
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: HasVersion
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasVersion
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1098
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is a version, edition, or adaptation of the described resource.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string HasVersion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is a version, edition, or adaptation of the described resource.
+    content.vb: Public Property HasVersion As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  id: Identifier
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Identifier
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Identifier
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1125
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets an unambiguous reference to the resource within a given context.\n"
+  remarks: "\nRecommended best practice is to identify the resource by means of a string conforming to a formal identification system.\n"
+  example: []
+  syntax:
+    content: public string Identifier { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: An unambiguous reference to the resource within a given context.
+    content.vb: Public Property Identifier As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  id: InstructionalMethod
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: InstructionalMethod
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InstructionalMethod
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1158
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod\" data-throw-if-not-resolved=\"false\"></xref> property represents a process that is used to engender knowledge, attitudes, and skills.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/MethodOfInstruction</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-MethodOfInstruction\">http://dublincore.org/documents/dcmi-terms/#classes-MethodOfInstruction</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string InstructionalMethod { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
+    content.vb: Public Property InstructionalMethod As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  id: IsFormatOf
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsFormatOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsFormatOf
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1185
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is substantially the same as the described resource, but in another format.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsFormatOf { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is substantially the same as the described resource, but in another format.
+    content.vb: Public Property IsFormatOf As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  id: IsPartOf
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsPartOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsPartOf
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1212
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource in which the described resource is physically or logically included.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsPartOf { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource in which the described resource is physically or logically included.
+    content.vb: Public Property IsPartOf As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  id: IsReferencedBy
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsReferencedBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsReferencedBy
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1239
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that references, cites, or otherwise points to the described resource.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsReferencedBy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that references, cites, or otherwise points to the described resource.
+    content.vb: Public Property IsReferencedBy As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  id: IsReplacedBy
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsReplacedBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsReplacedBy
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1266
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that supplants, displaces, or supersedes the described resource.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsReplacedBy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that supplants, displaces, or supersedes the described resource.
+    content.vb: Public Property IsReplacedBy As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  id: IsRequiredBy
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsRequiredBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsRequiredBy
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1293
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that requires the described resource to support its function, delivery, or coherence.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsRequiredBy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that requires the described resource to support its function, delivery, or coherence.
+    content.vb: Public Property IsRequiredBy As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  id: IsVersionOf
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsVersionOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsVersionOf
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1320
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource of which the described resource is a version, edition, or adaptation.\n"
+  remarks: "\nThis term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n"
+  example: []
+  syntax:
+    content: public string IsVersionOf { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource of which the described resource is a version, edition, or adaptation.
+    content.vb: Public Property IsVersionOf As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  id: Language
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1348
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the language of the resource.\n"
+  remarks: "\nRecommended best practice is to use a controlled vocabulary such as <a href=\"http://www.ietf.org/rfc/rfc4646.txt\">RFC 4646</a>.\nThis framework conforms to this best practice by utilizing the <xref href=\"System.Globalization.CultureInfo\" data-throw-if-not-resolved=\"false\"></xref> class to represent the language of a resource.\n"
+  example: []
+  syntax:
+    content: public CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> object that represents the language of the resource. The default value is a <strong>null</strong> reference, which indicates that no language was specified.
+    content.vb: Public Property Language As CultureInfo
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  id: License
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: License
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.License
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: License
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1374
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the legal document giving official permission to do something with the resource.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License\" data-throw-if-not-resolved=\"false\"></xref> property represents a legal document giving official permission to do something with a resource.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/LicenseDocument</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-LicenseDocument\">http://dublincore.org/documents/dcmi-terms/#classes-LicenseDocument</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string License { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The legal document giving official permission to do something with the resource.
+    content.vb: Public Property License As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  id: Mediator
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Mediator
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Mediator
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1408
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity that mediates access to the resource and for whom the resource is intended or useful.\n"
+  remarks: "\n<p>In an educational context, a mediator might be a parent, teacher, teaching assistant, or care-giver.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator\" data-throw-if-not-resolved=\"false\"></xref> property represents a resource that acts or has the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Agent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Agent\">http://dublincore.org/documents/dcmi-terms/#classes-Agent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Mediator { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity that mediates access to the resource and for whom the resource is intended or useful.
+    content.vb: Public Property Mediator As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  id: Medium
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Medium
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Medium
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1442
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the material or physical carrier of the resource.\n"
+  remarks: "\n<p>Examples include paper, canvas, or DVD.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium\" data-throw-if-not-resolved=\"false\"></xref> property represents a physical material or carrier.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/PhysicalMedium</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-PhysicalMedium\">http://dublincore.org/documents/dcmi-terms/#classes-PhysicalMedium</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Medium { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The material or physical carrier of the resource.
+    content.vb: Public Property Medium As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  id: Provenance
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Provenance
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Provenance
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1476
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance\" data-throw-if-not-resolved=\"false\"></xref> property represents a statement of any changes in ownership and custody of a resource\n    since its creation that are significant for its authenticity, integrity, and interpretation.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/ProvenanceStatement</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-ProvenanceStatement\">http://dublincore.org/documents/dcmi-terms/#classes-ProvenanceStatement</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Provenance { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
+    content.vb: Public Property Provenance As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  id: Publisher
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Publisher
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Publisher
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1510
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity responsible for making the resource available.\n"
+  remarks: "\n<p>Examples of a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher\" data-throw-if-not-resolved=\"false\"></xref> include a person, an organization, or a service. Typically, the name of a <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher\" data-throw-if-not-resolved=\"false\"></xref> should be used to indicate the entity.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher\" data-throw-if-not-resolved=\"false\"></xref> property represents a resource that acts or has the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Agent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Agent\">http://dublincore.org/documents/dcmi-terms/#classes-Agent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Publisher { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity responsible for making the resource available.
+    content.vb: Public Property Publisher As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+  id: References
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: References
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.References
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: References
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1539
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is referenced, cited, or otherwise pointed to by the described resource.\n"
+  remarks: "\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string References { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is referenced, cited, or otherwise pointed to by the described resource.
+    content.vb: Public Property References As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  id: Relation
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Relation
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Relation
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1569
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource.\n"
+  remarks: "\n<p>Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.</p>\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Relation { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource.
+    content.vb: Public Property Relation As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  id: Replaces
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Replaces
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Replaces
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1598
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is supplanted, displaced, or superseded by the described resource.\n"
+  remarks: "\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Replaces { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is supplanted, displaced, or superseded by the described resource.
+    content.vb: Public Property Replaces As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  id: Requires
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Requires
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Requires
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1627
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource that is required by the described resource to support its function, delivery, or coherence.\n"
+  remarks: "\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Requires { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource that is required by the described resource to support its function, delivery, or coherence.
+    content.vb: Public Property Requires As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  id: Rights
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Rights
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rights
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1662
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets information about rights held in and over the resource.\n"
+  remarks: "\n<p>Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.</p>\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights\" data-throw-if-not-resolved=\"false\"></xref> property represents a statement about the intellectual property rights (IPR) held in or over a resource,\n    a legal document giving official permission to do something with a resource, or a statement about access rights.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/RightsStatement</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-RightsStatement\">http://dublincore.org/documents/dcmi-terms/#classes-RightsStatement</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Rights { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Information about rights held in and over the resource.
+    content.vb: Public Property Rights As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  id: RightsHolder
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: RightsHolder
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RightsHolder
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1695
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the person or organization owning or managing rights over the resource.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder\" data-throw-if-not-resolved=\"false\"></xref> property represents a resource that acts or has the power to act.\n</p>\n<p>\n    The resource described by this term is an instance of <strong>http://purl.org/dc/terms/Agent</strong>.\n    See <a href=\"http://dublincore.org/documents/dcmi-terms/#classes-Agent\">http://dublincore.org/documents/dcmi-terms/#classes-Agent</a> for further information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string RightsHolder { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The person or organization owning or managing rights over the resource.
+    content.vb: Public Property RightsHolder As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  id: Source
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Source
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1728
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource from which the described resource is derived.\n"
+  remarks: "\n<p>\n    The described resource may be derived from the related resource in whole or in part.\n    Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.\n</p>\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Source { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource from which the described resource is derived.
+    content.vb: Public Property Source As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  id: SpatialCoverage
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: SpatialCoverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SpatialCoverage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1752
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the spatial characteristics of the resource.\n"
+  example: []
+  syntax:
+    content: public string SpatialCoverage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The spatial characteristics of the resource.
+    content.vb: Public Property SpatialCoverage As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  id: Subject
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Subject
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Subject
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1786
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the topic of the resource.\n"
+  remarks: "\n<p>\n    Typically, the subject will be represented using keywords, key phrases, or classification codes.\n    Recommended best practice is to use a controlled vocabulary.\n    To describe the spatial or temporal topic of the resource, use the <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage\" data-throw-if-not-resolved=\"false\"></xref> property.\n</p>\n<p>\n    This term is intended to be used with non-literal values as defined in the <a href=\"http://dublincore.org/documents/abstract-model/\">DCMI Abstract Model</a>.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Subject { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The topic of the resource.
+    content.vb: Public Property Subject As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  id: TableOfContents
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TableOfContents
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TableOfContents
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1810
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the list of sub-units of the resource.\n"
+  example: []
+  syntax:
+    content: public string TableOfContents { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The list of sub-units of the resource.
+    content.vb: Public Property TableOfContents As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  id: TemporalCoverage
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TemporalCoverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TemporalCoverage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1834
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the temporal characteristics of the resource.\n"
+  example: []
+  syntax:
+    content: public string TemporalCoverage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The temporal characteristics of the resource.
+    content.vb: Public Property TemporalCoverage As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  id: Title
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1861
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name given to the resource.\n"
+  remarks: "\nIn current practice, this term is used primarily with literal values; however, there are important uses with non-literal values as well.\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name given to the resource.
+    content.vb: Public Property Title As String
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  id: TypeVocabulary
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TypeVocabulary
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TypeVocabulary
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1895
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the nature or genre of the resource.\n"
+  remarks: "\n<p>\n    Recommended best practice is to use a controlled vocabulary such as the <a href=\"http://dublincore.org/documents/dcmi-type-vocabulary/\">DCMI Type Vocabulary</a>.\n    This framework conforms to this best practice by providing the <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies\" data-throw-if-not-resolved=\"false\"></xref> enumeration for specifiying the nature or genre of a resource.\n</p>\n<p>To describe the file format, physical medium, or dimensions of the resource, use the <xref href=\"Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format\" data-throw-if-not-resolved=\"false\"></xref> property.</p>\n"
+  example: []
+  syntax:
+    content: public DublinCoreTypeVocabularies TypeVocabulary { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+      description: "\nAn <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that represents the nature or genre of the resource.\nThe default value is <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no nature or genre was specified.\n"
+    content.vb: Public Property TypeVocabulary As DublinCoreTypeVocabularies
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1916
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs
+    startLine: 1958
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: DublinCoreMetadataTermsSyndicationExtension
+  nameWithType: DublinCoreMetadataTermsSyndicationExtension
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: DublinCoreMetadataTermsSyndicationExtensionContext
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.#ctor
+  name: DublinCoreMetadataTermsSyndicationExtensionContext
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DublinCoreMetadataTermsSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DublinCoreMetadataTermsSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  name: Abstract
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Abstract
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  name: AccessRights
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccessRights
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  name: AccrualMethod
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualMethod
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  name: AccrualPeriodicity
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPeriodicity
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  name: AccrualPolicy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AccrualPolicy
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  name: AlternativeTitle
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AlternativeTitle
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  name: Audience
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Audience
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  name: AudienceEducationLevel
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.AudienceEducationLevel
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  name: BibliographicCitation
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.BibliographicCitation
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  name: ConformsTo
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.ConformsTo
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  name: Contributor
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Contributor
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  name: Coverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Coverage
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  name: Creator
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Creator
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  name: Date
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Date
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Date
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  name: DateAccepted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAccepted
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  name: DateAvailable
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateAvailable
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  name: DateCopyrighted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCopyrighted
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  name: DateCreated
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateCreated
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  name: DateIssued
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateIssued
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  name: DateModified
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateModified
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  name: DateSubmitted
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateSubmitted
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  name: DateValid
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.DateValid
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  name: Description
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Description
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  name: Extent
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Extent
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  name: Format
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Format
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Format
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  name: HasFormat
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasFormat
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  name: HasPart
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasPart
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  name: HasVersion
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.HasVersion
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  name: Identifier
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Identifier
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  name: InstructionalMethod
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.InstructionalMethod
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  name: IsFormatOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsFormatOf
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  name: IsPartOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsPartOf
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  name: IsReferencedBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReferencedBy
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  name: IsReplacedBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsReplacedBy
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  name: IsRequiredBy
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsRequiredBy
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  name: IsVersionOf
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.IsVersionOf
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  name: Language
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Language
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+  name: License
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.License
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.License
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  name: Mediator
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Mediator
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  name: Medium
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Medium
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  name: Provenance
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Provenance
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  name: Publisher
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Publisher
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+  name: References
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.References
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.References
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  name: Relation
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Relation
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  name: Replaces
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Replaces
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  name: Requires
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Requires
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  name: Rights
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Rights
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  commentId: P:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  name: RightsHolder
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.RightsHolder
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  name: Source
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Source
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Source
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  name: SpatialCoverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.SpatialCoverage
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  name: Subject
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Subject
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  name: TableOfContents
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TableOfContents
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  name: TemporalCoverage
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TemporalCoverage
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  name: Title
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Title
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  commentId: T:Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  parent: Argotic.Extensions.Core
+  name: DublinCoreTypeVocabularies
+  nameWithType: DublinCoreTypeVocabularies
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  name: TypeVocabulary
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.TypeVocabulary
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.WriteTo

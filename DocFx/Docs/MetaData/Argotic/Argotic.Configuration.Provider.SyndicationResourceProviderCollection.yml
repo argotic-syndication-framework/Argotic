@@ -1,0 +1,1766 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  id: SyndicationResourceProviderCollection
+  parent: Argotic.Configuration.Provider
+  children:
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item(System.String)
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  langs:
+  - csharp
+  - vb
+  name: SyndicationResourceProviderCollection
+  nameWithType: SyndicationResourceProviderCollection
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationResourceProviderCollection
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nRepresents a collection of provider objects that inherit from <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: 'public class SyndicationResourceProviderCollection : ProviderCollection, ICollection, ICollection<SyndicationResourceProvider>, IEnumerable<SyndicationResourceProvider>, IEnumerable'
+    content.vb: >-
+      Public Class SyndicationResourceProviderCollection
+
+          Inherits ProviderCollection
+
+          Implements ICollection, ICollection(Of SyndicationResourceProvider), IEnumerable(Of SyndicationResourceProvider), IEnumerable
+  inheritance:
+  - System.Object
+  - System.Configuration.Provider.ProviderCollection
+  implements:
+  - System.Collections.ICollection
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  - System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+  - System.Configuration.Provider.ProviderCollection.Clear
+  - System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[],System.Int32)
+  - System.Configuration.Provider.ProviderCollection.Remove(System.String)
+  - System.Configuration.Provider.ProviderCollection.SetReadOnly
+  - System.Configuration.Provider.ProviderCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+  - System.Configuration.Provider.ProviderCollection.Count
+  - System.Configuration.Provider.ProviderCollection.IsSynchronized
+  - System.Configuration.Provider.ProviderCollection.SyncRoot
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+  commentId: P:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+  id: IsReadOnly
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: IsReadOnly
+  nameWithType: SyndicationResourceProviderCollection.IsReadOnly
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsReadOnly
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets a value indicating whether the collection is read-only.\n"
+  example: []
+  syntax:
+    content: public bool IsReadOnly { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection" data-throw-if-not-resolved="false"></xref> is read-only; otherwise, <strong>false</strong>.
+    content.vb: Public ReadOnly Property IsReadOnly As Boolean
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly*
+  implements:
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.IsReadOnly
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item(System.String)
+  commentId: P:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item(System.String)
+  id: Item(System.String)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: Item[String]
+  nameWithType: SyndicationResourceProviderCollection.Item[String]
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item[System.String]
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: this[]
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets the provider with the specified name.\n"
+  example: []
+  syntax:
+    content: public SyndicationResourceProvider this[string name] { get; }
+    parameters:
+    - id: name
+      type: System.String
+      description: The key by which the provider is identified.
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceProvider
+      description: The <xref href="Argotic.Configuration.Provider.SyndicationResourceProvider" data-throw-if-not-resolved="false"></xref> with the specified name.
+    content.vb: Public ReadOnly Property Item(name As String) As SyndicationResourceProvider
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item*
+  nameWithType.vb: SyndicationResourceProviderCollection.Item(String)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+  fullName.vb: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item(System.String)
+  name.vb: Item(String)
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  id: Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: Add(SyndicationResourceProvider)
+  nameWithType: SyndicationResourceProviderCollection.Add(SyndicationResourceProvider)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Add
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nAdds an item to the collection.\n"
+  example: []
+  syntax:
+    content: public void Add(SyndicationResourceProvider item)
+    parameters:
+    - id: item
+      type: Argotic.Configuration.Provider.SyndicationResourceProvider
+      description: The <xref href="Argotic.Configuration.Provider.SyndicationResourceProvider" data-throw-if-not-resolved="false"></xref> to add to the <xref href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub Add(item As SyndicationResourceProvider)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add*
+  implements:
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  id: Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: Contains(SyndicationResourceProvider)
+  nameWithType: SyndicationResourceProviderCollection.Contains(SyndicationResourceProvider)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Contains
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 50
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nDetermines whether the collection contains a specific value.\n"
+  example: []
+  syntax:
+    content: public bool Contains(SyndicationResourceProvider item)
+    parameters:
+    - id: item
+      type: Argotic.Configuration.Provider.SyndicationResourceProvider
+      description: The <xref href="Argotic.Configuration.Provider.SyndicationResourceProvider" data-throw-if-not-resolved="false"></xref> to locate in the <xref href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if item is found in the <xref href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection" data-throw-if-not-resolved="false"></xref>; otherwise, <strong>false</strong>.
+    content.vb: Public Function Contains(item As SyndicationResourceProvider) As Boolean
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains*
+  implements:
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  id: CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: CopyTo(SyndicationResourceProvider[], Int32)
+  nameWithType: SyndicationResourceProviderCollection.CopyTo(SyndicationResourceProvider[], Int32)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[], System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CopyTo
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 78
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nCopies the elements of the <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProviderCollection\" data-throw-if-not-resolved=\"false\"></xref> to an <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref>, starting at a particular <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref> index.\n"
+  example: []
+  syntax:
+    content: public void CopyTo(SyndicationResourceProvider[] array, int arrayIndex)
+    parameters:
+    - id: array
+      type: Argotic.Configuration.Provider.SyndicationResourceProvider[]
+      description: "\nThe one-dimensional <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref> that is the destination of the elements copied from <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProviderCollection\" data-throw-if-not-resolved=\"false\"></xref>.\nThe <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref> must have zero-based indexing.\n"
+    - id: arrayIndex
+      type: System.Int32
+      description: The zero-based index in <code data-dev-comment-type="paramref" class="paramref">array</code> at which copying begins.
+    content.vb: Public Sub CopyTo(array As SyndicationResourceProvider(), arrayIndex As Integer)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo*
+  implements:
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  nameWithType.vb: SyndicationResourceProviderCollection.CopyTo(SyndicationResourceProvider(), Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider(), System.Int32)
+  name.vb: CopyTo(SyndicationResourceProvider(), Int32)
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator
+  id: GetEnumerator
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: SyndicationResourceProviderCollection.GetEnumerator()
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetEnumerator
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 87
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nReturns an enumerator that iterates through the collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerator<SyndicationResourceProvider> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{Argotic.Configuration.Provider.SyndicationResourceProvider}
+      description: A <xref href="System.Collections.Generic.IEnumerator%601" data-throw-if-not-resolved="false"></xref> that can be used to iterate through the collection.
+    content.vb: Public Function GetEnumerator As IEnumerator(Of SyndicationResourceProvider)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}.GetEnumerator
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  id: Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  langs:
+  - csharp
+  - vb
+  name: Remove(SyndicationResourceProvider)
+  nameWithType: SyndicationResourceProviderCollection.Remove(SyndicationResourceProvider)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Remove
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProviderCollection.cs
+    startLine: 103
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nRemoves a specific <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider\" data-throw-if-not-resolved=\"false\"></xref> from the collection.\n"
+  example: []
+  syntax:
+    content: public bool Remove(SyndicationResourceProvider item)
+    parameters:
+    - id: item
+      type: Argotic.Configuration.Provider.SyndicationResourceProvider
+      description: The item.
+    return:
+      type: System.Boolean
+      description: "\n<strong>true</strong> if item was successfully removed from the <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProviderCollection\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, <strong>false</strong>.\nThis method also returns <strong>false</strong> if item is not found in the collection.\n"
+    content.vb: Public Function Remove(item As SyndicationResourceProvider) As Boolean
+  overload: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove*
+  implements:
+  - System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProvider
+  parent: Argotic.Configuration.Provider
+  name: SyndicationResourceProvider
+  nameWithType: SyndicationResourceProvider
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+- uid: Argotic.Configuration.Provider
+  commentId: N:Argotic.Configuration.Provider
+  name: Argotic.Configuration.Provider
+  nameWithType: Argotic.Configuration.Provider
+  fullName: Argotic.Configuration.Provider
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Configuration.Provider.ProviderCollection
+  commentId: T:System.Configuration.Provider.ProviderCollection
+  parent: System.Configuration.Provider
+  isExternal: true
+  name: ProviderCollection
+  nameWithType: ProviderCollection
+  fullName: System.Configuration.Provider.ProviderCollection
+- uid: System.Collections.ICollection
+  commentId: T:System.Collections.ICollection
+  parent: System.Collections
+  isExternal: true
+  name: ICollection
+  nameWithType: ICollection
+  fullName: System.Collections.ICollection
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  commentId: T:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<SyndicationResourceProvider>
+  nameWithType: ICollection<SyndicationResourceProvider>
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider)
+  name.vb: ICollection(Of SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<SyndicationResourceProvider>
+  nameWithType: IEnumerable<SyndicationResourceProvider>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Configuration.Provider.SyndicationResourceProvider>
+  nameWithType.vb: IEnumerable(Of SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Configuration.Provider.SyndicationResourceProvider)
+  name.vb: IEnumerable(Of SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+  commentId: M:System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: Add(ProviderBase)
+  nameWithType: ProviderCollection.Add(ProviderBase)
+  fullName: System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+    name: Add
+    nameWithType: ProviderCollection.Add
+    fullName: System.Configuration.Provider.ProviderCollection.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.Provider.ProviderBase
+    name: ProviderBase
+    nameWithType: ProviderBase
+    fullName: System.Configuration.Provider.ProviderBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)
+    name: Add
+    nameWithType: ProviderCollection.Add
+    fullName: System.Configuration.Provider.ProviderCollection.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.Provider.ProviderBase
+    name: ProviderBase
+    nameWithType: ProviderBase
+    fullName: System.Configuration.Provider.ProviderBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.Clear
+  commentId: M:System.Configuration.Provider.ProviderCollection.Clear
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: Clear()
+  nameWithType: ProviderCollection.Clear()
+  fullName: System.Configuration.Provider.ProviderCollection.Clear()
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.Clear
+    name: Clear
+    nameWithType: ProviderCollection.Clear
+    fullName: System.Configuration.Provider.ProviderCollection.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.Clear
+    name: Clear
+    nameWithType: ProviderCollection.Clear
+    fullName: System.Configuration.Provider.ProviderCollection.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[],System.Int32)
+  commentId: M:System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[],System.Int32)
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: CopyTo(ProviderBase[], Int32)
+  nameWithType: ProviderCollection.CopyTo(ProviderBase[], Int32)
+  fullName: System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[], System.Int32)
+  nameWithType.vb: ProviderCollection.CopyTo(ProviderBase(), Int32)
+  fullName.vb: System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase(), System.Int32)
+  name.vb: CopyTo(ProviderBase(), Int32)
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[],System.Int32)
+    name: CopyTo
+    nameWithType: ProviderCollection.CopyTo
+    fullName: System.Configuration.Provider.ProviderCollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.Provider.ProviderBase
+    name: ProviderBase
+    nameWithType: ProviderBase
+    fullName: System.Configuration.Provider.ProviderBase
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[],System.Int32)
+    name: CopyTo
+    nameWithType: ProviderCollection.CopyTo
+    fullName: System.Configuration.Provider.ProviderCollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.Provider.ProviderBase
+    name: ProviderBase
+    nameWithType: ProviderBase
+    fullName: System.Configuration.Provider.ProviderBase
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.Remove(System.String)
+  commentId: M:System.Configuration.Provider.ProviderCollection.Remove(System.String)
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: Remove(String)
+  nameWithType: ProviderCollection.Remove(String)
+  fullName: System.Configuration.Provider.ProviderCollection.Remove(System.String)
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.Remove(System.String)
+    name: Remove
+    nameWithType: ProviderCollection.Remove
+    fullName: System.Configuration.Provider.ProviderCollection.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.Remove(System.String)
+    name: Remove
+    nameWithType: ProviderCollection.Remove
+    fullName: System.Configuration.Provider.ProviderCollection.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.SetReadOnly
+  commentId: M:System.Configuration.Provider.ProviderCollection.SetReadOnly
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: SetReadOnly()
+  nameWithType: ProviderCollection.SetReadOnly()
+  fullName: System.Configuration.Provider.ProviderCollection.SetReadOnly()
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.SetReadOnly
+    name: SetReadOnly
+    nameWithType: ProviderCollection.SetReadOnly
+    fullName: System.Configuration.Provider.ProviderCollection.SetReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.SetReadOnly
+    name: SetReadOnly
+    nameWithType: ProviderCollection.SetReadOnly
+    fullName: System.Configuration.Provider.ProviderCollection.SetReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+  commentId: M:System.Configuration.Provider.ProviderCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: ICollection.CopyTo(Array, Int32)
+  nameWithType: ProviderCollection.ICollection.CopyTo(Array, Int32)
+  fullName: System.Configuration.Provider.ProviderCollection.System.Collections.ICollection.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: ProviderCollection.System.Collections.ICollection.CopyTo(Array, Int32)
+  name.vb: System.Collections.ICollection.CopyTo(Array, Int32)
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+    name: ICollection.CopyTo
+    nameWithType: ProviderCollection.ICollection.CopyTo
+    fullName: System.Configuration.Provider.ProviderCollection.System.Collections.ICollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+    name: System.Collections.ICollection.CopyTo
+    nameWithType: ProviderCollection.System.Collections.ICollection.CopyTo
+    fullName: System.Configuration.Provider.ProviderCollection.System.Collections.ICollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderCollection.Count
+  commentId: P:System.Configuration.Provider.ProviderCollection.Count
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: Count
+  nameWithType: ProviderCollection.Count
+  fullName: System.Configuration.Provider.ProviderCollection.Count
+- uid: System.Configuration.Provider.ProviderCollection.IsSynchronized
+  commentId: P:System.Configuration.Provider.ProviderCollection.IsSynchronized
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: IsSynchronized
+  nameWithType: ProviderCollection.IsSynchronized
+  fullName: System.Configuration.Provider.ProviderCollection.IsSynchronized
+- uid: System.Configuration.Provider.ProviderCollection.SyncRoot
+  commentId: P:System.Configuration.Provider.ProviderCollection.SyncRoot
+  parent: System.Configuration.Provider.ProviderCollection
+  isExternal: true
+  name: SyncRoot
+  nameWithType: ProviderCollection.SyncRoot
+  fullName: System.Configuration.Provider.ProviderCollection.SyncRoot
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Configuration.Provider
+  commentId: N:System.Configuration.Provider
+  isExternal: true
+  name: System.Configuration.Provider
+  nameWithType: System.Configuration.Provider
+  fullName: System.Configuration.Provider
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  name: SyndicationResourceProviderCollection
+  nameWithType: SyndicationResourceProviderCollection
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+  name: IsReadOnly
+  nameWithType: SyndicationResourceProviderCollection.IsReadOnly
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.IsReadOnly
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.IsReadOnly
+  parent: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.ICollection`1.IsReadOnly
+  name: IsReadOnly
+  nameWithType: ICollection<SyndicationResourceProvider>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.IsReadOnly
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).IsReadOnly
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Collections.Generic.ICollection`1.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection`1.IsReadOnly
+  isExternal: true
+  name: IsReadOnly
+  nameWithType: ICollection<T>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<T>.IsReadOnly
+  nameWithType.vb: ICollection(Of T).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of T).IsReadOnly
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item
+  name: Item
+  nameWithType: SyndicationResourceProviderCollection.Item
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Item
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add
+  name: Add
+  nameWithType: SyndicationResourceProviderCollection.Add
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Add
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.ICollection`1.Add(`0)
+  name: Add(SyndicationResourceProvider)
+  nameWithType: ICollection<SyndicationResourceProvider>.Add(SyndicationResourceProvider)
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider).Add(SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Add(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection<SyndicationResourceProvider>.Add
+    fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection(Of SyndicationResourceProvider).Add
+    fullName: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Add(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Add(`0)
+  isExternal: true
+  name: Add(T)
+  nameWithType: ICollection<T>.Add(T)
+  fullName: System.Collections.Generic.ICollection<T>.Add(T)
+  nameWithType.vb: ICollection(Of T).Add(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection<T>.Add
+    fullName: System.Collections.Generic.ICollection<T>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection(Of T).Add
+    fullName: System.Collections.Generic.ICollection(Of T).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains
+  name: Contains
+  nameWithType: SyndicationResourceProviderCollection.Contains
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Contains
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.ICollection`1.Contains(`0)
+  name: Contains(SyndicationResourceProvider)
+  nameWithType: ICollection<SyndicationResourceProvider>.Contains(SyndicationResourceProvider)
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider).Contains(SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Contains(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection<SyndicationResourceProvider>.Contains
+    fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection(Of SyndicationResourceProvider).Contains
+    fullName: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Contains(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Contains(`0)
+  isExternal: true
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection<T>.Contains
+    fullName: System.Collections.Generic.ICollection<T>.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection(Of T).Contains
+    fullName: System.Collections.Generic.ICollection(Of T).Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Array
+  commentId: T:System.Array
+  isExternal: true
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo
+  name: CopyTo
+  nameWithType: SyndicationResourceProviderCollection.CopyTo
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)
+  parent: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  name: CopyTo(SyndicationResourceProvider[], Int32)
+  nameWithType: ICollection<SyndicationResourceProvider>.CopyTo(SyndicationResourceProvider[], Int32)
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[], System.Int32)
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider).CopyTo(SyndicationResourceProvider(), Int32)
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider(), System.Int32)
+  name.vb: CopyTo(SyndicationResourceProvider(), Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection<SyndicationResourceProvider>.CopyTo
+    fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection(Of SyndicationResourceProvider).CopyTo
+    fullName: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider[]
+  isExternal: true
+  name: SyndicationResourceProvider[]
+  nameWithType: SyndicationResourceProvider[]
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider[]
+  nameWithType.vb: SyndicationResourceProvider()
+  fullName.vb: Argotic.Configuration.Provider.SyndicationResourceProvider()
+  name.vb: SyndicationResourceProvider()
+  spec.csharp:
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  isExternal: true
+  name: CopyTo(T[], Int32)
+  nameWithType: ICollection<T>.CopyTo(T[], Int32)
+  fullName: System.Collections.Generic.ICollection<T>.CopyTo(T[], System.Int32)
+  nameWithType.vb: ICollection(Of T).CopyTo(T(), Int32)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).CopyTo(T(), System.Int32)
+  name.vb: CopyTo(T(), Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection<T>.CopyTo
+    fullName: System.Collections.Generic.ICollection<T>.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection(Of T).CopyTo
+    fullName: System.Collections.Generic.ICollection(Of T).CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator
+  name: GetEnumerator
+  nameWithType: SyndicationResourceProviderCollection.GetEnumerator
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<SyndicationResourceProvider>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Configuration.Provider.SyndicationResourceProvider>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of SyndicationResourceProvider).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Configuration.Provider.SyndicationResourceProvider).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable<SyndicationResourceProvider>.GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable<Argotic.Configuration.Provider.SyndicationResourceProvider>.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable(Of SyndicationResourceProvider).GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable(Of Argotic.Configuration.Provider.SyndicationResourceProvider).GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerator{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  commentId: T:System.Collections.Generic.IEnumerator{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  name: IEnumerator<SyndicationResourceProvider>
+  nameWithType: IEnumerator<SyndicationResourceProvider>
+  fullName: System.Collections.Generic.IEnumerator<Argotic.Configuration.Provider.SyndicationResourceProvider>
+  nameWithType.vb: IEnumerator(Of SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of Argotic.Configuration.Provider.SyndicationResourceProvider)
+  name.vb: IEnumerator(Of SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable<T>.GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable(Of T).GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable(Of T).GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove
+  name: Remove
+  nameWithType: SyndicationResourceProviderCollection.Remove
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection.Remove
+- uid: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  commentId: M:System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  parent: System.Collections.Generic.ICollection{Argotic.Configuration.Provider.SyndicationResourceProvider}
+  definition: System.Collections.Generic.ICollection`1.Remove(`0)
+  name: Remove(SyndicationResourceProvider)
+  nameWithType: ICollection<SyndicationResourceProvider>.Remove(SyndicationResourceProvider)
+  fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  nameWithType.vb: ICollection(Of SyndicationResourceProvider).Remove(SyndicationResourceProvider)
+  fullName.vb: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Remove(Argotic.Configuration.Provider.SyndicationResourceProvider)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection<SyndicationResourceProvider>.Remove
+    fullName: System.Collections.Generic.ICollection<Argotic.Configuration.Provider.SyndicationResourceProvider>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection(Of SyndicationResourceProvider).Remove
+    fullName: System.Collections.Generic.ICollection(Of Argotic.Configuration.Provider.SyndicationResourceProvider).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+    name: SyndicationResourceProvider
+    nameWithType: SyndicationResourceProvider
+    fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Remove(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Remove(`0)
+  isExternal: true
+  name: Remove(T)
+  nameWithType: ICollection<T>.Remove(T)
+  fullName: System.Collections.Generic.ICollection<T>.Remove(T)
+  nameWithType.vb: ICollection(Of T).Remove(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection<T>.Remove
+    fullName: System.Collections.Generic.ICollection<T>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection(Of T).Remove
+    fullName: System.Collections.Generic.ICollection(Of T).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )

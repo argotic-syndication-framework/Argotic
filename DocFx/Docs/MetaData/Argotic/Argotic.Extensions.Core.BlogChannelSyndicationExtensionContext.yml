@@ -1,0 +1,748 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  id: BlogChannelSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: BlogChannelSyndicationExtensionContext
+  nameWithType: BlogChannelSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogChannelSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.BlogChannelSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class BlogChannelSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class BlogChannelSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: BlogChannelSyndicationExtensionContext()
+  nameWithType: BlogChannelSyndicationExtensionContext.BlogChannelSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogChannelSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 36
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public BlogChannelSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+  commentId: P:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+  id: Blink
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Blink
+  nameWithType: BlogChannelSyndicationExtensionContext.Blink
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Blink
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 44
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URL of a weblog that the author is promoting.\n"
+  example: []
+  syntax:
+    content: public Uri Blink { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of a weblog that the author is promoting.
+    content.vb: Public Property Blink As Uri
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+  commentId: P:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+  id: BlogRoll
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: BlogRoll
+  nameWithType: BlogChannelSyndicationExtensionContext.BlogRoll
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogRoll
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 61
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URL of an OPML file containing the blogroll for the web site.\n"
+  example: []
+  syntax:
+    content: public Uri BlogRoll { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of an OPML file containing the blogroll for the web site.
+    content.vb: Public Property BlogRoll As Uri
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+  commentId: P:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+  id: Changes
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Changes
+  nameWithType: BlogChannelSyndicationExtensionContext.Changes
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Changes
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 84
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URL the web site&apos;s change tracking endpoint.\n"
+  remarks: "\nWhen a feed that contains this element updates, it pings a server that updates this file.\nThe presence of this element indicates to aggregators that they only have to read the changes file to see if this feed has updated.\nIf several feeds point to the same changes file, aggregators have to do less polling, resulting in better use of server bandwidth and faster scans.\nSee <a href=\"http://www.xmlrpc.com/weblogsComForRss\">http://www.xmlrpc.com/weblogsComForRss</a> for technical details.\n"
+  example: []
+  syntax:
+    content: public Uri Changes { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL the web site&apos;s change tracking endpoint.
+    content.vb: Public Property Changes As Uri
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+  commentId: P:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+  id: MySubscriptions
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: MySubscriptions
+  nameWithType: BlogChannelSyndicationExtensionContext.MySubscriptions
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MySubscriptions
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 101
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URL of an OPML file containing the author&apos;s feed subscriptions.\n"
+  example: []
+  syntax:
+    content: public Uri MySubscriptions { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of an OPML file containing the author&apos;s feed subscriptions.
+    content.vb: Public Property MySubscriptions As Uri
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: BlogChannelSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 122
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: BlogChannelSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/BlogChannel/BlogChannelSyndicationExtensionContext.cs
+    startLine: 186
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.BlogChannelSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: BlogChannelSyndicationExtension
+  nameWithType: BlogChannelSyndicationExtension
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: BlogChannelSyndicationExtensionContext
+  nameWithType: BlogChannelSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.#ctor
+  name: BlogChannelSyndicationExtensionContext
+  nameWithType: BlogChannelSyndicationExtensionContext.BlogChannelSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogChannelSyndicationExtensionContext
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+  name: Blink
+  nameWithType: BlogChannelSyndicationExtensionContext.Blink
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Blink
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+  name: BlogRoll
+  nameWithType: BlogChannelSyndicationExtensionContext.BlogRoll
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.BlogRoll
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+  name: Changes
+  nameWithType: BlogChannelSyndicationExtensionContext.Changes
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Changes
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+  name: MySubscriptions
+  nameWithType: BlogChannelSyndicationExtensionContext.MySubscriptions
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.MySubscriptions
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: BlogChannelSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: BlogChannelSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.WriteTo
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

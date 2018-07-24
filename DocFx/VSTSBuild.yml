@@ -1,0 +1,24 @@
+resources:
+- repo: self
+  clean: true
+
+steps:
+- powershell: . 'DocFX/CleanUpWiki.ps1' DocFX 
+  displayName: Clean up wiki articles
+
+- powershell: . 'DocFX/CreateToc.ps1' DocFX 
+  displayName: Create TOC.yml
+
+- task: chrismason.vsts-docfxtasks.docfx-extension-build-task.DocFxTask@0
+  displayName: Create DocFx Documentation
+  inputs:
+    solution: 'DocFX/docfx.json'
+    docfxOptions: 'docFX DocFX/docfx.json'
+
+- task: ArchiveFiles@2
+  displayName: Archive DocFX/Docs/_site
+  inputs:
+    rootFolderOrFile: 'DocFX/Docs/_site'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'

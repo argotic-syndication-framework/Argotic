@@ -1,0 +1,55 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  id: Argotic.Extensions
+  children:
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  - Argotic.Extensions.ISyndicationExtension
+  - Argotic.Extensions.SyndicationExtension
+  - Argotic.Extensions.SyndicationExtensionAdapter
+  - Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+  type: Namespace
+  assemblies:
+  - Argotic.Extensions
+references:
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: Argotic.Extensions.SyndicationExtension
+  commentId: T:Argotic.Extensions.SyndicationExtension
+  parent: Argotic.Extensions
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension
+- uid: Argotic.Extensions.SyndicationExtensionAdapter
+  commentId: T:Argotic.Extensions.SyndicationExtensionAdapter
+  name: SyndicationExtensionAdapter
+  nameWithType: SyndicationExtensionAdapter
+  fullName: Argotic.Extensions.SyndicationExtensionAdapter
+- uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  commentId: T:Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  parent: Argotic.Extensions
+  name: SyndicationExtensionLoadedEventArgs
+  nameWithType: SyndicationExtensionLoadedEventArgs
+  fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions

@@ -1,0 +1,177 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  id: FeedSynchronizationConflictPreservationDirective
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Ignore
+  - Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.None
+  - Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Perform
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationConflictPreservationDirective
+  nameWithType: FeedSynchronizationConflictPreservationDirective
+  fullName: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedSynchronizationConflictPreservationDirective
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents whether conflict preservation should be performed for a <xref href=\"Argotic.Extensions.Core.FeedSynchronizationItem\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum FeedSynchronizationConflictPreservationDirective
+    content.vb: >-
+      <Serializable>
+
+      Public Enum FeedSynchronizationConflictPreservationDirective
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation
+    commentId: P:Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationItem
+    commentId: T:Argotic.Extensions.Core.FeedSynchronizationItem
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.None
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.None
+  id: None
+  parent: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: FeedSynchronizationConflictPreservationDirective.None
+  fullName: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo conflict preservation processing directive specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Ignore
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Ignore
+  id: Ignore
+  parent: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  langs:
+  - csharp
+  - vb
+  name: Ignore
+  nameWithType: FeedSynchronizationConflictPreservationDirective.Ignore
+  fullName: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Ignore
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Ignore
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nConflict preservation <strong>must not</strong> be performed for the item.\n"
+  example: []
+  syntax:
+    content: Ignore = 1
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Perform
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Perform
+  id: Perform
+  parent: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  langs:
+  - csharp
+  - vb
+  name: Perform
+  nameWithType: FeedSynchronizationConflictPreservationDirective.Perform
+  fullName: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.Perform
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Perform
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationConflictPreservationDirective.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nConflict preservation <strong>must</strong> be performed for the item.\n"
+  example: []
+  syntax:
+    content: Perform = 2
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.FeedSynchronizationItem
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationItem
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationItem
+  nameWithType: FeedSynchronizationItem
+  fullName: Argotic.Extensions.Core.FeedSynchronizationItem
+- uid: Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation
+  isExternal: true
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationConflictPreservationDirective
+  nameWithType: FeedSynchronizationConflictPreservationDirective
+  fullName: Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective

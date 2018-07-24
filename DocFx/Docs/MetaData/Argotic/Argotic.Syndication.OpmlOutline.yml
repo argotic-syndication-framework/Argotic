@@ -1,0 +1,2707 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.OpmlOutline
+  commentId: T:Argotic.Syndication.OpmlOutline
+  id: OpmlOutline
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.OpmlOutline.#ctor
+  - Argotic.Syndication.OpmlOutline.#ctor(System.String)
+  - Argotic.Syndication.OpmlOutline.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.OpmlOutline.Attributes
+  - Argotic.Syndication.OpmlOutline.Categories
+  - Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline},System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline})
+  - Argotic.Syndication.OpmlOutline.CompareTo(System.Object)
+  - Argotic.Syndication.OpmlOutline.ContentType
+  - Argotic.Syndication.OpmlOutline.CreatedOn
+  - Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  - Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  - Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri,System.Uri,System.String,System.String,System.String,System.Globalization.CultureInfo)
+  - Argotic.Syndication.OpmlOutline.Equals(System.Object)
+  - Argotic.Syndication.OpmlOutline.Extensions
+  - Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Syndication.OpmlOutline.GetHashCode
+  - Argotic.Syndication.OpmlOutline.HasBreakpoint
+  - Argotic.Syndication.OpmlOutline.HasExtensions
+  - Argotic.Syndication.OpmlOutline.IsCommented
+  - Argotic.Syndication.OpmlOutline.IsInclusionOutline
+  - Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+  - Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.OpmlOutline.op_Equality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  - Argotic.Syndication.OpmlOutline.op_GreaterThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  - Argotic.Syndication.OpmlOutline.op_Inequality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  - Argotic.Syndication.OpmlOutline.op_LessThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  - Argotic.Syndication.OpmlOutline.Outlines
+  - Argotic.Syndication.OpmlOutline.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.OpmlOutline.Text
+  - Argotic.Syndication.OpmlOutline.ToString
+  - Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: OpmlOutline
+  nameWithType: OpmlOutline
+  fullName: Argotic.Syndication.OpmlOutline
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OpmlOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents a discrete entity within an <xref href=\"Argotic.Syndication.OpmlDocument\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Opml\\OpmlOutlineExample.cs\" region=\"OpmlOutline\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class OpmlOutline : IComparable, IExtensibleSyndicationObject
+    content.vb: >-
+      <Serializable>
+
+      Public Class OpmlOutline
+
+          Implements IComparable, IExtensibleSyndicationObject
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Syndication.OpmlOutline.#ctor
+  commentId: M:Argotic.Syndication.OpmlOutline.#ctor
+  id: '#ctor'
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: OpmlOutline()
+  nameWithType: OpmlOutline.OpmlOutline()
+  fullName: Argotic.Syndication.OpmlOutline.OpmlOutline()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public OpmlOutline()
+    content.vb: Public Sub New
+  overload: Argotic.Syndication.OpmlOutline.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.#ctor(System.String)
+  commentId: M:Argotic.Syndication.OpmlOutline.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: OpmlOutline(String)
+  nameWithType: OpmlOutline.OpmlOutline(String)
+  fullName: Argotic.Syndication.OpmlOutline.OpmlOutline(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 71
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied text.\n"
+  remarks: "\nTextual values <em>may</em> contain encoded HTML markup.\n"
+  example: []
+  syntax:
+    content: public OpmlOutline(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: The textual content of this outline.
+    content.vb: Public Sub New(text As String)
+  overload: Argotic.Syndication.OpmlOutline.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.Attributes
+  commentId: P:Argotic.Syndication.OpmlOutline.Attributes
+  id: Attributes
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Attributes
+  nameWithType: OpmlOutline.Attributes
+  fullName: Argotic.Syndication.OpmlOutline.Attributes
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Attributes
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 84
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a collection of key/value string pairs that represent custom attributes applied to this outline.\n"
+  remarks: "\nThe attributes <strong>text</strong>, <strong>type</strong>, <strong>isComment</strong>, <strong>isBreakpoint</strong>, <strong>created</strong>, and <strong>category</strong> are treated as special\nwithin the OPML specification. Use the class properties that represent these attributes instead of adding them to this collection.\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, string> Attributes { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: A <xref href="System.Collections.Generic.Dictionary%602" data-throw-if-not-resolved="false"></xref> of strings that represent custom attributes applied to this outline.
+    content.vb: Public ReadOnly Property Attributes As Dictionary(Of String, String)
+  overload: Argotic.Syndication.OpmlOutline.Attributes*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.Categories
+  commentId: P:Argotic.Syndication.OpmlOutline.Categories
+  id: Categories
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: OpmlOutline.Categories
+  fullName: Argotic.Syndication.OpmlOutline.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 100
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a collection that describes the categorization taxonomy applied to this outline.\n"
+  remarks: "\nCategories are represented as slash-delimited strings, in the format defined by the <a href=\"http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt\">RSS 2.0 category element</a>.\nTo represent a <em>tag</em>, the category string should contain <u>no</u> slashes.\n"
+  example: []
+  syntax:
+    content: public Collection<string> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> of strings that represent the categorization taxonomy applied to this outline.
+    content.vb: Public ReadOnly Property Categories As Collection(Of String)
+  overload: Argotic.Syndication.OpmlOutline.Categories*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.ContentType
+  commentId: P:Argotic.Syndication.OpmlOutline.ContentType
+  id: ContentType
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: ContentType
+  nameWithType: OpmlOutline.ContentType
+  fullName: Argotic.Syndication.OpmlOutline.ContentType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContentType
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets a value indicating how this outline&apos;s attributes should be interpreted.\n"
+  example: []
+  syntax:
+    content: public string ContentType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A value indicating how this outline&apos;s attributes should be interpreted.
+    content.vb: Public Property ContentType As String
+  overload: Argotic.Syndication.OpmlOutline.ContentType*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.CreatedOn
+  commentId: P:Argotic.Syndication.OpmlOutline.CreatedOn
+  id: CreatedOn
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CreatedOn
+  nameWithType: OpmlOutline.CreatedOn
+  fullName: Argotic.Syndication.OpmlOutline.CreatedOn
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreatedOn
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 135
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets a date-time indicating when this outline was created.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime CreatedOn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates when this outline was created.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no creation date was provided.\n"
+    content.vb: Public Property CreatedOn As Date
+  overload: Argotic.Syndication.OpmlOutline.CreatedOn*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.Extensions
+  commentId: P:Argotic.Syndication.OpmlOutline.Extensions
+  id: Extensions
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: OpmlOutline.Extensions
+  fullName: Argotic.Syndication.OpmlOutline.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 145
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Syndication.OpmlOutline.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.HasBreakpoint
+  commentId: P:Argotic.Syndication.OpmlOutline.HasBreakpoint
+  id: HasBreakpoint
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: HasBreakpoint
+  nameWithType: OpmlOutline.HasBreakpoint
+  fullName: Argotic.Syndication.OpmlOutline.HasBreakpoint
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasBreakpoint
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 166
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets a value indicating whether gets or sets a value indicating if a breakpoint is set on this outline.\n"
+  remarks: "\nThis property is mainly necessary for outlines used to edit scripts. If it&apos;s not present, the value is <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool HasBreakpoint { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if a breakpoint is set on this outline; otherwise <strong>false</strong>.
+    content.vb: Public Property HasBreakpoint As Boolean
+  overload: Argotic.Syndication.OpmlOutline.HasBreakpoint*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.HasExtensions
+  commentId: P:Argotic.Syndication.OpmlOutline.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: OpmlOutline.HasExtensions
+  fullName: Argotic.Syndication.OpmlOutline.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 172
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.OpmlOutline.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Syndication.OpmlOutline.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.IsCommented
+  commentId: P:Argotic.Syndication.OpmlOutline.IsCommented
+  id: IsCommented
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: IsCommented
+  nameWithType: OpmlOutline.IsCommented
+  fullName: Argotic.Syndication.OpmlOutline.IsCommented
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsCommented
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 187
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets a value indicating whether this outline is commented.\n"
+  remarks: "\nBy convention if an outline is commented, all subordinate outlines are considered to also be commented. If it&apos;s not present, the value is <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool IsCommented { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if this outline is commented; otherwise <strong>false</strong>.
+    content.vb: Public Property IsCommented As Boolean
+  overload: Argotic.Syndication.OpmlOutline.IsCommented*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.IsInclusionOutline
+  commentId: P:Argotic.Syndication.OpmlOutline.IsInclusionOutline
+  id: IsInclusionOutline
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: IsInclusionOutline
+  nameWithType: OpmlOutline.IsInclusionOutline
+  fullName: Argotic.Syndication.OpmlOutline.IsInclusionOutline
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsInclusionOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 194
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a value indicating whether gets a value indicating if this outline represents an inclusion.\n"
+  example: []
+  syntax:
+    content: public bool IsInclusionOutline { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.OpmlOutline.ContentType" data-throw-if-not-resolved="false"></xref> is <em>include</em> or <em>link</em>; otherwise <strong>false</strong>.
+    content.vb: Public ReadOnly Property IsInclusionOutline As Boolean
+  overload: Argotic.Syndication.OpmlOutline.IsInclusionOutline*
+  seealso:
+  - linkId: Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+    commentId: M:Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+  commentId: P:Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+  id: IsSubscriptionListOutline
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: IsSubscriptionListOutline
+  nameWithType: OpmlOutline.IsSubscriptionListOutline
+  fullName: Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsSubscriptionListOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 208
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a value indicating whether gets a value indicating if this outline represents a subscription list.\n"
+  example: []
+  syntax:
+    content: public bool IsSubscriptionListOutline { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.OpmlOutline.ContentType" data-throw-if-not-resolved="false"></xref> is <em>rss</em> or <em>feed</em>; otherwise <strong>false</strong>.
+    content.vb: Public ReadOnly Property IsSubscriptionListOutline As Boolean
+  overload: Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline*
+  seealso:
+  - linkId: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+    commentId: M:Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.Outlines
+  commentId: P:Argotic.Syndication.OpmlOutline.Outlines
+  id: Outlines
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Outlines
+  nameWithType: OpmlOutline.Outlines
+  fullName: Argotic.Syndication.OpmlOutline.Outlines
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Outlines
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 221
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a collection of outlines that are children of this outline.\n"
+  example: []
+  syntax:
+    content: public Collection<OpmlOutline> Outlines { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> of <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> objects that represent the children of this outline.
+    content.vb: Public ReadOnly Property Outlines As Collection(Of OpmlOutline)
+  overload: Argotic.Syndication.OpmlOutline.Outlines*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.OpmlOutline.Text
+  commentId: P:Argotic.Syndication.OpmlOutline.Text
+  id: Text
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Text
+  nameWithType: OpmlOutline.Text
+  fullName: Argotic.Syndication.OpmlOutline.Text
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Text
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 238
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the textual content of this outline.\n"
+  remarks: "\nTextual values <em>may</em> contain encoded HTML markup.\n"
+  example: []
+  syntax:
+    content: public string Text { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The textual content of this outline.
+    content.vb: Public Property Text As String
+  overload: Argotic.Syndication.OpmlOutline.Text*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.op_Equality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  commentId: M:Argotic.Syndication.OpmlOutline.op_Equality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  id: op_Equality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Equality(OpmlOutline, OpmlOutline)
+  nameWithType: OpmlOutline.Equality(OpmlOutline, OpmlOutline)
+  fullName: Argotic.Syndication.OpmlOutline.Equality(Argotic.Syndication.OpmlOutline, Argotic.Syndication.OpmlOutline)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 258
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(OpmlOutline first, OpmlOutline second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As OpmlOutline, second As OpmlOutline) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.op_GreaterThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  commentId: M:Argotic.Syndication.OpmlOutline.op_GreaterThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  id: op_GreaterThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(OpmlOutline, OpmlOutline)
+  nameWithType: OpmlOutline.GreaterThan(OpmlOutline, OpmlOutline)
+  fullName: Argotic.Syndication.OpmlOutline.GreaterThan(Argotic.Syndication.OpmlOutline, Argotic.Syndication.OpmlOutline)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 279
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(OpmlOutline first, OpmlOutline second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As OpmlOutline, second As OpmlOutline) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.op_Inequality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  commentId: M:Argotic.Syndication.OpmlOutline.op_Inequality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  id: op_Inequality(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Inequality(OpmlOutline, OpmlOutline)
+  nameWithType: OpmlOutline.Inequality(OpmlOutline, OpmlOutline)
+  fullName: Argotic.Syndication.OpmlOutline.Inequality(Argotic.Syndication.OpmlOutline, Argotic.Syndication.OpmlOutline)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 300
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(OpmlOutline first, OpmlOutline second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As OpmlOutline, second As OpmlOutline) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.op_LessThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  commentId: M:Argotic.Syndication.OpmlOutline.op_LessThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  id: op_LessThan(Argotic.Syndication.OpmlOutline,Argotic.Syndication.OpmlOutline)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: LessThan(OpmlOutline, OpmlOutline)
+  nameWithType: OpmlOutline.LessThan(OpmlOutline, OpmlOutline)
+  fullName: Argotic.Syndication.OpmlOutline.LessThan(Argotic.Syndication.OpmlOutline, Argotic.Syndication.OpmlOutline)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 311
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(OpmlOutline first, OpmlOutline second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.OpmlOutline
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As OpmlOutline, second As OpmlOutline) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline},System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline})
+  commentId: M:Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline},System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline},System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline})
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<OpmlOutline>, Collection<OpmlOutline>)
+  nameWithType: OpmlOutline.CompareSequence(Collection<OpmlOutline>, Collection<OpmlOutline>)
+  fullName: Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection<Argotic.Syndication.OpmlOutline>, System.Collections.ObjectModel.Collection<Argotic.Syndication.OpmlOutline>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 345
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares two specified <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of OpmlOutline), target As Collection(Of OpmlOutline)) As Integer
+  overload: Argotic.Syndication.OpmlOutline.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: OpmlOutline.CompareSequence(Collection(Of OpmlOutline), Collection(Of OpmlOutline))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection(Of Argotic.Syndication.OpmlOutline), System.Collections.ObjectModel.Collection(Of Argotic.Syndication.OpmlOutline))
+  name.vb: CompareSequence(Collection(Of OpmlOutline), Collection(Of OpmlOutline))
+- uid: Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  commentId: M:Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  id: CreateInclusionOutline(System.String,System.Uri)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CreateInclusionOutline(String, Uri)
+  nameWithType: OpmlOutline.CreateInclusionOutline(String, Uri)
+  fullName: Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String, System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateInclusionOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 393
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> that represents an inclusion outline using the supplied parameters.\n"
+  remarks: "\n<p>\n    When a outline is expanded in an outliner, if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">url</code> ends with <em>.opml</em>, the outline expands in place. This is called <strong>inclusion</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">url</code> does not end with <em>.opml</em>, the link is assumed to point to something that can be displayed in a web browser.\n</p>\n<p>The difference between <strong>link</strong> and <strong>include</strong> is that <em>link</em> may point to something that is displayed in a web browser, and <em>include</em> always points to an OPML file.</p>\n<p>\n    This method will create an <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> with a <xref href=\"Argotic.Syndication.OpmlOutline.ContentType\" data-throw-if-not-resolved=\"false\"></xref> of <strong>include</strong> if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">url</code> ends with <em>.opml</em>,\n    otherwise the <xref href=\"Argotic.Syndication.OpmlOutline.ContentType\" data-throw-if-not-resolved=\"false\"></xref> will have a value of <strong>link</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static OpmlOutline CreateInclusionOutline(string text, Uri url)
+    parameters:
+    - id: text
+      type: System.String
+      description: The textual content of the outline.
+    - id: url
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents an http address.
+    return:
+      type: Argotic.Syndication.OpmlOutline
+      description: A new <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> object that represents an inclusion outline, initialized using the supplied parameters.
+    content.vb: Public Shared Function CreateInclusionOutline(text As String, url As Uri) As OpmlOutline
+  overload: Argotic.Syndication.OpmlOutline.CreateInclusionOutline*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  commentId: M:Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  id: CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CreateSubscriptionListOutline(String, String, Uri)
+  nameWithType: OpmlOutline.CreateSubscriptionListOutline(String, String, Uri)
+  fullName: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String, System.String, System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSubscriptionListOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 429
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> that represents a subscription list outline using the supplied parameters.\n"
+  remarks: "\n<p>\n    A subscription list is a possibly multiple-level list of subscriptions to feeds. Each sub-element of the body of the OPML document\n    is a node of type <em>rss</em> or an outline element that contains nodes of type <em>rss</em>.\n</p>\n<p>\n    Today, most subscription lists are a flat sequence of <em>rss</em> nodes, but some aggregators allow categorized subscription lists\n    that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.\n</p>\n"
+  example: []
+  syntax:
+    content: public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
+    parameters:
+    - id: text
+      type: System.String
+      description: The textual content of the outline.
+    - id: type
+      type: System.String
+      description: The syndication format of the feed being pointed to. Permissible values include <em>rss</em> or <em>feed</em>.
+    - id: xmlUrl
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the http address of the feed.
+    return:
+      type: Argotic.Syndication.OpmlOutline
+      description: A new <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> object that represents a subscription list outline, initialized using the supplied parameters.
+    content.vb: Public Shared Function CreateSubscriptionListOutline(text As String, type As String, xmlUrl As Uri) As OpmlOutline
+  overload: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlUrl</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri,System.Uri,System.String,System.String,System.String,System.Globalization.CultureInfo)
+  commentId: M:Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri,System.Uri,System.String,System.String,System.String,System.Globalization.CultureInfo)
+  id: CreateSubscriptionListOutline(System.String,System.String,System.Uri,System.Uri,System.String,System.String,System.String,System.Globalization.CultureInfo)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CreateSubscriptionListOutline(String, String, Uri, Uri, String, String, String, CultureInfo)
+  nameWithType: OpmlOutline.CreateSubscriptionListOutline(String, String, Uri, Uri, String, String, String, CultureInfo)
+  fullName: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String, System.String, System.Uri, System.Uri, System.String, System.String, System.String, System.Globalization.CultureInfo)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSubscriptionListOutline
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 465
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> that represents a subscription list outline using the supplied parameters.\n"
+  remarks: "\n<p>\n    A subscription list is a possibly multiple-level list of subscriptions to feeds. Each sub-element of the body of the OPML document\n    is a node of type <em>rss</em> or an outline element that contains nodes of type <em>rss</em>.\n</p>\n<p>\n    Today, most subscription lists are a flat sequence of <em>rss</em> nodes, but some aggregators allow categorized subscription lists\n    that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.\n</p>\n"
+  example: []
+  syntax:
+    content: public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
+    parameters:
+    - id: text
+      type: System.String
+      description: The textual content of the outline.
+    - id: type
+      type: System.String
+      description: The syndication format of the feed being pointed to. Permissible values include <em>rss</em> or <em>feed</em>.
+    - id: xmlUrl
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the http address of the feed.
+    - id: htmlUrl
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the web site that hosts the feed. This value can be <strong>null</strong>.
+    - id: version
+      type: System.String
+      description: "\nThe version of the syndication format for the feed that&apos;s being pointed to.\nPermissible values include <em>RSS</em>, <em>RSS1</em>, <em>scriptingNews</em>, or a custom version identifier for the feed.\nThis value can be an empty string.\n"
+    - id: title
+      type: System.String
+      description: The title of the feed. This value can be an empty string.
+    - id: description
+      type: System.String
+      description: The description of the feed. This value can be an empty string.
+    - id: language
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which the feed is written. This value can be <strong>null</strong>.
+    return:
+      type: Argotic.Syndication.OpmlOutline
+      description: A new <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> object that represents a subscription list outline, initialized using the supplied parameters.
+    content.vb: Public Shared Function CreateSubscriptionListOutline(text As String, type As String, xmlUrl As Uri, htmlUrl As Uri, version As String, title As String, description As String, language As CultureInfo) As OpmlOutline
+  overload: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlUrl</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.OpmlOutline.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.OpmlOutline.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: OpmlOutline.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.OpmlOutline.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 510
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.CompareTo(System.Object)
+  commentId: M:Argotic.Syndication.OpmlOutline.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: OpmlOutline.CompareTo(Object)
+  fullName: Argotic.Syndication.OpmlOutline.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 528
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Syndication.OpmlOutline.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.Equals(System.Object)
+  commentId: M:Argotic.Syndication.OpmlOutline.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: OpmlOutline.Equals(Object)
+  fullName: Argotic.Syndication.OpmlOutline.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 560
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Syndication.OpmlOutline.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: OpmlOutline.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 583
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Syndication.OpmlOutline.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Syndication.OpmlOutline.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Syndication.OpmlOutline.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Syndication.OpmlOutline.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: OpmlOutline.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Syndication.OpmlOutline.GetHashCode
+  commentId: M:Argotic.Syndication.OpmlOutline.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: OpmlOutline.GetHashCode()
+  fullName: Argotic.Syndication.OpmlOutline.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 596
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Syndication.OpmlOutline.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: OpmlOutline.Load(XPathNavigator)
+  fullName: Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 612
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: OpmlOutline.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 672
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.OpmlOutline.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: OpmlOutline.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.OpmlOutline.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 733
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Syndication.OpmlOutline.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.OpmlOutline.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.OpmlOutline.ToString
+  commentId: M:Argotic.Syndication.OpmlOutline.ToString
+  id: ToString
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: OpmlOutline.ToString()
+  fullName: Argotic.Syndication.OpmlOutline.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 755
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Syndication.OpmlOutline" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Syndication.OpmlOutline.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Syndication.OpmlOutline
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: OpmlOutline.WriteTo(XmlWriter)
+  fullName: Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs
+    startLine: 780
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSaves the current <xref href=\"Argotic.Syndication.OpmlOutline\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Syndication.OpmlOutline.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Syndication.OpmlDocument
+  commentId: T:Argotic.Syndication.OpmlDocument
+  parent: Argotic.Syndication
+  name: OpmlDocument
+  nameWithType: OpmlDocument
+  fullName: Argotic.Syndication.OpmlDocument
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Syndication.OpmlOutline
+  commentId: T:Argotic.Syndication.OpmlOutline
+  parent: Argotic.Syndication
+  name: OpmlOutline
+  nameWithType: OpmlOutline
+  fullName: Argotic.Syndication.OpmlOutline
+- uid: Argotic.Syndication.OpmlOutline.#ctor*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.#ctor
+  name: OpmlOutline
+  nameWithType: OpmlOutline.OpmlOutline
+  fullName: Argotic.Syndication.OpmlOutline.OpmlOutline
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.Attributes*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Attributes
+  name: Attributes
+  nameWithType: OpmlOutline.Attributes
+  fullName: Argotic.Syndication.OpmlOutline.Attributes
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.Categories*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Categories
+  name: Categories
+  nameWithType: OpmlOutline.Categories
+  fullName: Argotic.Syndication.OpmlOutline.Categories
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Syndication.OpmlOutline.ContentType*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.ContentType
+  name: ContentType
+  nameWithType: OpmlOutline.ContentType
+  fullName: Argotic.Syndication.OpmlOutline.ContentType
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.CreatedOn*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.CreatedOn
+  name: CreatedOn
+  nameWithType: OpmlOutline.CreatedOn
+  fullName: Argotic.Syndication.OpmlOutline.CreatedOn
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: Argotic.Syndication.OpmlOutline.Extensions*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Extensions
+  name: Extensions
+  nameWithType: OpmlOutline.Extensions
+  fullName: Argotic.Syndication.OpmlOutline.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.HasBreakpoint*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.HasBreakpoint
+  name: HasBreakpoint
+  nameWithType: OpmlOutline.HasBreakpoint
+  fullName: Argotic.Syndication.OpmlOutline.HasBreakpoint
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Syndication.OpmlOutline.Extensions
+  commentId: P:Argotic.Syndication.OpmlOutline.Extensions
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.HasExtensions*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.HasExtensions
+  name: HasExtensions
+  nameWithType: OpmlOutline.HasExtensions
+  fullName: Argotic.Syndication.OpmlOutline.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: Argotic.Syndication.OpmlOutline.IsCommented*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.IsCommented
+  name: IsCommented
+  nameWithType: OpmlOutline.IsCommented
+  fullName: Argotic.Syndication.OpmlOutline.IsCommented
+- uid: Argotic.Syndication.OpmlOutline.ContentType
+  commentId: P:Argotic.Syndication.OpmlOutline.ContentType
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  commentId: M:Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.IsInclusionOutline*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.IsInclusionOutline
+  name: IsInclusionOutline
+  nameWithType: OpmlOutline.IsInclusionOutline
+  fullName: Argotic.Syndication.OpmlOutline.IsInclusionOutline
+- uid: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  commentId: M:Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+  name: IsSubscriptionListOutline
+  nameWithType: OpmlOutline.IsSubscriptionListOutline
+  fullName: Argotic.Syndication.OpmlOutline.IsSubscriptionListOutline
+- uid: Argotic.Syndication.OpmlOutline.Outlines*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Outlines
+  name: Outlines
+  nameWithType: OpmlOutline.Outlines
+  fullName: Argotic.Syndication.OpmlOutline.Outlines
+- uid: System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<OpmlOutline>
+  nameWithType: Collection<OpmlOutline>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Syndication.OpmlOutline>
+  nameWithType.vb: Collection(Of OpmlOutline)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Syndication.OpmlOutline)
+  name.vb: Collection(Of OpmlOutline)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Syndication.OpmlOutline
+    name: OpmlOutline
+    nameWithType: OpmlOutline
+    fullName: Argotic.Syndication.OpmlOutline
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Syndication.OpmlOutline
+    name: OpmlOutline
+    nameWithType: OpmlOutline
+    fullName: Argotic.Syndication.OpmlOutline
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.Text*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Text
+  name: Text
+  nameWithType: OpmlOutline.Text
+  fullName: Argotic.Syndication.OpmlOutline.Text
+- uid: Argotic.Syndication.OpmlOutline.op_Equality*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.op_Equality
+  name: Equality
+  nameWithType: OpmlOutline.Equality
+  fullName: Argotic.Syndication.OpmlOutline.Equality
+- uid: Argotic.Syndication.OpmlOutline.op_GreaterThan*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.op_GreaterThan
+  name: GreaterThan
+  nameWithType: OpmlOutline.GreaterThan
+  fullName: Argotic.Syndication.OpmlOutline.GreaterThan
+- uid: Argotic.Syndication.OpmlOutline.op_Inequality*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.op_Inequality
+  name: Inequality
+  nameWithType: OpmlOutline.Inequality
+  fullName: Argotic.Syndication.OpmlOutline.Inequality
+- uid: Argotic.Syndication.OpmlOutline.op_LessThan*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.op_LessThan
+  name: LessThan
+  nameWithType: OpmlOutline.LessThan
+  fullName: Argotic.Syndication.OpmlOutline.LessThan
+- uid: Argotic.Syndication.OpmlOutline.CompareSequence*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.CompareSequence
+  name: CompareSequence
+  nameWithType: OpmlOutline.CompareSequence
+  fullName: Argotic.Syndication.OpmlOutline.CompareSequence
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Syndication.OpmlOutline.CreateInclusionOutline*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.CreateInclusionOutline
+  name: CreateInclusionOutline
+  nameWithType: OpmlOutline.CreateInclusionOutline
+  fullName: Argotic.Syndication.OpmlOutline.CreateInclusionOutline
+- uid: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline
+  name: CreateSubscriptionListOutline
+  nameWithType: OpmlOutline.CreateSubscriptionListOutline
+  fullName: Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Syndication.OpmlOutline.AddExtension*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.AddExtension
+  name: AddExtension
+  nameWithType: OpmlOutline.AddExtension
+  fullName: Argotic.Syndication.OpmlOutline.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Syndication.OpmlOutline.CompareTo*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.CompareTo
+  name: CompareTo
+  nameWithType: OpmlOutline.CompareTo
+  fullName: Argotic.Syndication.OpmlOutline.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.Equals*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Equals
+  name: Equals
+  nameWithType: OpmlOutline.Equals
+  fullName: Argotic.Syndication.OpmlOutline.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.FindExtension*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.FindExtension
+  name: FindExtension
+  nameWithType: OpmlOutline.FindExtension
+  fullName: Argotic.Syndication.OpmlOutline.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.GetHashCode*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.GetHashCode
+  name: GetHashCode
+  nameWithType: OpmlOutline.GetHashCode
+  fullName: Argotic.Syndication.OpmlOutline.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Syndication.OpmlOutline.Load*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.Load
+  name: Load
+  nameWithType: OpmlOutline.Load
+  fullName: Argotic.Syndication.OpmlOutline.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Syndication.OpmlOutline.RemoveExtension*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.RemoveExtension
+  name: RemoveExtension
+  nameWithType: OpmlOutline.RemoveExtension
+  fullName: Argotic.Syndication.OpmlOutline.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.OpmlOutline.ToString*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.ToString
+  name: ToString
+  nameWithType: OpmlOutline.ToString
+  fullName: Argotic.Syndication.OpmlOutline.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Syndication.OpmlOutline.WriteTo*
+  commentId: Overload:Argotic.Syndication.OpmlOutline.WriteTo
+  name: WriteTo
+  nameWithType: OpmlOutline.WriteTo
+  fullName: Argotic.Syndication.OpmlOutline.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

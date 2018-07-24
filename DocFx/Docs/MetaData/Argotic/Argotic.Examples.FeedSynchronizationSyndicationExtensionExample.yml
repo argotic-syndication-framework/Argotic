@@ -1,0 +1,397 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample
+  commentId: T:Argotic.Examples.FeedSynchronizationSyndicationExtensionExample
+  id: FeedSynchronizationSyndicationExtensionExample
+  parent: Argotic.Examples
+  children:
+  - Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationSyndicationExtensionExample
+  nameWithType: FeedSynchronizationSyndicationExtensionExample
+  fullName: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Extensions/Core/FeedSynchronizationSyndicationExtensionExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedSynchronizationSyndicationExtensionExample
+    path: ../Solutions/Argotic.Examples/Extensions/Core/FeedSynchronizationSyndicationExtensionExample.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nContains the code examples for the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  remarks: "\nThis class contains all of the code examples that are referenced by the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class.\nThe code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.\n"
+  example: []
+  syntax:
+    content: public static class FeedSynchronizationSyndicationExtensionExample
+    content.vb: Public Module FeedSynchronizationSyndicationExtensionExample
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample
+  commentId: M:Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample
+  id: ClassExample
+  parent: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample
+  langs:
+  - csharp
+  - vb
+  name: ClassExample()
+  nameWithType: FeedSynchronizationSyndicationExtensionExample.ClassExample()
+  fullName: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Extensions/Core/FeedSynchronizationSyndicationExtensionExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ClassExample
+    path: ../Solutions/Argotic.Examples/Extensions/Core/FeedSynchronizationSyndicationExtensionExample.cs
+    startLine: 20
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the FeedSynchronizationSyndicationExtension class.\n"
+  example: []
+  syntax:
+    content: public static void ClassExample()
+    content.vb: Public Shared Sub ClassExample
+  overload: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationSyndicationExtension
+  nameWithType: FeedSynchronizationSyndicationExtension
+  fullName: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension
+- uid: Argotic.Examples
+  commentId: N:Argotic.Examples
+  name: Argotic.Examples
+  nameWithType: Argotic.Examples
+  fullName: Argotic.Examples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample*
+  commentId: Overload:Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample
+  name: ClassExample
+  nameWithType: FeedSynchronizationSyndicationExtensionExample.ClassExample
+  fullName: Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.ClassExample

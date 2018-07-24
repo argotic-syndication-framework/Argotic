@@ -1,0 +1,2438 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Publishing.AtomWorkspace
+  commentId: T:Argotic.Publishing.AtomWorkspace
+  id: AtomWorkspace
+  parent: Argotic.Publishing
+  children:
+  - Argotic.Publishing.AtomWorkspace.#ctor
+  - Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct)
+  - Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct,System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  - Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Publishing.AtomWorkspace.BaseUri
+  - Argotic.Publishing.AtomWorkspace.Collections
+  - Argotic.Publishing.AtomWorkspace.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  - Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)
+  - Argotic.Publishing.AtomWorkspace.Equals(System.Object)
+  - Argotic.Publishing.AtomWorkspace.Extensions
+  - Argotic.Publishing.AtomWorkspace.FindCollection(System.Predicate{Argotic.Publishing.AtomMemberResources})
+  - Argotic.Publishing.AtomWorkspace.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Publishing.AtomWorkspace.GetHashCode
+  - Argotic.Publishing.AtomWorkspace.HasExtensions
+  - Argotic.Publishing.AtomWorkspace.Item(System.Int32)
+  - Argotic.Publishing.AtomWorkspace.Language
+  - Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomWorkspace.op_Equality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  - Argotic.Publishing.AtomWorkspace.op_GreaterThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  - Argotic.Publishing.AtomWorkspace.op_Inequality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  - Argotic.Publishing.AtomWorkspace.op_LessThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  - Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Publishing.AtomWorkspace.Title
+  - Argotic.Publishing.AtomWorkspace.ToString
+  - Argotic.Publishing.AtomWorkspace.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: AtomWorkspace
+  nameWithType: AtomWorkspace
+  fullName: Argotic.Publishing.AtomWorkspace
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomWorkspace
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 32
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nRepresents a server-defined group of <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> objects that describe member resources.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> class implements the <em>app:workspace</em> element of the <a href=\"http://bitworking.org/projects/atom/rfc5023.html\">Atom Publishing Protocol</a>.\n</p>\n<p>\n    A <xref href=\"Argotic.Publishing.AtomServiceDocument\" data-throw-if-not-resolved=\"false\"></xref> groups <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> into <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n    Operations on <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>, such as creation or deletion, are not defined by the <a href=\"http://bitworking.org/projects/atom/rfc5023.html\">Atom Publishing Protocol</a>\n    specification. The <a href=\"http://bitworking.org/projects/atom/rfc5023.html\">Atom Publishing Protocol</a> specification assigns no meaning to <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>;\n    that is, a <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> does not imply any specific processing assumptions.\n</p>\n<p>\n    There is no requirement that a server support multiple <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n    In addition, a <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> appear in more than one <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+    content.vb: >-
+      <Serializable>
+
+      Public Class AtomWorkspace
+
+          Implements IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  - Argotic.Syndication.IAtomCommonObjectAttributes
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Publishing.AtomWorkspace.#ctor
+  commentId: M:Argotic.Publishing.AtomWorkspace.#ctor
+  id: '#ctor'
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: AtomWorkspace()
+  nameWithType: AtomWorkspace.AtomWorkspace()
+  fullName: Argotic.Publishing.AtomWorkspace.AtomWorkspace()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 54
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public AtomWorkspace()
+    content.vb: Public Sub New
+  overload: Argotic.Publishing.AtomWorkspace.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct)
+  commentId: M:Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct)
+  id: '#ctor(Argotic.Syndication.AtomTextConstruct)'
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: AtomWorkspace(AtomTextConstruct)
+  nameWithType: AtomWorkspace.AtomWorkspace(AtomTextConstruct)
+  fullName: Argotic.Publishing.AtomWorkspace.AtomWorkspace(Argotic.Syndication.AtomTextConstruct)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomWorkspace(AtomTextConstruct title)
+    parameters:
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for the workspace.
+    content.vb: Public Sub New(title As AtomTextConstruct)
+  overload: Argotic.Publishing.AtomWorkspace.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct,System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  commentId: M:Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct,System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  id: '#ctor(Argotic.Syndication.AtomTextConstruct,System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})'
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: AtomWorkspace(AtomTextConstruct, Collection<AtomMemberResources>)
+  nameWithType: AtomWorkspace.AtomWorkspace(AtomTextConstruct, Collection<AtomMemberResources>)
+  fullName: Argotic.Publishing.AtomWorkspace.AtomWorkspace(Argotic.Syndication.AtomTextConstruct, System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomMemberResources>)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 75
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
+    parameters:
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for the workspace.
+    - id: collections
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources}
+      description: The collections.
+    content.vb: Public Sub New(title As AtomTextConstruct, collections As Collection(Of AtomMemberResources))
+  overload: Argotic.Publishing.AtomWorkspace.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">collections</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: AtomWorkspace.AtomWorkspace(AtomTextConstruct, Collection(Of AtomMemberResources))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Publishing.AtomWorkspace.AtomWorkspace(Argotic.Syndication.AtomTextConstruct, System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomMemberResources))
+  name.vb: AtomWorkspace(AtomTextConstruct, Collection(Of AtomMemberResources))
+- uid: Argotic.Publishing.AtomWorkspace.BaseUri
+  commentId: P:Argotic.Publishing.AtomWorkspace.BaseUri
+  id: BaseUri
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: BaseUri
+  nameWithType: AtomWorkspace.BaseUri
+  fullName: Argotic.Publishing.AtomWorkspace.BaseUri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BaseUri
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 95
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the base URI other than the base URI of the document or external entity.\n"
+  remarks: "\n<p>\n    The value of this property is interpreted as a URI Reference as defined in <a href=\"http://www.ietf.org/rfc/rfc2396.txt\">RFC 2396: Uniform Resource Identifiers</a>,\n    after processing according to <a href=\"http://www.w3.org/TR/xmlbase/#escaping\">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>\n"
+  example: []
+  syntax:
+    content: public Uri BaseUri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.
+    content.vb: Public Property BaseUri As Uri
+  overload: Argotic.Publishing.AtomWorkspace.BaseUri*
+  implements:
+  - Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Collections
+  commentId: P:Argotic.Publishing.AtomWorkspace.Collections
+  id: Collections
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Collections
+  nameWithType: AtomWorkspace.Collections
+  fullName: Argotic.Publishing.AtomWorkspace.Collections
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Collections
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 106
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the collections of resources available for editing that are associated with this workspace.\n"
+  remarks: "\n<p>This <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.</p>\n<p>The <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> for the <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> can contain zero or more <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> objects.</p>\n"
+  example: []
+  syntax:
+    content: public IEnumerable<AtomMemberResources> Collections { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Publishing.AtomMemberResources}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> objects that represent the collections of resources available for editing that are associated with this workspace.
+    content.vb: Public Property Collections As IEnumerable(Of AtomMemberResources)
+  overload: Argotic.Publishing.AtomWorkspace.Collections*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Extensions
+  commentId: P:Argotic.Publishing.AtomWorkspace.Extensions
+  id: Extensions
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: AtomWorkspace.Extensions
+  fullName: Argotic.Publishing.AtomWorkspace.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 133
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Publishing.AtomWorkspace.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.HasExtensions
+  commentId: P:Argotic.Publishing.AtomWorkspace.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: AtomWorkspace.HasExtensions
+  fullName: Argotic.Publishing.AtomWorkspace.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 156
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomWorkspace.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Publishing.AtomWorkspace.Language
+  commentId: P:Argotic.Publishing.AtomWorkspace.Language
+  id: Language
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: AtomWorkspace.Language
+  fullName: Argotic.Publishing.AtomWorkspace.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 173
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the natural or formal language in which the content is written.\n"
+  remarks: "\n<p>\n    The value of this property is a language identifier as defined by <a href=\"http://www.ietf.org/rfc/rfc3066.txt\">RFC 3066: Tags for the Identification of Languages</a>, or its successor.\n</p>\n"
+  example: []
+  syntax:
+    content: public CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.
+    content.vb: Public Property Language As CultureInfo
+  overload: Argotic.Publishing.AtomWorkspace.Language*
+  implements:
+  - Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Title
+  commentId: P:Argotic.Publishing.AtomWorkspace.Title
+  id: Title
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: AtomWorkspace.Title
+  fullName: Argotic.Publishing.AtomWorkspace.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 183
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets information that conveys a human-readable title for this workspace.\n"
+  example: []
+  syntax:
+    content: public AtomTextConstruct Title { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.AtomTextConstruct
+      description: "\nA <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref> object that represents information that conveys a human-readable title for this workspace.\nThe default value is an empty <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property Title As AtomTextConstruct
+  overload: Argotic.Publishing.AtomWorkspace.Title*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Item(System.Int32)
+  commentId: P:Argotic.Publishing.AtomWorkspace.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Item[Int32]
+  nameWithType: AtomWorkspace.Item[Int32]
+  fullName: Argotic.Publishing.AtomWorkspace.Item[System.Int32]
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: this[]
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 205
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> available for editing at the specified index.\n"
+  example: []
+  syntax:
+    content: public AtomMemberResources this[int index] { get; set; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The zero-based index of the collection to get or set.
+    return:
+      type: Argotic.Publishing.AtomMemberResources
+      description: The <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> available for editing at the specified index.
+    content.vb: Public Property Item(index As Integer) As AtomMemberResources
+  overload: Argotic.Publishing.AtomWorkspace.Item*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">index</code> is less than zero.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">index</code> is equal to or greater than the count for <xref href="Argotic.Publishing.AtomWorkspace.Collections" data-throw-if-not-resolved="false"></xref>.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: AtomWorkspace.Item(Int32)
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Publishing.AtomWorkspace.Item(System.Int32)
+  name.vb: Item(Int32)
+- uid: Argotic.Publishing.AtomWorkspace.op_Equality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  commentId: M:Argotic.Publishing.AtomWorkspace.op_Equality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  id: op_Equality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Equality(AtomWorkspace, AtomWorkspace)
+  nameWithType: AtomWorkspace.Equality(AtomWorkspace, AtomWorkspace)
+  fullName: Argotic.Publishing.AtomWorkspace.Equality(Argotic.Publishing.AtomWorkspace, Argotic.Publishing.AtomWorkspace)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 225
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(AtomWorkspace first, AtomWorkspace second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As AtomWorkspace, second As AtomWorkspace) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomWorkspace.op_GreaterThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  commentId: M:Argotic.Publishing.AtomWorkspace.op_GreaterThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  id: op_GreaterThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(AtomWorkspace, AtomWorkspace)
+  nameWithType: AtomWorkspace.GreaterThan(AtomWorkspace, AtomWorkspace)
+  fullName: Argotic.Publishing.AtomWorkspace.GreaterThan(Argotic.Publishing.AtomWorkspace, Argotic.Publishing.AtomWorkspace)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 246
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(AtomWorkspace first, AtomWorkspace second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As AtomWorkspace, second As AtomWorkspace) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomWorkspace.op_Inequality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  commentId: M:Argotic.Publishing.AtomWorkspace.op_Inequality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  id: op_Inequality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Inequality(AtomWorkspace, AtomWorkspace)
+  nameWithType: AtomWorkspace.Inequality(AtomWorkspace, AtomWorkspace)
+  fullName: Argotic.Publishing.AtomWorkspace.Inequality(Argotic.Publishing.AtomWorkspace, Argotic.Publishing.AtomWorkspace)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 267
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(AtomWorkspace first, AtomWorkspace second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As AtomWorkspace, second As AtomWorkspace) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomWorkspace.op_LessThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  commentId: M:Argotic.Publishing.AtomWorkspace.op_LessThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  id: op_LessThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: LessThan(AtomWorkspace, AtomWorkspace)
+  nameWithType: AtomWorkspace.LessThan(AtomWorkspace, AtomWorkspace)
+  fullName: Argotic.Publishing.AtomWorkspace.LessThan(Argotic.Publishing.AtomWorkspace, Argotic.Publishing.AtomWorkspace)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 278
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(AtomWorkspace first, AtomWorkspace second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomWorkspace
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As AtomWorkspace, second As AtomWorkspace) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomWorkspace.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  commentId: M:Argotic.Publishing.AtomWorkspace.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources})
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<AtomMemberResources>, Collection<AtomMemberResources>)
+  nameWithType: AtomWorkspace.CompareSequence(Collection<AtomMemberResources>, Collection<AtomMemberResources>)
+  fullName: Argotic.Publishing.AtomWorkspace.CompareSequence(System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomMemberResources>, System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomMemberResources>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 312
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCompares two specified <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of AtomMemberResources), target As Collection(Of AtomMemberResources)) As Integer
+  overload: Argotic.Publishing.AtomWorkspace.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: AtomWorkspace.CompareSequence(Collection(Of AtomMemberResources), Collection(Of AtomMemberResources))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Publishing.AtomWorkspace.CompareSequence(System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomMemberResources), System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomMemberResources))
+  name.vb: CompareSequence(Collection(Of AtomMemberResources), Collection(Of AtomMemberResources))
+- uid: Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)
+  id: AddCollection(Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: AddCollection(AtomMemberResources)
+  nameWithType: AtomWorkspace.AddCollection(AtomMemberResources)
+  fullName: Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddCollection
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 346
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nAdds the supplied <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> to the <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> of the workspace.\n"
+  example: []
+  syntax:
+    content: public bool AddCollection(AtomMemberResources collection)
+    parameters:
+    - id: collection
+      type: Argotic.Publishing.AtomMemberResources
+      description: The <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Publishing.AtomWorkspace.Collections" data-throw-if-not-resolved="false"></xref> of the workspace, otherwise <strong>false</strong>.
+    content.vb: Public Function AddCollection(collection As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.AddCollection*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">collection</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: AtomWorkspace.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 364
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)
+  commentId: M:Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: AtomWorkspace.CompareTo(Object)
+  fullName: Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 382
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Publishing.AtomWorkspace.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Equals(System.Object)
+  commentId: M:Argotic.Publishing.AtomWorkspace.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: AtomWorkspace.Equals(Object)
+  fullName: Argotic.Publishing.AtomWorkspace.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 416
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Publishing.AtomWorkspace.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomWorkspace.FindCollection(System.Predicate{Argotic.Publishing.AtomMemberResources})
+  commentId: M:Argotic.Publishing.AtomWorkspace.FindCollection(System.Predicate{Argotic.Publishing.AtomMemberResources})
+  id: FindCollection(System.Predicate{Argotic.Publishing.AtomMemberResources})
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: FindCollection(Predicate<AtomMemberResources>)
+  nameWithType: AtomWorkspace.FindCollection(Predicate<AtomMemberResources>)
+  fullName: Argotic.Publishing.AtomWorkspace.FindCollection(System.Predicate<Argotic.Publishing.AtomMemberResources>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindCollection
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 439
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSearches for a collection that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> of the workspace.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public AtomMemberResources FindCollection(Predicate<AtomMemberResources> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Publishing.AtomMemberResources}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Publishing.AtomMemberResources
+      description: "\nThe first collection that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindCollection(match As Predicate(Of AtomMemberResources)) As AtomMemberResources
+  overload: Argotic.Publishing.AtomWorkspace.FindCollection*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: AtomWorkspace.FindCollection(Predicate(Of AtomMemberResources))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Publishing.AtomWorkspace.FindCollection(System.Predicate(Of Argotic.Publishing.AtomMemberResources))
+  name.vb: FindCollection(Predicate(Of AtomMemberResources))
+- uid: Argotic.Publishing.AtomWorkspace.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Publishing.AtomWorkspace.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: AtomWorkspace.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Publishing.AtomWorkspace.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 460
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Publishing.AtomWorkspace.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Publishing.AtomWorkspace.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Publishing.AtomWorkspace.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Publishing.AtomWorkspace.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: AtomWorkspace.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Publishing.AtomWorkspace.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Publishing.AtomWorkspace.GetHashCode
+  commentId: M:Argotic.Publishing.AtomWorkspace.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: AtomWorkspace.GetHashCode()
+  fullName: Argotic.Publishing.AtomWorkspace.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 472
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Publishing.AtomWorkspace.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: AtomWorkspace.Load(XPathNavigator)
+  fullName: Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 488
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomWorkspace" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: AtomWorkspace.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomWorkspace.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 543
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomWorkspace" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)
+  id: RemoveCollection(Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: RemoveCollection(AtomMemberResources)
+  nameWithType: AtomWorkspace.RemoveCollection(AtomMemberResources)
+  fullName: Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveCollection
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 567
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> from the <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> of the workspace.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Publishing.AtomWorkspace.Collections\" data-throw-if-not-resolved=\"false\"></xref> of the workspace does not contain the specified <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveCollection(AtomMemberResources collection)
+    parameters:
+    - id: collection
+      type: Argotic.Publishing.AtomMemberResources
+      description: The <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Publishing.AtomWorkspace.Collections" data-throw-if-not-resolved="false"></xref> of the workspace, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveCollection(collection As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.RemoveCollection*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">collection</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: AtomWorkspace.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 591
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Publishing.AtomWorkspace.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Publishing.AtomWorkspace.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomWorkspace.ToString
+  commentId: M:Argotic.Publishing.AtomWorkspace.ToString
+  id: ToString
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: AtomWorkspace.ToString()
+  fullName: Argotic.Publishing.AtomWorkspace.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 613
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Publishing.AtomWorkspace" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Publishing.AtomWorkspace.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomWorkspace.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Publishing.AtomWorkspace.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Publishing.AtomWorkspace
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: AtomWorkspace.WriteTo(XmlWriter)
+  fullName: Argotic.Publishing.AtomWorkspace.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Publishing/AtomWorkspace.cs
+    startLine: 641
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSaves the current <xref href=\"Argotic.Publishing.AtomWorkspace\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Publishing.AtomWorkspace.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Publishing.AtomMemberResources
+  commentId: T:Argotic.Publishing.AtomMemberResources
+  parent: Argotic.Publishing
+  name: AtomMemberResources
+  nameWithType: AtomMemberResources
+  fullName: Argotic.Publishing.AtomMemberResources
+- uid: Argotic.Publishing.AtomWorkspace
+  commentId: T:Argotic.Publishing.AtomWorkspace
+  parent: Argotic.Publishing
+  name: AtomWorkspace
+  nameWithType: AtomWorkspace
+  fullName: Argotic.Publishing.AtomWorkspace
+- uid: Argotic.Publishing.AtomServiceDocument
+  commentId: T:Argotic.Publishing.AtomServiceDocument
+  parent: Argotic.Publishing
+  name: AtomServiceDocument
+  nameWithType: AtomServiceDocument
+  fullName: Argotic.Publishing.AtomServiceDocument
+- uid: Argotic.Publishing
+  commentId: N:Argotic.Publishing
+  name: Argotic.Publishing
+  nameWithType: Argotic.Publishing
+  fullName: Argotic.Publishing
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes
+  commentId: T:Argotic.Syndication.IAtomCommonObjectAttributes
+  parent: Argotic.Syndication
+  name: IAtomCommonObjectAttributes
+  nameWithType: IAtomCommonObjectAttributes
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: Argotic.Publishing.AtomWorkspace.#ctor*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.#ctor
+  name: AtomWorkspace
+  nameWithType: AtomWorkspace.AtomWorkspace
+  fullName: Argotic.Publishing.AtomWorkspace.AtomWorkspace
+- uid: Argotic.Syndication.AtomTextConstruct
+  commentId: T:Argotic.Syndication.AtomTextConstruct
+  parent: Argotic.Syndication
+  name: AtomTextConstruct
+  nameWithType: AtomTextConstruct
+  fullName: Argotic.Syndication.AtomTextConstruct
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomMemberResources}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<AtomMemberResources>
+  nameWithType: Collection<AtomMemberResources>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomMemberResources>
+  nameWithType.vb: Collection(Of AtomMemberResources)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomMemberResources)
+  name.vb: Collection(Of AtomMemberResources)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Publishing.AtomWorkspace.BaseUri*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.BaseUri
+  name: BaseUri
+  nameWithType: AtomWorkspace.BaseUri
+  fullName: Argotic.Publishing.AtomWorkspace.BaseUri
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  name: BaseUri
+  nameWithType: IAtomCommonObjectAttributes.BaseUri
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.Collections
+  commentId: P:Argotic.Publishing.AtomWorkspace.Collections
+  isExternal: true
+- uid: Argotic.Publishing.AtomWorkspace.Collections*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Collections
+  name: Collections
+  nameWithType: AtomWorkspace.Collections
+  fullName: Argotic.Publishing.AtomWorkspace.Collections
+- uid: System.Collections.Generic.IEnumerable{Argotic.Publishing.AtomMemberResources}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Publishing.AtomMemberResources}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<AtomMemberResources>
+  nameWithType: IEnumerable<AtomMemberResources>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Publishing.AtomMemberResources>
+  nameWithType.vb: IEnumerable(Of AtomMemberResources)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Publishing.AtomMemberResources)
+  name.vb: IEnumerable(Of AtomMemberResources)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: Argotic.Publishing.AtomWorkspace.Extensions*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Extensions
+  name: Extensions
+  nameWithType: AtomWorkspace.Extensions
+  fullName: Argotic.Publishing.AtomWorkspace.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.Extensions
+  commentId: P:Argotic.Publishing.AtomWorkspace.Extensions
+  isExternal: true
+- uid: Argotic.Publishing.AtomWorkspace.HasExtensions*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.HasExtensions
+  name: HasExtensions
+  nameWithType: AtomWorkspace.HasExtensions
+  fullName: Argotic.Publishing.AtomWorkspace.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Publishing.AtomWorkspace.Language*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Language
+  name: Language
+  nameWithType: AtomWorkspace.Language
+  fullName: Argotic.Publishing.AtomWorkspace.Language
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  name: Language
+  nameWithType: IAtomCommonObjectAttributes.Language
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Publishing.AtomWorkspace.Title*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Title
+  name: Title
+  nameWithType: AtomWorkspace.Title
+  fullName: Argotic.Publishing.AtomWorkspace.Title
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: Argotic.Publishing.AtomWorkspace.Item*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Item
+  name: Item
+  nameWithType: AtomWorkspace.Item
+  fullName: Argotic.Publishing.AtomWorkspace.Item
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Publishing.AtomWorkspace.op_Equality*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.op_Equality
+  name: Equality
+  nameWithType: AtomWorkspace.Equality
+  fullName: Argotic.Publishing.AtomWorkspace.Equality
+- uid: Argotic.Publishing.AtomWorkspace.op_GreaterThan*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.op_GreaterThan
+  name: GreaterThan
+  nameWithType: AtomWorkspace.GreaterThan
+  fullName: Argotic.Publishing.AtomWorkspace.GreaterThan
+- uid: Argotic.Publishing.AtomWorkspace.op_Inequality*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.op_Inequality
+  name: Inequality
+  nameWithType: AtomWorkspace.Inequality
+  fullName: Argotic.Publishing.AtomWorkspace.Inequality
+- uid: Argotic.Publishing.AtomWorkspace.op_LessThan*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.op_LessThan
+  name: LessThan
+  nameWithType: AtomWorkspace.LessThan
+  fullName: Argotic.Publishing.AtomWorkspace.LessThan
+- uid: Argotic.Publishing.AtomWorkspace.CompareSequence*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.CompareSequence
+  name: CompareSequence
+  nameWithType: AtomWorkspace.CompareSequence
+  fullName: Argotic.Publishing.AtomWorkspace.CompareSequence
+- uid: Argotic.Publishing.AtomWorkspace.AddCollection*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.AddCollection
+  name: AddCollection
+  nameWithType: AtomWorkspace.AddCollection
+  fullName: Argotic.Publishing.AtomWorkspace.AddCollection
+- uid: Argotic.Publishing.AtomWorkspace.AddExtension*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.AddExtension
+  name: AddExtension
+  nameWithType: AtomWorkspace.AddExtension
+  fullName: Argotic.Publishing.AtomWorkspace.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Publishing.AtomWorkspace.CompareTo*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.CompareTo
+  name: CompareTo
+  nameWithType: AtomWorkspace.CompareTo
+  fullName: Argotic.Publishing.AtomWorkspace.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.Equals*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Equals
+  name: Equals
+  nameWithType: AtomWorkspace.Equals
+  fullName: Argotic.Publishing.AtomWorkspace.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.FindCollection*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.FindCollection
+  name: FindCollection
+  nameWithType: AtomWorkspace.FindCollection
+  fullName: Argotic.Publishing.AtomWorkspace.FindCollection
+- uid: System.Predicate{Argotic.Publishing.AtomMemberResources}
+  commentId: T:System.Predicate{Argotic.Publishing.AtomMemberResources}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<AtomMemberResources>
+  nameWithType: Predicate<AtomMemberResources>
+  fullName: System.Predicate<Argotic.Publishing.AtomMemberResources>
+  nameWithType.vb: Predicate(Of AtomMemberResources)
+  fullName.vb: System.Predicate(Of Argotic.Publishing.AtomMemberResources)
+  name.vb: Predicate(Of AtomMemberResources)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Publishing.AtomMemberResources
+    name: AtomMemberResources
+    nameWithType: AtomMemberResources
+    fullName: Argotic.Publishing.AtomMemberResources
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.FindExtension*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.FindExtension
+  name: FindExtension
+  nameWithType: AtomWorkspace.FindExtension
+  fullName: Argotic.Publishing.AtomWorkspace.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.GetHashCode*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.GetHashCode
+  name: GetHashCode
+  nameWithType: AtomWorkspace.GetHashCode
+  fullName: Argotic.Publishing.AtomWorkspace.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Publishing.AtomWorkspace.Load*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.Load
+  name: Load
+  nameWithType: AtomWorkspace.Load
+  fullName: Argotic.Publishing.AtomWorkspace.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Publishing.AtomWorkspace.RemoveCollection*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.RemoveCollection
+  name: RemoveCollection
+  nameWithType: AtomWorkspace.RemoveCollection
+  fullName: Argotic.Publishing.AtomWorkspace.RemoveCollection
+- uid: Argotic.Publishing.AtomWorkspace.RemoveExtension*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.RemoveExtension
+  name: RemoveExtension
+  nameWithType: AtomWorkspace.RemoveExtension
+  fullName: Argotic.Publishing.AtomWorkspace.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomWorkspace.ToString*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.ToString
+  name: ToString
+  nameWithType: AtomWorkspace.ToString
+  fullName: Argotic.Publishing.AtomWorkspace.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Publishing.AtomWorkspace.WriteTo*
+  commentId: Overload:Argotic.Publishing.AtomWorkspace.WriteTo
+  name: WriteTo
+  nameWithType: AtomWorkspace.WriteTo
+  fullName: Argotic.Publishing.AtomWorkspace.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

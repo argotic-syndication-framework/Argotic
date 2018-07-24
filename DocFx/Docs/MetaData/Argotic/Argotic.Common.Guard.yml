@@ -1,0 +1,913 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.Guard
+  commentId: T:Argotic.Common.Guard
+  id: Guard
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.Guard.ArgumentNotGreaterThan(System.Decimal,System.String,System.Decimal)
+  - Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int32,System.String,System.Int32)
+  - Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int64,System.String,System.Int64)
+  - Argotic.Common.Guard.ArgumentNotLessThan(System.Decimal,System.String,System.Decimal)
+  - Argotic.Common.Guard.ArgumentNotLessThan(System.Int32,System.String,System.Int32)
+  - Argotic.Common.Guard.ArgumentNotLessThan(System.Int64,System.String,System.Int64)
+  - Argotic.Common.Guard.ArgumentNotNull(System.Object,System.String)
+  - Argotic.Common.Guard.ArgumentNotNullOrEmptyString(System.String,System.String)
+  - Argotic.Common.Guard.ArgumentNotOutOfRange(System.Decimal,System.String,System.Int32,System.Decimal)
+  - Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int32,System.String,System.Int32,System.Int32)
+  - Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int64,System.String,System.Int32,System.Int64)
+  langs:
+  - csharp
+  - vb
+  name: Guard
+  nameWithType: Guard
+  fullName: Argotic.Common.Guard
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Guard
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 7
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nProvides common validation methods shared across the framework entities. This class cannot be inherited.\n"
+  example: []
+  syntax:
+    content: public static class Guard
+    content.vb: Public Module Guard
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Common.Guard.ArgumentNotNull(System.Object,System.String)
+  commentId: M:Argotic.Common.Guard.ArgumentNotNull(System.Object,System.String)
+  id: ArgumentNotNull(System.Object,System.String)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotNull(Object, String)
+  nameWithType: Guard.ArgumentNotNull(Object, String)
+  fullName: Argotic.Common.Guard.ArgumentNotNull(System.Object, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotNull
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 17
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not a null reference.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is a <strong>null</strong> reference, an <xref href=\"System.ArgumentNullException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotNull(object value, string name)
+    parameters:
+    - id: value
+      type: System.Object
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    content.vb: Public Shared Sub ArgumentNotNull(value As Object, name As String)
+  overload: Argotic.Common.Guard.ArgumentNotNull*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotNullOrEmptyString(System.String,System.String)
+  commentId: M:Argotic.Common.Guard.ArgumentNotNullOrEmptyString(System.String,System.String)
+  id: ArgumentNotNullOrEmptyString(System.String,System.String)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotNullOrEmptyString(String, String)
+  nameWithType: Guard.ArgumentNotNullOrEmptyString(String, String)
+  fullName: Argotic.Common.Guard.ArgumentNotNullOrEmptyString(System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotNullOrEmptyString
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not a null reference or an empty string.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is a <strong>null</strong> reference or an empty string, an <xref href=\"System.ArgumentNullException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotNullOrEmptyString(string value, string name)
+    parameters:
+    - id: value
+      type: System.String
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    content.vb: Public Shared Sub ArgumentNotNullOrEmptyString(value As String, name As String)
+  overload: Argotic.Common.Guard.ArgumentNotNullOrEmptyString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int32,System.String,System.Int32)
+  commentId: M:Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int32,System.String,System.Int32)
+  id: ArgumentNotGreaterThan(System.Int32,System.String,System.Int32)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotGreaterThan(Int32, String, Int32)
+  nameWithType: Guard.ArgumentNotGreaterThan(Int32, String, Int32)
+  fullName: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int32, System.String, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotGreaterThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not greater than the specified maximum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotGreaterThan(int value, string name, int maximum)
+    parameters:
+    - id: value
+      type: System.Int32
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: maximum
+      type: System.Int32
+      description: The maximum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotGreaterThan(value As Integer, name As String, maximum As Integer)
+  overload: Argotic.Common.Guard.ArgumentNotGreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int64,System.String,System.Int64)
+  commentId: M:Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int64,System.String,System.Int64)
+  id: ArgumentNotGreaterThan(System.Int64,System.String,System.Int64)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotGreaterThan(Int64, String, Int64)
+  nameWithType: Guard.ArgumentNotGreaterThan(Int64, String, Int64)
+  fullName: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Int64, System.String, System.Int64)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotGreaterThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 69
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not greater than the specified maximum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotGreaterThan(long value, string name, long maximum)
+    parameters:
+    - id: value
+      type: System.Int64
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: maximum
+      type: System.Int64
+      description: The maximum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotGreaterThan(value As Long, name As String, maximum As Long)
+  overload: Argotic.Common.Guard.ArgumentNotGreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Decimal,System.String,System.Decimal)
+  commentId: M:Argotic.Common.Guard.ArgumentNotGreaterThan(System.Decimal,System.String,System.Decimal)
+  id: ArgumentNotGreaterThan(System.Decimal,System.String,System.Decimal)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotGreaterThan(Decimal, String, Decimal)
+  nameWithType: Guard.ArgumentNotGreaterThan(Decimal, String, Decimal)
+  fullName: Argotic.Common.Guard.ArgumentNotGreaterThan(System.Decimal, System.String, System.Decimal)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotGreaterThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 87
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not greater than the specified maximum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotGreaterThan(decimal value, string name, decimal maximum)
+    parameters:
+    - id: value
+      type: System.Decimal
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: maximum
+      type: System.Decimal
+      description: The maximum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotGreaterThan(value As Decimal, name As String, maximum As Decimal)
+  overload: Argotic.Common.Guard.ArgumentNotGreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotLessThan(System.Int32,System.String,System.Int32)
+  commentId: M:Argotic.Common.Guard.ArgumentNotLessThan(System.Int32,System.String,System.Int32)
+  id: ArgumentNotLessThan(System.Int32,System.String,System.Int32)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotLessThan(Int32, String, Int32)
+  nameWithType: Guard.ArgumentNotLessThan(Int32, String, Int32)
+  fullName: Argotic.Common.Guard.ArgumentNotLessThan(System.Int32, System.String, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotLessThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 105
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not less than the specified minimum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotLessThan(int value, string name, int minimum)
+    parameters:
+    - id: value
+      type: System.Int32
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Int32
+      description: The minimum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotLessThan(value As Integer, name As String, minimum As Integer)
+  overload: Argotic.Common.Guard.ArgumentNotLessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotLessThan(System.Int64,System.String,System.Int64)
+  commentId: M:Argotic.Common.Guard.ArgumentNotLessThan(System.Int64,System.String,System.Int64)
+  id: ArgumentNotLessThan(System.Int64,System.String,System.Int64)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotLessThan(Int64, String, Int64)
+  nameWithType: Guard.ArgumentNotLessThan(Int64, String, Int64)
+  fullName: Argotic.Common.Guard.ArgumentNotLessThan(System.Int64, System.String, System.Int64)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotLessThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 123
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not less than the specified minimum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotLessThan(long value, string name, long minimum)
+    parameters:
+    - id: value
+      type: System.Int64
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Int64
+      description: The minimum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotLessThan(value As Long, name As String, minimum As Long)
+  overload: Argotic.Common.Guard.ArgumentNotLessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotLessThan(System.Decimal,System.String,System.Decimal)
+  commentId: M:Argotic.Common.Guard.ArgumentNotLessThan(System.Decimal,System.String,System.Decimal)
+  id: ArgumentNotLessThan(System.Decimal,System.String,System.Decimal)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotLessThan(Decimal, String, Decimal)
+  nameWithType: Guard.ArgumentNotLessThan(Decimal, String, Decimal)
+  fullName: Argotic.Common.Guard.ArgumentNotLessThan(System.Decimal, System.String, System.Decimal)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotLessThan
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 141
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is not less than the specified minimum.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotLessThan(decimal value, string name, decimal minimum)
+    parameters:
+    - id: value
+      type: System.Decimal
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Decimal
+      description: The minimum acceptable value.
+    content.vb: Public Shared Sub ArgumentNotLessThan(value As Decimal, name As String, minimum As Decimal)
+  overload: Argotic.Common.Guard.ArgumentNotLessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int32,System.String,System.Int32,System.Int32)
+  commentId: M:Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int32,System.String,System.Int32,System.Int32)
+  id: ArgumentNotOutOfRange(System.Int32,System.String,System.Int32,System.Int32)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotOutOfRange(Int32, String, Int32, Int32)
+  nameWithType: Guard.ArgumentNotOutOfRange(Int32, String, Int32, Int32)
+  fullName: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int32, System.String, System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotOutOfRange
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 160
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is within the specified range.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code> <u>or</u> <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotOutOfRange(int value, string name, int minimum, int maximum)
+    parameters:
+    - id: value
+      type: System.Int32
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Int32
+      description: The minimum acceptable value of the range.
+    - id: maximum
+      type: System.Int32
+      description: The maximum acceptable value of the range.
+    content.vb: Public Shared Sub ArgumentNotOutOfRange(value As Integer, name As String, minimum As Integer, maximum As Integer)
+  overload: Argotic.Common.Guard.ArgumentNotOutOfRange*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int64,System.String,System.Int32,System.Int64)
+  commentId: M:Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int64,System.String,System.Int32,System.Int64)
+  id: ArgumentNotOutOfRange(System.Int64,System.String,System.Int32,System.Int64)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotOutOfRange(Int64, String, Int32, Int64)
+  nameWithType: Guard.ArgumentNotOutOfRange(Int64, String, Int32, Int64)
+  fullName: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Int64, System.String, System.Int32, System.Int64)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotOutOfRange
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 179
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is within the specified range.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code> <u>or</u> <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotOutOfRange(long value, string name, int minimum, long maximum)
+    parameters:
+    - id: value
+      type: System.Int64
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Int32
+      description: The minimum acceptable value of the range.
+    - id: maximum
+      type: System.Int64
+      description: The maximum acceptable value of the range.
+    content.vb: Public Shared Sub ArgumentNotOutOfRange(value As Long, name As String, minimum As Integer, maximum As Long)
+  overload: Argotic.Common.Guard.ArgumentNotOutOfRange*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Decimal,System.String,System.Int32,System.Decimal)
+  commentId: M:Argotic.Common.Guard.ArgumentNotOutOfRange(System.Decimal,System.String,System.Int32,System.Decimal)
+  id: ArgumentNotOutOfRange(System.Decimal,System.String,System.Int32,System.Decimal)
+  parent: Argotic.Common.Guard
+  langs:
+  - csharp
+  - vb
+  name: ArgumentNotOutOfRange(Decimal, String, Int32, Decimal)
+  nameWithType: Guard.ArgumentNotOutOfRange(Decimal, String, Int32, Decimal)
+  fullName: Argotic.Common.Guard.ArgumentNotOutOfRange(System.Decimal, System.String, System.Int32, System.Decimal)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/Guard.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ArgumentNotOutOfRange
+    path: ../Solutions/Argotic.Common/Guard.cs
+    startLine: 198
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nValidates that the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is within the specified range.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> is <strong>less than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">minimum</code> <u>or</u> <strong>greater than</strong> the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">maximum</code>,\nan <xref href=\"System.ArgumentOutOfRangeException\" data-throw-if-not-resolved=\"false\"></xref> is raised using the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: public static void ArgumentNotOutOfRange(decimal value, string name, int minimum, decimal maximum)
+    parameters:
+    - id: value
+      type: System.Decimal
+      description: The value of the method argument to validate.
+    - id: name
+      type: System.String
+      description: The name of the method argument.
+    - id: minimum
+      type: System.Int32
+      description: The minimum acceptable value of the range.
+    - id: maximum
+      type: System.Decimal
+      description: The maximum acceptable value of the range.
+    content.vb: Public Shared Sub ArgumentNotOutOfRange(value As Decimal, name As String, minimum As Integer, maximum As Decimal)
+  overload: Argotic.Common.Guard.ArgumentNotOutOfRange*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Common.Guard.ArgumentNotNull*
+  commentId: Overload:Argotic.Common.Guard.ArgumentNotNull
+  name: ArgumentNotNull
+  nameWithType: Guard.ArgumentNotNull
+  fullName: Argotic.Common.Guard.ArgumentNotNull
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Common.Guard.ArgumentNotNullOrEmptyString*
+  commentId: Overload:Argotic.Common.Guard.ArgumentNotNullOrEmptyString
+  name: ArgumentNotNullOrEmptyString
+  nameWithType: Guard.ArgumentNotNullOrEmptyString
+  fullName: Argotic.Common.Guard.ArgumentNotNullOrEmptyString
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: Argotic.Common.Guard.ArgumentNotGreaterThan*
+  commentId: Overload:Argotic.Common.Guard.ArgumentNotGreaterThan
+  name: ArgumentNotGreaterThan
+  nameWithType: Guard.ArgumentNotGreaterThan
+  fullName: Argotic.Common.Guard.ArgumentNotGreaterThan
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  name: Decimal
+  nameWithType: Decimal
+  fullName: System.Decimal
+- uid: Argotic.Common.Guard.ArgumentNotLessThan*
+  commentId: Overload:Argotic.Common.Guard.ArgumentNotLessThan
+  name: ArgumentNotLessThan
+  nameWithType: Guard.ArgumentNotLessThan
+  fullName: Argotic.Common.Guard.ArgumentNotLessThan
+- uid: Argotic.Common.Guard.ArgumentNotOutOfRange*
+  commentId: Overload:Argotic.Common.Guard.ArgumentNotOutOfRange
+  name: ArgumentNotOutOfRange
+  nameWithType: Guard.ArgumentNotOutOfRange
+  fullName: Argotic.Common.Guard.ArgumentNotOutOfRange

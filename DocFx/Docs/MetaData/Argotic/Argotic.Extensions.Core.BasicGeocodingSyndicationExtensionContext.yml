@@ -1,0 +1,662 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  id: BasicGeocodingSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: BasicGeocodingSyndicationExtensionContext
+  nameWithType: BasicGeocodingSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BasicGeocodingSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.BasicGeocodingSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class BasicGeocodingSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class BasicGeocodingSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: BasicGeocodingSyndicationExtensionContext()
+  nameWithType: BasicGeocodingSyndicationExtensionContext.BasicGeocodingSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.BasicGeocodingSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public BasicGeocodingSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+  commentId: P:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+  id: Latitude
+  parent: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Latitude
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Latitude
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Latitude
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 36
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the geocoding latitude coordinate.\n"
+  example: []
+  syntax:
+    content: public decimal Latitude { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+      description: The geocoding latitude coordinate. The default value is <xref href="System.Decimal.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no latitude was provided.
+    content.vb: Public Property Latitude As Decimal
+  overload: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+  commentId: P:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+  id: Longitude
+  parent: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Longitude
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Longitude
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Longitude
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 53
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the geocoding longitude coordinate.\n"
+  example: []
+  syntax:
+    content: public decimal Longitude { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+      description: The geocoding longitude coordinate. The default value is <xref href="System.Decimal.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no longitude was provided.
+    content.vb: Public Property Longitude As Decimal
+  overload: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 74
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: BasicGeocodingSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/BasicGeocoding/BasicGeocodingSyndicationExtensionContext.cs
+    startLine: 113
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.BasicGeocodingSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: BasicGeocodingSyndicationExtension
+  nameWithType: BasicGeocodingSyndicationExtension
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: BasicGeocodingSyndicationExtensionContext
+  nameWithType: BasicGeocodingSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.#ctor
+  name: BasicGeocodingSyndicationExtensionContext
+  nameWithType: BasicGeocodingSyndicationExtensionContext.BasicGeocodingSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.BasicGeocodingSyndicationExtensionContext
+- uid: System.Decimal.MinValue
+  commentId: F:System.Decimal.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude*
+  commentId: Overload:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+  name: Latitude
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Latitude
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Latitude
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  name: Decimal
+  nameWithType: Decimal
+  fullName: System.Decimal
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude*
+  commentId: Overload:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+  name: Longitude
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Longitude
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Longitude
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: BasicGeocodingSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: BasicGeocodingSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.WriteTo
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

@@ -1,0 +1,3839 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/CarmelEve/source/repos/Argotic/DocFx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/Home.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/Home.html",
+          "hash": "bY8ZKy3X7iT/Oxxt2q6NXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/argotic-syndication-framework-2008.1.0.0-planning-center.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/argotic-syndication-framework-2008.1.0.0-planning-center.html",
+          "hash": "JMUXqZRiQMQgdpeGuckJ7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/argotic-syndication-framework-2008.2.0.0-planning-center.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/argotic-syndication-framework-2008.2.0.0-planning-center.html",
+          "hash": "OxxYVcJKXdHun1emOBsT4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/argotic-syndication-framework-2008.3.0.0-planning-center.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/argotic-syndication-framework-2008.3.0.0-planning-center.html",
+          "hash": "6HFuZfRFSghwRwq8aXeLdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/argotic-syndication-framework-2008.4.0.0-planning-center.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/argotic-syndication-framework-2008.4.0.0-planning-center.html",
+          "hash": "Z89iMfew4f2SpisUPLwwlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/configuring-syndication-resource-providers-within-your-application.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/configuring-syndication-resource-providers-within-your-application.html",
+          "hash": "zzlazA4kwPy9b0rBy84Sfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-an-atom-feed-or-atom-entry-document.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-an-atom-feed-or-atom-entry-document.html",
+          "hash": "pKiJHEWnsSrjdzw0C8yDIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-an-extended-rss-feed.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-an-extended-rss-feed.html",
+          "hash": "CtKNvXOC8pyEaBmCqkHHzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-an-opml-outline.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-an-opml-outline.html",
+          "hash": "sM59FqD/CXapeb9dPo/ysg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-an-rss-feed.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-an-rss-feed.html",
+          "hash": "feGiERgWIhNPc5xU4gpLfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-opml-aggregated-content.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-opml-aggregated-content.html",
+          "hash": "HD63Dx2lhEyNatB0M84ZDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-personal-attention-data.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-personal-attention-data.html",
+          "hash": "zwkFvul2bRhbxolbk/fhIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-syndication-feeds.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-syndication-feeds.html",
+          "hash": "Ii+76WnqDDNXnW+TFcrO7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-web-log-communication-services-information.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-web-log-communication-services-information.html",
+          "hash": "YgFUANZE6Z15Y6fFDi/wvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/consuming-web-log-markup-language-blogml-formatted-content.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/consuming-web-log-markup-language-blogml-formatted-content.html",
+          "hash": "Bt4U1rgcLfUOekzGBcPUyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/format-agnostic-consumption-of-syndication-feeds.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/format-agnostic-consumption-of-syndication-feeds.html",
+          "hash": "MBMqfLXW3erHUYXLIQaGWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-aggregated-content-using-opml.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-aggregated-content-using-opml.html",
+          "hash": "7o9tTEz7nmOkUOUCn/1g/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-an-atom-feed-or-atom-entry-document.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-an-atom-feed-or-atom-entry-document.html",
+          "hash": "kZgFxQoeUA3Uty/tgiD6Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-an-extended-rss-feed.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-an-extended-rss-feed.html",
+          "hash": "CYqg5MJ5Gk/LPYrOq/Dk1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-an-opml-outline.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-an-opml-outline.html",
+          "hash": "0ZobF/y5vSOuxySvnpHWbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-an-rss-feed.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-an-rss-feed.html",
+          "hash": "/Kb8xQG/QiH/AhnbNvoQEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-attention-profile-information.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-attention-profile-information.html",
+          "hash": "4fR0t3wPUs2ZWO1Nmlun3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-portable-web-log-content.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-portable-web-log-content.html",
+          "hash": "F9OjAqmaEfSoExsYtRXFEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/generating-syndication-feeds.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/generating-syndication-feeds.html",
+          "hash": "smO3LdEB+LJ84WZmJzYaVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/introduction-to-the-framework-api-and-core-entities.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/introduction-to-the-framework-api-and-core-entities.html",
+          "hash": "0qTyzgQitj97GfWj1a5aBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/introduction-to-the-framework-components.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/introduction-to-the-framework-components.html",
+          "hash": "ACYy1cbKEte4XxZFeUFgQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/introduction-to-the-framework-extensible-provider-model.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/introduction-to-the-framework-extensible-provider-model.html",
+          "hash": "g3UwmGHsOebEynO2v+9jVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/introduction-to-the-framework-extension-architecture.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/introduction-to-the-framework-extension-architecture.html",
+          "hash": "tMghnOiLUIldbvI5CR1TDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/making-remote-procedure-calls-using-the-xml-rpc-client.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/making-remote-procedure-calls-using-the-xml-rpc-client.html",
+          "hash": "eo7USf5g5djuqd7NEGm7dA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/managing-provider-based-syndicated-content.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/managing-provider-based-syndicated-content.html",
+          "hash": "+jLKdk+xXXhIE5SJlp8R6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/overview-of-syndication-extensions-natively-supported-by-the-framework.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/overview-of-syndication-extensions-natively-supported-by-the-framework.html",
+          "hash": "K9JRqT4YzF3ZWmhevXoUzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/overview-of-the-features-provided-by-the-framework.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/overview-of-the-features-provided-by-the-framework.html",
+          "hash": "uXlc604lpZIdpdArzFPiKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/publishing-auto-discoverable-web-log-communication-service-information.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/publishing-auto-discoverable-web-log-communication-service-information.html",
+          "hash": "EpzTCNHI/IK2zqo3pDjxNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Articles/sending-notification-pings-using-the-trackback-client.md",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/sending-notification-pings-using-the-trackback-client.html",
+          "hash": "5CRApsu+Zk+usATrtKf6fQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Articles/toc.html",
+          "hash": "A5sUEUi27TpV3neTzOG/xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.ComparisonUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.ComparisonUtility.html",
+          "hash": "3WTkh/iOSyYeOI91+hKbnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.DiscoverableSyndicationEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.DiscoverableSyndicationEndpoint.html",
+          "hash": "KzWXzbFcIm27YxjafVqeYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.EnumerationMetadataAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.EnumerationMetadataAttribute.html",
+          "hash": "T8WZ3lDvlPrNx9IZ96WqVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.Guard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.Guard.html",
+          "hash": "uNzIYsB9WkwdVPadC0gX9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.ISyndicationResource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.ISyndicationResource.html",
+          "hash": "Wb5e1C6rmieMBaf+6ff5aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.Link.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.Link.html",
+          "hash": "ih3fcYOVSs5UVC5fgzqhFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.MimeMediaTypeAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.MimeMediaTypeAttribute.html",
+          "hash": "CPjS6DG4iKdhDg03vBlOmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationContentFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationContentFormat.html",
+          "hash": "umlfCoUcBKj2cqgT0fgnoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationDateTimeUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationDateTimeUtility.html",
+          "hash": "sHMW3BNKWvxlZ2Zmi6olkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationDiscoveryUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationDiscoveryUtility.html",
+          "hash": "naWyLRhi8i8BnYkmxaD7lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationEncodingUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationEncodingUtility.html",
+          "hash": "lN7Ugt7vz3r2hSdWPvs8LQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceLoadSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceLoadSettings.html",
+          "hash": "xvJzzkugWVcf+Kilk8NczQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceLoadedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceLoadedEventArgs.html",
+          "hash": "YEc1tyeVKAIFsBmairDiew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceMetadata.html",
+          "hash": "KhOEnmnlA/H4C62oz5rRrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceSaveSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.SyndicationResourceSaveSettings.html",
+          "hash": "SlXZUw8HM5Xei2OnjDLnSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.TrackbackDiscoveryMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.TrackbackDiscoveryMetadata.html",
+          "hash": "V6pmFXcZtE1TiKolfC1PkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.WebRequestOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.WebRequestOptions.html",
+          "hash": "/EVt4XV8vCu5x08rp/362A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Common.html",
+          "hash": "U7RaTiGY+Tj9TBPIz8x9YQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceCreateStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceCreateStatus.html",
+          "hash": "wHn1IHKGWINLdXSM7mb/fA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceProvider.html",
+          "hash": "+fnNDwUjqrBFvoXrbzbt2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceProviderCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceProviderCollection.html",
+          "hash": "GSBrs43lDpZHdoI8rRMB2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceSection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.SyndicationResourceSection.html",
+          "hash": "v3+t+iw3lZSZpRTdqEokPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.Provider.html",
+          "hash": "Djxe8gVFyKtudW/KQPbZnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.TrackbackClientNetworkElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.TrackbackClientNetworkElement.html",
+          "hash": "st6V2ufCucXpGGTVqfl4Bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.TrackbackClientSection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.TrackbackClientSection.html",
+          "hash": "Tx6qdmZvPgj3WV3m4gPM3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.XmlRpcClientNetworkElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.XmlRpcClientNetworkElement.html",
+          "hash": "gPhCyiNz9A+ZxkgN2pZ7MQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.XmlRpcClientSection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.XmlRpcClientSection.html",
+          "hash": "vw1J8C8e8Y/YpGcaihbQLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Configuration.html",
+          "hash": "GgTPX173dHAuaI+OdYucQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Apml06SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Apml06SyndicationResourceAdapter.html",
+          "hash": "LJkFdDvk/7F1ZJ0wkyelsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Atom03SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Atom03SyndicationResourceAdapter.html",
+          "hash": "fQtzoYt7YQj7xAJ8W/n1WA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Atom10SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Atom10SyndicationResourceAdapter.html",
+          "hash": "8GRCfSA9icLZK7eePXcqdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.AtomPublishing10SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.AtomPublishing10SyndicationResourceAdapter.html",
+          "hash": "y/lnm5bV1dXkOunHBO/YlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.BlogML20SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.BlogML20SyndicationResourceAdapter.html",
+          "hash": "VMn7vyBiLJD3fNXkRiAhmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Opml20SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Opml20SyndicationResourceAdapter.html",
+          "hash": "BVKKQNBMSafmmiPm8ykpDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rsd06SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rsd06SyndicationResourceAdapter.html",
+          "hash": "chIbZZPe87FvU97/KMZUYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rsd10SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rsd10SyndicationResourceAdapter.html",
+          "hash": "fRLgo50G7uuqKEERu2VV9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss090SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss090SyndicationResourceAdapter.html",
+          "hash": "QSFzyUOHj9R+4LT4cTHCLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.html",
+          "hash": "9HN0RomHzDWxxm3/KvPjDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss092SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss092SyndicationResourceAdapter.html",
+          "hash": "I6ahrJb+YeTTkwqIuzjAqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss10SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss10SyndicationResourceAdapter.html",
+          "hash": "U6Yjpuqqj7No/G54qvZIGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss20SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.Rss20SyndicationResourceAdapter.html",
+          "hash": "z5cnZuC4el8cKZ5doOprnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.SyndicationResourceAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.SyndicationResourceAdapter.html",
+          "hash": "Wfs5BnkkYio3cQa5yoZ7DA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Data.Adapters.html",
+          "hash": "Rom9kHq5IMEaWJDUILMO6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlApplicationExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlApplicationExample.html",
+          "hash": "9EJIZCuaDaeM/4FTi7xyzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlAuthorExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlAuthorExample.html",
+          "hash": "9cv26PoBy70nyrxelEmIKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlConceptExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlConceptExample.html",
+          "hash": "2xlorg8DAiSaq38TtIXY+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlDocumentExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlDocumentExample.html",
+          "hash": "76IGZASUBjm76TcVLqLQ0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlProfileExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlProfileExample.html",
+          "hash": "bA2dWn1+WzfqAjjXcvsk7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlSourceExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ApmlSourceExample.html",
+          "hash": "asGsd9mCAtB/GTfHLTMa8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomCategoryExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomCategoryExample.html",
+          "hash": "J56aTHnGlvJpigL5yLvmuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomContentExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomContentExample.html",
+          "hash": "4Lm8lMgTqfxndyGhsKB0vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomEntryExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomEntryExample.html",
+          "hash": "c9bupb9S6qqe4W/oUvqBpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomFeedExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomFeedExample.html",
+          "hash": "t/4jMVrQW6qfOWZUXiI/BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomGeneratorExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomGeneratorExample.html",
+          "hash": "q923JcRyMICu4kZcvmlenQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomIconExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomIconExample.html",
+          "hash": "lutpgvuWpT7nLpVzy6TpmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomIdExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomIdExample.html",
+          "hash": "NuaJZ84u+/aaQuGWHIrakA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomLinkExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomLinkExample.html",
+          "hash": "k9MgBUuhVSyIxaZjGLE36Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomLogoExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomLogoExample.html",
+          "hash": "+OI06p43MDh3EY91vy1KTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomPersonConstructExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomPersonConstructExample.html",
+          "hash": "uGjbSHDIJS9Atte8QPQpZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomSourceExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomSourceExample.html",
+          "hash": "E6BvDhKewT08ZqR1xAdx0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomTextConstructExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.AtomTextConstructExample.html",
+          "hash": "YpsoZoQMAuwlqnB5vSJSOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BasicGeocodingSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BasicGeocodingSyndicationExtensionExample.html",
+          "hash": "JTVsXihQnllNPyDysSohOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogChannelSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogChannelSyndicationExtensionExample.html",
+          "hash": "oAtejta/ZSy+UuQRUT269w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLDocumentExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLDocumentExample.html",
+          "hash": "g8uVI9j78RPQ+Nl1SXW1SA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLPostExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLPostExample.html",
+          "hash": "q2tUfYOs1SBCiUvdyvS22Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLTextConstructExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.BlogMLTextConstructExample.html",
+          "hash": "H4EV8sc6LpmKFUHlTDRGJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.CreativeCommonsSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.CreativeCommonsSyndicationExtensionExample.html",
+          "hash": "waCZ9ox5r7EjpSeR/Jdy/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.DublinCoreElementSetSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.DublinCoreElementSetSyndicationExtensionExample.html",
+          "hash": "8IQ+i/MnQHawyjFvVtBAnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.DublinCoreMetadataTermsSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.DublinCoreMetadataTermsSyndicationExtensionExample.html",
+          "hash": "ejTD3g9KQKdbsSY+6sc+0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedHistorySyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedHistorySyndicationExtensionExample.html",
+          "hash": "7Nqx0immmQKKjKkHCUq6mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedRankSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedRankSyndicationExtensionExample.html",
+          "hash": "OoeLKLrpBq8LKk2TZxQ/kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.FeedSynchronizationSyndicationExtensionExample.html",
+          "hash": "axgJ7O91lnOPuyEgPVGgJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.GenericSyndicationFeedExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.GenericSyndicationFeedExample.html",
+          "hash": "V7lultYqfsfOlUUrybQjXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ITunesSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.ITunesSyndicationExtensionExample.html",
+          "hash": "/U6zqIJyMdgusx18LEDvAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.LiveJournalSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.LiveJournalSyndicationExtensionExample.html",
+          "hash": "F7J/YZ0q/O19RfmfOpMhpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.MyCustomRssFeed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.MyCustomRssFeed.html",
+          "hash": "idqZG0BCJCurZ1yhwI4Jgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.MyCustomSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.MyCustomSyndicationExtension.html",
+          "hash": "nOXstZl6ksx92Sqy1zRvHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.OpmlDocumentExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.OpmlDocumentExample.html",
+          "hash": "Fx/WFiOeqObJ2kpP5jVnXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.OpmlOutlineExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.OpmlOutlineExample.html",
+          "hash": "8TbACZTRZKp4E4khn4qUFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.PheedSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.PheedSyndicationExtensionExample.html",
+          "hash": "OlyiuzqmVvlmLKSIqHSJrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.PingbackSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.PingbackSyndicationExtensionExample.html",
+          "hash": "/IGDMZ2RGntSZvETKhtyeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RsdApplicationInterfaceExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RsdApplicationInterfaceExample.html",
+          "hash": "hHhAuAYe9XeEhZe2z1Ft7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RsdDocumentExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RsdDocumentExample.html",
+          "hash": "PsmfJ4BDWPwCUKaeZFYqtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssCategoryExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssCategoryExample.html",
+          "hash": "Vf3latdTKcjUa7CG8N6iMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssChannelExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssChannelExample.html",
+          "hash": "/P9yW76hMQVBEmvK2+Pe2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssCloudExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssCloudExample.html",
+          "hash": "Mh5YnT9LaYxdkUN5BYKExw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssEnclosureExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssEnclosureExample.html",
+          "hash": "sdgj0fCv+nLGTR07ifbo6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssFeedExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssFeedExample.html",
+          "hash": "Q21OsDK05ZfydVZ+XsmexQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssGuidExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssGuidExample.html",
+          "hash": "I6Wfug5odQzBWdl+O5PsJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssImageExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssImageExample.html",
+          "hash": "ZLshGi95aTcGCRFNIWZofQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssItemExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssItemExample.html",
+          "hash": "A+9uCtfxX2ILHPbIO6UL8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssSourceExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssSourceExample.html",
+          "hash": "u3bI7a6dizqAUdgvkftyyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssTextInputExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.RssTextInputExample.html",
+          "hash": "Qe6p3xUxgdiHvhEwKN+N3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SimpleListSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SimpleListSyndicationExtensionExample.html",
+          "hash": "DmEkXEmUgeculgikx0iMIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummaryContentSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummaryContentSyndicationExtensionExample.html",
+          "hash": "VBXghclpWWrZpHaDi7dBFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummarySlashSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummarySlashSyndicationExtensionExample.html",
+          "hash": "ybRlNVJXB/RlqO08mztlcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummaryUpdateSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SiteSummaryUpdateSyndicationExtensionExample.html",
+          "hash": "Emoa+ZQHmD7oW3Ss2p0zqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SyndicationDiscoveryUtilityExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.SyndicationDiscoveryUtilityExample.html",
+          "hash": "bE/gjrbYD4MOGU4+rRHOHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.TrackbackClientExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.TrackbackClientExample.html",
+          "hash": "Qloafg6Df+b00lDBG70l5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.TrackbackSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.TrackbackSyndicationExtensionExample.html",
+          "hash": "FLSxfnTtvzkw0zdLUJUA6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.WellFormedWebCommentsSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.WellFormedWebCommentsSyndicationExtensionExample.html",
+          "hash": "zXFj8SQ0F4KJfAoOPEXz4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.XmlRpcClientExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.XmlRpcClientExample.html",
+          "hash": "aCqcXxZpWliCYHgrrmq1sw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.YahooMediaSyndicationExtensionExample.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.YahooMediaSyndicationExtensionExample.html",
+          "hash": "gJcLbdiRdI8Ez37/VAZn9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Examples.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Examples.html",
+          "hash": "czxwGUiiu8FB5JIqcSERfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension.html",
+          "hash": "G5JAHcb18dzU8OIXbnj8cQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingControlSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingControlSyndicationExtensionContext.html",
+          "hash": "ASoBmNZ1322NzMmQT0J8/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html",
+          "hash": "cuvgP3cz+7tIMc/OwAUcIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtensionContext.html",
+          "hash": "LUHpCawCZhLe9w8AtGLBiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BasicGeocodingSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BasicGeocodingSyndicationExtension.html",
+          "hash": "0dFt/JTSU7AlvoBitLrg0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BasicGeocodingSyndicationExtensionContext.html",
+          "hash": "VZNa6oPoYTJC8wiEaL/4sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BlogChannelSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BlogChannelSyndicationExtension.html",
+          "hash": "PzeY7uRJEtSu1vExMDKYeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.BlogChannelSyndicationExtensionContext.html",
+          "hash": "S57O1Pc3RCh51aXT9KcNcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.CreativeCommonsSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.CreativeCommonsSyndicationExtension.html",
+          "hash": "tvPka5eQBVOjSmP703jOwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.CreativeCommonsSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.CreativeCommonsSyndicationExtensionContext.html",
+          "hash": "a/t/gQ+HU/M1LVM/rOzpsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension.html",
+          "hash": "o93czF2xvoHBPJmzJNelYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.html",
+          "hash": "xs0/B3Vxw0FDgRHILU6uaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension.html",
+          "hash": "GuipdN4IrsyEEogayqDyaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtensionContext.html",
+          "hash": "DQpiu9GVdABpxKQhgF8SlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreTypeVocabularies.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.DublinCoreTypeVocabularies.html",
+          "hash": "zZ79ZlNGMaBhCtSeNzuIZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistoryLinkRelation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistoryLinkRelation.html",
+          "hash": "F+Inbm1Z2yy7kYMZcqvhwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistoryLinkRelationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistoryLinkRelationType.html",
+          "hash": "1SwcRSIx3+HlksfPBhY46g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistorySyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistorySyndicationExtension.html",
+          "hash": "teFtklVf7ySjJvY7HDY+UA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.html",
+          "hash": "A7WzThCP07FCLlk82gomGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedRankSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedRankSyndicationExtension.html",
+          "hash": "rfov4kF2hTLxWZY/HUBCUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedRankSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedRankSyndicationExtensionContext.html",
+          "hash": "1oFV3RfG98WvEeH3yXbuPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html",
+          "hash": "tzSCTd2J7hc2KjQsz9Sf1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationHistory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationHistory.html",
+          "hash": "SZGKZ8NM/LRnXONYlnmxtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationItem.html",
+          "hash": "x56p510pwe5/D9GA06Yo7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.html",
+          "hash": "LJ0LmifaQOsBQ25TdpM2oQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.html",
+          "hash": "uKOsm0xIE00ymsWLOk3sxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSharingInformation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSharingInformation.html",
+          "hash": "iSZiIqfnKWf97+V4HKrFOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension.html",
+          "hash": "S4nrSVHtBuyOD++BurHR4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext.html",
+          "hash": "iyxCk1IwAbtnBC+JAdlXRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html",
+          "hash": "jAEbvGXYcXf+qukYJFPv6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.html",
+          "hash": "8WHxVcN7TNkfd8lwZv/fZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesCategory.html",
+          "hash": "NzjuHstngJKpRIcdBEWqIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesExplicitMaterial.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesExplicitMaterial.html",
+          "hash": "KZ7UlQIR6OWqxVwfj39bAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesOwner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesOwner.html",
+          "hash": "SQwJugRmjDQnUQ6k3pcvTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesSyndicationExtension.html",
+          "hash": "JrcOKf07r4Ys5nqSfwcu3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.ITunesSyndicationExtensionContext.html",
+          "hash": "be3eC1fzeJuSsELUJ6vGPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.html",
+          "hash": "xpK9x1fWryRi4wTIlXmpWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalMood.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalMood.html",
+          "hash": "0aub9QBW8ciXX+42Lzil2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSecurity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSecurity.html",
+          "hash": "u2YmLmpvvrg9pV/kAZubxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSecurityType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSecurityType.html",
+          "hash": "M0SgUAZNLIugiakfcn7BMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSyndicationExtension.html",
+          "hash": "tEnKtAs9SqFYKGSbFXgY6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.html",
+          "hash": "mJn8FPot7QUMEorPRX9fnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalUserPicture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.LiveJournalUserPicture.html",
+          "hash": "ENS9j664uyxEIaSKipzp1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PheedSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PheedSyndicationExtension.html",
+          "hash": "a9sIO7aB8kSIrurhPIlWpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PheedSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PheedSyndicationExtensionContext.html",
+          "hash": "46Nalu6G/W1kcyZdsQ2oRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PingbackSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PingbackSyndicationExtension.html",
+          "hash": "4nlO5qkOAJTbxX2dPGJIHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PingbackSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.PingbackSyndicationExtensionContext.html",
+          "hash": "9p3dJ9bXpUFU5mv+iGdWGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListDataType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListDataType.html",
+          "hash": "EKPlhGSz4oSxvQj0/jGJXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListGroup.html",
+          "hash": "UgJ5voyn/UFjSdrsM3uZ7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSort.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSort.html",
+          "hash": "dkiNghdQ8wwayPNprhJ0EA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSyndicationExtension.html",
+          "hash": "DjxksSCVsSWcguOMYSvWNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.html",
+          "hash": "9NAo4k5FDi1JlszALk4xcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentItem.html",
+          "hash": "vKjUoET2QDhRLRlTIpxAJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html",
+          "hash": "TU/HS5GACHZfhIUddzFYIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext.html",
+          "hash": "OWQuvlLlF2GcXOyjNT4zPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension.html",
+          "hash": "JwSr9Z+5KT8ITKv4bq43sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.html",
+          "hash": "+IeqFDlwImfOmhN1/C/t1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdatePeriod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdatePeriod.html",
+          "hash": "ErGlxiw+7Ol92nebIjcvHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.html",
+          "hash": "3pK9n0n5XfalSBWpmoDNEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.html",
+          "hash": "AsavhfhiOfBX/9vmVsQftw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.TrackbackSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.TrackbackSyndicationExtension.html",
+          "hash": "UmrwNE37JLZVAOXTXA6OpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.TrackbackSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.TrackbackSyndicationExtensionContext.html",
+          "hash": "u+eR2fK9LEAHs0rjpiRUDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtension.html",
+          "hash": "axgKaGjQXpkXtVm5HV5Iyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtensionContext.html",
+          "hash": "PhJ6dtB1xu3e/ZOm8AyPSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCategory.html",
+          "hash": "Gwu184IjQvpuJcAJEC6ZMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaContent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaContent.html",
+          "hash": "FmT0Z070pn5/Dun7M5eosQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCopyright.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCopyright.html",
+          "hash": "EbCpdRQoGy0B5iCio3NGtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCredit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaCredit.html",
+          "hash": "+qeXhHj8PxNySvQaw8bSgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaExpression.html",
+          "hash": "vJWmbgldDap9xtlr5RCdaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaGroup.html",
+          "hash": "xrKEUz8AIqYd7roE7f7Mxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaHash.html",
+          "hash": "nStFCjoo+b3XyWjdP43jyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaHashAlgorithm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaHashAlgorithm.html",
+          "hash": "IXW6insGEVPdcphSahxcJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaMedium.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaMedium.html",
+          "hash": "4IN/PqDLuq4zDlirYEw2Fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaPlayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaPlayer.html",
+          "hash": "4tqLjKbRG+vGAmaGX6w8ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRating.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRating.html",
+          "hash": "GA84DtAXRDpWWYw9ryPvNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestriction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestriction.html",
+          "hash": "R69fs6596I/dAU/RMqoItA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestrictionRelationship.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestrictionRelationship.html",
+          "hash": "fGGlcus2+uNclJh6YvLVKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestrictionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaRestrictionType.html",
+          "hash": "09VeBhI5mu4RX0nfL/RwQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaSyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaSyndicationExtension.html",
+          "hash": "Ez7LVjtPLywbD08MlrEKLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.html",
+          "hash": "y66v/JQ6j1rrMK6Y7zVTQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaText.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaText.html",
+          "hash": "Ve7UVWdLjA0wxuldHPz4mw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaTextConstruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaTextConstruct.html",
+          "hash": "Oi64zCtjrSXX/oH3wiYTtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaTextConstructType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaTextConstructType.html",
+          "hash": "G9BMMyKW+CvxB6ugkr155g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaThumbnail.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.YahooMediaThumbnail.html",
+          "hash": "xqXki1HPuvNejdl9ENU7SA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.Core.html",
+          "hash": "gST0kK9xoelm4p+oYMilxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.IExtensibleSyndicationObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.IExtensibleSyndicationObject.html",
+          "hash": "wCkxlFFD75DgLC6SvFK1sA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.ISyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.ISyndicationExtension.html",
+          "hash": "OergwUJIz3wBjgkQp4ADpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtension.html",
+          "hash": "1iIqMLH/dp5ZBOBtuuSetw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtensionAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtensionAdapter.html",
+          "hash": "7K+Ja1FCtY7IQ3tAz0hbcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtensionLoadedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html",
+          "hash": "ZyAksVCuRfqBz9HKlFavXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Extensions.html",
+          "hash": "0kCnymjGpdGhXnJ0LhWXUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.IXmlRpcValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.IXmlRpcValue.html",
+          "hash": "sTc4N1nySV6gM6/VMNw1kA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackClient.html",
+          "hash": "X6vxltTKyRJrxJJwetqn1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackMessage.html",
+          "hash": "UffDw34YddHWCWadPT3ysw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackMessageSentEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackMessageSentEventArgs.html",
+          "hash": "EerTA1gL4rnNGOJsPa3CdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.TrackbackResponse.html",
+          "hash": "cC9KEebfps9IQ9hUMqMhKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.WebContentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.WebContentType.html",
+          "hash": "eqEHoa0YpC8l4c+cdbIzmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcArrayValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcArrayValue.html",
+          "hash": "89cwXb2l6l5aeeF9PBAviw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcClient.html",
+          "hash": "9+Y6G9MOn+xmzYYqf7uE/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcMessage.html",
+          "hash": "YJDzevBFZirj0TK2VJX0nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcMessageSentEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcMessageSentEventArgs.html",
+          "hash": "Hm97secuequPJJRy8YrAZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcResponse.html",
+          "hash": "1lLGFtacSM2My0nc+5NpLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcScalarValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcScalarValue.html",
+          "hash": "OBW8i9RWiIr/tQ6GmvC/HA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcScalarValueType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcScalarValueType.html",
+          "hash": "e0jfRo2VcVOW0A9Fd4cl4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcStructureMember.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcStructureMember.html",
+          "hash": "09wUwoJajhvKFKFQm+rglw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcStructureValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.XmlRpcStructureValue.html",
+          "hash": "o1cpD9FbZ2Z+5tqPidTWQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Net.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Net.html",
+          "hash": "W/y+TOqpDLU8NIqEY+Wz3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomAcceptedMediaRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomAcceptedMediaRange.html",
+          "hash": "bjiYViAeO6H08DBzz2bo/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomCategoryDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomCategoryDocument.html",
+          "hash": "NZSvNMoLE5ZHuwySZp8LVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomEntryResource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomEntryResource.html",
+          "hash": "tKued6lI1gYlXK/yoM4FJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomMemberResources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomMemberResources.html",
+          "hash": "oS8kQpCKdofWNb05xyAXkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomServiceDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomServiceDocument.html",
+          "hash": "H5eFGyHvSbvybvg1/k1PbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomWorkspace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.AtomWorkspace.html",
+          "hash": "oZwG63mjPjqqOZGGYqxELA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Publishing.html",
+          "hash": "AWrYjHS2HKfbePse+uEXEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomCategory.html",
+          "hash": "iGCv53A5U5AFv+AmAVtOlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomContent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomContent.html",
+          "hash": "xbS/dIe1mXpqCcvddw+Y5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomEntry.html",
+          "hash": "7tOpjJI+3S1QSRTPwuWVPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomFeed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomFeed.html",
+          "hash": "6fHrxaAQaotjZr0AhwMfJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomGenerator.html",
+          "hash": "DL6fkmFXhkXHttJdAHwhEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomIcon.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomIcon.html",
+          "hash": "G4Dw+9+a6zl4qVP/GWTMfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomId.html",
+          "hash": "GGBFSiBn1cpK7wnix2GYWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomLink.html",
+          "hash": "OXXSpO8B8dX+785io5CdBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomLogo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomLogo.html",
+          "hash": "MNqyKSaUyu1dZrmguOka/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomPersonConstruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomPersonConstruct.html",
+          "hash": "3JmTkHyydGFEDX8mOKntMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomSource.html",
+          "hash": "o+GGTgVJawxjF5p68cB+Rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomTextConstruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomTextConstruct.html",
+          "hash": "HubENxX/LUvSn4TyQo+/XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomTextConstructType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.AtomTextConstructType.html",
+          "hash": "zaro6clCOzhX4ArWmll/fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationCategory.html",
+          "hash": "6ySQIzAAVQnBYQnxO5I68g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationFeed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationFeed.html",
+          "hash": "kdBM8vVMGEo8/tUq28tzxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.GenericSyndicationItem.html",
+          "hash": "gtnY+Ng/MKQwy6CHgPXLcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.IAtomCommonObjectAttributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.IAtomCommonObjectAttributes.html",
+          "hash": "MrM3DK0otZPOBzS1T2CVzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlDocument.html",
+          "hash": "ijGrzZEbDgx1dTfUGoisMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlHead.html",
+          "hash": "UoSLWsQtqiorTgkj0zCMzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlOutline.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlOutline.html",
+          "hash": "nwYrSuKLtbsdkckZTHpYSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlOwner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlOwner.html",
+          "hash": "jIKKnmVQKtYlaLhD1H+NEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.OpmlWindow.html",
+          "hash": "vRLy3gUIdRDKMmaSv6tmKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCategory.html",
+          "hash": "qW7bEAYLkn1mT34xKb9hJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssChannel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssChannel.html",
+          "hash": "qCQN4+BDyoMSrAGLGEwJPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCloud.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCloud.html",
+          "hash": "hc128Fgou9bBPB/BPE+oaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCloudProtocol.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssCloudProtocol.html",
+          "hash": "B8bi0oJOxMBF5DfLz80G0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssEnclosure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssEnclosure.html",
+          "hash": "LDonI+Va0A9vzVEPJinJiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssFeed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssFeed.html",
+          "hash": "FYWNMFs/G/ra2ArJp1oS/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssGuid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssGuid.html",
+          "hash": "KWqp12XZmJXU63Fm6y/Nug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssImage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssImage.html",
+          "hash": "QtubIBf+NdqJh1p59Eu+ng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssItem.html",
+          "hash": "ULfKyhFivaHF35uhZtoPlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssSource.html",
+          "hash": "BJ9z6A5qVvyf8eIWZcTMOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssTextInput.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.RssTextInput.html",
+          "hash": "prWsOK6ky3MGbQPJZTG7Yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlApplication.html",
+          "hash": "vJlyWTc9e9rpcSwZpcXufw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlAuthor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlAuthor.html",
+          "hash": "wGtzWeVInokEuydhsNwTDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlConcept.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlConcept.html",
+          "hash": "Svz3QlESjTT836y83rZI5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlDocument.html",
+          "hash": "vghfJPkywJuLey4G85WE0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlHead.html",
+          "hash": "0rT2rV2t4NOMR//5F6ynnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlProfile.html",
+          "hash": "/nH4Tds6/NfRcPOs9RYiYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlSource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.ApmlSource.html",
+          "hash": "s7msMpP2YCc9/ySbFTGbnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLApprovalStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLApprovalStatus.html",
+          "hash": "QnTkCSG+ap/qIPyjvVeqPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLAttachment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLAttachment.html",
+          "hash": "ATzy4HL4pKULKSSdD1Bl7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLAuthor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLAuthor.html",
+          "hash": "AIa3mvt+pwIbQwk+rst3DQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLCategory.html",
+          "hash": "RpyYJma5lcIYLare8b2Piw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLComment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLComment.html",
+          "hash": "afQrozlQrtip024kgVsJ/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLContentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLContentType.html",
+          "hash": "S6MmXp+lgLzmd0nP2QN2lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLDocument.html",
+          "hash": "61sUFA6ysf3MrildWp4tRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLPost.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLPost.html",
+          "hash": "16/3jnjapdFlcGwhSGnVmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLPostType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLPostType.html",
+          "hash": "JbXPZFsGmDQi3CL0LFnZYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLTextConstruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLTextConstruct.html",
+          "hash": "qti0bIKABoRvrt4vYJYjog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLTrackback.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.BlogMLTrackback.html",
+          "hash": "FNYa5cy3Gia/6jmmqN02nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.IBlogMLCommonObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.IBlogMLCommonObject.html",
+          "hash": "7NFffkHBppSAOU9kxmxPQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.RsdApplicationInterface.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.RsdApplicationInterface.html",
+          "hash": "8xvSd30/X0RFFhShcREoig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.RsdDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.RsdDocument.html",
+          "hash": "X/RN3OxtsZmiUrrBWRBXkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.Specialized.html",
+          "hash": "J6enbtHm0d4aKn6DV/5QIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/Argotic.Syndication.html",
+          "hash": "6IDBxsXYGkKdvrc7wNYjcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "Docs/MetaData/Argotic/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Docs/MetaData/Argotic/toc.html",
+          "hash": "y26esVq4kwMkBvKZib+lUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "RestApi",
+      "source_relative_path": "RestAPIs/marian.json",
+      "output": {
+        ".html": {
+          "relative_path": "RestAPIs/marian.html",
+          "hash": "jFwGEO5/6BiKN/qRJeN1Fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "RestApi",
+      "source_relative_path": "RestAPIs/petstore-simple.json",
+      "output": {
+        ".html": {
+          "relative_path": "RestAPIs/petstore-simple.html",
+          "hash": "6ABbN0SEOR48PlE0IR5LNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "RestAPIs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "RestAPIs/toc.html",
+          "hash": "mcF61RDDxStDaN9KeJ9cbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "/5sod+tgS7eGs78zoZ7VdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "zcD/chGTCm77VqZQ2pSp5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "RestApiDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor RestApiDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

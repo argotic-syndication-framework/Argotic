@@ -1,0 +1,47 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration
+  commentId: N:Argotic.Configuration
+  id: Argotic.Configuration
+  children:
+  - Argotic.Configuration.TrackbackClientNetworkElement
+  - Argotic.Configuration.TrackbackClientSection
+  - Argotic.Configuration.XmlRpcClientNetworkElement
+  - Argotic.Configuration.XmlRpcClientSection
+  langs:
+  - csharp
+  - vb
+  name: Argotic.Configuration
+  nameWithType: Argotic.Configuration
+  fullName: Argotic.Configuration
+  type: Namespace
+  assemblies:
+  - Argotic.Core
+references:
+- uid: Argotic.Configuration.TrackbackClientNetworkElement
+  commentId: T:Argotic.Configuration.TrackbackClientNetworkElement
+  parent: Argotic.Configuration
+  name: TrackbackClientNetworkElement
+  nameWithType: TrackbackClientNetworkElement
+  fullName: Argotic.Configuration.TrackbackClientNetworkElement
+- uid: Argotic.Configuration.TrackbackClientSection
+  commentId: T:Argotic.Configuration.TrackbackClientSection
+  name: TrackbackClientSection
+  nameWithType: TrackbackClientSection
+  fullName: Argotic.Configuration.TrackbackClientSection
+- uid: Argotic.Configuration.XmlRpcClientNetworkElement
+  commentId: T:Argotic.Configuration.XmlRpcClientNetworkElement
+  parent: Argotic.Configuration
+  name: XmlRpcClientNetworkElement
+  nameWithType: XmlRpcClientNetworkElement
+  fullName: Argotic.Configuration.XmlRpcClientNetworkElement
+- uid: Argotic.Configuration.XmlRpcClientSection
+  commentId: T:Argotic.Configuration.XmlRpcClientSection
+  name: XmlRpcClientSection
+  nameWithType: XmlRpcClientSection
+  fullName: Argotic.Configuration.XmlRpcClientSection
+- uid: Argotic.Configuration
+  commentId: N:Argotic.Configuration
+  name: Argotic.Configuration
+  nameWithType: Argotic.Configuration
+  fullName: Argotic.Configuration

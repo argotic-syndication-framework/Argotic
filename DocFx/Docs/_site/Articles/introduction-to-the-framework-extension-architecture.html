@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction to the syndication extension architecture </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Introduction to the syndication extension architecture ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction-to-the-syndication-extension-architecture">Introduction to the syndication extension architecture</h1>
+
+<p>Common publishing formats such as Really Simple Syndication (RSS) and the Atom Syndication Format allow for the addition of information and meta-data that is outside the scope of the format specification through the use of syndication extensions. The framework provides an extensibility model for syndication resources (objects that implement the <em>ISyndicationResource</em> interface) that allows you to consume and include syndication extension information.</p>
+<p>A syndication format such as RSS or Atom is extended through the use of XML namespaces. Each extension to a syndication format involves a unique XML namespace that qualifies the elements and attributes being added to the syndication format. The framework will by default automatically retrieve the extensions that have been applied to the syndication format entities based on the declared XML namespaces. While the framework natively supports the most common syndication extensions in use today, you may create your own custom syndication extensions using the syndication resource extensibility model.</p>
+<p>The extensibility model of the framework is architected using interface inheritance by providing the <em>ISyndicationExtension</em> and <em>IExtensibleSyndicationObject</em> interfaces. The extensibility model also supports change notification through the use of events. The extensions applied to a syndication entity are exposed as an <em>IEnumerable</em> collection of <em>ISyndicationExtension</em> objects, which allows you to write queries against the extensions collections by using language keywords and familiar operators using Language-Integrated Query (LINQ); while still providing a common API to program against regardless of whether you are using the .NET 2.0 or .NET 3.5 versions of the framework.</p>
+<p>The <em>ISyndicationExtension</em> interface and the related <em>SyndicationExtension</em> abstract base class provide a means of <em>describing the information</em> that is used to extend a syndication format. When creating your own custom syndication extensions, you either implement the <em>ISyndicationExtension</em> interface or inherit from the <em>SyndicationExtension</em> base class. Implementers of custom syndication extensions may also optionally utilize the <em>SyndicationExtensionAdapter</em> class to easily retrieve syndication extension information from the underlying XML data source.</p>
+<p>The <em>IExtensibleSyndicationObject</em> interface provides a means of <em>adding, retrieving, or removing</em> syndication extensions for syndication entities. The <em>IExtensibleSyndicationObject</em> interface defines the minimal properties and methods that provide a common way to manipulate extension information. All syndication entities in the framework that can participate in the extensibility model implement the <em>IExtensibleSyndicationObject</em> interface.</p>
+<h2 id="core-extensibility-model-entities">Core extensibility model entities</h2>
+<p><strong>ISyndicationExtension Interface</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Allows an object to implement a syndication extension by representing a set of properties, methods, indexers and events common to web content syndication extensions.</li>
+</ul>
+</li>
+<li><em>Properties</em>
+<ul>
+<li><em>Description</em>: Gets a human-readable description of the syndication extension.</li>
+<li><em>Documentation</em>: Gets an Uri that points to documentation for the syndication extension.</li>
+<li><em>Name</em>: Gets the human-readable name of the syndication extension.</li>
+<li><em>Version</em>: Gets the Version of the specification that the syndication extension conforms to.</li>
+<li><em>XmlNamespace</em>: Gets the XML namespace that is used when qualifying the syndication extension's element and attribute names.</li>
+<li><em>XmlPrefix</em>: Gets the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.</li>
+</ul>
+</li>
+<li><em>Events</em>
+<ul>
+<li><em>Loaded</em>: Occurs when the syndication extension state has been changed by a load operation.</li>
+</ul>
+</li>
+<li><em>Methods</em>
+<ul>
+<li><em>CreateNamespaceManager</em>(<em>XPathNavigator</em>): Initializes an <em>XmlNamespaceManager</em> object for resolving prefixed XML namespaces utilized by the <em>SyndicationExtension</em>.</li>
+<li><em>ExistsInSource</em>(<em>XPathNavigator</em>): Determines if the <em>ISyndicationExtension</em> exists in the XML data in the supplied <em>XPathNavigator</em>.</li>
+<li><em>Load</em>(<em>IXPathNavigable</em>): Initializes the syndication extension using the supplied <em>IXPathNavigable</em>.</li>
+<li><em>Load</em>(<em>XmlReader</em>): Initializes the syndication extension using the supplied <em>XmlReader</em>.</li>
+<li>WriteTo(XmlWriter): Writes the syndication extension to the specified <em>XmlWriter</em>.</li>
+<li><em>WriteXmlNamespaceDeclaration</em>(<em>XmlWriter</em>): Writes the prefixed XML namespace for the current syndication extension to the specified <em>XmlWriter</em>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SyndicationExtensionLoadedEventArgs Class</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Provides data for the <em>ISyndicationExtension.Loaded</em> event.</li>
+</ul>
+</li>
+<li><em>Properties</em>
+<ul>
+<li><em>Data</em>: Gets a read-only <em>XPathNavigator</em> object for navigating the XML data that was used to load the syndication extension.</li>
+<li><em>Extension</em>: Gets the <em>ISyndicationExtension</em> that resulted from the load operation.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SyndicationExtension Class</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Provides the set of methods, properties and events that web content syndication extensions should inherit from.</li>
+<li>The <em>SyndicationExtension</em> abstract class is provided to reduce the difficulty of implementing custom syndication extensions. While implementers are free to implement their custom syndication extensions by implementing the <em>ISyndicationExtension</em> interface, it is <em>recommended</em> that custom syndication extensions inherit from the <em>SyndicationExtension</em> base class.</li>
+</ul>
+</li>
+</ul>
+<p><strong>IExtensibleSyndicationObject Interface</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Defines generalized extension properties, methods, indexers and events that a value type or class implements to create a type-specific implementation of extension properties, methods, indexers and events.</li>
+</ul>
+</li>
+<li><em>Properties</em>
+<ul>
+<li><em>Extensions</em>: Gets or sets the syndication extensions applied to the syndication entity.</li>
+<li><em>HasExtensions</em>: Gets a value indicating if the syndication entity has one or more syndication extensions applied to it.</li>
+</ul>
+</li>
+<li><em>Methods</em>
+<ul>
+<li><em>AddExtension</em>(<em>ISyndicationExtension</em>): Adds the supplied <em>ISyndicationExtension</em> to the current instance's <em>Extensions</em> collection.</li>
+<li><em>FindExtension</em>(Predicate&lt;<em>ISyndicationExtension</em>&gt;): Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <em>Extensions</em> collection.</li>
+<li><em>RemoveExtension</em>(<em>ISyndicationExtension</em>): Removes the supplied ISyndicationExtension from the current instance's <em>Extensions</em> collection.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SyndicationExtensionAdapter Class</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Represents an <em>XPathNavigator</em> and <em>SyndicationResourceLoadSettings</em> that are used to fill an <em>IExtensibleSyndicationObject</em>.</li>
+</ul>
+</li>
+<li><em>Properties</em>
+<ul>
+<li><em>Navigator</em>: Gets the <em>XPathNavigator</em> used to fill an extensible syndication resource.</li>
+<li><em>Settings</em>: Gets the <em>SyndicationResourceLoadSettings</em> used to configure the fill of an extensible syndication resource.</li>
+</ul>
+</li>
+<li><em>Methods</em>
+<ul>
+<li><em>Fill</em>(<em>IExtensibleSyndicationObject</em>): Modifies the <em>IExtensibleSyndicationObject</em> to match the data source.</li>
+<li><em>Fill</em>(<em>IExtensibleSyndicationObject</em>, <em>XmlNamespaceManager</em>): Modifies the <em>IExtensibleSyndicationObject</em> to match the data source.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SyndicationResourceLoadSettings Class</strong></p>
+<ul>
+<li><em>Overview</em>
+<ul>
+<li>Specifies a set of features to support on a <em>ISyndicationResource</em> object loaded by the <em>ISyndicationResource.Load</em>(<em>IXPathNavigable</em>, <em>SyndicationResourceLoadSettings</em>) method.</li>
+</ul>
+</li>
+<li><em>Properties</em>
+<ul>
+<li><em>AutoDetectExtensions</em> - Indicates if syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on the syndication resource.</li>
+<li>CharacterEncoding - Indicates the character encoding to use when parsing a syndication resource.</li>
+<li>RetrievalLimit - Determines the maximum number of resource entities to retrieve from a syndication resource.</li>
+<li><em>SupportedExtensions</em> - Indicates the custom syndication extensions that you wish to support.</li>
+<li>Timeout - Specifies the amount of time after which asynchronous load operations will time out.</li>
+</ul>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/introduction-to-the-framework-extension-architecture.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

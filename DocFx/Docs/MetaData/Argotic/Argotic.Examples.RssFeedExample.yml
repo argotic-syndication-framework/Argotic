@@ -1,0 +1,717 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Examples.RssFeedExample
+  commentId: T:Argotic.Examples.RssFeedExample
+  id: RssFeedExample
+  parent: Argotic.Examples
+  children:
+  - Argotic.Examples.RssFeedExample.ClassExample
+  - Argotic.Examples.RssFeedExample.CreateExample
+  - Argotic.Examples.RssFeedExample.LoadAsyncExample
+  - Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample
+  - Argotic.Examples.RssFeedExample.LoadStreamExample
+  - Argotic.Examples.RssFeedExample.LoadUriExample
+  - Argotic.Examples.RssFeedExample.LoadXmlReaderExample
+  - Argotic.Examples.RssFeedExample.SaveStreamExample
+  - Argotic.Examples.RssFeedExample.SaveXmlWriterExample
+  langs:
+  - csharp
+  - vb
+  name: RssFeedExample
+  nameWithType: RssFeedExample
+  fullName: Argotic.Examples.RssFeedExample
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RssFeedExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 19
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nContains the code examples for the <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  remarks: "\nThis class contains all of the code examples that are referenced by the <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> class.\nThe code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.\n"
+  example: []
+  syntax:
+    content: public static class RssFeedExample
+    content.vb: Public Module RssFeedExample
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Examples.RssFeedExample.ClassExample
+  commentId: M:Argotic.Examples.RssFeedExample.ClassExample
+  id: ClassExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: ClassExample()
+  nameWithType: RssFeedExample.ClassExample()
+  fullName: Argotic.Examples.RssFeedExample.ClassExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ClassExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the RssFeed class.\n"
+  example: []
+  syntax:
+    content: public static void ClassExample()
+    content.vb: Public Shared Sub ClassExample
+  overload: Argotic.Examples.RssFeedExample.ClassExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.CreateExample
+  commentId: M:Argotic.Examples.RssFeedExample.CreateExample
+  id: CreateExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: CreateExample()
+  nameWithType: RssFeedExample.CreateExample()
+  fullName: Argotic.Examples.RssFeedExample.CreateExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the RssFeed.Create(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void CreateExample()
+    content.vb: Public Shared Sub CreateExample
+  overload: Argotic.Examples.RssFeedExample.CreateExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.LoadAsyncExample
+  commentId: M:Argotic.Examples.RssFeedExample.LoadAsyncExample
+  id: LoadAsyncExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: LoadAsyncExample()
+  nameWithType: RssFeedExample.LoadAsyncExample()
+  fullName: Argotic.Examples.RssFeedExample.LoadAsyncExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsyncExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 120
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the LoadAsync(Uri, Object) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadAsyncExample()
+    content.vb: Public Shared Sub LoadAsyncExample
+  overload: Argotic.Examples.RssFeedExample.LoadAsyncExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample
+  commentId: M:Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample
+  id: LoadIXPathNavigableExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: LoadIXPathNavigableExample()
+  nameWithType: RssFeedExample.LoadIXPathNavigableExample()
+  fullName: Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadIXPathNavigableExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 132
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(IXPathNavigable) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadIXPathNavigableExample()
+    content.vb: Public Shared Sub LoadIXPathNavigableExample
+  overload: Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.LoadStreamExample
+  commentId: M:Argotic.Examples.RssFeedExample.LoadStreamExample
+  id: LoadStreamExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: LoadStreamExample()
+  nameWithType: RssFeedExample.LoadStreamExample()
+  fullName: Argotic.Examples.RssFeedExample.LoadStreamExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadStreamExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 151
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(Stream) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadStreamExample()
+    content.vb: Public Shared Sub LoadStreamExample
+  overload: Argotic.Examples.RssFeedExample.LoadStreamExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.LoadUriExample
+  commentId: M:Argotic.Examples.RssFeedExample.LoadUriExample
+  id: LoadUriExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: LoadUriExample()
+  nameWithType: RssFeedExample.LoadUriExample()
+  fullName: Argotic.Examples.RssFeedExample.LoadUriExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadUriExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 172
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(Uri, ICredentials, IWebProxy) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadUriExample()
+    content.vb: Public Shared Sub LoadUriExample
+  overload: Argotic.Examples.RssFeedExample.LoadUriExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.LoadXmlReaderExample
+  commentId: M:Argotic.Examples.RssFeedExample.LoadXmlReaderExample
+  id: LoadXmlReaderExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: LoadXmlReaderExample()
+  nameWithType: RssFeedExample.LoadXmlReaderExample()
+  fullName: Argotic.Examples.RssFeedExample.LoadXmlReaderExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadXmlReaderExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 191
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(XmlReader) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadXmlReaderExample()
+    content.vb: Public Shared Sub LoadXmlReaderExample
+  overload: Argotic.Examples.RssFeedExample.LoadXmlReaderExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.SaveStreamExample
+  commentId: M:Argotic.Examples.RssFeedExample.SaveStreamExample
+  id: SaveStreamExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: SaveStreamExample()
+  nameWithType: RssFeedExample.SaveStreamExample()
+  fullName: Argotic.Examples.RssFeedExample.SaveStreamExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SaveStreamExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 219
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Save(Stream) method.\n"
+  example: []
+  syntax:
+    content: public static void SaveStreamExample()
+    content.vb: Public Shared Sub SaveStreamExample
+  overload: Argotic.Examples.RssFeedExample.SaveStreamExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.RssFeedExample.SaveXmlWriterExample
+  commentId: M:Argotic.Examples.RssFeedExample.SaveXmlWriterExample
+  id: SaveXmlWriterExample
+  parent: Argotic.Examples.RssFeedExample
+  langs:
+  - csharp
+  - vb
+  name: SaveXmlWriterExample()
+  nameWithType: RssFeedExample.SaveXmlWriterExample()
+  fullName: Argotic.Examples.RssFeedExample.SaveXmlWriterExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SaveXmlWriterExample
+    path: ../Solutions/Argotic.Examples/Core/Rss/RssFeedExample.cs
+    startLine: 233
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Save(XmlWriter) method.\n"
+  example: []
+  syntax:
+    content: public static void SaveXmlWriterExample()
+    content.vb: Public Shared Sub SaveXmlWriterExample
+  overload: Argotic.Examples.RssFeedExample.SaveXmlWriterExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Syndication.RssFeed
+  commentId: T:Argotic.Syndication.RssFeed
+  parent: Argotic.Syndication
+  name: RssFeed
+  nameWithType: RssFeed
+  fullName: Argotic.Syndication.RssFeed
+- uid: Argotic.Examples
+  commentId: N:Argotic.Examples
+  name: Argotic.Examples
+  nameWithType: Argotic.Examples
+  fullName: Argotic.Examples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Examples.RssFeedExample.ClassExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.ClassExample
+  name: ClassExample
+  nameWithType: RssFeedExample.ClassExample
+  fullName: Argotic.Examples.RssFeedExample.ClassExample
+- uid: Argotic.Examples.RssFeedExample.CreateExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.CreateExample
+  name: CreateExample
+  nameWithType: RssFeedExample.CreateExample
+  fullName: Argotic.Examples.RssFeedExample.CreateExample
+- uid: Argotic.Examples.RssFeedExample.LoadAsyncExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.LoadAsyncExample
+  name: LoadAsyncExample
+  nameWithType: RssFeedExample.LoadAsyncExample
+  fullName: Argotic.Examples.RssFeedExample.LoadAsyncExample
+- uid: Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample
+  name: LoadIXPathNavigableExample
+  nameWithType: RssFeedExample.LoadIXPathNavigableExample
+  fullName: Argotic.Examples.RssFeedExample.LoadIXPathNavigableExample
+- uid: Argotic.Examples.RssFeedExample.LoadStreamExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.LoadStreamExample
+  name: LoadStreamExample
+  nameWithType: RssFeedExample.LoadStreamExample
+  fullName: Argotic.Examples.RssFeedExample.LoadStreamExample
+- uid: Argotic.Examples.RssFeedExample.LoadUriExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.LoadUriExample
+  name: LoadUriExample
+  nameWithType: RssFeedExample.LoadUriExample
+  fullName: Argotic.Examples.RssFeedExample.LoadUriExample
+- uid: Argotic.Examples.RssFeedExample.LoadXmlReaderExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.LoadXmlReaderExample
+  name: LoadXmlReaderExample
+  nameWithType: RssFeedExample.LoadXmlReaderExample
+  fullName: Argotic.Examples.RssFeedExample.LoadXmlReaderExample
+- uid: Argotic.Examples.RssFeedExample.SaveStreamExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.SaveStreamExample
+  name: SaveStreamExample
+  nameWithType: RssFeedExample.SaveStreamExample
+  fullName: Argotic.Examples.RssFeedExample.SaveStreamExample
+- uid: Argotic.Examples.RssFeedExample.SaveXmlWriterExample*
+  commentId: Overload:Argotic.Examples.RssFeedExample.SaveXmlWriterExample
+  name: SaveXmlWriterExample
+  nameWithType: RssFeedExample.SaveXmlWriterExample
+  fullName: Argotic.Examples.RssFeedExample.SaveXmlWriterExample

@@ -1,0 +1,751 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  commentId: T:Argotic.Examples.SyndicationDiscoveryUtilityExample
+  id: SyndicationDiscoveryUtilityExample
+  parent: Argotic.Examples
+  children:
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+  - Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample
+  langs:
+  - csharp
+  - vb
+  name: SyndicationDiscoveryUtilityExample
+  nameWithType: SyndicationDiscoveryUtilityExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationDiscoveryUtilityExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 17
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nContains the code examples for the <xref href=\"Argotic.Common.SyndicationDiscoveryUtility\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  remarks: "\nThis class contains all of the code examples that are referenced by the <xref href=\"Argotic.Common.SyndicationDiscoveryUtility\" data-throw-if-not-resolved=\"false\"></xref> class.\nThe code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.\n"
+  example: []
+  syntax:
+    content: public static class SyndicationDiscoveryUtilityExample
+    content.vb: Public Module SyndicationDiscoveryUtilityExample
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample
+  id: ConditionalGetExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: ConditionalGetExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.ConditionalGetExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConditionalGetExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, string) method.\n"
+  example: []
+  syntax:
+    content: public static void ConditionalGetExample()
+    content.vb: Public Shared Sub ConditionalGetExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+  id: IsPingbackEnabledExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: IsPingbackEnabledExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsPingbackEnabledExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 54
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.IsPingbackEnabled(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void IsPingbackEnabledExample()
+    content.vb: Public Shared Sub IsPingbackEnabledExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+  id: IsTrackbackEnabledExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: IsTrackbackEnabledExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsTrackbackEnabledExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 72
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void IsTrackbackEnabledExample()
+    content.vb: Public Shared Sub IsTrackbackEnabledExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+  id: LocateDiscoverableSyndicationEndpointsExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: LocateDiscoverableSyndicationEndpointsExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateDiscoverableSyndicationEndpointsExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 90
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void LocateDiscoverableSyndicationEndpointsExample()
+    content.vb: Public Shared Sub LocateDiscoverableSyndicationEndpointsExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+  id: LocatePingbackNotificationServerExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: LocatePingbackNotificationServerExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocatePingbackNotificationServerExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 113
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)  method.\n"
+  example: []
+  syntax:
+    content: public static void LocatePingbackNotificationServerExample()
+    content.vb: Public Shared Sub LocatePingbackNotificationServerExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+  id: LocateTrackbackNotificationServersExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: LocateTrackbackNotificationServersExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateTrackbackNotificationServersExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 136
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void LocateTrackbackNotificationServersExample()
+    content.vb: Public Shared Sub LocateTrackbackNotificationServersExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+  id: SourceReferencesTargetExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: SourceReferencesTargetExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SourceReferencesTargetExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 160
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.SourceReferencesTarget(Uri, Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void SourceReferencesTargetExample()
+    content.vb: Public Shared Sub SourceReferencesTargetExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+  id: SyndicationContentFormatGetExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGetExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGetExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 176
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void SyndicationContentFormatGetExample()
+    content.vb: Public Shared Sub SyndicationContentFormatGetExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+  id: TryConditionalGetExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: TryConditionalGetExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.TryConditionalGetExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryConditionalGetExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 192
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.TryConditionalGetExample(Uri, DateTime, string, out WebResponse) method.\n"
+  example: []
+  syntax:
+    content: public static void TryConditionalGetExample()
+    content.vb: Public Shared Sub TryConditionalGetExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample
+  commentId: M:Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample
+  id: UriExistsExample
+  parent: Argotic.Examples.SyndicationDiscoveryUtilityExample
+  langs:
+  - csharp
+  - vb
+  name: UriExistsExample()
+  nameWithType: SyndicationDiscoveryUtilityExample.UriExistsExample()
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UriExistsExample
+    path: ../Solutions/Argotic.Examples/Common/SyndicationDiscoveryUtilityExample.cs
+    startLine: 222
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the SyndicationDiscoveryUtility.UriExists(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void UriExistsExample()
+    content.vb: Public Shared Sub UriExistsExample
+  overload: Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Common.SyndicationDiscoveryUtility
+  commentId: T:Argotic.Common.SyndicationDiscoveryUtility
+  name: SyndicationDiscoveryUtility
+  nameWithType: SyndicationDiscoveryUtility
+  fullName: Argotic.Common.SyndicationDiscoveryUtility
+- uid: Argotic.Examples
+  commentId: N:Argotic.Examples
+  name: Argotic.Examples
+  nameWithType: Argotic.Examples
+  fullName: Argotic.Examples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample
+  name: ConditionalGetExample
+  nameWithType: SyndicationDiscoveryUtilityExample.ConditionalGetExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.ConditionalGetExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+  name: IsPingbackEnabledExample
+  nameWithType: SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsPingbackEnabledExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+  name: IsTrackbackEnabledExample
+  nameWithType: SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.IsTrackbackEnabledExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+  name: LocateDiscoverableSyndicationEndpointsExample
+  nameWithType: SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateDiscoverableSyndicationEndpointsExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+  name: LocatePingbackNotificationServerExample
+  nameWithType: SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocatePingbackNotificationServerExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+  name: LocateTrackbackNotificationServersExample
+  nameWithType: SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.LocateTrackbackNotificationServersExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+  name: SourceReferencesTargetExample
+  nameWithType: SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.SourceReferencesTargetExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+  name: SyndicationContentFormatGetExample
+  nameWithType: SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.SyndicationContentFormatGetExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+  name: TryConditionalGetExample
+  nameWithType: SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.TryConditionalGetExample
+- uid: Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample*
+  commentId: Overload:Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample
+  name: UriExistsExample
+  nameWithType: SyndicationDiscoveryUtilityExample.UriExistsExample
+  fullName: Argotic.Examples.SyndicationDiscoveryUtilityExample.UriExistsExample

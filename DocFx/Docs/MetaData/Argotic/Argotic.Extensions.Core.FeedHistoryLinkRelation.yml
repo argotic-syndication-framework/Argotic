@@ -1,0 +1,1152 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  commentId: T:Argotic.Extensions.Core.FeedHistoryLinkRelation
+  id: FeedHistoryLinkRelation
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor(Argotic.Extensions.Core.FeedHistoryLinkRelationType,System.Uri)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo(System.Object)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals(System.Object)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  - Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: FeedHistoryLinkRelation
+  nameWithType: FeedHistoryLinkRelation
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedHistoryLinkRelation
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents a link relation used to cross-reference linked feed documents.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class FeedHistoryLinkRelation : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class FeedHistoryLinkRelation
+
+          Implements IComparable
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.Relations
+    commentId: P:Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.Relations
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: FeedHistoryLinkRelation()
+  nameWithType: FeedHistoryLinkRelation.FeedHistoryLinkRelation()
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.FeedHistoryLinkRelation()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public FeedHistoryLinkRelation()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor(Argotic.Extensions.Core.FeedHistoryLinkRelationType,System.Uri)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor(Argotic.Extensions.Core.FeedHistoryLinkRelationType,System.Uri)
+  id: '#ctor(Argotic.Extensions.Core.FeedHistoryLinkRelationType,System.Uri)'
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: FeedHistoryLinkRelation(FeedHistoryLinkRelationType, Uri)
+  nameWithType: FeedHistoryLinkRelation.FeedHistoryLinkRelation(FeedHistoryLinkRelationType, Uri)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.FeedHistoryLinkRelation(Argotic.Extensions.Core.FeedHistoryLinkRelationType, System.Uri)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 38
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied relation type and location.\n"
+  example: []
+  syntax:
+    content: public FeedHistoryLinkRelation(FeedHistoryLinkRelationType relation, Uri href)
+    parameters:
+    - id: relation
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+      description: A <xref href="Argotic.Extensions.Core.FeedHistoryLinkRelationType" data-throw-if-not-resolved="false"></xref> enumeration value that indicates the link relation type.
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri" data-throw-if-not-resolved="false"></xref> that represents the location this link relation points to.
+    content.vb: Public Sub New(relation As FeedHistoryLinkRelationType, href As Uri)
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  commentId: P:Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  id: RelationType
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: RelationType
+  nameWithType: FeedHistoryLinkRelation.RelationType
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationType
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a value that indicates the type of this link relation.\n"
+  example: []
+  syntax:
+    content: public FeedHistoryLinkRelationType RelationType { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+      description: "\nA <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelationType\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that indicates the link relation type.\nThe default value is <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelationType.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates no relationship type was specified.\n"
+    content.vb: Public Property RelationType As FeedHistoryLinkRelationType
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  commentId: P:Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  id: Uri
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: Uri
+  nameWithType: FeedHistoryLinkRelation.Uri
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Uri
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 69
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets an IRI that identifies the location of this link relation.\n"
+  example: []
+  syntax:
+    content: public Uri Uri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri" data-throw-if-not-resolved="false"></xref> that represents a Internationalized Resource Identifier (IRI) that identifies the location of this link relation.
+    content.vb: Public Property Uri As Uri
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  id: op_Equality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: Equality(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  nameWithType: FeedHistoryLinkRelation.Equality(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equality(Argotic.Extensions.Core.FeedHistoryLinkRelation, Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 89
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(FeedHistoryLinkRelation first, FeedHistoryLinkRelation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As FeedHistoryLinkRelation, second As FeedHistoryLinkRelation) As Boolean
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  id: op_Inequality(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: Inequality(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  nameWithType: FeedHistoryLinkRelation.Inequality(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Inequality(Argotic.Extensions.Core.FeedHistoryLinkRelation, Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 109
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(FeedHistoryLinkRelation first, FeedHistoryLinkRelation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As FeedHistoryLinkRelation, second As FeedHistoryLinkRelation) As Boolean
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  id: op_LessThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: LessThan(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  nameWithType: FeedHistoryLinkRelation.LessThan(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.LessThan(Argotic.Extensions.Core.FeedHistoryLinkRelation, Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 120
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(FeedHistoryLinkRelation first, FeedHistoryLinkRelation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As FeedHistoryLinkRelation, second As FeedHistoryLinkRelation) As Boolean
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  id: op_GreaterThan(Argotic.Extensions.Core.FeedHistoryLinkRelation,Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  nameWithType: FeedHistoryLinkRelation.GreaterThan(FeedHistoryLinkRelation, FeedHistoryLinkRelation)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.GreaterThan(Argotic.Extensions.Core.FeedHistoryLinkRelation, Argotic.Extensions.Core.FeedHistoryLinkRelation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 140
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(FeedHistoryLinkRelation first, FeedHistoryLinkRelation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As FeedHistoryLinkRelation, second As FeedHistoryLinkRelation) As Boolean
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: FeedHistoryLinkRelation.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 163
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.FeedHistoryLinkRelation" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: FeedHistoryLinkRelation.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 201
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: FeedHistoryLinkRelation.ToString()
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 219
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.FeedHistoryLinkRelation\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.FeedHistoryLinkRelation" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: FeedHistoryLinkRelation.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 248
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: FeedHistoryLinkRelation.Equals(Object)
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 275
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode
+  commentId: M:Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: FeedHistoryLinkRelation.GetHashCode()
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelation.cs
+    startLine: 289
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.Relations
+  commentId: P:Argotic.Extensions.Core.FeedHistorySyndicationExtensionContext.Relations
+  isExternal: true
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation
+  commentId: T:Argotic.Extensions.Core.FeedHistoryLinkRelation
+  parent: Argotic.Extensions.Core
+  name: FeedHistoryLinkRelation
+  nameWithType: FeedHistoryLinkRelation
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.#ctor
+  name: FeedHistoryLinkRelation
+  nameWithType: FeedHistoryLinkRelation.FeedHistoryLinkRelation
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.FeedHistoryLinkRelation
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  commentId: T:Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  parent: Argotic.Extensions.Core
+  name: FeedHistoryLinkRelationType
+  nameWithType: FeedHistoryLinkRelationType
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  commentId: P:Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  isExternal: true
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  name: RelationType
+  nameWithType: FeedHistoryLinkRelation.RelationType
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+  name: Uri
+  nameWithType: FeedHistoryLinkRelation.Uri
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Uri
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Equality
+  name: Equality
+  nameWithType: FeedHistoryLinkRelation.Equality
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_Inequality
+  name: Inequality
+  nameWithType: FeedHistoryLinkRelation.Inequality
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Inequality
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_LessThan
+  name: LessThan
+  nameWithType: FeedHistoryLinkRelation.LessThan
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.LessThan
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.op_GreaterThan
+  name: GreaterThan
+  nameWithType: FeedHistoryLinkRelation.GreaterThan
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.GreaterThan
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Load*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.Load
+  name: Load
+  nameWithType: FeedHistoryLinkRelation.Load
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo
+  name: WriteTo
+  nameWithType: FeedHistoryLinkRelation.WriteTo
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString
+  name: ToString
+  nameWithType: FeedHistoryLinkRelation.ToString
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo
+  name: CompareTo
+  nameWithType: FeedHistoryLinkRelation.CompareTo
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals
+  name: Equals
+  nameWithType: FeedHistoryLinkRelation.Equals
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode
+  name: GetHashCode
+  nameWithType: FeedHistoryLinkRelation.GetHashCode
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelation.GetHashCode

@@ -1,0 +1,1339 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class RssEnclosure
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class RssEnclosure
+   ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Syndication.RssEnclosure">
+  
+  
+  <h1 id="Argotic_Syndication_RssEnclosure" data-uid="Argotic.Syndication.RssEnclosure" class="text-break">Class RssEnclosure
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a media object such as an audio, video, or executable file that can be associated with an <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">RssEnclosure</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+    <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.html">Argotic.Syndication</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
+  <h5 id="Argotic_Syndication_RssEnclosure_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class RssEnclosure : IComparable, IExtensibleSyndicationObject</code></pre>
+  </div>
+  <h5 id="Argotic_Syndication_RssEnclosure_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item.
+    Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.
+    For best support in the widest number of aggregators, an item <em>should not</em> contain more than one enclosure.
+</p>
+</div>
+  <h5 id="Argotic_Syndication_RssEnclosure_examples"><strong>Examples</strong></h5>
+  <pre><code><pre><code source="..\..\Argotic.Examples\Core\Rss\RssEnclosureExample.cs" region="RssEnclosure"></code></pre>
+<p></code></pre><p>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure__ctor.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L59">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure__ctor_" data-uid="Argotic.Syndication.RssEnclosure.#ctor*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure__ctor" data-uid="Argotic.Syndication.RssEnclosure.#ctor">RssEnclosure()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RssEnclosure()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure__ctor_System_Int64_System_String_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.%23ctor(System.Int64%2CSystem.String%2CSystem.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L73">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure__ctor_" data-uid="Argotic.Syndication.RssEnclosure.#ctor*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure__ctor_System_Int64_System_String_System_Uri_" data-uid="Argotic.Syndication.RssEnclosure.#ctor(System.Int64,System.String,System.Uri)">RssEnclosure(Int64, String, Uri)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> class using the supplied length, MIME type, and <span class="xref">System.Uri</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RssEnclosure(long length, string type, Uri url)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">length</span></td>
+        <td><p>The size, in bytes, of the media object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The media object's MIME content type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">url</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">length</code> is less than <em>zero</em>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_ContentType.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.ContentType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L89">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_ContentType_" data-uid="Argotic.Syndication.RssEnclosure.ContentType*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_ContentType" data-uid="Argotic.Syndication.RssEnclosure.ContentType">ContentType</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the media object's MIME content type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ContentType { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The media object's MIME content type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_ContentType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of the registered IANA MIME media types.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Extensions.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Extensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L111">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Extensions_" data-uid="Argotic.Syndication.RssEnclosure.Extensions*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Extensions" data-uid="Argotic.Syndication.RssEnclosure.Extensions">Extensions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the syndication extensions applied to this syndication entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ISyndicationExtension&gt; Extensions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_Extensions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_HasExtensions.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.HasExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L134">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_HasExtensions_" data-uid="Argotic.Syndication.RssEnclosure.HasExtensions*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_HasExtensions" data-uid="Argotic.Syndication.RssEnclosure.HasExtensions">HasExtensions</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasExtensions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssEnclosure.html#Argotic_Syndication_RssEnclosure_Extensions">Extensions</a> collection for this entity contains one or more <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects, otherwise returns <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Length.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Length%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L158">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Length_" data-uid="Argotic.Syndication.RssEnclosure.Length*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Length" data-uid="Argotic.Syndication.RssEnclosure.Length">Length</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the size of the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Length { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>The size, in bytes, of the media object. The default value is <span class="xref">System.Int64.MinValue</span>, which indicates that no size was specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_Length_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Though an enclosure <strong>must</strong> specify its size with the length attribute, the size of some media objects cannot be determined by an RSS publisher.
+    When an enclosure&apos;s size cannot be determined, a publisher <em>should</em> use a length of 0.
+</p>
+<p>
+    The peer-to-peer file-sharing protocol BitTorrent deploys files using a small key file called a torrent that tells a client how to find and download the file.
+    When an enclosure is delivered in a multi-step process like the one used by BitTorrent, the length <em>should</em> be the size
+    of the first file that must be downloaded to begin the process.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is less than <em>zero</em>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Url.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Url%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L177">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Url_" data-uid="Argotic.Syndication.RssEnclosure.Url*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Url" data-uid="Argotic.Syndication.RssEnclosure.Url">Url</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the URL of the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Url { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_AddExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.AddExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L271">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_AddExtension_" data-uid="Argotic.Syndication.RssEnclosure.AddExtension*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_AddExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Syndication.RssEnclosure.AddExtension(Argotic.Extensions.ISyndicationExtension)">AddExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Adds the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AddExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was added to the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L287">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_CompareTo_" data-uid="Argotic.Syndication.RssEnclosure.CompareTo*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_CompareTo_System_Object_" data-uid="Argotic.Syndication.RssEnclosure.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L324">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Equals_" data-uid="Argotic.Syndication.RssEnclosure.Equals*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Equals_System_Object_" data-uid="Argotic.Syndication.RssEnclosure.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L347">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_FindExtension_" data-uid="Argotic.Syndication.RssEnclosure.FindExtension*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.RssEnclosure.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Syndication.RssEnclosure.html#Argotic_Syndication_RssEnclosure_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISyndicationExtension FindExtension(Predicate&lt;ISyndicationExtension&gt; match)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="parametername">match</span></td>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><p>The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Syndication.RssEnclosure.html#Argotic_Syndication_RssEnclosure_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
+the <a class="xref" href="Argotic.Syndication.RssEnclosure.html#Argotic_Syndication_RssEnclosure_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L358">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_GetHashCode_" data-uid="Argotic.Syndication.RssEnclosure.GetHashCode*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_GetHashCode" data-uid="Argotic.Syndication.RssEnclosure.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L374">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Load_" data-uid="Argotic.Syndication.RssEnclosure.Load*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Syndication.RssEnclosure.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.Load(System.Xml.XPath.XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L437">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_Load_" data-uid="Argotic.Syndication.RssEnclosure.Load*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.RssEnclosure.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> used to configure the load operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L458">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_RemoveExtension_" data-uid="Argotic.Syndication.RssEnclosure.RemoveExtension*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_RemoveExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Syndication.RssEnclosure.RemoveExtension(Argotic.Extensions.ISyndicationExtension)">RemoveExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Removes the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> from the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was removed from the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssEnclosure_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.RssEnclosure.html#Argotic_Syndication_RssEnclosure_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_ToString.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L478">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_ToString_" data-uid="Argotic.Syndication.RssEnclosure.ToString*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_ToString" data-uid="Argotic.Syndication.RssEnclosure.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h5 id="Argotic_Syndication_RssEnclosure_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L506">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_WriteTo_" data-uid="Argotic.Syndication.RssEnclosure.WriteTo*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Syndication.RssEnclosure.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_op_Equality_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.op_Equality(Argotic.Syndication.RssEnclosure%2CArgotic.Syndication.RssEnclosure)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L197">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_op_Equality_" data-uid="Argotic.Syndication.RssEnclosure.op_Equality*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_op_Equality_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_" data-uid="Argotic.Syndication.RssEnclosure.op_Equality(Argotic.Syndication.RssEnclosure,Argotic.Syndication.RssEnclosure)">Equality(RssEnclosure, RssEnclosure)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(RssEnclosure first, RssEnclosure second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_op_GreaterThan_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.op_GreaterThan(Argotic.Syndication.RssEnclosure%2CArgotic.Syndication.RssEnclosure)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L218">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_op_GreaterThan_" data-uid="Argotic.Syndication.RssEnclosure.op_GreaterThan*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_op_GreaterThan_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_" data-uid="Argotic.Syndication.RssEnclosure.op_GreaterThan(Argotic.Syndication.RssEnclosure,Argotic.Syndication.RssEnclosure)">GreaterThan(RssEnclosure, RssEnclosure)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(RssEnclosure first, RssEnclosure second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_op_Inequality_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.op_Inequality(Argotic.Syndication.RssEnclosure%2CArgotic.Syndication.RssEnclosure)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L239">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_op_Inequality_" data-uid="Argotic.Syndication.RssEnclosure.op_Inequality*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_op_Inequality_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_" data-uid="Argotic.Syndication.RssEnclosure.op_Inequality(Argotic.Syndication.RssEnclosure,Argotic.Syndication.RssEnclosure)">Inequality(RssEnclosure, RssEnclosure)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(RssEnclosure first, RssEnclosure second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure_op_LessThan_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure.op_LessThan(Argotic.Syndication.RssEnclosure%2CArgotic.Syndication.RssEnclosure)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L250">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssEnclosure_op_LessThan_" data-uid="Argotic.Syndication.RssEnclosure.op_LessThan*"></a>
+  <h4 id="Argotic_Syndication_RssEnclosure_op_LessThan_Argotic_Syndication_RssEnclosure_Argotic_Syndication_RssEnclosure_" data-uid="Argotic.Syndication.RssEnclosure.op_LessThan(Argotic.Syndication.RssEnclosure,Argotic.Syndication.RssEnclosure)">LessThan(RssEnclosure, RssEnclosure)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(RssEnclosure first, RssEnclosure second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
+  <div>
+      <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Enclosures">Enclosures</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssEnclosure.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssEnclosure%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssEnclosure.cs/#L29" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1594 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class RssItem
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class RssItem
+   ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Syndication.RssItem">
+  
+  
+  <h1 id="Argotic_Syndication_RssItem" data-uid="Argotic.Syndication.RssItem" class="text-break">Class RssItem
+  </h1>
+  <div class="markdown level0 summary"><p>Represents distinct content published in an <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> such as a news article, weblog entry or some other form of discrete update.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">RssItem</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+    <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.html">Argotic.Syndication</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
+  <h5 id="Argotic_Syndication_RssItem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class RssItem : IComparable, IExtensibleSyndicationObject</code></pre>
+  </div>
+  <h5 id="Argotic_Syndication_RssItem_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> <strong>must</strong> contain either a <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Title">Title</a> <em>or</em> <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Description">Description</a>.</p>
+</div>
+  <h5 id="Argotic_Syndication_RssItem_examples"><strong>Examples</strong></h5>
+  <pre><code><pre><code source="..\..\Argotic.Examples\Core\Rss\RssItemExample.cs" region="RssItem"></code></pre>
+<p></code></pre><p>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem__ctor.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L91">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem__ctor_" data-uid="Argotic.Syndication.RssItem.#ctor*"></a>
+  <h4 id="Argotic_Syndication_RssItem__ctor" data-uid="Argotic.Syndication.RssItem.#ctor">RssItem()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RssItem()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Author.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Author%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L109">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Author_" data-uid="Argotic.Syndication.RssItem.Author*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Author" data-uid="Argotic.Syndication.RssItem.Author">Author</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the e-mail address of the person who wrote this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Author { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The e-mail address of the person who wrote this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Author_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
+    the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <em>username@hostname.tld (Real Name)</em>.
+</p>
+<p>
+    A feed published by an individual <em>should</em> omit the item <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Author">Author</a>
+    and use the <a class="xref" href="Argotic.Syndication.RssChannel.html#Argotic_Syndication_RssChannel_ManagingEditor">ManagingEditor</a> or <a class="xref" href="Argotic.Syndication.RssChannel.html#Argotic_Syndication_RssChannel_Webmaster">Webmaster</a> channel properties to provide contact information.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Categories.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Categories%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L135">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Categories_" data-uid="Argotic.Syndication.RssItem.Categories*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Categories" data-uid="Argotic.Syndication.RssItem.Categories">Categories</h4>
+  <div class="markdown level1 summary"><p>Gets the categories or tags to which this item belongs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;RssCategory&gt; Categories { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.RssCategory.html">RssCategory</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of <a class="xref" href="Argotic.Syndication.RssCategory.html">RssCategory</a> objects that represent the categories to which this item belongs. The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Comments.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Comments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L152">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Comments_" data-uid="Argotic.Syndication.RssItem.Comments*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Comments" data-uid="Argotic.Syndication.RssItem.Comments">Comments</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the URL of a web page that contains comments received in response to this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Comments { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of a web page that contains comments received in response to this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Description.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L180">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Description_" data-uid="Argotic.Syndication.RssItem.Description*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Description" data-uid="Argotic.Syndication.RssItem.Description">Description</h4>
+  <div class="markdown level1 summary"><p>Gets or sets character data that contains this item's full content or a summary of its contents.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Description { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Character data that contains this item's full content or a summary of its contents.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Description_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The description <em>may</em> be empty if the item specifies a <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Title">Title</a>.</p>
+<p>
+    The description <strong>must</strong> be suitable for presentation as HTML.
+    HTML markup must be encoded as character data either by employing the <strong>HTML entities</strong> (&lt; and >) <em>or</em> a <strong>CDATA</strong> section.
+</p>
+<p>
+    The description <em>should not</em> contain relative URLs, because the RSS format does not provide a means to identify the base URL of a document.
+    When a relative URL is present, an aggregator <em>may</em> attempt to resolve it to a full URL using the channel&apos;s <a class="xref" href="Argotic.Syndication.RssChannel.html#Argotic_Syndication_RssChannel_Link">Link</a> as the base.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Enclosures.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Enclosures%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L214">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Enclosures_" data-uid="Argotic.Syndication.RssItem.Enclosures*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Enclosures" data-uid="Argotic.Syndication.RssItem.Enclosures">Enclosures</h4>
+  <div class="markdown level1 summary"><p>Gets the media objects associated with this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;RssEnclosure&gt; Enclosures { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of <a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a> objects that represent the media objects such as an audio, video, or executable file that are associated with this item.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Enclosures_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item.
+    Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.
+    For best support in the widest number of aggregators, an item <em>should not</em> contain more than one enclosure.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Extensions.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Extensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L235">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Extensions_" data-uid="Argotic.Syndication.RssItem.Extensions*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Extensions" data-uid="Argotic.Syndication.RssItem.Extensions">Extensions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the syndication extensions applied to this syndication entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ISyndicationExtension&gt; Extensions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Extensions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Guid.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Guid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L263">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Guid_" data-uid="Argotic.Syndication.RssItem.Guid*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Guid" data-uid="Argotic.Syndication.RssItem.Guid">Guid</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the unique identifier for this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RssGuid Guid { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssGuid.html">RssGuid</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.RssGuid.html">RssGuid</a> object that represents the unique identifier for this item. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Guid_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A publisher <em>should</em> provide a guid for each item.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_HasExtensions.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.HasExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L280">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_HasExtensions_" data-uid="Argotic.Syndication.RssItem.HasExtensions*"></a>
+  <h4 id="Argotic_Syndication_RssItem_HasExtensions" data-uid="Argotic.Syndication.RssItem.HasExtensions">HasExtensions</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasExtensions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Extensions">Extensions</a> collection for this entity contains one or more <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects, otherwise returns <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Link.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Link%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L292">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Link_" data-uid="Argotic.Syndication.RssItem.Link*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Link" data-uid="Argotic.Syndication.RssItem.Link">Link</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the URL of a web page associated with this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Link { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of a web page associated with this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_PublicationDate.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.PublicationDate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L317">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_PublicationDate_" data-uid="Argotic.Syndication.RssItem.PublicationDate*"></a>
+  <h4 id="Argotic_Syndication_RssItem_PublicationDate" data-uid="Argotic.Syndication.RssItem.PublicationDate">PublicationDate</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the publication date and time of this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime PublicationDate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the publication date and time of this item.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that no publication date was specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_PublicationDate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The specification recommends that aggregators <em>should</em> ignore items with a publication date that occurs in the future,
+providing a means for publishers to embargo an item until that date. However, it is recommended that publishers <em>should not</em>
+include items in a feed until they are ready for publication.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Source.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Source%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L336">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Source_" data-uid="Argotic.Syndication.RssItem.Source*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Source" data-uid="Argotic.Syndication.RssItem.Source">Source</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the source feed that this item was republished from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RssSource Source { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssSource.html">RssSource</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.RssSource.html">RssSource</a> object that represents the source feed that this item was republished from. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Title.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L356">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Title_" data-uid="Argotic.Syndication.RssItem.Title*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Title" data-uid="Argotic.Syndication.RssItem.Title">Title</h4>
+  <div class="markdown level1 summary"><p>Gets or sets character data that provides this item's headline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Title { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Character data that provides this item's headline.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Title_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This property is optional if the item contains a <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Description">Description</a>.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_AddExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L493">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_AddExtension_" data-uid="Argotic.Syndication.RssItem.AddExtension*"></a>
+  <h4 id="Argotic_Syndication_RssItem_AddExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)">AddExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Adds the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AddExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was added to the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure__System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection%7BArgotic.Syndication.RssEnclosure%7D%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Syndication.RssEnclosure%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L462">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_CompareSequence_" data-uid="Argotic.Syndication.RssItem.CompareSequence*"></a>
+  <h4 id="Argotic_Syndication_RssItem_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure__System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure__" data-uid="Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure},System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure})">CompareSequence(Collection&lt;RssEnclosure&gt;, Collection&lt;RssEnclosure&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;RssEnclosure&gt; source, Collection&lt;RssEnclosure&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.RssEnclosure.html">RssEnclosure</a>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure__System_Collections_ObjectModel_Collection_Argotic_Syndication_RssEnclosure___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L509">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_CompareTo_" data-uid="Argotic.Syndication.RssItem.CompareTo*"></a>
+  <h4 id="Argotic_Syndication_RssItem_CompareTo_System_Object_" data-uid="Argotic.Syndication.RssItem.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L578">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Equals_" data-uid="Argotic.Syndication.RssItem.Equals*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Equals_System_Object_" data-uid="Argotic.Syndication.RssItem.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L601">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_FindExtension_" data-uid="Argotic.Syndication.RssItem.FindExtension*"></a>
+  <h4 id="Argotic_Syndication_RssItem_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.RssItem.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISyndicationExtension FindExtension(Predicate&lt;ISyndicationExtension&gt; match)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="parametername">match</span></td>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><p>The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
+the <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_FindExtension__1.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.FindExtension%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L613">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_FindExtension_" data-uid="Argotic.Syndication.RssItem.FindExtension*"></a>
+  <h4 id="Argotic_Syndication_RssItem_FindExtension__1" data-uid="Argotic.Syndication.RssItem.FindExtension``1">FindExtension&lt;TExtension&gt;()</h4>
+  <div class="markdown level1 summary"><p>Finds an extension.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TExtension FindExtension&lt;TExtension&gt;()
+
+    where TExtension : ISyndicationExtension</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TExtension</span></td>
+        <td><p>Returns the extension.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TExtension</span></td>
+        <td><p>The extension type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L623">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_GetHashCode_" data-uid="Argotic.Syndication.RssItem.GetHashCode*"></a>
+  <h4 id="Argotic_Syndication_RssItem_GetHashCode" data-uid="Argotic.Syndication.RssItem.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L639">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Load_" data-uid="Argotic.Syndication.RssItem.Load*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L761">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_Load_" data-uid="Argotic.Syndication.RssItem.Load*"></a>
+  <h4 id="Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> used to configure the load operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L885">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_RemoveExtension_" data-uid="Argotic.Syndication.RssItem.RemoveExtension*"></a>
+  <h4 id="Argotic_Syndication_RssItem_RemoveExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)">RemoveExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Removes the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> from the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was removed from the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_RssItem_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.RssItem.html#Argotic_Syndication_RssItem_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_ToString.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L905">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_ToString_" data-uid="Argotic.Syndication.RssItem.ToString*"></a>
+  <h4 id="Argotic_Syndication_RssItem_ToString" data-uid="Argotic.Syndication.RssItem.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h5 id="Argotic_Syndication_RssItem_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L933">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_WriteTo_" data-uid="Argotic.Syndication.RssItem.WriteTo*"></a>
+  <h4 id="Argotic_Syndication_RssItem_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_op_Equality_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.op_Equality(Argotic.Syndication.RssItem%2CArgotic.Syndication.RssItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L375">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_op_Equality_" data-uid="Argotic.Syndication.RssItem.op_Equality*"></a>
+  <h4 id="Argotic_Syndication_RssItem_op_Equality_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_" data-uid="Argotic.Syndication.RssItem.op_Equality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)">Equality(RssItem, RssItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(RssItem first, RssItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_op_GreaterThan_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.op_GreaterThan(Argotic.Syndication.RssItem%2CArgotic.Syndication.RssItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L396">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_op_GreaterThan_" data-uid="Argotic.Syndication.RssItem.op_GreaterThan*"></a>
+  <h4 id="Argotic_Syndication_RssItem_op_GreaterThan_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_" data-uid="Argotic.Syndication.RssItem.op_GreaterThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)">GreaterThan(RssItem, RssItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(RssItem first, RssItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_op_Inequality_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.op_Inequality(Argotic.Syndication.RssItem%2CArgotic.Syndication.RssItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L417">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_op_Inequality_" data-uid="Argotic.Syndication.RssItem.op_Inequality*"></a>
+  <h4 id="Argotic_Syndication_RssItem_op_Inequality_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_" data-uid="Argotic.Syndication.RssItem.op_Inequality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)">Inequality(RssItem, RssItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(RssItem first, RssItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem_op_LessThan_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem.op_LessThan(Argotic.Syndication.RssItem%2CArgotic.Syndication.RssItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L428">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_RssItem_op_LessThan_" data-uid="Argotic.Syndication.RssItem.op_LessThan*"></a>
+  <h4 id="Argotic_Syndication_RssItem_op_LessThan_Argotic_Syndication_RssItem_Argotic_Syndication_RssItem_" data-uid="Argotic.Syndication.RssItem.op_LessThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)">LessThan(RssItem, RssItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(RssItem first, RssItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.RssItem.html">RssItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
+  <div>
+      <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Syndication_RssItem.md&amp;value=---%0Auid%3A%20Argotic.Syndication.RssItem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Syndication/Rss/RssItem.cs/#L26" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,695 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.SyndicationDateTimeUtility
+  commentId: T:Argotic.Common.SyndicationDateTimeUtility
+  id: SyndicationDateTimeUtility
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime(System.String)
+  - Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime(System.String)
+  - Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)
+  - Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)
+  - Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String,System.DateTime@)
+  - Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String,System.DateTime@)
+  langs:
+  - csharp
+  - vb
+  name: SyndicationDateTimeUtility
+  nameWithType: SyndicationDateTimeUtility
+  fullName: Argotic.Common.SyndicationDateTimeUtility
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationDateTimeUtility
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 14
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nProvides methods for generating and parsing date-time information exposed by syndicated content. This class cannot be inherited.\n"
+  remarks: "\nSee <a href=\"http://www.ietf.org/rfc/rfc0822.txt\">RFC #822: Standard for ARPA Internet Text Messages (Date and Time Specification)</a>\nand <a href=\"http://www.ietf.org/rfc/rfc3339.txt\">RFC #3339: Date and Time on the Internet (Timestamps)</a> for further information about\nthe date-time formats implemented in the <xref href=\"Argotic.Common.SyndicationDateTimeUtility\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public static class SyndicationDateTimeUtility
+    content.vb: Public Module SyndicationDateTimeUtility
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime(System.String)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime(System.String)
+  id: ParseRfc3339DateTime(System.String)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: ParseRfc3339DateTime(String)
+  nameWithType: SyndicationDateTimeUtility.ParseRfc3339DateTime(String)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ParseRfc3339DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 24
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the specified string representation of a RFC-3339 formatted date to its <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> equivalent.\n"
+  example: []
+  syntax:
+    content: public static DateTime ParseRfc3339DateTime(string value)
+    parameters:
+    - id: value
+      type: System.String
+      description: A string containing a RFC-3339 formatted date to convert.
+    return:
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> equivalent to the RFC-3339 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.
+    content.vb: Public Shared Function ParseRfc3339DateTime(value As String) As Date
+  overload: Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is not a recognized as a RFC-3339 formatted date.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)
+  id: ToRfc3339DateTime(System.DateTime)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: ToRfc3339DateTime(DateTime)
+  nameWithType: SyndicationDateTimeUtility.ToRfc3339DateTime(DateTime)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToRfc3339DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 44
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the value of the supplied <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> object to its equivalent RFC-3339 date string representation.\n"
+  example: []
+  syntax:
+    content: public static string ToRfc3339DateTime(DateTime utcDateTime)
+    parameters:
+    - id: utcDateTime
+      type: System.DateTime
+      description: The UTC <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object to convert.
+    return:
+      type: System.String
+      description: A string that contains the RFC-3339 date string representation of the supplied <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object.
+    content.vb: Public Shared Function ToRfc3339DateTime(utcDateTime As Date) As String
+  overload: Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String,System.DateTime@)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String,System.DateTime@)
+  id: TryParseRfc3339DateTime(System.String,System.DateTime@)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: TryParseRfc3339DateTime(String, out DateTime)
+  nameWithType: SyndicationDateTimeUtility.TryParseRfc3339DateTime(String, out DateTime)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String, out System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseRfc3339DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 67
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the specified string representation of a RFC-3339 formatted date to its <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> equivalent.\n"
+  example: []
+  syntax:
+    content: public static bool TryParseRfc3339DateTime(string value, out DateTime result)
+    parameters:
+    - id: value
+      type: System.String
+      description: A string containing a RFC-3339 formatted date to convert.
+    - id: result
+      type: System.DateTime
+      description: "\nWhen this method returns, contains the <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> value equivalent to the date and time contained in <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code>, if the conversion succeeded, or <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref> if the conversion failed.\nThe conversion fails if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> parameter is a <strong>null</strong> or empty string, or does not contain a valid string representation of a RFC-3339 formatted date.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">value</code> parameter was converted successfully; otherwise, <strong>false</strong>.
+    content.vb: Public Shared Function TryParseRfc3339DateTime(value As String, ByRef result As Date) As Boolean
+  overload: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime*
+  nameWithType.vb: SyndicationDateTimeUtility.TryParseRfc3339DateTime(String, ByRef DateTime)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String, ByRef System.DateTime)
+  name.vb: TryParseRfc3339DateTime(String, ByRef DateTime)
+- uid: Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime(System.String)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime(System.String)
+  id: ParseRfc822DateTime(System.String)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: ParseRfc822DateTime(String)
+  nameWithType: SyndicationDateTimeUtility.ParseRfc822DateTime(String)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ParseRfc822DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 106
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the specified string representation of a RFC-822 formatted date to its <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> equivalent.\n"
+  example: []
+  syntax:
+    content: public static DateTime ParseRfc822DateTime(string value)
+    parameters:
+    - id: value
+      type: System.String
+      description: A string containing a RFC-822 formatted date to convert.
+    return:
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> equivalent to the RFC-822 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.
+    content.vb: Public Shared Function ParseRfc822DateTime(value As String) As Date
+  overload: Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is not a recognized as a RFC-822 formatted date.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)
+  id: ToRfc822DateTime(System.DateTime)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: ToRfc822DateTime(DateTime)
+  nameWithType: SyndicationDateTimeUtility.ToRfc822DateTime(DateTime)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToRfc822DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 126
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the value of the supplied <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> object to its equivalent RFC-822 date string representation.\n"
+  example: []
+  syntax:
+    content: public static string ToRfc822DateTime(DateTime dateTime)
+    parameters:
+    - id: dateTime
+      type: System.DateTime
+      description: The <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object to convert.
+    return:
+      type: System.String
+      description: A string that contains the RFC-822 date string representation of the supplied <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object.
+    content.vb: Public Shared Function ToRfc822DateTime(dateTime As Date) As String
+  overload: Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String,System.DateTime@)
+  commentId: M:Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String,System.DateTime@)
+  id: TryParseRfc822DateTime(System.String,System.DateTime@)
+  parent: Argotic.Common.SyndicationDateTimeUtility
+  langs:
+  - csharp
+  - vb
+  name: TryParseRfc822DateTime(String, out DateTime)
+  nameWithType: SyndicationDateTimeUtility.TryParseRfc822DateTime(String, out DateTime)
+  fullName: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String, out System.DateTime)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseRfc822DateTime
+    path: ../Solutions/Argotic.Common/SyndicationDateTimeUtility.cs
+    startLine: 144
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts the specified string representation of a RFC-822 formatted date to its <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> equivalent.\n"
+  example: []
+  syntax:
+    content: public static bool TryParseRfc822DateTime(string value, out DateTime result)
+    parameters:
+    - id: value
+      type: System.String
+      description: A string containing a RFC-822 formatted date to convert.
+    - id: result
+      type: System.DateTime
+      description: "\nWhen this method returns, contains the <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> value equivalent to the date and time contained in <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code>, if the conversion succeeded, or <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref> if the conversion failed.\nThe conversion fails if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">value</code> parameter is a <strong>null</strong> or empty string, or does not contain a valid string representation of a RFC-822 formatted date.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">value</code> parameter was converted successfully; otherwise, <strong>false</strong>.
+    content.vb: Public Shared Function TryParseRfc822DateTime(value As String, ByRef result As Date) As Boolean
+  overload: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime*
+  nameWithType.vb: SyndicationDateTimeUtility.TryParseRfc822DateTime(String, ByRef DateTime)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String, ByRef System.DateTime)
+  name.vb: TryParseRfc822DateTime(String, ByRef DateTime)
+references:
+- uid: Argotic.Common.SyndicationDateTimeUtility
+  commentId: T:Argotic.Common.SyndicationDateTimeUtility
+  name: SyndicationDateTimeUtility
+  nameWithType: SyndicationDateTimeUtility
+  fullName: Argotic.Common.SyndicationDateTimeUtility
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.FormatException
+  commentId: T:System.FormatException
+  isExternal: true
+- uid: Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime
+  name: ParseRfc3339DateTime
+  nameWithType: SyndicationDateTimeUtility.ParseRfc3339DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime
+  name: ToRfc3339DateTime
+  nameWithType: SyndicationDateTimeUtility.ToRfc3339DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime
+  name: TryParseRfc3339DateTime
+  nameWithType: SyndicationDateTimeUtility.TryParseRfc3339DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime
+  name: ParseRfc822DateTime
+  nameWithType: SyndicationDateTimeUtility.ParseRfc822DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime
+- uid: Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime
+  name: ToRfc822DateTime
+  nameWithType: SyndicationDateTimeUtility.ToRfc822DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime
+- uid: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime*
+  commentId: Overload:Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime
+  name: TryParseRfc822DateTime
+  nameWithType: SyndicationDateTimeUtility.TryParseRfc822DateTime
+  fullName: Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime

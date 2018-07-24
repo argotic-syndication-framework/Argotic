@@ -1,0 +1,1270 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture
+  commentId: T:Argotic.Extensions.Core.LiveJournalUserPicture
+  id: LiveJournalUserPicture
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.LiveJournalUserPicture.#ctor
+  - Argotic.Extensions.Core.LiveJournalUserPicture.#ctor(System.Uri,System.String,System.Int32,System.Int32)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo(System.Object)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Equals(System.Object)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Height
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  - Argotic.Extensions.Core.LiveJournalUserPicture.ToString
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Url
+  - Argotic.Extensions.Core.LiveJournalUserPicture.Width
+  - Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: LiveJournalUserPicture
+  nameWithType: LiveJournalUserPicture
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LiveJournalUserPicture
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the picture associated with a LiveJournal entry.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class LiveJournalUserPicture : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class LiveJournalUserPicture
+
+          Implements IComparable
+  seealso:
+  - linkId: Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.UserPicture
+    commentId: P:Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.UserPicture
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.#ctor
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: LiveJournalUserPicture()
+  nameWithType: LiveJournalUserPicture.LiveJournalUserPicture()
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.LiveJournalUserPicture()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 38
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public LiveJournalUserPicture()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.#ctor(System.Uri,System.String,System.Int32,System.Int32)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.#ctor(System.Uri,System.String,System.Int32,System.Int32)
+  id: '#ctor(System.Uri,System.String,System.Int32,System.Int32)'
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: LiveJournalUserPicture(Uri, String, Int32, Int32)
+  nameWithType: LiveJournalUserPicture.LiveJournalUserPicture(Uri, String, Int32, Int32)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.LiveJournalUserPicture(System.Uri, System.String, System.Int32, System.Int32)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 54
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied parameters.\n"
+  example: []
+  syntax:
+    content: public LiveJournalUserPicture(Uri url, string keyword, int width, int height)
+    parameters:
+    - id: url
+      type: System.Uri
+      description: The url.
+    - id: keyword
+      type: System.String
+      description: The keyword.
+    - id: width
+      type: System.Int32
+      description: The width.
+    - id: height
+      type: System.Int32
+      description: The height.
+    content.vb: Public Sub New(url As Uri, keyword As String, width As Integer, height As Integer)
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">keyword</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">keyword</code> is an empty string.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">width</code> is greater than <strong>100</strong>.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">height</code> is greater than <strong>100</strong>.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Height
+  commentId: P:Argotic.Extensions.Core.LiveJournalUserPicture.Height
+  id: Height
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: LiveJournalUserPicture.Height
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Height
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Height
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 70
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the height of this picture.\n"
+  remarks: "\nLiveJournal limits images to a maximum of <strong>100</strong> pixels in each dimension.\n"
+  example: []
+  syntax:
+    content: public int Height { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The height of this picture, in pixels. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates no height was specified.
+    content.vb: Public Property Height As Integer
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Height*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is greater than <strong>100</strong>.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+  commentId: P:Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+  id: Keyword
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Keyword
+  nameWithType: LiveJournalUserPicture.Keyword
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Keyword
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 91
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the keyword or phrase associated with the picture.\n"
+  remarks: The value of this property is expected to be <em>plain text</em>, and so entity-ecoded text should be ommited.
+  example: []
+  syntax:
+    content: public string Keyword { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The keyword or phrase associated with this picture.
+    content.vb: Public Property Keyword As String
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Keyword*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Url
+  commentId: P:Argotic.Extensions.Core.LiveJournalUserPicture.Url
+  id: Url
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: LiveJournalUserPicture.Url
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Url
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Url
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 110
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the the URL this picture.\n"
+  example: []
+  syntax:
+    content: public Uri Url { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of a GIF, JPEG, or PNG for this picture.
+    content.vb: Public Property Url As Uri
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Url*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Width
+  commentId: P:Argotic.Extensions.Core.LiveJournalUserPicture.Width
+  id: Width
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: LiveJournalUserPicture.Width
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Width
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Width
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 132
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the width of this picture.\n"
+  remarks: "\nLiveJournal limits images to a maximum of <strong>100</strong> pixels in each dimension.\n"
+  example: []
+  syntax:
+    content: public int Width { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The width of this picture, in pixels. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates no width was specified.
+    content.vb: Public Property Width As Integer
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Width*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is greater than <strong>100</strong>.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  id: op_Equality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Equality(LiveJournalUserPicture, LiveJournalUserPicture)
+  nameWithType: LiveJournalUserPicture.Equality(LiveJournalUserPicture, LiveJournalUserPicture)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Equality(Argotic.Extensions.Core.LiveJournalUserPicture, Argotic.Extensions.Core.LiveJournalUserPicture)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 152
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As LiveJournalUserPicture, second As LiveJournalUserPicture) As Boolean
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  id: op_Inequality(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Inequality(LiveJournalUserPicture, LiveJournalUserPicture)
+  nameWithType: LiveJournalUserPicture.Inequality(LiveJournalUserPicture, LiveJournalUserPicture)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Inequality(Argotic.Extensions.Core.LiveJournalUserPicture, Argotic.Extensions.Core.LiveJournalUserPicture)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 172
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As LiveJournalUserPicture, second As LiveJournalUserPicture) As Boolean
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  id: op_LessThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: LessThan(LiveJournalUserPicture, LiveJournalUserPicture)
+  nameWithType: LiveJournalUserPicture.LessThan(LiveJournalUserPicture, LiveJournalUserPicture)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.LessThan(Argotic.Extensions.Core.LiveJournalUserPicture, Argotic.Extensions.Core.LiveJournalUserPicture)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 183
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As LiveJournalUserPicture, second As LiveJournalUserPicture) As Boolean
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  id: op_GreaterThan(Argotic.Extensions.Core.LiveJournalUserPicture,Argotic.Extensions.Core.LiveJournalUserPicture)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(LiveJournalUserPicture, LiveJournalUserPicture)
+  nameWithType: LiveJournalUserPicture.GreaterThan(LiveJournalUserPicture, LiveJournalUserPicture)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.GreaterThan(Argotic.Extensions.Core.LiveJournalUserPicture, Argotic.Extensions.Core.LiveJournalUserPicture)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 203
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.LiveJournalUserPicture
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As LiveJournalUserPicture, second As LiveJournalUserPicture) As Boolean
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: LiveJournalUserPicture.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 226
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.LiveJournalUserPicture" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: LiveJournalUserPicture.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 296
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: LiveJournalUserPicture.Equals(Object)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 315
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.ToString
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: LiveJournalUserPicture.ToString()
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 332
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.LiveJournalUserPicture\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.LiveJournalUserPicture" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: LiveJournalUserPicture.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 361
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode
+  commentId: M:Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.LiveJournalUserPicture
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: LiveJournalUserPicture.GetHashCode()
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalUserPicture.cs
+    startLine: 389
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.UserPicture
+  commentId: P:Argotic.Extensions.Core.LiveJournalSyndicationExtensionContext.UserPicture
+  isExternal: true
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture
+  commentId: T:Argotic.Extensions.Core.LiveJournalUserPicture
+  parent: Argotic.Extensions.Core
+  name: LiveJournalUserPicture
+  nameWithType: LiveJournalUserPicture
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.#ctor
+  name: LiveJournalUserPicture
+  nameWithType: LiveJournalUserPicture.LiveJournalUserPicture
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.LiveJournalUserPicture
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Int32.MinValue
+  commentId: F:System.Int32.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Height*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Height
+  name: Height
+  nameWithType: LiveJournalUserPicture.Height
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Height
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Keyword*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+  name: Keyword
+  nameWithType: LiveJournalUserPicture.Keyword
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Keyword
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Url*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Url
+  name: Url
+  nameWithType: LiveJournalUserPicture.Url
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Url
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Width*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Width
+  name: Width
+  nameWithType: LiveJournalUserPicture.Width
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Width
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.op_Equality
+  name: Equality
+  nameWithType: LiveJournalUserPicture.Equality
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.op_Inequality
+  name: Inequality
+  nameWithType: LiveJournalUserPicture.Inequality
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Inequality
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.op_LessThan
+  name: LessThan
+  nameWithType: LiveJournalUserPicture.LessThan
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.LessThan
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.op_GreaterThan
+  name: GreaterThan
+  nameWithType: LiveJournalUserPicture.GreaterThan
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.GreaterThan
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Load*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Load
+  name: Load
+  nameWithType: LiveJournalUserPicture.Load
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo
+  name: WriteTo
+  nameWithType: LiveJournalUserPicture.WriteTo
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.Equals*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.Equals
+  name: Equals
+  nameWithType: LiveJournalUserPicture.Equals
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.Equals
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.ToString*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.ToString
+  name: ToString
+  nameWithType: LiveJournalUserPicture.ToString
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo
+  name: CompareTo
+  nameWithType: LiveJournalUserPicture.CompareTo
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode
+  name: GetHashCode
+  nameWithType: LiveJournalUserPicture.GetHashCode
+  fullName: Argotic.Extensions.Core.LiveJournalUserPicture.GetHashCode

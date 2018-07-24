@@ -1,0 +1,68 @@
+- name: argotic syndication framework 2008 1 0 0 planning center
+  href: argotic-syndication-framework-2008.1.0.0-planning-center.md 
+- name: argotic syndication framework 2008 2 0 0 planning center
+  href: argotic-syndication-framework-2008.2.0.0-planning-center.md 
+- name: argotic syndication framework 2008 3 0 0 planning center
+  href: argotic-syndication-framework-2008.3.0.0-planning-center.md 
+- name: argotic syndication framework 2008 4 0 0 planning center
+  href: argotic-syndication-framework-2008.4.0.0-planning-center.md 
+- name: configuring syndication resource providers within your application
+  href: configuring-syndication-resource-providers-within-your-application.md 
+- name: consuming an atom feed or atom entry document
+  href: consuming-an-atom-feed-or-atom-entry-document.md 
+- name: consuming an extended rss feed
+  href: consuming-an-extended-rss-feed.md 
+- name: consuming an opml outline
+  href: consuming-an-opml-outline.md 
+- name: consuming an rss feed
+  href: consuming-an-rss-feed.md 
+- name: consuming opml aggregated content
+  href: consuming-opml-aggregated-content.md 
+- name: consuming personal attention data
+  href: consuming-personal-attention-data.md 
+- name: consuming syndication feeds
+  href: consuming-syndication-feeds.md 
+- name: consuming web log communication services information
+  href: consuming-web-log-communication-services-information.md 
+- name: consuming web log markup language blogml formatted content
+  href: consuming-web-log-markup-language-blogml-formatted-content.md 
+- name: format agnostic consumption of syndication feeds
+  href: format-agnostic-consumption-of-syndication-feeds.md 
+- name: generating aggregated content using opml
+  href: generating-aggregated-content-using-opml.md 
+- name: generating an atom feed or atom entry document
+  href: generating-an-atom-feed-or-atom-entry-document.md 
+- name: generating an extended rss feed
+  href: generating-an-extended-rss-feed.md 
+- name: generating an opml outline
+  href: generating-an-opml-outline.md 
+- name: generating an rss feed
+  href: generating-an-rss-feed.md 
+- name: generating attention profile information
+  href: generating-attention-profile-information.md 
+- name: generating portable web log content
+  href: generating-portable-web-log-content.md 
+- name: generating syndication feeds
+  href: generating-syndication-feeds.md 
+- name: Home
+  href: Home.md 
+- name: introduction to the framework api and core entities
+  href: introduction-to-the-framework-api-and-core-entities.md 
+- name: introduction to the framework components
+  href: introduction-to-the-framework-components.md 
+- name: introduction to the framework extensible provider model
+  href: introduction-to-the-framework-extensible-provider-model.md 
+- name: introduction to the framework extension architecture
+  href: introduction-to-the-framework-extension-architecture.md 
+- name: making remote procedure calls using the xml rpc client
+  href: making-remote-procedure-calls-using-the-xml-rpc-client.md 
+- name: managing provider based syndicated content
+  href: managing-provider-based-syndicated-content.md 
+- name: overview of syndication extensions natively supported by the framework
+  href: overview-of-syndication-extensions-natively-supported-by-the-framework.md 
+- name: overview of the features provided by the framework
+  href: overview-of-the-features-provided-by-the-framework.md 
+- name: publishing auto discoverable web log communication service information
+  href: publishing-auto-discoverable-web-log-communication-service-information.md 
+- name: sending notification pings using the trackback client
+  href: sending-notification-pings-using-the-trackback-client.md 

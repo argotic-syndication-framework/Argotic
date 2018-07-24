@@ -1,0 +1,562 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  commentId: T:Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  id: DublinCoreTypeVocabularies
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Collection
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.DataSet
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Event
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.InteractiveResource
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.PhysicalObject
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Service
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Software
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Sound
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  - Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  langs:
+  - csharp
+  - vb
+  name: DublinCoreTypeVocabularies
+  nameWithType: DublinCoreTypeVocabularies
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DublinCoreTypeVocabularies
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 13
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents a general, cross-domain list of approved terms that may be used as values when identifying the nature or genre of a resource.\n"
+  remarks: "\nFor more information about the DCMI Type Vocabulary, see <a href=\"http://dublincore.org/documents/dcmi-type-vocabulary/\">http://dublincore.org/documents/dcmi-type-vocabulary/</a>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      [Flags]
+
+      public enum DublinCoreTypeVocabularies
+    content.vb: >-
+      <Serializable>
+
+      <Flags>
+
+      Public Enum DublinCoreTypeVocabularies
+  seealso:
+  - linkId: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+    commentId: T:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  - linkId: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+    commentId: T:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  - type: System.FlagsAttribute
+    ctor: System.FlagsAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  id: None
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: DublinCoreTypeVocabularies.None
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 20
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo type vocabulary specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Collection
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Collection
+  id: Collection
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Collection
+  nameWithType: DublinCoreTypeVocabularies.Collection
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Collection
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Collection
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 29
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents an aggregation of resources.\n"
+  remarks: "\nA collection is described as a group; its parts may also be separately described.\n"
+  example: []
+  syntax:
+    content: Collection = 1
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.DataSet
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.DataSet
+  id: DataSet
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: DataSet
+  nameWithType: DublinCoreTypeVocabularies.DataSet
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.DataSet
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DataSet
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 38
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents data encoded in a defined structure.\n"
+  remarks: "\nExamples include lists, tables, and databases. A dataset may be useful for direct machine processing.\n"
+  example: []
+  syntax:
+    content: DataSet = 2
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Event
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Event
+  id: Event
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Event
+  nameWithType: DublinCoreTypeVocabularies.Event
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Event
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Event
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 48
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a non-persistent, time-based occurrence.\n"
+  remarks: "\nMetadata for an event provides descriptive information that is the basis for discovery of the purpose, location, duration, and responsible agents associated with an event.\nExamples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.\n"
+  example: []
+  syntax:
+    content: Event = 4
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  id: Image
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Image
+  nameWithType: DublinCoreTypeVocabularies.Image
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Image
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a visual representation other than text.\n"
+  remarks: "\nExamples include images and photographs of physical objects, paintings, prints, drawings, other images and graphics, animations and moving pictures, film, diagrams, maps, musical notation.\nNote that <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image\" data-throw-if-not-resolved=\"false\"></xref> may include both electronic and physical representations.\n"
+  example: []
+  syntax:
+    content: Image = 8
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.InteractiveResource
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.InteractiveResource
+  id: InteractiveResource
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: InteractiveResource
+  nameWithType: DublinCoreTypeVocabularies.InteractiveResource
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.InteractiveResource
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InteractiveResource
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 67
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a resource requiring interaction from the user to be understood, executed, or experienced.\n"
+  remarks: "\nExamples include forms on Web pages, applets, multimedia learning objects, chat services, or virtual reality environments.\n"
+  example: []
+  syntax:
+    content: InteractiveResource = 16
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  id: MovingImage
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: MovingImage
+  nameWithType: DublinCoreTypeVocabularies.MovingImage
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MovingImage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 77
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a series of visual representations imparting an impression of motion when shown in succession.\n"
+  remarks: "\nExamples include animations, movies, television programs, videos, zoetropes, or visual output from a simulation.\nInstances of the type <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage\" data-throw-if-not-resolved=\"false\"></xref> must also be describable as instances of the broader type <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: MovingImage = 32
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.PhysicalObject
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.PhysicalObject
+  id: PhysicalObject
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: PhysicalObject
+  nameWithType: DublinCoreTypeVocabularies.PhysicalObject
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.PhysicalObject
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PhysicalObject
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 86
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents an inanimate, three-dimensional object or substance.\n"
+  remarks: "\nNote that digital representations of, or surrogates for, these objects should use <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text\" data-throw-if-not-resolved=\"false\"></xref> or one of the other types.\n"
+  example: []
+  syntax:
+    content: PhysicalObject = 64
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Service
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Service
+  id: Service
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Service
+  nameWithType: DublinCoreTypeVocabularies.Service
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Service
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Service
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 95
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a system that provides one or more functions.\n"
+  remarks: "\nExamples include a photocopying service, a banking service, an authentication service, interlibrary loans, a Z39.50 or Web server.\n"
+  example: []
+  syntax:
+    content: Service = 128
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Software
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Software
+  id: Software
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Software
+  nameWithType: DublinCoreTypeVocabularies.Software
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Software
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Software
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a computer program in source or compiled form.\n"
+  remarks: "\nExamples include a C source file, Microsoft Windows executable, or Perl script.\n"
+  example: []
+  syntax:
+    content: Software = 256
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Sound
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Sound
+  id: Sound
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Sound
+  nameWithType: DublinCoreTypeVocabularies.Sound
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Sound
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Sound
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 113
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a resource primarily intended to be heard.\n"
+  remarks: "\nExamples include a music playback file format, an audio compact disc, and recorded speech or sounds.\n"
+  example: []
+  syntax:
+    content: Sound = 512
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  id: StillImage
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: StillImage
+  nameWithType: DublinCoreTypeVocabularies.StillImage
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: StillImage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 124
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a static visual representation.\n"
+  remarks: "\nExamples include paintings, drawings, graphic designs, plans and maps.\nRecommended best practice is to assign the type <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text\" data-throw-if-not-resolved=\"false\"></xref> to images of textual materials.\nInstances of the type <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage\" data-throw-if-not-resolved=\"false\"></xref> must also be describable as instances of the broader type <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: StillImage = 1024
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  id: Text
+  parent: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  langs:
+  - csharp
+  - vb
+  name: Text
+  nameWithType: DublinCoreTypeVocabularies.Text
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Text
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreTypeVocabularies.cs
+    startLine: 134
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe type represents a resource consisting primarily of words for reading.\n"
+  remarks: "\nExamples include books, letters, dissertations, poems, newspapers, articles, archives of mailing lists.\nNote that facsimiles or images of texts are still of the genre <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: Text = 2048
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: DublinCoreElementSetSyndicationExtension
+  nameWithType: DublinCoreElementSetSyndicationExtension
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+- uid: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: DublinCoreMetadataTermsSyndicationExtension
+  nameWithType: DublinCoreMetadataTermsSyndicationExtension
+  fullName: Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  commentId: T:Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  parent: Argotic.Extensions.Core
+  name: DublinCoreTypeVocabularies
+  nameWithType: DublinCoreTypeVocabularies
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Image
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.MovingImage
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.Text
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.StillImage
+  isExternal: true

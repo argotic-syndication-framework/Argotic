@@ -1,0 +1,2101 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  id: YahooMediaSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent(Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent(Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaSyndicationExtensionContext
+  nameWithType: YahooMediaSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEntities
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaSyndicationExtensionContext
+
+          Implements IYahooMediaCommonObjectEntities
+  inheritance:
+  - System.Object
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaSyndicationExtensionContext()
+  nameWithType: YahooMediaSyndicationExtensionContext.YahooMediaSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.YahooMediaSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 88
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  id: Contents
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Contents
+  nameWithType: YahooMediaSyndicationExtensionContext.Contents
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Contents
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 105
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the publishable media objects.\n"
+  remarks: "\n<p>\n    The sequence of <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> objects within a syndication entity implies the order of presentation.\n</p>\n<p>\n    This <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n</p>\n"
+  example: []
+  syntax:
+    content: public IEnumerable<YahooMediaContent> Contents { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaContent}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> objects that represent publishable media objects.
+    content.vb: Public Property Contents As IEnumerable(Of YahooMediaContent)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  id: Groups
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Groups
+  nameWithType: YahooMediaSyndicationExtensionContext.Groups
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Groups
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 138
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the media objects that are effectively the same content, yet different representations.\n"
+  remarks: "\n<p>\n    Media objects that are not the same content should not be included in the same <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref>.\n    The sequence of <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> objects within a <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref> implies the order of presentation.\n</p>\n<p>\n    This <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n</p>\n"
+  example: []
+  syntax:
+    content: public IEnumerable<YahooMediaGroup> Groups { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaGroup}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref> objects that represent effectively the same content, yet different representations.
+    content.vb: Public Property Groups As IEnumerable(Of YahooMediaGroup)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+  id: Categories
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: YahooMediaSyndicationExtensionContext.Categories
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 164
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets a taxonomy that gives an indication of the type of content for this syndication entity.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaCategory> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaCategory\" data-throw-if-not-resolved=\"false\"></xref> objects that represent a taxonomy that gives an indication to the type of content for this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Categories As Collection(Of YahooMediaCategory)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+  id: Copyright
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Copyright
+  nameWithType: YahooMediaSyndicationExtensionContext.Copyright
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Copyright
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 184
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the copyright information for this syndication entity.\n"
+  remarks: "\nIf the media is operating under a <em>Creative Commons license</em>, a <xref href=\"Argotic.Extensions.Core.CreativeCommonsSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> should be used instead.\n"
+  example: []
+  syntax:
+    content: public YahooMediaCopyright Copyright { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaCopyright" data-throw-if-not-resolved="false"></xref> that represents the copyright information for this syndication entity.
+    content.vb: Public Property Copyright As YahooMediaCopyright
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+  id: Credits
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Credits
+  nameWithType: YahooMediaSyndicationExtensionContext.Credits
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credits
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 208
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the entities that contributed to the creation of this syndication entity.\n"
+  remarks: "\nCurrent entities can include people, companies, locations, etc. Specific entities can have multiple roles,\nand several entities can have the same role. These should appear as distinct <xref href=\"Argotic.Extensions.Core.YahooMediaCredit\" data-throw-if-not-resolved=\"false\"></xref> entities.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaCredit> Credits { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaCredit\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the entities that contributed to the creation of this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Credits As Collection(Of YahooMediaCredit)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+  id: Description
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: YahooMediaSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 228
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the description of this syndication entity.\n"
+  remarks: "\nMedia object descriptions are typically a sentence in length.\n"
+  example: []
+  syntax:
+    content: public YahooMediaTextConstruct Description { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaTextConstruct
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaTextConstruct" data-throw-if-not-resolved="false"></xref> that represents a short description of this syndication entity.
+    content.vb: Public Property Description As YahooMediaTextConstruct
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+  id: Hashes
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Hashes
+  nameWithType: YahooMediaSyndicationExtensionContext.Hashes
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Hashes
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 251
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the hash digests for this syndication entity.\n"
+  remarks: "\nWhen assigning multiple hashes, each <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> <strong>must</strong> have a different <xref href=\"Argotic.Extensions.Core.YahooMediaHash.Algorithm\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaHash> Hashes { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the hash digests for this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Hashes As Collection(Of YahooMediaHash)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+  id: Keywords
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Keywords
+  nameWithType: YahooMediaSyndicationExtensionContext.Keywords
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Keywords
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 274
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the relevant keywords that describe this syndication entity.\n"
+  remarks: "\nMedia objects are typically assigned maximum of ten keywords or phrases.\n"
+  example: []
+  syntax:
+    content: public Collection<string> Keywords { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the relevant keywords that describe this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Keywords As Collection(Of String)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+  id: Player
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Player
+  nameWithType: YahooMediaSyndicationExtensionContext.Player
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Player
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 291
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a web browser media player console this syndication entity can be accessed through.\n"
+  example: []
+  syntax:
+    content: public YahooMediaPlayer Player { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaPlayer
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaPlayer" data-throw-if-not-resolved="false"></xref> that represents a web browser media player console this syndication entity can be accessed through.
+    content.vb: Public Property Player As YahooMediaPlayer
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+  id: Ratings
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Ratings
+  nameWithType: YahooMediaSyndicationExtensionContext.Ratings
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Ratings
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 314
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the permissible audiences for this syndication entity.\n"
+  remarks: "\nIf there are no ratings specified, it can be assumed that no restrictions are necessary.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaRating> Ratings { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the permissible audiences for this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Ratings As Collection(Of YahooMediaRating)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+  id: Restrictions
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Restrictions
+  nameWithType: YahooMediaSyndicationExtensionContext.Restrictions
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Restrictions
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 334
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the restrictions to be placed on aggregators that are rendering this syndication entity.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaRestriction> Restrictions { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> objects that represent restrictions to be placed on aggregators that are rendering this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Restrictions As Collection(Of YahooMediaRestriction)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+  id: TextSeries
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TextSeries
+  nameWithType: YahooMediaSyndicationExtensionContext.TextSeries
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TextSeries
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 359
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the text transcript, closed captioning, or lyrics for this syndication entity.\n"
+  remarks: "\nMany of these <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects are permitted to provide a time series of text.\nIn such cases, it is encouraged, but not required, that the <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects be grouped by language and appear in time sequence order based on the start time.\n<xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects can have overlapping start and end times.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaText> TextSeries { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects that represent text transcript, closed captioning, or lyrics for this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property TextSeries As Collection(Of YahooMediaText)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+  id: Thumbnails
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Thumbnails
+  nameWithType: YahooMediaSyndicationExtensionContext.Thumbnails
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Thumbnails
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 382
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the representative images for this syndication entity.\n"
+  remarks: "\nIf multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaThumbnail> Thumbnails { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaThumbnail\" data-throw-if-not-resolved=\"false\"></xref> objects that represent images that are representative of this syndication entity.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Thumbnails As Collection(Of YahooMediaThumbnail)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+  id: Title
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: YahooMediaSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 399
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the title of this syndication entity.\n"
+  example: []
+  syntax:
+    content: public YahooMediaTextConstruct Title { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaTextConstruct
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaTextConstruct" data-throw-if-not-resolved="false"></xref> that represents the title of this syndication entity.
+    content.vb: Public Property Title As YahooMediaTextConstruct
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: YahooMediaSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 420
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: YahooMediaSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 473
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent(Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent(Argotic.Extensions.Core.YahooMediaContent)
+  id: AddContent(Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AddContent(YahooMediaContent)
+  nameWithType: YahooMediaSyndicationExtensionContext.AddContent(YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent(Argotic.Extensions.Core.YahooMediaContent)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddContent
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 496
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddContent(YahooMediaContent content)
+    parameters:
+    - id: content
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddContent(content As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  id: AddGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: AddGroup(YahooMediaGroup)
+  nameWithType: YahooMediaSyndicationExtensionContext.AddGroup(YahooMediaGroup)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddGroup
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 513
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddGroup(YahooMediaGroup group)
+    parameters:
+    - id: group
+      type: Argotic.Extensions.Core.YahooMediaGroup
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddGroup(group As YahooMediaGroup) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">group</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent(Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent(Argotic.Extensions.Core.YahooMediaContent)
+  id: RemoveContent(Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: RemoveContent(YahooMediaContent)
+  nameWithType: YahooMediaSyndicationExtensionContext.RemoveContent(YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent(Argotic.Extensions.Core.YahooMediaContent)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveContent
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 533
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveContent(YahooMediaContent content)
+    parameters:
+    - id: content
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveContent(content As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  commentId: M:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  id: RemoveGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  parent: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: RemoveGroup(YahooMediaGroup)
+  nameWithType: YahooMediaSyndicationExtensionContext.RemoveGroup(YahooMediaGroup)
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup(Argotic.Extensions.Core.YahooMediaGroup)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveGroup
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaSyndicationExtensionContext.cs
+    startLine: 556
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveGroup(YahooMediaGroup group)
+    parameters:
+    - id: group
+      type: Argotic.Extensions.Core.YahooMediaGroup
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveGroup(group As YahooMediaGroup) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">group</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.YahooMediaSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: YahooMediaSyndicationExtension
+  nameWithType: YahooMediaSyndicationExtension
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  commentId: T:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  parent: Argotic.Extensions.Core
+  name: IYahooMediaCommonObjectEntities
+  nameWithType: IYahooMediaCommonObjectEntities
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: YahooMediaSyndicationExtensionContext
+  nameWithType: YahooMediaSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.#ctor
+  name: YahooMediaSyndicationExtensionContext
+  nameWithType: YahooMediaSyndicationExtensionContext.YahooMediaSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.YahooMediaSyndicationExtensionContext
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent
+  commentId: T:Argotic.Extensions.Core.YahooMediaContent
+  parent: Argotic.Extensions.Core
+  name: YahooMediaContent
+  nameWithType: YahooMediaContent
+  fullName: Argotic.Extensions.Core.YahooMediaContent
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  name: Contents
+  nameWithType: YahooMediaSyndicationExtensionContext.Contents
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaContent}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaContent}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<YahooMediaContent>
+  nameWithType: IEnumerable<YahooMediaContent>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.Core.YahooMediaContent>
+  nameWithType.vb: IEnumerable(Of YahooMediaContent)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.Core.YahooMediaContent)
+  name.vb: IEnumerable(Of YahooMediaContent)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaContent
+    name: YahooMediaContent
+    nameWithType: YahooMediaContent
+    fullName: Argotic.Extensions.Core.YahooMediaContent
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaContent
+    name: YahooMediaContent
+    nameWithType: YahooMediaContent
+    fullName: Argotic.Extensions.Core.YahooMediaContent
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Extensions.Core.YahooMediaGroup
+  commentId: T:Argotic.Extensions.Core.YahooMediaGroup
+  parent: Argotic.Extensions.Core
+  name: YahooMediaGroup
+  nameWithType: YahooMediaGroup
+  fullName: Argotic.Extensions.Core.YahooMediaGroup
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  name: Groups
+  nameWithType: YahooMediaSyndicationExtensionContext.Groups
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaGroup}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.Core.YahooMediaGroup}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<YahooMediaGroup>
+  nameWithType: IEnumerable<YahooMediaGroup>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.Core.YahooMediaGroup>
+  nameWithType.vb: IEnumerable(Of YahooMediaGroup)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.Core.YahooMediaGroup)
+  name.vb: IEnumerable(Of YahooMediaGroup)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaGroup
+    name: YahooMediaGroup
+    nameWithType: YahooMediaGroup
+    fullName: Argotic.Extensions.Core.YahooMediaGroup
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaGroup
+    name: YahooMediaGroup
+    nameWithType: YahooMediaGroup
+    fullName: Argotic.Extensions.Core.YahooMediaGroup
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaCategory
+  commentId: T:Argotic.Extensions.Core.YahooMediaCategory
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCategory
+  nameWithType: YahooMediaCategory
+  fullName: Argotic.Extensions.Core.YahooMediaCategory
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+  name: Categories
+  nameWithType: YahooMediaSyndicationExtensionContext.Categories
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Categories
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Categories
+  nameWithType: IYahooMediaCommonObjectEntities.Categories
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaCategory>
+  nameWithType: Collection<YahooMediaCategory>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaCategory>
+  nameWithType.vb: Collection(Of YahooMediaCategory)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaCategory)
+  name.vb: Collection(Of YahooMediaCategory)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaCategory
+    name: YahooMediaCategory
+    nameWithType: YahooMediaCategory
+    fullName: Argotic.Extensions.Core.YahooMediaCategory
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaCategory
+    name: YahooMediaCategory
+    nameWithType: YahooMediaCategory
+    fullName: Argotic.Extensions.Core.YahooMediaCategory
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Extensions.Core.YahooMediaCopyright
+  commentId: T:Argotic.Extensions.Core.YahooMediaCopyright
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCopyright
+  nameWithType: YahooMediaCopyright
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright
+- uid: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: CreativeCommonsSyndicationExtension
+  nameWithType: CreativeCommonsSyndicationExtension
+  fullName: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+  name: Copyright
+  nameWithType: YahooMediaSyndicationExtensionContext.Copyright
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Copyright
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Copyright
+  nameWithType: IYahooMediaCommonObjectEntities.Copyright
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+- uid: Argotic.Extensions.Core.YahooMediaCredit
+  commentId: T:Argotic.Extensions.Core.YahooMediaCredit
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCredit
+  nameWithType: YahooMediaCredit
+  fullName: Argotic.Extensions.Core.YahooMediaCredit
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+  name: Credits
+  nameWithType: YahooMediaSyndicationExtensionContext.Credits
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Credits
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Credits
+  nameWithType: IYahooMediaCommonObjectEntities.Credits
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaCredit>
+  nameWithType: Collection<YahooMediaCredit>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaCredit>
+  nameWithType.vb: Collection(Of YahooMediaCredit)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaCredit)
+  name.vb: Collection(Of YahooMediaCredit)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaCredit
+    name: YahooMediaCredit
+    nameWithType: YahooMediaCredit
+    fullName: Argotic.Extensions.Core.YahooMediaCredit
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaCredit
+    name: YahooMediaCredit
+    nameWithType: YahooMediaCredit
+    fullName: Argotic.Extensions.Core.YahooMediaCredit
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaTextConstruct
+  commentId: T:Argotic.Extensions.Core.YahooMediaTextConstruct
+  parent: Argotic.Extensions.Core
+  name: YahooMediaTextConstruct
+  nameWithType: YahooMediaTextConstruct
+  fullName: Argotic.Extensions.Core.YahooMediaTextConstruct
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+  name: Description
+  nameWithType: YahooMediaSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Description
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Description
+  nameWithType: IYahooMediaCommonObjectEntities.Description
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+- uid: Argotic.Extensions.Core.YahooMediaHash
+  commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash
+- uid: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  commentId: P:Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+  name: Hashes
+  nameWithType: YahooMediaSyndicationExtensionContext.Hashes
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Hashes
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Hashes
+  nameWithType: IYahooMediaCommonObjectEntities.Hashes
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaHash>
+  nameWithType: Collection<YahooMediaHash>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaHash>
+  nameWithType.vb: Collection(Of YahooMediaHash)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaHash)
+  name.vb: Collection(Of YahooMediaHash)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaHash
+    name: YahooMediaHash
+    nameWithType: YahooMediaHash
+    fullName: Argotic.Extensions.Core.YahooMediaHash
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaHash
+    name: YahooMediaHash
+    nameWithType: YahooMediaHash
+    fullName: Argotic.Extensions.Core.YahooMediaHash
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+  name: Keywords
+  nameWithType: YahooMediaSyndicationExtensionContext.Keywords
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Keywords
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Keywords
+  nameWithType: IYahooMediaCommonObjectEntities.Keywords
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaPlayer
+  commentId: T:Argotic.Extensions.Core.YahooMediaPlayer
+  parent: Argotic.Extensions.Core
+  name: YahooMediaPlayer
+  nameWithType: YahooMediaPlayer
+  fullName: Argotic.Extensions.Core.YahooMediaPlayer
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+  name: Player
+  nameWithType: YahooMediaSyndicationExtensionContext.Player
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Player
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Player
+  nameWithType: IYahooMediaCommonObjectEntities.Player
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+- uid: Argotic.Extensions.Core.YahooMediaRating
+  commentId: T:Argotic.Extensions.Core.YahooMediaRating
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRating
+  nameWithType: YahooMediaRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+  name: Ratings
+  nameWithType: YahooMediaSyndicationExtensionContext.Ratings
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Ratings
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Ratings
+  nameWithType: IYahooMediaCommonObjectEntities.Ratings
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaRating>
+  nameWithType: Collection<YahooMediaRating>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaRating>
+  nameWithType.vb: Collection(Of YahooMediaRating)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaRating)
+  name.vb: Collection(Of YahooMediaRating)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaRating
+    name: YahooMediaRating
+    nameWithType: YahooMediaRating
+    fullName: Argotic.Extensions.Core.YahooMediaRating
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaRating
+    name: YahooMediaRating
+    nameWithType: YahooMediaRating
+    fullName: Argotic.Extensions.Core.YahooMediaRating
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+  name: Restrictions
+  nameWithType: YahooMediaSyndicationExtensionContext.Restrictions
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Restrictions
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Restrictions
+  nameWithType: IYahooMediaCommonObjectEntities.Restrictions
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaRestriction>
+  nameWithType: Collection<YahooMediaRestriction>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaRestriction>
+  nameWithType.vb: Collection(Of YahooMediaRestriction)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaRestriction)
+  name.vb: Collection(Of YahooMediaRestriction)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaRestriction
+    name: YahooMediaRestriction
+    nameWithType: YahooMediaRestriction
+    fullName: Argotic.Extensions.Core.YahooMediaRestriction
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaRestriction
+    name: YahooMediaRestriction
+    nameWithType: YahooMediaRestriction
+    fullName: Argotic.Extensions.Core.YahooMediaRestriction
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaText
+  commentId: T:Argotic.Extensions.Core.YahooMediaText
+  parent: Argotic.Extensions.Core
+  name: YahooMediaText
+  nameWithType: YahooMediaText
+  fullName: Argotic.Extensions.Core.YahooMediaText
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+  name: TextSeries
+  nameWithType: YahooMediaSyndicationExtensionContext.TextSeries
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.TextSeries
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: TextSeries
+  nameWithType: IYahooMediaCommonObjectEntities.TextSeries
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaText>
+  nameWithType: Collection<YahooMediaText>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaText>
+  nameWithType.vb: Collection(Of YahooMediaText)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaText)
+  name.vb: Collection(Of YahooMediaText)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaText
+    name: YahooMediaText
+    nameWithType: YahooMediaText
+    fullName: Argotic.Extensions.Core.YahooMediaText
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaText
+    name: YahooMediaText
+    nameWithType: YahooMediaText
+    fullName: Argotic.Extensions.Core.YahooMediaText
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaThumbnail
+  commentId: T:Argotic.Extensions.Core.YahooMediaThumbnail
+  parent: Argotic.Extensions.Core
+  name: YahooMediaThumbnail
+  nameWithType: YahooMediaThumbnail
+  fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+  name: Thumbnails
+  nameWithType: YahooMediaSyndicationExtensionContext.Thumbnails
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Thumbnails
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Thumbnails
+  nameWithType: IYahooMediaCommonObjectEntities.Thumbnails
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaThumbnail>
+  nameWithType: Collection<YahooMediaThumbnail>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaThumbnail>
+  nameWithType.vb: Collection(Of YahooMediaThumbnail)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaThumbnail)
+  name.vb: Collection(Of YahooMediaThumbnail)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaThumbnail
+    name: YahooMediaThumbnail
+    nameWithType: YahooMediaThumbnail
+    fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaThumbnail
+    name: YahooMediaThumbnail
+    nameWithType: YahooMediaThumbnail
+    fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+  name: Title
+  nameWithType: YahooMediaSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Title
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Title
+  nameWithType: IYahooMediaCommonObjectEntities.Title
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: YahooMediaSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.WriteTo
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Contents
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent
+  name: AddContent
+  nameWithType: YahooMediaSyndicationExtensionContext.AddContent
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddContent
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  commentId: P:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.Groups
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup
+  name: AddGroup
+  nameWithType: YahooMediaSyndicationExtensionContext.AddGroup
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.AddGroup
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent
+  name: RemoveContent
+  nameWithType: YahooMediaSyndicationExtensionContext.RemoveContent
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveContent
+- uid: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup
+  name: RemoveGroup
+  nameWithType: YahooMediaSyndicationExtensionContext.RemoveGroup
+  fullName: Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.RemoveGroup

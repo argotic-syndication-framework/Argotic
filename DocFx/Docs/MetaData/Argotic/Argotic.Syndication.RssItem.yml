@@ -1,0 +1,2405 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.RssItem
+  commentId: T:Argotic.Syndication.RssItem
+  id: RssItem
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.RssItem.#ctor
+  - Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.RssItem.Author
+  - Argotic.Syndication.RssItem.Categories
+  - Argotic.Syndication.RssItem.Comments
+  - Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure},System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure})
+  - Argotic.Syndication.RssItem.CompareTo(System.Object)
+  - Argotic.Syndication.RssItem.Description
+  - Argotic.Syndication.RssItem.Enclosures
+  - Argotic.Syndication.RssItem.Equals(System.Object)
+  - Argotic.Syndication.RssItem.Extensions
+  - Argotic.Syndication.RssItem.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Syndication.RssItem.FindExtension``1
+  - Argotic.Syndication.RssItem.GetHashCode
+  - Argotic.Syndication.RssItem.Guid
+  - Argotic.Syndication.RssItem.HasExtensions
+  - Argotic.Syndication.RssItem.Link
+  - Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.RssItem.op_Equality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  - Argotic.Syndication.RssItem.op_GreaterThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  - Argotic.Syndication.RssItem.op_Inequality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  - Argotic.Syndication.RssItem.op_LessThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  - Argotic.Syndication.RssItem.PublicationDate
+  - Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.RssItem.Source
+  - Argotic.Syndication.RssItem.Title
+  - Argotic.Syndication.RssItem.ToString
+  - Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: RssItem
+  nameWithType: RssItem
+  fullName: Argotic.Syndication.RssItem
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RssItem
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 25
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents distinct content published in an <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> such as a news article, weblog entry or some other form of discrete update.\n"
+  remarks: "\nA <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref> <strong>must</strong> contain either a <xref href=\"Argotic.Syndication.RssItem.Title\" data-throw-if-not-resolved=\"false\"></xref> <em>or</em> <xref href=\"Argotic.Syndication.RssItem.Description\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Rss\\RssItemExample.cs\" region=\"RssItem\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class RssItem : IComparable, IExtensibleSyndicationObject
+    content.vb: >-
+      <Serializable>
+
+      Public Class RssItem
+
+          Implements IComparable, IExtensibleSyndicationObject
+  seealso:
+  - linkId: Argotic.Syndication.RssFeed
+    commentId: T:Argotic.Syndication.RssFeed
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Syndication.RssItem.#ctor
+  commentId: M:Argotic.Syndication.RssItem.#ctor
+  id: '#ctor'
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: RssItem()
+  nameWithType: RssItem.RssItem()
+  fullName: Argotic.Syndication.RssItem.RssItem()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 90
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public RssItem()
+    content.vb: Public Sub New
+  overload: Argotic.Syndication.RssItem.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Author
+  commentId: P:Argotic.Syndication.RssItem.Author
+  id: Author
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Author
+  nameWithType: RssItem.Author
+  fullName: Argotic.Syndication.RssItem.Author
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Author
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 108
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the e-mail address of the person who wrote this item.\n"
+  remarks: "\n<p>\n    There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,\n    the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <em>username@hostname.tld (Real Name)</em>.\n</p>\n<p>\n    A feed published by an individual <em>should</em> omit the item <xref href=\"Argotic.Syndication.RssItem.Author\" data-throw-if-not-resolved=\"false\"></xref>\n    and use the <xref href=\"Argotic.Syndication.RssChannel.ManagingEditor\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Argotic.Syndication.RssChannel.Webmaster\" data-throw-if-not-resolved=\"false\"></xref> channel properties to provide contact information.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Author { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The e-mail address of the person who wrote this item.
+    content.vb: Public Property Author As String
+  overload: Argotic.Syndication.RssItem.Author*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Categories
+  commentId: P:Argotic.Syndication.RssItem.Categories
+  id: Categories
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: RssItem.Categories
+  fullName: Argotic.Syndication.RssItem.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 134
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the categories or tags to which this item belongs.\n"
+  example: []
+  syntax:
+    content: public Collection<RssCategory> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssCategory}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"Argotic.Syndication.RssCategory\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the categories to which this item belongs. The default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Categories As Collection(Of RssCategory)
+  overload: Argotic.Syndication.RssItem.Categories*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.RssItem.Comments
+  commentId: P:Argotic.Syndication.RssItem.Comments
+  id: Comments
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Comments
+  nameWithType: RssItem.Comments
+  fullName: Argotic.Syndication.RssItem.Comments
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Comments
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 151
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the URL of a web page that contains comments received in response to this item.\n"
+  example: []
+  syntax:
+    content: public Uri Comments { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of a web page that contains comments received in response to this item.
+    content.vb: Public Property Comments As Uri
+  overload: Argotic.Syndication.RssItem.Comments*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Description
+  commentId: P:Argotic.Syndication.RssItem.Description
+  id: Description
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: RssItem.Description
+  fullName: Argotic.Syndication.RssItem.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 179
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets character data that contains this item&apos;s full content or a summary of its contents.\n"
+  remarks: "\n<p>The description <em>may</em> be empty if the item specifies a <xref href=\"Argotic.Syndication.RssItem.Title\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n<p>\n    The description <strong>must</strong> be suitable for presentation as HTML.\n    HTML markup must be encoded as character data either by employing the <strong>HTML entities</strong> (&lt; and >) <em>or</em> a <strong>CDATA</strong> section.\n</p>\n<p>\n    The description <em>should not</em> contain relative URLs, because the RSS format does not provide a means to identify the base URL of a document.\n    When a relative URL is present, an aggregator <em>may</em> attempt to resolve it to a full URL using the channel&apos;s <xref href=\"Argotic.Syndication.RssChannel.Link\" data-throw-if-not-resolved=\"false\"></xref> as the base.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Character data that contains this item&apos;s full content or a summary of its contents.
+    content.vb: Public Property Description As String
+  overload: Argotic.Syndication.RssItem.Description*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Enclosures
+  commentId: P:Argotic.Syndication.RssItem.Enclosures
+  id: Enclosures
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Enclosures
+  nameWithType: RssItem.Enclosures
+  fullName: Argotic.Syndication.RssItem.Enclosures
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Enclosures
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 213
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the media objects associated with this item.\n"
+  remarks: "\n<p>\n    Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item.\n    Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.\n    For best support in the widest number of aggregators, an item <em>should not</em> contain more than one enclosure.\n</p>\n"
+  example: []
+  syntax:
+    content: public Collection<RssEnclosure> Enclosures { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"Argotic.Syndication.RssEnclosure\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the media objects such as an audio, video, or executable file that are associated with this item.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Enclosures As Collection(Of RssEnclosure)
+  overload: Argotic.Syndication.RssItem.Enclosures*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.RssItem.Extensions
+  commentId: P:Argotic.Syndication.RssItem.Extensions
+  id: Extensions
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: RssItem.Extensions
+  fullName: Argotic.Syndication.RssItem.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 234
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Syndication.RssItem.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Guid
+  commentId: P:Argotic.Syndication.RssItem.Guid
+  id: Guid
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Guid
+  nameWithType: RssItem.Guid
+  fullName: Argotic.Syndication.RssItem.Guid
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Guid
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 262
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the unique identifier for this item.\n"
+  remarks: "\nA publisher <em>should</em> provide a guid for each item.\n"
+  example: []
+  syntax:
+    content: public RssGuid Guid { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.RssGuid
+      description: "\nA <xref href=\"Argotic.Syndication.RssGuid\" data-throw-if-not-resolved=\"false\"></xref> object that represents the unique identifier for this item. The default value is a <strong>null</strong> reference.\n"
+    content.vb: Public Property Guid As RssGuid
+  overload: Argotic.Syndication.RssItem.Guid*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.HasExtensions
+  commentId: P:Argotic.Syndication.RssItem.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: RssItem.HasExtensions
+  fullName: Argotic.Syndication.RssItem.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 279
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssItem.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Syndication.RssItem.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.RssItem.Link
+  commentId: P:Argotic.Syndication.RssItem.Link
+  id: Link
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Link
+  nameWithType: RssItem.Link
+  fullName: Argotic.Syndication.RssItem.Link
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Link
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 291
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the URL of a web page associated with this item.\n"
+  example: []
+  syntax:
+    content: public Uri Link { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of a web page associated with this item.
+    content.vb: Public Property Link As Uri
+  overload: Argotic.Syndication.RssItem.Link*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.PublicationDate
+  commentId: P:Argotic.Syndication.RssItem.PublicationDate
+  id: PublicationDate
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: PublicationDate
+  nameWithType: RssItem.PublicationDate
+  fullName: Argotic.Syndication.RssItem.PublicationDate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PublicationDate
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 316
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the publication date and time of this item.\n"
+  remarks: "\nThe specification recommends that aggregators <em>should</em> ignore items with a publication date that occurs in the future,\nproviding a means for publishers to embargo an item until that date. However, it is recommended that publishers <em>should not</em>\ninclude items in a feed until they are ready for publication.\n"
+  example: []
+  syntax:
+    content: public DateTime PublicationDate { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> object that represents the publication date and time of this item.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no publication date was specified.\n"
+    content.vb: Public Property PublicationDate As Date
+  overload: Argotic.Syndication.RssItem.PublicationDate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Source
+  commentId: P:Argotic.Syndication.RssItem.Source
+  id: Source
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: RssItem.Source
+  fullName: Argotic.Syndication.RssItem.Source
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Source
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 335
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the source feed that this item was republished from.\n"
+  example: []
+  syntax:
+    content: public RssSource Source { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.RssSource
+      description: "\nA <xref href=\"Argotic.Syndication.RssSource\" data-throw-if-not-resolved=\"false\"></xref> object that represents the source feed that this item was republished from. The default value is a <strong>null</strong> reference.\n"
+    content.vb: Public Property Source As RssSource
+  overload: Argotic.Syndication.RssItem.Source*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Title
+  commentId: P:Argotic.Syndication.RssItem.Title
+  id: Title
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: RssItem.Title
+  fullName: Argotic.Syndication.RssItem.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 355
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets character data that provides this item&apos;s headline.\n"
+  remarks: "\nThis property is optional if the item contains a <xref href=\"Argotic.Syndication.RssItem.Description\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Character data that provides this item&apos;s headline.
+    content.vb: Public Property Title As String
+  overload: Argotic.Syndication.RssItem.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.op_Equality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  commentId: M:Argotic.Syndication.RssItem.op_Equality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  id: op_Equality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Equality(RssItem, RssItem)
+  nameWithType: RssItem.Equality(RssItem, RssItem)
+  fullName: Argotic.Syndication.RssItem.Equality(Argotic.Syndication.RssItem, Argotic.Syndication.RssItem)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 374
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(RssItem first, RssItem second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssItem
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssItem
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As RssItem, second As RssItem) As Boolean
+  overload: Argotic.Syndication.RssItem.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssItem.op_GreaterThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  commentId: M:Argotic.Syndication.RssItem.op_GreaterThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  id: op_GreaterThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(RssItem, RssItem)
+  nameWithType: RssItem.GreaterThan(RssItem, RssItem)
+  fullName: Argotic.Syndication.RssItem.GreaterThan(Argotic.Syndication.RssItem, Argotic.Syndication.RssItem)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 395
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(RssItem first, RssItem second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssItem
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssItem
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As RssItem, second As RssItem) As Boolean
+  overload: Argotic.Syndication.RssItem.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssItem.op_Inequality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  commentId: M:Argotic.Syndication.RssItem.op_Inequality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  id: op_Inequality(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Inequality(RssItem, RssItem)
+  nameWithType: RssItem.Inequality(RssItem, RssItem)
+  fullName: Argotic.Syndication.RssItem.Inequality(Argotic.Syndication.RssItem, Argotic.Syndication.RssItem)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 416
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(RssItem first, RssItem second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssItem
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssItem
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As RssItem, second As RssItem) As Boolean
+  overload: Argotic.Syndication.RssItem.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssItem.op_LessThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  commentId: M:Argotic.Syndication.RssItem.op_LessThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  id: op_LessThan(Argotic.Syndication.RssItem,Argotic.Syndication.RssItem)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: LessThan(RssItem, RssItem)
+  nameWithType: RssItem.LessThan(RssItem, RssItem)
+  fullName: Argotic.Syndication.RssItem.LessThan(Argotic.Syndication.RssItem, Argotic.Syndication.RssItem)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 427
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(RssItem first, RssItem second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssItem
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssItem
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As RssItem, second As RssItem) As Boolean
+  overload: Argotic.Syndication.RssItem.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure},System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure})
+  commentId: M:Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure},System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure},System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure})
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<RssEnclosure>, Collection<RssEnclosure>)
+  nameWithType: RssItem.CompareSequence(Collection<RssEnclosure>, Collection<RssEnclosure>)
+  fullName: Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection<Argotic.Syndication.RssEnclosure>, System.Collections.ObjectModel.Collection<Argotic.Syndication.RssEnclosure>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 461
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares two specified <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<RssEnclosure> source, Collection<RssEnclosure> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of RssEnclosure), target As Collection(Of RssEnclosure)) As Integer
+  overload: Argotic.Syndication.RssItem.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: RssItem.CompareSequence(Collection(Of RssEnclosure), Collection(Of RssEnclosure))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Syndication.RssItem.CompareSequence(System.Collections.ObjectModel.Collection(Of Argotic.Syndication.RssEnclosure), System.Collections.ObjectModel.Collection(Of Argotic.Syndication.RssEnclosure))
+  name.vb: CompareSequence(Collection(Of RssEnclosure), Collection(Of RssEnclosure))
+- uid: Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: RssItem.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.RssItem.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 492
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.RssItem.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.CompareTo(System.Object)
+  commentId: M:Argotic.Syndication.RssItem.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: RssItem.CompareTo(Object)
+  fullName: Argotic.Syndication.RssItem.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 508
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Syndication.RssItem.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Equals(System.Object)
+  commentId: M:Argotic.Syndication.RssItem.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: RssItem.Equals(Object)
+  fullName: Argotic.Syndication.RssItem.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 577
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Syndication.RssItem.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssItem.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Syndication.RssItem.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: RssItem.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Syndication.RssItem.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 600
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Syndication.RssItem.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Syndication.RssItem.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Syndication.RssItem.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Syndication.RssItem.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: RssItem.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Syndication.RssItem.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Syndication.RssItem.FindExtension``1
+  commentId: M:Argotic.Syndication.RssItem.FindExtension``1
+  id: FindExtension``1
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: FindExtension<TExtension>()
+  nameWithType: RssItem.FindExtension<TExtension>()
+  fullName: Argotic.Syndication.RssItem.FindExtension<TExtension>()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 612
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nFinds an extension.\n"
+  example: []
+  syntax:
+    content: >-
+      public TExtension FindExtension<TExtension>()
+
+          where TExtension : ISyndicationExtension
+    typeParameters:
+    - id: TExtension
+      description: The extension type.
+    return:
+      type: '{TExtension}'
+      description: Returns the extension.
+    content.vb: Public Function FindExtension(Of TExtension As ISyndicationExtension) As TExtension
+  overload: Argotic.Syndication.RssItem.FindExtension*
+  nameWithType.vb: RssItem.FindExtension(Of TExtension)()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Syndication.RssItem.FindExtension(Of TExtension)()
+  name.vb: FindExtension(Of TExtension)()
+- uid: Argotic.Syndication.RssItem.GetHashCode
+  commentId: M:Argotic.Syndication.RssItem.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: RssItem.GetHashCode()
+  fullName: Argotic.Syndication.RssItem.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 622
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Syndication.RssItem.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: RssItem.Load(XPathNavigator)
+  fullName: Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 638
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssItem" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Syndication.RssItem.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: RssItem.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.RssItem.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 760
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssItem" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Syndication.RssItem.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: RssItem.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.RssItem.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 884
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Syndication.RssItem.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.RssItem.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssItem.ToString
+  commentId: M:Argotic.Syndication.RssItem.ToString
+  id: ToString
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: RssItem.ToString()
+  fullName: Argotic.Syndication.RssItem.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 904
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Syndication.RssItem" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Syndication.RssItem.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Syndication.RssItem
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: RssItem.WriteTo(XmlWriter)
+  fullName: Argotic.Syndication.RssItem.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssItem.cs
+    startLine: 932
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSaves the current <xref href=\"Argotic.Syndication.RssItem\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Syndication.RssItem.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Syndication.RssFeed
+  commentId: T:Argotic.Syndication.RssFeed
+  parent: Argotic.Syndication
+  name: RssFeed
+  nameWithType: RssFeed
+  fullName: Argotic.Syndication.RssFeed
+- uid: Argotic.Syndication.RssItem
+  commentId: T:Argotic.Syndication.RssItem
+  parent: Argotic.Syndication
+  name: RssItem
+  nameWithType: RssItem
+  fullName: Argotic.Syndication.RssItem
+- uid: Argotic.Syndication.RssItem.Title
+  commentId: P:Argotic.Syndication.RssItem.Title
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.Description
+  commentId: P:Argotic.Syndication.RssItem.Description
+  isExternal: true
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Syndication.RssItem.#ctor*
+  commentId: Overload:Argotic.Syndication.RssItem.#ctor
+  name: RssItem
+  nameWithType: RssItem.RssItem
+  fullName: Argotic.Syndication.RssItem.RssItem
+- uid: Argotic.Syndication.RssItem.Author
+  commentId: P:Argotic.Syndication.RssItem.Author
+  isExternal: true
+- uid: Argotic.Syndication.RssChannel.ManagingEditor
+  commentId: P:Argotic.Syndication.RssChannel.ManagingEditor
+  isExternal: true
+- uid: Argotic.Syndication.RssChannel.Webmaster
+  commentId: P:Argotic.Syndication.RssChannel.Webmaster
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.Author*
+  commentId: Overload:Argotic.Syndication.RssItem.Author
+  name: Author
+  nameWithType: RssItem.Author
+  fullName: Argotic.Syndication.RssItem.Author
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssCategory
+  commentId: T:Argotic.Syndication.RssCategory
+  parent: Argotic.Syndication
+  name: RssCategory
+  nameWithType: RssCategory
+  fullName: Argotic.Syndication.RssCategory
+- uid: Argotic.Syndication.RssItem.Categories*
+  commentId: Overload:Argotic.Syndication.RssItem.Categories
+  name: Categories
+  nameWithType: RssItem.Categories
+  fullName: Argotic.Syndication.RssItem.Categories
+- uid: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssCategory}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Syndication.RssCategory}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<RssCategory>
+  nameWithType: Collection<RssCategory>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Syndication.RssCategory>
+  nameWithType.vb: Collection(Of RssCategory)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Syndication.RssCategory)
+  name.vb: Collection(Of RssCategory)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Syndication.RssCategory
+    name: RssCategory
+    nameWithType: RssCategory
+    fullName: Argotic.Syndication.RssCategory
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Syndication.RssCategory
+    name: RssCategory
+    nameWithType: RssCategory
+    fullName: Argotic.Syndication.RssCategory
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Syndication.RssItem.Comments*
+  commentId: Overload:Argotic.Syndication.RssItem.Comments
+  name: Comments
+  nameWithType: RssItem.Comments
+  fullName: Argotic.Syndication.RssItem.Comments
+- uid: Argotic.Syndication.RssChannel.Link
+  commentId: P:Argotic.Syndication.RssChannel.Link
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.Description*
+  commentId: Overload:Argotic.Syndication.RssItem.Description
+  name: Description
+  nameWithType: RssItem.Description
+  fullName: Argotic.Syndication.RssItem.Description
+- uid: Argotic.Syndication.RssEnclosure
+  commentId: T:Argotic.Syndication.RssEnclosure
+  parent: Argotic.Syndication
+  name: RssEnclosure
+  nameWithType: RssEnclosure
+  fullName: Argotic.Syndication.RssEnclosure
+- uid: Argotic.Syndication.RssItem.Enclosures*
+  commentId: Overload:Argotic.Syndication.RssItem.Enclosures
+  name: Enclosures
+  nameWithType: RssItem.Enclosures
+  fullName: Argotic.Syndication.RssItem.Enclosures
+- uid: System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Syndication.RssEnclosure}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<RssEnclosure>
+  nameWithType: Collection<RssEnclosure>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Syndication.RssEnclosure>
+  nameWithType.vb: Collection(Of RssEnclosure)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Syndication.RssEnclosure)
+  name.vb: Collection(Of RssEnclosure)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Syndication.RssEnclosure
+    name: RssEnclosure
+    nameWithType: RssEnclosure
+    fullName: Argotic.Syndication.RssEnclosure
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Syndication.RssEnclosure
+    name: RssEnclosure
+    nameWithType: RssEnclosure
+    fullName: Argotic.Syndication.RssEnclosure
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.Extensions*
+  commentId: Overload:Argotic.Syndication.RssItem.Extensions
+  name: Extensions
+  nameWithType: RssItem.Extensions
+  fullName: Argotic.Syndication.RssItem.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Syndication.RssGuid
+  commentId: T:Argotic.Syndication.RssGuid
+  parent: Argotic.Syndication
+  name: RssGuid
+  nameWithType: RssGuid
+  fullName: Argotic.Syndication.RssGuid
+- uid: Argotic.Syndication.RssItem.Guid*
+  commentId: Overload:Argotic.Syndication.RssItem.Guid
+  name: Guid
+  nameWithType: RssItem.Guid
+  fullName: Argotic.Syndication.RssItem.Guid
+- uid: Argotic.Syndication.RssItem.Extensions
+  commentId: P:Argotic.Syndication.RssItem.Extensions
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.HasExtensions*
+  commentId: Overload:Argotic.Syndication.RssItem.HasExtensions
+  name: HasExtensions
+  nameWithType: RssItem.HasExtensions
+  fullName: Argotic.Syndication.RssItem.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Syndication.RssItem.Link*
+  commentId: Overload:Argotic.Syndication.RssItem.Link
+  name: Link
+  nameWithType: RssItem.Link
+  fullName: Argotic.Syndication.RssItem.Link
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.PublicationDate*
+  commentId: Overload:Argotic.Syndication.RssItem.PublicationDate
+  name: PublicationDate
+  nameWithType: RssItem.PublicationDate
+  fullName: Argotic.Syndication.RssItem.PublicationDate
+- uid: Argotic.Syndication.RssSource
+  commentId: T:Argotic.Syndication.RssSource
+  parent: Argotic.Syndication
+  name: RssSource
+  nameWithType: RssSource
+  fullName: Argotic.Syndication.RssSource
+- uid: Argotic.Syndication.RssItem.Source*
+  commentId: Overload:Argotic.Syndication.RssItem.Source
+  name: Source
+  nameWithType: RssItem.Source
+  fullName: Argotic.Syndication.RssItem.Source
+- uid: Argotic.Syndication.RssItem.Title*
+  commentId: Overload:Argotic.Syndication.RssItem.Title
+  name: Title
+  nameWithType: RssItem.Title
+  fullName: Argotic.Syndication.RssItem.Title
+- uid: Argotic.Syndication.RssItem.op_Equality*
+  commentId: Overload:Argotic.Syndication.RssItem.op_Equality
+  name: Equality
+  nameWithType: RssItem.Equality
+  fullName: Argotic.Syndication.RssItem.Equality
+- uid: Argotic.Syndication.RssItem.op_GreaterThan*
+  commentId: Overload:Argotic.Syndication.RssItem.op_GreaterThan
+  name: GreaterThan
+  nameWithType: RssItem.GreaterThan
+  fullName: Argotic.Syndication.RssItem.GreaterThan
+- uid: Argotic.Syndication.RssItem.op_Inequality*
+  commentId: Overload:Argotic.Syndication.RssItem.op_Inequality
+  name: Inequality
+  nameWithType: RssItem.Inequality
+  fullName: Argotic.Syndication.RssItem.Inequality
+- uid: Argotic.Syndication.RssItem.op_LessThan*
+  commentId: Overload:Argotic.Syndication.RssItem.op_LessThan
+  name: LessThan
+  nameWithType: RssItem.LessThan
+  fullName: Argotic.Syndication.RssItem.LessThan
+- uid: Argotic.Syndication.RssItem.CompareSequence*
+  commentId: Overload:Argotic.Syndication.RssItem.CompareSequence
+  name: CompareSequence
+  nameWithType: RssItem.CompareSequence
+  fullName: Argotic.Syndication.RssItem.CompareSequence
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Syndication.RssItem.AddExtension*
+  commentId: Overload:Argotic.Syndication.RssItem.AddExtension
+  name: AddExtension
+  nameWithType: RssItem.AddExtension
+  fullName: Argotic.Syndication.RssItem.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Syndication.RssItem.CompareTo*
+  commentId: Overload:Argotic.Syndication.RssItem.CompareTo
+  name: CompareTo
+  nameWithType: RssItem.CompareTo
+  fullName: Argotic.Syndication.RssItem.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssItem.Equals*
+  commentId: Overload:Argotic.Syndication.RssItem.Equals
+  name: Equals
+  nameWithType: RssItem.Equals
+  fullName: Argotic.Syndication.RssItem.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssItem.FindExtension*
+  commentId: Overload:Argotic.Syndication.RssItem.FindExtension
+  name: FindExtension
+  nameWithType: RssItem.FindExtension
+  fullName: Argotic.Syndication.RssItem.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: '{TExtension}'
+  commentId: '!:TExtension'
+  definition: TExtension
+  name: TExtension
+  nameWithType: TExtension
+  fullName: TExtension
+- uid: TExtension
+  commentId: '!:TExtension'
+  name: TExtension
+  nameWithType: TExtension
+  fullName: TExtension
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssItem.GetHashCode*
+  commentId: Overload:Argotic.Syndication.RssItem.GetHashCode
+  name: GetHashCode
+  nameWithType: RssItem.GetHashCode
+  fullName: Argotic.Syndication.RssItem.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Syndication.RssItem.Load*
+  commentId: Overload:Argotic.Syndication.RssItem.Load
+  name: Load
+  nameWithType: RssItem.Load
+  fullName: Argotic.Syndication.RssItem.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Syndication.RssItem.RemoveExtension*
+  commentId: Overload:Argotic.Syndication.RssItem.RemoveExtension
+  name: RemoveExtension
+  nameWithType: RssItem.RemoveExtension
+  fullName: Argotic.Syndication.RssItem.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssItem.ToString*
+  commentId: Overload:Argotic.Syndication.RssItem.ToString
+  name: ToString
+  nameWithType: RssItem.ToString
+  fullName: Argotic.Syndication.RssItem.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Syndication.RssItem.WriteTo*
+  commentId: Overload:Argotic.Syndication.RssItem.WriteTo
+  name: WriteTo
+  nameWithType: RssItem.WriteTo
+  fullName: Argotic.Syndication.RssItem.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

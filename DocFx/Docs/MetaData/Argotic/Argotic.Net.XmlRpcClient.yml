@@ -1,0 +1,1367 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.XmlRpcClient
+  commentId: T:Argotic.Net.XmlRpcClient
+  id: XmlRpcClient
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.XmlRpcClient.#ctor
+  - Argotic.Net.XmlRpcClient.#ctor(System.Uri)
+  - Argotic.Net.XmlRpcClient.#ctor(System.Uri,System.String)
+  - Argotic.Net.XmlRpcClient.Credentials
+  - Argotic.Net.XmlRpcClient.Host
+  - Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  - Argotic.Net.XmlRpcClient.Proxy
+  - Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)
+  - Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)
+  - Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)
+  - Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  - Argotic.Net.XmlRpcClient.SendAsyncCancel
+  - Argotic.Net.XmlRpcClient.SendCompleted
+  - Argotic.Net.XmlRpcClient.Timeout
+  - Argotic.Net.XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator,Argotic.Net.IXmlRpcValue@)
+  - Argotic.Net.XmlRpcClient.UseDefaultCredentials
+  - Argotic.Net.XmlRpcClient.UserAgent
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcClient
+  nameWithType: XmlRpcClient
+  fullName: Argotic.Net.XmlRpcClient
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlRpcClient
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 30
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nAllows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.\n"
+  remarks: "\n<p>This implementation of XML-RPC is based on the XML-RPC 1.0 specification which can be found at <a href=\"http://www.xmlrpc.com/spec\">http://www.xmlrpc.com/spec</a>.</p>\n<p><strong>XML-RPC</strong> is a Remote Procedure Calling protocol that works over the Internet.</p>\n<p>\n    An XML-RPC <em>message</em> is an HTTP-POST request. The body of the request is in XML.\n    A procedure executes on the server and the value it returns is also formatted in XML.\n</p>\n<p>Procedure parameters can be scalars, numbers, strings, dates and other simple types; and can also be complex record and list structures.</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Net\\XmlRpcClientExample.cs\" region=\"XmlRpcClient\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public class XmlRpcClient
+    content.vb: Public Class XmlRpcClient
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Net.XmlRpcClient.#ctor
+  commentId: M:Argotic.Net.XmlRpcClient.#ctor
+  id: '#ctor'
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcClient()
+  nameWithType: XmlRpcClient.XmlRpcClient()
+  fullName: Argotic.Net.XmlRpcClient.XmlRpcClient()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcClient\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public XmlRpcClient()
+    content.vb: Public Sub New
+  overload: Argotic.Net.XmlRpcClient.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.#ctor(System.Uri)
+  commentId: M:Argotic.Net.XmlRpcClient.#ctor(System.Uri)
+  id: '#ctor(System.Uri)'
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcClient(Uri)
+  nameWithType: XmlRpcClient.XmlRpcClient(Uri)
+  fullName: Argotic.Net.XmlRpcClient.XmlRpcClient(System.Uri)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 73
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcClient\" data-throw-if-not-resolved=\"false\"></xref> class that sends remote procedure calls using the specified XML-RPC server.\n"
+  example: []
+  syntax:
+    content: public XmlRpcClient(Uri host)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for XML-RPC transactions.
+    content.vb: Public Sub New(host As Uri)
+  overload: Argotic.Net.XmlRpcClient.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.#ctor(System.Uri,System.String)
+  commentId: M:Argotic.Net.XmlRpcClient.#ctor(System.Uri,System.String)
+  id: '#ctor(System.Uri,System.String)'
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcClient(Uri, String)
+  nameWithType: XmlRpcClient.XmlRpcClient(Uri, String)
+  fullName: Argotic.Net.XmlRpcClient.XmlRpcClient(System.Uri, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 88
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcClient\" data-throw-if-not-resolved=\"false\"></xref> class that sends remote procedure calls using the specified XML-RPC server and user agent.\n"
+  example: []
+  syntax:
+    content: public XmlRpcClient(Uri host, string userAgent)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for XML-RPC transactions.
+    - id: userAgent
+      type: System.String
+      description: Information such as the application name, version, host operating system, and language.
+    content.vb: Public Sub New(host As Uri, userAgent As String)
+  overload: Argotic.Net.XmlRpcClient.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.SendCompleted
+  commentId: E:Argotic.Net.XmlRpcClient.SendCompleted
+  id: SendCompleted
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: SendCompleted
+  nameWithType: XmlRpcClient.SendCompleted
+  fullName: Argotic.Net.XmlRpcClient.SendCompleted
+  type: Event
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendCompleted
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 98
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nOccurs when an asynchronous remote procedure call send operation completes.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<XmlRpcMessageSentEventArgs> SendCompleted
+    return:
+      type: System.EventHandler{Argotic.Net.XmlRpcMessageSentEventArgs}
+    content.vb: Public Event SendCompleted As EventHandler(Of XmlRpcMessageSentEventArgs)
+  seealso:
+  - linkId: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+    commentId: M:Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.Credentials
+  commentId: P:Argotic.Net.XmlRpcClient.Credentials
+  id: Credentials
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: XmlRpcClient.Credentials
+  fullName: Argotic.Net.XmlRpcClient.Credentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credentials
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 107
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the authentication credentials utilized by this client when making remote procedure calls.\n"
+  example: []
+  syntax:
+    content: public ICredentials Credentials { get; set; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> object that represents the authentication credentials provided by this client when making remote procedure calls.\nThe default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.\n"
+    content.vb: Public Property Credentials As ICredentials
+  overload: Argotic.Net.XmlRpcClient.Credentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.Host
+  commentId: P:Argotic.Net.XmlRpcClient.Host
+  id: Host
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: Host
+  nameWithType: XmlRpcClient.Host
+  fullName: Argotic.Net.XmlRpcClient.Host
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Host
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 128
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the location of the host computer that client remote procedure calls will be sent to.\n"
+  remarks: "\nIf <xref href=\"Argotic.Net.XmlRpcClient.Host\" data-throw-if-not-resolved=\"false\"></xref> is a null reference (Nothing in Visual Basic), <xref href=\"Argotic.Net.XmlRpcClient.Host\" data-throw-if-not-resolved=\"false\"></xref> is initialized using the settings in the application or machine configuration files.\n"
+  example: []
+  syntax:
+    content: public Uri Host { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for XML-RPC transactions.
+    content.vb: Public Property Host As Uri
+  overload: Argotic.Net.XmlRpcClient.Host*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.Proxy
+  commentId: P:Argotic.Net.XmlRpcClient.Proxy
+  id: Proxy
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: Proxy
+  nameWithType: XmlRpcClient.Proxy
+  fullName: Argotic.Net.XmlRpcClient.Proxy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Proxy
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 149
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the web proxy utilized by this client to proxy remote procedure calls.\n"
+  example: []
+  syntax:
+    content: public IWebProxy Proxy { get; set; }
+    parameters: []
+    return:
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> object that represents the web proxy utilized by this client to proxy remote procedure calls.\nThe default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.\n"
+    content.vb: Public Property Proxy As IWebProxy
+  overload: Argotic.Net.XmlRpcClient.Proxy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.Timeout
+  commentId: P:Argotic.Net.XmlRpcClient.Timeout
+  id: Timeout
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: Timeout
+  nameWithType: XmlRpcClient.Timeout
+  fullName: Argotic.Net.XmlRpcClient.Timeout
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Timeout
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 168
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets a value that specifies the amount of time after which asynchronous send operations will time out.\n"
+  example: []
+  syntax:
+    content: public TimeSpan Timeout { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+      description: A <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref> that specifies the time-out period. The default value is 15 seconds.
+    content.vb: Public Property Timeout As TimeSpan
+  overload: Argotic.Net.XmlRpcClient.Timeout*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The time out period is less than zero.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The time out period is greater than a year.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.UseDefaultCredentials
+  commentId: P:Argotic.Net.XmlRpcClient.UseDefaultCredentials
+  id: UseDefaultCredentials
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: UseDefaultCredentials
+  nameWithType: XmlRpcClient.UseDefaultCredentials
+  fullName: Argotic.Net.XmlRpcClient.UseDefaultCredentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UseDefaultCredentials
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 211
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets a value indicating whether gets or sets a <xref href=\"System.Boolean\" data-throw-if-not-resolved=\"false\"></xref> value that controls whether the <xref href=\"System.Net.CredentialCache.DefaultCredentials\" data-throw-if-not-resolved=\"false\"></xref> are sent when making remote procedure calls.\n"
+  remarks: "\n<p>\n    Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf.\n    Set this property to <strong>true</strong> when this <xref href=\"Argotic.Net.XmlRpcClient\" data-throw-if-not-resolved=\"false\"></xref> object should, if requested by the server, authenticate using the\n    default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.\n</p>\n<p>\n    Credentials information can also be specified using the application and machine configuration files.\n    For more information, see <xref href=\"Argotic.Configuration.XmlRpcClientNetworkElement\" data-throw-if-not-resolved=\"false\"></xref> Element (Network Settings).\n</p>\n<p>\n    If the UseDefaultCredentials property is set to <strong>false</strong>, then the value set in the <xref href=\"Argotic.Net.XmlRpcClient.Credentials\" data-throw-if-not-resolved=\"false\"></xref> property\n    will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <strong>false</strong>\n    and the <xref href=\"Argotic.Net.XmlRpcClient.Credentials\" data-throw-if-not-resolved=\"false\"></xref> property has not been set, then remote procedure calls are sent to the server anonymously.\n</p>\n"
+  example: []
+  syntax:
+    content: public bool UseDefaultCredentials { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the default credentials are used; otherwise <strong>false</strong>. The default value is <strong>false</strong>.
+    content.vb: Public Property UseDefaultCredentials As Boolean
+  overload: Argotic.Net.XmlRpcClient.UseDefaultCredentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.UserAgent
+  commentId: P:Argotic.Net.XmlRpcClient.UserAgent
+  id: UserAgent
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: UserAgent
+  nameWithType: XmlRpcClient.UserAgent
+  fullName: Argotic.Net.XmlRpcClient.UserAgent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UserAgent
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 219
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets information such as the client application name, version, host operating system, and language.\n"
+  example: []
+  syntax:
+    content: public string UserAgent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.
+    content.vb: Public Property UserAgent As String
+  overload: Argotic.Net.XmlRpcClient.UserAgent*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)
+  commentId: M:Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)
+  id: ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: ScalarTypeAsString(XmlRpcScalarValueType)
+  nameWithType: XmlRpcClient.ScalarTypeAsString(XmlRpcScalarValueType)
+  fullName: Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ScalarTypeAsString
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 256
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns the scalar type identifier for the supplied <xref href=\"Argotic.Net.XmlRpcScalarValueType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code></code></pre>\n"
+  syntax:
+    content: public static string ScalarTypeAsString(XmlRpcScalarValueType type)
+    parameters:
+    - id: type
+      type: Argotic.Net.XmlRpcScalarValueType
+      description: The <xref href="Argotic.Net.XmlRpcScalarValueType" data-throw-if-not-resolved="false"></xref> to get the scalar type identifier for.
+    return:
+      type: System.String
+      description: The scalar type identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">type</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function ScalarTypeAsString(type As XmlRpcScalarValueType) As String
+  overload: Argotic.Net.XmlRpcClient.ScalarTypeAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)
+  commentId: M:Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)
+  id: ScalarTypeByName(System.String)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: ScalarTypeByName(String)
+  nameWithType: XmlRpcClient.ScalarTypeByName(String)
+  fullName: Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ScalarTypeByName
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 303
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns the <xref href=\"Argotic.Net.XmlRpcScalarValueType\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified scalar type name.\n"
+  remarks: This method disregards case of specified scalar type name.
+  example:
+  - "\n<pre><code></code></pre>\n"
+  syntax:
+    content: public static XmlRpcScalarValueType ScalarTypeByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the scalar type.
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+      description: A <xref href="Argotic.Net.XmlRpcScalarValueType" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>XmlRpcScalarValueType.None</strong>.
+    content.vb: Public Shared Function ScalarTypeByName(name As String) As XmlRpcScalarValueType
+  overload: Argotic.Net.XmlRpcClient.ScalarTypeByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator,Argotic.Net.IXmlRpcValue@)
+  commentId: M:Argotic.Net.XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator,Argotic.Net.IXmlRpcValue@)
+  id: TryParseValue(System.Xml.XPath.XPathNavigator,Argotic.Net.IXmlRpcValue@)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: TryParseValue(XPathNavigator, out IXmlRpcValue)
+  nameWithType: XmlRpcClient.TryParseValue(XPathNavigator, out IXmlRpcValue)
+  fullName: Argotic.Net.XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator, out Argotic.Net.IXmlRpcValue)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseValue
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 353
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nConstructs a new <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref> object from the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\nParameters specify the XML data source and the variable where the new <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref> object is returned.\n"
+  remarks: "\nThe <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> is expected to represent an XML-RPC <strong>value</strong> node.\n"
+  example: []
+  syntax:
+    content: public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the XML data source to be parsed.
+    - id: value
+      type: Argotic.Net.IXmlRpcValue
+      description: "\nWhen this method returns, contains an object that represents the <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref> specified by the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, or <strong>null</strong> if the conversion failed.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: "\n<strong>true</strong> if <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> was converted successfully; otherwise, <strong>false</strong>.\nThis operation returns <strong>false</strong> if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> parameter is a null reference (Nothing in Visual Basic),\nor represents XML data that is not in the expected format.\n"
+    content.vb: Public Shared Function TryParseValue(source As XPathNavigator, ByRef value As IXmlRpcValue) As Boolean
+  overload: Argotic.Net.XmlRpcClient.TryParseValue*
+  nameWithType.vb: XmlRpcClient.TryParseValue(XPathNavigator, ByRef IXmlRpcValue)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Net.XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator, ByRef Argotic.Net.IXmlRpcValue)
+  name.vb: TryParseValue(XPathNavigator, ByRef IXmlRpcValue)
+- uid: Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)
+  commentId: M:Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)
+  id: Send(Argotic.Net.XmlRpcMessage)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: Send(XmlRpcMessage)
+  nameWithType: XmlRpcClient.Send(XmlRpcMessage)
+  fullName: Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Send
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 486
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSends the specified message to an XML-RPC server to execute a remote procedure call.\n"
+  example: []
+  syntax:
+    content: public XmlRpcResponse Send(XmlRpcMessage message)
+    parameters:
+    - id: message
+      type: Argotic.Net.XmlRpcMessage
+      description: A <xref href="Argotic.Net.XmlRpcMessage" data-throw-if-not-resolved="false"></xref> that represents the information needed to execute the remote procedure call.
+    return:
+      type: Argotic.Net.XmlRpcResponse
+      description: A <xref href="Argotic.Net.XmlRpcResponse" data-throw-if-not-resolved="false"></xref> that represents the server&apos;s response to the remote procedure call.
+    content.vb: Public Function Send(message As XmlRpcMessage) As XmlRpcResponse
+  overload: Argotic.Net.XmlRpcClient.Send*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The <xref href="Argotic.Net.XmlRpcClient.Host" data-throw-if-not-resolved="false"></xref> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Net.XmlRpcClient" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  commentId: M:Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  id: SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(XmlRpcMessage, Object)
+  nameWithType: XmlRpcClient.SendAsync(XmlRpcMessage, Object)
+  fullName: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendAsync
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 541
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSends the specified message to an XML-RPC server to execute a remote procedure call.\nThis method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.\n"
+  remarks: "\n<p>\n    To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Net.XmlRpcClient.SendAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void SendAsync(XmlRpcMessage message, object userToken)
+    parameters:
+    - id: message
+      type: Argotic.Net.XmlRpcMessage
+      description: A <xref href="Argotic.Net.XmlRpcMessage" data-throw-if-not-resolved="false"></xref> that represents the information needed to execute the remote procedure call.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub SendAsync(message As XmlRpcMessage, userToken As Object)
+  overload: Argotic.Net.XmlRpcClient.SendAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The <xref href="Argotic.Net.XmlRpcClient.Host" data-throw-if-not-resolved="false"></xref> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Net.XmlRpcClient" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.SendAsyncCancel
+  commentId: M:Argotic.Net.XmlRpcClient.SendAsyncCancel
+  id: SendAsyncCancel
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: SendAsyncCancel()
+  nameWithType: XmlRpcClient.SendAsyncCancel()
+  fullName: Argotic.Net.XmlRpcClient.SendAsyncCancel()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendAsyncCancel
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 595
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCancels an asynchronous operation to send a remote procedure call.\n"
+  remarks: "\nUse the <xref href=\"Argotic.Net.XmlRpcClient.SendAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method to cancel a pending <xref href=\"Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation.\nIf there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.\nIf there is no send operation pending, this method does nothing.\n"
+  example: []
+  syntax:
+    content: public void SendAsyncCancel()
+    content.vb: Public Sub SendAsyncCancel
+  overload: Argotic.Net.XmlRpcClient.SendAsyncCancel*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  id: OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  parent: Argotic.Net.XmlRpcClient
+  langs:
+  - csharp
+  - vb
+  name: OnMessageSent(XmlRpcMessageSentEventArgs)
+  nameWithType: XmlRpcClient.OnMessageSent(XmlRpcMessageSentEventArgs)
+  fullName: Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OnMessageSent
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs
+    startLine: 659
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nRaises the <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
+  remarks: "\n<p>\n    Classes that inherit from the <xref href=\"Argotic.Net.XmlRpcClient\" data-throw-if-not-resolved=\"false\"></xref> class can override the <xref href=\"Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)\" data-throw-if-not-resolved=\"false\"></xref> method\n    to perform additional tasks when the <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event occurs.\n</p>\n<p>\n<xref href=\"Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)\" data-throw-if-not-resolved=\"false\"></xref> also allows derived classes to handle <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> without attaching a delegate.\nThis is the preferred technique for handling <xref href=\"Argotic.Net.XmlRpcClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> in a derived class.\n</p>\n"
+  example: []
+  syntax:
+    content: protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
+    parameters:
+    - id: e
+      type: Argotic.Net.XmlRpcMessageSentEventArgs
+      description: A <xref href="Argotic.Net.XmlRpcMessageSentEventArgs" data-throw-if-not-resolved="false"></xref> that contains the event data.
+    content.vb: Protected Overridable Sub OnMessageSent(e As XmlRpcMessageSentEventArgs)
+  overload: Argotic.Net.XmlRpcClient.OnMessageSent*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+references:
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Net.XmlRpcClient
+  commentId: T:Argotic.Net.XmlRpcClient
+  name: XmlRpcClient
+  nameWithType: XmlRpcClient
+  fullName: Argotic.Net.XmlRpcClient
+- uid: Argotic.Net.XmlRpcClient.#ctor*
+  commentId: Overload:Argotic.Net.XmlRpcClient.#ctor
+  name: XmlRpcClient
+  nameWithType: XmlRpcClient.XmlRpcClient
+  fullName: Argotic.Net.XmlRpcClient.XmlRpcClient
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  commentId: M:Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,System.Object)
+  isExternal: true
+- uid: System.EventHandler{Argotic.Net.XmlRpcMessageSentEventArgs}
+  commentId: T:System.EventHandler{Argotic.Net.XmlRpcMessageSentEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<XmlRpcMessageSentEventArgs>
+  nameWithType: EventHandler<XmlRpcMessageSentEventArgs>
+  fullName: System.EventHandler<Argotic.Net.XmlRpcMessageSentEventArgs>
+  nameWithType.vb: EventHandler(Of XmlRpcMessageSentEventArgs)
+  fullName.vb: System.EventHandler(Of Argotic.Net.XmlRpcMessageSentEventArgs)
+  name.vb: EventHandler(Of XmlRpcMessageSentEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Net.XmlRpcMessageSentEventArgs
+    name: XmlRpcMessageSentEventArgs
+    nameWithType: XmlRpcMessageSentEventArgs
+    fullName: Argotic.Net.XmlRpcMessageSentEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Net.XmlRpcMessageSentEventArgs
+    name: XmlRpcMessageSentEventArgs
+    nameWithType: XmlRpcMessageSentEventArgs
+    fullName: Argotic.Net.XmlRpcMessageSentEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: Argotic.Net.XmlRpcClient.Credentials*
+  commentId: Overload:Argotic.Net.XmlRpcClient.Credentials
+  name: Credentials
+  nameWithType: XmlRpcClient.Credentials
+  fullName: Argotic.Net.XmlRpcClient.Credentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Net.XmlRpcClient.Host
+  commentId: P:Argotic.Net.XmlRpcClient.Host
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.Host*
+  commentId: Overload:Argotic.Net.XmlRpcClient.Host
+  name: Host
+  nameWithType: XmlRpcClient.Host
+  fullName: Argotic.Net.XmlRpcClient.Host
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: Argotic.Net.XmlRpcClient.Proxy*
+  commentId: Overload:Argotic.Net.XmlRpcClient.Proxy
+  name: Proxy
+  nameWithType: XmlRpcClient.Proxy
+  fullName: Argotic.Net.XmlRpcClient.Proxy
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.Timeout*
+  commentId: Overload:Argotic.Net.XmlRpcClient.Timeout
+  name: Timeout
+  nameWithType: XmlRpcClient.Timeout
+  fullName: Argotic.Net.XmlRpcClient.Timeout
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Net.CredentialCache.DefaultCredentials
+  commentId: P:System.Net.CredentialCache.DefaultCredentials
+  isExternal: true
+- uid: Argotic.Configuration.XmlRpcClientNetworkElement
+  commentId: T:Argotic.Configuration.XmlRpcClientNetworkElement
+  parent: Argotic.Configuration
+  name: XmlRpcClientNetworkElement
+  nameWithType: XmlRpcClientNetworkElement
+  fullName: Argotic.Configuration.XmlRpcClientNetworkElement
+- uid: Argotic.Net.XmlRpcClient.Credentials
+  commentId: P:Argotic.Net.XmlRpcClient.Credentials
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.UseDefaultCredentials*
+  commentId: Overload:Argotic.Net.XmlRpcClient.UseDefaultCredentials
+  name: UseDefaultCredentials
+  nameWithType: XmlRpcClient.UseDefaultCredentials
+  fullName: Argotic.Net.XmlRpcClient.UseDefaultCredentials
+- uid: Argotic.Configuration
+  commentId: N:Argotic.Configuration
+  name: Argotic.Configuration
+  nameWithType: Argotic.Configuration
+  fullName: Argotic.Configuration
+- uid: Argotic.Net.XmlRpcClient.UserAgent*
+  commentId: Overload:Argotic.Net.XmlRpcClient.UserAgent
+  name: UserAgent
+  nameWithType: XmlRpcClient.UserAgent
+  fullName: Argotic.Net.XmlRpcClient.UserAgent
+- uid: Argotic.Net.XmlRpcScalarValueType
+  commentId: T:Argotic.Net.XmlRpcScalarValueType
+  parent: Argotic.Net
+  name: XmlRpcScalarValueType
+  nameWithType: XmlRpcScalarValueType
+  fullName: Argotic.Net.XmlRpcScalarValueType
+- uid: Argotic.Net.XmlRpcClient.ScalarTypeAsString*
+  commentId: Overload:Argotic.Net.XmlRpcClient.ScalarTypeAsString
+  name: ScalarTypeAsString
+  nameWithType: XmlRpcClient.ScalarTypeAsString
+  fullName: Argotic.Net.XmlRpcClient.ScalarTypeAsString
+- uid: Argotic.Net.XmlRpcClient.ScalarTypeByName*
+  commentId: Overload:Argotic.Net.XmlRpcClient.ScalarTypeByName
+  name: ScalarTypeByName
+  nameWithType: XmlRpcClient.ScalarTypeByName
+  fullName: Argotic.Net.XmlRpcClient.ScalarTypeByName
+- uid: Argotic.Net.IXmlRpcValue
+  commentId: T:Argotic.Net.IXmlRpcValue
+  parent: Argotic.Net
+  name: IXmlRpcValue
+  nameWithType: IXmlRpcValue
+  fullName: Argotic.Net.IXmlRpcValue
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Net.XmlRpcClient.TryParseValue*
+  commentId: Overload:Argotic.Net.XmlRpcClient.TryParseValue
+  name: TryParseValue
+  nameWithType: XmlRpcClient.TryParseValue
+  fullName: Argotic.Net.XmlRpcClient.TryParseValue
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Net.XmlRpcMessage
+  commentId: T:Argotic.Net.XmlRpcMessage
+  parent: Argotic.Net
+  name: XmlRpcMessage
+  nameWithType: XmlRpcMessage
+  fullName: Argotic.Net.XmlRpcMessage
+- uid: Argotic.Net.XmlRpcResponse
+  commentId: T:Argotic.Net.XmlRpcResponse
+  parent: Argotic.Net
+  name: XmlRpcResponse
+  nameWithType: XmlRpcResponse
+  fullName: Argotic.Net.XmlRpcResponse
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.Send*
+  commentId: Overload:Argotic.Net.XmlRpcClient.Send
+  name: Send
+  nameWithType: XmlRpcClient.Send
+  fullName: Argotic.Net.XmlRpcClient.Send
+- uid: Argotic.Net.XmlRpcClient.SendCompleted
+  commentId: E:Argotic.Net.XmlRpcClient.SendCompleted
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.SendAsyncCancel
+  commentId: M:Argotic.Net.XmlRpcClient.SendAsyncCancel
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.SendAsync*
+  commentId: Overload:Argotic.Net.XmlRpcClient.SendAsync
+  name: SendAsync
+  nameWithType: XmlRpcClient.SendAsync
+  fullName: Argotic.Net.XmlRpcClient.SendAsync
+- uid: Argotic.Net.XmlRpcClient.SendAsyncCancel*
+  commentId: Overload:Argotic.Net.XmlRpcClient.SendAsyncCancel
+  name: SendAsyncCancel
+  nameWithType: XmlRpcClient.SendAsyncCancel
+  fullName: Argotic.Net.XmlRpcClient.SendAsyncCancel
+- uid: Argotic.Net.XmlRpcMessageSentEventArgs
+  commentId: T:Argotic.Net.XmlRpcMessageSentEventArgs
+  parent: Argotic.Net
+  name: XmlRpcMessageSentEventArgs
+  nameWithType: XmlRpcMessageSentEventArgs
+  fullName: Argotic.Net.XmlRpcMessageSentEventArgs
+- uid: Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  commentId: M:Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)
+  isExternal: true
+- uid: Argotic.Net.XmlRpcClient.OnMessageSent*
+  commentId: Overload:Argotic.Net.XmlRpcClient.OnMessageSent
+  name: OnMessageSent
+  nameWithType: XmlRpcClient.OnMessageSent
+  fullName: Argotic.Net.XmlRpcClient.OnMessageSent

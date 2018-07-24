@@ -1,0 +1,839 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  id: SiteSummarySlashSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: SiteSummarySlashSyndicationExtensionContext
+  nameWithType: SiteSummarySlashSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SiteSummarySlashSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class SiteSummarySlashSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class SiteSummarySlashSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: SiteSummarySlashSyndicationExtensionContext()
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.SiteSummarySlashSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.SiteSummarySlashSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 38
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public SiteSummarySlashSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+  commentId: P:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+  id: Comments
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Comments
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Comments
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Comments
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the number of comments.\n"
+  example: []
+  syntax:
+    content: public int Comments { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of comments. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no comment count was specified.
+    content.vb: Public Property Comments As Integer
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+  commentId: P:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+  id: Department
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Department
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Department
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Department
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name of the department.\n"
+  example: []
+  syntax:
+    content: public string Department { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name of the department.
+    content.vb: Public Property Department As String
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+  commentId: P:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+  id: HitParade
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: HitParade
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.HitParade
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HitParade
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 90
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the hit parade identifiers.\n"
+  example: []
+  syntax:
+    content: public Collection<int> HitParade { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.Int32}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"System.Int32\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the hit parade identifiers.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property HitParade As Collection(Of Integer)
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+  commentId: P:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+  id: Section
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Section
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Section
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Section
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 107
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name of the section.\n"
+  example: []
+  syntax:
+    content: public string Section { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name of the section.
+    content.vb: Public Property Section As String
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 135
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySlash/SiteSummarySlashSyndicationExtensionContext.cs
+    startLine: 210
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: SiteSummarySlashSyndicationExtension
+  nameWithType: SiteSummarySlashSyndicationExtension
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: SiteSummarySlashSyndicationExtensionContext
+  nameWithType: SiteSummarySlashSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.#ctor
+  name: SiteSummarySlashSyndicationExtensionContext
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.SiteSummarySlashSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.SiteSummarySlashSyndicationExtensionContext
+- uid: System.Int32.MinValue
+  commentId: F:System.Int32.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+  name: Comments
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Comments
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Comments
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+  name: Department
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Department
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Department
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+  name: HitParade
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.HitParade
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.HitParade
+- uid: System.Collections.ObjectModel.Collection{System.Int32}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Int32}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Int32>
+  nameWithType: Collection<Int32>
+  fullName: System.Collections.ObjectModel.Collection<System.Int32>
+  nameWithType.vb: Collection(Of Int32)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Int32)
+  name.vb: Collection(Of Int32)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+  name: Section
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Section
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Section
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: SiteSummarySlashSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.SiteSummarySlashSyndicationExtensionContext.WriteTo

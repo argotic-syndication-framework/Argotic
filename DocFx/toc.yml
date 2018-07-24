@@ -1,0 +1,6 @@
+- name: Argotic
+  href: Docs/MetaData/Argotic/
+- name: Articles
+  href: Articles/
+- name: Rest Apis
+  href: RestAPIs/

@@ -1,0 +1,47 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration.Provider
+  commentId: N:Argotic.Configuration.Provider
+  id: Argotic.Configuration.Provider
+  children:
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  - Argotic.Configuration.Provider.SyndicationResourceProvider
+  - Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  - Argotic.Configuration.Provider.SyndicationResourceSection
+  langs:
+  - csharp
+  - vb
+  name: Argotic.Configuration.Provider
+  nameWithType: Argotic.Configuration.Provider
+  fullName: Argotic.Configuration.Provider
+  type: Namespace
+  assemblies:
+  - Argotic.Core
+references:
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  parent: Argotic.Configuration.Provider
+  name: SyndicationResourceCreateStatus
+  nameWithType: SyndicationResourceCreateStatus
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProvider
+  parent: Argotic.Configuration.Provider
+  name: SyndicationResourceProvider
+  nameWithType: SyndicationResourceProvider
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+- uid: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+  name: SyndicationResourceProviderCollection
+  nameWithType: SyndicationResourceProviderCollection
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProviderCollection
+- uid: Argotic.Configuration.Provider.SyndicationResourceSection
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceSection
+  name: SyndicationResourceSection
+  nameWithType: SyndicationResourceSection
+  fullName: Argotic.Configuration.Provider.SyndicationResourceSection
+- uid: Argotic.Configuration.Provider
+  commentId: N:Argotic.Configuration.Provider
+  name: Argotic.Configuration.Provider
+  nameWithType: Argotic.Configuration.Provider
+  fullName: Argotic.Configuration.Provider

@@ -1,0 +1,207 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial
+  commentId: T:Argotic.Extensions.Core.ITunesExplicitMaterial
+  id: ITunesExplicitMaterial
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.ITunesExplicitMaterial.Clean
+  - Argotic.Extensions.Core.ITunesExplicitMaterial.No
+  - Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  - Argotic.Extensions.Core.ITunesExplicitMaterial.Yes
+  langs:
+  - csharp
+  - vb
+  name: ITunesExplicitMaterial
+  nameWithType: ITunesExplicitMaterial
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ITunesExplicitMaterial
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the explicit language or adult content advisory information of an iTunes podcast.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum ITunesExplicitMaterial
+    content.vb: >-
+      <Serializable>
+
+      Public Enum ITunesExplicitMaterial
+  seealso:
+  - linkId: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+    commentId: T:Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  commentId: F:Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  id: None
+  parent: Argotic.Extensions.Core.ITunesExplicitMaterial
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: ITunesExplicitMaterial.None
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo explicit material designation specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.ITunesExplicitMaterial
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial.Clean
+  commentId: F:Argotic.Extensions.Core.ITunesExplicitMaterial.Clean
+  id: Clean
+  parent: Argotic.Extensions.Core.ITunesExplicitMaterial
+  langs:
+  - csharp
+  - vb
+  name: Clean
+  nameWithType: ITunesExplicitMaterial.Clean
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial.Clean
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Clean
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe podcast has no explicit language or adult content included anywhere in its episodes.\n"
+  example: []
+  syntax:
+    content: Clean = 1
+    return:
+      type: Argotic.Extensions.Core.ITunesExplicitMaterial
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial.No
+  commentId: F:Argotic.Extensions.Core.ITunesExplicitMaterial.No
+  id: No
+  parent: Argotic.Extensions.Core.ITunesExplicitMaterial
+  langs:
+  - csharp
+  - vb
+  name: No
+  nameWithType: ITunesExplicitMaterial.No
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial.No
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: No
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe podcast explicit material advisory was not provided by the publisher.\n"
+  example: []
+  syntax:
+    content: No = 2
+    return:
+      type: Argotic.Extensions.Core.ITunesExplicitMaterial
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial.Yes
+  commentId: F:Argotic.Extensions.Core.ITunesExplicitMaterial.Yes
+  id: Yes
+  parent: Argotic.Extensions.Core.ITunesExplicitMaterial
+  langs:
+  - csharp
+  - vb
+  name: Yes
+  nameWithType: ITunesExplicitMaterial.Yes
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial.Yes
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Yes
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesExplicitMaterial.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe podcast has explicit language or adult content included in its episodes.\n"
+  example: []
+  syntax:
+    content: Yes = 3
+    return:
+      type: Argotic.Extensions.Core.ITunesExplicitMaterial
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: ITunesSyndicationExtensionContext
+  nameWithType: ITunesSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial
+  commentId: T:Argotic.Extensions.Core.ITunesExplicitMaterial
+  parent: Argotic.Extensions.Core
+  name: ITunesExplicitMaterial
+  nameWithType: ITunesExplicitMaterial
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial

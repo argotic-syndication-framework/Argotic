@@ -1,0 +1,344 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  commentId: T:Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  id: FeedHistoryLinkRelationType
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.Current
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.First
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.Last
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.Next
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.NextArchive
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.Previous
+  - Argotic.Extensions.Core.FeedHistoryLinkRelationType.PreviousArchive
+  langs:
+  - csharp
+  - vb
+  name: FeedHistoryLinkRelationType
+  nameWithType: FeedHistoryLinkRelationType
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedHistoryLinkRelationType
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the link relation type of a web resource.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum FeedHistoryLinkRelationType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum FeedHistoryLinkRelationType
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+    commentId: P:Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  id: None
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: FeedHistoryLinkRelationType.None
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo link relation type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Current
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.Current
+  id: Current
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: Current
+  nameWithType: FeedHistoryLinkRelationType.Current
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Current
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Current
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to a document containing the most recent entries.\n"
+  example: []
+  syntax:
+    content: Current = 1
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.First
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.First
+  id: First
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: First
+  nameWithType: FeedHistoryLinkRelationType.First
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.First
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: First
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the furthest preceding document in a series of documents.\n"
+  example: []
+  syntax:
+    content: First = 1
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Last
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.Last
+  id: Last
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: Last
+  nameWithType: FeedHistoryLinkRelationType.Last
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Last
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Last
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the furthest following document in a series of documents.\n"
+  example: []
+  syntax:
+    content: Last = 2
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Next
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.Next
+  id: Next
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: Next
+  nameWithType: FeedHistoryLinkRelationType.Next
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Next
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Next
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 39
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the immediately following document in a series of documents.\n"
+  example: []
+  syntax:
+    content: Next = 3
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.NextArchive
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.NextArchive
+  id: NextArchive
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: NextArchive
+  nameWithType: FeedHistoryLinkRelationType.NextArchive
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.NextArchive
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: NextArchive
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 45
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the immediately following archive document.\n"
+  example: []
+  syntax:
+    content: NextArchive = 3
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Previous
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.Previous
+  id: Previous
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: Previous
+  nameWithType: FeedHistoryLinkRelationType.Previous
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.Previous
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Previous
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the immediately preceding document in a series of documents.\n"
+  example: []
+  syntax:
+    content: Previous = 4
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType.PreviousArchive
+  commentId: F:Argotic.Extensions.Core.FeedHistoryLinkRelationType.PreviousArchive
+  id: PreviousArchive
+  parent: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  langs:
+  - csharp
+  - vb
+  name: PreviousArchive
+  nameWithType: FeedHistoryLinkRelationType.PreviousArchive
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType.PreviousArchive
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PreviousArchive
+    path: ../Solutions/Argotic.Extensions/Core/FeedHistory/FeedHistoryLinkRelationType.cs
+    startLine: 57
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRefers to the immediately preceding archive document.\n"
+  example: []
+  syntax:
+    content: PreviousArchive = 5
+    return:
+      type: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  commentId: P:Argotic.Extensions.Core.FeedHistoryLinkRelation.RelationType
+  isExternal: true
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  commentId: T:Argotic.Extensions.Core.FeedHistoryLinkRelationType
+  parent: Argotic.Extensions.Core
+  name: FeedHistoryLinkRelationType
+  nameWithType: FeedHistoryLinkRelationType
+  fullName: Argotic.Extensions.Core.FeedHistoryLinkRelationType

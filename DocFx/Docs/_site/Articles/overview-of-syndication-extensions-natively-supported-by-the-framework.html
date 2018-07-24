@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Overview of syndication extensions natively supported by the framework </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Overview of syndication extensions natively supported by the framework ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="overview-of-syndication-extensions-natively-supported-by-the-framework">Overview of syndication extensions natively supported by the framework</h1>
+
+<p>Syndication formats such as RSS or Atom are extended through the use of XML namespaces. Each extension to a syndication format involves a unique XML namespace that qualifies the elements and attributes being added to the syndication format. The framework will by default automatically retrieve the extensions that have been applied to the syndication format entities based on the declared XML namespaces.</p>
+<p>While the framework natively supports the most common syndication extensions in use today, you may optionally create your own custom syndication extensions using the syndication resource extensibility model. All natively supported syndication extensions exist in the <em>Argotic.Extensions</em> assembly under the <em>Argotic.Extensions.Core</em> namespace, and are listed below by the name of the class that implements the syndication extension.</p>
+<h3 id="syndication-extensions-implemented-in-the-framework">Syndication Extensions Implemented in the Framework</h3>
+<p><strong>BasicGeocodingSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of representing latitude, longitude and other information about spatially-located things.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://www.w3.org/2003/01/geo/wgs84_pos#">http://www.w3.org/2003/01/geo/wgs84_pos#</a></em></li>
+<li><strong>XML Prefix</strong>: <em>geo</em></li>
+<li><strong>Specification</strong>: <a href="">http://www.w3.org/2003/01/geo/|http://www.w3.org/2003/01/geo/</a></li>
+</ul>
+<p><strong>BlogChannelSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide meta-data common to weblogs.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://backend.userland.com/blogChannelModule">http://backend.userland.com/blogChannelModule</a></em></li>
+<li><strong>XML Prefix</strong>: <em>blogChannel</em></li>
+<li><strong>Specification</strong>: <a href="">http://backend.userland.com/blogChannelModule|http://backend.userland.com/blogChannelModule</a></li>
+</ul>
+<p><strong>CreativeCommonsSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of specifying which Creative Commons licenses are applicable to published content.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://backend.userland.com/creativeCommonsRssModule">http://backend.userland.com/creativeCommonsRssModule</a></em></li>
+<li><strong>XML Prefix</strong>: <em>creativeCommons</em></li>
+<li><strong>Specification</strong>: <a href="">http://backend.userland.com/creativeCommonsRssModule|http://backend.userland.com/creativeCommonsRssModule</a></li>
+</ul>
+<p><strong>DublinCoreElementSetSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a meta-data element resource description vocabulary.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>dc</em></li>
+<li><strong>Specification</strong>: <a href="">http://dublincore.org/documents/dces/|http://dublincore.org/documents/dces/</a></li>
+</ul>
+<p><strong>DublinCoreMetadataTermsSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a meta-data term resource description vocabulary.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>dcterms</em></li>
+<li><strong>Specification</strong>: <a href="">http://dublincore.org/documents/dcmi-terms/|http://dublincore.org/documents/dcmi-terms/</a></li>
+</ul>
+<p><strong>FeedHistorySyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of publishing of entries across one or more feed documents.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/syndication/history/1.0">http://purl.org/syndication/history/1.0</a></em></li>
+<li><strong>XML Prefix</strong>: <em>fh</em></li>
+<li><strong>Specification</strong>: <a href="">http://www.ietf.org/rfc/rfc5005.txt|http://www.ietf.org/rfc/rfc5005.txt</a></li>
+</ul>
+<p><strong>FeedRankSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/atompub/rank/1.0">http://purl.org/atompub/rank/1.0</a></em></li>
+<li><strong>XML Prefix</strong>: <em>re</em></li>
+<li><strong>Specification</strong>: <a href="">http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt|http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt</a></li>
+</ul>
+<p><strong>FeedSynchronizationSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to enable loosely-cooperating applications to use feeds as the basis for item sharing; the bi-directional, asynchronous synchronization of new and changed items amongst two or more cross-subscribed feeds.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://feedsync.org/2007/feedsync">http://feedsync.org/2007/feedsync</a></em></li>
+<li><strong>XML Prefix</strong>: <em>sx</em></li>
+<li><strong>Specification</strong>: <a href="">http://dev.live.com/feedsync/spec/|http://dev.live.com/feedsync/spec/</a></li>
+</ul>
+<p><strong>ITunesSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of describing iTunes podcasting information.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://www.itunes.com/dtds/podcast-1.0.dtd">http://www.itunes.com/dtds/podcast-1.0.dtd</a></em></li>
+<li><strong>XML Prefix</strong>: <em>itunes</em></li>
+<li><strong>Specification</strong>: <a href="">http://www.apple.com/itunes/store/podcaststechspecs.html#rss|http://www.apple.com/itunes/store/podcaststechspecs.html#rss</a></li>
+</ul>
+<p><strong>LiveJournalSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide LiveJournal specific meta-data.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://livejournal.org/rss/lj/2.0/">http://livejournal.org/rss/lj/2.0/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>lj</em></li>
+<li><strong>Specification</strong>: <a href="">http://neugierig.org/drop/lj/rss/|http://neugierig.org/drop/lj/rss/</a></li>
+</ul>
+<p><strong>PheedSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of describing a collection of photographs as both thumbnail and full size images.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://www.pheed.com/pheed/">http://www.pheed.com/pheed/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>photo</em></li>
+<li><strong>Specification</strong>: <a href="">http://www.pheed.com/pheed/|http://www.pheed.com/pheed/</a></li>
+</ul>
+<p><strong>PingbackSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means for publishers to request notification when an entity links to their content.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://madskills.com/public/xml/rss/module/pingback/">http://madskills.com/public/xml/rss/module/pingback/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>pingback</em></li>
+<li><strong>Specification</strong>: <a href="">http://madskills.com/public/xml/rss/module/pingback/|http://madskills.com/public/xml/rss/module/pingback/</a></li>
+</ul>
+<p><strong>SimpleListSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of exposing ordered lists of items easier and more accessible to users.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://www.microsoft.com/schemas/rss/core/2005">http://www.microsoft.com/schemas/rss/core/2005</a></em></li>
+<li><strong>XML Prefix</strong>: <em>cf</em></li>
+<li><strong>Specification</strong>: <a href="">http://msdn2.microsoft.com/en-us/xml/bb190612.aspx|http://msdn2.microsoft.com/en-us/xml/bb190612.aspx</a></li>
+</ul>
+<p><strong>SiteSummaryContentSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of describing content, including its format and encoding.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/rss/1.0/modules/content/">http://purl.org/rss/1.0/modules/content/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>content</em></li>
+<li><strong>Specification</strong>: <a href="">http://web.resource.org/rss/1.0/modules/content/|http://web.resource.org/rss/1.0/modules/content/</a></li>
+</ul>
+<p><strong>SiteSummarySlashSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of describing Slash-based site meta-data.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/rss/1.0/modules/slash/">http://purl.org/rss/1.0/modules/slash/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>slash</em></li>
+<li><strong>Specification</strong>: <a href="">http://web.resource.org/rss/1.0/modules/slash/|http://web.resource.org/rss/1.0/modules/slash/</a></li>
+</ul>
+<p><strong>SiteSummaryUpdateSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide syndication hints to aggregators and other entities regarding how often a feed is updated.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://purl.org/rss/1.0/modules/syndication/">http://purl.org/rss/1.0/modules/syndication/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>sy</em></li>
+<li><strong>Specification</strong>: <a href="">http://web.resource.org/rss/1.0/modules/syndication/|http://web.resource.org/rss/1.0/modules/syndication/</a></li>
+</ul>
+<p><strong>TrackbackSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of communicating where to send Trackback peer-to-peer notification pings.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://madskills.com/public/xml/rss/module/trackback/">http://madskills.com/public/xml/rss/module/trackback/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>trackback</em></li>
+<li><strong>Specification</strong>: <a href="">http://madskills.com/public/xml/rss/module/trackback/|http://madskills.com/public/xml/rss/module/trackback/</a></li>
+</ul>
+<p><strong>WellFormedWebCommentsSyndicationExtension</strong></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means exposing comments made against feed content.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://wellformedweb.org/CommentAPI/">http://wellformedweb.org/CommentAPI/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>wfw</em></li>
+<li><strong>Specification</strong>: <a href="">http://wellformedweb.org/news/wfw_namespace_elements/|http://wellformedweb.org/news/wfw_namespace_elements/</a></li>
+</ul>
+<p><em>YahooMediaSyndicationExtension</em></p>
+<ul>
+<li><strong>Purpose</strong>: Extends syndication specifications to provide a means of supplementing the enclosure capabilities of feeds.</li>
+<li><strong>XML Namespace</strong>: <em><a href="http://search.yahoo.com/mrss/">http://search.yahoo.com/mrss/</a></em></li>
+<li><strong>XML Prefix</strong>: <em>media</em></li>
+<li><strong>Specification</strong>: <a href="">http://search.yahoo.com/mrss|http://search.yahoo.com/mrss</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/overview-of-syndication-extensions-natively-supported-by-the-framework.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

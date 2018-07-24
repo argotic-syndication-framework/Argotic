@@ -57,16 +57,6 @@
         private static Version feedVersion = new Version(1, 0);
 
         /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
-        /// <summary>
         /// Private member to hold the collection of authors of the feed.
         /// </summary>
         private Collection<AtomPersonConstruct> feedAuthors;
@@ -87,16 +77,6 @@
         private IEnumerable<AtomEntry> feedEntries;
 
         /// <summary>
-        /// Private member to hold the agent used to generate the feed.
-        /// </summary>
-        private AtomGenerator feedGenerator;
-
-        /// <summary>
-        /// Private member to hold an image that provides iconic visual identification for the feed.
-        /// </summary>
-        private AtomIcon feedIcon;
-
-        /// <summary>
         /// Private member to hold a permanent, universally unique identifier for the feed.
         /// </summary>
         private AtomId feedId;
@@ -107,44 +87,14 @@
         private Collection<AtomLink> feedLinks;
 
         /// <summary>
-        /// Private member to hold an image that provides visual identification for the feed.
-        /// </summary>
-        private AtomLogo feedLogo;
-
-        /// <summary>
-        /// Private member to hold information about rights held in and over the feed.
-        /// </summary>
-        private AtomTextConstruct feedRights;
-
-        /// <summary>
-        /// Private member to hold inofmration that conveys a human-readable description or subtitle for the feed.
-        /// </summary>
-        private AtomTextConstruct feedSubtitle;
-
-        /// <summary>
         /// Private member to hold information that conveys a human-readable title for the feed.
         /// </summary>
         private AtomTextConstruct feedTitle;
 
         /// <summary>
-        /// Private member to hold a value indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
-        /// </summary>
-        private DateTime feedUpdatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomFeed"/> class.
@@ -210,18 +160,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets the categories associated with this feed.
@@ -315,30 +254,13 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return feedFormat;
-            }
-        }
+        public SyndicationContentFormat Format => feedFormat;
 
         /// <summary>
         /// Gets or sets the agent used to generate this feed.
         /// </summary>
         /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this feed. The default value is a <b>null</b> reference.</value>
-        public AtomGenerator Generator
-        {
-            get
-            {
-                return this.feedGenerator;
-            }
-
-            set
-            {
-                this.feedGenerator = value;
-            }
-        }
+        public AtomGenerator Generator { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -359,18 +281,7 @@
         /// <remarks>
         ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
         /// </remarks>
-        public AtomIcon Icon
-        {
-            get
-            {
-                return this.feedIcon;
-            }
-
-            set
-            {
-                this.feedIcon = value;
-            }
-        }
+        public AtomIcon Icon { get; set; }
 
         /// <summary>
         /// Gets or sets a permanent, universally unique identifier for this feed.
@@ -407,18 +318,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets references from this feed to one or more Web resources.
@@ -454,18 +354,7 @@
         /// <remarks>
         ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
         /// </remarks>
-        public AtomLogo Logo
-        {
-            get
-            {
-                return this.feedLogo;
-            }
-
-            set
-            {
-                this.feedLogo = value;
-            }
-        }
+        public AtomLogo Logo { get; set; }
 
         /// <summary>
         /// Gets or sets information about rights held in and over this feed.
@@ -474,35 +363,13 @@
         /// <remarks>
         ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
         /// </remarks>
-        public AtomTextConstruct Rights
-        {
-            get
-            {
-                return this.feedRights;
-            }
-
-            set
-            {
-                this.feedRights = value;
-            }
-        }
+        public AtomTextConstruct Rights { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a human-readable description or subtitle for this feed.
         /// </summary>
         /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this feed.</value>
-        public AtomTextConstruct Subtitle
-        {
-            get
-            {
-                return this.feedSubtitle;
-            }
-
-            set
-            {
-                this.feedSubtitle = value;
-            }
-        }
+        public AtomTextConstruct Subtitle { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a human-readable title for this feed.
@@ -533,64 +400,25 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime UpdatedOn
-        {
-            get
-            {
-                return this.feedUpdatedOn;
-            }
-
-            set
-            {
-                this.feedUpdatedOn = value;
-            }
-        }
+        public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return feedVersion;
-            }
-        }
+        public Version Version => feedVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="AtomEntry"/> at the specified index.

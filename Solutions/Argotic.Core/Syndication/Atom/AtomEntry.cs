@@ -60,16 +60,6 @@
         private static Version feedVersion = new Version(1, 0);
 
         /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-
-        /// <summary>
         /// Private member to hold the collection of authors of the entry.
         /// </summary>
         private Collection<AtomPersonConstruct> entryAuthors;
@@ -78,11 +68,6 @@
         /// Private member to hold the collection of categories associated with the entry.
         /// </summary>
         private Collection<AtomCategory> entryCategories;
-
-        /// <summary>
-        /// Private member to hold information that contains or links to the content of the entry.
-        /// </summary>
-        private AtomContent entryContent;
 
         /// <summary>
         /// Private member to hold the collection of contributors of the entry.
@@ -100,49 +85,14 @@
         private Collection<AtomLink> entryLinks;
 
         /// <summary>
-        /// Private member to hold a value indicating an instant in time associated with an event early in the life cycle of the entry.
-        /// </summary>
-        private DateTime entryPublishedOn = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold information about rights held in and over the entry.
-        /// </summary>
-        private AtomTextConstruct entryRights;
-
-        /// <summary>
-        /// Private member to hold the meta-data of the source feed that the entry was copied from.
-        /// </summary>
-        private AtomSource entrySource;
-
-        /// <summary>
-        /// Private member to hold information that conveys a short summary, abstract, or excerpt of the entry.
-        /// </summary>
-        private AtomTextConstruct entrySummary;
-
-        /// <summary>
         /// Private member to hold information that conveys a human-readable title for the entry.
         /// </summary>
         private AtomTextConstruct entryTitle;
 
         /// <summary>
-        /// Private member to hold a value indicating the most recent instant in time when the entry was modified in a way the publisher considers significant.
-        /// </summary>
-        private DateTime entryUpdatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
         /// </summary>
         private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomEntry"/> class.
@@ -208,18 +158,7 @@
         ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
         ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
         /// </remarks>
-        public Uri BaseUri
-        {
-            get
-            {
-                return this.commonObjectBaseUri;
-            }
-
-            set
-            {
-                this.commonObjectBaseUri = value;
-            }
-        }
+        public Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets the categories associated with this entry.
@@ -242,18 +181,7 @@
         /// Gets or sets information that contains or links to the content of this entry.
         /// </summary>
         /// <value>A <see cref="AtomContent"/> object that represents information that contains or links to the content of this entry.</value>
-        public AtomContent Content
-        {
-            get
-            {
-                return this.entryContent;
-            }
-
-            set
-            {
-                this.entryContent = value;
-            }
-        }
+        public AtomContent Content { get; set; }
 
         /// <summary>
         /// Gets the entities who contributed to this entry.
@@ -303,13 +231,7 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return feedFormat;
-            }
-        }
+        public SyndicationContentFormat Format => feedFormat;
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -358,18 +280,7 @@
         ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
         ///     </para>
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.commonObjectLanguage;
-            }
-
-            set
-            {
-                this.commonObjectLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets references from this entry to one or more Web resources.
@@ -404,18 +315,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime PublishedOn
-        {
-            get
-            {
-                return this.entryPublishedOn;
-            }
-
-            set
-            {
-                this.entryPublishedOn = value;
-            }
-        }
+        public DateTime PublishedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets information about rights held in and over this entry.
@@ -425,18 +325,7 @@
         ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
         ///     If an <see cref="AtomEntry"/> does not provide any rights information, then the <see cref="AtomFeed.Rights"/> of the containing feed, if present, is considered to apply to the entry.
         /// </remarks>
-        public AtomTextConstruct Rights
-        {
-            get
-            {
-                return this.entryRights;
-            }
-
-            set
-            {
-                this.entryRights = value;
-            }
-        }
+        public AtomTextConstruct Rights { get; set; }
 
         /// <summary>
         /// Gets or sets the meta-data of the source feed that this entry was copied from.
@@ -449,18 +338,7 @@
         ///         (<see cref="AtomFeed.Id">id</see>, <see cref="AtomFeed.Title">title</see>, and <see cref="AtomFeed.UpdatedOn">updated</see>) in the <see cref="AtomSource"/>.
         ///     </para>
         /// </remarks>
-        public AtomSource Source
-        {
-            get
-            {
-                return this.entrySource;
-            }
-
-            set
-            {
-                this.entrySource = value;
-            }
-        }
+        public AtomSource Source { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a short summary, abstract, or excerpt for this entry.
@@ -488,18 +366,7 @@
         ///         </list>
         ///     </para>
         /// </remarks>
-        public AtomTextConstruct Summary
-        {
-            get
-            {
-                return this.entrySummary;
-            }
-
-            set
-            {
-                this.entrySummary = value;
-            }
-        }
+        public AtomTextConstruct Summary { get; set; }
 
         /// <summary>
         /// Gets or sets information that conveys a human-readable title for this entry.
@@ -530,64 +397,25 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime UpdatedOn
-        {
-            get
-            {
-                return this.entryUpdatedOn;
-            }
-
-            set
-            {
-                this.entryUpdatedOn = value;
-            }
-        }
+        public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return feedVersion;
-            }
-        }
+        public Version Version => feedVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>.

@@ -14,11 +14,6 @@
     internal static class AtomUtility
     {
         /// <summary>
-        /// Private member to hold the Atom 1.0 namespace identifier.
-        /// </summary>
-        private const string InternalAtomNamespace = "http://www.w3.org/2005/Atom";
-
-        /// <summary>
         /// Private member to hold the Atom Publishing Protocol 1.0 namespace identifier.
         /// </summary>
         private const string InternalAtompubNamespace = "http://www.w3.org/2007/app";
@@ -37,37 +32,19 @@
         /// Gets the XML namespace URI for the Atom 1.0 specification.
         /// </summary>
         /// <value>The XML namespace URI for the Atom 1.0 specification.</value>
-        public static string AtomNamespace
-        {
-            get
-            {
-                return InternalAtomNamespace;
-            }
-        }
+        public static string AtomNamespace { get; } = "http://www.w3.org/2005/Atom";
 
         /// <summary>
         /// Gets the XML namespace URI for the Atom Publishing Protocol 1.0 specification.
         /// </summary>
         /// <value>The XML namespace URI for the Atom Publishing Protocol 1.0 specification.</value>
-        public static string AtomPublishingNamespace
-        {
-            get
-            {
-                return InternalAtompubNamespace;
-            }
-        }
+        public static string AtomPublishingNamespace => InternalAtompubNamespace;
 
         /// <summary>
         /// Gets the XML namespace URI for the XHTML specification.
         /// </summary>
         /// <value>The XML namespace URI for the Extensible Hyper-Text Markup Lanaguage (XHTML) specification.</value>
-        public static string XhtmlNamespace
-        {
-            get
-            {
-                return InternalXhtmlNamespace;
-            }
-        }
+        public static string XhtmlNamespace => InternalXhtmlNamespace;
 
         /// <summary>
         /// Compares objects that implement the <see cref="IAtomCommonObjectAttributes"/> interface.
@@ -125,7 +102,7 @@
             manager = new XmlNamespaceManager(nameTable);
             manager.AddNamespace(
                 "atom",
-                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : InternalAtomNamespace);
+                !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : AtomNamespace);
             manager.AddNamespace("app", InternalAtompubNamespace);
             manager.AddNamespace("xhtml", InternalXhtmlNamespace);
 

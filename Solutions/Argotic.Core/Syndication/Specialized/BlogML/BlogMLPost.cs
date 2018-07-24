@@ -23,24 +23,9 @@
     public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
     {
         /// <summary>
-        /// Private member to hold a value indicating the web log entity approval status.
-        /// </summary>
-        private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
-
-        /// <summary>
-        /// Private member to hold a date-time indicating when the  web log entity information was created.
-        /// </summary>
-        private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold a unique identifier for the  web log entity.
         /// </summary>
         private string commonObjectBaseId = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a date-time indicating when the  web log entity information was last modified.
-        /// </summary>
-        private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
 
         /// <summary>
         /// Private member to hold the title of the web log entity.
@@ -78,29 +63,9 @@
         private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
 
         /// <summary>
-        /// Private member to hold the excerpt of the post.
-        /// </summary>
-        private BlogMLTextConstruct postExcerpt;
-
-        /// <summary>
-        /// Private member to hold the name of the post.
-        /// </summary>
-        private BlogMLTextConstruct postName;
-
-        /// <summary>
         /// Private member to hold trackbacks for the post.
         /// </summary>
         private Collection<BlogMLTrackback> postTrackbacks;
-
-        /// <summary>
-        /// Private member to hold the type of web log entry the post represents.
-        /// </summary>
-        private BlogMLPostType postType = BlogMLPostType.None;
-
-        /// <summary>
-        /// Private member to hold the URL of the post.
-        /// </summary>
-        private Uri postUrl;
 
         /// <summary>
         /// Private member to hold views of the post.
@@ -121,18 +86,7 @@
         ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
         ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
         /// </value>
-        public BlogMLApprovalStatus ApprovalStatus
-        {
-            get
-            {
-                return this.commonObjectBaseApprovalStatus;
-            }
-
-            set
-            {
-                this.commonObjectBaseApprovalStatus = value;
-            }
-        }
+        public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
         /// <summary>
         /// Gets the attachments for this post.
@@ -237,35 +191,13 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return this.commonObjectBaseCreatedOn;
-            }
-
-            set
-            {
-                this.commonObjectBaseCreatedOn = value;
-            }
-        }
+        public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the excerpt of this post.
         /// </summary>
         /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
-        public BlogMLTextConstruct Excerpt
-        {
-            get
-            {
-                return this.postExcerpt;
-            }
-
-            set
-            {
-                this.postExcerpt = value;
-            }
-        }
+        public BlogMLTextConstruct Excerpt { get; set; }
 
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -352,35 +284,13 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime LastModifiedOn
-        {
-            get
-            {
-                return this.commonObjectBaseLastModifiedOn;
-            }
-
-            set
-            {
-                this.commonObjectBaseLastModifiedOn = value;
-            }
-        }
+        public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the name of this post.
         /// </summary>
         /// <value>A <see cref="BlogMLTextConstruct"/> that represents the name of this post.</value>
-        public BlogMLTextConstruct Name
-        {
-            get
-            {
-                return this.postName;
-            }
-
-            set
-            {
-                this.postName = value;
-            }
-        }
+        public BlogMLTextConstruct Name { get; set; }
 
         /// <summary>
         /// Gets or sets the type of web log entry this post represents.
@@ -389,18 +299,7 @@
         ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents.
         ///     The default value is <see cref="BlogMLPostType.None"/>.
         /// </value>
-        public BlogMLPostType PostType
-        {
-            get
-            {
-                return this.postType;
-            }
-
-            set
-            {
-                this.postType = value;
-            }
-        }
+        public BlogMLPostType PostType { get; set; } = BlogMLPostType.None;
 
         /// <summary>
         /// Gets or sets the title of this web log entity.
@@ -446,18 +345,7 @@
         /// Gets or sets the URL of this post.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of this post.</value>
-        public Uri Url
-        {
-            get
-            {
-                return this.postUrl;
-            }
-
-            set
-            {
-                this.postUrl = value;
-            }
-        }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Gets or sets the views of this post.

@@ -88,25 +88,13 @@
         /// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
         /// </summary>
         /// <value>The <see cref="XPathNavigator"/> used to fill an extensible syndication resource.</value>
-        public XPathNavigator Navigator
-        {
-            get
-            {
-                return this.adapterNavigator;
-            }
-        }
+        public XPathNavigator Navigator => this.adapterNavigator;
 
         /// <summary>
         /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.
         /// </summary>
         /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.</value>
-        public SyndicationResourceLoadSettings Settings
-        {
-            get
-            {
-                return this.adapterSettings;
-            }
-        }
+        public SyndicationResourceLoadSettings Settings => this.adapterSettings;
 
         /// <summary>
         /// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.

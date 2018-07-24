@@ -41,11 +41,6 @@
         private Collection<RssCategory> itemCategories;
 
         /// <summary>
-        /// Private member to hold the URL of a web page that contains comments received in response to the item.
-        /// </summary>
-        private Uri itemComments;
-
-        /// <summary>
         /// Private member to hold character data that contains the item's full content or a summary of its contents.
         /// </summary>
         private string itemDescription = string.Empty;
@@ -54,26 +49,6 @@
         /// Private member to hold media objects such as an audio, video, or executable file that are associated with the item.
         /// </summary>
         private Collection<RssEnclosure> itemEnclosures;
-
-        /// <summary>
-        /// Private member to hold the unique identifier for the item.
-        /// </summary>
-        private RssGuid itemGuid;
-
-        /// <summary>
-        /// Private member to hold the URL of a web page associated with the item.
-        /// </summary>
-        private Uri itemLink;
-
-        /// <summary>
-        /// Private member to hold the publication date and time of the item.
-        /// </summary>
-        private DateTime itemPublicationDate = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold information about the source feed that the item was republished from.
-        /// </summary>
-        private RssSource itemSource;
 
         /// <summary>
         /// Private member to hold character data that provides the item's headline.
@@ -149,18 +124,7 @@
         /// Gets or sets the URL of a web page that contains comments received in response to this item.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of a web page that contains comments received in response to this item.</value>
-        public Uri Comments
-        {
-            get
-            {
-                return this.itemComments;
-            }
-
-            set
-            {
-                this.itemComments = value;
-            }
-        }
+        public Uri Comments { get; set; }
 
         /// <summary>
         /// Gets or sets character data that contains this item's full content or a summary of its contents.
@@ -260,18 +224,7 @@
         /// <remarks>
         ///     A publisher <i>should</i> provide a guid for each item.
         /// </remarks>
-        public RssGuid Guid
-        {
-            get
-            {
-                return this.itemGuid;
-            }
-
-            set
-            {
-                this.itemGuid = value;
-            }
-        }
+        public RssGuid Guid { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
@@ -289,18 +242,7 @@
         /// Gets or sets the URL of a web page associated with this item.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of a web page associated with this item.</value>
-        public Uri Link
-        {
-            get
-            {
-                return this.itemLink;
-            }
-
-            set
-            {
-                this.itemLink = value;
-            }
-        }
+        public Uri Link { get; set; }
 
         /// <summary>
         /// Gets or sets the publication date and time of this item.
@@ -314,18 +256,7 @@
         ///     providing a means for publishers to embargo an item until that date. However, it is recommended that publishers <i>should not</i>
         ///     include items in a feed until they are ready for publication.
         /// </remarks>
-        public DateTime PublicationDate
-        {
-            get
-            {
-                return this.itemPublicationDate;
-            }
-
-            set
-            {
-                this.itemPublicationDate = value;
-            }
-        }
+        public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the source feed that this item was republished from.
@@ -333,18 +264,7 @@
         /// <value>
         ///     A <see cref="RssSource"/> object that represents the source feed that this item was republished from. The default value is a <b>null</b> reference.
         /// </value>
-        public RssSource Source
-        {
-            get
-            {
-                return this.itemSource;
-            }
-
-            set
-            {
-                this.itemSource = value;
-            }
-        }
+        public RssSource Source { get; set; }
 
         /// <summary>
         /// Gets or sets character data that provides this item's headline.

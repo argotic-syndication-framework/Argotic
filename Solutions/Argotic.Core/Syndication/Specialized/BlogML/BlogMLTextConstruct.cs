@@ -28,16 +28,6 @@
         private string textConstructContent = string.Empty;
 
         /// <summary>
-        /// Private member to hold a value indicating if the text construct escapes content using a CDATA block.
-        /// </summary>
-        private bool textConstructEscapesContent = true;
-
-        /// <summary>
-        /// Private member to hold entity encoding utilized by the text.
-        /// </summary>
-        private BlogMLContentType textConstructType = BlogMLContentType.None;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BlogMLTextConstruct"/> class.
         /// </summary>
         public BlogMLTextConstruct()
@@ -104,18 +94,7 @@
         ///     An <see cref="BlogMLContentType"/> enumeration value that represents the entity encoding utilized by this text.
         ///     The default value is <see cref="BlogMLContentType.None"/>.
         /// </value>
-        public BlogMLContentType ContentType
-        {
-            get
-            {
-                return this.textConstructType;
-            }
-
-            set
-            {
-                this.textConstructType = value;
-            }
-        }
+        public BlogMLContentType ContentType { get; set; } = BlogMLContentType.None;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the content of this text is escaped using a CDATA block.
@@ -127,18 +106,7 @@
         ///     <i>CDATA</i> blocks should be used when you want to include large blocks of special characters as character data,
         ///     but you do not want to have to use entity references all the time.
         /// </remarks>
-        public bool EscapeContent
-        {
-            get
-            {
-                return this.textConstructEscapesContent;
-            }
-
-            set
-            {
-                this.textConstructEscapesContent = value;
-            }
-        }
+        public bool EscapeContent { get; set; } = true;
 
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.

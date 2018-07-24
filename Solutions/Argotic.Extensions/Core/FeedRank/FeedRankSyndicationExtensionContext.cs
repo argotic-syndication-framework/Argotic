@@ -18,19 +18,9 @@
         private Uri extensionScheme;
 
         /// <summary>
-        /// Private member to hold the permanent, universally unique identifier for the ranking domain.
-        /// </summary>
-        private Uri extensionDomain;
-
-        /// <summary>
         /// Private member to hold the language sensitive, human-readable label for the rank.
         /// </summary>
         private string extensionLabel = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the decimal value of the rank.
-        /// </summary>
-        private decimal extensionValue = decimal.MinValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
@@ -55,18 +45,7 @@
         /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
         /// </summary>
         /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.</value>
-        public Uri Domain
-        {
-            get
-            {
-                return this.extensionDomain;
-            }
-
-            set
-            {
-                this.extensionDomain = value;
-            }
-        }
+        public Uri Domain { get; set; }
 
         /// <summary>
         /// Gets or sets the language sensitive, human-readable label for this rank.
@@ -115,18 +94,7 @@
         /// Gets or sets the value of this rank.
         /// </summary>
         /// <value>The <see cref="decimal"/> value of this rank. The default value is <see cref="decimal.MinValue"/>, which indicates that no ranking value was specified.</value>
-        public decimal Value
-        {
-            get
-            {
-                return this.extensionValue;
-            }
-
-            set
-            {
-                this.extensionValue = value;
-            }
-        }
+        public decimal Value { get; set; } = decimal.MinValue;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

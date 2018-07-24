@@ -17,10 +17,6 @@
     [Serializable]
     public class YahooMediaTextConstruct : IComparable
     {
-        /// <summary>
-        /// Private member to hold the entity encoding utilized by the human-readable text.
-        /// </summary>
-        private YahooMediaTextConstructType textConstructType = YahooMediaTextConstructType.None;
 
         /// <summary>
         /// Private member to hold the content of the human-readable text.
@@ -91,18 +87,7 @@
         /// <remarks>
         ///     If no entity encoding is specified, a default value of <see cref="YahooMediaTextConstructType.Plain"/> can be assumed.
         /// </remarks>
-        public YahooMediaTextConstructType TextType
-        {
-            get
-            {
-                return this.textConstructType;
-            }
-
-            set
-            {
-                this.textConstructType = value;
-            }
-        }
+        public YahooMediaTextConstructType TextType { get; set; } = YahooMediaTextConstructType.None;
 
         /// <summary>
         /// Determines if operands are equal.

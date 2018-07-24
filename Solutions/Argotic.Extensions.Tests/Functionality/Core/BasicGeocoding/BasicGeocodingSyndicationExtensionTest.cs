@@ -24,24 +24,11 @@
 
         private const string StrExtXml = "<geo:lat>41.0000000</geo:lat><geo:long>-74.1200000</geo:long>";
 
-        private TestContext testContextInstance;
-
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return this.testContextInstance;
-            }
-
-            set
-            {
-                this.testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         /// <summary>
         /// Create context.

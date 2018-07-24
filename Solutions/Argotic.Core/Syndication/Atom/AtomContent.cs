@@ -72,7 +72,6 @@
     [Serializable]
     public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold a value indicating the entity encoding of the content.
         /// </summary>

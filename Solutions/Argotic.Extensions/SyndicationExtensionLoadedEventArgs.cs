@@ -75,13 +75,7 @@
         /// </summary>
         /// <value>An uninitialized instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.</value>
         /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationExtensionLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationExtensionLoadedEventArgs()"/> constructor.</remarks>
-        public static new SyndicationExtensionLoadedEventArgs Empty
-        {
-            get
-            {
-                return EmptyEventArguments;
-            }
-        }
+        public static new SyndicationExtensionLoadedEventArgs Empty => EmptyEventArguments;
 
         /// <summary>
         /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
@@ -89,13 +83,7 @@
         /// <value>
         ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
         /// </value>
-        public XPathNavigator Data
-        {
-            get
-            {
-                return this.eventNavigator;
-            }
-        }
+        public XPathNavigator Data => this.eventNavigator;
 
         /// <summary>
         /// Gets the <see cref="ISyndicationExtension"/> that resulted from the load operation.
@@ -103,13 +91,7 @@
         /// <value>
         ///     The <see cref="ISyndicationExtension"/> that resulted from the load operation.
         /// </value>
-        public ISyndicationExtension Extension
-        {
-            get
-            {
-                return this.eventExtension;
-            }
-        }
+        public ISyndicationExtension Extension => this.eventExtension;
 
         /// <summary>
         /// Determines if operands are equal.

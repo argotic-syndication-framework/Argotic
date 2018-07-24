@@ -38,16 +38,6 @@
         private int synchronizationUpdates = 1;
 
         /// <summary>
-        /// Private member to hold a value indicating that the item has been deleted and is a tombstone.
-        /// </summary>
-        private FeedSynchronizationTombstoneStatus synchronizationTombstoneStatus;
-
-        /// <summary>
-        /// Private member to hold a value indicating how conflict preservation is processed.
-        /// </summary>
-        private FeedSynchronizationConflictPreservationDirective synchronizationConflictPreservation;
-
-        /// <summary>
         /// Private member to hold information about updates to the item.
         /// </summary>
         private Collection<FeedSynchronizationHistory> synchronizationHistories;
@@ -193,18 +183,7 @@
         ///         Specifying a value of <see cref="FeedSynchronizationConflictPreservationDirective.None"/> is equivalent to the <i>noconflicts</i> attribute not being present.
         ///     </para>
         /// </remarks>
-        public FeedSynchronizationConflictPreservationDirective ConflictPreservation
-        {
-            get
-            {
-                return this.synchronizationConflictPreservation;
-            }
-
-            set
-            {
-                this.synchronizationConflictPreservation = value;
-            }
-        }
+        public FeedSynchronizationConflictPreservationDirective ConflictPreservation { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating if the item has been deleted.
@@ -220,18 +199,7 @@
         ///         Specifying a value of <see cref="FeedSynchronizationTombstoneStatus.None"/> is equivalent to the <i>deleted</i> attribute not being present.
         ///     </para>
         /// </remarks>
-        public FeedSynchronizationTombstoneStatus TombstoneStatus
-        {
-            get
-            {
-                return this.synchronizationTombstoneStatus;
-            }
-
-            set
-            {
-                this.synchronizationTombstoneStatus = value;
-            }
-        }
+        public FeedSynchronizationTombstoneStatus TombstoneStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the number of updates applied to this item.

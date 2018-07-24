@@ -20,13 +20,7 @@
         /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
         /// </summary>
         /// <value>The XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.</value>
-        public static string ApmlNamespace
-        {
-            get
-            {
-                return InternalApmlNamespace;
-            }
-        }
+        public static string ApmlNamespace => InternalApmlNamespace;
 
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Attention Profiling Markup Language (APML) syndication entities.

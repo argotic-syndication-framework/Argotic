@@ -36,16 +36,6 @@
         private static Version feedVersion = new Version(3, 0);
 
         /// <summary>
-        /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-        /// </summary>
-        private bool resourceAsyncLoadCancelled;
-
-        /// <summary>
-        /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-        /// </summary>
-        private bool resourceIsLoading;
-
-        /// <summary>
         /// Occurs when the syndication resource state has been changed by a load operation.
         /// </summary>
         /// <seealso cref="MyCustomRssFeed.Load(IXPathNavigable)"/>
@@ -56,59 +46,25 @@
         /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
         /// </summary>
         /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-        public SyndicationContentFormat Format
-        {
-            get
-            {
-                return feedFormat;
-            }
-        }
+        public SyndicationContentFormat Format => feedFormat;
 
         /// <summary>
         /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
         /// </summary>
         /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return feedVersion;
-            }
-        }
+        public Version Version => feedVersion;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncLoadHasBeenCancelled
-        {
-            get
-            {
-                return this.resourceAsyncLoadCancelled;
-            }
-
-            set
-            {
-                this.resourceAsyncLoadCancelled = value;
-            }
-        }
+        internal bool AsyncLoadHasBeenCancelled { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
         /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
-        internal bool LoadOperationInProgress
-        {
-            get
-            {
-                return this.resourceIsLoading;
-            }
-
-            set
-            {
-                this.resourceIsLoading = value;
-            }
-        }
+        internal bool LoadOperationInProgress { get; set; }
 
         /// <summary>
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="MyCustomRssFeed"/>.

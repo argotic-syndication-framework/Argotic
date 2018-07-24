@@ -24,7 +24,6 @@
     [Serializable]
     public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
     {
-
         /// <summary>
         /// Private member to hold an advisory length of the resource content in octets.
         /// </summary>

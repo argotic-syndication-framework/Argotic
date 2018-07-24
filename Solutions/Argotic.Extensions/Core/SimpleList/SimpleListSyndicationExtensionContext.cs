@@ -12,10 +12,6 @@
     [Serializable]
     public class SimpleListSyndicationExtensionContext
     {
-        /// <summary>
-        /// Private member to hold a value indicating if the feed is intended to be consumed as a list.
-        /// </summary>
-        private bool extensionTreatAsList;
 
         /// <summary>
         /// Private member to hold information that allows the client to group or filter on the values of feed properties.
@@ -82,18 +78,7 @@
         ///     This property allows the publisher of a feed document to indicate to the consumers of the feed that the feed is intended to be consumed as a list,
         ///     and as such is the primary means for feed consumers to identify lists.
         /// </remarks>
-        public bool TreatAsList
-        {
-            get
-            {
-                return this.extensionTreatAsList;
-            }
-
-            set
-            {
-                this.extensionTreatAsList = value;
-            }
-        }
+        public bool TreatAsList { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

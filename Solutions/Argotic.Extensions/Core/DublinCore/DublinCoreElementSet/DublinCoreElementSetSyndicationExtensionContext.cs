@@ -28,11 +28,6 @@
         private string extensionCreator = string.Empty;
 
         /// <summary>
-        /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
-        /// </summary>
-        private DateTime extensionDate = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold an account of the resource.
         /// </summary>
         private string extensionDescription = string.Empty;
@@ -46,11 +41,6 @@
         /// Private member to hold an unambiguous reference to the resource within a given context.
         /// </summary>
         private string extensionIdentifier = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the language of the resource.
-        /// </summary>
-        private CultureInfo extensionLanguage;
 
         /// <summary>
         /// Private member to hold the entity responsible for making the resource available.
@@ -81,11 +71,6 @@
         /// Private member to hold the name given to the resource.
         /// </summary>
         private string extensionTitle = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the nature or genre of the resource.
-        /// </summary>
-        private DublinCoreTypeVocabularies extensionType = DublinCoreTypeVocabularies.None;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
@@ -193,18 +178,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime Date
-        {
-            get
-            {
-                return this.extensionDate;
-            }
-
-            set
-            {
-                this.extensionDate = value;
-            }
-        }
+        public DateTime Date { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets an account of the resource.
@@ -296,18 +270,7 @@
         ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
         ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.extensionLanguage;
-            }
-
-            set
-            {
-                this.extensionLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the entity responsible for making the resource available.
@@ -488,18 +451,7 @@
         ///     </para>
         ///     <para>To describe the file format, physical medium, or dimensions of the resource, use <see cref="Format"/>.</para>
         /// </remarks>
-        public DublinCoreTypeVocabularies TypeVocabulary
-        {
-            get
-            {
-                return this.extensionType;
-            }
-
-            set
-            {
-                this.extensionType = value;
-            }
-        }
+        public DublinCoreTypeVocabularies TypeVocabulary { get; set; } = DublinCoreTypeVocabularies.None;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

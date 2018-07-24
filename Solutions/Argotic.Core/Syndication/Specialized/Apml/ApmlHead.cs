@@ -22,11 +22,6 @@
     public class ApmlHead : IComparable, IExtensibleSyndicationObject
     {
         /// <summary>
-        /// Private member to hold a date-time indicating when the document was created.
-        /// </summary>
-        private DateTime headCreatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold a value that credits the software that created the document.
         /// </summary>
         private string headGenerator = string.Format(
@@ -74,18 +69,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return this.headCreatedOn;
-            }
-
-            set
-            {
-                this.headCreatedOn = value;
-            }
-        }
+        public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the email address of the owner of this document.

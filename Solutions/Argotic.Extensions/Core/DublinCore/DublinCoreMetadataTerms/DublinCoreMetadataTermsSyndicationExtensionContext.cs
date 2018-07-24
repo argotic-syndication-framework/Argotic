@@ -73,34 +73,9 @@
         private string extensionCoverage = string.Empty;
 
         /// <summary>
-        /// Private member to hold the date of creation of the resource.
-        /// </summary>
-        private DateTime extensionDateCreated = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold the entity primarily responsible for making the resource.
         /// </summary>
         private string extensionCreator = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
-        /// </summary>
-        private DateTime extensionDate = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold the date of acceptance of the resource.
-        /// </summary>
-        private DateTime extensionDateAccepted = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold the date of copyright of the resource.
-        /// </summary>
-        private DateTime extensionDateCopyrighted = DateTime.MinValue;
-
-        /// <summary>
-        /// Private member to hold the date of submission of the resource.
-        /// </summary>
-        private DateTime extensionDateSubmitted = DateTime.MinValue;
 
         /// <summary>
         /// Private member to hold an account of the resource.
@@ -173,19 +148,9 @@
         private string extensionIsRequiredBy = string.Empty;
 
         /// <summary>
-        /// Private member to hold the date of formal issuance (e.g., publication) of the resource.
-        /// </summary>
-        private DateTime extensionDateIssued = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold a related resource of which the described resource is a version, edition, or adaptation.
         /// </summary>
         private string extensionIsVersionOf = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the language of the resource.
-        /// </summary>
-        private CultureInfo extensionLanguage;
 
         /// <summary>
         /// Private member to hold the legal document giving official permission to do something with the resource.
@@ -201,11 +166,6 @@
         /// Private member to hold the material or physical carrier of the resource.
         /// </summary>
         private string extensionMedium = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the date on which the resource was changed.
-        /// </summary>
-        private DateTime extensionDateModified = DateTime.MinValue;
 
         /// <summary>
         /// Private member to hold the statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
@@ -276,11 +236,6 @@
         /// Private member to hold the name given to the resource.
         /// </summary>
         private string extensionTitle = string.Empty;
-
-        /// <summary>
-        /// Private member to hold the nature or genre of the resource.
-        /// </summary>
-        private DublinCoreTypeVocabularies extensionType = DublinCoreTypeVocabularies.None;
 
         /// <summary>
         /// Private member to hold the date (often a range) of validity of the resource.
@@ -722,18 +677,7 @@
         /// <remarks>
         ///     Date may be used to express temporal information at any level of granularity. The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime Date
-        {
-            get
-            {
-                return this.extensionDate;
-            }
-
-            set
-            {
-                this.extensionDate = value;
-            }
-        }
+        public DateTime Date { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date of acceptance of the resource.
@@ -748,18 +692,7 @@
         ///         Examples of resources to which a <see cref="DateAccepted">Date Accepted</see> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).
         ///     </para>
         /// </remarks>
-        public DateTime DateAccepted
-        {
-            get
-            {
-                return this.extensionDateAccepted;
-            }
-
-            set
-            {
-                this.extensionDateAccepted = value;
-            }
-        }
+        public DateTime DateAccepted { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date that the resource became or will become available.
@@ -800,18 +733,7 @@
         /// <remarks>
         ///     <para>The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).</para>
         /// </remarks>
-        public DateTime DateCopyrighted
-        {
-            get
-            {
-                return this.extensionDateCopyrighted;
-            }
-
-            set
-            {
-                this.extensionDateCopyrighted = value;
-            }
-        }
+        public DateTime DateCopyrighted { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date of creation of the resource.
@@ -823,18 +745,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime DateCreated
-        {
-            get
-            {
-                return this.extensionDateCreated;
-            }
-
-            set
-            {
-                this.extensionDateCreated = value;
-            }
-        }
+        public DateTime DateCreated { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date of issuance of the resource.
@@ -846,18 +757,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime DateIssued
-        {
-            get
-            {
-                return this.extensionDateIssued;
-            }
-
-            set
-            {
-                this.extensionDateIssued = value;
-            }
-        }
+        public DateTime DateIssued { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date on which the resource was changed.
@@ -869,18 +769,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime DateModified
-        {
-            get
-            {
-                return this.extensionDateModified;
-            }
-
-            set
-            {
-                this.extensionDateModified = value;
-            }
-        }
+        public DateTime DateModified { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date of submission of the resource.
@@ -895,18 +784,7 @@
         ///         Examples of resources to which a <see cref="DateSubmitted">Date Submitted</see> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).
         ///     </para>
         /// </remarks>
-        public DateTime DateSubmitted
-        {
-            get
-            {
-                return this.extensionDateSubmitted;
-            }
-
-            set
-            {
-                this.extensionDateSubmitted = value;
-            }
-        }
+        public DateTime DateSubmitted { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the date that the resource is valid for.
@@ -1346,18 +1224,7 @@
         ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
         ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return this.extensionLanguage;
-            }
-
-            set
-            {
-                this.extensionLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the legal document giving official permission to do something with the resource.
@@ -1893,18 +1760,7 @@
         ///     </para>
         ///     <para>To describe the file format, physical medium, or dimensions of the resource, use the <see cref="Format"/> property.</para>
         /// </remarks>
-        public DublinCoreTypeVocabularies TypeVocabulary
-        {
-            get
-            {
-                return this.extensionType;
-            }
-
-            set
-            {
-                this.extensionType = value;
-            }
-        }
+        public DublinCoreTypeVocabularies TypeVocabulary { get; set; } = DublinCoreTypeVocabularies.None;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

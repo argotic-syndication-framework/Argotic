@@ -21,13 +21,7 @@
         /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
         /// </summary>
         /// <value>The XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.</value>
-        public static string RsdNamespace
-        {
-            get
-            {
-                return InternalRsdNamespace;
-            }
-        }
+        public static string RsdNamespace => InternalRsdNamespace;
 
         /// <summary>
         /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Really Simple Discoverability (RSD) syndication entities.

@@ -23,13 +23,7 @@
         /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
         /// </summary>
         /// <value>The XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.</value>
-        public static string BlogMLNamespace
-        {
-            get
-            {
-                return InternalBlogmlNamespace;
-            }
-        }
+        public static string BlogMLNamespace => InternalBlogmlNamespace;
 
         /// <summary>
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.

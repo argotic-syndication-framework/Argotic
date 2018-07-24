@@ -22,24 +22,9 @@
         private string authorEmailAddress = string.Empty;
 
         /// <summary>
-        /// Private member to hold a value indicating the web log entity approval status.
-        /// </summary>
-        private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
-
-        /// <summary>
-        /// Private member to hold a date-time indicating when the  web log entity information was created.
-        /// </summary>
-        private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
-
-        /// <summary>
         /// Private member to hold a unique identifier for the  web log entity.
         /// </summary>
         private string commonObjectBaseId = string.Empty;
-
-        /// <summary>
-        /// Private member to hold a date-time indicating when the  web log entity information was last modified.
-        /// </summary>
-        private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
 
         /// <summary>
         /// Private member to hold the title of the web log entity.
@@ -65,18 +50,7 @@
         ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
         ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
         /// </value>
-        public BlogMLApprovalStatus ApprovalStatus
-        {
-            get
-            {
-                return this.commonObjectBaseApprovalStatus;
-            }
-
-            set
-            {
-                this.commonObjectBaseApprovalStatus = value;
-            }
-        }
+        public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
         /// <summary>
         /// Gets or sets a date-time indicating when this web log entity was created.
@@ -88,18 +62,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime CreatedOn
-        {
-            get
-            {
-                return this.commonObjectBaseCreatedOn;
-            }
-
-            set
-            {
-                this.commonObjectBaseCreatedOn = value;
-            }
-        }
+        public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the email address of this author.
@@ -198,18 +161,7 @@
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime LastModifiedOn
-        {
-            get
-            {
-                return this.commonObjectBaseLastModifiedOn;
-            }
-
-            set
-            {
-                this.commonObjectBaseLastModifiedOn = value;
-            }
-        }
+        public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets the title of this web log entity.

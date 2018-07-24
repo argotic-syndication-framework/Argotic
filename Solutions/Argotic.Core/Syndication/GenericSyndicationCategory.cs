@@ -94,25 +94,13 @@
         /// Gets a string that identifies the categorization scheme.
         /// </summary>
         /// <value>A string that identifies the categorization scheme used by this category.</value>
-        public string Scheme
-        {
-            get
-            {
-                return this.categoryScheme;
-            }
-        }
+        public string Scheme => this.categoryScheme;
 
         /// <summary>
         /// Gets a string that identifies the category.
         /// </summary>
         /// <value>A string that identifies the category.</value>
-        public string Term
-        {
-            get
-            {
-                return this.categoryTerm;
-            }
-        }
+        public string Term => this.categoryTerm;
 
         /// <summary>
         /// Determines if operands are equal.

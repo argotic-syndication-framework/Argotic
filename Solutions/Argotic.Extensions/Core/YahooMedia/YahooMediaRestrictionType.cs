@@ -1,21 +1,20 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Indicates the type of media that a restriction applies to.
     /// </summary>
     /// <seealso cref="YahooMediaRestriction"/>
-    [Serializable()]
+    [Serializable]
     public enum YahooMediaRestrictionType
     {
         /// <summary>
         /// No restriction type specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
         /// Indicates that restrictions are be placed based on country code.
@@ -27,6 +26,6 @@ namespace Argotic.Extensions.Core
         /// Indicates that restrictions are be placed based on URI.
         /// </summary>
         [EnumerationMetadata(DisplayName = "URI", AlternateValue = "uri")]
-        Uri    = 2
+        Uri = 2,
     }
 }

@@ -1,5 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common.netstandard2_0.proj" />
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <IsPackable>false</IsPackable>
@@ -11,6 +11,8 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>

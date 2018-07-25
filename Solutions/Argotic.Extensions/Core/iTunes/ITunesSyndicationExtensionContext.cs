@@ -1,64 +1,43 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="ITunesSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class ITunesSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the name of the artist of the podcast.
         /// </summary>
-        private string extensionAuthor                                      = String.Empty;
-        /// <summary>
-        /// Private member to hold a value indicating if the podcast is blocked from appearing in the iTunes Podcast directory.
-        /// </summary>
-        private bool extensionIsBlocked;
+        private string extensionAuthor = string.Empty;
+
         /// <summary>
         /// Private member to hold the categorization taxonomy applied to the podcast.
         /// </summary>
         private Collection<ITunesCategory> extensionCategories;
-        /// <summary>
-        /// Private member to hold the total duration of the podcast.
-        /// </summary>
-        private TimeSpan extensionDuration                                  = TimeSpan.MinValue;
-        /// <summary>
-        /// Private member to hold a value indicating if the podcast contains explicit material.
-        /// </summary>
-        private ITunesExplicitMaterial extensionExplicitMaterialDesignation = ITunesExplicitMaterial.None;
-        /// <summary>
-        /// Private member to hold a URL that points to the album artwork for the podcast.
-        /// </summary>
-        private Uri extensionImage;
+
         /// <summary>
         ///  Private member to hold keywords that describe the podcast.
         /// </summary>
         private Collection<string> extensionKeywords;
-        /// <summary>
-        /// Private member to hold the URL where the podcast feed is has been relocated to.
-        /// </summary>
-        private Uri extensionNewFeedUrl;
-        /// <summary>
-        /// Private member to hold information that can be used to contact the owner of the podcast.
-        /// </summary>
-        private ITunesOwner extensionOwner;
+
         /// <summary>
         /// Private member to hold a brief synopsis of the podcast.
         /// </summary>
-        private string extensionSubtitle                                    = String.Empty;
+        private string extensionSubtitle = string.Empty;
+
         /// <summary>
         /// Private member to hold the full description of the podcast.
         /// </summary>
-        private string extensionSummary                                     = String.Empty;
+        private string extensionSummary = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
         /// </summary>
@@ -74,18 +53,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionAuthor;
+                return this.extensionAuthor;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionAuthor = String.Empty;
+                    this.extensionAuthor = string.Empty;
                 }
                 else
                 {
-                    extensionAuthor = value.Trim();
+                    this.extensionAuthor = value.Trim();
                 }
             }
         }
@@ -100,11 +79,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionCategories == null)
+                if (this.extensionCategories == null)
                 {
-                    extensionCategories = new Collection<ITunesCategory>();
+                    this.extensionCategories = new Collection<ITunesCategory>();
                 }
-                return extensionCategories;
+
+                return this.extensionCategories;
             }
         }
 
@@ -112,77 +92,33 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the total duration of this podcast.
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that represents total duration of this podcast. The default value is <see cref="TimeSpan.MinValue"/>, which indicates that no duration was specified.</value>
-        public TimeSpan Duration
-        {
-            get
-            {
-                return extensionDuration;
-            }
-
-            set
-            {
-                extensionDuration = value;
-            }
-        }
+        public TimeSpan Duration { get; set; } = TimeSpan.MinValue;
 
         /// <summary>
         /// Gets or sets the explicit language or adult content advisory information for this podcast.
         /// </summary>
         /// <value>
-        ///     An <see cref="ITunesExplicitMaterial"/> enumeration value that indicates whether the podcast contains explicit material. 
+        ///     An <see cref="ITunesExplicitMaterial"/> enumeration value that indicates whether the podcast contains explicit material.
         ///     The default value is <see cref="ITunesExplicitMaterial.None"/>.
         /// </value>
-        public ITunesExplicitMaterial ExplicitMaterial
-        {
-            get
-            {
-                return extensionExplicitMaterialDesignation;
-            }
-
-            set
-            {
-                extensionExplicitMaterialDesignation = value;
-            }
-        }
+        public ITunesExplicitMaterial ExplicitMaterial { get; set; } = ITunesExplicitMaterial.None;
 
         /// <summary>
         /// Gets or sets a URL that points to the album artwork for this podcast.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents a URL that points to the album artwork for this podcast.</value>
         /// <remarks>
-        ///     iTunes recommends the use of square images that are at least 600 by 600 pixels. 
-        ///     iTunes supports images in <i>JPEG</i> and <i>PNG</i> formats. 
+        ///     iTunes recommends the use of square images that are at least 600 by 600 pixels.
+        ///     iTunes supports images in <i>JPEG</i> and <i>PNG</i> formats.
         ///     The URL <b>must</b> end in ".jpg" or ".png".
         /// </remarks>
-        public Uri Image
-        {
-            get
-            {
-                return extensionImage;
-            }
-
-            set
-            {
-                extensionImage = value;
-            }
-        }
+        public Uri Image { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.
         /// </summary>
         /// <value><b>true</b> if this podcast is blocked from appearing in the iTunes Podcast directory; otherwise <b>false</b>. The default value is <b>false</b>.</value>
-        public bool IsBlocked
-        {
-            get
-            {
-                return extensionIsBlocked;
-            }
-
-            set
-            {
-                extensionIsBlocked = value;
-            }
-        }
+        public bool IsBlocked { get; set; }
 
         /// <summary>
         /// Gets the search keywords for this podcast.
@@ -192,11 +128,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionKeywords == null)
+                if (this.extensionKeywords == null)
                 {
-                    extensionKeywords = new Collection<string>();
+                    this.extensionKeywords = new Collection<string>();
                 }
-                return extensionKeywords;
+
+                return this.extensionKeywords;
             }
         }
 
@@ -207,38 +144,16 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     It is recommended that you should maintain the old feed for 48 hours before retiring it. At that point, iTunes will have updated the directory with the new feed URL.
         /// </remarks>
-        public Uri NewFeedUrl
-        {
-            get
-            {
-                return extensionNewFeedUrl;
-            }
-
-            set
-            {
-                extensionNewFeedUrl = value;
-            }
-        }
+        public Uri NewFeedUrl { get; set; }
 
         /// <summary>
         /// Gets or sets information that can be used to contact the owner of this podcast.
         /// </summary>
         /// <value>
-        ///     A <see cref="ITunesOwner"/> object that represents information that can be used to contact the owner of this podcast. 
+        ///     A <see cref="ITunesOwner"/> object that represents information that can be used to contact the owner of this podcast.
         ///     The default value is a <b>null</b> reference.
         /// </value>
-        public ITunesOwner Owner
-        {
-            get
-            {
-                return extensionOwner;
-            }
-
-            set
-            {
-                extensionOwner = value;
-            }
-        }
+        public ITunesOwner Owner { get; set; }
 
         /// <summary>
         /// Gets or sets a brief synopsis of this podcast.
@@ -251,18 +166,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionSubtitle;
+                return this.extensionSubtitle;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionSubtitle = String.Empty;
+                    this.extensionSubtitle = string.Empty;
                 }
                 else
                 {
-                    extensionSubtitle = value.Trim();
+                    this.extensionSubtitle = value.Trim();
                 }
             }
         }
@@ -275,18 +190,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionSummary;
+                return this.extensionSummary;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionSummary = String.Empty;
+                    this.extensionSummary = string.Empty;
                 }
                 else
                 {
-                    extensionSummary = value.Trim();
+                    this.extensionSummary = value.Trim();
                 }
             }
         }
@@ -301,17 +216,17 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(this.LoadCommon(source, manager))
+            if (this.LoadCommon(source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if (this.LoadOptionals(source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -334,17 +249,17 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("new-feed-url", xmlNamespace, this.NewFeedUrl.ToString());
             }
 
-            if (!String.IsNullOrEmpty(this.Subtitle))
+            if (!string.IsNullOrEmpty(this.Subtitle))
             {
                 writer.WriteElementString("subtitle", xmlNamespace, this.Subtitle);
             }
 
-            if (!String.IsNullOrEmpty(this.Author))
+            if (!string.IsNullOrEmpty(this.Author))
             {
                 writer.WriteElementString("author", xmlNamespace, this.Author);
             }
 
-            if (!String.IsNullOrEmpty(this.Summary))
+            if (!string.IsNullOrEmpty(this.Summary))
             {
                 writer.WriteElementString("summary", xmlNamespace, this.Summary);
             }
@@ -363,20 +278,20 @@ namespace Argotic.Extensions.Core
 
             if (this.Duration != TimeSpan.MinValue)
             {
-                string hours    = this.Duration.Hours < 10 ? String.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
-                string minutes  = this.Duration.Minutes < 10 ? String.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
-                string seconds  = this.Duration.Seconds < 10 ? String.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
-                string duration = String.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
+                string hours = this.Duration.Hours < 10 ? string.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
+                string minutes = this.Duration.Minutes < 10 ? string.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
+                string seconds = this.Duration.Seconds < 10 ? string.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
+                string duration = string.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
 
                 writer.WriteElementString("duration", xmlNamespace, duration);
             }
 
             if (this.Keywords.Count > 0)
             {
-                string[] keywords   = new string[this.Keywords.Count];
+                string[] keywords = new string[this.Keywords.Count];
                 this.Keywords.CopyTo(keywords, 0);
 
-                writer.WriteElementString("keywords", xmlNamespace, String.Join(",", keywords));
+                writer.WriteElementString("keywords", xmlNamespace, string.Join(",", keywords));
             }
 
             if (this.ExplicitMaterial != ITunesExplicitMaterial.None)
@@ -391,11 +306,79 @@ namespace Argotic.Extensions.Core
 
             if (this.Categories.Count > 0)
             {
-                foreach(ITunesCategory category in this.Categories)
+                foreach (ITunesCategory category in this.Categories)
                 {
                     category.WriteTo(writer);
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the <see cref="TimeSpan"/> represented by the supplied duration value.
+        /// </summary>
+        /// <param name="value">The ITunes duration representation of the podcast duration.</param>
+        /// <returns>A <see cref="TimeSpan"/> that represents the duration. If unable to determine duration, returns <see cref="TimeSpan.MinValue"/>.</returns>
+        /// <remarks>Value can be formatted as an integer, HH:MM:SS, H:MM:SS, MM:SS, or M:SS.</remarks>
+        private static TimeSpan ParseDuration(string value)
+        {
+            TimeSpan timeSpan = TimeSpan.MinValue;
+
+            if (!value.Contains(":"))
+            {
+                int totalSeconds;
+                if (int.TryParse(value, out totalSeconds))
+                {
+                    timeSpan = new TimeSpan(0, 0, totalSeconds);
+                }
+                else
+                {
+                    TimeSpan duration;
+                    if (TimeSpan.TryParse(value, out duration))
+                    {
+                        timeSpan = duration;
+                    }
+                }
+            }
+            else
+            {
+                string[] durationParts = value.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+                if (durationParts.Length == 2)
+                {
+                    int minutes;
+                    int seconds;
+
+                    if (int.TryParse(durationParts[0], out minutes) && int.TryParse(durationParts[1], out seconds))
+                    {
+                        timeSpan = new TimeSpan(0, minutes, seconds);
+                    }
+                }
+                else if (durationParts.Length >= 3)
+                {
+                    int hours;
+                    int minutes;
+                    int seconds;
+
+                    string hoursValue = durationParts[0];
+                    string minutesValue = durationParts[1];
+                    string secondsValue = durationParts[2];
+
+                    if (int.TryParse(hoursValue, out hours) && int.TryParse(minutesValue, out minutes) && int.TryParse(secondsValue, out seconds))
+                    {
+                        timeSpan = new TimeSpan(hours, minutes, seconds);
+                    }
+                    else
+                    {
+                        TimeSpan duration;
+                        if (TimeSpan.TryParse(value, out duration))
+                        {
+                            timeSpan = duration;
+                        }
+                    }
+                }
+            }
+
+            return timeSpan;
         }
 
         /// <summary>
@@ -408,41 +391,41 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             if (source.HasChildren)
             {
-                XPathNavigator authorNavigator      = source.SelectSingleNode("itunes:author", manager);
-                XPathNavigator keywordsNavigator    = source.SelectSingleNode("itunes:keywords", manager);
-                XPathNavigator newFeedUrlNavigator  = source.SelectSingleNode("itunes:new-feed-url", manager);
-                XPathNavigator ownerNavigator       = source.SelectSingleNode("itunes:owner", manager);
-                XPathNavigator subtitleNavigator    = source.SelectSingleNode("itunes:subtitle", manager);
-                XPathNavigator summaryNavigator     = source.SelectSingleNode("itunes:summary", manager);
+                XPathNavigator authorNavigator = source.SelectSingleNode("itunes:author", manager);
+                XPathNavigator keywordsNavigator = source.SelectSingleNode("itunes:keywords", manager);
+                XPathNavigator newFeedUrlNavigator = source.SelectSingleNode("itunes:new-feed-url", manager);
+                XPathNavigator ownerNavigator = source.SelectSingleNode("itunes:owner", manager);
+                XPathNavigator subtitleNavigator = source.SelectSingleNode("itunes:subtitle", manager);
+                XPathNavigator summaryNavigator = source.SelectSingleNode("itunes:summary", manager);
 
-                XPathNodeIterator categoryIterator  = source.Select("itunes:category", manager);
+                XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
-                if (authorNavigator != null && !String.IsNullOrEmpty(authorNavigator.Value))
+                if (authorNavigator != null && !string.IsNullOrEmpty(authorNavigator.Value))
                 {
                     this.Author = authorNavigator.Value;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
 
-                if (keywordsNavigator != null && !String.IsNullOrEmpty(keywordsNavigator.Value))
+                if (keywordsNavigator != null && !string.IsNullOrEmpty(keywordsNavigator.Value))
                 {
-                    if(keywordsNavigator.Value.Contains(","))
+                    if (keywordsNavigator.Value.Contains(","))
                     {
-                        string[] keywords   = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        string[] keywords = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         foreach (string keyword in keywords)
                         {
                             this.Keywords.Add(keyword);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                     else
                     {
                         this.Keywords.Add(keywordsNavigator.Value);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
@@ -452,30 +435,30 @@ namespace Argotic.Extensions.Core
                     if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out newFeedUrl))
                     {
                         this.NewFeedUrl = newFeedUrl;
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
                 }
 
                 if (ownerNavigator != null)
                 {
-                    ITunesOwner owner   = new ITunesOwner();
+                    ITunesOwner owner = new ITunesOwner();
                     if (owner.Load(ownerNavigator))
                     {
-                        this.Owner  = owner;
-                        wasLoaded   = true;
+                        this.Owner = owner;
+                        wasLoaded = true;
                     }
                 }
 
-                if (subtitleNavigator != null && !String.IsNullOrEmpty(subtitleNavigator.Value))
+                if (subtitleNavigator != null && !string.IsNullOrEmpty(subtitleNavigator.Value))
                 {
-                    this.Subtitle   = subtitleNavigator.Value;
-                    wasLoaded       = true;
+                    this.Subtitle = subtitleNavigator.Value;
+                    wasLoaded = true;
                 }
 
-                if (summaryNavigator != null && !String.IsNullOrEmpty(summaryNavigator.Value))
+                if (summaryNavigator != null && !string.IsNullOrEmpty(summaryNavigator.Value))
                 {
-                    this.Summary    = summaryNavigator.Value;
-                    wasLoaded       = true;
+                    this.Summary = summaryNavigator.Value;
+                    wasLoaded = true;
                 }
 
                 if (categoryIterator != null && categoryIterator.Count > 0)
@@ -486,7 +469,7 @@ namespace Argotic.Extensions.Core
                         if (category.Load(categoryIterator.Current))
                         {
                             this.Categories.Add(category);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -505,135 +488,67 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             if (source.HasChildren)
             {
-                XPathNavigator blockNavigator       = source.SelectSingleNode("itunes:block", manager);
-                XPathNavigator imageNavigator       = source.SelectSingleNode("itunes:image", manager);
-                XPathNavigator durationNavigator    = source.SelectSingleNode("itunes:duration", manager);
-                XPathNavigator explicitNavigator    = source.SelectSingleNode("itunes:explicit", manager);
+                XPathNavigator blockNavigator = source.SelectSingleNode("itunes:block", manager);
+                XPathNavigator imageNavigator = source.SelectSingleNode("itunes:image", manager);
+                XPathNavigator durationNavigator = source.SelectSingleNode("itunes:duration", manager);
+                XPathNavigator explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
 
-                if (blockNavigator != null && !String.IsNullOrEmpty(blockNavigator.Value))
+                if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
                 {
-                    if(String.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        this.IsBlocked  = true;
-                        wasLoaded       = true;
+                        this.IsBlocked = true;
+                        wasLoaded = true;
                     }
-                    else if (String.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        this.IsBlocked  = false;
-                        wasLoaded       = true;
+                        this.IsBlocked = false;
+                        wasLoaded = true;
                     }
                 }
 
                 if (imageNavigator != null && imageNavigator.HasAttributes)
                 {
-                    string hrefAttribute    = imageNavigator.GetAttribute("href", String.Empty);
-                    if (!String.IsNullOrEmpty(hrefAttribute))
+                    string hrefAttribute = imageNavigator.GetAttribute("href", string.Empty);
+                    if (!string.IsNullOrEmpty(hrefAttribute))
                     {
                         Uri image;
 
                         if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out image))
                         {
-                            this.Image  = image;
-                            wasLoaded   = true;
+                            this.Image = image;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                if (durationNavigator != null && !String.IsNullOrEmpty(durationNavigator.Value))
+                if (durationNavigator != null && !string.IsNullOrEmpty(durationNavigator.Value))
                 {
-                    TimeSpan duration   = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
+                    TimeSpan duration = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
                     if (duration != TimeSpan.MinValue)
                     {
-                        this.Duration   = duration;
-                        wasLoaded       = true;
+                        this.Duration = duration;
+                        wasLoaded = true;
                     }
                 }
 
-                if (explicitNavigator != null && !String.IsNullOrEmpty(explicitNavigator.Value))
+                if (explicitNavigator != null && !string.IsNullOrEmpty(explicitNavigator.Value))
                 {
                     ITunesExplicitMaterial explicitMaterial = ITunesSyndicationExtension.ExplicitMaterialByName(explicitNavigator.Value.Trim());
                     if (explicitMaterial != ITunesExplicitMaterial.None)
                     {
-                        this.ExplicitMaterial   = explicitMaterial;
-                        wasLoaded               = true;
+                        this.ExplicitMaterial = explicitMaterial;
+                        wasLoaded = true;
                     }
                 }
             }
 
             return wasLoaded;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="TimeSpan"/> represented by the supplied duration value.
-        /// </summary>
-        /// <param name="value">The ITunes duration representation of the podcast duration.</param>
-        /// <returns>A <see cref="TimeSpan"/> that represents the duration. If unable to determine duration, returns <see cref="TimeSpan.MinValue"/>.</returns>
-        /// <remarks>Value can be formatted as an integer, HH:MM:SS, H:MM:SS, MM:SS, or M:SS.</remarks>
-        private static TimeSpan ParseDuration(string value)
-        {
-            TimeSpan timeSpan   = TimeSpan.MinValue;
-
-            if (!value.Contains(":"))
-            {
-                int totalSeconds;
-                if (Int32.TryParse(value, out totalSeconds))
-                {
-                    timeSpan    = new TimeSpan(0, 0, totalSeconds);
-                }
-                else
-                {
-                    TimeSpan duration;
-                    if (TimeSpan.TryParse(value, out duration))
-                    {
-                        timeSpan    = duration;
-                    }
-                }
-            }
-            else
-            {
-                string[] durationParts  = value.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-                if (durationParts.Length == 2)
-                {
-                    int minutes;
-                    int seconds;
-
-                    if (Int32.TryParse(durationParts[0], out minutes) && Int32.TryParse(durationParts[1], out seconds))
-                    {
-                        timeSpan    = new TimeSpan(0, minutes, seconds);
-                    }
-                }
-                else if (durationParts.Length >= 3)
-                {
-                    int hours;
-                    int minutes;
-                    int seconds;
-
-                    string hoursValue   = durationParts[0];
-                    string minutesValue = durationParts[1];
-                    string secondsValue = durationParts[2];
-
-                    if (Int32.TryParse(hoursValue, out hours) && Int32.TryParse(minutesValue, out minutes) && Int32.TryParse(secondsValue, out seconds))
-                    {
-                        timeSpan    = new TimeSpan(hours, minutes, seconds);
-                    }
-                    else
-                    {
-                        TimeSpan duration;
-                        if (TimeSpan.TryParse(value, out duration))
-                        {
-                            timeSpan    = duration;
-                        }
-                    }
-                }
-            }
-
-            return timeSpan;
         }
     }
 }

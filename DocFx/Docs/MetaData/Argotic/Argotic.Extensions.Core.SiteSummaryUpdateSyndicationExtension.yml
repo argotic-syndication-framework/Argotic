@@ -1,0 +1,1733 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  id: SiteSummaryUpdateSyndicationExtension
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo(System.Object)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals(System.Object)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XmlReader)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString(Argotic.Extensions.Core.SiteSummaryUpdatePeriod)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName(System.String)
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: SiteSummaryUpdateSyndicationExtension
+  nameWithType: SiteSummaryUpdateSyndicationExtension
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SiteSummaryUpdateSyndicationExtension
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 23
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nExtends syndication specifications to provide syndication hints to aggregators and other entities regarding how often a feed is updated.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> extends syndicated content to specify hints to aggregators and other entities regarding how often a feed is updated.\n    This syndication extension conforms to the <strong>RDF Site Summary 1.0 Modules: Syndication</strong> 1.0 specification, which can be found\n    at <a href=\"http://web.resource.org/rss/1.0/modules/syndication/\">http://web.resource.org/rss/1.0/modules/syndication/</a>.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Extensions\\Core\\SiteSummaryUpdateSyndicationExtensionExample.cs\" region=\"SiteSummaryUpdateSyndicationExtension\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class SiteSummaryUpdateSyndicationExtension
+
+          Inherits SyndicationExtension
+
+          Implements ISyndicationExtension, IXmlSerializable, IComparable
+  inheritance:
+  - System.Object
+  - Argotic.Extensions.SyndicationExtension
+  implements:
+  - Argotic.Extensions.ISyndicationExtension
+  - System.Xml.Serialization.IXmlSerializable
+  - System.IComparable
+  inheritedMembers:
+  - Argotic.Extensions.SyndicationExtension.Loaded
+  - Argotic.Extensions.SyndicationExtension.Description
+  - Argotic.Extensions.SyndicationExtension.Documentation
+  - Argotic.Extensions.SyndicationExtension.Name
+  - Argotic.Extensions.SyndicationExtension.Version
+  - Argotic.Extensions.SyndicationExtension.XmlNamespace
+  - Argotic.Extensions.SyndicationExtension.XmlPrefix
+  - Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.GetSchema
+  - Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  - Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: SiteSummaryUpdateSyndicationExtension()
+  nameWithType: SiteSummaryUpdateSyndicationExtension.SiteSummaryUpdateSyndicationExtension()
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.SiteSummaryUpdateSyndicationExtension()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public SiteSummaryUpdateSyndicationExtension()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+  commentId: P:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+  id: Context
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Context
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Context
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Context
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 49
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> object associated with this extension.\n"
+  remarks: "\nThe <strong>Context</strong> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity.\nIts purpose is to prevent property naming collisions between the base <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class and any custom properties that\nare defined for the custom syndication extension.\n"
+  example: []
+  syntax:
+    content: public SiteSummaryUpdateSyndicationExtensionContext Context { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+      description: A <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> object that contains information associated with the current syndication extension.
+    content.vb: Public Property Context As SiteSummaryUpdateSyndicationExtensionContext
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  id: op_Equality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Equality(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Equality(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension, Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 69
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(SiteSummaryUpdateSyndicationExtension first, SiteSummaryUpdateSyndicationExtension second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As SiteSummaryUpdateSyndicationExtension, second As SiteSummaryUpdateSyndicationExtension) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  id: op_Inequality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Inequality(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Inequality(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Inequality(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension, Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 89
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(SiteSummaryUpdateSyndicationExtension first, SiteSummaryUpdateSyndicationExtension second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As SiteSummaryUpdateSyndicationExtension, second As SiteSummaryUpdateSyndicationExtension) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  id: op_LessThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: LessThan(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.LessThan(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.LessThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension, Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 100
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(SiteSummaryUpdateSyndicationExtension first, SiteSummaryUpdateSyndicationExtension second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As SiteSummaryUpdateSyndicationExtension, second As SiteSummaryUpdateSyndicationExtension) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  id: op_GreaterThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension,Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.GreaterThan(SiteSummaryUpdateSyndicationExtension, SiteSummaryUpdateSyndicationExtension)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GreaterThan(Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension, Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 120
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(SiteSummaryUpdateSyndicationExtension first, SiteSummaryUpdateSyndicationExtension second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As SiteSummaryUpdateSyndicationExtension, second As SiteSummaryUpdateSyndicationExtension) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  id: MatchByType(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: MatchByType(ISyndicationExtension)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.MatchByType(ISyndicationExtension)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MatchByType
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 141
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nPredicate delegate that returns a value indicating if the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>\nrepresents the same <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> as this <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool MatchByType(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be compared.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <xref href="System.Type" data-throw-if-not-resolved="false"></xref> as this <xref href="Argotic.Extensions.SyndicationExtension" data-throw-if-not-resolved="false"></xref>; otherwise, <strong>false</strong>.
+    content.vb: Public Shared Function MatchByType(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString(Argotic.Extensions.Core.SiteSummaryUpdatePeriod)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString(Argotic.Extensions.Core.SiteSummaryUpdatePeriod)
+  id: PeriodAsString(Argotic.Extensions.Core.SiteSummaryUpdatePeriod)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: PeriodAsString(SiteSummaryUpdatePeriod)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString(Argotic.Extensions.Core.SiteSummaryUpdatePeriod)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PeriodAsString
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 153
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the period identifier for the supplied <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdatePeriod\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string PeriodAsString(SiteSummaryUpdatePeriod period)
+    parameters:
+    - id: period
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+      description: The <xref href="Argotic.Extensions.Core.SiteSummaryUpdatePeriod" data-throw-if-not-resolved="false"></xref> to get the period identifier for.
+    return:
+      type: System.String
+      description: The period identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">period</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function PeriodAsString(period As SiteSummaryUpdatePeriod) As String
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName(System.String)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName(System.String)
+  id: PeriodByName(System.String)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: PeriodByName(String)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.PeriodByName(String)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PeriodByName
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 189
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdatePeriod\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified period name.\n"
+  remarks: This method disregards case of specified period name.
+  example: []
+  syntax:
+    content: public static SiteSummaryUpdatePeriod PeriodByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the period.
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+      description: A <xref href="Argotic.Extensions.Core.SiteSummaryUpdatePeriod" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>SiteSummaryUpdatePeriod.None</strong>.
+    content.vb: Public Shared Function PeriodByName(name As String) As SiteSummaryUpdatePeriod
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  id: Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 224
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension using the supplied <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override bool Load(IXPathNavigable source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <strong>IXPathNavigable</strong> used to load this <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Overrides Function Load(source As IXPathNavigable) As Boolean
+  overridden: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XmlReader)
+  id: Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 244
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension using the supplied <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override bool Load(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load this <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.
+    content.vb: Public Overrides Function Load(reader As XmlReader) As Boolean
+  overridden: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 258
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the syndication extension to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the syndication extension.
+    content.vb: Public Overrides Sub WriteTo(writer As XmlWriter)
+  overridden: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: SiteSummaryUpdateSyndicationExtension.ToString()
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 272
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 298
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Equals(Object)
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 326
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode
+  commentId: M:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: SiteSummaryUpdateSyndicationExtension.GetHashCode()
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdateSyndicationExtension.cs
+    startLine: 340
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: SiteSummaryUpdateSyndicationExtension
+  nameWithType: SiteSummaryUpdateSyndicationExtension
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Argotic.Extensions.SyndicationExtension
+  commentId: T:Argotic.Extensions.SyndicationExtension
+  parent: Argotic.Extensions
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: System.Xml.Serialization.IXmlSerializable
+  commentId: T:System.Xml.Serialization.IXmlSerializable
+  parent: System.Xml.Serialization
+  isExternal: true
+  name: IXmlSerializable
+  nameWithType: IXmlSerializable
+  fullName: System.Xml.Serialization.IXmlSerializable
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.SyndicationExtension.Loaded
+  commentId: E:Argotic.Extensions.SyndicationExtension.Loaded
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Loaded
+  nameWithType: SyndicationExtension.Loaded
+  fullName: Argotic.Extensions.SyndicationExtension.Loaded
+- uid: Argotic.Extensions.SyndicationExtension.Description
+  commentId: P:Argotic.Extensions.SyndicationExtension.Description
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Description
+  nameWithType: SyndicationExtension.Description
+  fullName: Argotic.Extensions.SyndicationExtension.Description
+- uid: Argotic.Extensions.SyndicationExtension.Documentation
+  commentId: P:Argotic.Extensions.SyndicationExtension.Documentation
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Documentation
+  nameWithType: SyndicationExtension.Documentation
+  fullName: Argotic.Extensions.SyndicationExtension.Documentation
+- uid: Argotic.Extensions.SyndicationExtension.Name
+  commentId: P:Argotic.Extensions.SyndicationExtension.Name
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Name
+  nameWithType: SyndicationExtension.Name
+  fullName: Argotic.Extensions.SyndicationExtension.Name
+- uid: Argotic.Extensions.SyndicationExtension.Version
+  commentId: P:Argotic.Extensions.SyndicationExtension.Version
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Version
+  nameWithType: SyndicationExtension.Version
+  fullName: Argotic.Extensions.SyndicationExtension.Version
+- uid: Argotic.Extensions.SyndicationExtension.XmlNamespace
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlNamespace
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlNamespace
+  nameWithType: SyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.SyndicationExtension.XmlNamespace
+- uid: Argotic.Extensions.SyndicationExtension.XmlPrefix
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlPrefix
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlPrefix
+  nameWithType: SyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.SyndicationExtension.XmlPrefix
+- uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: CreateNamespaceManager(XPathNavigator)
+  nameWithType: SyndicationExtension.CreateNamespaceManager(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: SyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: SyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: ExistsInSource(XPathNavigator)
+  nameWithType: SyndicationExtension.ExistsInSource(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: SyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: SyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteXmlNamespaceDeclaration(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.GetSchema
+  commentId: M:Argotic.Extensions.SyndicationExtension.GetSchema
+  parent: Argotic.Extensions.SyndicationExtension
+  name: GetSchema()
+  nameWithType: SyndicationExtension.GetSchema()
+  fullName: Argotic.Extensions.SyndicationExtension.GetSchema()
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.GetSchema
+    name: GetSchema
+    nameWithType: SyndicationExtension.GetSchema
+    fullName: Argotic.Extensions.SyndicationExtension.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.GetSchema
+    name: GetSchema
+    nameWithType: SyndicationExtension.GetSchema
+    fullName: Argotic.Extensions.SyndicationExtension.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: ReadXml(XmlReader)
+  nameWithType: SyndicationExtension.ReadXml(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: SyndicationExtension.ReadXml
+    fullName: Argotic.Extensions.SyndicationExtension.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: SyndicationExtension.ReadXml
+    fullName: Argotic.Extensions.SyndicationExtension.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXml(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  commentId: M:Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  parent: Argotic.Extensions.SyndicationExtension
+  name: OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  nameWithType: SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+    name: OnExtensionLoaded
+    nameWithType: SyndicationExtension.OnExtensionLoaded
+    fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+    name: OnExtensionLoaded
+    nameWithType: SyndicationExtension.OnExtensionLoaded
+    fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: System.Xml.Serialization
+  commentId: N:System.Xml.Serialization
+  isExternal: true
+  name: System.Xml.Serialization
+  nameWithType: System.Xml.Serialization
+  fullName: System.Xml.Serialization
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.#ctor
+  name: SiteSummaryUpdateSyndicationExtension
+  nameWithType: SiteSummaryUpdateSyndicationExtension.SiteSummaryUpdateSyndicationExtension
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.SiteSummaryUpdateSyndicationExtension
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: SiteSummaryUpdateSyndicationExtensionContext
+  nameWithType: SiteSummaryUpdateSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+  name: Context
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Context
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Context
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Equality
+  name: Equality
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Equality
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_Inequality
+  name: Inequality
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Inequality
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Inequality
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_LessThan
+  name: LessThan
+  nameWithType: SiteSummaryUpdateSyndicationExtension.LessThan
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.LessThan
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.op_GreaterThan
+  name: GreaterThan
+  nameWithType: SiteSummaryUpdateSyndicationExtension.GreaterThan
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GreaterThan
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType
+  name: MatchByType
+  nameWithType: SiteSummaryUpdateSyndicationExtension.MatchByType
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.MatchByType
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  parent: Argotic.Extensions.Core
+  name: SiteSummaryUpdatePeriod
+  nameWithType: SiteSummaryUpdatePeriod
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString
+  name: PeriodAsString
+  nameWithType: SiteSummaryUpdateSyndicationExtension.PeriodAsString
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodAsString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName
+  name: PeriodByName
+  nameWithType: SiteSummaryUpdateSyndicationExtension.PeriodByName
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.PeriodByName
+- uid: System.Xml.XPath.IXPathNavigable
+  commentId: T:System.Xml.XPath.IXPathNavigable
+  parent: System.Xml.XPath
+  isExternal: true
+  name: IXPathNavigable
+  nameWithType: IXPathNavigable
+  fullName: System.Xml.XPath.IXPathNavigable
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: SyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load
+  name: Load
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Load
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlReader
+  commentId: T:System.Xml.XmlReader
+  parent: System.Xml
+  isExternal: true
+  name: XmlReader
+  nameWithType: XmlReader
+  fullName: System.Xml.XmlReader
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: SyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteTo(XmlWriter)
+  nameWithType: SyndicationExtension.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: SyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.SyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: SyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.SyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo
+  name: WriteTo
+  nameWithType: SiteSummaryUpdateSyndicationExtension.WriteTo
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.WriteTo
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString
+  name: ToString
+  nameWithType: SiteSummaryUpdateSyndicationExtension.ToString
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.ToString
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo
+  name: CompareTo
+  nameWithType: SiteSummaryUpdateSyndicationExtension.CompareTo
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals
+  name: Equals
+  nameWithType: SiteSummaryUpdateSyndicationExtension.Equals
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode
+  name: GetHashCode
+  nameWithType: SiteSummaryUpdateSyndicationExtension.GetHashCode
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension.GetHashCode

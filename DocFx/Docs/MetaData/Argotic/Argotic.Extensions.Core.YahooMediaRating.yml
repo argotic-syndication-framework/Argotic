@@ -1,0 +1,1293 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaRating
+  commentId: T:Argotic.Extensions.Core.YahooMediaRating
+  id: YahooMediaRating
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaRating.#ctor
+  - Argotic.Extensions.Core.YahooMediaRating.#ctor(System.String)
+  - Argotic.Extensions.Core.YahooMediaRating.CompareTo(System.Object)
+  - Argotic.Extensions.Core.YahooMediaRating.Content
+  - Argotic.Extensions.Core.YahooMediaRating.Equals(System.Object)
+  - Argotic.Extensions.Core.YahooMediaRating.GetHashCode
+  - Argotic.Extensions.Core.YahooMediaRating.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.YahooMediaRating.op_Equality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  - Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  - Argotic.Extensions.Core.YahooMediaRating.op_Inequality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  - Argotic.Extensions.Core.YahooMediaRating.op_LessThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  - Argotic.Extensions.Core.YahooMediaRating.Scheme
+  - Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  - Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  - Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  - Argotic.Extensions.Core.YahooMediaRating.ToString
+  - Argotic.Extensions.Core.YahooMediaRating.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRating
+  nameWithType: YahooMediaRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaRating
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the permissible audience for a media object.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaRating : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaRating
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaRating.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRating()
+  nameWithType: YahooMediaRating.YahooMediaRating()
+  fullName: Argotic.Extensions.Core.YahooMediaRating.YahooMediaRating()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaRating()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaRating.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.#ctor(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRating(String)
+  nameWithType: YahooMediaRating.YahooMediaRating(String)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.YahooMediaRating(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 37
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied audience.\n"
+  example: []
+  syntax:
+    content: public YahooMediaRating(string audience)
+    parameters:
+    - id: audience
+      type: System.String
+      description: A textual value that represents the permissible audience(s) for this media object.
+    content.vb: Public Sub New(audience As String)
+  overload: Argotic.Extensions.Core.YahooMediaRating.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">audience</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">audience</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  id: SimpleAdultRating
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: SimpleAdultRating
+  nameWithType: YahooMediaRating.SimpleAdultRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SimpleAdultRating
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the media simple rating scheme adult content rating.\n"
+  example: []
+  syntax:
+    content: public static string SimpleAdultRating { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: The media simple rating scheme <strong>adult</strong> content rating value.
+    content.vb: Public Shared ReadOnly Property SimpleAdultRating As String
+  overload: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  id: SimpleNonAdultRating
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: SimpleNonAdultRating
+  nameWithType: YahooMediaRating.SimpleNonAdultRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SimpleNonAdultRating
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the media simple rating scheme non-adult content rating.\n"
+  example: []
+  syntax:
+    content: public static string SimpleNonAdultRating { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: The media simple rating scheme <strong>nonadult</strong> content rating value.
+    content.vb: Public Shared ReadOnly Property SimpleNonAdultRating As String
+  overload: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  id: SimpleScheme
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: SimpleScheme
+  nameWithType: YahooMediaRating.SimpleScheme
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SimpleScheme
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 70
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the media simple rating scheme.\n"
+  example: []
+  syntax:
+    content: public static Uri SimpleScheme { get; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the media simple rating scheme. The simple scheme has a value of <strong>urn:simple</strong>.
+    content.vb: Public Shared ReadOnly Property SimpleScheme As Uri
+  overload: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaRating.Content
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.Content
+  id: Content
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Content
+  nameWithType: YahooMediaRating.Content
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Content
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Content
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 86
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the permissible audience for this media object.\n"
+  example: []
+  syntax:
+    content: public string Content { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A textual value that represents the permissible audience(s) for this media object.
+    content.vb: Public Property Content As String
+  overload: Argotic.Extensions.Core.YahooMediaRating.Content*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+    commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  - linkId: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+    commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.Scheme
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.Scheme
+  id: Scheme
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Scheme
+  nameWithType: YahooMediaRating.Scheme
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Scheme
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Scheme
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 108
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a URI that identifies this rating scheme.\n"
+  remarks: "\nIf no rating scheme is provided, the default scheme is <strong>urn:simple</strong>.\n"
+  example: []
+  syntax:
+    content: public Uri Scheme { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents this rating scheme. The default value is <strong>null</strong>.
+    content.vb: Public Property Scheme As Uri
+  overload: Argotic.Extensions.Core.YahooMediaRating.Scheme*
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+    commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_Equality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.op_Equality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  id: op_Equality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Equality(YahooMediaRating, YahooMediaRating)
+  nameWithType: YahooMediaRating.Equality(YahooMediaRating, YahooMediaRating)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Equality(Argotic.Extensions.Core.YahooMediaRating, Argotic.Extensions.Core.YahooMediaRating)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 127
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(YahooMediaRating first, YahooMediaRating second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As YahooMediaRating, second As YahooMediaRating) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRating.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_Inequality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.op_Inequality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  id: op_Inequality(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Inequality(YahooMediaRating, YahooMediaRating)
+  nameWithType: YahooMediaRating.Inequality(YahooMediaRating, YahooMediaRating)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Inequality(Argotic.Extensions.Core.YahooMediaRating, Argotic.Extensions.Core.YahooMediaRating)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 147
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(YahooMediaRating first, YahooMediaRating second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As YahooMediaRating, second As YahooMediaRating) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRating.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_LessThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.op_LessThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  id: op_LessThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: LessThan(YahooMediaRating, YahooMediaRating)
+  nameWithType: YahooMediaRating.LessThan(YahooMediaRating, YahooMediaRating)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.LessThan(Argotic.Extensions.Core.YahooMediaRating, Argotic.Extensions.Core.YahooMediaRating)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 158
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(YahooMediaRating first, YahooMediaRating second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As YahooMediaRating, second As YahooMediaRating) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRating.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  id: op_GreaterThan(Argotic.Extensions.Core.YahooMediaRating,Argotic.Extensions.Core.YahooMediaRating)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(YahooMediaRating, YahooMediaRating)
+  nameWithType: YahooMediaRating.GreaterThan(YahooMediaRating, YahooMediaRating)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.GreaterThan(Argotic.Extensions.Core.YahooMediaRating, Argotic.Extensions.Core.YahooMediaRating)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 178
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(YahooMediaRating first, YahooMediaRating second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaRating
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As YahooMediaRating, second As YahooMediaRating) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaRating.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: YahooMediaRating.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 201
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaRating" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaRating.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: YahooMediaRating.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 233
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.YahooMediaRating.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.ToString
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: YahooMediaRating.ToString()
+  fullName: Argotic.Extensions.Core.YahooMediaRating.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 259
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.YahooMediaRating" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.YahooMediaRating.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaRating.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: YahooMediaRating.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 288
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.YahooMediaRating.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaRating.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: YahooMediaRating.Equals(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 315
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.YahooMediaRating.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaRating.GetHashCode
+  commentId: M:Argotic.Extensions.Core.YahooMediaRating.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.YahooMediaRating
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: YahooMediaRating.GetHashCode()
+  fullName: Argotic.Extensions.Core.YahooMediaRating.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRating.cs
+    startLine: 329
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.YahooMediaRating.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaRating
+  commentId: T:Argotic.Extensions.Core.YahooMediaRating
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRating
+  nameWithType: YahooMediaRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating
+- uid: Argotic.Extensions.Core.YahooMediaRating.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.#ctor
+  name: YahooMediaRating
+  nameWithType: YahooMediaRating.YahooMediaRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating.YahooMediaRating
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  name: SimpleAdultRating
+  nameWithType: YahooMediaRating.SimpleAdultRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  name: SimpleNonAdultRating
+  nameWithType: YahooMediaRating.SimpleNonAdultRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  name: SimpleScheme
+  nameWithType: YahooMediaRating.SimpleScheme
+  fullName: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleAdultRating
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleNonAdultRating
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRating.Content*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.Content
+  name: Content
+  nameWithType: YahooMediaRating.Content
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Content
+- uid: Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  commentId: P:Argotic.Extensions.Core.YahooMediaRating.SimpleScheme
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRating.Scheme*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.Scheme
+  name: Scheme
+  nameWithType: YahooMediaRating.Scheme
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Scheme
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.op_Equality
+  name: Equality
+  nameWithType: YahooMediaRating.Equality
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.op_Inequality
+  name: Inequality
+  nameWithType: YahooMediaRating.Inequality
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Inequality
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.op_LessThan
+  name: LessThan
+  nameWithType: YahooMediaRating.LessThan
+  fullName: Argotic.Extensions.Core.YahooMediaRating.LessThan
+- uid: Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.op_GreaterThan
+  name: GreaterThan
+  nameWithType: YahooMediaRating.GreaterThan
+  fullName: Argotic.Extensions.Core.YahooMediaRating.GreaterThan
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.YahooMediaRating.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.Load
+  name: Load
+  nameWithType: YahooMediaRating.Load
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaRating.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaRating.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaRating.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRating.ToString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.ToString
+  name: ToString
+  nameWithType: YahooMediaRating.ToString
+  fullName: Argotic.Extensions.Core.YahooMediaRating.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaRating.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.CompareTo
+  name: CompareTo
+  nameWithType: YahooMediaRating.CompareTo
+  fullName: Argotic.Extensions.Core.YahooMediaRating.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRating.Equals*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.Equals
+  name: Equals
+  nameWithType: YahooMediaRating.Equals
+  fullName: Argotic.Extensions.Core.YahooMediaRating.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRating.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaRating.GetHashCode
+  name: GetHashCode
+  nameWithType: YahooMediaRating.GetHashCode
+  fullName: Argotic.Extensions.Core.YahooMediaRating.GetHashCode

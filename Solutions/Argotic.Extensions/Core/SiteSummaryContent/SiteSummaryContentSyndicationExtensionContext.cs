@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="SiteSummaryContentSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SiteSummaryContentSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the entity-encoded or CDATA-escaped version of the content of the item.
         /// </summary>
-        private string extensionEncoded = String.Empty;
+        private string extensionEncoded = string.Empty;
+
         /// <summary>
         /// Private member to hold the alternative versions of the item's content.
         /// </summary>
@@ -35,24 +34,24 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The alternative version of the content of this item.</value>
         /// <remarks>
-        ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped. 
+        ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped.
         /// </remarks>
         public string Encoded
         {
             get
             {
-                return extensionEncoded;
+                return this.extensionEncoded;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionEncoded = String.Empty;
+                    this.extensionEncoded = string.Empty;
                 }
                 else
                 {
-                    extensionEncoded = value.Trim();
+                    this.extensionEncoded = value.Trim();
                 }
             }
         }
@@ -61,22 +60,23 @@ namespace Argotic.Extensions.Core
         /// Gets the alternative versions of this item's content.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="SiteSummaryContentItem"/> objects that represent multiple versions of this item's content. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="SiteSummaryContentItem"/> objects that represent multiple versions of this item's content.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     The <see cref="Encoded"/> property represents the <b>updated</b> syntax for the <see cref="SiteSummaryContentSyndicationExtension"/>. 
+        ///     The <see cref="Encoded"/> property represents the <b>updated</b> syntax for the <see cref="SiteSummaryContentSyndicationExtension"/>.
         ///     It is <i>recommended</i> that <see cref="Encoded"/> is utilized when defining an alternative encoding for the content of an item.
         /// </remarks>
         public Collection<SiteSummaryContentItem> Items
         {
             get
             {
-                if (extensionItems == null)
+                if (this.extensionItems == null)
                 {
-                    extensionItems = new Collection<SiteSummaryContentItem>();
+                    this.extensionItems = new Collection<SiteSummaryContentItem>();
                 }
-                return extensionItems;
+
+                return this.extensionItems;
             }
         }
 
@@ -90,23 +90,23 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
                 XPathNavigator encodedNavigator = source.SelectSingleNode("content:encoded", manager);
-                XPathNavigator itemsNavigator   = source.SelectSingleNode("content:items", manager);
+                XPathNavigator itemsNavigator = source.SelectSingleNode("content:items", manager);
 
-                if (encodedNavigator != null && !String.IsNullOrEmpty(encodedNavigator.Value))
+                if (encodedNavigator != null && !string.IsNullOrEmpty(encodedNavigator.Value))
                 {
-                    this.Encoded    = encodedNavigator.Value;
-                    wasLoaded       = true;
+                    this.Encoded = encodedNavigator.Value;
+                    wasLoaded = true;
                 }
 
                 if (itemsNavigator != null && itemsNavigator.HasChildren)
                 {
-                    XPathNodeIterator itemIterator  = itemsNavigator.Select("content:item", manager);
+                    XPathNodeIterator itemIterator = itemsNavigator.Select("content:item", manager);
                     if (itemIterator != null && itemIterator.Count > 0)
                     {
                         while (itemIterator.MoveNext())
@@ -115,7 +115,7 @@ namespace Argotic.Extensions.Core
                             if (item.Load(itemIterator.Current))
                             {
                                 this.Items.Add(item);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -137,20 +137,21 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(!String.IsNullOrEmpty(this.Encoded))
+            if (!string.IsNullOrEmpty(this.Encoded))
             {
                 writer.WriteStartElement("encoded", xmlNamespace);
                 writer.WriteCData(this.Encoded);
                 writer.WriteEndElement();
             }
 
-            if(this.Items.Count > 0)
+            if (this.Items.Count > 0)
             {
                 writer.WriteStartElement("items", xmlNamespace);
-                foreach(SiteSummaryContentItem item in this.Items)
+                foreach (SiteSummaryContentItem item in this.Items)
                 {
                     item.WriteTo(writer);
                 }
+
                 writer.WriteEndElement();
             }
         }

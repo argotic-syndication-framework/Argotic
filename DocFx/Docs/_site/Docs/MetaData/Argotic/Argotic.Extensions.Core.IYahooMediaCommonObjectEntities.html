@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IYahooMediaCommonObjectEntities
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IYahooMediaCommonObjectEntities
+   ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities">
+  
+  
+  <h1 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities" class="text-break">Interface IYahooMediaCommonObjectEntities
+  </h1>
+  <div class="markdown level0 summary"><p>Allows an object to implement common Yahoo media entities by representing a set of properties, methods, indexers and events common to Yahoo media syndication resources.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IYahooMediaCommonObjectEntities</code></pre>
+  </div>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+     The following properties are optional and may appear as sub-elements of syndication entities, <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> and/or <a class="xref" href="Argotic.Extensions.Core.YahooMediaGroup.html">YahooMediaGroup</a>.
+</p>
+<p>
+    When a property appears at a shallow level, such as syndication entities, it means that the property should be applied to every media object within its scope.
+    Duplicated properties appearing at deeper levels of the document tree have higher priority over other levels. For example, <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> level
+    properties are favored over syndication entity level properties.
+</p>
+<p>
+    The priority level is listed from strongest to weakest: <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>, <a class="xref" href="Argotic.Extensions.Core.YahooMediaGroup.html">YahooMediaGroup</a>, syndication item entity, syndication feed.
+</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Categories.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L34">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Categories_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Categories" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories">Categories</h4>
+  <div class="markdown level1 summary"><p>Gets a taxonomy that gives an indication of the type of content for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaCategory&gt; Categories { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a> objects that represent a taxonomy that gives an indication to the type of content for the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Copyright.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L46">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Copyright_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Copyright" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright">Copyright</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the copyright information for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">YahooMediaCopyright Copyright { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaCopyright.html">YahooMediaCopyright</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.YahooMediaCopyright.html">YahooMediaCopyright</a> that represents the copyright information for the media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Copyright_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the media is operating under a <em>Creative Commons license</em>, a <a class="xref" href="Argotic.Extensions.Core.CreativeCommonsSyndicationExtension.html">CreativeCommonsSyndicationExtension</a> should be used instead.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Credits.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L63">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Credits_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Credits" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits">Credits</h4>
+  <div class="markdown level1 summary"><p>Gets the entities that contributed to the creation of the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaCredit&gt; Credits { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a> objects that represent the entities that contributed to the creation of the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Credits_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
+and several entities can have the same role. These should appear as distinct <a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a> entities.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Description.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L75">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Description_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Description" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description">Description</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the description of the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">YahooMediaTextConstruct Description { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstruct.html">YahooMediaTextConstruct</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstruct.html">YahooMediaTextConstruct</a> that represents a short description of the media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Description_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Media object descriptions are typically a sentence in length.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Hashes.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L91">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Hashes_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Hashes" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes">Hashes</h4>
+  <div class="markdown level1 summary"><p>Gets the hash digests for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaHash&gt; Hashes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a> objects that represent the hash digests for the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Hashes_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>When assigning multiple hashes, each <a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a> <strong>must</strong> have a different <a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html#Argotic_Extensions_Core_YahooMediaHash_Algorithm">Algorithm</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Keywords.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L106">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Keywords_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Keywords" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords">Keywords</h4>
+  <div class="markdown level1 summary"><p>Gets the relevant keywords that describe the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;string&gt; Keywords { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <span class="xref">System.String</span> objects that represent the relevant keywords that describe the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Keywords_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Media objects are typically assigned maximum of ten keywords or phrases.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Player.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L115">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Player_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Player" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player">Player</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a web browser media player console the media object can be accessed through.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">YahooMediaPlayer Player { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> that represents a web browser media player console the media object can be accessed through.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Ratings.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L131">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Ratings_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Ratings" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings">Ratings</h4>
+  <div class="markdown level1 summary"><p>Gets the permissible audiences for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaRating&gt; Ratings { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a> objects that represent the permissible audiences for the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Ratings_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If there are no ratings specified, it can be assumed that no restrictions are necessary.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Restrictions.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L143">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Restrictions_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Restrictions" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions">Restrictions</h4>
+  <div class="markdown level1 summary"><p>Gets the restrictions to be placed on aggregators that are rendering the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaRestriction&gt; Restrictions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> objects that represent restrictions to be placed on aggregators that are rendering the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_TextSeries.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L160">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_TextSeries_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_TextSeries" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries">TextSeries</h4>
+  <div class="markdown level1 summary"><p>Gets the text transcript, closed captioning, or lyrics for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaText&gt; TextSeries { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects that represent text transcript, closed captioning, or lyrics for the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_TextSeries_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Many of these <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects are permitted to provide a time series of text.
+In such cases, it is encouraged, but not required, that the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects be grouped by language and appear in time sequence order based on the start time.
+<a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects can have overlapping start and end times.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Thumbnails.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L175">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Thumbnails_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Thumbnails" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails">Thumbnails</h4>
+  <div class="markdown level1 summary"><p>Gets the representative images for the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Collection&lt;YahooMediaThumbnail&gt; Thumbnails { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a> objects that represent images that are representative of the media object.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Thumbnails_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Title.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L184">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Title_" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title*"></a>
+  <h4 id="Argotic_Extensions_Core_IYahooMediaCommonObjectEntities_Title" data-uid="Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title">Title</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the title of the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">YahooMediaTextConstruct Title { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstruct.html">YahooMediaTextConstruct</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstruct.html">YahooMediaTextConstruct</a> that represents the title of the media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a></div>
+      <div><a class="xref" href="Argotic.Extensions.Core.YahooMediaGroup.html">YahooMediaGroup</a></div>
+      <div><a class="xref" href="Argotic.Extensions.Core.YahooMediaSyndicationExtensionContext.html">YahooMediaSyndicationExtensionContext</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_IYahooMediaCommonObjectEntities.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.IYahooMediaCommonObjectEntities%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/IYahooMediaCommonObjectEntities.cs/#L25" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

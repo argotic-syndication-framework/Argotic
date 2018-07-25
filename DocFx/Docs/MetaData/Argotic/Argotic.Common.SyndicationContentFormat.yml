@@ -1,0 +1,530 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  id: SyndicationContentFormat
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.SyndicationContentFormat.Apml
+  - Argotic.Common.SyndicationContentFormat.Atom
+  - Argotic.Common.SyndicationContentFormat.AtomCategoryDocument
+  - Argotic.Common.SyndicationContentFormat.AtomServiceDocument
+  - Argotic.Common.SyndicationContentFormat.BlogML
+  - Argotic.Common.SyndicationContentFormat.MicroSummaryGenerator
+  - Argotic.Common.SyndicationContentFormat.NewsML
+  - Argotic.Common.SyndicationContentFormat.None
+  - Argotic.Common.SyndicationContentFormat.OpenSearchDescription
+  - Argotic.Common.SyndicationContentFormat.Opml
+  - Argotic.Common.SyndicationContentFormat.Rdf
+  - Argotic.Common.SyndicationContentFormat.Rsd
+  - Argotic.Common.SyndicationContentFormat.Rss
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormat
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nSpecifies the web content syndication format that the syndicated content conforms to.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum SyndicationContentFormat
+    content.vb: >-
+      <Serializable>
+
+      Public Enum SyndicationContentFormat
+  seealso:
+  - linkId: Argotic.Common.EnumerationMetadataAttribute
+    commentId: T:Argotic.Common.EnumerationMetadataAttribute
+  - linkId: Argotic.Common.MimeMediaTypeAttribute
+    commentId: T:Argotic.Common.MimeMediaTypeAttribute
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Common.SyndicationContentFormat.None
+  commentId: F:Argotic.Common.SyndicationContentFormat.None
+  id: None
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: SyndicationContentFormat.None
+  fullName: Argotic.Common.SyndicationContentFormat.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nNo web content syndication format specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Apml
+  commentId: F:Argotic.Common.SyndicationContentFormat.Apml
+  id: Apml
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Apml
+  nameWithType: SyndicationContentFormat.Apml
+  fullName: Argotic.Common.SyndicationContentFormat.Apml
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Apml
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Attention Profiling Markup Language (APML) 1.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Apml = 1
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Atom
+  commentId: F:Argotic.Common.SyndicationContentFormat.Atom
+  id: Atom
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Atom
+  nameWithType: SyndicationContentFormat.Atom
+  fullName: Argotic.Common.SyndicationContentFormat.Atom
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Atom
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 30
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Atom 1.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Atom = 2
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.BlogML
+  commentId: F:Argotic.Common.SyndicationContentFormat.BlogML
+  id: BlogML
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: BlogML
+  nameWithType: SyndicationContentFormat.BlogML
+  fullName: Argotic.Common.SyndicationContentFormat.BlogML
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogML
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 37
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Web Log Markup Language (BlogML) 2.0 syndication format.\n"
+  example: []
+  syntax:
+    content: BlogML = 3
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.MicroSummaryGenerator
+  commentId: F:Argotic.Common.SyndicationContentFormat.MicroSummaryGenerator
+  id: MicroSummaryGenerator
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: MicroSummaryGenerator
+  nameWithType: SyndicationContentFormat.MicroSummaryGenerator
+  fullName: Argotic.Common.SyndicationContentFormat.MicroSummaryGenerator
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MicroSummaryGenerator
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 44
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Microsummary Generator 0.1 syndication format.\n"
+  example: []
+  syntax:
+    content: MicroSummaryGenerator = 4
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.NewsML
+  commentId: F:Argotic.Common.SyndicationContentFormat.NewsML
+  id: NewsML
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: NewsML
+  nameWithType: SyndicationContentFormat.NewsML
+  fullName: Argotic.Common.SyndicationContentFormat.NewsML
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: NewsML
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the News Markup Language (NewsML) G2 1.0 syndication format.\n"
+  example: []
+  syntax:
+    content: NewsML = 5
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.OpenSearchDescription
+  commentId: F:Argotic.Common.SyndicationContentFormat.OpenSearchDescription
+  id: OpenSearchDescription
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: OpenSearchDescription
+  nameWithType: SyndicationContentFormat.OpenSearchDescription
+  fullName: Argotic.Common.SyndicationContentFormat.OpenSearchDescription
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OpenSearchDescription
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the OpenSearch Description 1.1 syndication format.\n"
+  example: []
+  syntax:
+    content: OpenSearchDescription = 6
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Opml
+  commentId: F:Argotic.Common.SyndicationContentFormat.Opml
+  id: Opml
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Opml
+  nameWithType: SyndicationContentFormat.Opml
+  fullName: Argotic.Common.SyndicationContentFormat.Opml
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Opml
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 65
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Outline Processor Markup Language (OPML) 2.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Opml = 7
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Rsd
+  commentId: F:Argotic.Common.SyndicationContentFormat.Rsd
+  id: Rsd
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Rsd
+  nameWithType: SyndicationContentFormat.Rsd
+  fullName: Argotic.Common.SyndicationContentFormat.Rsd
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rsd
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 73
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Really Simple Discovery (RSD) 1.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Rsd = 8
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Rss
+  commentId: F:Argotic.Common.SyndicationContentFormat.Rss
+  id: Rss
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Rss
+  nameWithType: SyndicationContentFormat.Rss
+  fullName: Argotic.Common.SyndicationContentFormat.Rss
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rss
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 81
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Really Simple Syndication (RSS) 2.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Rss = 9
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.Rdf
+  commentId: F:Argotic.Common.SyndicationContentFormat.Rdf
+  id: Rdf
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: Rdf
+  nameWithType: SyndicationContentFormat.Rdf
+  fullName: Argotic.Common.SyndicationContentFormat.Rdf
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rdf
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 89
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Resource Description Framework (RDF) 1.0 syndication format.\n"
+  example: []
+  syntax:
+    content: Rdf = 10
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.AtomCategoryDocument
+  commentId: F:Argotic.Common.SyndicationContentFormat.AtomCategoryDocument
+  id: AtomCategoryDocument
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: AtomCategoryDocument
+  nameWithType: SyndicationContentFormat.AtomCategoryDocument
+  fullName: Argotic.Common.SyndicationContentFormat.AtomCategoryDocument
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomCategoryDocument
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 97
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Atom Publishing Protocol 1.0 Category Document syndication format.\n"
+  example: []
+  syntax:
+    content: AtomCategoryDocument = 11
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Common.SyndicationContentFormat.AtomServiceDocument
+  commentId: F:Argotic.Common.SyndicationContentFormat.AtomServiceDocument
+  id: AtomServiceDocument
+  parent: Argotic.Common.SyndicationContentFormat
+  langs:
+  - csharp
+  - vb
+  name: AtomServiceDocument
+  nameWithType: SyndicationContentFormat.AtomServiceDocument
+  fullName: Argotic.Common.SyndicationContentFormat.AtomServiceDocument
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationContentFormat.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomServiceDocument
+    path: ../Solutions/Argotic.Common/SyndicationContentFormat.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nIndicates that the syndication resource conforms to the Atom Publishing Protocol 1.0 Service Document syndication format.\n"
+  example: []
+  syntax:
+    content: AtomServiceDocument = 12
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Common.EnumerationMetadataAttribute
+  commentId: T:Argotic.Common.EnumerationMetadataAttribute
+  parent: Argotic.Common
+  name: EnumerationMetadataAttribute
+  nameWithType: EnumerationMetadataAttribute
+  fullName: Argotic.Common.EnumerationMetadataAttribute
+- uid: Argotic.Common.MimeMediaTypeAttribute
+  commentId: T:Argotic.Common.MimeMediaTypeAttribute
+  parent: Argotic.Common
+  name: MimeMediaTypeAttribute
+  nameWithType: MimeMediaTypeAttribute
+  fullName: Argotic.Common.MimeMediaTypeAttribute
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat

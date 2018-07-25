@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="ApmlDocument"/>.
     /// </summary>
@@ -20,7 +20,10 @@ namespace Argotic.Data.Adapters
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="ApmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the APML 0.6 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Apml")]
     public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -33,7 +36,8 @@ namespace Argotic.Data.Adapters
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -46,27 +50,27 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator headNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
+            XPathNavigator headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
             if (headNavigator != null)
             {
                 resource.Head.Load(headNavigator, this.Settings);
             }
 
-            XPathNavigator bodyNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
+            XPathNavigator bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
             if (bodyNavigator != null)
             {
                 if (bodyNavigator.HasAttributes)
                 {
-                    string defaultProfileAttribute  = bodyNavigator.GetAttribute("defaultprofile", String.Empty);
-                    if (!String.IsNullOrEmpty(defaultProfileAttribute))
+                    string defaultProfileAttribute = bodyNavigator.GetAttribute("defaultprofile", string.Empty);
+                    if (!string.IsNullOrEmpty(defaultProfileAttribute))
                     {
                         resource.DefaultProfileName = defaultProfileAttribute;
                     }
                 }
 
-                XPathNodeIterator profileIterator   = bodyNavigator.Select("apml:Profile", manager);
+                XPathNodeIterator profileIterator = bodyNavigator.Select("apml:Profile", manager);
                 if (profileIterator != null && profileIterator.Count > 0)
                 {
                     int counter = 0;
@@ -87,7 +91,9 @@ namespace Argotic.Data.Adapters
                     }
                 }
 
-                XPathNodeIterator applicationIterator   = bodyNavigator.Select("apml:Applications/apml:Application", manager);
+                XPathNodeIterator applicationIterator = bodyNavigator.Select(
+                    "apml:Applications/apml:Application",
+                    manager);
                 if (applicationIterator != null && applicationIterator.Count > 0)
                 {
                     while (applicationIterator.MoveNext())
@@ -101,7 +107,9 @@ namespace Argotic.Data.Adapters
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
+            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(
+                this.Navigator.SelectSingleNode("apml:APML", manager),
+                this.Settings);
             adapter.Fill(resource, manager);
         }
     }

@@ -1,0 +1,1191 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.TrackbackClient
+  commentId: T:Argotic.Net.TrackbackClient
+  id: TrackbackClient
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.TrackbackClient.#ctor
+  - Argotic.Net.TrackbackClient.#ctor(System.Uri)
+  - Argotic.Net.TrackbackClient.#ctor(System.Uri,System.String)
+  - Argotic.Net.TrackbackClient.Credentials
+  - Argotic.Net.TrackbackClient.Host
+  - Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  - Argotic.Net.TrackbackClient.Proxy
+  - Argotic.Net.TrackbackClient.Send(Argotic.Net.TrackbackMessage)
+  - Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  - Argotic.Net.TrackbackClient.SendAsyncCancel
+  - Argotic.Net.TrackbackClient.SendCompleted
+  - Argotic.Net.TrackbackClient.Timeout
+  - Argotic.Net.TrackbackClient.UseDefaultCredentials
+  - Argotic.Net.TrackbackClient.UserAgent
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClient
+  nameWithType: TrackbackClient
+  fullName: Argotic.Net.TrackbackClient
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TrackbackClient
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 24
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nAllows applications to send and received notification pings by using the Trackback peer-to-peer notification protocol.\n"
+  remarks: "\n<p>\n    This implementation of Trackback is based on the Trackback 1.2 specification which can be found\n    at <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a>.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Net\\TrackbackClientExample.cs\" region=\"TrackbackClient\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public class TrackbackClient
+    content.vb: Public Class TrackbackClient
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Net.TrackbackClient.#ctor
+  commentId: M:Argotic.Net.TrackbackClient.#ctor
+  id: '#ctor'
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClient()
+  nameWithType: TrackbackClient.TrackbackClient()
+  fullName: Argotic.Net.TrackbackClient.TrackbackClient()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 61
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public TrackbackClient()
+    content.vb: Public Sub New
+  overload: Argotic.Net.TrackbackClient.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.#ctor(System.Uri)
+  commentId: M:Argotic.Net.TrackbackClient.#ctor(System.Uri)
+  id: '#ctor(System.Uri)'
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClient(Uri)
+  nameWithType: TrackbackClient.TrackbackClient(Uri)
+  fullName: Argotic.Net.TrackbackClient.TrackbackClient(System.Uri)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 71
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> class that sends Trackback pings using the specified Trackback server.\n"
+  example: []
+  syntax:
+    content: public TrackbackClient(Uri host)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for Trackback transactions.
+    content.vb: Public Sub New(host As Uri)
+  overload: Argotic.Net.TrackbackClient.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.#ctor(System.Uri,System.String)
+  commentId: M:Argotic.Net.TrackbackClient.#ctor(System.Uri,System.String)
+  id: '#ctor(System.Uri,System.String)'
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClient(Uri, String)
+  nameWithType: TrackbackClient.TrackbackClient(Uri, String)
+  fullName: Argotic.Net.TrackbackClient.TrackbackClient(System.Uri, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 85
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> class that sends Trackback pings using the specified Trackback server and user agent.\n"
+  example: []
+  syntax:
+    content: public TrackbackClient(Uri host, string userAgent)
+    parameters:
+    - id: host
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for Trackback transactions.
+    - id: userAgent
+      type: System.String
+      description: Information such as the application name, version, host operating system, and language.
+    content.vb: Public Sub New(host As Uri, userAgent As String)
+  overload: Argotic.Net.TrackbackClient.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.SendCompleted
+  commentId: E:Argotic.Net.TrackbackClient.SendCompleted
+  id: SendCompleted
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: SendCompleted
+  nameWithType: TrackbackClient.SendCompleted
+  fullName: Argotic.Net.TrackbackClient.SendCompleted
+  type: Event
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendCompleted
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 95
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nOccurs when an asynchronous Trackback ping request send operation completes.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<TrackbackMessageSentEventArgs> SendCompleted
+    return:
+      type: System.EventHandler{Argotic.Net.TrackbackMessageSentEventArgs}
+    content.vb: Public Event SendCompleted As EventHandler(Of TrackbackMessageSentEventArgs)
+  seealso:
+  - linkId: Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+    commentId: M:Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.Credentials
+  commentId: P:Argotic.Net.TrackbackClient.Credentials
+  id: Credentials
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: TrackbackClient.Credentials
+  fullName: Argotic.Net.TrackbackClient.Credentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credentials
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the authentication credentials utilized by this client when making Trackback pings.\n"
+  example: []
+  syntax:
+    content: public ICredentials Credentials { get; set; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> object that represents the authentication credentials provided by this client when making Trackback pings.\nThe default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.\n"
+    content.vb: Public Property Credentials As ICredentials
+  overload: Argotic.Net.TrackbackClient.Credentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.Host
+  commentId: P:Argotic.Net.TrackbackClient.Host
+  id: Host
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: Host
+  nameWithType: TrackbackClient.Host
+  fullName: Argotic.Net.TrackbackClient.Host
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Host
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 125
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the location of the host computer that client Trackback pings will be sent to.\n"
+  remarks: "\nIf <xref href=\"Argotic.Net.TrackbackClient.Host\" data-throw-if-not-resolved=\"false\"></xref> is a null reference (Nothing in Visual Basic), <xref href=\"Argotic.Net.TrackbackClient.Host\" data-throw-if-not-resolved=\"false\"></xref> is initialized using the settings in the application or machine configuration files.\n"
+  example: []
+  syntax:
+    content: public Uri Host { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the host computer used for Trackback transactions.
+    content.vb: Public Property Host As Uri
+  overload: Argotic.Net.TrackbackClient.Host*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.Proxy
+  commentId: P:Argotic.Net.TrackbackClient.Proxy
+  id: Proxy
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: Proxy
+  nameWithType: TrackbackClient.Proxy
+  fullName: Argotic.Net.TrackbackClient.Proxy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Proxy
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 146
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the web proxy utilized by this client to proxy Trackback pings.\n"
+  example: []
+  syntax:
+    content: public IWebProxy Proxy { get; set; }
+    parameters: []
+    return:
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> object that represents the web proxy utilized by this client to proxy Trackback pings.\nThe default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.\n"
+    content.vb: Public Property Proxy As IWebProxy
+  overload: Argotic.Net.TrackbackClient.Proxy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.Timeout
+  commentId: P:Argotic.Net.TrackbackClient.Timeout
+  id: Timeout
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: Timeout
+  nameWithType: TrackbackClient.Timeout
+  fullName: Argotic.Net.TrackbackClient.Timeout
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Timeout
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 168
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets a value that specifies the amount of time after which asynchronous send operations will time out.\n"
+  remarks: "\nIf <xref href=\"Argotic.Net.TrackbackClient.Timeout\" data-throw-if-not-resolved=\"false\"></xref> is equal to <xref href=\"System.TimeSpan.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Net.TrackbackClient.Timeout\" data-throw-if-not-resolved=\"false\"></xref> is initialized using the settings in the application or machine configuration files.\n"
+  example: []
+  syntax:
+    content: public TimeSpan Timeout { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+      description: A <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref> that specifies the time-out period. The default value is 15 seconds.
+    content.vb: Public Property Timeout As TimeSpan
+  overload: Argotic.Net.TrackbackClient.Timeout*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The time out period is less than zero.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The time out period is greater than a year.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.UseDefaultCredentials
+  commentId: P:Argotic.Net.TrackbackClient.UseDefaultCredentials
+  id: UseDefaultCredentials
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: UseDefaultCredentials
+  nameWithType: TrackbackClient.UseDefaultCredentials
+  fullName: Argotic.Net.TrackbackClient.UseDefaultCredentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UseDefaultCredentials
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 211
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets a value indicating whether gets or sets a <xref href=\"System.Boolean\" data-throw-if-not-resolved=\"false\"></xref> value that controls whether the <xref href=\"System.Net.CredentialCache.DefaultCredentials\" data-throw-if-not-resolved=\"false\"></xref> are sent when making Trackback pings.\n"
+  remarks: "\n<p>\n    Some Trackback servers require that the client be authenticated before the server executes Trackback pings on its behalf.\n    Set this property to <strong>true</strong> when this <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> object should, if requested by the server, authenticate using the\n    default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.\n</p>\n<p>\n    Credentials information can also be specified using the application and machine configuration files.\n    For more information, see <xref href=\"Argotic.Configuration.XmlRpcClientNetworkElement\" data-throw-if-not-resolved=\"false\"></xref> Element (Network Settings).\n</p>\n<p>\n    If the UseDefaultCredentials property is set to <strong>false</strong>, then the value set in the <xref href=\"Argotic.Net.TrackbackClient.Credentials\" data-throw-if-not-resolved=\"false\"></xref> property\n    will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <strong>false</strong>\n    and the <xref href=\"Argotic.Net.TrackbackClient.Credentials\" data-throw-if-not-resolved=\"false\"></xref> property has not been set, then Trackback pings are sent to the server anonymously.\n</p>\n"
+  example: []
+  syntax:
+    content: public bool UseDefaultCredentials { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the default credentials are used; otherwise <strong>false</strong>. The default value is <strong>false</strong>.
+    content.vb: Public Property UseDefaultCredentials As Boolean
+  overload: Argotic.Net.TrackbackClient.UseDefaultCredentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.UserAgent
+  commentId: P:Argotic.Net.TrackbackClient.UserAgent
+  id: UserAgent
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: UserAgent
+  nameWithType: TrackbackClient.UserAgent
+  fullName: Argotic.Net.TrackbackClient.UserAgent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UserAgent
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 219
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets information such as the client application name, version, host operating system, and language.\n"
+  example: []
+  syntax:
+    content: public string UserAgent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.
+    content.vb: Public Property UserAgent As String
+  overload: Argotic.Net.TrackbackClient.UserAgent*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.Send(Argotic.Net.TrackbackMessage)
+  commentId: M:Argotic.Net.TrackbackClient.Send(Argotic.Net.TrackbackMessage)
+  id: Send(Argotic.Net.TrackbackMessage)
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: Send(TrackbackMessage)
+  nameWithType: TrackbackClient.Send(TrackbackMessage)
+  fullName: Argotic.Net.TrackbackClient.Send(Argotic.Net.TrackbackMessage)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Send
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 253
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSends the specified message to a Trackback server to execute an Trackback ping request.\n"
+  example: []
+  syntax:
+    content: public TrackbackResponse Send(TrackbackMessage message)
+    parameters:
+    - id: message
+      type: Argotic.Net.TrackbackMessage
+      description: A <xref href="Argotic.Net.TrackbackMessage" data-throw-if-not-resolved="false"></xref> that represents the information needed to execute the Trackback ping request.
+    return:
+      type: Argotic.Net.TrackbackResponse
+      description: A <xref href="Argotic.Net.TrackbackResponse" data-throw-if-not-resolved="false"></xref> that represents the server&apos;s response to the Trackback ping request.
+    content.vb: Public Function Send(message As TrackbackMessage) As TrackbackResponse
+  overload: Argotic.Net.TrackbackClient.Send*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The <xref href="Argotic.Net.TrackbackClient.Host" data-throw-if-not-resolved="false"></xref> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Net.TrackbackClient" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  commentId: M:Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  id: SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: SendAsync(TrackbackMessage, Object)
+  nameWithType: TrackbackClient.SendAsync(TrackbackMessage, Object)
+  fullName: Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendAsync
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 308
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSends the specified message to an Trackback server to execute an Trackback ping request.\nThis method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.\n"
+  remarks: "\n<p>\n    To receive notification when the Trackback ping request has been sent or the operation has been cancelled, add an event handler to the <xref href=\"Argotic.Net.TrackbackClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Net.TrackbackClient.SendAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void SendAsync(TrackbackMessage message, object userToken)
+    parameters:
+    - id: message
+      type: Argotic.Net.TrackbackMessage
+      description: A <xref href="Argotic.Net.TrackbackMessage" data-throw-if-not-resolved="false"></xref> that represents the information needed to execute the Trackback ping request.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub SendAsync(message As TrackbackMessage, userToken As Object)
+  overload: Argotic.Net.TrackbackClient.SendAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The <xref href="Argotic.Net.TrackbackClient.Host" data-throw-if-not-resolved="false"></xref> is a <strong>null</strong> reference (Nothing in Visual Basic).
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Net.TrackbackClient" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.SendAsyncCancel
+  commentId: M:Argotic.Net.TrackbackClient.SendAsyncCancel
+  id: SendAsyncCancel
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: SendAsyncCancel()
+  nameWithType: TrackbackClient.SendAsyncCancel()
+  fullName: Argotic.Net.TrackbackClient.SendAsyncCancel()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendAsyncCancel
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 362
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCancels an asynchronous operation to send an Trackback ping request.\n"
+  remarks: "\nUse the <xref href=\"Argotic.Net.TrackbackClient.SendAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method to cancel a pending <xref href=\"Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation.\nIf there is an Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.\nIf there is no send operation pending, this method does nothing.\n"
+  example: []
+  syntax:
+    content: public void SendAsyncCancel()
+    content.vb: Public Sub SendAsyncCancel
+  overload: Argotic.Net.TrackbackClient.SendAsyncCancel*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  commentId: M:Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  id: OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  parent: Argotic.Net.TrackbackClient
+  langs:
+  - csharp
+  - vb
+  name: OnMessageSent(TrackbackMessageSentEventArgs)
+  nameWithType: TrackbackClient.OnMessageSent(TrackbackMessageSentEventArgs)
+  fullName: Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OnMessageSent
+    path: ../Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs
+    startLine: 385
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nRaises the <xref href=\"Argotic.Net.TrackbackClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
+  remarks: "\n<p>\n    Classes that inherit from the <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> class can override the <xref href=\"Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)\" data-throw-if-not-resolved=\"false\"></xref> method\n    to perform additional tasks when the <xref href=\"Argotic.Net.TrackbackClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> event occurs.\n</p>\n<p>\n<xref href=\"Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)\" data-throw-if-not-resolved=\"false\"></xref> also allows derived classes to handle <xref href=\"Argotic.Net.TrackbackClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> without attaching a delegate.\nThis is the preferred technique for handling <xref href=\"Argotic.Net.TrackbackClient.SendCompleted\" data-throw-if-not-resolved=\"false\"></xref> in a derived class.\n</p>\n"
+  example: []
+  syntax:
+    content: protected virtual void OnMessageSent(TrackbackMessageSentEventArgs e)
+    parameters:
+    - id: e
+      type: Argotic.Net.TrackbackMessageSentEventArgs
+      description: A <xref href="Argotic.Net.TrackbackMessageSentEventArgs" data-throw-if-not-resolved="false"></xref> that contains the event data.
+    content.vb: Protected Overridable Sub OnMessageSent(e As TrackbackMessageSentEventArgs)
+  overload: Argotic.Net.TrackbackClient.OnMessageSent*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+references:
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Net.TrackbackClient
+  commentId: T:Argotic.Net.TrackbackClient
+  name: TrackbackClient
+  nameWithType: TrackbackClient
+  fullName: Argotic.Net.TrackbackClient
+- uid: Argotic.Net.TrackbackClient.#ctor*
+  commentId: Overload:Argotic.Net.TrackbackClient.#ctor
+  name: TrackbackClient
+  nameWithType: TrackbackClient.TrackbackClient
+  fullName: Argotic.Net.TrackbackClient.TrackbackClient
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  commentId: M:Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)
+  isExternal: true
+- uid: System.EventHandler{Argotic.Net.TrackbackMessageSentEventArgs}
+  commentId: T:System.EventHandler{Argotic.Net.TrackbackMessageSentEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<TrackbackMessageSentEventArgs>
+  nameWithType: EventHandler<TrackbackMessageSentEventArgs>
+  fullName: System.EventHandler<Argotic.Net.TrackbackMessageSentEventArgs>
+  nameWithType.vb: EventHandler(Of TrackbackMessageSentEventArgs)
+  fullName.vb: System.EventHandler(Of Argotic.Net.TrackbackMessageSentEventArgs)
+  name.vb: EventHandler(Of TrackbackMessageSentEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Net.TrackbackMessageSentEventArgs
+    name: TrackbackMessageSentEventArgs
+    nameWithType: TrackbackMessageSentEventArgs
+    fullName: Argotic.Net.TrackbackMessageSentEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Net.TrackbackMessageSentEventArgs
+    name: TrackbackMessageSentEventArgs
+    nameWithType: TrackbackMessageSentEventArgs
+    fullName: Argotic.Net.TrackbackMessageSentEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: Argotic.Net.TrackbackClient.Credentials*
+  commentId: Overload:Argotic.Net.TrackbackClient.Credentials
+  name: Credentials
+  nameWithType: TrackbackClient.Credentials
+  fullName: Argotic.Net.TrackbackClient.Credentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Net.TrackbackClient.Host
+  commentId: P:Argotic.Net.TrackbackClient.Host
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.Host*
+  commentId: Overload:Argotic.Net.TrackbackClient.Host
+  name: Host
+  nameWithType: TrackbackClient.Host
+  fullName: Argotic.Net.TrackbackClient.Host
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: Argotic.Net.TrackbackClient.Proxy*
+  commentId: Overload:Argotic.Net.TrackbackClient.Proxy
+  name: Proxy
+  nameWithType: TrackbackClient.Proxy
+  fullName: Argotic.Net.TrackbackClient.Proxy
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Argotic.Net.TrackbackClient.Timeout
+  commentId: P:Argotic.Net.TrackbackClient.Timeout
+  isExternal: true
+- uid: System.TimeSpan.MinValue
+  commentId: F:System.TimeSpan.MinValue
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.Timeout*
+  commentId: Overload:Argotic.Net.TrackbackClient.Timeout
+  name: Timeout
+  nameWithType: TrackbackClient.Timeout
+  fullName: Argotic.Net.TrackbackClient.Timeout
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Net.CredentialCache.DefaultCredentials
+  commentId: P:System.Net.CredentialCache.DefaultCredentials
+  isExternal: true
+- uid: Argotic.Configuration.XmlRpcClientNetworkElement
+  commentId: T:Argotic.Configuration.XmlRpcClientNetworkElement
+  parent: Argotic.Configuration
+  name: XmlRpcClientNetworkElement
+  nameWithType: XmlRpcClientNetworkElement
+  fullName: Argotic.Configuration.XmlRpcClientNetworkElement
+- uid: Argotic.Net.TrackbackClient.Credentials
+  commentId: P:Argotic.Net.TrackbackClient.Credentials
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.UseDefaultCredentials*
+  commentId: Overload:Argotic.Net.TrackbackClient.UseDefaultCredentials
+  name: UseDefaultCredentials
+  nameWithType: TrackbackClient.UseDefaultCredentials
+  fullName: Argotic.Net.TrackbackClient.UseDefaultCredentials
+- uid: Argotic.Configuration
+  commentId: N:Argotic.Configuration
+  name: Argotic.Configuration
+  nameWithType: Argotic.Configuration
+  fullName: Argotic.Configuration
+- uid: Argotic.Net.TrackbackClient.UserAgent*
+  commentId: Overload:Argotic.Net.TrackbackClient.UserAgent
+  name: UserAgent
+  nameWithType: TrackbackClient.UserAgent
+  fullName: Argotic.Net.TrackbackClient.UserAgent
+- uid: Argotic.Net.TrackbackMessage
+  commentId: T:Argotic.Net.TrackbackMessage
+  parent: Argotic.Net
+  name: TrackbackMessage
+  nameWithType: TrackbackMessage
+  fullName: Argotic.Net.TrackbackMessage
+- uid: Argotic.Net.TrackbackResponse
+  commentId: T:Argotic.Net.TrackbackResponse
+  parent: Argotic.Net
+  name: TrackbackResponse
+  nameWithType: TrackbackResponse
+  fullName: Argotic.Net.TrackbackResponse
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.Send*
+  commentId: Overload:Argotic.Net.TrackbackClient.Send
+  name: Send
+  nameWithType: TrackbackClient.Send
+  fullName: Argotic.Net.TrackbackClient.Send
+- uid: Argotic.Net.TrackbackClient.SendCompleted
+  commentId: E:Argotic.Net.TrackbackClient.SendCompleted
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.SendAsyncCancel
+  commentId: M:Argotic.Net.TrackbackClient.SendAsyncCancel
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.SendAsync*
+  commentId: Overload:Argotic.Net.TrackbackClient.SendAsync
+  name: SendAsync
+  nameWithType: TrackbackClient.SendAsync
+  fullName: Argotic.Net.TrackbackClient.SendAsync
+- uid: Argotic.Net.TrackbackClient.SendAsyncCancel*
+  commentId: Overload:Argotic.Net.TrackbackClient.SendAsyncCancel
+  name: SendAsyncCancel
+  nameWithType: TrackbackClient.SendAsyncCancel
+  fullName: Argotic.Net.TrackbackClient.SendAsyncCancel
+- uid: Argotic.Net.TrackbackMessageSentEventArgs
+  commentId: T:Argotic.Net.TrackbackMessageSentEventArgs
+  parent: Argotic.Net
+  name: TrackbackMessageSentEventArgs
+  nameWithType: TrackbackMessageSentEventArgs
+  fullName: Argotic.Net.TrackbackMessageSentEventArgs
+- uid: Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  commentId: M:Argotic.Net.TrackbackClient.OnMessageSent(Argotic.Net.TrackbackMessageSentEventArgs)
+  isExternal: true
+- uid: Argotic.Net.TrackbackClient.OnMessageSent*
+  commentId: Overload:Argotic.Net.TrackbackClient.OnMessageSent
+  name: OnMessageSent
+  nameWithType: TrackbackClient.OnMessageSent
+  fullName: Argotic.Net.TrackbackClient.OnMessageSent

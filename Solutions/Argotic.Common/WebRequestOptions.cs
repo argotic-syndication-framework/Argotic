@@ -1,22 +1,28 @@
-using System;
-using System.Net;
-using System.Net.Cache;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
-
 namespace Argotic.Common
 {
+    using System;
+    using System.Net;
+    using System.Net.Cache;
+    using System.Net.Security;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Principal;
+
     /// <summary>
     /// Holds options that should be applied to web requests.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class WebRequestOptions
     {
+        [NonSerialized]
+        private RequestCachePolicy cachePolicy;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WebRequestOptions"/> class.
         /// </summary>
-        public WebRequestOptions() : this(null, null) {}
+        public WebRequestOptions()
+            : this(null, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebRequestOptions"/> class using the specified <see cref="ICredentials">credentials</see>.
@@ -24,7 +30,10 @@ namespace Argotic.Common
         /// <param name="credentials">
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the source resource when required. This value can be <b>null</b>.
         /// </param>
-        public WebRequestOptions(ICredentials credentials) : this(credentials, null) {}
+        public WebRequestOptions(ICredentials credentials)
+            : this(credentials, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WebRequestOptions"/> class using the specified <see cref="ICredentials">credentials</see> and  <see cref="IWebProxy">proxy</see>.
@@ -37,308 +46,128 @@ namespace Argotic.Common
         /// </param>
         public WebRequestOptions(ICredentials credentials, IWebProxy proxy)
         {
-            _allowAutoRedirect  = true;
-            _keepAlive          = true;
-            _credentials        = credentials;
-            _proxy = proxy;
+            this.AllowAutoRedirect = true;
+            this.KeepAlive = true;
+            this.Credentials = credentials;
+            this.Proxy = proxy;
 
             if (credentials == null)
             {
-                _useDefaultCredentials  = true;
+                this.UseDefaultCredentials = true;
             }
         }
 
-        private AuthenticationLevel? _authenticationLevel;
-        [NonSerialized()] private RequestCachePolicy _cachePolicy;
-        private string _connectionGroupName;
-        private ICredentials _credentials;
-        private WebHeaderCollection _headers;
-        private TokenImpersonationLevel? _impersonationLevel;
-        private bool? _preAuthenticate;
-        private IWebProxy _proxy;
-        private int? _timeout;
-        private bool? _useDefaultCredentials;
-
         /// <summary>Gets or sets values indicating the level of authentication and impersonation used for this request.</summary>
-        public AuthenticationLevel? AuthenticationLevel
-        {
-            get { return _authenticationLevel; }
-            set { _authenticationLevel = value; }
-        }
+        public AuthenticationLevel? AuthenticationLevel { get; set; }
 
         /// <summary>Gets or sets the cache policy for this request.</summary>
         public RequestCachePolicy CachePolicy
         {
-            get { return _cachePolicy; }
-            set { _cachePolicy = value; }
+            get { return this.cachePolicy; }
+            set { this.cachePolicy = value; }
         }
 
         /// <summary>Gets or sets the name of the connection group for the request.</summary>
-        public string ConnectionGroupName
-        {
-            get { return _connectionGroupName; }
-            set { _connectionGroupName = value; }
-        }
+        public string ConnectionGroupName { get; set; }
 
         /// <summary>Gets or sets the network credentials used for authenticating the request with the Internet resource.</summary>
-        public ICredentials Credentials
-        {
-            get { return _credentials; }
-            set { _credentials = value; }
-        }
+        public ICredentials Credentials { get; set; }
 
         /// <summary>Gets or sets the collection of header name/value pairs associated with the request.</summary>
-        public WebHeaderCollection Headers
-        {
-            get { return _headers; }
-            set { _headers = value; }
-        }
+        public WebHeaderCollection Headers { get; set; }
 
         /// <summary>Gets or sets the impersonation level for the current request.</summary>
-        public TokenImpersonationLevel? ImpersonationLevel
-        {
-            get { return _impersonationLevel; }
-            set { _impersonationLevel = value; }
-        }
+        public TokenImpersonationLevel? ImpersonationLevel { get; set; }
 
-        /// <summary>Indicates whether to pre-authenticate the request.</summary>
-        public bool? PreAuthenticate
-        {
-            get { return _preAuthenticate; }
-            set { _preAuthenticate = value; }
-        }
+        /// <summary>Gets or sets indicates whether to pre-authenticate the request.</summary>
+        public bool? PreAuthenticate { get; set; }
 
         /// <summary>Gets or sets the network proxy to use to access this Internet resource.</summary>
-        public IWebProxy Proxy
-        {
-            get { return _proxy; }
-            set { _proxy = value; }
-        }
+        public IWebProxy Proxy { get; set; }
 
         /// <summary>Gets or sets the length of time before the request times out.</summary>
-        public int? Timeout
-        {
-            get { return _timeout; }
-            set { _timeout = value; }
-        }
+        public int? Timeout { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> value that controls whether <see cref="P:System.Net.CredentialCache.DefaultCredentials"></see> are sent with requests.</summary>
-        public bool? UseDefaultCredentials
-        {
-            get { return _useDefaultCredentials; }
-            set { _useDefaultCredentials = value; }
-        }
-
-        private long? _contentOffset;
-        private bool? _enableSsl;
-        private string _renameTo;
-        private bool? _useBinary;
-        private bool? _usePassive;
+        public bool? UseDefaultCredentials { get; set; }
 
         /// <summary>Gets or sets a byte offset into the file being downloaded by this request.</summary>
-        public long? ContentOffset
-        {
-            get { return _contentOffset; }
-            set { _contentOffset = value; }
-        }
+        public long? ContentOffset { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> that specifies that an SSL connection should be used.</summary>
-        public bool? EnableSsl
-        {
-            get { return _enableSsl; }
-            set { _enableSsl = value; }
-        }
+        public bool? EnableSsl { get; set; }
 
         /// <summary>Gets or sets the new name of a file being renamed.</summary>
-        public string RenameTo
-        {
-            get { return _renameTo; }
-            set { _renameTo = value; }
-        }
+        public string RenameTo { get; set; }
 
         /// <summary>Gets or sets a <see cref="T:System.Boolean"/> value that specifies the data type for file transfers.</summary>
-        public bool? UseBinary
-        {
-            get { return _useBinary; }
-            set { _useBinary = value; }
-        }
+        public bool? UseBinary { get; set; }
 
         /// <summary>Gets or sets the behavior of a client application's data transfer process.</summary>
-        public bool? UsePassive
-        {
-            get { return _usePassive; }
-            set { _usePassive = value; }
-        }
-
-        private string _accept;
-        private bool? _allowAutoRedirect;
-        private bool? _allowWriteStreamBuffering;
-        private DecompressionMethods? _automaticDecompression;
-        private string _connection;
-        private HttpContinueDelegate _continueDelegate;
-        private CookieContainer _cookieContainer;
-        private string _expect;
-        private int? _maximumAutomaticRedirections;
-        private int? _maximumResponseHeadersLength;
-        private string _mediaType;
-        private bool? _pipelined;
-        private Version _protocolVersion;
-        private string _referer;
-        private bool? _sendChunked;
-        private string _transferEncoding;
-        private bool? _unsafeAuthenticatedConnectionSharing;
-        private string _userAgent;
+        public bool? UsePassive { get; set; }
 
         /// <summary>Gets or sets the value of the Accept HTTP header.</summary>
-        public string Accept
-        {
-            get { return _accept; }
-            set { _accept = value; }
-        }
+        public string Accept { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether the request should follow redirection responses.</summary>
-        public bool? AllowAutoRedirect
-        {
-            get { return _allowAutoRedirect; }
-            set { _allowAutoRedirect = value; }
-        }
+        public bool? AllowAutoRedirect { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to buffer the data sent to the Internet resource.</summary>
-        public bool? AllowWriteStreamBuffering
-        {
-            get { return _allowWriteStreamBuffering; }
-            set { _allowWriteStreamBuffering = value; }
-        }
+        public bool? AllowWriteStreamBuffering { get; set; }
 
         /// <summary>Gets or sets the type of decompression that is used.</summary>
-        public DecompressionMethods? AutomaticDecompression
-        {
-            get { return _automaticDecompression; }
-            set { _automaticDecompression = value; }
-        }
+        public DecompressionMethods? AutomaticDecompression { get; set; }
 
         /// <summary>Gets or sets the value of the Connection HTTP header.</summary>
-        public string Connection
-        {
-            get { return _connection; }
-            set { _connection = value; }
-        }
+        public string Connection { get; set; }
 
         /// <summary>Gets or sets the delegate method called when an HTTP 100-continue response is received from the Internet resource.</summary>
-        public HttpContinueDelegate ContinueDelegate
-        {
-            get { return _continueDelegate; }
-            set { _continueDelegate = value; }
-        }
+        public HttpContinueDelegate ContinueDelegate { get; set; }
 
         /// <summary>Gets or sets the cookies associated with the request.</summary>
-        public CookieContainer CookieContainer
-        {
-            get { return _cookieContainer; }
-            set { _cookieContainer = value; }
-        }
+        public CookieContainer CookieContainer { get; set; }
 
         /// <summary>Gets or sets the value of the Expect HTTP header.</summary>
-        public string Expect
-        {
-            get { return _expect; }
-            set { _expect = value; }
-        }
+        public string Expect { get; set; }
 
         /// <summary>Gets or sets the maximum number of redirects that the request follows.</summary>
-        public int? MaximumAutomaticRedirections
-        {
-            get { return _maximumAutomaticRedirections; }
-            set { _maximumAutomaticRedirections = value; }
-        }
+        public int? MaximumAutomaticRedirections { get; set; }
 
         /// <summary>Gets or sets the maximum allowed length of the response headers.</summary>
-        public int? MaximumResponseHeadersLength
-        {
-            get { return _maximumResponseHeadersLength; }
-            set { _maximumResponseHeadersLength = value; }
-        }
+        public int? MaximumResponseHeadersLength { get; set; }
 
         /// <summary>Gets or sets the media type of the request.</summary>
-        public string MediaType
-        {
-            get { return _mediaType; }
-            set { _mediaType = value; }
-        }
+        public string MediaType { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to pipeline the request to the Internet resource.</summary>
-        public bool? Pipelined
-        {
-            get { return _pipelined; }
-            set { _pipelined = value; }
-        }
+        public bool? Pipelined { get; set; }
 
         /// <summary>Gets or sets the version of HTTP to use for the request.</summary>
-        public Version ProtocolVersion
-        {
-            get { return _protocolVersion; }
-            set { _protocolVersion = value; }
-        }
+        public Version ProtocolVersion { get; set; }
 
         /// <summary>Gets or sets the value of the Referer HTTP header.</summary>
-        public string Referer
-        {
-            get { return _referer; }
-            set { _referer = value; }
-        }
+        public string Referer { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to send data in segments to the Internet resource.</summary>
-        public bool? SendChunked
-        {
-            get { return _sendChunked; }
-            set { _sendChunked = value; }
-        }
+        public bool? SendChunked { get; set; }
 
         /// <summary>Gets or sets the value of the Transfer-encoding HTTP header.</summary>
-        public string TransferEncoding
-        {
-            get { return _transferEncoding; }
-            set { _transferEncoding = value; }
-        }
+        public string TransferEncoding { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to allow high-speed NTLM-authenticated connection sharing.</summary>
-        public bool? UnsafeAuthenticatedConnectionSharing
-        {
-            get { return _unsafeAuthenticatedConnectionSharing; }
-            set { _unsafeAuthenticatedConnectionSharing = value; }
-        }
+        public bool? UnsafeAuthenticatedConnectionSharing { get; set; }
 
         /// <summary>Gets or sets the value of the User-agent HTTP header.</summary>
-        public string UserAgent
-        {
-            get { return _userAgent; }
-            set { _userAgent = value; }
-        }
-
-        private X509CertificateCollection _clientCertificates;
-        private bool? _keepAlive;
-        private int? _readWriteTimeout;
+        public string UserAgent { get; set; }
 
         /// <summary>Gets or sets the collection of security certificates that are associated with this request.</summary>
-        public X509CertificateCollection ClientCertificates
-        {
-            get { return _clientCertificates; }
-            set { _clientCertificates = value; }
-        }
+        public X509CertificateCollection ClientCertificates { get; set; }
 
         /// <summary>Gets or sets a value that indicates whether to make a persistent connection to the Internet resource.</summary>
-        public bool? KeepAlive
-        {
-            get { return _keepAlive; }
-            set { _keepAlive = value; }
-        }
+        public bool? KeepAlive { get; set; }
 
         /// <summary>Gets or sets a time-out when writing to or reading from a stream.</summary>
-        public int? ReadWriteTimeout
-        {
-            get { return _readWriteTimeout; }
-            set { _readWriteTimeout = value; }
-        }
+        public int? ReadWriteTimeout { get; set; }
 
         /// <summary>
         /// Applies all options on the current instance to the supplied <see cref="WebRequest"/>.
@@ -346,67 +175,218 @@ namespace Argotic.Common
         /// <param name="request">A <see cref="WebRequest"/> that should be configured.</param>
         public void ApplyOptions(WebRequest request)
         {
-            if (AuthenticationLevel != null)    request.AuthenticationLevel     = AuthenticationLevel.Value;
-            if (CachePolicy != null)            request.CachePolicy             = CachePolicy;
-            if (ConnectionGroupName != null)    request.ConnectionGroupName     = ConnectionGroupName;
-            if (Credentials != null)            request.Credentials             = Credentials;
-            if (Headers != null)                request.Headers                 = Headers;
-            if (ImpersonationLevel != null)     request.ImpersonationLevel      = ImpersonationLevel.Value;
-            if (PreAuthenticate != null)        request.PreAuthenticate         = PreAuthenticate.Value;
-            if (Proxy != null)                  request.Proxy                   = Proxy;
-            if (Timeout != null)                request.Timeout                 = Timeout.Value;
-            if (UseDefaultCredentials != null)  request.UseDefaultCredentials   = UseDefaultCredentials.Value;
+            if (this.AuthenticationLevel != null)
+            {
+                request.AuthenticationLevel = this.AuthenticationLevel.Value;
+            }
+
+            if (this.CachePolicy != null)
+            {
+                request.CachePolicy = this.CachePolicy;
+            }
+
+            if (this.ConnectionGroupName != null)
+            {
+                request.ConnectionGroupName = this.ConnectionGroupName;
+            }
+
+            if (this.Credentials != null)
+            {
+                request.Credentials = this.Credentials;
+            }
+
+            if (this.Headers != null)
+            {
+                request.Headers = this.Headers;
+            }
+
+            if (this.ImpersonationLevel != null)
+            {
+                request.ImpersonationLevel = this.ImpersonationLevel.Value;
+            }
+
+            if (this.PreAuthenticate != null)
+            {
+                request.PreAuthenticate = this.PreAuthenticate.Value;
+            }
+
+            if (this.Proxy != null)
+            {
+                request.Proxy = this.Proxy;
+            }
+
+            if (this.Timeout != null)
+            {
+                request.Timeout = this.Timeout.Value;
+            }
+
+            if (this.UseDefaultCredentials != null)
+            {
+                request.UseDefaultCredentials = this.UseDefaultCredentials.Value;
+            }
 
             FtpWebRequest ftpRequest = request as FtpWebRequest;
             if (ftpRequest != null)
             {
-                ApplyFtpOptions(ftpRequest);
+                this.ApplyFtpOptions(ftpRequest);
             }
 
             HttpWebRequest httpRequest = request as HttpWebRequest;
             if (httpRequest != null)
             {
-                ApplyHttpOptions(httpRequest);
+                this.ApplyHttpOptions(httpRequest);
             }
         }
-        
+
         private void ApplyFtpOptions(FtpWebRequest ftpRequest)
         {
-            if (ContentOffset != null)  ftpRequest.ContentOffset    = ContentOffset.Value;
-            if (EnableSsl != null)      ftpRequest.EnableSsl        = EnableSsl.Value;
-            if (RenameTo != null)       ftpRequest.RenameTo         = RenameTo;
-            if (UseBinary != null)      ftpRequest.UseBinary        = UseBinary.Value;
-            if (UsePassive != null)     ftpRequest.UsePassive       = UsePassive.Value;
+            if (this.ContentOffset != null)
+            {
+                ftpRequest.ContentOffset = this.ContentOffset.Value;
+            }
 
-            if (ClientCertificates != null) ftpRequest.ClientCertificates   = ClientCertificates;
-            if (KeepAlive != null)          ftpRequest.KeepAlive            = KeepAlive.Value;
-            if (ReadWriteTimeout != null)   ftpRequest.ReadWriteTimeout     = ReadWriteTimeout.Value;
+            if (this.EnableSsl != null)
+            {
+                ftpRequest.EnableSsl = this.EnableSsl.Value;
+            }
+
+            if (this.RenameTo != null)
+            {
+                ftpRequest.RenameTo = this.RenameTo;
+            }
+
+            if (this.UseBinary != null)
+            {
+                ftpRequest.UseBinary = this.UseBinary.Value;
+            }
+
+            if (this.UsePassive != null)
+            {
+                ftpRequest.UsePassive = this.UsePassive.Value;
+            }
+
+            if (this.ClientCertificates != null)
+            {
+                ftpRequest.ClientCertificates = this.ClientCertificates;
+            }
+
+            if (this.KeepAlive != null)
+            {
+                ftpRequest.KeepAlive = this.KeepAlive.Value;
+            }
+
+            if (this.ReadWriteTimeout != null)
+            {
+                ftpRequest.ReadWriteTimeout = this.ReadWriteTimeout.Value;
+            }
         }
-        
+
         private void ApplyHttpOptions(HttpWebRequest httpRequest)
         {
-            if (Accept != null)                                 httpRequest.Accept                                  = Accept;
-            if (AllowAutoRedirect != null)                      httpRequest.AllowAutoRedirect                       = AllowAutoRedirect.Value;
-            if (AllowWriteStreamBuffering != null)              httpRequest.AllowWriteStreamBuffering               = AllowWriteStreamBuffering.Value;
-            if (AutomaticDecompression != null)                 httpRequest.AutomaticDecompression                  = AutomaticDecompression.Value;
-            if (Connection != null)                             httpRequest.Connection                              = Connection;
-            if (ContinueDelegate != null)                       httpRequest.ContinueDelegate                        = ContinueDelegate;
-            if (CookieContainer != null)                        httpRequest.CookieContainer                         = CookieContainer;
-            if (Expect != null)                                 httpRequest.Expect                                  = Expect;
-            if (MaximumAutomaticRedirections != null)           httpRequest.MaximumAutomaticRedirections            = MaximumAutomaticRedirections.Value;
-            if (MaximumResponseHeadersLength != null)           httpRequest.MaximumResponseHeadersLength            = MaximumResponseHeadersLength.Value;
-            if (MediaType != null)                              httpRequest.MediaType                               = MediaType;
-            if (Pipelined != null)                              httpRequest.Pipelined                               = Pipelined.Value;
-            if (ProtocolVersion != null)                        httpRequest.ProtocolVersion                         = ProtocolVersion;
-            if (Referer != null)                                httpRequest.Referer                                 = Referer;
-            if (SendChunked != null)                            httpRequest.SendChunked                             = SendChunked.Value;
-            if (TransferEncoding != null)                       httpRequest.TransferEncoding                        = TransferEncoding;
-            if (UnsafeAuthenticatedConnectionSharing != null)   httpRequest.UnsafeAuthenticatedConnectionSharing    = UnsafeAuthenticatedConnectionSharing.Value;
-            if (UserAgent != null)                              httpRequest.UserAgent                               = UserAgent;
+            if (this.Accept != null)
+            {
+                httpRequest.Accept = this.Accept;
+            }
 
-            if (ClientCertificates != null) httpRequest.ClientCertificates  = ClientCertificates;
-            if (KeepAlive != null)          httpRequest.KeepAlive           = KeepAlive.Value;
-            if (ReadWriteTimeout != null)   httpRequest.ReadWriteTimeout    = ReadWriteTimeout.Value;
+            if (this.AllowAutoRedirect != null)
+            {
+                httpRequest.AllowAutoRedirect = this.AllowAutoRedirect.Value;
+            }
+
+            if (this.AllowWriteStreamBuffering != null)
+            {
+                httpRequest.AllowWriteStreamBuffering = this.AllowWriteStreamBuffering.Value;
+            }
+
+            if (this.AutomaticDecompression != null)
+            {
+                httpRequest.AutomaticDecompression = this.AutomaticDecompression.Value;
+            }
+
+            if (this.Connection != null)
+            {
+                httpRequest.Connection = this.Connection;
+            }
+
+            if (this.ContinueDelegate != null)
+            {
+                httpRequest.ContinueDelegate = this.ContinueDelegate;
+            }
+
+            if (this.CookieContainer != null)
+            {
+                httpRequest.CookieContainer = this.CookieContainer;
+            }
+
+            if (this.Expect != null)
+            {
+                httpRequest.Expect = this.Expect;
+            }
+
+            if (this.MaximumAutomaticRedirections != null)
+            {
+                httpRequest.MaximumAutomaticRedirections = this.MaximumAutomaticRedirections.Value;
+            }
+
+            if (this.MaximumResponseHeadersLength != null)
+            {
+                httpRequest.MaximumResponseHeadersLength = this.MaximumResponseHeadersLength.Value;
+            }
+
+            if (this.MediaType != null)
+            {
+                httpRequest.MediaType = this.MediaType;
+            }
+
+            if (this.Pipelined != null)
+            {
+                httpRequest.Pipelined = this.Pipelined.Value;
+            }
+
+            if (this.ProtocolVersion != null)
+            {
+                httpRequest.ProtocolVersion = this.ProtocolVersion;
+            }
+
+            if (this.Referer != null)
+            {
+                httpRequest.Referer = this.Referer;
+            }
+
+            if (this.SendChunked != null)
+            {
+                httpRequest.SendChunked = this.SendChunked.Value;
+            }
+
+            if (this.TransferEncoding != null)
+            {
+                httpRequest.TransferEncoding = this.TransferEncoding;
+            }
+
+            if (this.UnsafeAuthenticatedConnectionSharing != null)
+            {
+                httpRequest.UnsafeAuthenticatedConnectionSharing = this.UnsafeAuthenticatedConnectionSharing.Value;
+            }
+
+            if (this.UserAgent != null)
+            {
+                httpRequest.UserAgent = this.UserAgent;
+            }
+
+            if (this.ClientCertificates != null)
+            {
+                httpRequest.ClientCertificates = this.ClientCertificates;
+            }
+
+            if (this.KeepAlive != null)
+            {
+                httpRequest.KeepAlive = this.KeepAlive.Value;
+            }
+
+            if (this.ReadWriteTimeout != null)
+            {
+                httpRequest.ReadWriteTimeout = this.ReadWriteTimeout.Value;
+            }
         }
     }
 }

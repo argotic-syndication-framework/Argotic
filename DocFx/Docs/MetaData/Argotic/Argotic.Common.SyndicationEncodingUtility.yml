@@ -1,0 +1,1525 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.SyndicationEncodingUtility
+  commentId: T:Argotic.Common.SyndicationEncodingUtility
+  id: SyndicationEncodingUtility
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream,System.Text.Encoding)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions,System.Text.Encoding)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Text.Encoding)
+  - Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Common.SyndicationEncodingUtility.DecodeBase64String(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte[])
+  - Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)
+  - Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.String)
+  - Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(System.String)
+  langs:
+  - csharp
+  - vb
+  name: SyndicationEncodingUtility
+  nameWithType: SyndicationEncodingUtility
+  fullName: Argotic.Common.SyndicationEncodingUtility
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationEncodingUtility
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nProvides methods for encoding and decoding information exposed by syndicated content. This class cannot be inherited.\n"
+  example: []
+  syntax:
+    content: public static class SyndicationEncodingUtility
+    content.vb: Public Module SyndicationEncodingUtility
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.String)
+  id: CreateSafeNavigator(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(String)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied XML data.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(string xml)
+    parameters:
+    - id: xml
+      type: System.String
+      description: The XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied XML data.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">xml</code> data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(xml As String) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xml</code> data is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xml</code> data is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)
+  id: CreateSafeNavigator(System.IO.Stream)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Stream)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Stream)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 59
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe character encoding of the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code> is automatically determined based on the <em>encoding</em> attribute of the XML document declaration.\nIf the character encoding cannot be determined, a default encoding of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref> is used.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> object that contains the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(stream As Stream) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream,System.Text.Encoding)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream,System.Text.Encoding)
+  id: CreateSafeNavigator(System.IO.Stream,System.Text.Encoding)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Stream, Encoding)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Stream, Encoding)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream, System.Text.Encoding)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 88
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> object that contains the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    - id: encoding
+      type: System.Text.Encoding
+      description: A <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> object that indicates the character encoding to use when reading the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(stream As Stream, encoding As Encoding) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">encoding</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)
+  id: CreateSafeNavigator(System.IO.TextReader)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(TextReader)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(TextReader)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 109
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.IO.TextReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(TextReader reader)
+    parameters:
+    - id: reader
+      type: System.IO.TextReader
+      description: The <xref href="System.IO.TextReader" data-throw-if-not-resolved="false"></xref> object that contains the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">reader</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">reader</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(reader As TextReader) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  id: CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Uri, ICredentials, IWebProxy)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 134
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings.\n"
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(source As Uri, credentials As ICredentials, proxy As IWebProxy) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions)
+  id: CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Uri, WebRequestOptions)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Uri, WebRequestOptions)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri, Argotic.Common.WebRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 150
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(source As Uri, options As WebRequestOptions) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Text.Encoding)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Text.Encoding)
+  id: CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Text.Encoding)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Uri, ICredentials, IWebProxy, Encoding)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Uri, ICredentials, IWebProxy, Encoding)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri, System.Net.ICredentials, System.Net.IWebProxy, System.Text.Encoding)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 178
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">encoding</code> is <strong>null</strong>, the character encoding of the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> is determined automatically.\nOtherwise the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">encoding</code> is used when reading the XML data represented by the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings.\n"
+    - id: encoding
+      type: System.Text.Encoding
+      description: A <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(source As Uri, credentials As ICredentials, proxy As IWebProxy, encoding As Encoding) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions,System.Text.Encoding)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions,System.Text.Encoding)
+  id: CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions,System.Text.Encoding)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateSafeNavigator(Uri, WebRequestOptions, Encoding)
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator(Uri, WebRequestOptions, Encoding)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri, Argotic.Common.WebRequestOptions, System.Text.Encoding)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateSafeNavigator
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 199
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCreates a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nIf the <code data-dev-comment-type=\"paramref\" class=\"paramref\">encoding</code> is <strong>null</strong>, the character encoding of the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> is determined automatically.\nOtherwise the specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">encoding</code> is used when reading the XML data represented by the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\n"
+  example: []
+  syntax:
+    content: public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the XML data to be navigated by the created <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref>.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: encoding
+      type: System.Text.Encoding
+      description: A <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: "\nAn <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that provides a cursor model for navigating the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\nThe supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> XML data is parsed to remove invalid XML characters that would normally prevent\na navigator from being created.\n"
+    content.vb: Public Shared Function CreateSafeNavigator(source As Uri, options As WebRequestOptions, encoding As Encoding) As XPathNavigator
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  id: CreateWebRequest(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateWebRequest(Uri, ICredentials, IWebProxy)
+  nameWithType: SyndicationEncodingUtility.CreateWebRequest(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateWebRequest
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 256
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> that makes a request for a resource located at the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the resource to be retrieved.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials if supported by the underlying protocol.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings if supported by the underlying protocol.\n"
+    return:
+      type: System.Net.WebRequest
+      description: "\nAn <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> that makes a request to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>. If unable to create a <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> for\nthe specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).\n"
+    content.vb: Public Shared Function CreateWebRequest(source As Uri, credentials As ICredentials, proxy As IWebProxy) As WebRequest
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,Argotic.Common.WebRequestOptions)
+  id: CreateWebRequest(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateWebRequest(Uri, WebRequestOptions)
+  nameWithType: SyndicationEncodingUtility.CreateWebRequest(Uri, WebRequestOptions)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri, Argotic.Common.WebRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateWebRequest
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 271
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> that makes a request for a resource located at the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the resource to be retrieved.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    return:
+      type: System.Net.WebRequest
+      description: "\nAn <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> that makes a request to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>. If unable to create a <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> for\nthe specified <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).\n"
+    content.vb: Public Shared Function CreateWebRequest(source As Uri, options As WebRequestOptions) As WebRequest
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  id: CreateWebResponse(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateWebResponse(Uri, ICredentials, IWebProxy)
+  nameWithType: SyndicationEncodingUtility.CreateWebResponse(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateWebResponse
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 315
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> to a request for a resource located at the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the resource to be retrieved.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials if supported by the underlying protocol.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings if supported by the underlying protocol.\n"
+    return:
+      type: System.Net.WebResponse
+      description: "\nAn <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> that contains the response from the requested resource. If unable to create a <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> for\nthe requested <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).\n"
+    content.vb: Public Shared Function CreateWebResponse(source As Uri, credentials As ICredentials, proxy As IWebProxy) As WebResponse
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,Argotic.Common.WebRequestOptions)
+  id: CreateWebResponse(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: CreateWebResponse(Uri, WebRequestOptions)
+  nameWithType: SyndicationEncodingUtility.CreateWebResponse(Uri, WebRequestOptions)
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri, Argotic.Common.WebRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateWebResponse
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 330
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> to a request for a resource located at the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the resource to be retrieved.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    return:
+      type: System.Net.WebResponse
+      description: "\nAn <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> that contains the response from the requested resource. If unable to create a <xref href=\"System.Net.WebResponse\" data-throw-if-not-resolved=\"false\"></xref> for\nthe requested <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).\n"
+    content.vb: Public Shared Function CreateWebResponse(source As Uri, options As WebRequestOptions) As WebResponse
+  overload: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.DecodeBase64String(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.DecodeBase64String(System.String)
+  id: DecodeBase64String(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: DecodeBase64String(String)
+  nameWithType: SyndicationEncodingUtility.DecodeBase64String(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.DecodeBase64String(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DecodeBase64String
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 352
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDecodes a base64 encoded string.\n"
+  example: []
+  syntax:
+    content: public static Stream DecodeBase64String(string encodedValue)
+    parameters:
+    - id: encodedValue
+      type: System.String
+      description: The base64 encoded string to decode.
+    return:
+      type: System.IO.Stream
+      description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> the represents the decoded result of the base64 encoded value.
+    content.vb: Public Shared Function DecodeBase64String(encodedValue As String) As Stream
+  overload: Argotic.Common.SyndicationEncodingUtility.DecodeBase64String*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">encodedValue</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">encodedValue</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString(System.String)
+  id: DecodeHtmlEscapedString(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: DecodeHtmlEscapedString(String)
+  nameWithType: SyndicationEncodingUtility.DecodeHtmlEscapedString(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DecodeHtmlEscapedString
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 376
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDecodes an HTML escaped string.\n"
+  example: []
+  syntax:
+    content: public static string DecodeHtmlEscapedString(string escapedValue)
+    parameters:
+    - id: escapedValue
+      type: System.String
+      description: The HTML escaped string to decode.
+    return:
+      type: System.String
+      description: A string the represents the unescaped result of the HTML escaped value.
+    content.vb: Public Shared Function DecodeHtmlEscapedString(escapedValue As String) As String
+  overload: Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">escapedValue</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">escapedValue</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(System.String)
+  id: EncodeInvalidXmlHexadecimalCharacters(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: EncodeInvalidXmlHexadecimalCharacters(String)
+  nameWithType: SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: EncodeInvalidXmlHexadecimalCharacters
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 402
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nEncodes the supplied string so that it can be safely represented in XML.\n"
+  remarks: "\n<p>The encoding process replaces invalid XML hexadecimal characters with their equivalent decimal representation.</p>\n<p>\n    Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],\n    and any Unicode character; excluding the surrogate blocks FFFE and FFFF.\n</p>\n"
+  example: []
+  syntax:
+    content: public static string EncodeInvalidXmlHexadecimalCharacters(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: A string that represents the XML data to parse for invalid XML hexadecimal characters.
+    return:
+      type: System.String
+      description: A string that has been encoded to be safe for XML.
+    content.vb: Public Shared Function EncodeInvalidXmlHexadecimalCharacters(content As String) As String
+  overload: Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte[])
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte[])
+  id: GetXmlEncoding(System.Byte[])
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: GetXmlEncoding(Byte[])
+  nameWithType: SyndicationEncodingUtility.GetXmlEncoding(Byte[])
+  fullName: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte[])
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetXmlEncoding
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 484
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns an <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the XML character encoding for the supplied array of bytes.\n"
+  example: []
+  syntax:
+    content: public static Encoding GetXmlEncoding(byte[] data)
+    parameters:
+    - id: data
+      type: System.Byte[]
+      description: An array of bytes that represents an XML data source to determine the character encoding for.
+    return:
+      type: System.Text.Encoding
+      description: "\nA <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the character encoding specified by the XML data source.\nIf the character encoding is not specified or unable to be determined, returns <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function GetXmlEncoding(data As Byte()) As Encoding
+  overload: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationEncodingUtility.GetXmlEncoding(Byte())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte())
+  name.vb: GetXmlEncoding(Byte())
+- uid: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)
+  id: GetXmlEncoding(System.IO.Stream)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: GetXmlEncoding(Stream)
+  nameWithType: SyndicationEncodingUtility.GetXmlEncoding(Stream)
+  fullName: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetXmlEncoding
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 503
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns an <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the XML character encoding for the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static Encoding GetXmlEncoding(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> that represents an XML data source to determine the character encoding for.
+    return:
+      type: System.Text.Encoding
+      description: "\nA <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the character encoding specified by the XML data source.\nIf the character encoding is not specified or unable to be determined, returns <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function GetXmlEncoding(stream As Stream) As Encoding
+  overload: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.String)
+  id: GetXmlEncoding(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: GetXmlEncoding(String)
+  nameWithType: SyndicationEncodingUtility.GetXmlEncoding(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetXmlEncoding
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 523
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns an <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the XML character encoding for the supplied content.\n"
+  example: []
+  syntax:
+    content: public static Encoding GetXmlEncoding(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: A string that represents the XML data to determine the character encoding for.
+    return:
+      type: System.Text.Encoding
+      description: "\nA <xref href=\"System.Text.Encoding\" data-throw-if-not-resolved=\"false\"></xref> that represents the character encoding specified by the XML data.\nIf the character encoding is not specified or unable to be determined, returns <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function GetXmlEncoding(content As String) As Encoding
+  overload: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(System.String)
+  id: RemoveInvalidXmlHexadecimalCharacters(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: RemoveInvalidXmlHexadecimalCharacters(String)
+  nameWithType: SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveInvalidXmlHexadecimalCharacters
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 564
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nSanitizes the supplied string so that it can be safely represented in XML.\n"
+  remarks: "\n<p>The sanitation process removes characters that are invalid for XML encoding.</p>\n<p>\n    Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],\n    and any Unicode character; excluding the surrogate blocks FFFE and FFFF.\n</p>\n"
+  example: []
+  syntax:
+    content: public static string RemoveInvalidXmlHexadecimalCharacters(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: A string that represents the XML data to parse for invalid XML hexadecimal characters.
+    return:
+      type: System.String
+      description: A string that has been sanitized to be safe for XML.
+    content.vb: Public Shared Function RemoveInvalidXmlHexadecimalCharacters(content As String) As String
+  overload: Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)
+  commentId: M:Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)
+  id: EncodeSafeDirectoryName(System.String)
+  parent: Argotic.Common.SyndicationEncodingUtility
+  langs:
+  - csharp
+  - vb
+  name: EncodeSafeDirectoryName(String)
+  nameWithType: SyndicationEncodingUtility.EncodeSafeDirectoryName(String)
+  fullName: Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: EncodeSafeDirectoryName
+    path: ../Solutions/Argotic.Common/SyndicationEncodingUtility.cs
+    startLine: 580
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nConverts a string into a value that can be safely used as a <xref href=\"System.IO.Directory\" data-throw-if-not-resolved=\"false\"></xref> name.\n"
+  example: []
+  syntax:
+    content: public static string EncodeSafeDirectoryName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The directory name to encode.
+    return:
+      type: System.String
+      description: A string that can be safely used as an argument when <xref href="System.IO.Directory.CreateDirectory(System.String)" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function EncodeSafeDirectoryName(name As String) As String
+  overload: Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator
+  name: CreateSafeNavigator
+  nameWithType: SyndicationEncodingUtility.CreateSafeNavigator
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.Text.Encoding.UTF8
+  commentId: P:System.Text.Encoding.UTF8
+  isExternal: true
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
+  isExternal: true
+  name: Encoding
+  nameWithType: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+- uid: System.IO.TextReader
+  commentId: T:System.IO.TextReader
+  parent: System.IO
+  isExternal: true
+  name: TextReader
+  nameWithType: TextReader
+  fullName: System.IO.TextReader
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: System.Net.WebRequest
+  commentId: T:System.Net.WebRequest
+  parent: System.Net
+  isExternal: true
+  name: WebRequest
+  nameWithType: WebRequest
+  fullName: System.Net.WebRequest
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.CreateWebRequest
+  name: CreateWebRequest
+  nameWithType: SyndicationEncodingUtility.CreateWebRequest
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebRequest
+- uid: System.Net.WebResponse
+  commentId: T:System.Net.WebResponse
+  parent: System.Net
+  isExternal: true
+  name: WebResponse
+  nameWithType: WebResponse
+  fullName: System.Net.WebResponse
+- uid: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.CreateWebResponse
+  name: CreateWebResponse
+  nameWithType: SyndicationEncodingUtility.CreateWebResponse
+  fullName: Argotic.Common.SyndicationEncodingUtility.CreateWebResponse
+- uid: Argotic.Common.SyndicationEncodingUtility.DecodeBase64String*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.DecodeBase64String
+  name: DecodeBase64String
+  nameWithType: SyndicationEncodingUtility.DecodeBase64String
+  fullName: Argotic.Common.SyndicationEncodingUtility.DecodeBase64String
+- uid: Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString
+  name: DecodeHtmlEscapedString
+  nameWithType: SyndicationEncodingUtility.DecodeHtmlEscapedString
+  fullName: Argotic.Common.SyndicationEncodingUtility.DecodeHtmlEscapedString
+- uid: Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters
+  name: EncodeInvalidXmlHexadecimalCharacters
+  nameWithType: SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters
+  fullName: Argotic.Common.SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters
+- uid: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding
+  name: GetXmlEncoding
+  nameWithType: SyndicationEncodingUtility.GetXmlEncoding
+  fullName: Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters
+  name: RemoveInvalidXmlHexadecimalCharacters
+  nameWithType: SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters
+  fullName: Argotic.Common.SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters
+- uid: System.IO.Directory
+  commentId: T:System.IO.Directory
+  isExternal: true
+- uid: System.IO.Directory.CreateDirectory(System.String)
+  commentId: M:System.IO.Directory.CreateDirectory(System.String)
+  isExternal: true
+- uid: Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName*
+  commentId: Overload:Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName
+  name: EncodeSafeDirectoryName
+  nameWithType: SyndicationEncodingUtility.EncodeSafeDirectoryName
+  fullName: Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName

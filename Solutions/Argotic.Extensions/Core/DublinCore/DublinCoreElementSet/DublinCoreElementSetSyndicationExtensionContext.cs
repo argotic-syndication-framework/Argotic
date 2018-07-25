@@ -1,79 +1,77 @@
-﻿using System;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="DublinCoreElementSetSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class DublinCoreElementSetSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the entity responsible for making contributions to the resource.
         /// </summary>
-        private string extensionContributor             = String.Empty;
+        private string extensionContributor = string.Empty;
+
         /// <summary>
         /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
         /// </summary>
-        private string extensionCoverage                = String.Empty;
+        private string extensionCoverage = string.Empty;
+
         /// <summary>
         /// Private member to hold the entity primarily responsible for making the resource.
         /// </summary>
-        private string extensionCreator                 = String.Empty;
-        /// <summary>
-        /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
-        /// </summary>
-        private DateTime extensionDate                  = DateTime.MinValue;
+        private string extensionCreator = string.Empty;
+
         /// <summary>
         /// Private member to hold an account of the resource.
         /// </summary>
-        private string extensionDescription             = String.Empty;
+        private string extensionDescription = string.Empty;
+
         /// <summary>
         /// Private member to hold the file format, physical medium, or dimensions of the resource.
         /// </summary>
-        private string extensionFormat                  = String.Empty;
+        private string extensionFormat = string.Empty;
+
         /// <summary>
         /// Private member to hold an unambiguous reference to the resource within a given context.
         /// </summary>
-        private string extensionIdentifier              = String.Empty;
-        /// <summary>
-        /// Private member to hold the language of the resource.
-        /// </summary>
-        private CultureInfo extensionLanguage;
+        private string extensionIdentifier = string.Empty;
+
         /// <summary>
         /// Private member to hold the entity responsible for making the resource available.
         /// </summary>
-        private string extensionPublisher               = String.Empty;
+        private string extensionPublisher = string.Empty;
+
         /// <summary>
         /// Private member to hold a related resource.
         /// </summary>
-        private string extensionRelation                = String.Empty;
+        private string extensionRelation = string.Empty;
+
         /// <summary>
         /// Private member to hold information about rights held in and over the resource.
         /// </summary>
-        private string extensionRights                  = String.Empty;
+        private string extensionRights = string.Empty;
+
         /// <summary>
         /// Private member to hold a related resource from which the described resource is derived.
         /// </summary>
-        private string extesionSource                   = String.Empty;
+        private string extesionSource = string.Empty;
+
         /// <summary>
         /// Private member to hold the topic of the resource.
         /// </summary>
-        private string extensionSubject                 = String.Empty;
+        private string extensionSubject = string.Empty;
+
         /// <summary>
         /// Private member to hold the name given to the resource.
         /// </summary>
-        private string extensionTitle                   = String.Empty;
-        /// <summary>
-        /// Private member to hold the nature or genre of the resource.
-        /// </summary>
-        private DublinCoreTypeVocabularies extensionType  = DublinCoreTypeVocabularies.None;
+        private string extensionTitle = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
         /// </summary>
@@ -92,18 +90,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionContributor;
+                return this.extensionContributor;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionContributor = String.Empty;
+                    this.extensionContributor = string.Empty;
                 }
                 else
                 {
-                    extensionContributor = value.Trim();
+                    this.extensionContributor = value.Trim();
                 }
             }
         }
@@ -114,12 +112,12 @@ namespace Argotic.Extensions.Core
         /// <value>The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.</value>
         /// <remarks>
         ///     <para>
-        ///         Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. 
-        ///         Temporal topic may be a named period, date, or date range. 
+        ///         Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates.
+        ///         Temporal topic may be a named period, date, or date range.
         ///         A jurisdiction may be a named administrative entity or a geographic place to which the resource applies.
         ///     </para>
         ///     <para>
-        ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://www.getty.edu/research/tools/vocabulary/tgn/index.html">Thesaurus of Geographic Names</a>. 
+        ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://www.getty.edu/research/tools/vocabulary/tgn/index.html">Thesaurus of Geographic Names</a>.
         ///         Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.
         ///     </para>
         /// </remarks>
@@ -127,18 +125,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionCoverage;
+                return this.extensionCoverage;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionCoverage = String.Empty;
+                    this.extensionCoverage = string.Empty;
                 }
                 else
                 {
-                    extensionCoverage = value.Trim();
+                    this.extensionCoverage = value.Trim();
                 }
             }
         }
@@ -154,18 +152,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionCreator;
+                return this.extensionCreator;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionCreator = String.Empty;
+                    this.extensionCreator = string.Empty;
                 }
                 else
                 {
-                    extensionCreator = value.Trim();
+                    this.extensionCreator = value.Trim();
                 }
             }
         }
@@ -174,24 +172,13 @@ namespace Argotic.Extensions.Core
         /// Gets or sets a point or period of time associated with an event in the lifecycle of the resource.
         /// </summary>
         /// <value>
-        ///     A <see cref="DateTime"/> that indicates a point or period of time associated with an event in the lifecycle of the resource. 
+        ///     A <see cref="DateTime"/> that indicates a point or period of time associated with an event in the lifecycle of the resource.
         ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no date was provided.
         /// </value>
         /// <remarks>
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </remarks>
-        public DateTime Date
-        {
-            get
-            {
-                return extensionDate;
-            }
-
-            set
-            {
-                extensionDate = value;
-            }
-        }
+        public DateTime Date { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Gets or sets an account of the resource.
@@ -204,18 +191,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionDescription;
+                return this.extensionDescription;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionDescription = String.Empty;
+                    this.extensionDescription = string.Empty;
                 }
                 else
                 {
-                    extensionDescription = value.Trim();
+                    this.extensionDescription = value.Trim();
                 }
             }
         }
@@ -225,25 +212,25 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The file format, physical medium, or dimensions of the resource.</value>
         /// <remarks>
-        ///     Examples of dimensions include size and duration. 
+        ///     Examples of dimensions include size and duration.
         ///     Recommended best practice is to use a controlled vocabulary such as the list of <a href="http://www.iana.org/assignments/media-types/">Internet Media Types</a>.
         /// </remarks>
         public string Format
         {
             get
             {
-                return extensionFormat;
+                return this.extensionFormat;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionFormat = String.Empty;
+                    this.extensionFormat = string.Empty;
                 }
                 else
                 {
-                    extensionFormat = value.Trim();
+                    this.extensionFormat = value.Trim();
                 }
             }
         }
@@ -259,18 +246,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionIdentifier;
+                return this.extensionIdentifier;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionIdentifier = String.Empty;
+                    this.extensionIdentifier = string.Empty;
                 }
                 else
                 {
-                    extensionIdentifier = value.Trim();
+                    this.extensionIdentifier = value.Trim();
                 }
             }
         }
@@ -280,21 +267,10 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>A <see cref="CultureInfo"/> object that represents the language of the resource. The default value is a <b>null</b> reference, which indicates that no language was specified.</value>
         /// <remarks>
-        ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>. 
+        ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
         ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
         /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return extensionLanguage;
-            }
-
-            set
-            {
-                extensionLanguage = value;
-            }
-        }
+        public CultureInfo Language { get; set; }
 
         /// <summary>
         /// Gets or sets the entity responsible for making the resource available.
@@ -307,18 +283,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionPublisher;
+                return this.extensionPublisher;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionPublisher = String.Empty;
+                    this.extensionPublisher = string.Empty;
                 }
                 else
                 {
-                    extensionPublisher = value.Trim();
+                    this.extensionPublisher = value.Trim();
                 }
             }
         }
@@ -334,18 +310,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionRelation;
+                return this.extensionRelation;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionRelation = String.Empty;
+                    this.extensionRelation = string.Empty;
                 }
                 else
                 {
-                    extensionRelation = value.Trim();
+                    this.extensionRelation = value.Trim();
                 }
             }
         }
@@ -361,18 +337,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionRights;
+                return this.extensionRights;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionRights = String.Empty;
+                    this.extensionRights = string.Empty;
                 }
                 else
                 {
-                    extensionRights = value.Trim();
+                    this.extensionRights = value.Trim();
                 }
             }
         }
@@ -382,25 +358,25 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>A related resource from which the described resource is derived.</value>
         /// <remarks>
-        ///     The described resource may be derived from the related resource in whole or in part. 
+        ///     The described resource may be derived from the related resource in whole or in part.
         ///     Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.
         /// </remarks>
         public string Source
         {
             get
             {
-                return extesionSource;
+                return this.extesionSource;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extesionSource = String.Empty;
+                    this.extesionSource = string.Empty;
                 }
                 else
                 {
-                    extesionSource = value.Trim();
+                    this.extesionSource = value.Trim();
                 }
             }
         }
@@ -410,26 +386,26 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The topic of the resource.</value>
         /// <remarks>
-        ///     Typically, the subject will be represented using keywords, key phrases, or classification codes. 
-        ///     Recommended best practice is to use a controlled vocabulary. 
+        ///     Typically, the subject will be represented using keywords, key phrases, or classification codes.
+        ///     Recommended best practice is to use a controlled vocabulary.
         ///     To describe the spatial or temporal topic of the resource, use the <see cref="Coverage"/> element.
         /// </remarks>
         public string Subject
         {
             get
             {
-                return extensionSubject;
+                return this.extensionSubject;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionSubject = String.Empty;
+                    this.extensionSubject = string.Empty;
                 }
                 else
                 {
-                    extensionSubject = value.Trim();
+                    this.extensionSubject = value.Trim();
                 }
             }
         }
@@ -445,18 +421,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionTitle;
+                return this.extensionTitle;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionTitle = String.Empty;
+                    this.extensionTitle = string.Empty;
                 }
                 else
                 {
-                    extensionTitle = value.Trim();
+                    this.extensionTitle = value.Trim();
                 }
             }
         }
@@ -465,28 +441,17 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the nature or genre of the resource.
         /// </summary>
         /// <value>
-        ///     An <see cref="DublinCoreTypeVocabularies"/> enumeration value that represents the nature or genre of the resource. 
+        ///     An <see cref="DublinCoreTypeVocabularies"/> enumeration value that represents the nature or genre of the resource.
         ///     The default value is <see cref="DublinCoreTypeVocabularies.None"/>, which indicates that no nature or genre was specified.
         /// </value>
         /// <remarks>
         ///     <para>
-        ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>. 
+        ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>.
         ///         This framework conforms to this best practice by providing the <see cref="DublinCoreTypeVocabularies"/> enumeration for specifiying the nature or genre of a resource.
         ///     </para>
         ///     <para>To describe the file format, physical medium, or dimensions of the resource, use <see cref="Format"/>.</para>
         /// </remarks>
-        public DublinCoreTypeVocabularies TypeVocabulary
-        {
-            get
-            {
-                return extensionType;
-            }
-
-            set
-            {
-                extensionType = value;
-            }
-        }
+        public DublinCoreTypeVocabularies TypeVocabulary { get; set; } = DublinCoreTypeVocabularies.None;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
@@ -498,14 +463,14 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            wasLoaded   = this.LoadCommon(source, manager);
+            wasLoaded = this.LoadCommon(source, manager);
 
             if (this.LoadOptionals(source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -523,17 +488,17 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(!String.IsNullOrEmpty(this.Contributor))
+            if (!string.IsNullOrEmpty(this.Contributor))
             {
                 writer.WriteElementString("contributor", xmlNamespace, this.Contributor);
             }
 
-            if (!String.IsNullOrEmpty(this.Coverage))
+            if (!string.IsNullOrEmpty(this.Coverage))
             {
                 writer.WriteElementString("coverage", xmlNamespace, this.Coverage);
             }
 
-            if (!String.IsNullOrEmpty(this.Creator))
+            if (!string.IsNullOrEmpty(this.Creator))
             {
                 writer.WriteElementString("creator", xmlNamespace, this.Creator);
             }
@@ -543,17 +508,17 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("date", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Date));
             }
 
-            if (!String.IsNullOrEmpty(this.Description))
+            if (!string.IsNullOrEmpty(this.Description))
             {
                 writer.WriteElementString("description", xmlNamespace, this.Description);
             }
 
-            if (!String.IsNullOrEmpty(this.Format))
+            if (!string.IsNullOrEmpty(this.Format))
             {
                 writer.WriteElementString("format", xmlNamespace, this.Format);
             }
 
-            if (!String.IsNullOrEmpty(this.Identifier))
+            if (!string.IsNullOrEmpty(this.Identifier))
             {
                 writer.WriteElementString("identifier", xmlNamespace, this.Identifier);
             }
@@ -563,32 +528,32 @@ namespace Argotic.Extensions.Core
                 writer.WriteElementString("language", xmlNamespace, this.Language.Name);
             }
 
-            if (!String.IsNullOrEmpty(this.Publisher))
+            if (!string.IsNullOrEmpty(this.Publisher))
             {
                 writer.WriteElementString("publisher", xmlNamespace, this.Publisher);
             }
 
-            if (!String.IsNullOrEmpty(this.Relation))
+            if (!string.IsNullOrEmpty(this.Relation))
             {
                 writer.WriteElementString("relation", xmlNamespace, this.Relation);
             }
 
-            if (!String.IsNullOrEmpty(this.Rights))
+            if (!string.IsNullOrEmpty(this.Rights))
             {
                 writer.WriteElementString("rights", xmlNamespace, this.Rights);
             }
 
-            if (!String.IsNullOrEmpty(this.Source))
+            if (!string.IsNullOrEmpty(this.Source))
             {
                 writer.WriteElementString("source", xmlNamespace, this.Source);
             }
 
-            if (!String.IsNullOrEmpty(this.Subject))
+            if (!string.IsNullOrEmpty(this.Subject))
             {
                 writer.WriteElementString("subject", xmlNamespace, this.Subject);
             }
 
-            if (!String.IsNullOrEmpty(this.Title))
+            if (!string.IsNullOrEmpty(this.Title))
             {
                 writer.WriteElementString("title", xmlNamespace, this.Title);
             }
@@ -609,28 +574,28 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             XPathNavigator contributorNavigator = source.SelectSingleNode("dc:contributor", manager);
-            XPathNavigator creatorNavigator     = source.SelectSingleNode("dc:creator", manager);
-            XPathNavigator dateNavigator        = source.SelectSingleNode("dc:date", manager);
+            XPathNavigator creatorNavigator = source.SelectSingleNode("dc:creator", manager);
+            XPathNavigator dateNavigator = source.SelectSingleNode("dc:date", manager);
             XPathNavigator descriptionNavigator = source.SelectSingleNode("dc:description", manager);
-            XPathNavigator languageNavigator    = source.SelectSingleNode("dc:language", manager);
-            XPathNavigator publisherNavigator   = source.SelectSingleNode("dc:publisher", manager);
-            XPathNavigator rightsNavigator      = source.SelectSingleNode("dc:rights", manager);
-            XPathNavigator titleNavigator       = source.SelectSingleNode("dc:title", manager);
+            XPathNavigator languageNavigator = source.SelectSingleNode("dc:language", manager);
+            XPathNavigator publisherNavigator = source.SelectSingleNode("dc:publisher", manager);
+            XPathNavigator rightsNavigator = source.SelectSingleNode("dc:rights", manager);
+            XPathNavigator titleNavigator = source.SelectSingleNode("dc:title", manager);
 
-            if (contributorNavigator != null && !String.IsNullOrEmpty(contributorNavigator.Value))
+            if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
             {
-                this.Contributor    = contributorNavigator.Value;
-                wasLoaded           = true;
+                this.Contributor = contributorNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (creatorNavigator != null && !String.IsNullOrEmpty(creatorNavigator.Value))
+            if (creatorNavigator != null && !string.IsNullOrEmpty(creatorNavigator.Value))
             {
-                this.Creator    = creatorNavigator.Value;
-                wasLoaded       = true;
+                this.Creator = creatorNavigator.Value;
+                wasLoaded = true;
             }
 
             if (dateNavigator != null)
@@ -638,24 +603,24 @@ namespace Argotic.Extensions.Core
                 DateTime date;
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out date))
                 {
-                    this.Date   = date;
-                    wasLoaded   = true;
+                    this.Date = date;
+                    wasLoaded = true;
                 }
             }
 
-            if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+            if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
             {
-                this.Description    = descriptionNavigator.Value;
-                wasLoaded           = true;
+                this.Description = descriptionNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (languageNavigator != null && !String.IsNullOrEmpty(languageNavigator.Value))
+            if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
             {
                 try
                 {
-                    CultureInfo language    = new CultureInfo(languageNavigator.Value);
-                    this.Language           = language;
-                    wasLoaded               = true;
+                    CultureInfo language = new CultureInfo(languageNavigator.Value);
+                    this.Language = language;
+                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -663,22 +628,22 @@ namespace Argotic.Extensions.Core
                 }
             }
 
-            if (publisherNavigator != null && !String.IsNullOrEmpty(publisherNavigator.Value))
+            if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
             {
-                this.Publisher  = publisherNavigator.Value;
-                wasLoaded       = true;
+                this.Publisher = publisherNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (rightsNavigator != null && !String.IsNullOrEmpty(rightsNavigator.Value))
+            if (rightsNavigator != null && !string.IsNullOrEmpty(rightsNavigator.Value))
             {
                 this.Rights = rightsNavigator.Value;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
-            if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+            if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
             {
-                this.Title  = titleNavigator.Value;
-                wasLoaded   = true;
+                this.Title = titleNavigator.Value;
+                wasLoaded = true;
             }
 
             return wasLoaded;
@@ -694,60 +659,60 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            XPathNavigator coverageNavigator    = source.SelectSingleNode("dc:coverage", manager);
-            XPathNavigator formatNavigator      = source.SelectSingleNode("dc:format", manager);
-            XPathNavigator identifierNavigator  = source.SelectSingleNode("dc:identifier", manager);
-            XPathNavigator relationNavigator    = source.SelectSingleNode("dc:relation", manager);
-            XPathNavigator sourceNavigator      = source.SelectSingleNode("dc:source", manager);
-            XPathNavigator subjectNavigator     = source.SelectSingleNode("dc:subject", manager);
-            XPathNavigator typeNavigator        = source.SelectSingleNode("dc:type", manager);
+            XPathNavigator coverageNavigator = source.SelectSingleNode("dc:coverage", manager);
+            XPathNavigator formatNavigator = source.SelectSingleNode("dc:format", manager);
+            XPathNavigator identifierNavigator = source.SelectSingleNode("dc:identifier", manager);
+            XPathNavigator relationNavigator = source.SelectSingleNode("dc:relation", manager);
+            XPathNavigator sourceNavigator = source.SelectSingleNode("dc:source", manager);
+            XPathNavigator subjectNavigator = source.SelectSingleNode("dc:subject", manager);
+            XPathNavigator typeNavigator = source.SelectSingleNode("dc:type", manager);
 
-            if (coverageNavigator != null && !String.IsNullOrEmpty(coverageNavigator.Value))
+            if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
             {
-                this.Coverage   = coverageNavigator.Value;
-                wasLoaded       = true;
+                this.Coverage = coverageNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (formatNavigator != null && !String.IsNullOrEmpty(formatNavigator.Value))
+            if (formatNavigator != null && !string.IsNullOrEmpty(formatNavigator.Value))
             {
                 this.Format = formatNavigator.Value;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
-            if (identifierNavigator != null && !String.IsNullOrEmpty(identifierNavigator.Value))
+            if (identifierNavigator != null && !string.IsNullOrEmpty(identifierNavigator.Value))
             {
                 this.Identifier = identifierNavigator.Value;
-                wasLoaded       = true;
+                wasLoaded = true;
             }
 
-            if (relationNavigator != null && !String.IsNullOrEmpty(relationNavigator.Value))
+            if (relationNavigator != null && !string.IsNullOrEmpty(relationNavigator.Value))
             {
-                this.Relation   = relationNavigator.Value;
-                wasLoaded       = true;
+                this.Relation = relationNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (sourceNavigator != null && !String.IsNullOrEmpty(sourceNavigator.Value))
+            if (sourceNavigator != null && !string.IsNullOrEmpty(sourceNavigator.Value))
             {
                 this.Source = sourceNavigator.Value;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
-            if (subjectNavigator != null && !String.IsNullOrEmpty(subjectNavigator.Value))
+            if (subjectNavigator != null && !string.IsNullOrEmpty(subjectNavigator.Value))
             {
-                this.Subject    = subjectNavigator.Value;
-                wasLoaded       = true;
+                this.Subject = subjectNavigator.Value;
+                wasLoaded = true;
             }
 
-            if (typeNavigator != null && !String.IsNullOrEmpty(typeNavigator.Value))
+            if (typeNavigator != null && !string.IsNullOrEmpty(typeNavigator.Value))
             {
-                DublinCoreTypeVocabularies typeVocabulary   = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
+                DublinCoreTypeVocabularies typeVocabulary = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
                 if (typeVocabulary != DublinCoreTypeVocabularies.None)
                 {
                     this.TypeVocabulary = typeVocabulary;
-                    wasLoaded           = true;
+                    wasLoaded = true;
                 }
             }
 

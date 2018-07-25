@@ -1,0 +1,2963 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Examples.MyCustomRssFeed
+  commentId: T:Argotic.Examples.MyCustomRssFeed
+  id: MyCustomRssFeed
+  parent: Argotic.Examples
+  children:
+  - Argotic.Examples.MyCustomRssFeed.CreateNavigator
+  - Argotic.Examples.MyCustomRssFeed.Format
+  - Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  - Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  - Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  - Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  - Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,System.Object)
+  - Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  - Argotic.Examples.MyCustomRssFeed.Loaded
+  - Argotic.Examples.MyCustomRssFeed.OnFeedLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  - Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream)
+  - Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  - Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter)
+  - Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  - Argotic.Examples.MyCustomRssFeed.Version
+  langs:
+  - csharp
+  - vb
+  name: MyCustomRssFeed
+  nameWithType: MyCustomRssFeed
+  fullName: Argotic.Examples.MyCustomRssFeed
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MyCustomRssFeed
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 14
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nExample implementation of the <xref href=\"Argotic.Common.ISyndicationResource\" data-throw-if-not-resolved=\"false\"></xref> interface.\n"
+  example: []
+  syntax:
+    content: 'public class MyCustomRssFeed : ISyndicationResource'
+    content.vb: >-
+      Public Class MyCustomRssFeed
+
+          Implements ISyndicationResource
+  inheritance:
+  - System.Object
+  implements:
+  - Argotic.Common.ISyndicationResource
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Examples.MyCustomRssFeed.Loaded
+  commentId: E:Argotic.Examples.MyCustomRssFeed.Loaded
+  id: Loaded
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Loaded
+  nameWithType: MyCustomRssFeed.Loaded
+  fullName: Argotic.Examples.MyCustomRssFeed.Loaded
+  type: Event
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Loaded
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 52
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nOccurs when the syndication resource state has been changed by a load operation.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded
+    return:
+      type: System.EventHandler{Argotic.Common.SyndicationResourceLoadedEventArgs}
+    content.vb: Public Event Loaded As EventHandler(Of SyndicationResourceLoadedEventArgs)
+  seealso:
+  - linkId: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+    commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  - linkId: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+    commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  implements:
+  - Argotic.Common.ISyndicationResource.Loaded
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Format
+  commentId: P:Argotic.Examples.MyCustomRssFeed.Format
+  id: Format
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Format
+  nameWithType: MyCustomRssFeed.Format
+  fullName: Argotic.Examples.MyCustomRssFeed.Format
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Format
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nGets the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> that this syndication resource implements.\n"
+  example: []
+  syntax:
+    content: public SyndicationContentFormat Format { get; }
+    parameters: []
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: The <xref href="Argotic.Common.SyndicationContentFormat" data-throw-if-not-resolved="false"></xref> enumeration value that indicates the type of syndication format that this syndication resource implements.
+    content.vb: Public ReadOnly Property Format As SyndicationContentFormat
+  overload: Argotic.Examples.MyCustomRssFeed.Format*
+  implements:
+  - Argotic.Common.ISyndicationResource.Format
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Examples.MyCustomRssFeed.Version
+  commentId: P:Argotic.Examples.MyCustomRssFeed.Version
+  id: Version
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Version
+  nameWithType: MyCustomRssFeed.Version
+  fullName: Argotic.Examples.MyCustomRssFeed.Version
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Version
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 70
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nGets the <xref href=\"Argotic.Examples.MyCustomRssFeed.Version\" data-throw-if-not-resolved=\"false\"></xref> of the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> that this syndication resource conforms to.\n"
+  example: []
+  syntax:
+    content: public Version Version { get; }
+    parameters: []
+    return:
+      type: System.Version
+      description: The <xref href="Argotic.Examples.MyCustomRssFeed.Version" data-throw-if-not-resolved="false"></xref> of the <xref href="Argotic.Common.SyndicationContentFormat" data-throw-if-not-resolved="false"></xref> that this syndication resource conforms to. The default value is <strong>2.0</strong>.
+    content.vb: Public ReadOnly Property Version As Version
+  overload: Argotic.Examples.MyCustomRssFeed.Version*
+  implements:
+  - Argotic.Common.ISyndicationResource.Version
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Examples.MyCustomRssFeed.CreateNavigator
+  commentId: M:Argotic.Examples.MyCustomRssFeed.CreateNavigator
+  id: CreateNavigator
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: CreateNavigator()
+  nameWithType: MyCustomRssFeed.CreateNavigator()
+  fullName: Argotic.Examples.MyCustomRssFeed.CreateNavigator()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateNavigator
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 120
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nInitializes a read-only <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> object for navigating through nodes in this <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThe <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> is positioned on the root element of the <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\nIf there is no root element, the <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> is positioned on the first element in the XML representation of the <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public XPathNavigator CreateNavigator()
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: A read-only <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> object.
+    content.vb: Public Function CreateNavigator As XPathNavigator
+  overload: Argotic.Examples.MyCustomRssFeed.CreateNavigator*
+  implements:
+  - Argotic.Common.ISyndicationResource.CreateNavigator
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  id: Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable)
+  nameWithType: MyCustomRssFeed.Load(IXPathNavigable)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 152
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(IXPathNavigable source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <strong>IXPathNavigable</strong> used to load the syndication resource.
+    content.vb: Public Sub Load(source As IXPathNavigable)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  nameWithType: MyCustomRssFeed.Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 168
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <strong>IXPathNavigable</strong> used to load the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As IXPathNavigable, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream)
+  id: Load(System.IO.Stream)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Stream)
+  nameWithType: MyCustomRssFeed.Load(Stream)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 190
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <strong>Stream</strong> used to load the syndication resource.
+    content.vb: Public Sub Load(stream As Stream)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Stream, SyndicationResourceLoadSettings)
+  nameWithType: MyCustomRssFeed.Load(Stream, SyndicationResourceLoadSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.IO.Stream, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 206
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(Stream stream, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <strong>Stream</strong> used to load the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(stream As Stream, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  id: Load(System.Xml.XmlReader)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader)
+  nameWithType: MyCustomRssFeed.Load(XmlReader)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 229
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load the syndication resource.
+    content.vb: Public Sub Load(reader As XmlReader)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader, SyndicationResourceLoadSettings)
+  nameWithType: MyCustomRssFeed.Load(XmlReader, SyndicationResourceLoadSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 245
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(reader As XmlReader, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  id: Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, ICredentials, IWebProxy)
+  nameWithType: MyCustomRssFeed.Load(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 285
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n             If <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n</li><li>\n    If <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    content.vb: Public Sub Load(source As Uri, credentials As ICredentials, proxy As IWebProxy)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  id: Load(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, WebRequestOptions)
+  nameWithType: MyCustomRssFeed.Load(Uri, WebRequestOptions)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Uri, Argotic.Common.WebRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 309
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n            After the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, WebRequestOptions options)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    content.vb: Public Sub Load(source As Uri, options As WebRequestOptions)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  nameWithType: MyCustomRssFeed.Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 356
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n             If <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n</li><li>\n    If <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings.\n</li><li>\n    If <code data-dev-comment-type=\"paramref\" class=\"paramref\">settings</code> has a <xref href=\"Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>\n    the character encoding of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used.\n    If automatic detection fails, a character encoding of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref> is used by default.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As Uri, credentials As ICredentials, proxy As IWebProxy, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  nameWithType: MyCustomRssFeed.Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Load(System.Uri, Argotic.Common.WebRequestOptions, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 392
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n            If <code data-dev-comment-type=\"paramref\" class=\"paramref\">settings</code> has a <xref href=\"Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>\n            the character encoding of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used.\n            If automatic detection fails, a character encoding of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref> is used by default.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As Uri, options As WebRequestOptions, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the feed remains empty.
+  implements:
+  - Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,System.Object)
+  id: LoadAsync(System.Uri,System.Object)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, Object)
+  nameWithType: MyCustomRssFeed.LoadAsync(Uri, Object)
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 432
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads this <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>The <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref> is loaded using the default <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>, you must wait for the load operation to complete before\n    attempting to load the syndication resource using the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, userToken As Object)
+  overload: Argotic.Examples.MyCustomRssFeed.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  implements:
+  - Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  id: LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  nameWithType: MyCustomRssFeed.LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 456
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads this <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>, you must wait for the load operation to complete before\n    attempting to load the syndication resource using the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, settings As SyndicationResourceLoadSettings, userToken As Object)
+  overload: Argotic.Examples.MyCustomRssFeed.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  implements:
+  - Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  id: LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  nameWithType: MyCustomRssFeed.LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Net.ICredentials, System.Net.IWebProxy, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 486
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads this <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>,\n    you must wait for the load operation to complete before attempting to load the syndication resource using the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, settings As SyndicationResourceLoadSettings, credentials As ICredentials, proxy As IWebProxy, userToken As Object)
+  overload: Argotic.Examples.MyCustomRssFeed.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  implements:
+  - Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  id: LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  nameWithType: MyCustomRssFeed.LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, Argotic.Common.WebRequestOptions, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 516
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nLoads this <xref href=\"Argotic.Examples.MyCustomRssFeed\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>,\n    you must wait for the load operation to complete before attempting to load the syndication resource using the <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, settings As SyndicationResourceLoadSettings, options As WebRequestOptions, userToken As Object)
+  overload: Argotic.Examples.MyCustomRssFeed.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  implements:
+  - Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  id: LoadAsyncCancel
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: LoadAsyncCancel()
+  nameWithType: MyCustomRssFeed.LoadAsyncCancel()
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsyncCancel
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 559
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nCancels an asynchronous operation to load this syndication resource.\n"
+  remarks: "\nUse the LoadAsyncCancel method to cancel a pending <xref href=\"Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation.\nIf there is a load operation in progress, this method releases resources used to execute the load operation.\nIf there is no load operation pending, this method does nothing.\n"
+  example: []
+  syntax:
+    content: public void LoadAsyncCancel()
+    content.vb: Public Sub LoadAsyncCancel
+  overload: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel*
+  implements:
+  - Argotic.Common.ISyndicationResource.LoadAsyncCancel
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream)
+  id: Save(System.IO.Stream)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Save(Stream)
+  nameWithType: MyCustomRssFeed.Save(Stream)
+  fullName: Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Save
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 574
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nSaves the syndication resource to the specified <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Save(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <strong>Stream</strong> to which you want to save the syndication resource.
+    content.vb: Public Sub Save(stream As Stream)
+  overload: Argotic.Examples.MyCustomRssFeed.Save*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: The operation would not result in well formed XML for the syndication resource.
+  implements:
+  - Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  id: Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Save(Stream, SyndicationResourceSaveSettings)
+  nameWithType: MyCustomRssFeed.Save(Stream, SyndicationResourceSaveSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Save(System.IO.Stream, Argotic.Common.SyndicationResourceSaveSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Save
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 586
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nSaves the syndication resource to the specified <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Save(Stream stream, SyndicationResourceSaveSettings settings)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The <strong>Stream</strong> to which you want to save the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceSaveSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceSaveSettings" data-throw-if-not-resolved="false"></xref> object used to configure the persistence of the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Save(stream As Stream, settings As SyndicationResourceSaveSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Save*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: The operation would not result in well formed XML for the syndication resource.
+  implements:
+  - Argotic.Common.ISyndicationResource.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter)
+  id: Save(System.Xml.XmlWriter)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Save(XmlWriter)
+  nameWithType: MyCustomRssFeed.Save(XmlWriter)
+  fullName: Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Save
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 612
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nSaves the syndication resource to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Save(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to save the syndication resource.
+    content.vb: Public Sub Save(writer As XmlWriter)
+  overload: Argotic.Examples.MyCustomRssFeed.Save*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: The operation would not result in well formed XML for the syndication resource.
+  implements:
+  - Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  id: Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: Save(XmlWriter, SyndicationResourceSaveSettings)
+  nameWithType: MyCustomRssFeed.Save(XmlWriter, SyndicationResourceSaveSettings)
+  fullName: Argotic.Examples.MyCustomRssFeed.Save(System.Xml.XmlWriter, Argotic.Common.SyndicationResourceSaveSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Save
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 626
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nSaves the syndication resource to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"Argotic.Common.SyndicationResourceSaveSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to save the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceSaveSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceSaveSettings" data-throw-if-not-resolved="false"></xref> object used to configure the persistence of the <xref href="Argotic.Examples.MyCustomRssFeed" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Sub Save(writer As XmlWriter, settings As SyndicationResourceSaveSettings)
+  overload: Argotic.Examples.MyCustomRssFeed.Save*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: The operation would not result in well formed XML for the syndication resource.
+  implements:
+  - Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Examples.MyCustomRssFeed.OnFeedLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.OnFeedLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  id: OnFeedLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  parent: Argotic.Examples.MyCustomRssFeed
+  langs:
+  - csharp
+  - vb
+  name: OnFeedLoaded(SyndicationResourceLoadedEventArgs)
+  nameWithType: MyCustomRssFeed.OnFeedLoaded(SyndicationResourceLoadedEventArgs)
+  fullName: Argotic.Examples.MyCustomRssFeed.OnFeedLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OnFeedLoaded
+    path: ../Solutions/Argotic.Examples/Common/ISyndicationResourceExample.cs
+    startLine: 641
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nRaises the <xref href=\"Argotic.Examples.MyCustomRssFeed.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
+  example: []
+  syntax:
+    content: protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
+    parameters:
+    - id: e
+      type: Argotic.Common.SyndicationResourceLoadedEventArgs
+      description: A <xref href="Argotic.Common.SyndicationResourceLoadedEventArgs" data-throw-if-not-resolved="false"></xref> that contains the event data.
+    content.vb: Protected Overridable Sub OnFeedLoaded(e As SyndicationResourceLoadedEventArgs)
+  overload: Argotic.Examples.MyCustomRssFeed.OnFeedLoaded*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+references:
+- uid: Argotic.Common.ISyndicationResource
+  commentId: T:Argotic.Common.ISyndicationResource
+  parent: Argotic.Common
+  name: ISyndicationResource
+  nameWithType: ISyndicationResource
+  fullName: Argotic.Common.ISyndicationResource
+- uid: Argotic.Examples
+  commentId: N:Argotic.Examples
+  name: Argotic.Examples
+  nameWithType: Argotic.Examples
+  fullName: Argotic.Examples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XPath.IXPathNavigable)
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.Load(System.Xml.XmlReader)
+  isExternal: true
+- uid: Argotic.Common.ISyndicationResource.Loaded
+  commentId: E:Argotic.Common.ISyndicationResource.Loaded
+  parent: Argotic.Common.ISyndicationResource
+  name: Loaded
+  nameWithType: ISyndicationResource.Loaded
+  fullName: Argotic.Common.ISyndicationResource.Loaded
+- uid: System.EventHandler{Argotic.Common.SyndicationResourceLoadedEventArgs}
+  commentId: T:System.EventHandler{Argotic.Common.SyndicationResourceLoadedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SyndicationResourceLoadedEventArgs>
+  nameWithType: EventHandler<SyndicationResourceLoadedEventArgs>
+  fullName: System.EventHandler<Argotic.Common.SyndicationResourceLoadedEventArgs>
+  nameWithType.vb: EventHandler(Of SyndicationResourceLoadedEventArgs)
+  fullName.vb: System.EventHandler(Of Argotic.Common.SyndicationResourceLoadedEventArgs)
+  name.vb: EventHandler(Of SyndicationResourceLoadedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+    name: SyndicationResourceLoadedEventArgs
+    nameWithType: SyndicationResourceLoadedEventArgs
+    fullName: Argotic.Common.SyndicationResourceLoadedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+    name: SyndicationResourceLoadedEventArgs
+    nameWithType: SyndicationResourceLoadedEventArgs
+    fullName: Argotic.Common.SyndicationResourceLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: Argotic.Examples.MyCustomRssFeed.Format*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.Format
+  name: Format
+  nameWithType: MyCustomRssFeed.Format
+  fullName: Argotic.Examples.MyCustomRssFeed.Format
+- uid: Argotic.Common.ISyndicationResource.Format
+  commentId: P:Argotic.Common.ISyndicationResource.Format
+  parent: Argotic.Common.ISyndicationResource
+  name: Format
+  nameWithType: ISyndicationResource.Format
+  fullName: Argotic.Common.ISyndicationResource.Format
+- uid: Argotic.Examples.MyCustomRssFeed.Version
+  commentId: P:Argotic.Examples.MyCustomRssFeed.Version
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.Version*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.Version
+  name: Version
+  nameWithType: MyCustomRssFeed.Version
+  fullName: Argotic.Examples.MyCustomRssFeed.Version
+- uid: Argotic.Common.ISyndicationResource.Version
+  commentId: P:Argotic.Common.ISyndicationResource.Version
+  parent: Argotic.Common.ISyndicationResource
+  name: Version
+  nameWithType: ISyndicationResource.Version
+  fullName: Argotic.Common.ISyndicationResource.Version
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Examples.MyCustomRssFeed
+  commentId: T:Argotic.Examples.MyCustomRssFeed
+  name: MyCustomRssFeed
+  nameWithType: MyCustomRssFeed
+  fullName: Argotic.Examples.MyCustomRssFeed
+- uid: Argotic.Examples.MyCustomRssFeed.CreateNavigator*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.CreateNavigator
+  name: CreateNavigator
+  nameWithType: MyCustomRssFeed.CreateNavigator
+  fullName: Argotic.Examples.MyCustomRssFeed.CreateNavigator
+- uid: Argotic.Common.ISyndicationResource.CreateNavigator
+  commentId: M:Argotic.Common.ISyndicationResource.CreateNavigator
+  parent: Argotic.Common.ISyndicationResource
+  name: CreateNavigator()
+  nameWithType: ISyndicationResource.CreateNavigator()
+  fullName: Argotic.Common.ISyndicationResource.CreateNavigator()
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.CreateNavigator
+    name: CreateNavigator
+    nameWithType: ISyndicationResource.CreateNavigator
+    fullName: Argotic.Common.ISyndicationResource.CreateNavigator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.CreateNavigator
+    name: CreateNavigator
+    nameWithType: ISyndicationResource.CreateNavigator
+    fullName: Argotic.Common.ISyndicationResource.CreateNavigator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XPath.IXPathNavigable
+  commentId: T:System.Xml.XPath.IXPathNavigable
+  parent: System.Xml.XPath
+  isExternal: true
+  name: IXPathNavigable
+  nameWithType: IXPathNavigable
+  fullName: System.Xml.XPath.IXPathNavigable
+- uid: Argotic.Examples.MyCustomRssFeed.Loaded
+  commentId: E:Argotic.Examples.MyCustomRssFeed.Loaded
+  isExternal: true
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.FormatException
+  commentId: T:System.FormatException
+  isExternal: true
+- uid: System.Xml.XmlException
+  commentId: T:System.Xml.XmlException
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.Load*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.Load
+  name: Load
+  nameWithType: MyCustomRssFeed.Load
+  fullName: Argotic.Examples.MyCustomRssFeed.Load
+- uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: ISyndicationResource.Load(IXPathNavigable)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  nameWithType: ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Stream)
+  nameWithType: ISyndicationResource.Load(Stream)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Stream, SyndicationResourceLoadSettings)
+  nameWithType: ISyndicationResource.Load(Stream, SyndicationResourceLoadSettings)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.IO.Stream, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.XmlReader
+  commentId: T:System.Xml.XmlReader
+  parent: System.Xml
+  isExternal: true
+  name: XmlReader
+  nameWithType: XmlReader
+  fullName: System.Xml.XmlReader
+- uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: ISyndicationResource.Load(XmlReader)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(XmlReader, SyndicationResourceLoadSettings)
+  nameWithType: ISyndicationResource.Load(XmlReader, SyndicationResourceLoadSettings)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: System.Net.WebRequest
+  commentId: T:System.Net.WebRequest
+  parent: System.Net
+  isExternal: true
+  name: WebRequest
+  nameWithType: WebRequest
+  fullName: System.Net.WebRequest
+- uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Uri, ICredentials, IWebProxy)
+  nameWithType: ISyndicationResource.Load(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Uri, WebRequestOptions)
+  nameWithType: ISyndicationResource.Load(Uri, WebRequestOptions)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Uri, Argotic.Common.WebRequestOptions)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding
+  commentId: P:Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding
+  isExternal: true
+- uid: System.Text.Encoding.UTF8
+  commentId: P:System.Text.Encoding.UTF8
+  isExternal: true
+- uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  nameWithType: ISyndicationResource.Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  nameWithType: ISyndicationResource.Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  fullName: Argotic.Common.ISyndicationResource.Load(System.Uri, Argotic.Common.WebRequestOptions, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: ISyndicationResource.Load
+    fullName: Argotic.Common.ISyndicationResource.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,System.Object)
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.LoadAsync
+  name: LoadAsync
+  nameWithType: MyCustomRssFeed.LoadAsync
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsync
+- uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,System.Object)
+  commentId: M:Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,System.Object)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: LoadAsync(Uri, Object)
+  nameWithType: ISyndicationResource.LoadAsync(Uri, Object)
+  fullName: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri, System.Object)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  commentId: M:Argotic.Examples.MyCustomRssFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  isExternal: true
+- uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  commentId: M:Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  nameWithType: ISyndicationResource.LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  fullName: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Object)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  nameWithType: ISyndicationResource.LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  fullName: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Net.ICredentials, System.Net.IWebProxy, System.Object)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  commentId: M:Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  nameWithType: ISyndicationResource.LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  fullName: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, Argotic.Common.WebRequestOptions, System.Object)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+    name: LoadAsync
+    nameWithType: ISyndicationResource.LoadAsync
+    fullName: Argotic.Common.ISyndicationResource.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+  name: LoadAsyncCancel
+  nameWithType: MyCustomRssFeed.LoadAsyncCancel
+  fullName: Argotic.Examples.MyCustomRssFeed.LoadAsyncCancel
+- uid: Argotic.Common.ISyndicationResource.LoadAsyncCancel
+  commentId: M:Argotic.Common.ISyndicationResource.LoadAsyncCancel
+  parent: Argotic.Common.ISyndicationResource
+  name: LoadAsyncCancel()
+  nameWithType: ISyndicationResource.LoadAsyncCancel()
+  fullName: Argotic.Common.ISyndicationResource.LoadAsyncCancel()
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsyncCancel
+    name: LoadAsyncCancel
+    nameWithType: ISyndicationResource.LoadAsyncCancel
+    fullName: Argotic.Common.ISyndicationResource.LoadAsyncCancel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.LoadAsyncCancel
+    name: LoadAsyncCancel
+    nameWithType: ISyndicationResource.LoadAsyncCancel
+    fullName: Argotic.Common.ISyndicationResource.LoadAsyncCancel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Examples.MyCustomRssFeed.Save*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.Save
+  name: Save
+  nameWithType: MyCustomRssFeed.Save
+  fullName: Argotic.Examples.MyCustomRssFeed.Save
+- uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+  commentId: M:Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Save(Stream)
+  nameWithType: ISyndicationResource.Save(Stream)
+  fullName: Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceSaveSettings
+  commentId: T:Argotic.Common.SyndicationResourceSaveSettings
+  parent: Argotic.Common
+  name: SyndicationResourceSaveSettings
+  nameWithType: SyndicationResourceSaveSettings
+  fullName: Argotic.Common.SyndicationResourceSaveSettings
+- uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Save(Stream, SyndicationResourceSaveSettings)
+  nameWithType: ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)
+  fullName: Argotic.Common.ISyndicationResource.Save(System.IO.Stream, Argotic.Common.SyndicationResourceSaveSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+  commentId: M:Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Save(XmlWriter)
+  nameWithType: ISyndicationResource.Save(XmlWriter)
+  fullName: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Common.ISyndicationResource
+  isExternal: true
+  name: Save(XmlWriter, SyndicationResourceSaveSettings)
+  nameWithType: ISyndicationResource.Save(XmlWriter, SyndicationResourceSaveSettings)
+  fullName: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter, Argotic.Common.SyndicationResourceSaveSettings)
+  spec.csharp:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Common.ISyndicationResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: ISyndicationResource.Save
+    fullName: Argotic.Common.ISyndicationResource.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+  commentId: T:Argotic.Common.SyndicationResourceLoadedEventArgs
+  parent: Argotic.Common
+  name: SyndicationResourceLoadedEventArgs
+  nameWithType: SyndicationResourceLoadedEventArgs
+  fullName: Argotic.Common.SyndicationResourceLoadedEventArgs
+- uid: Argotic.Examples.MyCustomRssFeed.OnFeedLoaded*
+  commentId: Overload:Argotic.Examples.MyCustomRssFeed.OnFeedLoaded
+  name: OnFeedLoaded
+  nameWithType: MyCustomRssFeed.OnFeedLoaded
+  fullName: Argotic.Examples.MyCustomRssFeed.OnFeedLoaded

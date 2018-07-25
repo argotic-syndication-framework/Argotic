@@ -1,0 +1,19 @@
+# Introduction to the framework extensible provider model
+
+A _provider_ is a software module that provides a uniform interface between a service and a data source. Providers abstract physical storage media, in much the same way that device drivers abstract physical hardware devices. Since the Argotic framework syndication resource management services are provider-based, storing syndicated content that implements the _ISyndicationResource_ interface in an Oracle database rather than a Microsoft SQL Server database is as simple as plugging in a Oracle syndication resource provider. Code outside the provider layer needn't be modified, and a simple configuration change, accomplished declaratively through Web.config or App.config, connects the relevant services to the custom provider. The framework includes an XML file-based provider that can manage all of the syndication formats supported by the framework.
+
+Thanks to the provider model, applications using the Argotic framework can be configured to store syndicated content virtually anywhere. Syndication feed data, for example, could just as easily come from a Web service as from a database. All that's required is a custom provider. Some companies will prefer to acquire custom providers from third parties. Others, however, will want to write their own, either because no suitable provider is available off the shelf, or because they wish to adapt their content syndication systems to legacy storage media (for example, existing relational databases or flat files).
+
+## Goals of the framework provider model
+
+The Argotic framework provider model was designed with the following goals in mind:
+
+- Use the existing provider model architecture that Microsoft .NET provides.
+- To make syndication resource storage both flexible and extensible.
+- To insulate application-level code from the physical storage media where syndicated content is stored, and to isolate the changes required to use alternative media types to a single well-defined layer with minimal surface area.
+- To make writing custom providers as simple as possible by providing a robust and well-documented set of base classes from which developers can derive provider classes of their own.
+It is expected that developers who wish to publish syndicated content using data sources for which off-the-shelf providers are not available can, with a reasonable amount of effort, write custom providers to do the job.
+
+The *SyndicationResourceProvider* abstract class is simple, containing only a few basic methods and properties that are common to all syndication resource providers. Implementation-specific providers (such as the _XmlSyndicationResourceProvider_) inherit from this abstract base class in order to provide a uniform abstraction layer between a specific data storage implementation and the code that generates and/or manages the content being syndicated.
+
+The provider model is intended to encapsulate the retrieval and persistence of syndicated content. It allows the developer to create supporting classes that provide multiple implementations of the encapsulated CRUD functionality. The most important aspect of the provider model is that the implementation (for example, whether data is persisted as a XML file or in a database) is abstracted from the application code. The type of the implementation-specific provider for the retrieval and persistence of syndicated content is designated in a configuration file. The syndication manager then reads in the type from the configuration file and acts as a factory to the syndicated content management code. The application developer can then use the syndication management classes in the application code. The implementation type can be swapped out in the configuration file, eliminating the need to rewrite the code to accommodate the different implementation methodology.

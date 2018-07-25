@@ -1,40 +1,63 @@
-﻿using System;
-using System.ComponentModel;
-using System.Configuration;
-
-namespace Argotic.Configuration
+﻿namespace Argotic.Configuration
 {
+    using System;
+    using System.ComponentModel;
+    using System.Configuration;
+
     /// <summary>
     /// Represents the configuration section used to declarativly configure the <see cref="Argotic.Net.TrackbackClient"/> class. This class cannot be inheritied.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Trackback")]
     public sealed class TrackbackClientSection : ConfigurationSection
     {
         /// <summary>
+        /// Private member to hold the client network configuration property for the section.
+        /// </summary>
+        private static readonly ConfigurationProperty ConfigurationSectionNetworkProperty = new ConfigurationProperty(
+            "network",
+            typeof(TrackbackClientNetworkElement),
+            null,
+            ConfigurationPropertyOptions.None);
+
+        /// <summary>
         /// Private member to hold the client timeout configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionTimeoutProperty   = new ConfigurationProperty("timeout", typeof(System.TimeSpan), TimeSpan.FromSeconds(15), new TimeSpanConverter(), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionTimeoutProperty = new ConfigurationProperty(
+            "timeout",
+            typeof(TimeSpan),
+            TimeSpan.FromSeconds(15),
+            new TimeSpanConverter(),
+            null,
+            ConfigurationPropertyOptions.None);
+
         /// <summary>
         /// Private member to hold the client user agent configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new ConfigurationProperty("agent", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold the client network configuration property for the section.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationSectionNetworkProperty   = new ConfigurationProperty("network", typeof(TrackbackClientNetworkElement), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionUserAgentProperty = new ConfigurationProperty(
+            "agent",
+            typeof(string),
+            string.Empty,
+            new StringConverter(),
+            null,
+            ConfigurationPropertyOptions.None);
+
         /// <summary>
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
-        private static ConfigurationPropertyCollection configurationSectionProperties       = new ConfigurationPropertyCollection();
+        private static ConfigurationPropertyCollection configurationSectionProperties =
+            new ConfigurationPropertyCollection();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackbackClientSection"/> class.
         /// </summary>
         public TrackbackClientSection()
         {
-            configurationSectionProperties.Add(configurationSectionTimeoutProperty);
-            configurationSectionProperties.Add(configurationSectionUserAgentProperty);
-            configurationSectionProperties.Add(configurationSectionNetworkProperty);
+            configurationSectionProperties.Add(ConfigurationSectionTimeoutProperty);
+            configurationSectionProperties.Add(ConfigurationSectionUserAgentProperty);
+            configurationSectionProperties.Add(ConfigurationSectionNetworkProperty);
         }
 
         /// <summary>
@@ -46,7 +69,7 @@ namespace Argotic.Configuration
         {
             get
             {
-                return (TrackbackClientNetworkElement)base[configurationSectionNetworkProperty];
+                return (TrackbackClientNetworkElement)this[ConfigurationSectionNetworkProperty];
             }
         }
 
@@ -55,16 +78,17 @@ namespace Argotic.Configuration
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
         [ConfigurationProperty("timeout", DefaultValue = "0:0:15.0", Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter(typeof(System.TimeSpan))]
+        [TypeConverter(typeof(TimeSpan))]
         public TimeSpan Timeout
         {
             get
             {
-                return (TimeSpan)base[configurationSectionTimeoutProperty];
+                return (TimeSpan)this[ConfigurationSectionTimeoutProperty];
             }
+
             set
             {
-                base[configurationSectionTimeoutProperty] = value;
+                this[ConfigurationSectionTimeoutProperty] = value;
             }
         }
 
@@ -77,11 +101,12 @@ namespace Argotic.Configuration
         {
             get
             {
-                return (string)base[configurationSectionUserAgentProperty];
+                return (string)this[ConfigurationSectionUserAgentProperty];
             }
+
             set
             {
-                base[configurationSectionUserAgentProperty] = value;
+                this[ConfigurationSectionUserAgentProperty] = value;
             }
         }
 

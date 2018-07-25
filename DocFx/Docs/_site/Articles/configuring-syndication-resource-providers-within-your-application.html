@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring syndication resource providers within your application </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring syndication resource providers within your application ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuring-syndication-resource-providers-within-your-application">Configuring syndication resource providers within your application</h1>
+
+<p>The first step is add the framework configuration sections for the features you wish to utilize within your App.config or Web.config configuration file:</p>
+<pre><code>&lt;configSections&gt;
+  &lt;!-- Syndication resources configuration section --&gt;
+  &lt;section name=&quot;argotic.syndication&quot; type=&quot;Argotic.Configuration.Provider.SyndicationResourceSection, Argotic.Core&quot;/&gt;
+
+  &lt;!-- Syndication HTTP Handler configuration section --&gt;
+  &lt;section name=&quot;argotic.web.httpHandler&quot; type=&quot;Argotic.Configuration.SyndicationResourceHandlerSection, Argotic.Web&quot;/&gt;
+&lt;/configSections&gt;
+</code></pre>
+<p>In the example above, the core <em>argotic.syndication</em> configuration section that most framework features are dependent upon is defined. In addition the configuration section for the syndication HTTP handler as been included.</p>
+<p>The next step is to define the referenced configuration sections:</p>
+<pre><code>&lt;!-- Configure provider(s) used to store syndicated content and indicate the default provider to use --&gt;
+&lt;argotic.syndication defaultProvider=&quot;MySyndicationResourceProvider&quot;&gt;
+  &lt;providers&gt;
+    &lt;add name=&quot;MySyndicationResourceProvider&quot; type=&quot;Argotic.Configuration.Provider.XmlSyndicationResourceProvider, Argotic.Core&quot; applicationName=&quot;/&quot; path=&quot;~/App_Data/Syndication&quot; /&gt;
+  &lt;/providers&gt;
+&lt;/argotic.syndication&gt;
+</code></pre>
+<p>In the configuration section above, a single syndication resource provider is configured, in this case the XML file-based provider that is included in the framework.</p>
+<pre><code>&lt;!-- Configure syndication HTTP handler (typically used by ASP.NET applications to act as a generic endpoint for managed syndicated content) --&gt;
+&lt;argotic.web.httpHandler
+  enableCaching=&quot;true&quot;
+  format=&quot;Rss&quot;
+  updatableWithin=&quot;0:15:0.0&quot;
+  validFor=&quot;0:59:0.0&quot; 
+/&gt;
+</code></pre>
+<p>In the configuration section above, the HTTP handler has been configured to serve RSS feeds by default and has had caching enabled to improve scalability. By default the first (and sometime only) syndication resource managed by the provider for the specified default content format is served by the HTTP handler. If you wish to specify a specific managed resource, you may use the <em>id</em> attribute to explicitly indicate which syndication resource to retrieve from the provider.</p>
+<p>If you choose to use the flexible HTTP handler that the framework provides, you must perform the additional step of mapping a path to the handler. This step varies depending on whether you use the classic or integrated managed pipeline mode:</p>
+<p>Classic:</p>
+<pre><code>&lt;httpHandlers&gt;
+  &lt;add verb=&quot;GET,HEAD&quot; path=&quot;syndication.axd&quot; type=&quot;Argotic.Web.SyndicationResourceHandler, Argotic.Web&quot; validate=&quot;false&quot; /&gt;
+&lt;/httpHandlers&gt;
+</code></pre>
+<p>Integrated:</p>
+<pre><code>&lt;handlers&gt;
+  &lt;add name=&quot;SyndicationHandler&quot; verb=&quot;GET,HEAD&quot; path=&quot;syndication.axd&quot; type=&quot;Argotic.Web.SyndicationResourceHandler, Argotic.Web&quot; /&gt;
+&lt;/handlers&gt;
+</code></pre>
+<p>In the example above, we have specified that the syndication resource HTTP handler will be mapped to an endpoint path of <em>syndication.axd</em> and will accept the GET and HEAD verbs.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/configuring-syndication-resource-providers-within-your-application.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,207 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaExpression
+  commentId: T:Argotic.Extensions.Core.YahooMediaExpression
+  id: YahooMediaExpression
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaExpression.Full
+  - Argotic.Extensions.Core.YahooMediaExpression.None
+  - Argotic.Extensions.Core.YahooMediaExpression.Nonstop
+  - Argotic.Extensions.Core.YahooMediaExpression.Sample
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaExpression
+  nameWithType: YahooMediaExpression
+  fullName: Argotic.Extensions.Core.YahooMediaExpression
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaExpression
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the expressed version of a media object.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum YahooMediaExpression
+    content.vb: >-
+      <Serializable>
+
+      Public Enum YahooMediaExpression
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaTextConstruct
+    commentId: T:Argotic.Extensions.Core.YahooMediaTextConstruct
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.YahooMediaExpression.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaExpression.None
+  id: None
+  parent: Argotic.Extensions.Core.YahooMediaExpression
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: YahooMediaExpression.None
+  fullName: Argotic.Extensions.Core.YahooMediaExpression.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo media expression specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.YahooMediaExpression
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaExpression.Full
+  commentId: F:Argotic.Extensions.Core.YahooMediaExpression.Full
+  id: Full
+  parent: Argotic.Extensions.Core.YahooMediaExpression
+  langs:
+  - csharp
+  - vb
+  name: Full
+  nameWithType: YahooMediaExpression.Full
+  fullName: Argotic.Extensions.Core.YahooMediaExpression.Full
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Full
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe media object represents the full version.\n"
+  example: []
+  syntax:
+    content: Full = 1
+    return:
+      type: Argotic.Extensions.Core.YahooMediaExpression
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaExpression.Nonstop
+  commentId: F:Argotic.Extensions.Core.YahooMediaExpression.Nonstop
+  id: Nonstop
+  parent: Argotic.Extensions.Core.YahooMediaExpression
+  langs:
+  - csharp
+  - vb
+  name: Nonstop
+  nameWithType: YahooMediaExpression.Nonstop
+  fullName: Argotic.Extensions.Core.YahooMediaExpression.Nonstop
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Nonstop
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nhe media object represents a continuous stream.\n"
+  example: []
+  syntax:
+    content: Nonstop = 2
+    return:
+      type: Argotic.Extensions.Core.YahooMediaExpression
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaExpression.Sample
+  commentId: F:Argotic.Extensions.Core.YahooMediaExpression.Sample
+  id: Sample
+  parent: Argotic.Extensions.Core.YahooMediaExpression
+  langs:
+  - csharp
+  - vb
+  name: Sample
+  nameWithType: YahooMediaExpression.Sample
+  fullName: Argotic.Extensions.Core.YahooMediaExpression.Sample
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Sample
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaExpression.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe media object represents a sample version.\n"
+  example: []
+  syntax:
+    content: Sample = 3
+    return:
+      type: Argotic.Extensions.Core.YahooMediaExpression
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.YahooMediaTextConstruct
+  commentId: T:Argotic.Extensions.Core.YahooMediaTextConstruct
+  parent: Argotic.Extensions.Core
+  name: YahooMediaTextConstruct
+  nameWithType: YahooMediaTextConstruct
+  fullName: Argotic.Extensions.Core.YahooMediaTextConstruct
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.YahooMediaExpression
+  commentId: T:Argotic.Extensions.Core.YahooMediaExpression
+  parent: Argotic.Extensions.Core
+  name: YahooMediaExpression
+  nameWithType: YahooMediaExpression
+  fullName: Argotic.Extensions.Core.YahooMediaExpression

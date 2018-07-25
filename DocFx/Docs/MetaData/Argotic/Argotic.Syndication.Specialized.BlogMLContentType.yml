@@ -1,0 +1,233 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.Specialized.BlogMLContentType
+  commentId: T:Argotic.Syndication.Specialized.BlogMLContentType
+  id: BlogMLContentType
+  parent: Argotic.Syndication.Specialized
+  children:
+  - Argotic.Syndication.Specialized.BlogMLContentType.Base64
+  - Argotic.Syndication.Specialized.BlogMLContentType.Html
+  - Argotic.Syndication.Specialized.BlogMLContentType.None
+  - Argotic.Syndication.Specialized.BlogMLContentType.Text
+  - Argotic.Syndication.Specialized.BlogMLContentType.Xhtml
+  langs:
+  - csharp
+  - vb
+  name: BlogMLContentType
+  nameWithType: BlogMLContentType
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogMLContentType
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nRepresents the entity encoding utilized by textual content constructs.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum BlogMLContentType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum BlogMLContentType
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Syndication.Specialized.BlogMLContentType.None
+  commentId: F:Argotic.Syndication.Specialized.BlogMLContentType.None
+  id: None
+  parent: Argotic.Syndication.Specialized.BlogMLContentType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: BlogMLContentType.None
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nNo content type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLContentType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLContentType.Base64
+  commentId: F:Argotic.Syndication.Specialized.BlogMLContentType.Base64
+  id: Base64
+  parent: Argotic.Syndication.Specialized.BlogMLContentType
+  langs:
+  - csharp
+  - vb
+  name: Base64
+  nameWithType: BlogMLContentType.Base64
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType.Base64
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Base64
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the textual content is base-64 encoded.\n"
+  example: []
+  syntax:
+    content: Base64 = 1
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLContentType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLContentType.Html
+  commentId: F:Argotic.Syndication.Specialized.BlogMLContentType.Html
+  id: Html
+  parent: Argotic.Syndication.Specialized.BlogMLContentType
+  langs:
+  - csharp
+  - vb
+  name: Html
+  nameWithType: BlogMLContentType.Html
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType.Html
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Html
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the textual content is Hyper-Text Markup Language (HTML) encoded.\n"
+  example: []
+  syntax:
+    content: Html = 2
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLContentType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLContentType.Text
+  commentId: F:Argotic.Syndication.Specialized.BlogMLContentType.Text
+  id: Text
+  parent: Argotic.Syndication.Specialized.BlogMLContentType
+  langs:
+  - csharp
+  - vb
+  name: Text
+  nameWithType: BlogMLContentType.Text
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType.Text
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Text
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the textual content is not encoded per a specific entity scheme.\n"
+  example: []
+  syntax:
+    content: Text = 3
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLContentType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLContentType.Xhtml
+  commentId: F:Argotic.Syndication.Specialized.BlogMLContentType.Xhtml
+  id: Xhtml
+  parent: Argotic.Syndication.Specialized.BlogMLContentType
+  langs:
+  - csharp
+  - vb
+  name: Xhtml
+  nameWithType: BlogMLContentType.Xhtml
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType.Xhtml
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Xhtml
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLContentType.cs
+    startLine: 39
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the textual content is Extensible Hyper-Text Markup Language (XHTML) encoded.\n"
+  example: []
+  syntax:
+    content: Xhtml = 4
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLContentType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Syndication.Specialized
+  commentId: N:Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  nameWithType: Argotic.Syndication.Specialized
+  fullName: Argotic.Syndication.Specialized
+- uid: Argotic.Syndication.Specialized.BlogMLContentType
+  commentId: T:Argotic.Syndication.Specialized.BlogMLContentType
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLContentType
+  nameWithType: BlogMLContentType
+  fullName: Argotic.Syndication.Specialized.BlogMLContentType

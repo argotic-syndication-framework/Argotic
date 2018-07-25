@@ -1,27 +1,26 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the expressed version of a media object.
     /// </summary>
     /// <seealso cref="YahooMediaTextConstruct"/>
-    [Serializable()]
+    [Serializable]
     public enum YahooMediaExpression
     {
         /// <summary>
         /// No media expression specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
         /// The media object represents the full version.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        Full    = 1,
+        Full = 1,
 
         /// <summary>
         /// he media object represents a continuous stream.
@@ -33,6 +32,6 @@ namespace Argotic.Extensions.Core
         /// The media object represents a sample version.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        Sample  = 3
+        Sample = 3,
     }
 }

@@ -1,0 +1,717 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Examples.OpmlDocumentExample
+  commentId: T:Argotic.Examples.OpmlDocumentExample
+  id: OpmlDocumentExample
+  parent: Argotic.Examples
+  children:
+  - Argotic.Examples.OpmlDocumentExample.ClassExample
+  - Argotic.Examples.OpmlDocumentExample.CreateExample
+  - Argotic.Examples.OpmlDocumentExample.LoadAsyncExample
+  - Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample
+  - Argotic.Examples.OpmlDocumentExample.LoadStreamExample
+  - Argotic.Examples.OpmlDocumentExample.LoadUriExample
+  - Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample
+  - Argotic.Examples.OpmlDocumentExample.SaveStreamExample
+  - Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample
+  langs:
+  - csharp
+  - vb
+  name: OpmlDocumentExample
+  nameWithType: OpmlDocumentExample
+  fullName: Argotic.Examples.OpmlDocumentExample
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OpmlDocumentExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 18
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nContains the code examples for the <xref href=\"Argotic.Syndication.OpmlDocument\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  remarks: "\nThis class contains all of the code examples that are referenced by the <xref href=\"Argotic.Syndication.OpmlDocument\" data-throw-if-not-resolved=\"false\"></xref> class.\nThe code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.\n"
+  example: []
+  syntax:
+    content: public static class OpmlDocumentExample
+    content.vb: Public Module OpmlDocumentExample
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Examples.OpmlDocumentExample.ClassExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.ClassExample
+  id: ClassExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: ClassExample()
+  nameWithType: OpmlDocumentExample.ClassExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.ClassExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ClassExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the OpmlDocument class.\n"
+  example: []
+  syntax:
+    content: public static void ClassExample()
+    content.vb: Public Shared Sub ClassExample
+  overload: Argotic.Examples.OpmlDocumentExample.ClassExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.CreateExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.CreateExample
+  id: CreateExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: CreateExample()
+  nameWithType: OpmlDocumentExample.CreateExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.CreateExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 55
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the OpmlDocument.Create(Uri) method.\n"
+  example: []
+  syntax:
+    content: public static void CreateExample()
+    content.vb: Public Shared Sub CreateExample
+  overload: Argotic.Examples.OpmlDocumentExample.CreateExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.LoadAsyncExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.LoadAsyncExample
+  id: LoadAsyncExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: LoadAsyncExample()
+  nameWithType: OpmlDocumentExample.LoadAsyncExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadAsyncExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsyncExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 71
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the LoadAsync(Uri, Object) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadAsyncExample()
+    content.vb: Public Shared Sub LoadAsyncExample
+  overload: Argotic.Examples.OpmlDocumentExample.LoadAsyncExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample
+  id: LoadIXPathNavigableExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: LoadIXPathNavigableExample()
+  nameWithType: OpmlDocumentExample.LoadIXPathNavigableExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadIXPathNavigableExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 83
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(IXPathNavigable) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadIXPathNavigableExample()
+    content.vb: Public Shared Sub LoadIXPathNavigableExample
+  overload: Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.LoadStreamExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.LoadStreamExample
+  id: LoadStreamExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: LoadStreamExample()
+  nameWithType: OpmlDocumentExample.LoadStreamExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadStreamExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadStreamExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 102
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(Stream) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadStreamExample()
+    content.vb: Public Shared Sub LoadStreamExample
+  overload: Argotic.Examples.OpmlDocumentExample.LoadStreamExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.LoadUriExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.LoadUriExample
+  id: LoadUriExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: LoadUriExample()
+  nameWithType: OpmlDocumentExample.LoadUriExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadUriExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadUriExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 123
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(Uri, ICredentials, IWebProxy) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadUriExample()
+    content.vb: Public Shared Sub LoadUriExample
+  overload: Argotic.Examples.OpmlDocumentExample.LoadUriExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample
+  id: LoadXmlReaderExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: LoadXmlReaderExample()
+  nameWithType: OpmlDocumentExample.LoadXmlReaderExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadXmlReaderExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 142
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Load(XmlReader) method.\n"
+  example: []
+  syntax:
+    content: public static void LoadXmlReaderExample()
+    content.vb: Public Shared Sub LoadXmlReaderExample
+  overload: Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.SaveStreamExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.SaveStreamExample
+  id: SaveStreamExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: SaveStreamExample()
+  nameWithType: OpmlDocumentExample.SaveStreamExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.SaveStreamExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SaveStreamExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 170
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Save(Stream) method.\n"
+  example: []
+  syntax:
+    content: public static void SaveStreamExample()
+    content.vb: Public Shared Sub SaveStreamExample
+  overload: Argotic.Examples.OpmlDocumentExample.SaveStreamExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample
+  commentId: M:Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample
+  id: SaveXmlWriterExample
+  parent: Argotic.Examples.OpmlDocumentExample
+  langs:
+  - csharp
+  - vb
+  name: SaveXmlWriterExample()
+  nameWithType: OpmlDocumentExample.SaveXmlWriterExample()
+  fullName: Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SaveXmlWriterExample
+    path: ../Solutions/Argotic.Examples/Core/Opml/OpmlDocumentExample.cs
+    startLine: 184
+  assemblies:
+  - Argotic.Examples
+  namespace: Argotic.Examples
+  summary: "\nProvides example code for the Save(XmlWriter) method.\n"
+  example: []
+  syntax:
+    content: public static void SaveXmlWriterExample()
+    content.vb: Public Shared Sub SaveXmlWriterExample
+  overload: Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Syndication.OpmlDocument
+  commentId: T:Argotic.Syndication.OpmlDocument
+  parent: Argotic.Syndication
+  name: OpmlDocument
+  nameWithType: OpmlDocument
+  fullName: Argotic.Syndication.OpmlDocument
+- uid: Argotic.Examples
+  commentId: N:Argotic.Examples
+  name: Argotic.Examples
+  nameWithType: Argotic.Examples
+  fullName: Argotic.Examples
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Examples.OpmlDocumentExample.ClassExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.ClassExample
+  name: ClassExample
+  nameWithType: OpmlDocumentExample.ClassExample
+  fullName: Argotic.Examples.OpmlDocumentExample.ClassExample
+- uid: Argotic.Examples.OpmlDocumentExample.CreateExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.CreateExample
+  name: CreateExample
+  nameWithType: OpmlDocumentExample.CreateExample
+  fullName: Argotic.Examples.OpmlDocumentExample.CreateExample
+- uid: Argotic.Examples.OpmlDocumentExample.LoadAsyncExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.LoadAsyncExample
+  name: LoadAsyncExample
+  nameWithType: OpmlDocumentExample.LoadAsyncExample
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadAsyncExample
+- uid: Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample
+  name: LoadIXPathNavigableExample
+  nameWithType: OpmlDocumentExample.LoadIXPathNavigableExample
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadIXPathNavigableExample
+- uid: Argotic.Examples.OpmlDocumentExample.LoadStreamExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.LoadStreamExample
+  name: LoadStreamExample
+  nameWithType: OpmlDocumentExample.LoadStreamExample
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadStreamExample
+- uid: Argotic.Examples.OpmlDocumentExample.LoadUriExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.LoadUriExample
+  name: LoadUriExample
+  nameWithType: OpmlDocumentExample.LoadUriExample
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadUriExample
+- uid: Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample
+  name: LoadXmlReaderExample
+  nameWithType: OpmlDocumentExample.LoadXmlReaderExample
+  fullName: Argotic.Examples.OpmlDocumentExample.LoadXmlReaderExample
+- uid: Argotic.Examples.OpmlDocumentExample.SaveStreamExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.SaveStreamExample
+  name: SaveStreamExample
+  nameWithType: OpmlDocumentExample.SaveStreamExample
+  fullName: Argotic.Examples.OpmlDocumentExample.SaveStreamExample
+- uid: Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample*
+  commentId: Overload:Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample
+  name: SaveXmlWriterExample
+  nameWithType: OpmlDocumentExample.SaveXmlWriterExample
+  fullName: Argotic.Examples.OpmlDocumentExample.SaveXmlWriterExample

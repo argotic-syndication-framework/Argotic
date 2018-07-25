@@ -1,28 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="BasicGeocodingSyndicationExtension"/>.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Geocoding")]
-    [Serializable()]
+    [Serializable]
     public class BasicGeocodingSyndicationExtensionContext
     {
-
-        /// <summary>
-        /// Private member to hold the latitude spatial coordinate.
-        /// </summary>
-        private decimal extensionLatitude   = Decimal.MinValue;
-        /// <summary>
-        /// Private member to hold the longitude spatial coordinate.
-        /// </summary>
-        private decimal extensionLongitude  = Decimal.MinValue;
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
         /// </summary>
@@ -33,36 +23,14 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets the geocoding latitude coordinate.
         /// </summary>
-        /// <value>The geocoding latitude coordinate. The default value is <see cref="Decimal.MinValue"/>, which indicates that no latitude was provided.</value>
-        public decimal Latitude
-        {
-            get
-            {
-                return extensionLatitude;
-            }
-
-            set
-            {
-                extensionLatitude = value;
-            }
-        }
+        /// <value>The geocoding latitude coordinate. The default value is <see cref="decimal.MinValue"/>, which indicates that no latitude was provided.</value>
+        public decimal Latitude { get; set; } = decimal.MinValue;
 
         /// <summary>
         /// Gets or sets the geocoding longitude coordinate.
         /// </summary>
-        /// <value>The geocoding longitude coordinate. The default value is <see cref="Decimal.MinValue"/>, which indicates that no longitude was provided.</value>
-        public decimal Longitude
-        {
-            get
-            {
-                return extensionLongitude;
-            }
-
-            set
-            {
-                extensionLongitude = value;
-            }
-        }
+        /// <value>The geocoding longitude coordinate. The default value is <see cref="decimal.MinValue"/>, which indicates that no longitude was provided.</value>
+        public decimal Longitude { get; set; } = decimal.MinValue;
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
@@ -74,29 +42,29 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            XPathNavigator latitudeNavigator    = source.SelectSingleNode("geo:lat", manager);
-            XPathNavigator longitudeNavigator   = source.SelectSingleNode("geo:long", manager);
+            XPathNavigator latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
+            XPathNavigator longitudeNavigator = source.SelectSingleNode("geo:long", manager);
 
             if (latitudeNavigator != null)
             {
                 decimal latitude;
-                if (Decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out latitude))
+                if (decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out latitude))
                 {
-                    this.Latitude   = latitude;
-                    wasLoaded       = true;
+                    this.Latitude = latitude;
+                    wasLoaded = true;
                 }
             }
 
             if (longitudeNavigator != null)
             {
                 decimal longitude;
-                if (Decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out longitude))
+                if (decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out longitude))
                 {
-                    this.Longitude  = longitude;
-                    wasLoaded       = true;
+                    this.Longitude = longitude;
+                    wasLoaded = true;
                 }
             }
 
@@ -117,14 +85,14 @@ namespace Argotic.Extensions.Core
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
 
-            formatProvider.NumberDecimalDigits      = 7;
-            formatProvider.NumberDecimalSeparator   = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
-            if (this.Latitude != Decimal.MinValue)
+            formatProvider.NumberDecimalDigits = 7;
+            formatProvider.NumberDecimalSeparator = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
+            if (this.Latitude != decimal.MinValue)
             {
                 writer.WriteElementString("lat", xmlNamespace, this.Latitude.ToString("N", formatProvider));
             }
 
-            if (this.Longitude != Decimal.MinValue)
+            if (this.Longitude != decimal.MinValue)
             {
                 writer.WriteElementString("long", xmlNamespace, this.Longitude.ToString("N", formatProvider));
             }

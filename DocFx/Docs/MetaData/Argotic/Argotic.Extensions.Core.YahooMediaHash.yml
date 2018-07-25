@@ -1,0 +1,1319 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaHash
+  commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  id: YahooMediaHash
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaHash.#ctor
+  - Argotic.Extensions.Core.YahooMediaHash.#ctor(System.String)
+  - Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  - Argotic.Extensions.Core.YahooMediaHash.CompareTo(System.Object)
+  - Argotic.Extensions.Core.YahooMediaHash.Equals(System.Object)
+  - Argotic.Extensions.Core.YahooMediaHash.GenerateHash(System.IO.Stream,Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  - Argotic.Extensions.Core.YahooMediaHash.GetHashCode
+  - Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString(Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  - Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName(System.String)
+  - Argotic.Extensions.Core.YahooMediaHash.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.YahooMediaHash.op_Equality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  - Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  - Argotic.Extensions.Core.YahooMediaHash.op_Inequality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  - Argotic.Extensions.Core.YahooMediaHash.op_LessThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  - Argotic.Extensions.Core.YahooMediaHash.ToString
+  - Argotic.Extensions.Core.YahooMediaHash.Value
+  - Argotic.Extensions.Core.YahooMediaHash.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaHash
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 17
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the hash of a binary media object.\n"
+  remarks: "\n<p>\n    This entity can be assocaited multiple times to a media object as long as each <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> instance has a different <xref href=\"Argotic.Extensions.Core.YahooMediaHash.Algorithm\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaHash : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaHash
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaHash.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaHash()
+  nameWithType: YahooMediaHash.YahooMediaHash()
+  fullName: Argotic.Extensions.Core.YahooMediaHash.YahooMediaHash()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaHash()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaHash.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.#ctor(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaHash(String)
+  nameWithType: YahooMediaHash.YahooMediaHash(String)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.YahooMediaHash(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 43
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied hash digest value.\n"
+  example: []
+  syntax:
+    content: public YahooMediaHash(string value)
+    parameters:
+    - id: value
+      type: System.String
+      description: The value of this hash.
+    content.vb: Public Sub New(value As String)
+  overload: Argotic.Extensions.Core.YahooMediaHash.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  commentId: P:Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  id: Algorithm
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Algorithm
+  nameWithType: YahooMediaHash.Algorithm
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Algorithm
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the algorithm used to create this hash.\n"
+  remarks: "\nIf no algorithm is specified, it can be assumed that <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5\" data-throw-if-not-resolved=\"false\"></xref> was used to create this hash.\n"
+  example: []
+  syntax:
+    content: public YahooMediaHashAlgorithm Algorithm { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+      description: "\nA <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that indicates the algorithm used to create this hash.\nThe default value is <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no hash algorithm was specified.\n"
+    content.vb: Public Property Algorithm As YahooMediaHashAlgorithm
+  overload: Argotic.Extensions.Core.YahooMediaHash.Algorithm*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.Value
+  commentId: P:Argotic.Extensions.Core.YahooMediaHash.Value
+  id: Value
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: YahooMediaHash.Value
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Value
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Value
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 77
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the value of this hash.\n"
+  example: []
+  syntax:
+    content: public string Value { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The value of this hash.
+    content.vb: Public Property Value As String
+  overload: Argotic.Extensions.Core.YahooMediaHash.Value*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_Equality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.op_Equality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  id: op_Equality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Equality(YahooMediaHash, YahooMediaHash)
+  nameWithType: YahooMediaHash.Equality(YahooMediaHash, YahooMediaHash)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Equality(Argotic.Extensions.Core.YahooMediaHash, Argotic.Extensions.Core.YahooMediaHash)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 97
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(YahooMediaHash first, YahooMediaHash second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As YahooMediaHash, second As YahooMediaHash) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaHash.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_Inequality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.op_Inequality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  id: op_Inequality(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Inequality(YahooMediaHash, YahooMediaHash)
+  nameWithType: YahooMediaHash.Inequality(YahooMediaHash, YahooMediaHash)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Inequality(Argotic.Extensions.Core.YahooMediaHash, Argotic.Extensions.Core.YahooMediaHash)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 117
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(YahooMediaHash first, YahooMediaHash second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As YahooMediaHash, second As YahooMediaHash) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaHash.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_LessThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.op_LessThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  id: op_LessThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: LessThan(YahooMediaHash, YahooMediaHash)
+  nameWithType: YahooMediaHash.LessThan(YahooMediaHash, YahooMediaHash)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.LessThan(Argotic.Extensions.Core.YahooMediaHash, Argotic.Extensions.Core.YahooMediaHash)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 128
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(YahooMediaHash first, YahooMediaHash second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As YahooMediaHash, second As YahooMediaHash) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaHash.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  id: op_GreaterThan(Argotic.Extensions.Core.YahooMediaHash,Argotic.Extensions.Core.YahooMediaHash)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(YahooMediaHash, YahooMediaHash)
+  nameWithType: YahooMediaHash.GreaterThan(YahooMediaHash, YahooMediaHash)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GreaterThan(Argotic.Extensions.Core.YahooMediaHash, Argotic.Extensions.Core.YahooMediaHash)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 148
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(YahooMediaHash first, YahooMediaHash second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaHash
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As YahooMediaHash, second As YahooMediaHash) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.GenerateHash(System.IO.Stream,Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.GenerateHash(System.IO.Stream,Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  id: GenerateHash(System.IO.Stream,Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: GenerateHash(Stream, YahooMediaHashAlgorithm)
+  nameWithType: YahooMediaHash.GenerateHash(Stream, YahooMediaHashAlgorithm)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GenerateHash(System.IO.Stream, Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GenerateHash
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 170
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nComputes the hash value for the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: The input to compute the hash code for.
+    - id: algorithm
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaHashAlgorithm" data-throw-if-not-resolved="false"></xref> enumeration value that indicates the algorithm to use.
+    return:
+      type: System.String
+      description: The <strong>base64</strong> encoded result of the computed hash code.
+    content.vb: Public Shared Function GenerateHash(stream As Stream, algorithm As YahooMediaHashAlgorithm) As String
+  overload: Argotic.Extensions.Core.YahooMediaHash.GenerateHash*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">algorithm</code> is equal to <xref href="Argotic.Extensions.Core.YahooMediaHashAlgorithm.None" data-throw-if-not-resolved="false"></xref>.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString(Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString(Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  id: HashAlgorithmAsString(Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: HashAlgorithmAsString(YahooMediaHashAlgorithm)
+  nameWithType: YahooMediaHash.HashAlgorithmAsString(YahooMediaHashAlgorithm)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString(Argotic.Extensions.Core.YahooMediaHashAlgorithm)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HashAlgorithmAsString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 200
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the hash algorithm identifier for the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm)
+    parameters:
+    - id: algorithm
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+      description: The <xref href="Argotic.Extensions.Core.YahooMediaHashAlgorithm" data-throw-if-not-resolved="false"></xref> to get the hash algorithm identifier for.
+    return:
+      type: System.String
+      description: The hash algorithm identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">algorithm</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function HashAlgorithmAsString(algorithm As YahooMediaHashAlgorithm) As String
+  overload: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName(System.String)
+  id: HashAlgorithmByName(System.String)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: HashAlgorithmByName(String)
+  nameWithType: YahooMediaHash.HashAlgorithmByName(String)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HashAlgorithmByName
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 235
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the <xref href=\"Argotic.Extensions.Core.YahooMediaHashAlgorithm\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified hash algorithm name.\n"
+  remarks: This method disregards case of specified hash algorithm name.
+  example: []
+  syntax:
+    content: public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the hash algorithm.
+    return:
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaHashAlgorithm" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>YahooMediaHashAlgorithm.None</strong>.
+    content.vb: Public Shared Function HashAlgorithmByName(name As String) As YahooMediaHashAlgorithm
+  overload: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaHash.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: YahooMediaHash.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 271
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaHash" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaHash.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: YahooMediaHash.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 303
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.YahooMediaHash.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.ToString
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: YahooMediaHash.ToString()
+  fullName: Argotic.Extensions.Core.YahooMediaHash.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 329
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.YahooMediaHash" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.YahooMediaHash.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaHash.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: YahooMediaHash.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 358
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.YahooMediaHash.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaHash.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: YahooMediaHash.Equals(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 385
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.YahooMediaHash.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaHash.GetHashCode
+  commentId: M:Argotic.Extensions.Core.YahooMediaHash.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.YahooMediaHash
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: YahooMediaHash.GetHashCode()
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHash.cs
+    startLine: 399
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.YahooMediaHash.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.YahooMediaHash
+  commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash
+- uid: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  commentId: P:Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  isExternal: true
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaHash.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.#ctor
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash.YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash.YahooMediaHash
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  commentId: T:Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHashAlgorithm
+  nameWithType: YahooMediaHashAlgorithm
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  commentId: F:Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaHash.Algorithm*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  name: Algorithm
+  nameWithType: YahooMediaHash.Algorithm
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+- uid: Argotic.Extensions.Core.YahooMediaHash.Value*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.Value
+  name: Value
+  nameWithType: YahooMediaHash.Value
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Value
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.op_Equality
+  name: Equality
+  nameWithType: YahooMediaHash.Equality
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.op_Inequality
+  name: Inequality
+  nameWithType: YahooMediaHash.Inequality
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Inequality
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.op_LessThan
+  name: LessThan
+  nameWithType: YahooMediaHash.LessThan
+  fullName: Argotic.Extensions.Core.YahooMediaHash.LessThan
+- uid: Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.op_GreaterThan
+  name: GreaterThan
+  nameWithType: YahooMediaHash.GreaterThan
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GreaterThan
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaHash.GenerateHash*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.GenerateHash
+  name: GenerateHash
+  nameWithType: YahooMediaHash.GenerateHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GenerateHash
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString
+  name: HashAlgorithmAsString
+  nameWithType: YahooMediaHash.HashAlgorithmAsString
+  fullName: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmAsString
+- uid: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName
+  name: HashAlgorithmByName
+  nameWithType: YahooMediaHash.HashAlgorithmByName
+  fullName: Argotic.Extensions.Core.YahooMediaHash.HashAlgorithmByName
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.YahooMediaHash.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.Load
+  name: Load
+  nameWithType: YahooMediaHash.Load
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaHash.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaHash.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaHash.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaHash.ToString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.ToString
+  name: ToString
+  nameWithType: YahooMediaHash.ToString
+  fullName: Argotic.Extensions.Core.YahooMediaHash.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Argotic.Extensions.Core.YahooMediaHash.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.CompareTo
+  name: CompareTo
+  nameWithType: YahooMediaHash.CompareTo
+  fullName: Argotic.Extensions.Core.YahooMediaHash.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaHash.Equals*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.Equals
+  name: Equals
+  nameWithType: YahooMediaHash.Equals
+  fullName: Argotic.Extensions.Core.YahooMediaHash.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaHash.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaHash.GetHashCode
+  name: GetHashCode
+  nameWithType: YahooMediaHash.GetHashCode
+  fullName: Argotic.Extensions.Core.YahooMediaHash.GetHashCode

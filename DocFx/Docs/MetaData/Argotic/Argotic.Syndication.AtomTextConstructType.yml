@@ -1,0 +1,207 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.AtomTextConstructType
+  commentId: T:Argotic.Syndication.AtomTextConstructType
+  id: AtomTextConstructType
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.AtomTextConstructType.Html
+  - Argotic.Syndication.AtomTextConstructType.None
+  - Argotic.Syndication.AtomTextConstructType.Text
+  - Argotic.Syndication.AtomTextConstructType.Xhtml
+  langs:
+  - csharp
+  - vb
+  name: AtomTextConstructType
+  nameWithType: AtomTextConstructType
+  fullName: Argotic.Syndication.AtomTextConstructType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomTextConstructType
+    path: ../Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents the entity encoding utilized by human-readable text constructs.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum AtomTextConstructType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum AtomTextConstructType
+  seealso:
+  - linkId: Argotic.Syndication.AtomTextConstruct
+    commentId: T:Argotic.Syndication.AtomTextConstruct
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Syndication.AtomTextConstructType.None
+  commentId: F:Argotic.Syndication.AtomTextConstructType.None
+  id: None
+  parent: Argotic.Syndication.AtomTextConstructType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: AtomTextConstructType.None
+  fullName: Argotic.Syndication.AtomTextConstructType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nNo entity-encoding type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Syndication.AtomTextConstructType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.AtomTextConstructType.Html
+  commentId: F:Argotic.Syndication.AtomTextConstructType.Html
+  id: Html
+  parent: Argotic.Syndication.AtomTextConstructType
+  langs:
+  - csharp
+  - vb
+  name: Html
+  nameWithType: AtomTextConstructType.Html
+  fullName: Argotic.Syndication.AtomTextConstructType.Html
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Html
+    path: ../Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nIndicates that the human-readable text is Hyper-Text Markup Language (HTML) encoded.\n"
+  example: []
+  syntax:
+    content: Html = 1
+    return:
+      type: Argotic.Syndication.AtomTextConstructType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.AtomTextConstructType.Text
+  commentId: F:Argotic.Syndication.AtomTextConstructType.Text
+  id: Text
+  parent: Argotic.Syndication.AtomTextConstructType
+  langs:
+  - csharp
+  - vb
+  name: Text
+  nameWithType: AtomTextConstructType.Text
+  fullName: Argotic.Syndication.AtomTextConstructType.Text
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Text
+    path: ../Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nIndicates that the human-readable text is not encoded per a specific entity scheme.\n"
+  example: []
+  syntax:
+    content: Text = 2
+    return:
+      type: Argotic.Syndication.AtomTextConstructType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.AtomTextConstructType.Xhtml
+  commentId: F:Argotic.Syndication.AtomTextConstructType.Xhtml
+  id: Xhtml
+  parent: Argotic.Syndication.AtomTextConstructType
+  langs:
+  - csharp
+  - vb
+  name: Xhtml
+  nameWithType: AtomTextConstructType.Xhtml
+  fullName: Argotic.Syndication.AtomTextConstructType.Xhtml
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Xhtml
+    path: ../Solutions/Argotic.Core/Syndication/Atom/AtomTextConstructType.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nIndicates that the human-readable text is Extensible Hyper-Text Markup Language (XHTML) encoded.\n"
+  example: []
+  syntax:
+    content: Xhtml = 3
+    return:
+      type: Argotic.Syndication.AtomTextConstructType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Syndication.AtomTextConstruct
+  commentId: T:Argotic.Syndication.AtomTextConstruct
+  parent: Argotic.Syndication
+  name: AtomTextConstruct
+  nameWithType: AtomTextConstruct
+  fullName: Argotic.Syndication.AtomTextConstruct
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: Argotic.Syndication.AtomTextConstructType
+  commentId: T:Argotic.Syndication.AtomTextConstructType
+  parent: Argotic.Syndication
+  name: AtomTextConstructType
+  nameWithType: AtomTextConstructType
+  fullName: Argotic.Syndication.AtomTextConstructType

@@ -1,5 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common.netstandard2_0.proj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
@@ -13,9 +13,15 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description>Argotic Entity Extensibility Class Library, that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</Description>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Authors />
-    <Company />
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />

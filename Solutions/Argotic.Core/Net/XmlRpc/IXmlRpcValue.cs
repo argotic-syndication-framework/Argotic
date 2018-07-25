@@ -1,9 +1,9 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Defines generalized properties, methods, indexers and events that a value type or class
     /// implements to create a type-specific XML-RPC values.
@@ -25,19 +25,19 @@ namespace Argotic.Net
         bool Load(XPathNavigator source);
 
         /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        string ToString();
+
+        /// <summary>
         /// Saves the current <see cref="IXmlRpcValue"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         void WriteTo(XmlWriter writer);
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        string ToString();
     }
 }

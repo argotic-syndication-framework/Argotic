@@ -1,0 +1,2115 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.SyndicationExtension
+  commentId: T:Argotic.Extensions.SyndicationExtension
+  id: SyndicationExtension
+  parent: Argotic.Extensions
+  children:
+  - Argotic.Extensions.SyndicationExtension.#ctor
+  - Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version)
+  - Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version,System.Uri,System.String,System.String)
+  - Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.Description
+  - Argotic.Extensions.SyndicationExtension.Documentation
+  - Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.GetSchema
+  - Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  - Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  - Argotic.Extensions.SyndicationExtension.Loaded
+  - Argotic.Extensions.SyndicationExtension.Name
+  - Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  - Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  - Argotic.Extensions.SyndicationExtension.Version
+  - Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.XmlNamespace
+  - Argotic.Extensions.SyndicationExtension.XmlPrefix
+  langs:
+  - csharp
+  - vb
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationExtension
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 30
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nProvides the set of methods, properties and events that web content syndication extensions should inherit from.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> abstract class is provided to reduce the difficulty of implementing custom syndication extensions.\n    While implementers are free to implement their custom syndication extensions by implementing the <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> interface,\n    it is <em>recommended</em> that custom syndication extensions inherit from the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> base class.\n</p>\n<p>\n    If you choose to not inherit from the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> abstract base class, please be aware that the <xref href=\"Argotic.Extensions.SyndicationExtensionAdapter\" data-throw-if-not-resolved=\"false\"></xref> class\n    internally calls the <xref href=\"System.Activator.CreateInstance(System.Type)\" data-throw-if-not-resolved=\"false\"></xref> method, and so any custom syndication extension will need to have the\n    appropriate SecurityPermissionAttribute and ReflectionPermissionAttribute attributes applied as necessary.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Extensions\\SyndicationExtensionExample.cs\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializable
+    content.vb: >-
+      <Serializable>
+
+      Public MustInherit Class SyndicationExtension
+
+          Implements ISyndicationExtension, IXmlSerializable
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Argotic.Examples.MyCustomSyndicationExtension
+  - Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+  - Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+  - Argotic.Extensions.Core.BasicGeocodingSyndicationExtension
+  - Argotic.Extensions.Core.BlogChannelSyndicationExtension
+  - Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  - Argotic.Extensions.Core.DublinCoreMetadataTermsSyndicationExtension
+  - Argotic.Extensions.Core.FeedHistorySyndicationExtension
+  - Argotic.Extensions.Core.FeedRankSyndicationExtension
+  - Argotic.Extensions.Core.FeedSynchronizationSyndicationExtension
+  - Argotic.Extensions.Core.ITunesSyndicationExtension
+  - Argotic.Extensions.Core.LiveJournalSyndicationExtension
+  - Argotic.Extensions.Core.PheedSyndicationExtension
+  - Argotic.Extensions.Core.PingbackSyndicationExtension
+  - Argotic.Extensions.Core.SimpleListSyndicationExtension
+  - Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension
+  - Argotic.Extensions.Core.SiteSummarySlashSyndicationExtension
+  - Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtension
+  - Argotic.Extensions.Core.TrackbackSyndicationExtension
+  - Argotic.Extensions.Core.WellFormedWebCommentsSyndicationExtension
+  - Argotic.Extensions.Core.YahooMediaSyndicationExtension
+  - Argotic.Publishing.AtomMemberResources
+  implements:
+  - Argotic.Extensions.ISyndicationExtension
+  - System.Xml.Serialization.IXmlSerializable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - abstract
+  - class
+  modifiers.vb:
+  - Public
+  - MustInherit
+  - Class
+- uid: Argotic.Extensions.SyndicationExtension.#ctor
+  commentId: M:Argotic.Extensions.SyndicationExtension.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: SyndicationExtension()
+  nameWithType: SyndicationExtension.SyndicationExtension()
+  fullName: Argotic.Extensions.SyndicationExtension.SyndicationExtension()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 36
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: protected SyndicationExtension()
+    content.vb: Protected Sub New
+  overload: Argotic.Extensions.SyndicationExtension.#ctor*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version)
+  commentId: M:Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version)
+  id: '#ctor(System.String,System.String,System.Version)'
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: SyndicationExtension(String, String, Version)
+  nameWithType: SyndicationExtension.SyndicationExtension(String, String, Version)
+  fullName: Argotic.Extensions.SyndicationExtension.SyndicationExtension(System.String, System.String, System.Version)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied parameters.\n"
+  example: []
+  syntax:
+    content: protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version)
+    parameters:
+    - id: xmlPrefix
+      type: System.String
+      description: The prefix used to associate this syndication extension&apos;s element and attribute names with this syndication extension&apos;s XML namespace.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace that is used when qualifying this syndication extension&apos;s element and attribute names.
+    - id: version
+      type: System.Version
+      description: The <xref href="Argotic.Extensions.SyndicationExtension.Version" data-throw-if-not-resolved="false"></xref> of the specification that this syndication extension conforms to.
+    content.vb: Protected Sub New(xmlPrefix As String, xmlNamespace As String, version As Version)
+  overload: Argotic.Extensions.SyndicationExtension.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlPrefix</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlPrefix</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">version</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version,System.Uri,System.String,System.String)
+  commentId: M:Argotic.Extensions.SyndicationExtension.#ctor(System.String,System.String,System.Version,System.Uri,System.String,System.String)
+  id: '#ctor(System.String,System.String,System.Version,System.Uri,System.String,System.String)'
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: SyndicationExtension(String, String, Version, Uri, String, String)
+  nameWithType: SyndicationExtension.SyndicationExtension(String, String, Version, Uri, String, String)
+  fullName: Argotic.Extensions.SyndicationExtension.SyndicationExtension(System.String, System.String, System.Version, System.Uri, System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 79
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied parameters.\n"
+  example: []
+  syntax:
+    content: protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version, Uri documentation, string name, string description)
+    parameters:
+    - id: xmlPrefix
+      type: System.String
+      description: The prefix used to associate this syndication extension&apos;s element and attribute names with this syndication extension&apos;s XML namespace.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace that is used when qualifying this syndication extension&apos;s element and attribute names.
+    - id: version
+      type: System.Version
+      description: The <xref href="Argotic.Extensions.SyndicationExtension.Version" data-throw-if-not-resolved="false"></xref> of the specification that this syndication extension conforms to.
+    - id: documentation
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the documentation for this syndication extension.
+    - id: name
+      type: System.String
+      description: A human-readable name for this syndication extension.
+    - id: description
+      type: System.String
+      description: A human-readable description for this syndication extension.
+    content.vb: Protected Sub New(xmlPrefix As String, xmlNamespace As String, version As Version, documentation As Uri, name As String, description As String)
+  overload: Argotic.Extensions.SyndicationExtension.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlPrefix</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlPrefix</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">version</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">documentation</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Argotic.Extensions.SyndicationExtension.Loaded
+  commentId: E:Argotic.Extensions.SyndicationExtension.Loaded
+  id: Loaded
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Loaded
+  nameWithType: SyndicationExtension.Loaded
+  fullName: Argotic.Extensions.SyndicationExtension.Loaded
+  type: Event
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Loaded
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 99
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nOccurs when the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> state has been changed by a load operation.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded
+    return:
+      type: System.EventHandler{Argotic.Extensions.SyndicationExtensionLoadedEventArgs}
+    content.vb: Public Event Loaded As EventHandler(Of SyndicationExtensionLoadedEventArgs)
+  seealso:
+  - linkId: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  - linkId: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Loaded
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.Description
+  commentId: P:Argotic.Extensions.SyndicationExtension.Description
+  id: Description
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: SyndicationExtension.Description
+  fullName: Argotic.Extensions.SyndicationExtension.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 105
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets a human-readable description of this syndication extension.\n"
+  example: []
+  syntax:
+    content: public string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: A human-readable description for this syndication extension.
+    content.vb: Public ReadOnly Property Description As String
+  overload: Argotic.Extensions.SyndicationExtension.Description*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Description
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.Documentation
+  commentId: P:Argotic.Extensions.SyndicationExtension.Documentation
+  id: Documentation
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Documentation
+  nameWithType: SyndicationExtension.Documentation
+  fullName: Argotic.Extensions.SyndicationExtension.Documentation
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Documentation
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 111
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets a <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that points to documentation for this syndication extension.\n"
+  example: []
+  syntax:
+    content: public Uri Documentation { get; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the documentation or implementation details for this syndication extension.
+    content.vb: Public ReadOnly Property Documentation As Uri
+  overload: Argotic.Extensions.SyndicationExtension.Documentation*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Documentation
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.Name
+  commentId: P:Argotic.Extensions.SyndicationExtension.Name
+  id: Name
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: SyndicationExtension.Name
+  fullName: Argotic.Extensions.SyndicationExtension.Name
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Name
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 117
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets a human-readable name of this syndication extension.\n"
+  example: []
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: A human-readable name for this syndication extension.
+    content.vb: Public ReadOnly Property Name As String
+  overload: Argotic.Extensions.SyndicationExtension.Name*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Name
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.Version
+  commentId: P:Argotic.Extensions.SyndicationExtension.Version
+  id: Version
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Version
+  nameWithType: SyndicationExtension.Version
+  fullName: Argotic.Extensions.SyndicationExtension.Version
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Version
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 123
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets the <xref href=\"Argotic.Extensions.SyndicationExtension.Version\" data-throw-if-not-resolved=\"false\"></xref> of the specification that this syndication extension conforms to.\n"
+  example: []
+  syntax:
+    content: public Version Version { get; }
+    parameters: []
+    return:
+      type: System.Version
+      description: The <xref href="Argotic.Extensions.SyndicationExtension.Version" data-throw-if-not-resolved="false"></xref> of the specification that this syndication extension conforms to.
+    content.vb: Public ReadOnly Property Version As Version
+  overload: Argotic.Extensions.SyndicationExtension.Version*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Version
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.XmlNamespace
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlNamespace
+  id: XmlNamespace
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: XmlNamespace
+  nameWithType: SyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.SyndicationExtension.XmlNamespace
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlNamespace
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 129
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets the XML namespace that is used when qualifying this syndication extension&apos;s element and attribute names.\n"
+  example: []
+  syntax:
+    content: public string XmlNamespace { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: The XML namespace that is used when qualifying this syndication extension&apos;s element and attribute names.
+    content.vb: Public ReadOnly Property XmlNamespace As String
+  overload: Argotic.Extensions.SyndicationExtension.XmlNamespace*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.XmlNamespace
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.XmlPrefix
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlPrefix
+  id: XmlPrefix
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: XmlPrefix
+  nameWithType: SyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.SyndicationExtension.XmlPrefix
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlPrefix
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 135
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGets the prefix used to associate this syndication extension&apos;s element and attribute names with this syndication extension&apos;s XML namespace.\n"
+  example: []
+  syntax:
+    content: public string XmlPrefix { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: The prefix used to associate this syndication extension&apos;s element and attribute names with this syndication extension&apos;s <xref href="Argotic.Extensions.SyndicationExtension.XmlNamespace" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public ReadOnly Property XmlPrefix As String
+  overload: Argotic.Extensions.SyndicationExtension.XmlPrefix*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.XmlPrefix
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  id: CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: CreateNamespaceManager(XPathNavigator)
+  nameWithType: SyndicationExtension.CreateNamespaceManager(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateNamespaceManager
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 149
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes a <xref href=\"System.Xml.XmlNamespaceManager\" data-throw-if-not-resolved=\"false\"></xref> object for resolving prefixed XML namespaces utilized by this <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method will return a <xref href=\"System.Xml.XmlNamespaceManager\" data-throw-if-not-resolved=\"false\"></xref> that has a namespace added to it using the <xref href=\"Argotic.Extensions.SyndicationExtension.XmlPrefix\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Extensions.SyndicationExtension.XmlNamespace\" data-throw-if-not-resolved=\"false\"></xref>\nof the extension unless the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> already has an XML namespace associated to the <xref href=\"Argotic.Extensions.SyndicationExtension.XmlPrefix\" data-throw-if-not-resolved=\"false\"></xref>, in which case\nthe associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that\nis not per the extension&apos;s specification has been declared on the syndication resource.\n"
+  example: []
+  syntax:
+    content: public XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator)
+    parameters:
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: Provides a cursor model for navigating syndication extension data.
+    return:
+      type: System.Xml.XmlNamespaceManager
+      description: A <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> that resolves prefixed XML namespaces and provides scope management for these namespaces.
+    content.vb: Public Function CreateNamespaceManager(navigator As XPathNavigator) As XmlNamespaceManager
+  overload: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  id: ExistsInSource(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: ExistsInSource(XPathNavigator)
+  nameWithType: SyndicationExtension.ExistsInSource(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExistsInSource
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 183
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nDetermines if the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> exists in the XML data in the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    This method should be as lightweight as possible when determining if the <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> or its related entities are present in the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>.\n    The default implementation utilizes the <xref href=\"System.Xml.XPath.XPathNavigator.GetNamespacesInScope(System.Xml.XmlNamespaceScope)\" data-throw-if-not-resolved=\"false\"></xref> method to determine if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> contains\n    the expected namespace(s) for this <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>It is recommended that you call this method prior to executing a possibly costly load operation using the <xref href=\"Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)\" data-throw-if-not-resolved=\"false\"></xref> method.</p>\n"
+  example: []
+  syntax:
+    content: public virtual bool ExistsInSource(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to parse.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.SyndicationExtension" data-throw-if-not-resolved="false"></xref> elements or attributes are present in the <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Overridable Function ExistsInSource(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.SyndicationExtension.ExistsInSource*
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  id: WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: WriteXmlNamespaceDeclaration(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteXmlNamespaceDeclaration
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 208
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nWrites the prefixed XML namespace for the current syndication extension to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteXmlNamespaceDeclaration(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the prefixed XML namespace declaration to.
+    content.vb: Public Sub WriteXmlNamespaceDeclaration(writer As XmlWriter)
+  overload: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.GetSchema
+  commentId: M:Argotic.Extensions.SyndicationExtension.GetSchema
+  id: GetSchema
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: GetSchema()
+  nameWithType: SyndicationExtension.GetSchema()
+  fullName: Argotic.Extensions.SyndicationExtension.GetSchema()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetSchema
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 237
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nThis method is reserved and <u>should not be used</u>. When implementing the <xref href=\"System.Xml.Serialization.IXmlSerializable\" data-throw-if-not-resolved=\"false\"></xref> interface, it is recommended\nthat a <strong>null</strong> reference (Nothing in Visual Basic) is returned from this method, and instead, if\nspecifying a custom schema is required, to apply the <xref href=\"System.Xml.Serialization.XmlSchemaProviderAttribute\" data-throw-if-not-resolved=\"false\"></xref> to the class.\n"
+  remarks: "\n<p>\n    When serializing or deserializing an object, the <xref href=\"System.Xml.Serialization.XmlSerializer\" data-throw-if-not-resolved=\"false\"></xref> class does not perform XML validation.\n    For this reason, it is often safe to omit schema information by providing a trivial implementation of this method,\n    for example by returning a <strong>null</strong> reference (Nothing in Visual Basic).\n</p>\n<p>\n    Some .NET Framework types as well as legacy custom types implementing the <xref href=\"System.Xml.Serialization.IXmlSerializable\" data-throw-if-not-resolved=\"false\"></xref> interface may be using <xref href=\"System.Xml.Serialization.IXmlSerializable.GetSchema\" data-throw-if-not-resolved=\"false\"></xref>\n    instead of <xref href=\"System.Xml.Serialization.XmlSchemaProviderAttribute\" data-throw-if-not-resolved=\"false\"></xref>. In this case, the method returns an accurate XML schema that describes the XML representation\n    of the object generated by the <xref href=\"Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public XmlSchema GetSchema()
+    return:
+      type: System.Xml.Schema.XmlSchema
+      description: "\nA <xref href=\"System.Xml.Schema.XmlSchema\" data-throw-if-not-resolved=\"false\"></xref> object that represents an in-memory representation of an XML Schema as specified\nin the <strong>World Wide Web Consortium (W3C)</strong> XML Schema <em>Structures</em> and <em>Datatypes</em> specifications.\nThe default return value for this method is a <strong>null</strong> reference (Nothing in Visual Basic).\n"
+    content.vb: Public Function GetSchema As XmlSchema
+  overload: Argotic.Extensions.SyndicationExtension.GetSchema*
+  implements:
+  - System.Xml.Serialization.IXmlSerializable.GetSchema
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  id: ReadXml(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: ReadXml(XmlReader)
+  nameWithType: SyndicationExtension.ReadXml(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ReadXml
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 247
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nGenerates an object from its XML representation.\n"
+  example: []
+  syntax:
+    content: public void ReadXml(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <xref href="System.Xml.XmlReader" data-throw-if-not-resolved="false"></xref> stream from which the object is deserialized.
+    content.vb: Public Sub ReadXml(reader As XmlReader)
+  overload: Argotic.Extensions.SyndicationExtension.ReadXml*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  id: WriteXml(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: WriteXml(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXml(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteXml
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 259
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nConverts an object into its XML representation.\n"
+  example: []
+  syntax:
+    content: public void WriteXml(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> stream to which the object is serialized.
+    content.vb: Public Sub WriteXml(writer As XmlWriter)
+  overload: Argotic.Extensions.SyndicationExtension.WriteXml*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  id: Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable)
+  nameWithType: SyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 284
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes the syndication extension using the supplied <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<strong>Notes to Implementers:</strong>\n<ul><li>\n            After the load operation has successfully completed, the <xref href=\"Argotic.Extensions.SyndicationExtension.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event <strong>must</strong> be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public abstract bool Load(IXPathNavigable source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <strong>IXPathNavigable</strong> used to load the syndication extension.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.SyndicationExtension" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public MustOverride Function Load(source As IXPathNavigable) As Boolean
+  overload: Argotic.Extensions.SyndicationExtension.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  id: Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader)
+  nameWithType: SyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 310
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nInitializes the syndication extension using the supplied <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<strong>Notes to Implementers:</strong>\n<ul><li>\n            When implementing this method, the <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref> should be used to create a <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref>\n            that is then passed to the <xref href=\"Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Extensions.SyndicationExtension.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event <strong>must</strong> be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public abstract bool Load(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load the syndication extension.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.SyndicationExtension" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.
+    content.vb: Public MustOverride Function Load(reader As XmlReader) As Boolean
+  overload: Argotic.Extensions.SyndicationExtension.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: SyndicationExtension.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 317
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nWrites the syndication extension to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public abstract void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the syndication extension.
+    content.vb: Public MustOverride Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.SyndicationExtension.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  commentId: M:Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  id: OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  parent: Argotic.Extensions.SyndicationExtension
+  langs:
+  - csharp
+  - vb
+  name: OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  nameWithType: SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/SyndicationExtension.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: OnExtensionLoaded
+    path: ../Solutions/Argotic.Extensions/SyndicationExtension.cs
+    startLine: 323
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions
+  summary: "\nRaises the <xref href=\"Argotic.Extensions.SyndicationExtension.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
+  example: []
+  syntax:
+    content: protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
+    parameters:
+    - id: e
+      type: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+      description: A <xref href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs" data-throw-if-not-resolved="false"></xref> that contains the event data.
+    content.vb: Protected Overridable Sub OnExtensionLoaded(e As SyndicationExtensionLoadedEventArgs)
+  overload: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+references:
+- uid: Argotic.Extensions.SyndicationExtension
+  commentId: T:Argotic.Extensions.SyndicationExtension
+  parent: Argotic.Extensions
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: Argotic.Extensions.SyndicationExtensionAdapter
+  commentId: T:Argotic.Extensions.SyndicationExtensionAdapter
+  name: SyndicationExtensionAdapter
+  nameWithType: SyndicationExtensionAdapter
+  fullName: Argotic.Extensions.SyndicationExtensionAdapter
+- uid: System.Activator.CreateInstance(System.Type)
+  commentId: M:System.Activator.CreateInstance(System.Type)
+  isExternal: true
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Xml.Serialization.IXmlSerializable
+  commentId: T:System.Xml.Serialization.IXmlSerializable
+  parent: System.Xml.Serialization
+  isExternal: true
+  name: IXmlSerializable
+  nameWithType: IXmlSerializable
+  fullName: System.Xml.Serialization.IXmlSerializable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml.Serialization
+  commentId: N:System.Xml.Serialization
+  isExternal: true
+  name: System.Xml.Serialization
+  nameWithType: System.Xml.Serialization
+  fullName: System.Xml.Serialization
+- uid: Argotic.Extensions.SyndicationExtension.#ctor*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.#ctor
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension.SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension.SyndicationExtension
+- uid: Argotic.Extensions.SyndicationExtension.Version
+  commentId: P:Argotic.Extensions.SyndicationExtension.Version
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Version
+  nameWithType: SyndicationExtension.Version
+  fullName: Argotic.Extensions.SyndicationExtension.Version
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: SyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: SyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension.Loaded
+  commentId: E:Argotic.Extensions.ISyndicationExtension.Loaded
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: Loaded
+  nameWithType: ISyndicationExtension.Loaded
+  fullName: Argotic.Extensions.ISyndicationExtension.Loaded
+- uid: System.EventHandler{Argotic.Extensions.SyndicationExtensionLoadedEventArgs}
+  commentId: T:System.EventHandler{Argotic.Extensions.SyndicationExtensionLoadedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SyndicationExtensionLoadedEventArgs>
+  nameWithType: EventHandler<SyndicationExtensionLoadedEventArgs>
+  fullName: System.EventHandler<Argotic.Extensions.SyndicationExtensionLoadedEventArgs>
+  nameWithType.vb: EventHandler(Of SyndicationExtensionLoadedEventArgs)
+  fullName.vb: System.EventHandler(Of Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  name.vb: EventHandler(Of SyndicationExtensionLoadedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.Description*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.Description
+  name: Description
+  nameWithType: SyndicationExtension.Description
+  fullName: Argotic.Extensions.SyndicationExtension.Description
+- uid: Argotic.Extensions.ISyndicationExtension.Description
+  commentId: P:Argotic.Extensions.ISyndicationExtension.Description
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: Description
+  nameWithType: ISyndicationExtension.Description
+  fullName: Argotic.Extensions.ISyndicationExtension.Description
+- uid: Argotic.Extensions.SyndicationExtension.Documentation*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.Documentation
+  name: Documentation
+  nameWithType: SyndicationExtension.Documentation
+  fullName: Argotic.Extensions.SyndicationExtension.Documentation
+- uid: Argotic.Extensions.ISyndicationExtension.Documentation
+  commentId: P:Argotic.Extensions.ISyndicationExtension.Documentation
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: Documentation
+  nameWithType: ISyndicationExtension.Documentation
+  fullName: Argotic.Extensions.ISyndicationExtension.Documentation
+- uid: Argotic.Extensions.SyndicationExtension.Name*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.Name
+  name: Name
+  nameWithType: SyndicationExtension.Name
+  fullName: Argotic.Extensions.SyndicationExtension.Name
+- uid: Argotic.Extensions.ISyndicationExtension.Name
+  commentId: P:Argotic.Extensions.ISyndicationExtension.Name
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: Name
+  nameWithType: ISyndicationExtension.Name
+  fullName: Argotic.Extensions.ISyndicationExtension.Name
+- uid: Argotic.Extensions.SyndicationExtension.Version*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.Version
+  name: Version
+  nameWithType: SyndicationExtension.Version
+  fullName: Argotic.Extensions.SyndicationExtension.Version
+- uid: Argotic.Extensions.ISyndicationExtension.Version
+  commentId: P:Argotic.Extensions.ISyndicationExtension.Version
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: Version
+  nameWithType: ISyndicationExtension.Version
+  fullName: Argotic.Extensions.ISyndicationExtension.Version
+- uid: Argotic.Extensions.SyndicationExtension.XmlNamespace*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.XmlNamespace
+  name: XmlNamespace
+  nameWithType: SyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.SyndicationExtension.XmlNamespace
+- uid: Argotic.Extensions.ISyndicationExtension.XmlNamespace
+  commentId: P:Argotic.Extensions.ISyndicationExtension.XmlNamespace
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: XmlNamespace
+  nameWithType: ISyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.ISyndicationExtension.XmlNamespace
+- uid: Argotic.Extensions.SyndicationExtension.XmlNamespace
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlNamespace
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlNamespace
+  nameWithType: SyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.SyndicationExtension.XmlNamespace
+- uid: Argotic.Extensions.SyndicationExtension.XmlPrefix*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.XmlPrefix
+  name: XmlPrefix
+  nameWithType: SyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.SyndicationExtension.XmlPrefix
+- uid: Argotic.Extensions.ISyndicationExtension.XmlPrefix
+  commentId: P:Argotic.Extensions.ISyndicationExtension.XmlPrefix
+  parent: Argotic.Extensions.ISyndicationExtension
+  name: XmlPrefix
+  nameWithType: ISyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.ISyndicationExtension.XmlPrefix
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: Argotic.Extensions.SyndicationExtension.XmlPrefix
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlPrefix
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlPrefix
+  nameWithType: SyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.SyndicationExtension.XmlPrefix
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+  name: CreateNamespaceManager
+  nameWithType: SyndicationExtension.CreateNamespaceManager
+  fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+- uid: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: CreateNamespaceManager(XPathNavigator)
+  nameWithType: ISyndicationExtension.CreateNamespaceManager(XPathNavigator)
+  fullName: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: ISyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: ISyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XPath.XPathNavigator.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  commentId: M:System.Xml.XPath.XPathNavigator.GetNamespacesInScope(System.Xml.XmlNamespaceScope)
+  isExternal: true
+- uid: Argotic.Extensions.SyndicationExtension.ExistsInSource*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.ExistsInSource
+  name: ExistsInSource
+  nameWithType: SyndicationExtension.ExistsInSource
+  fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource
+- uid: Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: ExistsInSource(XPathNavigator)
+  nameWithType: ISyndicationExtension.ExistsInSource(XPathNavigator)
+  fullName: Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: ISyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.ISyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: ISyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.ISyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+  name: WriteXmlNamespaceDeclaration
+  nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+- uid: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: WriteXmlNamespaceDeclaration(XmlWriter)
+  nameWithType: ISyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)
+  fullName: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: ISyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: ISyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.Serialization.XmlSchemaProviderAttribute
+  commentId: T:System.Xml.Serialization.XmlSchemaProviderAttribute
+  isExternal: true
+- uid: System.Xml.Schema.XmlSchema
+  commentId: T:System.Xml.Schema.XmlSchema
+  parent: System.Xml.Schema
+  isExternal: true
+  name: XmlSchema
+  nameWithType: XmlSchema
+  fullName: System.Xml.Schema.XmlSchema
+- uid: System.Xml.Serialization.XmlSerializer
+  commentId: T:System.Xml.Serialization.XmlSerializer
+  isExternal: true
+- uid: System.Xml.Serialization.IXmlSerializable.GetSchema
+  commentId: M:System.Xml.Serialization.IXmlSerializable.GetSchema
+  parent: System.Xml.Serialization.IXmlSerializable
+  isExternal: true
+  name: GetSchema()
+  nameWithType: IXmlSerializable.GetSchema()
+  fullName: System.Xml.Serialization.IXmlSerializable.GetSchema()
+  spec.csharp:
+  - uid: System.Xml.Serialization.IXmlSerializable.GetSchema
+    name: GetSchema
+    nameWithType: IXmlSerializable.GetSchema
+    fullName: System.Xml.Serialization.IXmlSerializable.GetSchema
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Xml.Serialization.IXmlSerializable.GetSchema
+    name: GetSchema
+    nameWithType: IXmlSerializable.GetSchema
+    fullName: System.Xml.Serialization.IXmlSerializable.GetSchema
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXml(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.GetSchema*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.GetSchema
+  name: GetSchema
+  nameWithType: SyndicationExtension.GetSchema
+  fullName: Argotic.Extensions.SyndicationExtension.GetSchema
+- uid: System.Xml.Schema
+  commentId: N:System.Xml.Schema
+  isExternal: true
+  name: System.Xml.Schema
+  nameWithType: System.Xml.Schema
+  fullName: System.Xml.Schema
+- uid: System.Xml.XmlReader
+  commentId: T:System.Xml.XmlReader
+  parent: System.Xml
+  isExternal: true
+  name: XmlReader
+  nameWithType: XmlReader
+  fullName: System.Xml.XmlReader
+- uid: Argotic.Extensions.SyndicationExtension.ReadXml*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.ReadXml
+  name: ReadXml
+  nameWithType: SyndicationExtension.ReadXml
+  fullName: Argotic.Extensions.SyndicationExtension.ReadXml
+- uid: System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+  commentId: M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+  parent: System.Xml.Serialization.IXmlSerializable
+  isExternal: true
+  name: ReadXml(XmlReader)
+  nameWithType: IXmlSerializable.ReadXml(XmlReader)
+  fullName: System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: IXmlSerializable.ReadXml
+    fullName: System.Xml.Serialization.IXmlSerializable.ReadXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: IXmlSerializable.ReadXml
+    fullName: System.Xml.Serialization.IXmlSerializable.ReadXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXml*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.WriteXml
+  name: WriteXml
+  nameWithType: SyndicationExtension.WriteXml
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+- uid: System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+  commentId: M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+  parent: System.Xml.Serialization.IXmlSerializable
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: IXmlSerializable.WriteXml(XmlWriter)
+  fullName: System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: IXmlSerializable.WriteXml
+    fullName: System.Xml.Serialization.IXmlSerializable.WriteXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: IXmlSerializable.WriteXml
+    fullName: System.Xml.Serialization.IXmlSerializable.WriteXml
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.XPath.IXPathNavigable
+  commentId: T:System.Xml.XPath.IXPathNavigable
+  parent: System.Xml.XPath
+  isExternal: true
+  name: IXPathNavigable
+  nameWithType: IXPathNavigable
+  fullName: System.Xml.XPath.IXPathNavigable
+- uid: Argotic.Extensions.SyndicationExtension.Loaded
+  commentId: E:Argotic.Extensions.SyndicationExtension.Loaded
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Loaded
+  nameWithType: SyndicationExtension.Loaded
+  fullName: Argotic.Extensions.SyndicationExtension.Loaded
+- uid: Argotic.Extensions.SyndicationExtension.Load*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.Load
+  name: Load
+  nameWithType: SyndicationExtension.Load
+  fullName: Argotic.Extensions.SyndicationExtension.Load
+- uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: ISyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: ISyndicationExtension.Load
+    fullName: Argotic.Extensions.ISyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: ISyndicationExtension.Load
+    fullName: Argotic.Extensions.ISyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: ISyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: ISyndicationExtension.Load
+    fullName: Argotic.Extensions.ISyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: ISyndicationExtension.Load
+    fullName: Argotic.Extensions.ISyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteTo*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.WriteTo
+  name: WriteTo
+  nameWithType: SyndicationExtension.WriteTo
+  fullName: Argotic.Extensions.SyndicationExtension.WriteTo
+- uid: Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.ISyndicationExtension
+  isExternal: true
+  name: WriteTo(XmlWriter)
+  nameWithType: ISyndicationExtension.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: ISyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.ISyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: ISyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.ISyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  commentId: T:Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  parent: Argotic.Extensions
+  name: SyndicationExtensionLoadedEventArgs
+  nameWithType: SyndicationExtensionLoadedEventArgs
+  fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+- uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded*
+  commentId: Overload:Argotic.Extensions.SyndicationExtension.OnExtensionLoaded
+  name: OnExtensionLoaded
+  nameWithType: SyndicationExtension.OnExtensionLoaded
+  fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded

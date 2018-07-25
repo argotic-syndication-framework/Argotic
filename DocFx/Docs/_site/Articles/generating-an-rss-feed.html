@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create Really Simple Syndication (RSS) syndication feeds </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to create Really Simple Syndication (RSS) syndication feeds ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-create-really-simple-syndication-rss-syndication-feeds">How to create Really Simple Syndication (RSS) syndication feeds</h1>
+
+<p>Really Simple Syndication (RSS) is an XML-based document format for the syndication of web content so that it can be republished on other sites or downloaded periodically and presented to users. The framework provides a complete implementation of the Really Simple Syndication (RSS) 2.0 specification, which can be found at [url:http://www.rssboard.org/rss-specification]. The framework's implementation of this specification also conforms to the [url:RSS Best Practices Profile|:http://www.rssboard.org/rss-profile] guidelines as closely as possible.</p>
+<p>The classes and enumerations that together compose the implementation of RSS are located in the <em>Argotic.Syndication</em> namespace. The primary framework entity that you will use when working with RSS formated syndication resources is the <em>RssFeed</em> class. This class implements the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated content. The framework will by default automatically detect any syndication extensions that have been added to an <em>RssFeed</em> or its child entities and output the appropriate XML namespaces.</p>
+<p>One of the core principals of the framework is &quot;<strong>Read flexibly, Write strictly</strong>&quot;. The framework upholds this principal by consuming syndication resources as flexibly as possible, but always generates output that strictly matches the syndication format specification. This methodology ensures you can consume syndication resources with confidence while still publishing syndicated content that strictly conforms to its format specification.</p>
+<h2 id="creating-syndicated-content">Creating syndicated content</h2>
+<p>To create a new RSS feed, you simply instantiate a new instance of the <em>RssFeed</em> class and utilize its properties and methods to describe the web content you wish to syndicate. The framework API will as much as possible match the terminology used in the syndication format specification, which allows you to easily navigate the framework syndication entities.</p>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+RssFeed feed = new RssFeed();
+
+feed.Channel.Link = new Uri(&quot;http://localhost&quot;);
+feed.Channel.Title = &quot;Simple RSS Feed&quot;;
+feed.Channel.Description = &quot;A minimal RSS 2.0 syndication feed.&quot;;
+
+RssItem item = new RssItem();
+item.Title = &quot;Simple RSS Item&quot;;
+item.Link = new Uri(&quot;http://localhost/items/SimpleRSSItem.aspx&quot;);
+item.Description = &quot;A minimal RSS channel item.&quot;;
+
+feed.Channel.AddItem(item);
+
+using(FileStream stream = new FileStream(&quot;SimpleRssFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    feed.Save(stream);
+}
+</code></pre>
+<p>The RSS feed generated in the above example represents the minimal information required per the RSS 2.0 specification.</p>
+<h2 id="specifying-the-set-of-features-to-support-when-generating-syndicated-content">Specifying the set of features to support when generating syndicated content</h2>
+<p>The framework provides a means of specifying the set of features that are supported when persisting a syndication resource via the <em>SyndicationResourceSaveSettings</em> class. This class is passed as an argument to the <em>Save</em> method of the syndication resource in order to configure how the save operation is performed.</p>
+<p>The <em>SyndicationResourceSaveSettings</em> class exposes the following properties:</p>
+<ul>
+<li><strong>AutoDetectExtensions</strong> - Indicates if syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities.</li>
+<li><strong>CharacterEncoding</strong> - Indicates the character encoding that is used when persisting a syndication resource.</li>
+<li><strong>MinimizeOutputSize</strong> - Indicates if syndication resource persist operations should attempt to minimize the physical size of the resulting output.</li>
+<li><strong>SupportedExtensions</strong> - Indicates the custom syndication extensions that you wish the save operation to support.</li>
+</ul>
+<p>Example:</p>
+<pre><code>using System.IO;
+using Argotic.Common;
+using Argotic.Syndication;
+
+RssFeed feed = new RssFeed();
+
+feed.Channel.Link = new Uri(&quot;http://localhost&quot;);
+feed.Channel.Title = &quot;Compact RSS Feed&quot;;
+feed.Channel.Description = &quot;A minimal and non-indented RSS 2.0 syndication feed.&quot;;
+ 
+RssItem item = new RssItem();
+item.Title = &quot;Simple RSS Item&quot;;
+item.Link = new Uri(&quot;http://localhost/items/SimpleRSSItem.aspx&quot;);
+item.Description = &quot;A minimal RSS channel item.&quot;;
+ 
+feed.Channel.AddItem(item);
+
+using (FileStream stream = new FileStream(&quot;CompactRssFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    SyndicationResourceSaveSettings settings = new SyndicationResourceSaveSettings();
+    settings.MinimizeOutputSize = true;
+
+    feed.Save(stream, settings);
+}
+</code></pre>
+<p>In the example above, we are using the <em>SyndicationResourceSaveSettings</em> class to minimize the size of the raw XML data that represents the feed.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/generating-an-rss-feed.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

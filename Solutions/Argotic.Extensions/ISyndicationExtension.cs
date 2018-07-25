@@ -1,15 +1,22 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-namespace Argotic.Extensions
+﻿namespace Argotic.Extensions
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Allows an object to implement a syndication extension by representing a set of properties, methods, indexers and events common to web content syndication extensions.
     /// </summary>
     /// <seealso cref="SyndicationExtension"/>
     public interface ISyndicationExtension
     {
+        /// <summary>
+        /// Occurs when the syndication extension state has been changed by a load operation.
+        /// </summary>
+        /// <seealso cref="ISyndicationExtension.Load(IXPathNavigable)"/>
+        /// <seealso cref="ISyndicationExtension.Load(XmlReader)"/>
+        event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
+
         /// <summary>
         /// Gets a human-readable description of the syndication extension.
         /// </summary>
@@ -63,12 +70,6 @@ namespace Argotic.Extensions
         {
             get;
         }
-        /// <summary>
-        /// Occurs when the syndication extension state has been changed by a load operation.
-        /// </summary>
-        /// <seealso cref="ISyndicationExtension.Load(IXPathNavigable)"/>
-        /// <seealso cref="ISyndicationExtension.Load(XmlReader)"/>
-        event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
 
         /// <summary>
         /// Determines if the <see cref="ISyndicationExtension"/> exists in the XML data in the supplied <see cref="XPathNavigator"/>.
@@ -81,8 +82,8 @@ namespace Argotic.Extensions
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     This method should be as lightweight as possible when determining if the <see cref="ISyndicationExtension"/> or its related entities are present in the <paramref name="source"/>. 
-        ///                     It is recommended that implementers utilize the <see cref="XPathNavigator.GetNamespacesInScope(XmlNamespaceScope)"/> method to determine if the <paramref name="source"/> contains 
+        ///                     This method should be as lightweight as possible when determining if the <see cref="ISyndicationExtension"/> or its related entities are present in the <paramref name="source"/>.
+        ///                     It is recommended that implementers utilize the <see cref="XPathNavigator.GetNamespacesInScope(XmlNamespaceScope)"/> method to determine if the <paramref name="source"/> contains
         ///                     the expected namespace(s) for the <see cref="ISyndicationExtension"/>.
         ///                 </description>
         ///             </item>
@@ -97,9 +98,9 @@ namespace Argotic.Extensions
         /// <param name="navigator">Provides a cursor model for navigating syndication extension data.</param>
         /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
         /// <remarks>
-        ///     This method will return a <see cref="XmlNamespaceManager"/> that has a namespace added to it using the <see cref="XmlPrefix"/> and <see cref="XmlNamespace"/> 
-        ///     of the extension unless the supplied <see cref="XPathNavigator"/> already has an XML namespace associated to the <see cref="XmlPrefix"/>, in which case 
-        ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that 
+        ///     This method will return a <see cref="XmlNamespaceManager"/> that has a namespace added to it using the <see cref="XmlPrefix"/> and <see cref="XmlNamespace"/>
+        ///     of the extension unless the supplied <see cref="XPathNavigator"/> already has an XML namespace associated to the <see cref="XmlPrefix"/>, in which case
+        ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that
         ///     is not per the extension's specification has been declared on the syndication resource.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -136,7 +137,7 @@ namespace Argotic.Extensions
         ///         <list type="bullet">
         ///             <item>
         ///                 <description>
-        ///                     When implementing this method, the <see cref="XmlReader"/> should be used to create a <see cref="IXPathNavigable"/> 
+        ///                     When implementing this method, the <see cref="XmlReader"/> should be used to create a <see cref="IXPathNavigable"/>
         ///                     that is then passed to the <see cref="ISyndicationExtension.Load(IXPathNavigable)"/> method.
         ///                 </description>
         ///             </item>

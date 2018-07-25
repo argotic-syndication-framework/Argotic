@@ -1,0 +1,1243 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint
+  commentId: T:Argotic.Common.DiscoverableSyndicationEndpoint
+  id: DiscoverableSyndicationEndpoint
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.DiscoverableSyndicationEndpoint.#ctor
+  - Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String,System.String)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo(System.Object)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+  - Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  - Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator
+  - Argotic.Common.DiscoverableSyndicationEndpoint.Equals(System.Object)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode
+  - Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  - Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  - Argotic.Common.DiscoverableSyndicationEndpoint.Title
+  - Argotic.Common.DiscoverableSyndicationEndpoint.ToString
+  langs:
+  - csharp
+  - vb
+  name: DiscoverableSyndicationEndpoint
+  nameWithType: DiscoverableSyndicationEndpoint
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DiscoverableSyndicationEndpoint
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nRepresents a discoverable syndication endpoint that is being broadcast by a web resource.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class DiscoverableSyndicationEndpoint : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class DiscoverableSyndicationEndpoint
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.#ctor
+  id: '#ctor'
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: DiscoverableSyndicationEndpoint()
+  nameWithType: DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint()
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 30
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public DiscoverableSyndicationEndpoint()
+    content.vb: Public Sub New
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String)
+  id: '#ctor(System.Uri,System.String)'
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: DiscoverableSyndicationEndpoint(Uri, String)
+  nameWithType: DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint(Uri, String)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint(System.Uri, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 42
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> and MIME content type.\n"
+  example: []
+  syntax:
+    content: public DiscoverableSyndicationEndpoint(Uri source, string contentType)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the Uniform Resource Locator (URL) of the syndication endpoint.
+    - id: contentType
+      type: System.String
+      description: The MIME content type that the syndicated resource conforms to.
+    content.vb: Public Sub New(source As Uri, contentType As String)
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">contentType</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">contentType</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String,System.String)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.#ctor(System.Uri,System.String,System.String)
+  id: '#ctor(System.Uri,System.String,System.String)'
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: DiscoverableSyndicationEndpoint(Uri, String, String)
+  nameWithType: DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint(Uri, String, String)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint(System.Uri, System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 57
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, MIME content type and title.\n"
+  example: []
+  syntax:
+    content: public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the Uniform Resource Locator (URL) of the syndication endpoint.
+    - id: contentType
+      type: System.String
+      description: The MIME content type that the syndicated resource conforms to.
+    - id: title
+      type: System.String
+      description: The title of the syndication endpoint.
+    content.vb: Public Sub New(source As Uri, contentType As String, title As String)
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">contentType</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">contentType</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+  id: ContentFormat
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: ContentFormat
+  nameWithType: DiscoverableSyndicationEndpoint.ContentFormat
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContentFormat
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 72
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndication endpoint.\n"
+  remarks: The syndication content format is determined based upon the <xref href="Argotic.Common.DiscoverableSyndicationEndpoint.ContentType" data-throw-if-not-resolved="false"></xref> of the current instance.
+  example: []
+  syntax:
+    content: public SyndicationContentFormat ContentFormat { get; }
+    parameters: []
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that indicates the syndication content format that the auto-discoverable syndicated content conforms to.\nIf a format cannot be determined for the <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint.ContentType\" data-throw-if-not-resolved=\"false\"></xref>, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public ReadOnly Property ContentFormat As SyndicationContentFormat
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  id: ContentType
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: ContentType
+  nameWithType: DiscoverableSyndicationEndpoint.ContentType
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContentType
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 115
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets or sets the MIME content type of the syndication endpoint.\n"
+  remarks: See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of registered MIME types.
+  example: []
+  syntax:
+    content: public string ContentType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The registered MIME type of the syndication endpoint.
+    content.vb: Public Property ContentType As String
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  id: Source
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: DiscoverableSyndicationEndpoint.Source
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Source
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 136
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets or sets the Uniform Resource Locator (URL) of the syndication endpoint.\n"
+  remarks: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref>can be either <strong>Relative</strong> or <strong>Absolute</strong>. It is up to the caller to resolve the endpoint source as appropriate.
+  example: []
+  syntax:
+    content: public Uri Source { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> of the syndication endpoint.
+    content.vb: Public Property Source As Uri
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.Source*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Title
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.Title
+  id: Title
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: DiscoverableSyndicationEndpoint.Title
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 156
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets or sets the title of the syndication endpoint.\n"
+  remarks: This property will be empty if no title attribute was assigned to the syndication endpoint link.
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The title of the syndication endpoint.
+    content.vb: Public Property Title As String
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  id: op_Equality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: Equality(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  nameWithType: DiscoverableSyndicationEndpoint.Equality(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Equality(Argotic.Common.DiscoverableSyndicationEndpoint, Argotic.Common.DiscoverableSyndicationEndpoint)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 182
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+    parameters:
+    - id: first
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As DiscoverableSyndicationEndpoint, second As DiscoverableSyndicationEndpoint) As Boolean
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  id: op_Inequality(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: Inequality(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  nameWithType: DiscoverableSyndicationEndpoint.Inequality(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Inequality(Argotic.Common.DiscoverableSyndicationEndpoint, Argotic.Common.DiscoverableSyndicationEndpoint)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 203
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+    parameters:
+    - id: first
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As DiscoverableSyndicationEndpoint, second As DiscoverableSyndicationEndpoint) As Boolean
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  id: op_LessThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: LessThan(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  nameWithType: DiscoverableSyndicationEndpoint.LessThan(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.LessThan(Argotic.Common.DiscoverableSyndicationEndpoint, Argotic.Common.DiscoverableSyndicationEndpoint)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 214
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+    parameters:
+    - id: first
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As DiscoverableSyndicationEndpoint, second As DiscoverableSyndicationEndpoint) As Boolean
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  id: op_GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint,Argotic.Common.DiscoverableSyndicationEndpoint)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  nameWithType: DiscoverableSyndicationEndpoint.GreaterThan(DiscoverableSyndicationEndpoint, DiscoverableSyndicationEndpoint)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.GreaterThan(Argotic.Common.DiscoverableSyndicationEndpoint, Argotic.Common.DiscoverableSyndicationEndpoint)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 235
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(DiscoverableSyndicationEndpoint first, DiscoverableSyndicationEndpoint second)
+    parameters:
+    - id: first
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.DiscoverableSyndicationEndpoint
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As DiscoverableSyndicationEndpoint, second As DiscoverableSyndicationEndpoint) As Boolean
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator
+  id: CreateNavigator
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: CreateNavigator()
+  nameWithType: DiscoverableSyndicationEndpoint.CreateNavigator()
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateNavigator
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 255
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a read-only <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> object for navigating through the auto-discoverable syndicated content located at the <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint.Source\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public XPathNavigator CreateNavigator()
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: A read-only <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> object for navigating the auto-discoverable syndicated content.
+    content.vb: Public Function CreateNavigator As XPathNavigator
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <xref href="Argotic.Common.DiscoverableSyndicationEndpoint.Source" data-throw-if-not-resolved="false"></xref> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ToString
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.ToString
+  id: ToString
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: DiscoverableSyndicationEndpoint.ToString()
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 269
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XHTML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Common.DiscoverableSyndicationEndpoint" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo(System.Object)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: DiscoverableSyndicationEndpoint.CompareTo(Object)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 280
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Equals(System.Object)
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: DiscoverableSyndicationEndpoint.Equals(Object)
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 306
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode
+  commentId: M:Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Common.DiscoverableSyndicationEndpoint
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: DiscoverableSyndicationEndpoint.GetHashCode()
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Common/DiscoverableSyndicationEndpoint.cs
+    startLine: 320
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint
+  commentId: T:Argotic.Common.DiscoverableSyndicationEndpoint
+  parent: Argotic.Common
+  name: DiscoverableSyndicationEndpoint
+  nameWithType: DiscoverableSyndicationEndpoint
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.#ctor*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.#ctor
+  name: DiscoverableSyndicationEndpoint
+  nameWithType: DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.DiscoverableSyndicationEndpoint
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  isExternal: true
+- uid: Argotic.Common.SyndicationContentFormat.None
+  commentId: F:Argotic.Common.SyndicationContentFormat.None
+  isExternal: true
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+  name: ContentFormat
+  nameWithType: DiscoverableSyndicationEndpoint.ContentFormat
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ContentFormat
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+  name: ContentType
+  nameWithType: DiscoverableSyndicationEndpoint.ContentType
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ContentType
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Source*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  name: Source
+  nameWithType: DiscoverableSyndicationEndpoint.Source
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Source
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Title*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.Title
+  name: Title
+  nameWithType: DiscoverableSyndicationEndpoint.Title
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Title
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.op_Equality
+  name: Equality
+  nameWithType: DiscoverableSyndicationEndpoint.Equality
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.op_Inequality
+  name: Inequality
+  nameWithType: DiscoverableSyndicationEndpoint.Inequality
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Inequality
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.op_LessThan
+  name: LessThan
+  nameWithType: DiscoverableSyndicationEndpoint.LessThan
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.LessThan
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.op_GreaterThan
+  name: GreaterThan
+  nameWithType: DiscoverableSyndicationEndpoint.GreaterThan
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.GreaterThan
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  commentId: P:Argotic.Common.DiscoverableSyndicationEndpoint.Source
+  isExternal: true
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator
+  name: CreateNavigator
+  nameWithType: DiscoverableSyndicationEndpoint.CreateNavigator
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.CreateNavigator
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.ToString*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.ToString
+  name: ToString
+  nameWithType: DiscoverableSyndicationEndpoint.ToString
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo
+  name: CompareTo
+  nameWithType: DiscoverableSyndicationEndpoint.CompareTo
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.Equals*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.Equals
+  name: Equals
+  nameWithType: DiscoverableSyndicationEndpoint.Equals
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode*
+  commentId: Overload:Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode
+  name: GetHashCode
+  nameWithType: DiscoverableSyndicationEndpoint.GetHashCode
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint.GetHashCode

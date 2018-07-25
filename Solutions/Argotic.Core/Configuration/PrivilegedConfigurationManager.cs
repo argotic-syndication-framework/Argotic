@@ -1,36 +1,38 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Permissions;
-using System.Threading;
-
-using Argotic.Common;
-using Argotic.Configuration.Provider;
-
-namespace Argotic.Configuration
+﻿namespace Argotic.Configuration
 {
+    using System;
+    using System.Configuration;
+    using System.Security.Permissions;
+    using System.Threading;
+
+    using Argotic.Common;
+    using Argotic.Configuration.Provider;
+
     /// <summary>
     /// Provides privileged access to configuration files for client applications. This class cannot be inherited.
     /// </summary>
-    //[ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
+    // [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
     internal static class PrivilegedConfigurationManager
     {
-        /// <summary>
-        /// Private member to hold object used to synchronize locks when reading Trackback configuration information.
-        /// </summary>
-        private static object configurationManagerTrackbackSyncObject;
-        /// <summary>
-        /// Private member to hold object used to synchronize locks when reading XML-RPC configuration information.
-        /// </summary>
-        private static object configurationManagerXmlRpcSyncObject;
         /// <summary>
         /// Private member to hold object used to synchronize locks when reading syndication resource configuration information.
         /// </summary>
         private static object configurationManagerSyndicationResourceSyncObject;
 
         /// <summary>
-        /// Gets the <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.
+        /// Private member to hold object used to synchronize locks when reading Trackback configuration information.
         /// </summary>
-        /// <value>The <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.</value>
+        private static object configurationManagerTrackbackSyncObject;
+
+        /// <summary>
+        /// Private member to hold object used to synchronize locks when reading XML-RPC configuration information.
+        /// </summary>
+        private static object configurationManagerXmlRpcSyncObject;
+
+        /// <summary>
+        /// Gets the <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.
+        /// </summary>
+        /// <value>The <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.</value>
         internal static object SyndicationSyncObject
         {
             get
@@ -39,14 +41,15 @@ namespace Argotic.Configuration
                 {
                     Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new object(), null);
                 }
+
                 return configurationManagerSyndicationResourceSyncObject;
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="Object"/> used when locking acess to the Trackback configuration file section being managed.
+        /// Gets the <see cref="object"/> used when locking acess to the Trackback configuration file section being managed.
         /// </summary>
-        /// <value>The <see cref="Object"/> used when locking acess to the Trackback configuration file section being managed.</value>
+        /// <value>The <see cref="object"/> used when locking acess to the Trackback configuration file section being managed.</value>
         internal static object TrackbackSyncObject
         {
             get
@@ -55,14 +58,15 @@ namespace Argotic.Configuration
                 {
                     Interlocked.CompareExchange(ref configurationManagerTrackbackSyncObject, new object(), null);
                 }
+
                 return configurationManagerTrackbackSyncObject;
             }
         }
 
         /// <summary>
-        /// Gets the <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.
+        /// Gets the <see cref="object"/> used when locking acess to the XML-RPC configuration file section being managed.
         /// </summary>
-        /// <value>The <see cref="Object"/> used when locking acess to the  XML-RPC configuration file section being managed.</value>
+        /// <value>The <see cref="object"/> used when locking acess to the  XML-RPC configuration file section being managed.</value>
         internal static object XmlRpcSyncObject
         {
             get
@@ -71,6 +75,7 @@ namespace Argotic.Configuration
                 {
                     Interlocked.CompareExchange(ref configurationManagerXmlRpcSyncObject, new object(), null);
                 }
+
                 return configurationManagerXmlRpcSyncObject;
             }
         }
@@ -103,13 +108,14 @@ namespace Argotic.Configuration
         {
             string sectionPath = "argotic.syndication";
 
-            lock (PrivilegedConfigurationManager.SyndicationSyncObject)
+            lock (SyndicationSyncObject)
             {
-                SyndicationResourceSection section   = PrivilegedConfigurationManager.GetSection(sectionPath) as SyndicationResourceSection;
+                SyndicationResourceSection section = GetSection(sectionPath) as SyndicationResourceSection;
                 if (section == null)
                 {
                     return null;
                 }
+
                 return section;
             }
         }
@@ -126,13 +132,14 @@ namespace Argotic.Configuration
         {
             string sectionPath = "argotic.net/clientSettings/trackback";
 
-            lock (PrivilegedConfigurationManager.TrackbackSyncObject)
+            lock (TrackbackSyncObject)
             {
-                TrackbackClientSection section  = PrivilegedConfigurationManager.GetSection(sectionPath) as TrackbackClientSection;
+                TrackbackClientSection section = GetSection(sectionPath) as TrackbackClientSection;
                 if (section == null)
                 {
                     return null;
                 }
+
                 return section;
             }
         }
@@ -147,15 +154,16 @@ namespace Argotic.Configuration
         [SecurityPermission(SecurityAction.Demand)]
         internal static XmlRpcClientSection GetXmlRpcClientSection()
         {
-            string sectionPath  = "argotic.net/clientSettings/xmlRpc";
+            string sectionPath = "argotic.net/clientSettings/xmlRpc";
 
-            lock (PrivilegedConfigurationManager.XmlRpcSyncObject)
+            lock (XmlRpcSyncObject)
             {
-                XmlRpcClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as XmlRpcClientSection;
+                XmlRpcClientSection section = GetSection(sectionPath) as XmlRpcClientSection;
                 if (section == null)
                 {
                     return null;
                 }
+
                 return section;
             }
         }

@@ -1,0 +1,248 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.IXmlRpcValue
+  commentId: T:Argotic.Net.IXmlRpcValue
+  id: IXmlRpcValue
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Net.IXmlRpcValue.ToString
+  - Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: IXmlRpcValue
+  nameWithType: IXmlRpcValue
+  fullName: Argotic.Net.IXmlRpcValue
+  type: Interface
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IXmlRpcValue
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+    startLine: 13
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDefines generalized properties, methods, indexers and events that a value type or class\nimplements to create a type-specific XML-RPC values.\n"
+  example: []
+  syntax:
+    content: public interface IXmlRpcValue
+    content.vb: Public Interface IXmlRpcValue
+  seealso:
+  - linkId: Argotic.Net.XmlRpcArrayValue
+    commentId: T:Argotic.Net.XmlRpcArrayValue
+  - linkId: Argotic.Net.XmlRpcScalarValue
+    commentId: T:Argotic.Net.XmlRpcScalarValue
+  - linkId: Argotic.Net.XmlRpcStructureValue
+    commentId: T:Argotic.Net.XmlRpcStructureValue
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Net.IXmlRpcValue
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: IXmlRpcValue.Load(XPathNavigator)
+  fullName: Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+    startLine: 24
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nLoads this <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>This method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+  example: []
+  syntax:
+    content: bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Net.IXmlRpcValue" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Net.IXmlRpcValue.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+- uid: Argotic.Net.IXmlRpcValue.ToString
+  commentId: M:Argotic.Net.IXmlRpcValue.ToString
+  id: ToString
+  parent: Argotic.Net.IXmlRpcValue
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: IXmlRpcValue.ToString()
+  fullName: Argotic.Net.IXmlRpcValue.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Net.IXmlRpcValue" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Function ToString As String
+  overload: Argotic.Net.IXmlRpcValue.ToString*
+- uid: Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Net.IXmlRpcValue
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: IXmlRpcValue.WriteTo(XmlWriter)
+  fullName: Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSaves the current <xref href=\"Argotic.Net.IXmlRpcValue\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Net.IXmlRpcValue.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+references:
+- uid: Argotic.Net.XmlRpcArrayValue
+  commentId: T:Argotic.Net.XmlRpcArrayValue
+  parent: Argotic.Net
+  name: XmlRpcArrayValue
+  nameWithType: XmlRpcArrayValue
+  fullName: Argotic.Net.XmlRpcArrayValue
+- uid: Argotic.Net.XmlRpcScalarValue
+  commentId: T:Argotic.Net.XmlRpcScalarValue
+  parent: Argotic.Net
+  name: XmlRpcScalarValue
+  nameWithType: XmlRpcScalarValue
+  fullName: Argotic.Net.XmlRpcScalarValue
+- uid: Argotic.Net.XmlRpcStructureValue
+  commentId: T:Argotic.Net.XmlRpcStructureValue
+  parent: Argotic.Net
+  name: XmlRpcStructureValue
+  nameWithType: XmlRpcStructureValue
+  fullName: Argotic.Net.XmlRpcStructureValue
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: Argotic.Net.IXmlRpcValue
+  commentId: T:Argotic.Net.IXmlRpcValue
+  parent: Argotic.Net
+  name: IXmlRpcValue
+  nameWithType: IXmlRpcValue
+  fullName: Argotic.Net.IXmlRpcValue
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Net.IXmlRpcValue.Load*
+  commentId: Overload:Argotic.Net.IXmlRpcValue.Load
+  name: Load
+  nameWithType: IXmlRpcValue.Load
+  fullName: Argotic.Net.IXmlRpcValue.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Net.IXmlRpcValue.ToString*
+  commentId: Overload:Argotic.Net.IXmlRpcValue.ToString
+  name: ToString
+  nameWithType: IXmlRpcValue.ToString
+  fullName: Argotic.Net.IXmlRpcValue.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Net.IXmlRpcValue.WriteTo*
+  commentId: Overload:Argotic.Net.IXmlRpcValue.WriteTo
+  name: WriteTo
+  nameWithType: IXmlRpcValue.WriteTo
+  fullName: Argotic.Net.IXmlRpcValue.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

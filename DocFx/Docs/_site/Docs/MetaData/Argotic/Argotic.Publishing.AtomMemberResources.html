@@ -1,0 +1,2289 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AtomMemberResources
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AtomMemberResources
+   ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Publishing.AtomMemberResources">
+  
+  
+  <h1 id="Argotic_Publishing_AtomMemberResources" data-uid="Argotic.Publishing.AtomMemberResources" class="text-break">Class AtomMemberResources
+  </h1>
+  <div class="markdown level0 summary"><p>Describes the location and capabilities of a discoverable resource that contains a set of member resources.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a></div>
+    <div class="level2"><span class="xref">AtomMemberResources</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></div>
+    <div><span class="xref">System.Xml.Serialization.IXmlSerializable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
+    <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+    <div><a class="xref" href="Argotic.Syndication.IAtomCommonObjectAttributes.html">IAtomCommonObjectAttributes</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Loaded">SyndicationExtension.Loaded</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Description">SyndicationExtension.Description</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Documentation">SyndicationExtension.Documentation</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Name">SyndicationExtension.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Version">SyndicationExtension.Version</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_XmlNamespace">SyndicationExtension.XmlNamespace</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_XmlPrefix">SyndicationExtension.XmlPrefix</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_CreateNamespaceManager_System_Xml_XPath_XPathNavigator_">SyndicationExtension.CreateNamespaceManager(XPathNavigator)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ExistsInSource_System_Xml_XPath_XPathNavigator_">SyndicationExtension.ExistsInSource(XPathNavigator)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXmlNamespaceDeclaration_System_Xml_XmlWriter_">SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_GetSchema">SyndicationExtension.GetSchema()</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ReadXml_System_Xml_XmlReader_">SyndicationExtension.ReadXml(XmlReader)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXml_System_Xml_XmlWriter_">SyndicationExtension.WriteXml(XmlWriter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_OnExtensionLoaded_Argotic_Extensions_SyndicationExtensionLoadedEventArgs_">SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Publishing.html">Argotic.Publishing</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
+  <h5 id="Argotic_Publishing_AtomMemberResources_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class AtomMemberResources : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes</code></pre>
+  </div>
+  <h5 id="Argotic_Publishing_AtomMemberResources_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> class implements the <em>app:collection</em> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+</p>
+<p>
+    The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> describes a <a class="xref" href="Argotic.Syndication.AtomFeed.html">AtomFeed</a>. The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <strong>must</strong> specify a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Title">Title</a> and <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>.
+</p>
+<p>
+    The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <em>may</em> contain any number of <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> entities,
+    indicating the types of representations accepted by the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>. The order of such elements is <u>not</u> significant.
+    Additionally, the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <em>may</em> contain any number of <a class="xref" href="Argotic.Publishing.AtomCategoryDocument.html">AtomCategoryDocument</a>.
+</p>
+<p>
+    The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <em>may</em> appear as a child of an <a class="xref" href="Argotic.Syndication.AtomFeed.html">AtomFeed</a> or <a class="xref" href="Argotic.Syndication.AtomSource.html">AtomSource</a> element in an <a class="xref" href="Argotic.Syndication.AtomFeed.html">AtomFeed</a> document.
+    Its content identifies a collection by which new entries can be added to appear in the feed.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources__ctor.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L71">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources__ctor_" data-uid="Argotic.Publishing.AtomMemberResources.#ctor*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources__ctor" data-uid="Argotic.Publishing.AtomMemberResources.#ctor">AtomMemberResources()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomMemberResources()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources__ctor_System_Uri_Argotic_Syndication_AtomTextConstruct_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.%23ctor(System.Uri%2CArgotic.Syndication.AtomTextConstruct)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L89">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources__ctor_" data-uid="Argotic.Publishing.AtomMemberResources.#ctor*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources__ctor_System_Uri_Argotic_Syndication_AtomTextConstruct_" data-uid="Argotic.Publishing.AtomMemberResources.#ctor(System.Uri,Argotic.Syndication.AtomTextConstruct)">AtomMemberResources(Uri, AtomTextConstruct)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> class using the supplied <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomMemberResources(Uri href, AtomTextConstruct title)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">href</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents a Internationalized Resource Identifier (IRI) that identifies the location of the collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> object that represents information that conveys a human-readable title for the collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Accepts.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Accepts%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L113">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Accepts_" data-uid="Argotic.Publishing.AtomMemberResources.Accepts*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Accepts" data-uid="Argotic.Publishing.AtomMemberResources.Accepts">Accepts</h4>
+  <div class="markdown level1 summary"><p>Gets a list of media ranges that are accepted by this collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;AtomAcceptedMediaRange&gt; Accepts { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> objects that represent a list of media ranges that this collection will accept from clients.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Accepts_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    A value of <strong>application/atom+xml;type=entry</strong> <em>may</em> appear in any <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> list of media ranges
+    and indicates that <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> can be added to the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.
+    If no <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> is present, clients <em>should</em> treat this as equivalent to an <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> with the content <strong>application/atom+xml;type=entry</strong>.
+    The <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> class exposes a static string property named <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html#Argotic_Publishing_AtomAcceptedMediaRange_AtomEntryMediaRange">AtomEntryMediaRange</a> that can be used to assign the
+<strong>application/atom+xml;type=entry</strong> media range value.
+</p>
+<p>
+    If one <a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a> exists and is empty, clients <em>should</em> assume
+    that the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <strong>does not</strong> support the creation of new <a class="xref" href="Argotic.Syndication.AtomFeed.html#Argotic_Syndication_AtomFeed_Entries">Entries</a>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_BaseUri.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.BaseUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L135">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_BaseUri_" data-uid="Argotic.Publishing.AtomMemberResources.BaseUri*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_BaseUri" data-uid="Argotic.Publishing.AtomMemberResources.BaseUri">BaseUri</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the base URI other than the base URI of the document or external entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri BaseUri { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_BaseUri_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
+    after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Categories.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Categories%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L147">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Categories_" data-uid="Argotic.Publishing.AtomMemberResources.Categories*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Categories" data-uid="Argotic.Publishing.AtomMemberResources.Categories">Categories</h4>
+  <div class="markdown level1 summary"><p>Gets a list of categories that can be applied to members of this collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;AtomCategoryDocument&gt; Categories { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomCategoryDocument.html">AtomCategoryDocument</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of <a class="xref" href="Argotic.Publishing.AtomCategoryDocument.html">AtomCategoryDocument</a> objects that represent a list of categories that can be applied to members of this collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Categories_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The server <em>may</em> reject attempts to create or store members whose categories are not present in its categories list.
+A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> that indicates the category set is open <strong>should not</strong> reject otherwise acceptable members whose categories are not in its categories list.
+The absence of <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Categories">Categories</a> means that the category handling of the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> is unspecified.
+A <a class="xref" href="Argotic.Publishing.AtomCategoryDocument.html#Argotic_Publishing_AtomCategoryDocument_IsFixed">IsFixed</a> category list that contains zero categories indicates the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> does not accept category data.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Extensions.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Extensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L168">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Extensions_" data-uid="Argotic.Publishing.AtomMemberResources.Extensions*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Extensions" data-uid="Argotic.Publishing.AtomMemberResources.Extensions">Extensions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the syndication extensions applied to this syndication entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ISyndicationExtension&gt; Extensions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Extensions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_HasExtensions.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.HasExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L191">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_HasExtensions_" data-uid="Argotic.Publishing.AtomMemberResources.HasExtensions*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_HasExtensions" data-uid="Argotic.Publishing.AtomMemberResources.HasExtensions">HasExtensions</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasExtensions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Extensions">Extensions</a> collection for this entity contains one or more <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects, otherwise returns <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Language.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Language%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L208">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Language_" data-uid="Argotic.Publishing.AtomMemberResources.Language*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Language" data-uid="Argotic.Publishing.AtomMemberResources.Language">Language</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the natural or formal language in which the content is written.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CultureInfo Language { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Language_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Title.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L218">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Title_" data-uid="Argotic.Publishing.AtomMemberResources.Title*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Title" data-uid="Argotic.Publishing.AtomMemberResources.Title">Title</h4>
+  <div class="markdown level1 summary"><p>Gets or sets information that conveys a human-readable title for this collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomTextConstruct Title { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> object that represents information that conveys a human-readable title for this collection.
+The default value is an empty <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Uri.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Uri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L241">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Uri_" data-uid="Argotic.Publishing.AtomMemberResources.Uri*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Uri" data-uid="Argotic.Publishing.AtomMemberResources.Uri">Uri</h4>
+  <div class="markdown level1 summary"><p>Gets or sets an IRI that identifies the location of this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Uri { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents a Internationalized Resource Identifier (IRI) that identifies the location of this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Uri_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</p>
+<p>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_AddExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L580">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_AddExtension_" data-uid="Argotic.Publishing.AtomMemberResources.AddExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_AddExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)">AddExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Adds the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AddExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was added to the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange__System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection%7BArgotic.Publishing.AtomAcceptedMediaRange%7D%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Publishing.AtomAcceptedMediaRange%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L348">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CompareSequence_" data-uid="Argotic.Publishing.AtomMemberResources.CompareSequence*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange__System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange__" data-uid="Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange})">CompareSequence(Collection&lt;AtomAcceptedMediaRange&gt;, Collection&lt;AtomAcceptedMediaRange&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;AtomAcceptedMediaRange&gt; source, Collection&lt;AtomAcceptedMediaRange&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomAcceptedMediaRange.html">AtomAcceptedMediaRange</a>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange__System_Collections_ObjectModel_Collection_Argotic_Publishing_AtomAcceptedMediaRange___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L598">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CompareTo_" data-uid="Argotic.Publishing.AtomMemberResources.CompareTo*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CompareTo_System_Object_" data-uid="Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CreateEditLink_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L389">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CreateEditLink_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditLink*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CreateEditLink_System_Uri_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)">CreateEditLink(Uri)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that can be used to retrieve, update, and delete the Resource represented by an editable <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> using the supplied <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AtomLink CreateEditLink(Uri href)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">href</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents the IRI of an editable <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> object that can be used to retrieve, update, and delete the Resource represented by an editable <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_CreateEditLink_System_Uri__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that is returned has a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> of <strong>edit</strong>. The value of <em>edit</em> specifies
+    that the value of the <code data-dev-comment-type="paramref" class="paramref">href</code> attribute is the IRI of an editable <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.
+</p>
+<p>An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <strong>must not</strong> contain more than one <em>edit</em> link relation.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L418">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)">CreateEditMediaLink(Uri)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> using the supplied <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AtomLink CreateEditMediaLink(Uri href)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">href</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> object that can be can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that is returned has a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies
+    that the value of the <code data-dev-comment-type="paramref" class="paramref">href</code> attribute is an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.
+</p>
+<p>
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <em>may</em> contain zero or more <em>edit-media</em> link relations.
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <strong>must not</strong> contain more than one <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> with a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> value of <em>edit-media</em>
+    that has the same <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> values.
+    All <em>edit-media</em> link relations in the same <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> reference the same Resource.
+    If a client encounters multiple <em>edit-media</em> link relations in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> then it <em>should</em> choose a link based on the client
+    preferences for <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a>. If a client encounters multiple <em>edit-media</em> link relations
+    in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> and has no preference based on the <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> then the
+    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L448">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)">CreateEditMediaLink(Uri, String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> using the supplied parameters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AtomLink CreateEditMediaLink(Uri href, string contentType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">href</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> object that can be can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that is returned has a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies
+    that the value of the <code data-dev-comment-type="paramref" class="paramref">href</code> attribute is an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.
+</p>
+<p>
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <em>may</em> contain zero or more <em>edit-media</em> link relations.
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <strong>must not</strong> contain more than one <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> with a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> value of <em>edit-media</em>
+    that has the same <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> values.
+    All <em>edit-media</em> link relations in the same <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> reference the same Resource.
+    If a client encounters multiple <em>edit-media</em> link relations in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> then it <em>should</em> choose a link based on the client
+    preferences for <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a>. If a client encounters multiple <em>edit-media</em> link relations
+    in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> and has no preference based on the <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> then the
+    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String_System_Globalization_CultureInfo_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri%2CSystem.String%2CSystem.Globalization.CultureInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L479">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String_System_Globalization_CultureInfo_" data-uid="Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String,System.Globalization.CultureInfo)">CreateEditMediaLink(Uri, String, CultureInfo)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> using the supplied parameters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">href</span></td>
+        <td><p>A <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a> that represents an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">contentType</span></td>
+        <td><p>An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
+        <td><span class="parametername">contentLanguage</span></td>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the natural or formal language in which this resource content is written.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> object that can be can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_CreateEditMediaLink_System_Uri_System_String_System_Globalization_CultureInfo__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> that is returned has a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies
+    that the value of the <code data-dev-comment-type="paramref" class="paramref">href</code> attribute is an IRI that can be used to modify a media resource associated with an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a>.
+</p>
+<p>
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <em>may</em> contain zero or more <em>edit-media</em> link relations.
+    An <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> <strong>must not</strong> contain more than one <a class="xref" href="Argotic.Syndication.AtomLink.html">AtomLink</a> with a <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_Relation">Relation</a> value of <em>edit-media</em>
+    that has the same <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> values.
+    All <em>edit-media</em> link relations in the same <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> reference the same Resource.
+    If a client encounters multiple <em>edit-media</em> link relations in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> then it <em>should</em> choose a link based on the client
+    preferences for <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a>. If a client encounters multiple <em>edit-media</em> link relations
+    in an <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> and has no preference based on the <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentType">ContentType</a> and <a class="xref" href="Argotic.Syndication.AtomLink.html#Argotic_Syndication_AtomLink_ContentLanguage">ContentLanguage</a> then the
+    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L636">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Equals_" data-uid="Argotic.Publishing.AtomMemberResources.Equals*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Equals_System_Object_" data-uid="Argotic.Publishing.AtomMemberResources.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L659">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_FindExtension_" data-uid="Argotic.Publishing.AtomMemberResources.FindExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISyndicationExtension FindExtension(Predicate&lt;ISyndicationExtension&gt; match)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="parametername">match</span></td>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><p>The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
+the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L671">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_GetHashCode_" data-uid="Argotic.Publishing.AtomMemberResources.GetHashCode*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_GetHashCode" data-uid="Argotic.Publishing.AtomMemberResources.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Load_System_Xml_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L791">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Load_" data-uid="Argotic.Publishing.AtomMemberResources.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XmlReader_" data-uid="Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)">Load(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> using the supplied <span class="xref">System.Xml.XmlReader</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Load(XmlReader reader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
+        <td><span class="parametername">reader</span></td>
+        <td><p>The <strong>XmlReader</strong> used to load this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_System_Xml_XmlReader_">SyndicationExtension.Load(XmlReader)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Load_System_Xml_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L805">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Load_" data-uid="Argotic.Publishing.AtomMemberResources.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)">Load(XmlReader, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> using the supplied <span class="xref">System.Xml.XmlReader</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
+        <td><span class="parametername">reader</span></td>
+        <td><p>The <strong>XmlReader</strong> used to load this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> used to configure the load operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L687">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Load_" data-uid="Argotic.Publishing.AtomMemberResources.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)">Load(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Load(IXPathNavigable source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.IXPathNavigable</span> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">SyndicationExtension.Load(IXPathNavigable)</a></div>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_IXPathNavigable__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L770">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_Load_" data-uid="Argotic.Publishing.AtomMemberResources.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> used to configure the load operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_MatchByType_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L501">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_MatchByType_" data-uid="Argotic.Publishing.AtomMemberResources.MatchByType*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_MatchByType_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)">MatchByType(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Predicate delegate that returns a value indicating if the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
+represents the same <span class="xref">System.Type</span> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool MatchByType(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <span class="xref">System.Type</span> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L828">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_RemoveExtension_" data-uid="Argotic.Publishing.AtomMemberResources.RemoveExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_RemoveExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)">RemoveExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Removes the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> from the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was removed from the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_SlugDecode_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L535">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_SlugDecode_" data-uid="Argotic.Publishing.AtomMemberResources.SlugDecode*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_SlugDecode_System_String_" data-uid="Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)">SlugDecode(String)</h4>
+  <div class="markdown level1 summary"><p>Decodes the percent-encoded value of the UTF-8 encoding of a character sequence that represents a Slug HTTP entity-header value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SlugDecode(string slug)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">slug</span></td>
+        <td><p>The percent-encoded value of the UTF-8 encoding of a character sequence to be included in a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Returns a decoded url.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_SlugDecode_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+<em>Slug</em> is an HTTP entity-header whose presence in a POST to a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> constitutes a request by the client
+to use the header&apos;s value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.
+</p>
+<p>
+    Servers <em>may</em> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
+    by using some or all of the words in the value for the last URI segment. Servers <em>may</em> also use the value when creating
+    the <a class="xref" href="Argotic.Syndication.AtomId.html">AtomId</a>, or as the <a class="xref" href="Argotic.Syndication.AtomEntry.html#Argotic_Syndication_AtomEntry_Title">Title</a> of a Media Link Entry.
+</p>
+<p>
+    Servers <em>may</em> choose to ignore the Slug entity-header. Servers <i>may</i> alter the header value before using it.
+    For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">slug</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">slug</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_SlugEncode_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L567">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_SlugEncode_" data-uid="Argotic.Publishing.AtomMemberResources.SlugEncode*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_SlugEncode_System_String_" data-uid="Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)">SlugEncode(String)</h4>
+  <div class="markdown level1 summary"><p>Encodes a sequence of characters that may be safely used as the value of a Slug HTTP entity-header.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SlugEncode(string characterSequence)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">characterSequence</span></td>
+        <td><p>A sequence of characters that constitutes a request by a client to use the <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> as part of any <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>
+that would normally be used to retrieve the web resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The percent-encoded value of the UTF-8 encoding of the <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> to be included in a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html#Argotic_Publishing_AtomMemberResources_Uri">Uri</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomMemberResources_SlugEncode_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+<em>Slug</em> is an HTTP entity-header whose presence in a POST to a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> constitutes a request by the client
+to use the header&apos;s value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.
+</p>
+<p>
+    Servers <em>may</em> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
+    by using some or all of the words in the value for the last URI segment. Servers <em>may</em> also use the value when creating
+    the <a class="xref" href="Argotic.Syndication.AtomId.html">AtomId</a>, or as the <a class="xref" href="Argotic.Syndication.AtomEntry.html#Argotic_Syndication_AtomEntry_Title">Title</a> of a Media Link Entry.
+</p>
+<p>
+    Servers <em>may</em> choose to ignore the Slug entity-header. Servers <i>may</i> alter the header value before using it.
+    For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_ToString.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L850">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_ToString_" data-uid="Argotic.Publishing.AtomMemberResources.ToString*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_ToString" data-uid="Argotic.Publishing.AtomMemberResources.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h5 id="Argotic_Publishing_AtomMemberResources_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L878">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_WriteTo_" data-uid="Argotic.Publishing.AtomMemberResources.WriteTo*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteTo_System_Xml_XmlWriter_">SyndicationExtension.WriteTo(XmlWriter)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_op_Equality_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.op_Equality(Argotic.Publishing.AtomMemberResources%2CArgotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L261">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_op_Equality_" data-uid="Argotic.Publishing.AtomMemberResources.op_Equality*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_op_Equality_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomMemberResources.op_Equality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)">Equality(AtomMemberResources, AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(AtomMemberResources first, AtomMemberResources second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_op_GreaterThan_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.op_GreaterThan(Argotic.Publishing.AtomMemberResources%2CArgotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L282">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_op_GreaterThan_" data-uid="Argotic.Publishing.AtomMemberResources.op_GreaterThan*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_op_GreaterThan_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomMemberResources.op_GreaterThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)">GreaterThan(AtomMemberResources, AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(AtomMemberResources first, AtomMemberResources second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_op_Inequality_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.op_Inequality(Argotic.Publishing.AtomMemberResources%2CArgotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L303">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_op_Inequality_" data-uid="Argotic.Publishing.AtomMemberResources.op_Inequality*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_op_Inequality_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomMemberResources.op_Inequality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)">Inequality(AtomMemberResources, AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(AtomMemberResources first, AtomMemberResources second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources_op_LessThan_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources.op_LessThan(Argotic.Publishing.AtomMemberResources%2CArgotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L314">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomMemberResources_op_LessThan_" data-uid="Argotic.Publishing.AtomMemberResources.op_LessThan*"></a>
+  <h4 id="Argotic_Publishing_AtomMemberResources_op_LessThan_Argotic_Publishing_AtomMemberResources_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomMemberResources.op_LessThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)">LessThan(AtomMemberResources, AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(AtomMemberResources first, AtomMemberResources second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
+  </div>
+  <div>
+      <span class="xref">System.Xml.Serialization.IXmlSerializable</span>
+  </div>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
+  <div>
+      <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>
+  </div>
+  <div>
+      <a class="xref" href="Argotic.Syndication.IAtomCommonObjectAttributes.html">IAtomCommonObjectAttributes</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></div>
+      <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Publishing_AtomMemberResources.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomMemberResources%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Core/Publishing/AtomMemberResources.cs/#L37" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

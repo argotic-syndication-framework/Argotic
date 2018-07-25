@@ -1,0 +1,303 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  commentId: T:Argotic.Syndication.Specialized.IBlogMLCommonObject
+  id: IBlogMLCommonObject
+  parent: Argotic.Syndication.Specialized
+  children:
+  - Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+  - Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+  - Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+  - Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+  - Argotic.Syndication.Specialized.IBlogMLCommonObject.Title
+  langs:
+  - csharp
+  - vb
+  name: IBlogMLCommonObject
+  nameWithType: IBlogMLCommonObject
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  type: Interface
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IBlogMLCommonObject
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 8
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nAllows an object to implement common Web Log Markup Language (BlogML) entity information by representing a set of properties, methods, indexers and events common to BlogML syndication resources.\n"
+  example: []
+  syntax:
+    content: public interface IBlogMLCommonObject
+    content.vb: Public Interface IBlogMLCommonObject
+  seealso:
+  - linkId: Argotic.Syndication.Specialized.BlogMLAuthor
+    commentId: T:Argotic.Syndication.Specialized.BlogMLAuthor
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+  commentId: P:Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+  id: ApprovalStatus
+  parent: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  langs:
+  - csharp
+  - vb
+  name: ApprovalStatus
+  nameWithType: IBlogMLCommonObject.ApprovalStatus
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ApprovalStatus
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 17
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the approval status of the web log entity.\n"
+  example: []
+  syntax:
+    content: BlogMLApprovalStatus ApprovalStatus { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+      description: "\nAn <xref href=\"Argotic.Syndication.Specialized.BlogMLApprovalStatus\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that represents whether the web log entity was approved to be publicly available.\nThe default value is <xref href=\"Argotic.Syndication.Specialized.BlogMLApprovalStatus.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no approval status information was specified.\n"
+    content.vb: Property ApprovalStatus As BlogMLApprovalStatus
+  overload: Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+  commentId: P:Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+  id: CreatedOn
+  parent: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  langs:
+  - csharp
+  - vb
+  name: CreatedOn
+  nameWithType: IBlogMLCommonObject.CreatedOn
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreatedOn
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 29
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets a date-time indicating when the web log entity was created.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: DateTime CreatedOn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates an instant in time associated with an event early in the life cycle of the web log entity.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no creation date-time was provided.\n"
+    content.vb: Property CreatedOn As Date
+  overload: Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+  commentId: P:Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+  id: Id
+  parent: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: IBlogMLCommonObject.Id
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Id
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 35
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the unique identifier of the web log entity.\n"
+  example: []
+  syntax:
+    content: string Id { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: An identification string for the web log entity. The default value is an <strong>empty</strong> string, which indicated that no identifier was specified.
+    content.vb: Property Id As String
+  overload: Argotic.Syndication.Specialized.IBlogMLCommonObject.Id*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+  commentId: P:Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+  id: LastModifiedOn
+  parent: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  langs:
+  - csharp
+  - vb
+  name: LastModifiedOn
+  nameWithType: IBlogMLCommonObject.LastModifiedOn
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LastModifiedOn
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 47
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets a date-time indicating when the web log entity was last modified.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: DateTime LastModifiedOn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when the web log entity was modified in a way the publisher considers significant.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no modification date-time was provided.\n"
+    content.vb: Property LastModifiedOn As Date
+  overload: Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.Title
+  commentId: P:Argotic.Syndication.Specialized.IBlogMLCommonObject.Title
+  id: Title
+  parent: Argotic.Syndication.Specialized.IBlogMLCommonObject
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: IBlogMLCommonObject.Title
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/IBlogMLCommonObject.cs
+    startLine: 54
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the title of the web log entity.\n"
+  example: []
+  syntax:
+    content: BlogMLTextConstruct Title { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLTextConstruct
+      description: A <xref href="Argotic.Syndication.Specialized.BlogMLTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents the title of the web log entity.
+    content.vb: Property Title As BlogMLTextConstruct
+  overload: Argotic.Syndication.Specialized.IBlogMLCommonObject.Title*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Argotic.Syndication.Specialized.BlogMLAuthor
+  commentId: T:Argotic.Syndication.Specialized.BlogMLAuthor
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLAuthor
+  nameWithType: BlogMLAuthor
+  fullName: Argotic.Syndication.Specialized.BlogMLAuthor
+- uid: Argotic.Syndication.Specialized
+  commentId: N:Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  nameWithType: Argotic.Syndication.Specialized
+  fullName: Argotic.Syndication.Specialized
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  commentId: T:Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLApprovalStatus
+  nameWithType: BlogMLApprovalStatus
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  commentId: F:Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  isExternal: true
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus*
+  commentId: Overload:Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+  name: ApprovalStatus
+  nameWithType: IBlogMLCommonObject.ApprovalStatus
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.ApprovalStatus
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn*
+  commentId: Overload:Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+  name: CreatedOn
+  nameWithType: IBlogMLCommonObject.CreatedOn
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.CreatedOn
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.Id*
+  commentId: Overload:Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+  name: Id
+  nameWithType: IBlogMLCommonObject.Id
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.Id
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn*
+  commentId: Overload:Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+  name: LastModifiedOn
+  nameWithType: IBlogMLCommonObject.LastModifiedOn
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.LastModifiedOn
+- uid: Argotic.Syndication.Specialized.BlogMLTextConstruct
+  commentId: T:Argotic.Syndication.Specialized.BlogMLTextConstruct
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLTextConstruct
+  nameWithType: BlogMLTextConstruct
+  fullName: Argotic.Syndication.Specialized.BlogMLTextConstruct
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Syndication.Specialized.IBlogMLCommonObject.Title*
+  commentId: Overload:Argotic.Syndication.Specialized.IBlogMLCommonObject.Title
+  name: Title
+  nameWithType: IBlogMLCommonObject.Title
+  fullName: Argotic.Syndication.Specialized.IBlogMLCommonObject.Title

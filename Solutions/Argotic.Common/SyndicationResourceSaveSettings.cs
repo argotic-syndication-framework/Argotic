@@ -1,42 +1,39 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object persisted by the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public sealed class SyndicationResourceSaveSettings : IComparable
     {
         /// <summary>
         /// Private member to hold the character encoding to use when reading the syndication resource.
         /// </summary>
-        private Encoding characterEncoding                      = Encoding.UTF8;
+        private Encoding characterEncoding = Encoding.UTF8;
+
         /// <summary>
         /// Private member to hold a value indicating if write/save operations should attempt to minimize the size of the resulting output.
         /// </summary>
         private bool minimizeOutputSize;
+
         /// <summary>
         /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
         /// </summary>
         private Collection<Type> supportedSyndicationExtensions;
+
         /// <summary>
         /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
-        private bool syndicationExtensionAutodetectionEnabled   = true;
+        private bool syndicationExtensionAutodetectionEnabled = true;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
-        /// </summary>
-        public SyndicationResourceSaveSettings()
-        {
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         /// <value>
         ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; otherwise <b>false</b>.
@@ -50,12 +47,12 @@ namespace Argotic.Common
         {
             get
             {
-                return syndicationExtensionAutodetectionEnabled;
+                return this.syndicationExtensionAutodetectionEnabled;
             }
 
             set
             {
-                syndicationExtensionAutodetectionEnabled = value;
+                this.syndicationExtensionAutodetectionEnabled = value;
             }
         }
 
@@ -68,30 +65,30 @@ namespace Argotic.Common
         {
             get
             {
-                return characterEncoding;
+                return this.characterEncoding;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                characterEncoding = value;
+                this.characterEncoding = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
         /// </summary>
         /// <value><b>true</b> if output size should be as small as possible; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         public bool MinimizeOutputSize
         {
             get
             {
-                return minimizeOutputSize;
+                return this.minimizeOutputSize;
             }
 
             set
             {
-                minimizeOutputSize = value;
+                this.minimizeOutputSize = value;
             }
         }
 
@@ -109,80 +106,13 @@ namespace Argotic.Common
         {
             get
             {
-                if (supportedSyndicationExtensions == null)
+                if (this.supportedSyndicationExtensions == null)
                 {
-                    supportedSyndicationExtensions = new Collection<Type>();
+                    this.supportedSyndicationExtensions = new Collection<Type>();
                 }
-                return supportedSyndicationExtensions;
+
+                return this.supportedSyndicationExtensions;
             }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            return String.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            SyndicationResourceSaveSettings value  = obj as SyndicationResourceSaveSettings;
-
-            if (value != null)
-            {
-                int result  = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
-                result      = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-                result      = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is SyndicationResourceSaveSettings))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -193,11 +123,12 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -224,16 +155,17 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -244,16 +176,83 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceSaveSettings first, SyndicationResourceSaveSettings second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            return string.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(NumberFormatInfo.InvariantInfo));
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            SyndicationResourceSaveSettings value = obj as SyndicationResourceSaveSettings;
+
+            if (value != null)
+            {
+                int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+                result = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
+                result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+                result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+
+                return result;
+            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SyndicationResourceSaveSettings))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

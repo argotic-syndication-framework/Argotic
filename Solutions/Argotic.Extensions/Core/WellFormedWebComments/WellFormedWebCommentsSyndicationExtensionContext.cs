@@ -1,28 +1,16 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="WellFormedWebCommentsSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class WellFormedWebCommentsSyndicationExtensionContext
     {
-
-        /// <summary>
-        /// Private member to hold the URI that comment entries are to be posted to.
-        /// </summary>
-        private Uri extensionComment;
-
-        /// <summary>
-        /// Private member to hold the URI of the syndication feed for comment entries.
-        /// </summary>
-        private Uri extensionCommentFeed;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> class.
         /// </summary>
@@ -34,35 +22,13 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the URL that comment entries are to be posted to.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URI that comment entries are to be posted to.</value>
-        public Uri Comments
-        {
-            get
-            {
-                return extensionComment;
-            }
-
-            set
-            {
-                extensionComment = value;
-            }
-        }
+        public Uri Comments { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the syndication feed for comment entries.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URI of the syndication feed for comment entries.</value>
-        public Uri CommentsFeed
-        {
-            get
-            {
-                return extensionCommentFeed;
-            }
-
-            set
-            {
-                extensionCommentFeed = value;
-            }
-        }
+        public Uri CommentsFeed { get; set; }
 
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
@@ -74,21 +40,21 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator commentNavigator     = source.SelectSingleNode("wfw:comment", manager);
-                XPathNavigator commentRssNavigator  = source.SelectSingleNode("wfw:commentRss", manager);
+                XPathNavigator commentNavigator = source.SelectSingleNode("wfw:comment", manager);
+                XPathNavigator commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
 
                 if (commentNavigator != null)
                 {
                     Uri comments;
                     if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out comments))
                     {
-                        this.Comments   = comments;
-                        wasLoaded       = true;
+                        this.Comments = comments;
+                        wasLoaded = true;
                     }
                 }
 
@@ -103,8 +69,8 @@ namespace Argotic.Extensions.Core
                     Uri commentsFeed;
                     if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out commentsFeed))
                     {
-                        this.CommentsFeed   = commentsFeed;
-                        wasLoaded           = true;
+                        this.CommentsFeed = commentsFeed;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -124,7 +90,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.Comments != null)
+            if (this.Comments != null)
             {
                 writer.WriteElementString("comment", xmlNamespace, this.Comments.ToString());
             }

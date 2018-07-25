@@ -1,0 +1,1292 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  id: DublinCoreElementSetSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  - Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: DublinCoreElementSetSyndicationExtensionContext
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DublinCoreElementSetSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class DublinCoreElementSetSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class DublinCoreElementSetSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: DublinCoreElementSetSyndicationExtensionContext()
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.DublinCoreElementSetSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.DublinCoreElementSetSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 92
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public DublinCoreElementSetSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  id: Contributor
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Contributor
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Contributor
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Contributor
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 103
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity responsible for making contributions to the resource.\n"
+  remarks: "\nExamples of a Contributor include a person, an organization, or a service. Typically, the name of a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor\" data-throw-if-not-resolved=\"false\"></xref> should be used to indicate the entity.\n"
+  example: []
+  syntax:
+    content: public string Contributor { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity responsible for making contributions to the resource.
+    content.vb: Public Property Contributor As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  id: Coverage
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Coverage
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Coverage
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Coverage
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 138
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.\n"
+  remarks: "\n<p>\n    Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates.\n    Temporal topic may be a named period, date, or date range.\n    A jurisdiction may be a named administrative entity or a geographic place to which the resource applies.\n</p>\n<p>\n    Recommended best practice is to use a controlled vocabulary such as the <a href=\"http://www.getty.edu/research/tools/vocabulary/tgn/index.html\">Thesaurus of Geographic Names</a>.\n    Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.\n</p>\n"
+  example: []
+  syntax:
+    content: public string Coverage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
+    content.vb: Public Property Coverage As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  id: Creator
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Creator
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Creator
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Creator
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 165
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity primarily responsible for making the resource.\n"
+  remarks: "\nExamples of a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator\" data-throw-if-not-resolved=\"false\"></xref> include a person, an organization, or a service. Typically, the name of a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator\" data-throw-if-not-resolved=\"false\"></xref> should be used to indicate the entity.\n"
+  example: []
+  syntax:
+    content: public string Creator { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity primarily responsible for making the resource.
+    content.vb: Public Property Creator As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+  id: Date
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Date
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Date
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 195
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a point or period of time associated with an event in the lifecycle of the resource.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime Date { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates a point or period of time associated with an event in the lifecycle of the resource.\nThe default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no date was provided.\n"
+    content.vb: Public Property Date As Date
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  id: Description
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 215
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets an account of the resource.\n"
+  remarks: "\n<xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description\" data-throw-if-not-resolved=\"false\"></xref> may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.\n"
+  example: []
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: An account of the resource.
+    content.vb: Public Property Description As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  id: Format
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Format
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Format
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Format
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 243
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the file format, physical medium, or dimensions of the resource.\n"
+  remarks: "\nExamples of dimensions include size and duration.\nRecommended best practice is to use a controlled vocabulary such as the list of <a href=\"http://www.iana.org/assignments/media-types/\">Internet Media Types</a>.\n"
+  example: []
+  syntax:
+    content: public string Format { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The file format, physical medium, or dimensions of the resource.
+    content.vb: Public Property Format As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+  id: Identifier
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Identifier
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Identifier
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Identifier
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 270
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets an unambiguous reference to the resource within a given context.\n"
+  remarks: "\nRecommended best practice is to identify the resource by means of a string conforming to a formal identification system.\n"
+  example: []
+  syntax:
+    content: public string Identifier { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: An unambiguous reference to the resource within a given context.
+    content.vb: Public Property Identifier As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+  id: Language
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Language
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 298
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the language of the resource.\n"
+  remarks: "\nRecommended best practice is to use a controlled vocabulary such as <a href=\"http://www.ietf.org/rfc/rfc4646.txt\">RFC 4646</a>.\nThis framework conforms to this best practice by utilizing the <xref href=\"System.Globalization.CultureInfo\" data-throw-if-not-resolved=\"false\"></xref> class to represent the language of a resource.\n"
+  example: []
+  syntax:
+    content: public CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> object that represents the language of the resource. The default value is a <strong>null</strong> reference, which indicates that no language was specified.
+    content.vb: Public Property Language As CultureInfo
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  id: Publisher
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Publisher
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Publisher
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Publisher
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 318
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the entity responsible for making the resource available.\n"
+  remarks: "\nExamples of a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher\" data-throw-if-not-resolved=\"false\"></xref> include a person, an organization, or a service. Typically, the name of a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher\" data-throw-if-not-resolved=\"false\"></xref> should be used to indicate the entity.\n"
+  example: []
+  syntax:
+    content: public string Publisher { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The entity responsible for making the resource available.
+    content.vb: Public Property Publisher As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+  id: Relation
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Relation
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Relation
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Relation
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 345
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource.\n"
+  remarks: "\nRecommended best practice is to identify the related resource by means of a string conforming to a formal identification system.\n"
+  example: []
+  syntax:
+    content: public string Relation { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource.
+    content.vb: Public Property Relation As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+  id: Rights
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Rights
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Rights
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rights
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 372
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets information about rights held in and over the resource.\n"
+  remarks: "\nTypically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.\n"
+  example: []
+  syntax:
+    content: public string Rights { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Information about rights held in and over the resource.
+    content.vb: Public Property Rights As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+  id: Source
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Source
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Source
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 400
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a related resource from which the described resource is derived.\n"
+  remarks: "\nThe described resource may be derived from the related resource in whole or in part.\nRecommended best practice is to identify the related resource by means of a string conforming to a formal identification system.\n"
+  example: []
+  syntax:
+    content: public string Source { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A related resource from which the described resource is derived.
+    content.vb: Public Property Source As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+  id: Subject
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Subject
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Subject
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Subject
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 429
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the topic of the resource.\n"
+  remarks: "\nTypically, the subject will be represented using keywords, key phrases, or classification codes.\nRecommended best practice is to use a controlled vocabulary.\nTo describe the spatial or temporal topic of the resource, use the <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage\" data-throw-if-not-resolved=\"false\"></xref> element.\n"
+  example: []
+  syntax:
+    content: public string Subject { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The topic of the resource.
+    content.vb: Public Property Subject As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  id: Title
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 456
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name given to the resource.\n"
+  remarks: "\nTypically, a <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title\" data-throw-if-not-resolved=\"false\"></xref> will be a name by which the resource is formally known.\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name given to the resource.
+    content.vb: Public Property Title As String
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  id: TypeVocabulary
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TypeVocabulary
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TypeVocabulary
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 490
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the nature or genre of the resource.\n"
+  remarks: "\n<p>\n    Recommended best practice is to use a controlled vocabulary such as the <a href=\"http://dublincore.org/documents/dcmi-type-vocabulary/\">DCMI Type Vocabulary</a>.\n    This framework conforms to this best practice by providing the <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies\" data-throw-if-not-resolved=\"false\"></xref> enumeration for specifiying the nature or genre of a resource.\n</p>\n<p>To describe the file format, physical medium, or dimensions of the resource, use <xref href=\"Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+  example: []
+  syntax:
+    content: public DublinCoreTypeVocabularies TypeVocabulary { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+      description: "\nAn <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that represents the nature or genre of the resource.\nThe default value is <xref href=\"Argotic.Extensions.Core.DublinCoreTypeVocabularies.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no nature or genre was specified.\n"
+    content.vb: Public Property TypeVocabulary As DublinCoreTypeVocabularies
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 511
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreElementSet/DublinCoreElementSetSyndicationExtensionContext.cs
+    startLine: 534
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: DublinCoreElementSetSyndicationExtension
+  nameWithType: DublinCoreElementSetSyndicationExtension
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: DublinCoreElementSetSyndicationExtensionContext
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.#ctor
+  name: DublinCoreElementSetSyndicationExtensionContext
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.DublinCoreElementSetSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.DublinCoreElementSetSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+  name: Contributor
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Contributor
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Contributor
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  name: Coverage
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Coverage
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+  name: Creator
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Creator
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Creator
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+  name: Date
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Date
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Date
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+  name: Description
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Description
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Description
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  name: Format
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Format
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+  name: Identifier
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Identifier
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Identifier
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+  name: Language
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Language
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+  name: Publisher
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Publisher
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Publisher
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+  name: Relation
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Relation
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Relation
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+  name: Rights
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Rights
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Rights
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+  name: Source
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Source
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Source
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Coverage
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+  name: Subject
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Subject
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Subject
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+  name: Title
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Title
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Title
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  commentId: T:Argotic.Extensions.Core.DublinCoreTypeVocabularies
+  parent: Argotic.Extensions.Core
+  name: DublinCoreTypeVocabularies
+  nameWithType: DublinCoreTypeVocabularies
+  fullName: Argotic.Extensions.Core.DublinCoreTypeVocabularies
+- uid: Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  commentId: F:Argotic.Extensions.Core.DublinCoreTypeVocabularies.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  commentId: P:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Format
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  name: TypeVocabulary
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.Load
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: DublinCoreElementSetSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.DublinCoreElementSetSyndicationExtensionContext.WriteTo

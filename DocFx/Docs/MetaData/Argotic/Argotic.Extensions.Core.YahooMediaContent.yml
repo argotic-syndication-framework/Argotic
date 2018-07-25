@@ -1,0 +1,2865 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaContent
+  commentId: T:Argotic.Extensions.Core.YahooMediaContent
+  id: YahooMediaContent
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaContent.#ctor
+  - Argotic.Extensions.Core.YahooMediaContent.#ctor(Argotic.Extensions.Core.YahooMediaPlayer)
+  - Argotic.Extensions.Core.YahooMediaContent.#ctor(System.Uri)
+  - Argotic.Extensions.Core.YahooMediaContent.Bitrate
+  - Argotic.Extensions.Core.YahooMediaContent.Categories
+  - Argotic.Extensions.Core.YahooMediaContent.Channels
+  - Argotic.Extensions.Core.YahooMediaContent.CompareTo(System.Object)
+  - Argotic.Extensions.Core.YahooMediaContent.ContentType
+  - Argotic.Extensions.Core.YahooMediaContent.Copyright
+  - Argotic.Extensions.Core.YahooMediaContent.Credits
+  - Argotic.Extensions.Core.YahooMediaContent.Description
+  - Argotic.Extensions.Core.YahooMediaContent.Duration
+  - Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)
+  - Argotic.Extensions.Core.YahooMediaContent.Expression
+  - Argotic.Extensions.Core.YahooMediaContent.FileSize
+  - Argotic.Extensions.Core.YahooMediaContent.FrameRate
+  - Argotic.Extensions.Core.YahooMediaContent.GetHashCode
+  - Argotic.Extensions.Core.YahooMediaContent.Hashes
+  - Argotic.Extensions.Core.YahooMediaContent.Height
+  - Argotic.Extensions.Core.YahooMediaContent.IsDefault
+  - Argotic.Extensions.Core.YahooMediaContent.Keywords
+  - Argotic.Extensions.Core.YahooMediaContent.Language
+  - Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.YahooMediaContent.Medium
+  - Argotic.Extensions.Core.YahooMediaContent.op_Equality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaContent.op_Inequality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaContent.op_LessThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  - Argotic.Extensions.Core.YahooMediaContent.Player
+  - Argotic.Extensions.Core.YahooMediaContent.Ratings
+  - Argotic.Extensions.Core.YahooMediaContent.Restrictions
+  - Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+  - Argotic.Extensions.Core.YahooMediaContent.TextSeries
+  - Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+  - Argotic.Extensions.Core.YahooMediaContent.Title
+  - Argotic.Extensions.Core.YahooMediaContent.ToString
+  - Argotic.Extensions.Core.YahooMediaContent.Url
+  - Argotic.Extensions.Core.YahooMediaContent.Width
+  - Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaContent
+  nameWithType: YahooMediaContent
+  fullName: Argotic.Extensions.Core.YahooMediaContent
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaContent
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 20
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents a publishable media object.\n"
+  remarks: "\n<p>\n    Media objects that are not the same content should not be included in the same <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref>.\n    The sequence of <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> objects within a <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref> implies the order of presentation.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaContent
+
+          Implements IComparable, IYahooMediaCommonObjectEntities
+  seealso:
+  - linkId: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+    commentId: T:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaContent.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaContent()
+  nameWithType: YahooMediaContent.YahooMediaContent()
+  fullName: Argotic.Extensions.Core.YahooMediaContent.YahooMediaContent()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 156
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaContent()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaContent.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.#ctor(System.Uri)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.#ctor(System.Uri)
+  id: '#ctor(System.Uri)'
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaContent(Uri)
+  nameWithType: YahooMediaContent.YahooMediaContent(Uri)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.YahooMediaContent(System.Uri)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 165
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public YahooMediaContent(Uri url)
+    parameters:
+    - id: url
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the direct URL to this media object.
+    content.vb: Public Sub New(url As Uri)
+  overload: Argotic.Extensions.Core.YahooMediaContent.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.#ctor(Argotic.Extensions.Core.YahooMediaPlayer)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.#ctor(Argotic.Extensions.Core.YahooMediaPlayer)
+  id: '#ctor(Argotic.Extensions.Core.YahooMediaPlayer)'
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaContent(YahooMediaPlayer)
+  nameWithType: YahooMediaContent.YahooMediaContent(YahooMediaPlayer)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.YahooMediaContent(Argotic.Extensions.Core.YahooMediaPlayer)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 177
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Extensions.Core.YahooMediaPlayer\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public YahooMediaContent(YahooMediaPlayer player)
+    parameters:
+    - id: player
+      type: Argotic.Extensions.Core.YahooMediaPlayer
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaPlayer" data-throw-if-not-resolved="false"></xref> that represents a web browser media player console this media object can be accessed through.
+    content.vb: Public Sub New(player As YahooMediaPlayer)
+  overload: Argotic.Extensions.Core.YahooMediaContent.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">player</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Bitrate
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Bitrate
+  id: Bitrate
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Bitrate
+  nameWithType: YahooMediaContent.Bitrate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Bitrate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Bitrate
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 188
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the kilobits per second rate of this media object.\n"
+  example: []
+  syntax:
+    content: public int Bitrate { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The <em>kilobits</em> per second rate of this media object. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no bit-rate was specified.
+    content.vb: Public Property Bitrate As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.Bitrate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Channels
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Channels
+  id: Channels
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Channels
+  nameWithType: YahooMediaContent.Channels
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Channels
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Channels
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 205
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the number of audio channels in this media object.\n"
+  example: []
+  syntax:
+    content: public int Channels { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of audio channels in this media object. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no audio channels were specified.
+    content.vb: Public Property Channels As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.Channels*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.ContentType
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.ContentType
+  id: ContentType
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: ContentType
+  nameWithType: YahooMediaContent.ContentType
+  fullName: Argotic.Extensions.Core.YahooMediaContent.ContentType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContentType
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 225
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the content type of this media object.\n"
+  remarks: "\nSee <a href=\"http://www.iana.org/assignments/media-types/\">IANA MIME Media Types</a> for a listing of registered MIME types.\n"
+  example: []
+  syntax:
+    content: public string ContentType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The standard MIME type of this media object.
+    content.vb: Public Property ContentType As String
+  overload: Argotic.Extensions.Core.YahooMediaContent.ContentType*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Duration
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Duration
+  id: Duration
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Duration
+  nameWithType: YahooMediaContent.Duration
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Duration
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Duration
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 249
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the total play time for this media object.\n"
+  example: []
+  syntax:
+    content: public TimeSpan Duration { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+      description: A <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref> that represents the total playing time for this media object. The default value is <xref href="System.TimeSpan.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no duration was specified.
+    content.vb: Public Property Duration As TimeSpan
+  overload: Argotic.Extensions.Core.YahooMediaContent.Duration*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Expression
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Expression
+  id: Expression
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Expression
+  nameWithType: YahooMediaContent.Expression
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Expression
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Expression
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 269
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the expressed version of this media object.\n"
+  example: []
+  syntax:
+    content: public YahooMediaExpression Expression { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaExpression
+      description: "\nA <xref href=\"Argotic.Extensions.Core.YahooMediaExpression\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that represents the expressed version of this media object.\nThe default value is <xref href=\"Argotic.Extensions.Core.YahooMediaExpression.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no expression version was specified.\n"
+    content.vb: Public Property Expression As YahooMediaExpression
+  overload: Argotic.Extensions.Core.YahooMediaContent.Expression*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.FileSize
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.FileSize
+  id: FileSize
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: FileSize
+  nameWithType: YahooMediaContent.FileSize
+  fullName: Argotic.Extensions.Core.YahooMediaContent.FileSize
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FileSize
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 286
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the file size of this media object.\n"
+  example: []
+  syntax:
+    content: public long FileSize { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+      description: The number of bytes this media object represents on disk. The default value is <xref href="System.Int64.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no file size was specified.
+    content.vb: Public Property FileSize As Long
+  overload: Argotic.Extensions.Core.YahooMediaContent.FileSize*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.FrameRate
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.FrameRate
+  id: FrameRate
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: FrameRate
+  nameWithType: YahooMediaContent.FrameRate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.FrameRate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FrameRate
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 303
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the number of frames per second for this media object.\n"
+  example: []
+  syntax:
+    content: public int FrameRate { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of frames per second for this media object. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no frame-rate was specified.
+    content.vb: Public Property FrameRate As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.FrameRate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Height
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Height
+  id: Height
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: YahooMediaContent.Height
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Height
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Height
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 320
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the height of this media object.\n"
+  example: []
+  syntax:
+    content: public int Height { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The height of this media object, typically in pixels. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no height was specified.
+    content.vb: Public Property Height As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.Height*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.IsDefault
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.IsDefault
+  id: IsDefault
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: IsDefault
+  nameWithType: YahooMediaContent.IsDefault
+  fullName: Argotic.Extensions.Core.YahooMediaContent.IsDefault
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsDefault
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 340
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a value indicating whether gets or sets a value indicating if this media object is the default object in a group.\n"
+  remarks: "\nThere should <strong>only</strong> be one default media object per <xref href=\"Argotic.Extensions.Core.YahooMediaGroup\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool IsDefault { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if this media object is the default object that should be used for a <xref href="Argotic.Extensions.Core.YahooMediaGroup" data-throw-if-not-resolved="false"></xref>; otherwise <strong>false</strong>.
+    content.vb: Public Property IsDefault As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.IsDefault*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Language
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Language
+  id: Language
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: YahooMediaContent.Language
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 365
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the primary language encapsulated in this media object.\n"
+  remarks: "\n<p>\n    The value of this property is a language identifier as defined by <a href=\"http://www.ietf.org/rfc/rfc3066.txt\">RFC 3066: Tags for the Identification of Languages</a>, or its successor.\n</p>\n"
+  example: []
+  syntax:
+    content: public CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: "\nA <xref href=\"System.Globalization.CultureInfo\" data-throw-if-not-resolved=\"false\"></xref> that represents the primary language encapsulated in this media object.\nThe default value is a <strong>null</strong> reference, which indicates no language was specified.\n"
+    content.vb: Public Property Language As CultureInfo
+  overload: Argotic.Extensions.Core.YahooMediaContent.Language*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Medium
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Medium
+  id: Medium
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Medium
+  nameWithType: YahooMediaContent.Medium
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Medium
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Medium
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 385
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the content medium of this media object.\n"
+  example: []
+  syntax:
+    content: public YahooMediaMedium Medium { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaMedium
+      description: "\nA <xref href=\"Argotic.Extensions.Core.YahooMediaMedium\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that represents the type of this media object.\nThe default value is <xref href=\"Argotic.Extensions.Core.YahooMediaMedium.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no content medium was specified.\n"
+    content.vb: Public Property Medium As YahooMediaMedium
+  overload: Argotic.Extensions.Core.YahooMediaContent.Medium*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+  id: SamplingRate
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: SamplingRate
+  nameWithType: YahooMediaContent.SamplingRate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SamplingRate
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 405
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the number of samples per second taken to create this media object.\n"
+  remarks: "\nThis property is expressed in thousands of samples per second (kHz).\n"
+  example: []
+  syntax:
+    content: public decimal SamplingRate { get; set; }
+    parameters: []
+    return:
+      type: System.Decimal
+      description: The number of samples per second taken to create this media object. The default value is <xref href="System.Decimal.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no sampling-rate was specified.
+    content.vb: Public Property SamplingRate As Decimal
+  overload: Argotic.Extensions.Core.YahooMediaContent.SamplingRate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Url
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Url
+  id: Url
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: YahooMediaContent.Url
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Url
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Url
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 422
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the location of this media object.\n"
+  example: []
+  syntax:
+    content: public Uri Url { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the direct URL to this media object.
+    content.vb: Public Property Url As Uri
+  overload: Argotic.Extensions.Core.YahooMediaContent.Url*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Width
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Width
+  id: Width
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: YahooMediaContent.Width
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Width
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Width
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 439
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the width of this media object.\n"
+  example: []
+  syntax:
+    content: public int Width { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The width of this media object, typically in pixels. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no width was specified.
+    content.vb: Public Property Width As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.Width*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Categories
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Categories
+  id: Categories
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: YahooMediaContent.Categories
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 459
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets a taxonomy that gives an indication of the type of content for this media object.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaCategory> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaCategory\" data-throw-if-not-resolved=\"false\"></xref> objects that represent a taxonomy that gives an indication to the type of content for this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Categories As Collection(Of YahooMediaCategory)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Categories*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Copyright
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Copyright
+  id: Copyright
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Copyright
+  nameWithType: YahooMediaContent.Copyright
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Copyright
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Copyright
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 479
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the copyright information for this media object.\n"
+  remarks: "\nIf the media is operating under a <em>Creative Commons license</em>, a <xref href=\"Argotic.Extensions.Core.CreativeCommonsSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> should be used instead.\n"
+  example: []
+  syntax:
+    content: public YahooMediaCopyright Copyright { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaCopyright" data-throw-if-not-resolved="false"></xref> that represents the copyright information for this media object.
+    content.vb: Public Property Copyright As YahooMediaCopyright
+  overload: Argotic.Extensions.Core.YahooMediaContent.Copyright*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Credits
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Credits
+  id: Credits
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Credits
+  nameWithType: YahooMediaContent.Credits
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Credits
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credits
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 503
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the entities that contributed to the creation of this media object.\n"
+  remarks: "\nCurrent entities can include people, companies, locations, etc. Specific entities can have multiple roles,\nand several entities can have the same role. These should appear as distinct <xref href=\"Argotic.Extensions.Core.YahooMediaCredit\" data-throw-if-not-resolved=\"false\"></xref> entities.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaCredit> Credits { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaCredit\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the entities that contributed to the creation of this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Credits As Collection(Of YahooMediaCredit)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Credits*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Description
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Description
+  id: Description
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: YahooMediaContent.Description
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 523
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the description of this media object.\n"
+  remarks: "\nMedia object descriptions are typically a sentence in length.\n"
+  example: []
+  syntax:
+    content: public YahooMediaTextConstruct Description { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaTextConstruct
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaTextConstruct" data-throw-if-not-resolved="false"></xref> that represents a short description of this media object.
+    content.vb: Public Property Description As YahooMediaTextConstruct
+  overload: Argotic.Extensions.Core.YahooMediaContent.Description*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Hashes
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Hashes
+  id: Hashes
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Hashes
+  nameWithType: YahooMediaContent.Hashes
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Hashes
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Hashes
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 546
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the hash digests for this media object.\n"
+  remarks: "\nWhen assigning multiple hashes, each <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> <strong>must</strong> have a different <xref href=\"Argotic.Extensions.Core.YahooMediaHash.Algorithm\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaHash> Hashes { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaHash\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the hash digests for this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Hashes As Collection(Of YahooMediaHash)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Hashes*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Keywords
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Keywords
+  id: Keywords
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Keywords
+  nameWithType: YahooMediaContent.Keywords
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Keywords
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Keywords
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 569
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the relevant keywords that describe this media object.\n"
+  remarks: "\nMedia objects are typically assigned maximum of ten keywords or phrases.\n"
+  example: []
+  syntax:
+    content: public Collection<string> Keywords { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the relevant keywords that describe this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Keywords As Collection(Of String)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Keywords*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Player
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Player
+  id: Player
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Player
+  nameWithType: YahooMediaContent.Player
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Player
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Player
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 586
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a web browser media player console this media object can be accessed through.\n"
+  example: []
+  syntax:
+    content: public YahooMediaPlayer Player { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaPlayer
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaPlayer" data-throw-if-not-resolved="false"></xref> that represents a web browser media player console this media object can be accessed through.
+    content.vb: Public Property Player As YahooMediaPlayer
+  overload: Argotic.Extensions.Core.YahooMediaContent.Player*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.Ratings
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Ratings
+  id: Ratings
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Ratings
+  nameWithType: YahooMediaContent.Ratings
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Ratings
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Ratings
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 609
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the permissible audiences for this media object.\n"
+  remarks: "\nIf there are no ratings specified, it can be assumed that no restrictions are necessary.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaRating> Ratings { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaRating\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the permissible audiences for this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Ratings As Collection(Of YahooMediaRating)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Ratings*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Restrictions
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Restrictions
+  id: Restrictions
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Restrictions
+  nameWithType: YahooMediaContent.Restrictions
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Restrictions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Restrictions
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 629
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the restrictions to be placed on aggregators that are rendering this media object.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaRestriction> Restrictions { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaRestriction\" data-throw-if-not-resolved=\"false\"></xref> objects that represent restrictions to be placed on aggregators that are rendering this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Restrictions As Collection(Of YahooMediaRestriction)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Restrictions*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.TextSeries
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.TextSeries
+  id: TextSeries
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: TextSeries
+  nameWithType: YahooMediaContent.TextSeries
+  fullName: Argotic.Extensions.Core.YahooMediaContent.TextSeries
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TextSeries
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 654
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the text transcript, closed captioning, or lyrics for this media object.\n"
+  remarks: "\nMany of these <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects are permitted to provide a time series of text.\nIn such cases, it is encouraged, but not required, that the <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects be grouped by language and appear in time sequence order based on the start time.\n<xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects can have overlapping start and end times.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaText> TextSeries { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaText\" data-throw-if-not-resolved=\"false\"></xref> objects that represent text transcript, closed captioning, or lyrics for this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property TextSeries As Collection(Of YahooMediaText)
+  overload: Argotic.Extensions.Core.YahooMediaContent.TextSeries*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+  id: Thumbnails
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Thumbnails
+  nameWithType: YahooMediaContent.Thumbnails
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Thumbnails
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 677
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the representative images for this media object.\n"
+  remarks: "\nIf multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.\n"
+  example: []
+  syntax:
+    content: public Collection<YahooMediaThumbnail> Thumbnails { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.YahooMediaThumbnail\" data-throw-if-not-resolved=\"false\"></xref> objects that represent images that are representative of this media object.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Thumbnails As Collection(Of YahooMediaThumbnail)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Thumbnails*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.YahooMediaContent.Title
+  commentId: P:Argotic.Extensions.Core.YahooMediaContent.Title
+  id: Title
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: YahooMediaContent.Title
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 694
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the title of this media object.\n"
+  example: []
+  syntax:
+    content: public YahooMediaTextConstruct Title { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.YahooMediaTextConstruct
+      description: A <xref href="Argotic.Extensions.Core.YahooMediaTextConstruct" data-throw-if-not-resolved="false"></xref> that represents the title of this media object.
+    content.vb: Public Property Title As YahooMediaTextConstruct
+  overload: Argotic.Extensions.Core.YahooMediaContent.Title*
+  implements:
+  - Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_Equality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.op_Equality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  id: op_Equality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Equality(YahooMediaContent, YahooMediaContent)
+  nameWithType: YahooMediaContent.Equality(YahooMediaContent, YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Equality(Argotic.Extensions.Core.YahooMediaContent, Argotic.Extensions.Core.YahooMediaContent)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 713
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(YahooMediaContent first, YahooMediaContent second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As YahooMediaContent, second As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_Inequality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.op_Inequality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  id: op_Inequality(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Inequality(YahooMediaContent, YahooMediaContent)
+  nameWithType: YahooMediaContent.Inequality(YahooMediaContent, YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Inequality(Argotic.Extensions.Core.YahooMediaContent, Argotic.Extensions.Core.YahooMediaContent)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 733
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(YahooMediaContent first, YahooMediaContent second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As YahooMediaContent, second As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_LessThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.op_LessThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  id: op_LessThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: LessThan(YahooMediaContent, YahooMediaContent)
+  nameWithType: YahooMediaContent.LessThan(YahooMediaContent, YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.LessThan(Argotic.Extensions.Core.YahooMediaContent, Argotic.Extensions.Core.YahooMediaContent)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 744
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(YahooMediaContent first, YahooMediaContent second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As YahooMediaContent, second As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  id: op_GreaterThan(Argotic.Extensions.Core.YahooMediaContent,Argotic.Extensions.Core.YahooMediaContent)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(YahooMediaContent, YahooMediaContent)
+  nameWithType: YahooMediaContent.GreaterThan(YahooMediaContent, YahooMediaContent)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.GreaterThan(Argotic.Extensions.Core.YahooMediaContent, Argotic.Extensions.Core.YahooMediaContent)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 764
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(YahooMediaContent first, YahooMediaContent second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaContent
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As YahooMediaContent, second As YahooMediaContent) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaContent.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: YahooMediaContent.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 784
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.YahooMediaContent.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.GetHashCode
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: YahooMediaContent.GetHashCode()
+  fullName: Argotic.Extensions.Core.YahooMediaContent.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 828
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.YahooMediaContent.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: YahooMediaContent.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 844
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaContent.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: YahooMediaContent.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 868
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.YahooMediaContent.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaContent.ToString
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: YahooMediaContent.ToString()
+  fullName: Argotic.Extensions.Core.YahooMediaContent.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 956
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.YahooMediaContent\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.YahooMediaContent" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.YahooMediaContent.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaContent
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: YahooMediaContent.Equals(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs
+    startLine: 984
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.YahooMediaContent.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.YahooMediaGroup
+  commentId: T:Argotic.Extensions.Core.YahooMediaGroup
+  parent: Argotic.Extensions.Core
+  name: YahooMediaGroup
+  nameWithType: YahooMediaGroup
+  fullName: Argotic.Extensions.Core.YahooMediaGroup
+- uid: Argotic.Extensions.Core.YahooMediaContent
+  commentId: T:Argotic.Extensions.Core.YahooMediaContent
+  parent: Argotic.Extensions.Core
+  name: YahooMediaContent
+  nameWithType: YahooMediaContent
+  fullName: Argotic.Extensions.Core.YahooMediaContent
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  commentId: T:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  parent: Argotic.Extensions.Core
+  name: IYahooMediaCommonObjectEntities
+  nameWithType: IYahooMediaCommonObjectEntities
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaContent.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.#ctor
+  name: YahooMediaContent
+  nameWithType: YahooMediaContent.YahooMediaContent
+  fullName: Argotic.Extensions.Core.YahooMediaContent.YahooMediaContent
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaPlayer
+  commentId: T:Argotic.Extensions.Core.YahooMediaPlayer
+  parent: Argotic.Extensions.Core
+  name: YahooMediaPlayer
+  nameWithType: YahooMediaPlayer
+  fullName: Argotic.Extensions.Core.YahooMediaPlayer
+- uid: System.Int32.MinValue
+  commentId: F:System.Int32.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.Bitrate*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Bitrate
+  name: Bitrate
+  nameWithType: YahooMediaContent.Bitrate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Bitrate
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Extensions.Core.YahooMediaContent.Channels*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Channels
+  name: Channels
+  nameWithType: YahooMediaContent.Channels
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Channels
+- uid: Argotic.Extensions.Core.YahooMediaContent.ContentType*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.ContentType
+  name: ContentType
+  nameWithType: YahooMediaContent.ContentType
+  fullName: Argotic.Extensions.Core.YahooMediaContent.ContentType
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: System.TimeSpan.MinValue
+  commentId: F:System.TimeSpan.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.Duration*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Duration
+  name: Duration
+  nameWithType: YahooMediaContent.Duration
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Duration
+- uid: Argotic.Extensions.Core.YahooMediaExpression
+  commentId: T:Argotic.Extensions.Core.YahooMediaExpression
+  parent: Argotic.Extensions.Core
+  name: YahooMediaExpression
+  nameWithType: YahooMediaExpression
+  fullName: Argotic.Extensions.Core.YahooMediaExpression
+- uid: Argotic.Extensions.Core.YahooMediaExpression.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaExpression.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.Expression*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Expression
+  name: Expression
+  nameWithType: YahooMediaContent.Expression
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Expression
+- uid: System.Int64.MinValue
+  commentId: F:System.Int64.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.FileSize*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.FileSize
+  name: FileSize
+  nameWithType: YahooMediaContent.FileSize
+  fullName: Argotic.Extensions.Core.YahooMediaContent.FileSize
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: Argotic.Extensions.Core.YahooMediaContent.FrameRate*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.FrameRate
+  name: FrameRate
+  nameWithType: YahooMediaContent.FrameRate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.FrameRate
+- uid: Argotic.Extensions.Core.YahooMediaContent.Height*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Height
+  name: Height
+  nameWithType: YahooMediaContent.Height
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Height
+- uid: Argotic.Extensions.Core.YahooMediaContent.IsDefault*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.IsDefault
+  name: IsDefault
+  nameWithType: YahooMediaContent.IsDefault
+  fullName: Argotic.Extensions.Core.YahooMediaContent.IsDefault
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Extensions.Core.YahooMediaContent.Language*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Language
+  name: Language
+  nameWithType: YahooMediaContent.Language
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Extensions.Core.YahooMediaMedium
+  commentId: T:Argotic.Extensions.Core.YahooMediaMedium
+  parent: Argotic.Extensions.Core
+  name: YahooMediaMedium
+  nameWithType: YahooMediaMedium
+  fullName: Argotic.Extensions.Core.YahooMediaMedium
+- uid: Argotic.Extensions.Core.YahooMediaMedium.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaMedium.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.Medium*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Medium
+  name: Medium
+  nameWithType: YahooMediaContent.Medium
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Medium
+- uid: System.Decimal.MinValue
+  commentId: F:System.Decimal.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.SamplingRate*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+  name: SamplingRate
+  nameWithType: YahooMediaContent.SamplingRate
+  fullName: Argotic.Extensions.Core.YahooMediaContent.SamplingRate
+- uid: System.Decimal
+  commentId: T:System.Decimal
+  parent: System
+  isExternal: true
+  name: Decimal
+  nameWithType: Decimal
+  fullName: System.Decimal
+- uid: Argotic.Extensions.Core.YahooMediaContent.Url*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Url
+  name: Url
+  nameWithType: YahooMediaContent.Url
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Url
+- uid: Argotic.Extensions.Core.YahooMediaContent.Width*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Width
+  name: Width
+  nameWithType: YahooMediaContent.Width
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Width
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaCategory
+  commentId: T:Argotic.Extensions.Core.YahooMediaCategory
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCategory
+  nameWithType: YahooMediaCategory
+  fullName: Argotic.Extensions.Core.YahooMediaCategory
+- uid: Argotic.Extensions.Core.YahooMediaContent.Categories*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Categories
+  name: Categories
+  nameWithType: YahooMediaContent.Categories
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Categories
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Categories
+  nameWithType: IYahooMediaCommonObjectEntities.Categories
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Categories
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCategory}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaCategory>
+  nameWithType: Collection<YahooMediaCategory>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaCategory>
+  nameWithType.vb: Collection(Of YahooMediaCategory)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaCategory)
+  name.vb: Collection(Of YahooMediaCategory)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaCategory
+    name: YahooMediaCategory
+    nameWithType: YahooMediaCategory
+    fullName: Argotic.Extensions.Core.YahooMediaCategory
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaCategory
+    name: YahooMediaCategory
+    nameWithType: YahooMediaCategory
+    fullName: Argotic.Extensions.Core.YahooMediaCategory
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Extensions.Core.YahooMediaCopyright
+  commentId: T:Argotic.Extensions.Core.YahooMediaCopyright
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCopyright
+  nameWithType: YahooMediaCopyright
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright
+- uid: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: CreativeCommonsSyndicationExtension
+  nameWithType: CreativeCommonsSyndicationExtension
+  fullName: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+- uid: Argotic.Extensions.Core.YahooMediaContent.Copyright*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Copyright
+  name: Copyright
+  nameWithType: YahooMediaContent.Copyright
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Copyright
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Copyright
+  nameWithType: IYahooMediaCommonObjectEntities.Copyright
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Copyright
+- uid: Argotic.Extensions.Core.YahooMediaCredit
+  commentId: T:Argotic.Extensions.Core.YahooMediaCredit
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCredit
+  nameWithType: YahooMediaCredit
+  fullName: Argotic.Extensions.Core.YahooMediaCredit
+- uid: Argotic.Extensions.Core.YahooMediaContent.Credits*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Credits
+  name: Credits
+  nameWithType: YahooMediaContent.Credits
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Credits
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Credits
+  nameWithType: IYahooMediaCommonObjectEntities.Credits
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Credits
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaCredit}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaCredit>
+  nameWithType: Collection<YahooMediaCredit>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaCredit>
+  nameWithType.vb: Collection(Of YahooMediaCredit)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaCredit)
+  name.vb: Collection(Of YahooMediaCredit)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaCredit
+    name: YahooMediaCredit
+    nameWithType: YahooMediaCredit
+    fullName: Argotic.Extensions.Core.YahooMediaCredit
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaCredit
+    name: YahooMediaCredit
+    nameWithType: YahooMediaCredit
+    fullName: Argotic.Extensions.Core.YahooMediaCredit
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaTextConstruct
+  commentId: T:Argotic.Extensions.Core.YahooMediaTextConstruct
+  parent: Argotic.Extensions.Core
+  name: YahooMediaTextConstruct
+  nameWithType: YahooMediaTextConstruct
+  fullName: Argotic.Extensions.Core.YahooMediaTextConstruct
+- uid: Argotic.Extensions.Core.YahooMediaContent.Description*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Description
+  name: Description
+  nameWithType: YahooMediaContent.Description
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Description
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Description
+  nameWithType: IYahooMediaCommonObjectEntities.Description
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Description
+- uid: Argotic.Extensions.Core.YahooMediaHash
+  commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash
+- uid: Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  commentId: P:Argotic.Extensions.Core.YahooMediaHash.Algorithm
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.Hashes*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Hashes
+  name: Hashes
+  nameWithType: YahooMediaContent.Hashes
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Hashes
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Hashes
+  nameWithType: IYahooMediaCommonObjectEntities.Hashes
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Hashes
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaHash}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaHash>
+  nameWithType: Collection<YahooMediaHash>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaHash>
+  nameWithType.vb: Collection(Of YahooMediaHash)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaHash)
+  name.vb: Collection(Of YahooMediaHash)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaHash
+    name: YahooMediaHash
+    nameWithType: YahooMediaHash
+    fullName: Argotic.Extensions.Core.YahooMediaHash
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaHash
+    name: YahooMediaHash
+    nameWithType: YahooMediaHash
+    fullName: Argotic.Extensions.Core.YahooMediaHash
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.Keywords*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Keywords
+  name: Keywords
+  nameWithType: YahooMediaContent.Keywords
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Keywords
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Keywords
+  nameWithType: IYahooMediaCommonObjectEntities.Keywords
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Keywords
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.Player*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Player
+  name: Player
+  nameWithType: YahooMediaContent.Player
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Player
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Player
+  nameWithType: IYahooMediaCommonObjectEntities.Player
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Player
+- uid: Argotic.Extensions.Core.YahooMediaRating
+  commentId: T:Argotic.Extensions.Core.YahooMediaRating
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRating
+  nameWithType: YahooMediaRating
+  fullName: Argotic.Extensions.Core.YahooMediaRating
+- uid: Argotic.Extensions.Core.YahooMediaContent.Ratings*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Ratings
+  name: Ratings
+  nameWithType: YahooMediaContent.Ratings
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Ratings
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Ratings
+  nameWithType: IYahooMediaCommonObjectEntities.Ratings
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Ratings
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRating}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaRating>
+  nameWithType: Collection<YahooMediaRating>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaRating>
+  nameWithType.vb: Collection(Of YahooMediaRating)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaRating)
+  name.vb: Collection(Of YahooMediaRating)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaRating
+    name: YahooMediaRating
+    nameWithType: YahooMediaRating
+    fullName: Argotic.Extensions.Core.YahooMediaRating
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaRating
+    name: YahooMediaRating
+    nameWithType: YahooMediaRating
+    fullName: Argotic.Extensions.Core.YahooMediaRating
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+- uid: Argotic.Extensions.Core.YahooMediaContent.Restrictions*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Restrictions
+  name: Restrictions
+  nameWithType: YahooMediaContent.Restrictions
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Restrictions
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Restrictions
+  nameWithType: IYahooMediaCommonObjectEntities.Restrictions
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Restrictions
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaRestriction}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaRestriction>
+  nameWithType: Collection<YahooMediaRestriction>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaRestriction>
+  nameWithType.vb: Collection(Of YahooMediaRestriction)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaRestriction)
+  name.vb: Collection(Of YahooMediaRestriction)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaRestriction
+    name: YahooMediaRestriction
+    nameWithType: YahooMediaRestriction
+    fullName: Argotic.Extensions.Core.YahooMediaRestriction
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaRestriction
+    name: YahooMediaRestriction
+    nameWithType: YahooMediaRestriction
+    fullName: Argotic.Extensions.Core.YahooMediaRestriction
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaText
+  commentId: T:Argotic.Extensions.Core.YahooMediaText
+  parent: Argotic.Extensions.Core
+  name: YahooMediaText
+  nameWithType: YahooMediaText
+  fullName: Argotic.Extensions.Core.YahooMediaText
+- uid: Argotic.Extensions.Core.YahooMediaContent.TextSeries*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.TextSeries
+  name: TextSeries
+  nameWithType: YahooMediaContent.TextSeries
+  fullName: Argotic.Extensions.Core.YahooMediaContent.TextSeries
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: TextSeries
+  nameWithType: IYahooMediaCommonObjectEntities.TextSeries
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.TextSeries
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaText}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaText>
+  nameWithType: Collection<YahooMediaText>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaText>
+  nameWithType.vb: Collection(Of YahooMediaText)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaText)
+  name.vb: Collection(Of YahooMediaText)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaText
+    name: YahooMediaText
+    nameWithType: YahooMediaText
+    fullName: Argotic.Extensions.Core.YahooMediaText
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaText
+    name: YahooMediaText
+    nameWithType: YahooMediaText
+    fullName: Argotic.Extensions.Core.YahooMediaText
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaThumbnail
+  commentId: T:Argotic.Extensions.Core.YahooMediaThumbnail
+  parent: Argotic.Extensions.Core
+  name: YahooMediaThumbnail
+  nameWithType: YahooMediaThumbnail
+  fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+- uid: Argotic.Extensions.Core.YahooMediaContent.Thumbnails*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+  name: Thumbnails
+  nameWithType: YahooMediaContent.Thumbnails
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Thumbnails
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Thumbnails
+  nameWithType: IYahooMediaCommonObjectEntities.Thumbnails
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Thumbnails
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.YahooMediaThumbnail}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<YahooMediaThumbnail>
+  nameWithType: Collection<YahooMediaThumbnail>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.YahooMediaThumbnail>
+  nameWithType.vb: Collection(Of YahooMediaThumbnail)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.YahooMediaThumbnail)
+  name.vb: Collection(Of YahooMediaThumbnail)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.YahooMediaThumbnail
+    name: YahooMediaThumbnail
+    nameWithType: YahooMediaThumbnail
+    fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.YahooMediaThumbnail
+    name: YahooMediaThumbnail
+    nameWithType: YahooMediaThumbnail
+    fullName: Argotic.Extensions.Core.YahooMediaThumbnail
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.Title*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Title
+  name: Title
+  nameWithType: YahooMediaContent.Title
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Title
+- uid: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  commentId: P:Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+  parent: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities
+  name: Title
+  nameWithType: IYahooMediaCommonObjectEntities.Title
+  fullName: Argotic.Extensions.Core.IYahooMediaCommonObjectEntities.Title
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.op_Equality
+  name: Equality
+  nameWithType: YahooMediaContent.Equality
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Equality
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.op_Inequality
+  name: Inequality
+  nameWithType: YahooMediaContent.Inequality
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Inequality
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.op_LessThan
+  name: LessThan
+  nameWithType: YahooMediaContent.LessThan
+  fullName: Argotic.Extensions.Core.YahooMediaContent.LessThan
+- uid: Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.op_GreaterThan
+  name: GreaterThan
+  nameWithType: YahooMediaContent.GreaterThan
+  fullName: Argotic.Extensions.Core.YahooMediaContent.GreaterThan
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaContent.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.CompareTo
+  name: CompareTo
+  nameWithType: YahooMediaContent.CompareTo
+  fullName: Argotic.Extensions.Core.YahooMediaContent.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.GetHashCode
+  name: GetHashCode
+  nameWithType: YahooMediaContent.GetHashCode
+  fullName: Argotic.Extensions.Core.YahooMediaContent.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.YahooMediaContent.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Load
+  name: Load
+  nameWithType: YahooMediaContent.Load
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaContent.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaContent.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaContent.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.ToString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.ToString
+  name: ToString
+  nameWithType: YahooMediaContent.ToString
+  fullName: Argotic.Extensions.Core.YahooMediaContent.ToString
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaContent.Equals*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaContent.Equals
+  name: Equals
+  nameWithType: YahooMediaContent.Equals
+  fullName: Argotic.Extensions.Core.YahooMediaContent.Equals

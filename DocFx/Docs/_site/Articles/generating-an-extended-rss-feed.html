@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to generate an extended Really Simple Syndication (RSS) syndication feed </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to generate an extended Really Simple Syndication (RSS) syndication feed ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-generate-an-extended-really-simple-syndication-rss-syndication-feed">How to generate an extended Really Simple Syndication (RSS) syndication feed</h1>
+
+<p>Common publishing formats such as Really Simple Syndication (RSS) and the Atom Syndication Format allow for the addition of information and meta-data that is outside the scope of the format specification through the use of syndication extensions. The framework provides an extensibility model for syndication resources (objects that implement the ISyndicationResource interface) that allows you to consume and include syndication extension information. For more information on how syndication extension support is implemented in the framework, see <a href="http://www.codeplex.com/Argotic/Wiki/View.aspx?title=Introduction%20to%20the%20framework%20extension%20architecture">Introduction to the framework extension architecture</a></p>
+<h2 id="generating-extended-syndicated-content">Generating extended syndicated content</h2>
+<p>The Argotic framework exposes the <em>AddExtension</em> method on all extensible entities, which allows you to add meta-data that is outside the scope of the format specification through the use of the <em>ISyndicationExtension</em> interface. Publishers may choose to create their own custom syndication extensions by implementing the <em>ISyndicationExtension</em> interface on their custom syndication extension class, or by inheriting from the <em>SyndicationExtension</em> base class. The framework provides native implementations of the most common syndication extensions in use by feed publishers, all of which can be found under the +Argotic.Extensions.Core+ namespace. For more information on the currently syndication extensions natively supported by the framework, see the [Overview of supported syndication extensions](./Overview of syndication extensions natively supported by the framework.md).</p>
+<pre><code>using Argotic.Extensions.Core;
+using Argotic.Syndication;
+
+RssFeed feed = new RssFeed(new Uri(&quot;http://example.com/feed.aspx&quot;), &quot;Simple extended syndication feed&quot;);
+feed.Channel.Description = &quot;An example of how to generate an extended syndication feed.&quot;;
+
+//  Create and add iTunes information to feed channel
+ITunesSyndicationExtension channelExtension = new ITunesSyndicationExtension();
+channelExtension.Context.Subtitle = &quot;This feed uses the iTunes syndication extension.&quot;;
+channelExtension.Context.ExplicitMaterial = ITunesExplicitMaterial.No;
+channelExtension.Context.Author = &quot;John Doe&quot;;
+channelExtension.Context.Summary = &quot;The Argotic syndication framework natively supports the iTunes syndication extension.&quot;;
+channelExtension.Context.Owner = new ITunesOwner(&quot;john.doe@example.com&quot;, &quot;John Q. Doe&quot;);
+channelExtension.Context.Image = new Uri(&quot;http://example.com.feed_logo.jpg&quot;);
+
+channelExtension.Context.Categories.Add(new ITunesCategory(&quot;Extensions&quot;));
+channelExtension.Context.Categories.Add(new ITunesCategory(&quot;iTunes&quot;));
+
+feed.Channel.AddExtension(channelExtension);
+
+//  Create and add iTunes information to channel item
+RssItem item = new RssItem();
+item.Title = &quot;My Extended Channel Item&quot;;
+item.Link = new Uri(&quot;http://example.com/posts/1234&quot;);
+item.PublicationDate = DateTime.Now;
+
+RssEnclosure enclosure = new RssEnclosure(47156978L, &quot;audio/mp3&quot;, new Uri(&quot;http://example.com/myPodcast.mp3&quot;));
+item.Enclosures.Add(enclosure);
+
+ITunesSyndicationExtension itemExtension = new ITunesSyndicationExtension();
+itemExtension.Context.Author = &quot;Jane Doe&quot;;
+itemExtension.Context.Subtitle = &quot;This channel item uses the iTunes syndication extension.&quot;;
+itemExtension.Context.Summary = &quot;The iTunes syndication extension properties that are used vary based on whether extending the channel or an item&quot;;
+itemExtension.Context.Duration = new TimeSpan(1, 2, 13);
+itemExtension.Context.Keywords.Add(&quot;Podcast&quot;);
+itemExtension.Context.Keywords.Add(&quot;iTunes&quot;);
+
+item.AddExtension(itemExtension);
+
+feed.Channel.AddItem(item);
+
+//  Persist extended feed
+using (FileStream stream = new FileStream(&quot;ExtendedFeed.rss.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    feed.Save(stream);
+}
+</code></pre>
+<p>The above example demonstrates how to generate an RSS feed that utilizes the <a href="http://www.apple.com/itunes/store/podcaststechspecs.html#rss">iTunes</a> syndication extension at both the feed channel and item level.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/generating-an-extended-rss-feed.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

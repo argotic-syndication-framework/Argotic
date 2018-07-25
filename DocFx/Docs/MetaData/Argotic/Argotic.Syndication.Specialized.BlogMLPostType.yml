@@ -1,0 +1,163 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.Specialized.BlogMLPostType
+  commentId: T:Argotic.Syndication.Specialized.BlogMLPostType
+  id: BlogMLPostType
+  parent: Argotic.Syndication.Specialized
+  children:
+  - Argotic.Syndication.Specialized.BlogMLPostType.Article
+  - Argotic.Syndication.Specialized.BlogMLPostType.None
+  - Argotic.Syndication.Specialized.BlogMLPostType.Normal
+  langs:
+  - csharp
+  - vb
+  name: BlogMLPostType
+  nameWithType: BlogMLPostType
+  fullName: Argotic.Syndication.Specialized.BlogMLPostType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogMLPostType
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nRepresents the permissible types of a web log post.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum BlogMLPostType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum BlogMLPostType
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Syndication.Specialized.BlogMLPostType.None
+  commentId: F:Argotic.Syndication.Specialized.BlogMLPostType.None
+  id: None
+  parent: Argotic.Syndication.Specialized.BlogMLPostType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: BlogMLPostType.None
+  fullName: Argotic.Syndication.Specialized.BlogMLPostType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nNo post type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLPostType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLPostType.Article
+  commentId: F:Argotic.Syndication.Specialized.BlogMLPostType.Article
+  id: Article
+  parent: Argotic.Syndication.Specialized.BlogMLPostType
+  langs:
+  - csharp
+  - vb
+  name: Article
+  nameWithType: BlogMLPostType.Article
+  fullName: Argotic.Syndication.Specialized.BlogMLPostType.Article
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Article
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the post represents an article.\n"
+  example: []
+  syntax:
+    content: Article = 1
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLPostType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLPostType.Normal
+  commentId: F:Argotic.Syndication.Specialized.BlogMLPostType.Normal
+  id: Normal
+  parent: Argotic.Syndication.Specialized.BlogMLPostType
+  langs:
+  - csharp
+  - vb
+  name: Normal
+  nameWithType: BlogMLPostType.Normal
+  fullName: Argotic.Syndication.Specialized.BlogMLPostType.Normal
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Normal
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLPostType.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the post represents web log entry.\n"
+  example: []
+  syntax:
+    content: Normal = 2
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLPostType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Syndication.Specialized
+  commentId: N:Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  nameWithType: Argotic.Syndication.Specialized
+  fullName: Argotic.Syndication.Specialized
+- uid: Argotic.Syndication.Specialized.BlogMLPostType
+  commentId: T:Argotic.Syndication.Specialized.BlogMLPostType
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLPostType
+  nameWithType: BlogMLPostType
+  fullName: Argotic.Syndication.Specialized.BlogMLPostType

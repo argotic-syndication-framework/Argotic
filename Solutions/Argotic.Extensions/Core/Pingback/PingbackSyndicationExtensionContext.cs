@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="PingbackSyndicationExtension"/>.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
-    [Serializable()]
+    [Serializable]
     public class PingbackSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the URL of the Pingback server.
         /// </summary>
         private Uri extensionServer;
+
         /// <summary>
         /// Private member to hold the value that should be used as the target in a ping.
         /// </summary>
         private Uri extensionTarget;
+
         /// <summary>
         /// Private member to hold the targets that were pinged in reference.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Argotic.Extensions.Core
         /// Gets the targets that were pinged in reference.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent targets that were pinged in reference. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent targets that were pinged in reference.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Abouts")]
@@ -47,11 +47,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionAbouts == null)
+                if (this.extensionAbouts == null)
                 {
-                    extensionAbouts = new Collection<Uri>();
+                    this.extensionAbouts = new Collection<Uri>();
                 }
-                return extensionAbouts;
+
+                return this.extensionAbouts;
             }
         }
 
@@ -64,13 +65,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionServer;
+                return this.extensionServer;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionServer = value;
+                this.extensionServer = value;
             }
         }
 
@@ -83,13 +84,13 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionTarget;
+                return this.extensionTarget;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                extensionTarget = value;
+                this.extensionTarget = value;
             }
         }
 
@@ -103,14 +104,14 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
 
             if (source.HasChildren)
             {
-                XPathNavigator serverNavigator  = source.SelectSingleNode("pingback:server", manager);
-                XPathNavigator targetNavigator  = source.SelectSingleNode("pingback:target", manager);
+                XPathNavigator serverNavigator = source.SelectSingleNode("pingback:server", manager);
+                XPathNavigator targetNavigator = source.SelectSingleNode("pingback:target", manager);
                 XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
 
                 if (serverNavigator != null)
@@ -119,7 +120,7 @@ namespace Argotic.Extensions.Core
                     if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out server))
                     {
                         this.Server = server;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
@@ -129,7 +130,7 @@ namespace Argotic.Extensions.Core
                     if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out target))
                     {
                         this.Target = target;
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
 
@@ -141,7 +142,7 @@ namespace Argotic.Extensions.Core
                         if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out about))
                         {
                             this.Abouts.Add(about);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -162,10 +163,10 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : String.Empty);
-            writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : String.Empty);
+            writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : string.Empty);
+            writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : string.Empty);
 
-            foreach(Uri about in this.Abouts)
+            foreach (Uri about in this.Abouts)
             {
                 if (about != null)
                 {

@@ -1,0 +1,173 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.RssCloudProtocol
+  commentId: T:Argotic.Syndication.RssCloudProtocol
+  id: RssCloudProtocol
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.RssCloudProtocol.None
+  - Argotic.Syndication.RssCloudProtocol.Soap
+  - Argotic.Syndication.RssCloudProtocol.XmlRpc
+  langs:
+  - csharp
+  - vb
+  name: RssCloudProtocol
+  nameWithType: RssCloudProtocol
+  fullName: Argotic.Syndication.RssCloudProtocol
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RssCloudProtocol
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+    startLine: 13
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents the message format utilized by a web service that implements the RssCloud application programming interface.\n"
+  remarks: "\nFor more information about the RssCloud application programming interface, see <a href=\"http://www.rssboard.org/rsscloud-interface\">http://www.rssboard.org/rsscloud-interface</a>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum RssCloudProtocol
+    content.vb: >-
+      <Serializable>
+
+      Public Enum RssCloudProtocol
+  seealso:
+  - linkId: Argotic.Syndication.RssCloud
+    commentId: T:Argotic.Syndication.RssCloud
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Syndication.RssCloudProtocol.None
+  commentId: F:Argotic.Syndication.RssCloudProtocol.None
+  id: None
+  parent: Argotic.Syndication.RssCloudProtocol
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: RssCloudProtocol.None
+  fullName: Argotic.Syndication.RssCloudProtocol.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+    startLine: 23
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nNo cloud protocol specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Syndication.RssCloudProtocol
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.RssCloudProtocol.Soap
+  commentId: F:Argotic.Syndication.RssCloudProtocol.Soap
+  id: Soap
+  parent: Argotic.Syndication.RssCloudProtocol
+  langs:
+  - csharp
+  - vb
+  name: Soap
+  nameWithType: RssCloudProtocol.Soap
+  fullName: Argotic.Syndication.RssCloudProtocol.Soap
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Soap
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+    startLine: 29
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nThe cloud notification web service utilizes SOAP 1.1 message exchange.\n"
+  example: []
+  syntax:
+    content: Soap = 1
+    return:
+      type: Argotic.Syndication.RssCloudProtocol
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.RssCloudProtocol.XmlRpc
+  commentId: F:Argotic.Syndication.RssCloudProtocol.XmlRpc
+  id: XmlRpc
+  parent: Argotic.Syndication.RssCloudProtocol
+  langs:
+  - csharp
+  - vb
+  name: XmlRpc
+  nameWithType: RssCloudProtocol.XmlRpc
+  fullName: Argotic.Syndication.RssCloudProtocol.XmlRpc
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlRpc
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssCloudProtocol.cs
+    startLine: 35
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nThe cloud notification web service utilizes XML-RPC message exchange.\n"
+  example: []
+  syntax:
+    content: XmlRpc = 2
+    return:
+      type: Argotic.Syndication.RssCloudProtocol
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Syndication.RssCloud
+  commentId: T:Argotic.Syndication.RssCloud
+  parent: Argotic.Syndication
+  name: RssCloud
+  nameWithType: RssCloud
+  fullName: Argotic.Syndication.RssCloud
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: Argotic.Syndication.RssCloudProtocol
+  commentId: T:Argotic.Syndication.RssCloudProtocol
+  parent: Argotic.Syndication
+  name: RssCloudProtocol
+  nameWithType: RssCloudProtocol
+  fullName: Argotic.Syndication.RssCloudProtocol

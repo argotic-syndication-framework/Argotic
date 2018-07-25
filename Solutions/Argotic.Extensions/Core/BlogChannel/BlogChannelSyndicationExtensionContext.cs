@@ -1,114 +1,53 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="BlogChannelSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class BlogChannelSyndicationExtensionContext
     {
-
-        /// <summary>
-        /// Private member to hold the URL of an OPML file containing the blogroll for the web site.
-        /// </summary>
-        private Uri extensionBlogRoll;
-        /// <summary>
-        /// Private member to hold the URL of an OPML file containing the author's feed subscriptions.
-        /// </summary>
-        private Uri extensionMySubscriptions;
-        /// <summary>
-        /// Private member to hold the URL of a weblog that the author is promoting.
-        /// </summary>
-        private Uri extensionBlink;
-        /// <summary>
-        /// Private member to hold the URL of the site's changes file.
-        /// </summary>
-        private Uri extensionChanges;
         /// <summary>
         /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtensionContext"/> class.
         /// </summary>
         public BlogChannelSyndicationExtensionContext()
         {
-
         }
+
         /// <summary>
         /// Gets or sets the URL of a weblog that the author is promoting.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of a weblog that the author is promoting.</value>
-        public Uri Blink
-        {
-            get
-            {
-                return extensionBlink;
-            }
-
-            set
-            {
-                extensionBlink = value;
-            }
-        }
+        public Uri Blink { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the blogroll for the web site.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the blogroll for the web site.</value>
-        public Uri BlogRoll
-        {
-            get
-            {
-                return extensionBlogRoll;
-            }
-
-            set
-            {
-                extensionBlogRoll = value;
-            }
-        }
+        public Uri BlogRoll { get; set; }
 
         /// <summary>
         /// Gets or sets the URL the web site's change tracking endpoint.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL the web site's change tracking endpoint.</value>
         /// <remarks>
-        ///     When a feed that contains this element updates, it pings a server that updates this file. 
-        ///     The presence of this element indicates to aggregators that they only have to read the changes file to see if this feed has updated. 
-        ///     If several feeds point to the same changes file, aggregators have to do less polling, resulting in better use of server bandwidth and faster scans. 
+        ///     When a feed that contains this element updates, it pings a server that updates this file.
+        ///     The presence of this element indicates to aggregators that they only have to read the changes file to see if this feed has updated.
+        ///     If several feeds point to the same changes file, aggregators have to do less polling, resulting in better use of server bandwidth and faster scans.
         ///     See <a href="http://www.xmlrpc.com/weblogsComForRss">http://www.xmlrpc.com/weblogsComForRss</a> for technical details.
         /// </remarks>
-        public Uri Changes
-        {
-            get
-            {
-                return extensionChanges;
-            }
-
-            set
-            {
-                extensionChanges = value;
-            }
-        }
+        public Uri Changes { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of an OPML file containing the author's feed subscriptions.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the author's feed subscriptions.</value>
-        public Uri MySubscriptions
-        {
-            get
-            {
-                return extensionMySubscriptions;
-            }
+        public Uri MySubscriptions { get; set; }
 
-            set
-            {
-                extensionMySubscriptions = value;
-            }
-        }
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -119,23 +58,23 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator blogRollNavigator        = source.SelectSingleNode("blogChannel:blogRoll", manager);
+                XPathNavigator blogRollNavigator = source.SelectSingleNode("blogChannel:blogRoll", manager);
                 XPathNavigator mySubscriptionsNavigator = source.SelectSingleNode("blogChannel:mySubscriptions", manager);
-                XPathNavigator blinkNavigator           = source.SelectSingleNode("blogChannel:blink", manager);
-                XPathNavigator changesNavigator         = source.SelectSingleNode("blogChannel:changes", manager);
+                XPathNavigator blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
+                XPathNavigator changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
 
                 if (blogRollNavigator != null)
                 {
                     Uri blogRoll;
                     if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out blogRoll))
                     {
-                        this.BlogRoll   = blogRoll;
-                        wasLoaded       = true;
+                        this.BlogRoll = blogRoll;
+                        wasLoaded = true;
                     }
                 }
 
@@ -144,8 +83,8 @@ namespace Argotic.Extensions.Core
                     Uri mySubscriptions;
                     if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out mySubscriptions))
                     {
-                        this.MySubscriptions    = mySubscriptions;
-                        wasLoaded               = true;
+                        this.MySubscriptions = mySubscriptions;
+                        wasLoaded = true;
                     }
                 }
 
@@ -154,8 +93,8 @@ namespace Argotic.Extensions.Core
                     Uri blink;
                     if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out blink))
                     {
-                        this.Blink  = blink;
-                        wasLoaded   = true;
+                        this.Blink = blink;
+                        wasLoaded = true;
                     }
                 }
 
@@ -164,8 +103,8 @@ namespace Argotic.Extensions.Core
                     Uri changes;
                     if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out changes))
                     {
-                        this.Changes    = changes;
-                        wasLoaded       = true;
+                        this.Changes = changes;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -185,7 +124,7 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.BlogRoll != null)
+            if (this.BlogRoll != null)
             {
                 writer.WriteElementString("blogRoll", xmlNamespace, this.BlogRoll.ToString());
             }

@@ -1,0 +1,1105 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class YahooMediaText
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class YahooMediaText
+   ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Extensions.Core.YahooMediaText">
+  
+  
+  <h1 id="Argotic_Extensions_Core_YahooMediaText" data-uid="Argotic.Extensions.Core.YahooMediaText" class="text-break">Class YahooMediaText
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a means of allowing the inclusion of a text transcript, closed captioning, or lyrics of the media content.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">YahooMediaText</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class YahooMediaText : IComparable</code></pre>
+  </div>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    Many of these <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects are permitted to provide a time series of text.
+    In such cases, it is encouraged, but not required, that the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects be grouped by language and appear in time sequence order based on the start time.
+<a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects can have overlapping start and end times.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText__ctor.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L51">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText__ctor_" data-uid="Argotic.Extensions.Core.YahooMediaText.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText__ctor" data-uid="Argotic.Extensions.Core.YahooMediaText.#ctor">YahooMediaText()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public YahooMediaText()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText__ctor_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L61">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText__ctor_" data-uid="Argotic.Extensions.Core.YahooMediaText.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText__ctor_System_String_" data-uid="Argotic.Extensions.Core.YahooMediaText.#ctor(System.String)">YahooMediaText(String)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> class using the supplied textual content.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public YahooMediaText(string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The text transcript, closed captioning, or lyrics for this media content.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_Content.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.Content%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L75">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_Content_" data-uid="Argotic.Extensions.Core.YahooMediaText.Content*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_Content" data-uid="Argotic.Extensions.Core.YahooMediaText.Content">Content</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the content of this embedded text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Content { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The text transcript, closed captioning, or lyrics for this media content.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_Content_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All HTML <strong>must</strong> be entity-encoded.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_End.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.End%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L101">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_End_" data-uid="Argotic.Extensions.Core.YahooMediaText.End*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_End" data-uid="Argotic.Extensions.Core.YahooMediaText.End">End</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the end time offset that this text stops being relevant to the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan End { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><p>A <span class="xref">System.TimeSpan</span> that represents the end time offset that this text stops being relevant to the media object.
+The default value is <span class="xref">System.TimeSpan.MinValue</span>, which indicates that no end time was specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_End_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this property is not provided, and a <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html#Argotic_Extensions_Core_YahooMediaText_Start">Start</a> is used,
+it is expected that the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html#Argotic_Extensions_Core_YahooMediaText_End">End</a> is either the end of the clip or the start of the next <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> object.</p>
+</div>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_End_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html#Argotic_Extensions_Core_YahooMediaText_Start">Start</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_Language.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.Language%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L126">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_Language_" data-uid="Argotic.Extensions.Core.YahooMediaText.Language*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_Language" data-uid="Argotic.Extensions.Core.YahooMediaText.Language">Language</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the primary language encapsulated in this media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CultureInfo Language { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the natural or formal language in which the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html#Argotic_Extensions_Core_YahooMediaText_Content">Content</a> is written.
+The default value is a <strong>null</strong> reference, which indicates no language was specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_Language_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_Start.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.Start%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L147">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_Start_" data-uid="Argotic.Extensions.Core.YahooMediaText.Start*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_Start" data-uid="Argotic.Extensions.Core.YahooMediaText.Start">Start</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the start time offset that this text starts being relevant to the media object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan Start { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><p>A <span class="xref">System.TimeSpan</span> that represents the start time offset that this text starts being relevant to the media object.
+The default value is <span class="xref">System.TimeSpan.MinValue</span>, which indicates that no start time was specified.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_Start_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html#Argotic_Extensions_Core_YahooMediaText_End">End</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_TextType.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.TextType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L170">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_TextType_" data-uid="Argotic.Extensions.Core.YahooMediaText.TextType*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_TextType" data-uid="Argotic.Extensions.Core.YahooMediaText.TextType">TextType</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the entity encoding utilized by this embedded text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public YahooMediaTextConstructType TextType { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a></td>
+        <td><p>An <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstruct.html">YahooMediaTextConstruct</a> enumeration value that represents the entity encoding utilized by this embedded text.
+The default value is <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html#Argotic_Extensions_Core_YahooMediaTextConstructType_None">None</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_TextType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If no entity encoding is specified, a default value of <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html#Argotic_Extensions_Core_YahooMediaTextConstructType_Plain">Plain</a> can be assumed.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L470">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_CompareTo_" data-uid="Argotic.Extensions.Core.YahooMediaText.CompareTo*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_CompareTo_System_Object_" data-uid="Argotic.Extensions.Core.YahooMediaText.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L504">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_Equals_" data-uid="Argotic.Extensions.Core.YahooMediaText.Equals*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_Equals_System_Object_" data-uid="Argotic.Extensions.Core.YahooMediaText.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L518">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_GetHashCode_" data-uid="Argotic.Extensions.Core.YahooMediaText.GetHashCode*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_GetHashCode" data-uid="Argotic.Extensions.Core.YahooMediaText.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L330">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_Load_" data-uid="Argotic.Extensions.Core.YahooMediaText.Load*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaText.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_TextTypeAsString_Argotic_Extensions_Core_YahooMediaTextConstructType_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.TextTypeAsString(Argotic.Extensions.Core.YahooMediaTextConstructType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L259">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_TextTypeAsString_" data-uid="Argotic.Extensions.Core.YahooMediaText.TextTypeAsString*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_TextTypeAsString_Argotic_Extensions_Core_YahooMediaTextConstructType_" data-uid="Argotic.Extensions.Core.YahooMediaText.TextTypeAsString(Argotic.Extensions.Core.YahooMediaTextConstructType)">TextTypeAsString(YahooMediaTextConstructType)</h4>
+  <div class="markdown level1 summary"><p>Returns the entity encoding type identifier for the supplied <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string TextTypeAsString(YahooMediaTextConstructType type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a> to get the entity encoding type identifier for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The entity encoding type identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">type</code>, otherwise returns an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_TextTypeByName_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.TextTypeByName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L294">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_TextTypeByName_" data-uid="Argotic.Extensions.Core.YahooMediaText.TextTypeByName*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_TextTypeByName_System_String_" data-uid="Argotic.Extensions.Core.YahooMediaText.TextTypeByName(System.String)">TextTypeByName(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a> enumeration value that corresponds to the specified entity encoding type name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static YahooMediaTextConstructType TextTypeByName(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the entity encoding type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.YahooMediaTextConstructType.html">YahooMediaTextConstructType</a> enumeration value that corresponds to the specified string, otherwise returns <strong>YahooMediaTextConstructType.None</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_TextTypeByName_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method disregards case of specified entity encoding type name.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L441">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_ToString_" data-uid="Argotic.Extensions.Core.YahooMediaText.ToString*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_ToString" data-uid="Argotic.Extensions.Core.YahooMediaText.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h5 id="Argotic_Extensions_Core_YahooMediaText_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L400">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_WriteTo_" data-uid="Argotic.Extensions.Core.YahooMediaText.WriteTo*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaText.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_op_Equality_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.op_Equality(Argotic.Extensions.Core.YahooMediaText%2CArgotic.Extensions.Core.YahooMediaText)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L189">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_op_Equality_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_Equality*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_op_Equality_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_Equality(Argotic.Extensions.Core.YahooMediaText,Argotic.Extensions.Core.YahooMediaText)">Equality(YahooMediaText, YahooMediaText)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(YahooMediaText first, YahooMediaText second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_op_GreaterThan_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.op_GreaterThan(Argotic.Extensions.Core.YahooMediaText%2CArgotic.Extensions.Core.YahooMediaText)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L240">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_op_GreaterThan_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_GreaterThan*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_op_GreaterThan_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_GreaterThan(Argotic.Extensions.Core.YahooMediaText,Argotic.Extensions.Core.YahooMediaText)">GreaterThan(YahooMediaText, YahooMediaText)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(YahooMediaText first, YahooMediaText second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_op_Inequality_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.op_Inequality(Argotic.Extensions.Core.YahooMediaText%2CArgotic.Extensions.Core.YahooMediaText)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L209">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_op_Inequality_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_Inequality*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_op_Inequality_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_Inequality(Argotic.Extensions.Core.YahooMediaText,Argotic.Extensions.Core.YahooMediaText)">Inequality(YahooMediaText, YahooMediaText)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(YahooMediaText first, YahooMediaText second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText_op_LessThan_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText.op_LessThan(Argotic.Extensions.Core.YahooMediaText%2CArgotic.Extensions.Core.YahooMediaText)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L220">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_YahooMediaText_op_LessThan_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_LessThan*"></a>
+  <h4 id="Argotic_Extensions_Core_YahooMediaText_op_LessThan_Argotic_Extensions_Core_YahooMediaText_Argotic_Extensions_Core_YahooMediaText_" data-uid="Argotic.Extensions.Core.YahooMediaText.op_LessThan(Argotic.Extensions.Core.YahooMediaText,Argotic.Extensions.Core.YahooMediaText)">LessThan(YahooMediaText, YahooMediaText)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(YahooMediaText first, YahooMediaText second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/feature/DocFx/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaText.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaText.cs/#L20" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

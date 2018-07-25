@@ -1,0 +1,1146 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.XmlRpcStructureMember
+  commentId: T:Argotic.Net.XmlRpcStructureMember
+  id: XmlRpcStructureMember
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.XmlRpcStructureMember.#ctor
+  - Argotic.Net.XmlRpcStructureMember.#ctor(System.String,Argotic.Net.IXmlRpcValue)
+  - Argotic.Net.XmlRpcStructureMember.CompareTo(System.Object)
+  - Argotic.Net.XmlRpcStructureMember.Equals(System.Object)
+  - Argotic.Net.XmlRpcStructureMember.GetHashCode
+  - Argotic.Net.XmlRpcStructureMember.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Net.XmlRpcStructureMember.Name
+  - Argotic.Net.XmlRpcStructureMember.op_Equality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  - Argotic.Net.XmlRpcStructureMember.op_GreaterThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  - Argotic.Net.XmlRpcStructureMember.op_Inequality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  - Argotic.Net.XmlRpcStructureMember.op_LessThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  - Argotic.Net.XmlRpcStructureMember.ToString
+  - Argotic.Net.XmlRpcStructureMember.Value
+  - Argotic.Net.XmlRpcStructureMember.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcStructureMember
+  nameWithType: XmlRpcStructureMember
+  fullName: Argotic.Net.XmlRpcStructureMember
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlRpcStructureMember
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nRepresents a structured list member.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class XmlRpcStructureMember : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class XmlRpcStructureMember
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Net.XmlRpcStructureMember.#ctor
+  commentId: M:Argotic.Net.XmlRpcStructureMember.#ctor
+  id: '#ctor'
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcStructureMember()
+  nameWithType: XmlRpcStructureMember.XmlRpcStructureMember()
+  fullName: Argotic.Net.XmlRpcStructureMember.XmlRpcStructureMember()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public XmlRpcStructureMember()
+    content.vb: Public Sub New
+  overload: Argotic.Net.XmlRpcStructureMember.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.#ctor(System.String,Argotic.Net.IXmlRpcValue)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.#ctor(System.String,Argotic.Net.IXmlRpcValue)
+  id: '#ctor(System.String,Argotic.Net.IXmlRpcValue)'
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcStructureMember(String, IXmlRpcValue)
+  nameWithType: XmlRpcStructureMember.XmlRpcStructureMember(String, IXmlRpcValue)
+  fullName: Argotic.Net.XmlRpcStructureMember.XmlRpcStructureMember(System.String, Argotic.Net.IXmlRpcValue)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref> class using the specified name and value.\n"
+  example: []
+  syntax:
+    content: public XmlRpcStructureMember(string name, IXmlRpcValue value)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of this structure member.
+    - id: value
+      type: Argotic.Net.IXmlRpcValue
+      description: An object that implements the <xref href="Argotic.Net.IXmlRpcValue" data-throw-if-not-resolved="false"></xref> interface that represents the value of this structure member.
+    content.vb: Public Sub New(name As String, value As IXmlRpcValue)
+  overload: Argotic.Net.XmlRpcStructureMember.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.Name
+  commentId: P:Argotic.Net.XmlRpcStructureMember.Name
+  id: Name
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: XmlRpcStructureMember.Name
+  fullName: Argotic.Net.XmlRpcStructureMember.Name
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Name
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 52
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the name of this structure member.\n"
+  example: []
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name of this structure member.
+    content.vb: Public Property Name As String
+  overload: Argotic.Net.XmlRpcStructureMember.Name*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.Value
+  commentId: P:Argotic.Net.XmlRpcStructureMember.Value
+  id: Value
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: XmlRpcStructureMember.Value
+  fullName: Argotic.Net.XmlRpcStructureMember.Value
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Value
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 71
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nGets or sets the value of this structure member.\n"
+  example: []
+  syntax:
+    content: public IXmlRpcValue Value { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Net.IXmlRpcValue
+      description: An object that implements the <xref href="Argotic.Net.IXmlRpcValue" data-throw-if-not-resolved="false"></xref> interface that represents the value of this structure member.
+    content.vb: Public Property Value As IXmlRpcValue
+  overload: Argotic.Net.XmlRpcStructureMember.Value*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.op_Equality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.op_Equality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  id: op_Equality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Equality(XmlRpcStructureMember, XmlRpcStructureMember)
+  nameWithType: XmlRpcStructureMember.Equality(XmlRpcStructureMember, XmlRpcStructureMember)
+  fullName: Argotic.Net.XmlRpcStructureMember.Equality(Argotic.Net.XmlRpcStructureMember, Argotic.Net.XmlRpcStructureMember)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 91
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(XmlRpcStructureMember first, XmlRpcStructureMember second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As XmlRpcStructureMember, second As XmlRpcStructureMember) As Boolean
+  overload: Argotic.Net.XmlRpcStructureMember.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcStructureMember.op_GreaterThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.op_GreaterThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  id: op_GreaterThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(XmlRpcStructureMember, XmlRpcStructureMember)
+  nameWithType: XmlRpcStructureMember.GreaterThan(XmlRpcStructureMember, XmlRpcStructureMember)
+  fullName: Argotic.Net.XmlRpcStructureMember.GreaterThan(Argotic.Net.XmlRpcStructureMember, Argotic.Net.XmlRpcStructureMember)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(XmlRpcStructureMember first, XmlRpcStructureMember second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As XmlRpcStructureMember, second As XmlRpcStructureMember) As Boolean
+  overload: Argotic.Net.XmlRpcStructureMember.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcStructureMember.op_Inequality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.op_Inequality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  id: op_Inequality(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Inequality(XmlRpcStructureMember, XmlRpcStructureMember)
+  nameWithType: XmlRpcStructureMember.Inequality(XmlRpcStructureMember, XmlRpcStructureMember)
+  fullName: Argotic.Net.XmlRpcStructureMember.Inequality(Argotic.Net.XmlRpcStructureMember, Argotic.Net.XmlRpcStructureMember)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 133
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(XmlRpcStructureMember first, XmlRpcStructureMember second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As XmlRpcStructureMember, second As XmlRpcStructureMember) As Boolean
+  overload: Argotic.Net.XmlRpcStructureMember.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcStructureMember.op_LessThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.op_LessThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  id: op_LessThan(Argotic.Net.XmlRpcStructureMember,Argotic.Net.XmlRpcStructureMember)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: LessThan(XmlRpcStructureMember, XmlRpcStructureMember)
+  nameWithType: XmlRpcStructureMember.LessThan(XmlRpcStructureMember, XmlRpcStructureMember)
+  fullName: Argotic.Net.XmlRpcStructureMember.LessThan(Argotic.Net.XmlRpcStructureMember, Argotic.Net.XmlRpcStructureMember)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 144
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(XmlRpcStructureMember first, XmlRpcStructureMember second)
+    parameters:
+    - id: first
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Net.XmlRpcStructureMember
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As XmlRpcStructureMember, second As XmlRpcStructureMember) As Boolean
+  overload: Argotic.Net.XmlRpcStructureMember.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Net.XmlRpcStructureMember.CompareTo(System.Object)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: XmlRpcStructureMember.CompareTo(Object)
+  fullName: Argotic.Net.XmlRpcStructureMember.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 165
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Net.XmlRpcStructureMember.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.Equals(System.Object)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: XmlRpcStructureMember.Equals(Object)
+  fullName: Argotic.Net.XmlRpcStructureMember.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 195
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Net.XmlRpcStructureMember.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.XmlRpcStructureMember.GetHashCode
+  commentId: M:Argotic.Net.XmlRpcStructureMember.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: XmlRpcStructureMember.GetHashCode()
+  fullName: Argotic.Net.XmlRpcStructureMember.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 209
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Net.XmlRpcStructureMember.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.XmlRpcStructureMember.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: XmlRpcStructureMember.Load(XPathNavigator)
+  fullName: Argotic.Net.XmlRpcStructureMember.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 225
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nLoads this <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>This method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Net.XmlRpcStructureMember" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Net.XmlRpcStructureMember.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Net.XmlRpcStructureMember.ToString
+  commentId: M:Argotic.Net.XmlRpcStructureMember.ToString
+  id: ToString
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: XmlRpcStructureMember.ToString()
+  fullName: Argotic.Net.XmlRpcStructureMember.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 263
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Net.XmlRpcStructureMember" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Net.XmlRpcStructureMember.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Net.XmlRpcStructureMember.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Net.XmlRpcStructureMember.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Net.XmlRpcStructureMember
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: XmlRpcStructureMember.WriteTo(XmlWriter)
+  fullName: Argotic.Net.XmlRpcStructureMember.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcStructureMember.cs
+    startLine: 291
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nSaves the current <xref href=\"Argotic.Net.XmlRpcStructureMember\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Net.XmlRpcStructureMember.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Net.XmlRpcStructureMember
+  commentId: T:Argotic.Net.XmlRpcStructureMember
+  parent: Argotic.Net
+  name: XmlRpcStructureMember
+  nameWithType: XmlRpcStructureMember
+  fullName: Argotic.Net.XmlRpcStructureMember
+- uid: Argotic.Net.XmlRpcStructureMember.#ctor*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.#ctor
+  name: XmlRpcStructureMember
+  nameWithType: XmlRpcStructureMember.XmlRpcStructureMember
+  fullName: Argotic.Net.XmlRpcStructureMember.XmlRpcStructureMember
+- uid: Argotic.Net.IXmlRpcValue
+  commentId: T:Argotic.Net.IXmlRpcValue
+  parent: Argotic.Net
+  name: IXmlRpcValue
+  nameWithType: IXmlRpcValue
+  fullName: Argotic.Net.IXmlRpcValue
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Net.XmlRpcStructureMember.Name*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.Name
+  name: Name
+  nameWithType: XmlRpcStructureMember.Name
+  fullName: Argotic.Net.XmlRpcStructureMember.Name
+- uid: Argotic.Net.XmlRpcStructureMember.Value*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.Value
+  name: Value
+  nameWithType: XmlRpcStructureMember.Value
+  fullName: Argotic.Net.XmlRpcStructureMember.Value
+- uid: Argotic.Net.XmlRpcStructureMember.op_Equality*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.op_Equality
+  name: Equality
+  nameWithType: XmlRpcStructureMember.Equality
+  fullName: Argotic.Net.XmlRpcStructureMember.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Net.XmlRpcStructureMember.op_GreaterThan*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.op_GreaterThan
+  name: GreaterThan
+  nameWithType: XmlRpcStructureMember.GreaterThan
+  fullName: Argotic.Net.XmlRpcStructureMember.GreaterThan
+- uid: Argotic.Net.XmlRpcStructureMember.op_Inequality*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.op_Inequality
+  name: Inequality
+  nameWithType: XmlRpcStructureMember.Inequality
+  fullName: Argotic.Net.XmlRpcStructureMember.Inequality
+- uid: Argotic.Net.XmlRpcStructureMember.op_LessThan*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.op_LessThan
+  name: LessThan
+  nameWithType: XmlRpcStructureMember.LessThan
+  fullName: Argotic.Net.XmlRpcStructureMember.LessThan
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Net.XmlRpcStructureMember.CompareTo*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.CompareTo
+  name: CompareTo
+  nameWithType: XmlRpcStructureMember.CompareTo
+  fullName: Argotic.Net.XmlRpcStructureMember.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcStructureMember.Equals*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.Equals
+  name: Equals
+  nameWithType: XmlRpcStructureMember.Equals
+  fullName: Argotic.Net.XmlRpcStructureMember.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcStructureMember.GetHashCode*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.GetHashCode
+  name: GetHashCode
+  nameWithType: XmlRpcStructureMember.GetHashCode
+  fullName: Argotic.Net.XmlRpcStructureMember.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Net.XmlRpcStructureMember.Load*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.Load
+  name: Load
+  nameWithType: XmlRpcStructureMember.Load
+  fullName: Argotic.Net.XmlRpcStructureMember.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Net.XmlRpcStructureMember.ToString*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.ToString
+  name: ToString
+  nameWithType: XmlRpcStructureMember.ToString
+  fullName: Argotic.Net.XmlRpcStructureMember.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Net.XmlRpcStructureMember.WriteTo*
+  commentId: Overload:Argotic.Net.XmlRpcStructureMember.WriteTo
+  name: WriteTo
+  nameWithType: XmlRpcStructureMember.WriteTo
+  fullName: Argotic.Net.XmlRpcStructureMember.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

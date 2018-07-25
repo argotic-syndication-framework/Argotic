@@ -1,63 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Extensions;
+
     /// <summary>
     /// Represents a discoverable application programming interface (API) that provides services to web log clients.
     /// </summary>
     /// <seealso cref="RsdDocument.Interfaces"/>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the RsdApplicationInterface class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdApplicationInterfaceExample.cs" 
-    ///             region="RsdApplicationInterface" 
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Rsd\RsdApplicationInterfaceExample.cs" region="RsdApplicationInterface" />
     ///     </code>
     /// </example>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-    [Serializable()]
+    [Serializable]
     public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     {
-        /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-        /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-        /// <summary>
-        /// Private member to hold the name of the application interface.
-        /// </summary>
-        private string interfaceName        = String.Empty;
-        /// <summary>
-        /// Private member to hold a value indicating if the application interface is preferred.
-        /// </summary>
-        private bool interfaceIsPreferred;
         /// <summary>
         /// Private member to hold the communication endpoint of the application interface.
         /// </summary>
         private Uri interfaceLink;
+
         /// <summary>
-        /// Private member to hold custom data that is passed to the application interface.
+        /// Private member to hold the name of the application interface.
         /// </summary>
-        private string interfaceWeblogId    = String.Empty;
-        /// <summary>
-        /// Private member to hold the location of the documentation for the application interface.
-        /// </summary>
-        private Uri interfaceDocumentation;
+        private string interfaceName = string.Empty;
+
         /// <summary>
         /// Private member to hold human readable text that explains the features and settings for the application interface.
         /// </summary>
-        private string interfaceNotes       = String.Empty;
+        private string interfaceNotes = string.Empty;
+
         /// <summary>
         /// Private member to hold service specific settings for the application interface.
         /// </summary>
         private Dictionary<string, string> interfaceSettings;
+
+        /// <summary>
+        /// Private member to hold custom data that is passed to the application interface.
+        /// </summary>
+        private string interfaceWeblogId = string.Empty;
+
+        /// <summary>
+        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
+        /// </summary>
+        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RsdApplicationInterface"/> class.
         /// </summary>
@@ -77,11 +72,18 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference (Nothing in Visual Basic).</exception>
         public RsdApplicationInterface(string name, Uri link, bool isPreferred, string weblogId)
         {
-            this.IsPreferred    = isPreferred;
-            this.Link           = link;
-            this.Name           = name;
-            this.WeblogId       = weblogId;
+            this.IsPreferred = isPreferred;
+            this.Link = link;
+            this.Name = name;
+            this.WeblogId = weblogId;
         }
+
+        /// <summary>
+        /// Gets or sets the location of the documentation for this application interface.
+        /// </summary>
+        /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
+        public Uri Documentation { get; set; }
+
         /// <summary>
         /// Gets or sets the syndication extensions applied to this syndication entity.
         /// </summary>
@@ -94,22 +96,18 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                if (objectSyndicationExtensions == null)
-                {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-                return objectSyndicationExtensions;
+                return this.objectSyndicationExtensions ?? (this.objectSyndicationExtensions = new Collection<ISyndicationExtension>());
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
+                this.objectSyndicationExtensions = value;
             }
         }
 
         /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+        /// Gets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
         /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
         public bool HasExtensions
@@ -119,39 +117,12 @@ namespace Argotic.Syndication.Specialized
                 return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
             }
         }
-        /// <summary>
-        /// Gets or sets the location of the documentation for this application interface.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
-        public Uri Documentation
-        {
-            get
-            {
-                return interfaceDocumentation;
-            }
-
-            set
-            {
-                interfaceDocumentation = value;
-            }
-        }
 
         /// <summary>
-        /// Gets or sets a value indicating if this application interface is preferred.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if this application interface is preferred.
         /// </summary>
         /// <value><b>true</b> if this application interface is the preferred service; otherwise <b>false</b>.</value>
-        public bool IsPreferred
-        {
-            get
-            {
-                return interfaceIsPreferred;
-            }
-
-            set
-            {
-                interfaceIsPreferred = value;
-            }
-        }
+        public bool IsPreferred { get; set; }
 
         /// <summary>
         /// Gets or sets the communication endpoint of this application interface.
@@ -162,13 +133,13 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                return interfaceLink;
+                return this.interfaceLink;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                interfaceLink = value;
+                this.interfaceLink = value;
             }
         }
 
@@ -208,13 +179,13 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                return interfaceName;
+                return this.interfaceName;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                interfaceName = value.Trim();
+                this.interfaceName = value.Trim();
             }
         }
 
@@ -226,19 +197,12 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                return interfaceNotes;
+                return this.interfaceNotes;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
-                {
-                    interfaceNotes = String.Empty;
-                }
-                else
-                {
-                    interfaceNotes = value.Trim();
-                }
+                this.interfaceNotes = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
         }
 
@@ -250,11 +214,7 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                if (interfaceSettings == null)
-                {
-                    interfaceSettings = new Dictionary<string, string>();
-                }
-                return interfaceSettings;
+                return this.interfaceSettings ?? (this.interfaceSettings = new Dictionary<string, string>());
             }
         }
 
@@ -266,20 +226,87 @@ namespace Argotic.Syndication.Specialized
         {
             get
             {
-                return interfaceWeblogId;
+                return this.interfaceWeblogId;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
-                {
-                    interfaceWeblogId = String.Empty;
-                }
-                else
-                {
-                    interfaceWeblogId = value.Trim();
-                }
+                this.interfaceWeblogId = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(RsdApplicationInterface first, RsdApplicationInterface second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(RsdApplicationInterface first, RsdApplicationInterface second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(RsdApplicationInterface first, RsdApplicationInterface second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(RsdApplicationInterface first, RsdApplicationInterface second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -290,12 +317,60 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
-            bool wasAdded   = false;
+            bool wasAdded = false;
+
             Guard.ArgumentNotNull(extension, "extension");
+
             ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
+            wasAdded = true;
 
             return wasAdded;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            RsdApplicationInterface value = obj as RsdApplicationInterface;
+
+            if (value != null)
+            {
+                int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | this.IsPreferred.CompareTo(value.IsPreferred);
+                result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
+                result = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
+                result = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RsdApplicationInterface))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
         }
 
         /// <summary>
@@ -306,8 +381,8 @@ namespace Argotic.Syndication.Specialized
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
@@ -319,25 +394,14 @@ namespace Argotic.Syndication.Specialized
         }
 
         /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+        /// Returns a hash code for the current instance.
         /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
         {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
-            }
+            char[] charArray = this.ToString().ToCharArray();
 
-            return wasRemoved;
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -351,86 +415,88 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source)
         {
-            bool wasLoaded              = false;
+            bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
+
             XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(source.NameTable);
+
             if (source.HasAttributes)
             {
-                string nameAttribute        = source.GetAttribute("name", String.Empty);
-                string preferredAttribute   = source.GetAttribute("preferred", String.Empty);
-                string apiLinkAttribute     = source.GetAttribute("apiLink", String.Empty);
-                string blogIdAttribute      = source.GetAttribute("blogID", String.Empty);
+                string nameAttribute = source.GetAttribute("name", string.Empty);
+                string preferredAttribute = source.GetAttribute("preferred", string.Empty);
+                string apiLinkAttribute = source.GetAttribute("apiLink", string.Empty);
+                string blogIdAttribute = source.GetAttribute("blogID", string.Empty);
 
-                if (!String.IsNullOrEmpty(nameAttribute))
+                if (!string.IsNullOrEmpty(nameAttribute))
                 {
-                    this.Name   = nameAttribute;
-                    wasLoaded   = true;
+                    this.Name = nameAttribute;
+                    wasLoaded = true;
                 }
 
-                if (!String.IsNullOrEmpty(preferredAttribute))
+                if (!string.IsNullOrEmpty(preferredAttribute))
                 {
                     bool isPreferred;
-                    if (Boolean.TryParse(preferredAttribute, out isPreferred))
+                    if (bool.TryParse(preferredAttribute, out isPreferred))
                     {
-                        this.IsPreferred    = isPreferred;
-                        wasLoaded           = true;
+                        this.IsPreferred = isPreferred;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(apiLinkAttribute))
+                if (!string.IsNullOrEmpty(apiLinkAttribute))
                 {
                     Uri link;
                     if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out link))
                     {
-                        this.Link   = link;
-                        wasLoaded   = true;
+                        this.Link = link;
+                        wasLoaded = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(blogIdAttribute))
+                if (!string.IsNullOrEmpty(blogIdAttribute))
                 {
-                    this.WeblogId   = blogIdAttribute;
-                    wasLoaded       = true;
+                    this.WeblogId = blogIdAttribute;
+                    wasLoaded = true;
                 }
             }
 
             if (source.HasChildren)
             {
-                XPathNavigator settingsNavigator        = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+                XPathNavigator settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
                 if (settingsNavigator != null)
                 {
-                    XPathNavigator docsNavigator        = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
-                    XPathNavigator notesNavigator       = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
-                    XPathNodeIterator settingIterator   = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
+                    XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
+                    XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
+                    XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
                     if (docsNavigator != null)
                     {
-                        Uri documentation;
-                        if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out documentation))
+                        if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out var documentation))
                         {
-                            this.Documentation  = documentation;
-                            wasLoaded           = true;
+                            this.Documentation = documentation;
+                            wasLoaded = true;
                         }
                     }
 
                     if (notesNavigator != null)
                     {
-                        this.Notes  = notesNavigator.Value;
-                        wasLoaded   = true;
+                        this.Notes = notesNavigator.Value;
+                        wasLoaded = true;
                     }
 
                     if (settingIterator != null && settingIterator.Count > 0)
                     {
                         while (settingIterator.MoveNext())
                         {
-                            string settingName  = settingIterator.Current.GetAttribute("name", String.Empty);
+                            string settingName = settingIterator.Current.GetAttribute("name", string.Empty);
                             string settingValue = settingIterator.Current.Value;
 
-                            if(!this.Settings.ContainsKey(settingName))
+                            if (!this.Settings.ContainsKey(settingName))
                             {
                                 this.Settings.Add(settingName, settingValue);
-                                wasLoaded       = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -453,10 +519,12 @@ namespace Argotic.Syndication.Specialized
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
+
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
+
+            wasLoaded = this.Load(source);
             SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
             adapter.Fill(this);
 
@@ -464,66 +532,43 @@ namespace Argotic.Syndication.Specialized
         }
 
         /// <summary>
-        /// Saves the current <see cref="RsdApplicationInterface"/> to the specified <see cref="XmlWriter"/>.
+        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
+        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool RemoveExtension(ISyndicationExtension extension)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("api", RsdUtility.RsdNamespace);
+            bool wasRemoved = false;
 
-            writer.WriteAttributeString("name", this.Name);
-            writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
-            writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : String.Empty);
-            writer.WriteAttributeString("blogID", this.WeblogId);
+            Guard.ArgumentNotNull(extension, "extension");
 
-            if(this.Documentation != null || !String.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
+            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
             {
-                writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
-
-                if (this.Documentation != null)
-                {
-                    writer.WriteElementString("docs", RsdUtility.RsdNamespace, this.Documentation.ToString());
-                }
-
-                if (!String.IsNullOrEmpty(this.Notes))
-                {
-                    writer.WriteElementString("notes", RsdUtility.RsdNamespace, this.Notes);
-                }
-
-                foreach(string settingName in this.Settings.Keys)
-                {
-                    writer.WriteStartElement("setting", RsdUtility.RsdNamespace);
-                    writer.WriteAttributeString("name", settingName);
-                    writer.WriteString(this.Settings[settingName]);
-                    writer.WriteEndElement();
-                }
-
-                writer.WriteEndElement();
+                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
+                wasRemoved = true;
             }
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
-            writer.WriteEndElement();
+            return wasRemoved;
         }
 
         /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
         /// <remarks>
         ///     This method returns the XML representation for the current instance.
         /// </remarks>
         public override string ToString()
         {
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
+                XmlWriterSettings settings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment, Indent = true, OmitXmlDeclaration = true };
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     this.WriteTo(writer);
                 }
@@ -538,132 +583,48 @@ namespace Argotic.Syndication.Specialized
         }
 
         /// <summary>
-        /// Compares the current instance with another object of the same type.
+        /// Saves the current <see cref="RsdApplicationInterface"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
         {
-            if (obj == null)
-            {
-                return 1;
-            }
-            RsdApplicationInterface value  = obj as RsdApplicationInterface;
+            Guard.ArgumentNotNull(writer, "writer");
 
-            if (value != null)
-            {
-                int result  = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | this.IsPreferred.CompareTo(value.IsPreferred);
-                result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-                result      = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-                result      = result | String.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+            writer.WriteStartElement("api", RsdUtility.RsdNamespace);
+            writer.WriteAttributeString("name", this.Name);
+            writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
+            writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);
+            writer.WriteAttributeString("blogID", this.WeblogId);
 
-                return result;
-            }
-            else
+            if (this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
+                writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
 
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is RsdApplicationInterface))
-            {
-                return false;
+                if (this.Documentation != null)
+                {
+                    writer.WriteElementString("docs", RsdUtility.RsdNamespace, this.Documentation.ToString());
+                }
+
+                if (!string.IsNullOrEmpty(this.Notes))
+                {
+                    writer.WriteElementString("notes", RsdUtility.RsdNamespace, this.Notes);
+                }
+
+                foreach (string settingName in this.Settings.Keys)
+                {
+                    writer.WriteStartElement("setting", RsdUtility.RsdNamespace);
+                    writer.WriteAttributeString("name", settingName);
+                    writer.WriteString(this.Settings[settingName]);
+                    writer.WriteEndElement();
+                }
+
+                writer.WriteEndElement();
             }
 
-            return (this.CompareTo(obj) == 0);
-        }
+            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(RsdApplicationInterface first, RsdApplicationInterface second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(RsdApplicationInterface first, RsdApplicationInterface second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(RsdApplicationInterface first, RsdApplicationInterface second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(RsdApplicationInterface first, RsdApplicationInterface second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
+            writer.WriteEndElement();
         }
     }
 }

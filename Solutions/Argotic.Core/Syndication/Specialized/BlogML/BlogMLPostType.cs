@@ -1,20 +1,20 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Syndication.Specialized
+﻿namespace Argotic.Syndication.Specialized
 {
+    using System;
+
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the permissible types of a web log post.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public enum BlogMLPostType
     {
         /// <summary>
         /// No post type specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
         /// Indicates that the post represents an article.
@@ -26,6 +26,6 @@ namespace Argotic.Syndication.Specialized
         /// Indicates that the post represents web log entry.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Normal", AlternateValue = "normal")]
-        Normal  = 2
+        Normal = 2,
     }
 }

@@ -1,0 +1,1835 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.Specialized.ApmlApplication
+  commentId: T:Argotic.Syndication.Specialized.ApmlApplication
+  id: ApmlApplication
+  parent: Argotic.Syndication.Specialized
+  children:
+  - Argotic.Syndication.Specialized.ApmlApplication.#ctor
+  - Argotic.Syndication.Specialized.ApmlApplication.#ctor(System.String)
+  - Argotic.Syndication.Specialized.ApmlApplication.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.Specialized.ApmlApplication.CompareTo(System.Object)
+  - Argotic.Syndication.Specialized.ApmlApplication.Data
+  - Argotic.Syndication.Specialized.ApmlApplication.Equals(System.Object)
+  - Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  - Argotic.Syndication.Specialized.ApmlApplication.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Syndication.Specialized.ApmlApplication.GetHashCode
+  - Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+  - Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.Specialized.ApmlApplication.Name
+  - Argotic.Syndication.Specialized.ApmlApplication.op_Equality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  - Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  - Argotic.Syndication.Specialized.ApmlApplication.op_Inequality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  - Argotic.Syndication.Specialized.ApmlApplication.op_LessThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  - Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.Specialized.ApmlApplication.ToString
+  - Argotic.Syndication.Specialized.ApmlApplication.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: ApmlApplication
+  nameWithType: ApmlApplication
+  fullName: Argotic.Syndication.Specialized.ApmlApplication
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ApmlApplication
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nRepresents a product or service data that can be associated to an <xref href=\"Argotic.Syndication.Specialized.ApmlDocument\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Apml\\ApmlApplicationExample.cs\" region=\"ApmlApplication\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ApmlApplication : IComparable, IExtensibleSyndicationObject
+    content.vb: >-
+      <Serializable>
+
+      Public Class ApmlApplication
+
+          Implements IComparable, IExtensibleSyndicationObject
+  seealso:
+  - linkId: Argotic.Syndication.Specialized.ApmlDocument.Applications
+    commentId: P:Argotic.Syndication.Specialized.ApmlDocument.Applications
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Syndication.Specialized.ApmlApplication.#ctor
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.#ctor
+  id: '#ctor'
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: ApmlApplication()
+  nameWithType: ApmlApplication.ApmlApplication()
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.ApmlApplication()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 43
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public ApmlApplication()
+    content.vb: Public Sub New
+  overload: Argotic.Syndication.Specialized.ApmlApplication.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.#ctor(System.String)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: ApmlApplication(String)
+  nameWithType: ApmlApplication.ApmlApplication(String)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.ApmlApplication(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 53
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied name.\n"
+  example: []
+  syntax:
+    content: public ApmlApplication(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The unique name for this application.
+    content.vb: Public Sub New(name As String)
+  overload: Argotic.Syndication.Specialized.ApmlApplication.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Data
+  commentId: P:Argotic.Syndication.Specialized.ApmlApplication.Data
+  id: Data
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Data
+  nameWithType: ApmlApplication.Data
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Data
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Data
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 65
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the textual data of this application.\n"
+  remarks: "\nApplication data <em>may</em> be entity encoded (HTML, XHTML, XML) content.\n"
+  example: []
+  syntax:
+    content: public string Data { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The textual content that represents the data payload for this application.
+    content.vb: Public Property Data As String
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Data*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  commentId: P:Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  id: Extensions
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: ApmlApplication.Extensions
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 86
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+  commentId: P:Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: ApmlApplication.HasExtensions
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.Specialized.ApmlApplication.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Name
+  commentId: P:Argotic.Syndication.Specialized.ApmlApplication.Name
+  id: Name
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: ApmlApplication.Name
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Name
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Name
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 118
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nGets or sets the unique name for this application.\n"
+  example: []
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The unique name for this application.
+    content.vb: Public Property Name As String
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Name*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_Equality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.op_Equality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  id: op_Equality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Equality(ApmlApplication, ApmlApplication)
+  nameWithType: ApmlApplication.Equality(ApmlApplication, ApmlApplication)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Equality(Argotic.Syndication.Specialized.ApmlApplication, Argotic.Syndication.Specialized.ApmlApplication)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 138
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(ApmlApplication first, ApmlApplication second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As ApmlApplication, second As ApmlApplication) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  id: op_GreaterThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(ApmlApplication, ApmlApplication)
+  nameWithType: ApmlApplication.GreaterThan(ApmlApplication, ApmlApplication)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.GreaterThan(Argotic.Syndication.Specialized.ApmlApplication, Argotic.Syndication.Specialized.ApmlApplication)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 159
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(ApmlApplication first, ApmlApplication second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As ApmlApplication, second As ApmlApplication) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_Inequality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.op_Inequality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  id: op_Inequality(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Inequality(ApmlApplication, ApmlApplication)
+  nameWithType: ApmlApplication.Inequality(ApmlApplication, ApmlApplication)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Inequality(Argotic.Syndication.Specialized.ApmlApplication, Argotic.Syndication.Specialized.ApmlApplication)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 180
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(ApmlApplication first, ApmlApplication second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As ApmlApplication, second As ApmlApplication) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_LessThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.op_LessThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  id: op_LessThan(Argotic.Syndication.Specialized.ApmlApplication,Argotic.Syndication.Specialized.ApmlApplication)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: LessThan(ApmlApplication, ApmlApplication)
+  nameWithType: ApmlApplication.LessThan(ApmlApplication, ApmlApplication)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.LessThan(Argotic.Syndication.Specialized.ApmlApplication, Argotic.Syndication.Specialized.ApmlApplication)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 191
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(ApmlApplication first, ApmlApplication second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.Specialized.ApmlApplication
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As ApmlApplication, second As ApmlApplication) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.Specialized.ApmlApplication.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: ApmlApplication.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 212
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.CompareTo(System.Object)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: ApmlApplication.CompareTo(Object)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 230
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Syndication.Specialized.ApmlApplication.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Equals(System.Object)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: ApmlApplication.Equals(Object)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 261
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.Specialized.ApmlApplication.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: ApmlApplication.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 284
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Syndication.Specialized.ApmlApplication.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Syndication.Specialized.ApmlApplication.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Syndication.Specialized.ApmlApplication.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Syndication.Specialized.ApmlApplication.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: ApmlApplication.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Syndication.Specialized.ApmlApplication.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Syndication.Specialized.ApmlApplication.GetHashCode
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: ApmlApplication.GetHashCode()
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 297
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Syndication.Specialized.ApmlApplication.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: ApmlApplication.Load(XPathNavigator)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 313
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.Specialized.ApmlApplication" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: ApmlApplication.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 350
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.Specialized.ApmlApplication" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: ApmlApplication.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 373
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Syndication.Specialized.ApmlApplication.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.Specialized.ApmlApplication.ToString
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.ToString
+  id: ToString
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: ApmlApplication.ToString()
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 395
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Syndication.Specialized.ApmlApplication" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Syndication.Specialized.ApmlApplication.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.Specialized.ApmlApplication.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Syndication.Specialized.ApmlApplication.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Syndication.Specialized.ApmlApplication
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: ApmlApplication.WriteTo(XmlWriter)
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/Apml/ApmlApplication.cs
+    startLine: 420
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nSaves the current <xref href=\"Argotic.Syndication.Specialized.ApmlApplication\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Syndication.Specialized.ApmlApplication.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Syndication.Specialized.ApmlDocument
+  commentId: T:Argotic.Syndication.Specialized.ApmlDocument
+  parent: Argotic.Syndication.Specialized
+  name: ApmlDocument
+  nameWithType: ApmlDocument
+  fullName: Argotic.Syndication.Specialized.ApmlDocument
+- uid: Argotic.Syndication.Specialized.ApmlDocument.Applications
+  commentId: P:Argotic.Syndication.Specialized.ApmlDocument.Applications
+  isExternal: true
+- uid: Argotic.Syndication.Specialized
+  commentId: N:Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  nameWithType: Argotic.Syndication.Specialized
+  fullName: Argotic.Syndication.Specialized
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Syndication.Specialized.ApmlApplication
+  commentId: T:Argotic.Syndication.Specialized.ApmlApplication
+  parent: Argotic.Syndication.Specialized
+  name: ApmlApplication
+  nameWithType: ApmlApplication
+  fullName: Argotic.Syndication.Specialized.ApmlApplication
+- uid: Argotic.Syndication.Specialized.ApmlApplication.#ctor*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.#ctor
+  name: ApmlApplication
+  nameWithType: ApmlApplication.ApmlApplication
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.ApmlApplication
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Data*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.Data
+  name: Data
+  nameWithType: ApmlApplication.Data
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Data
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Extensions*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  name: Extensions
+  nameWithType: ApmlApplication.Extensions
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  commentId: P:Argotic.Syndication.Specialized.ApmlApplication.Extensions
+  isExternal: true
+- uid: Argotic.Syndication.Specialized.ApmlApplication.HasExtensions*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+  name: HasExtensions
+  nameWithType: ApmlApplication.HasExtensions
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Name*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.Name
+  name: Name
+  nameWithType: ApmlApplication.Name
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Name
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_Equality*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.op_Equality
+  name: Equality
+  nameWithType: ApmlApplication.Equality
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Equality
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.op_GreaterThan
+  name: GreaterThan
+  nameWithType: ApmlApplication.GreaterThan
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.GreaterThan
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_Inequality*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.op_Inequality
+  name: Inequality
+  nameWithType: ApmlApplication.Inequality
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Inequality
+- uid: Argotic.Syndication.Specialized.ApmlApplication.op_LessThan*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.op_LessThan
+  name: LessThan
+  nameWithType: ApmlApplication.LessThan
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.LessThan
+- uid: Argotic.Syndication.Specialized.ApmlApplication.AddExtension*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.AddExtension
+  name: AddExtension
+  nameWithType: ApmlApplication.AddExtension
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Syndication.Specialized.ApmlApplication.CompareTo*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.CompareTo
+  name: CompareTo
+  nameWithType: ApmlApplication.CompareTo
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Equals*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.Equals
+  name: Equals
+  nameWithType: ApmlApplication.Equals
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.Specialized.ApmlApplication.FindExtension*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.FindExtension
+  name: FindExtension
+  nameWithType: ApmlApplication.FindExtension
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.Specialized.ApmlApplication.GetHashCode*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.GetHashCode
+  name: GetHashCode
+  nameWithType: ApmlApplication.GetHashCode
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Syndication.Specialized.ApmlApplication.Load*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.Load
+  name: Load
+  nameWithType: ApmlApplication.Load
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension
+  name: RemoveExtension
+  nameWithType: ApmlApplication.RemoveExtension
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.Specialized.ApmlApplication.ToString*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.ToString
+  name: ToString
+  nameWithType: ApmlApplication.ToString
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Syndication.Specialized.ApmlApplication.WriteTo*
+  commentId: Overload:Argotic.Syndication.Specialized.ApmlApplication.WriteTo
+  name: WriteTo
+  nameWithType: ApmlApplication.WriteTo
+  fullName: Argotic.Syndication.Specialized.ApmlApplication.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

@@ -1,0 +1,2247 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.RssImage
+  commentId: T:Argotic.Syndication.RssImage
+  id: RssImage
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.RssImage.#ctor
+  - Argotic.Syndication.RssImage.#ctor(System.Uri,System.String,System.Uri)
+  - Argotic.Syndication.RssImage.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.RssImage.CompareTo(System.Object)
+  - Argotic.Syndication.RssImage.Description
+  - Argotic.Syndication.RssImage.Equals(System.Object)
+  - Argotic.Syndication.RssImage.Extensions
+  - Argotic.Syndication.RssImage.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Syndication.RssImage.GetHashCode
+  - Argotic.Syndication.RssImage.HasExtensions
+  - Argotic.Syndication.RssImage.Height
+  - Argotic.Syndication.RssImage.HeightDefault
+  - Argotic.Syndication.RssImage.HeightMaximum
+  - Argotic.Syndication.RssImage.Link
+  - Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.RssImage.op_Equality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  - Argotic.Syndication.RssImage.op_GreaterThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  - Argotic.Syndication.RssImage.op_Inequality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  - Argotic.Syndication.RssImage.op_LessThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  - Argotic.Syndication.RssImage.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.RssImage.Title
+  - Argotic.Syndication.RssImage.ToString
+  - Argotic.Syndication.RssImage.Url
+  - Argotic.Syndication.RssImage.Width
+  - Argotic.Syndication.RssImage.WidthDefault
+  - Argotic.Syndication.RssImage.WidthMaximum
+  - Argotic.Syndication.RssImage.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: RssImage
+  nameWithType: RssImage
+  fullName: Argotic.Syndication.RssImage
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RssImage
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRepresents a graphical logo for an <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Core\\Rss\\RssImageExample.cs\" region=\"RssImage\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class RssImage : IComparable, IExtensibleSyndicationObject
+    content.vb: >-
+      <Serializable>
+
+      Public Class RssImage
+
+          Implements IComparable, IExtensibleSyndicationObject
+  seealso:
+  - linkId: Argotic.Syndication.RssChannel.Image
+    commentId: P:Argotic.Syndication.RssChannel.Image
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Syndication.RssImage.#ctor
+  commentId: M:Argotic.Syndication.RssImage.#ctor
+  id: '#ctor'
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: RssImage()
+  nameWithType: RssImage.RssImage()
+  fullName: Argotic.Syndication.RssImage.RssImage()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 83
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public RssImage()
+    content.vb: Public Sub New
+  overload: Argotic.Syndication.RssImage.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.#ctor(System.Uri,System.String,System.Uri)
+  commentId: M:Argotic.Syndication.RssImage.#ctor(System.Uri,System.String,System.Uri)
+  id: '#ctor(System.Uri,System.String,System.Uri)'
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: RssImage(Uri, String, Uri)
+  nameWithType: RssImage.RssImage(Uri, String, Uri)
+  fullName: Argotic.Syndication.RssImage.RssImage(System.Uri, System.String, System.Uri)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 97
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied link, title, and url.\n"
+  example: []
+  syntax:
+    content: public RssImage(Uri link, string title, Uri url)
+    parameters:
+    - id: link
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the web site represented by this image.
+    - id: title
+      type: System.String
+      description: Character data that provides a human-readable description of this image.
+    - id: url
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of this image.
+    content.vb: Public Sub New(link As Uri, title As String, url As Uri)
+  overload: Argotic.Syndication.RssImage.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">link</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is an empty string.
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.HeightDefault
+  commentId: P:Argotic.Syndication.RssImage.HeightDefault
+  id: HeightDefault
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: HeightDefault
+  nameWithType: RssImage.HeightDefault
+  fullName: Argotic.Syndication.RssImage.HeightDefault
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HeightDefault
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 108
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the default height that should be assumed for images that do not explicitly define a height.\n"
+  example: []
+  syntax:
+    content: public static int HeightDefault { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The default height, in pixels, that should be assumed for images that do not explicitly define a height.
+    content.vb: Public Shared ReadOnly Property HeightDefault As Integer
+  overload: Argotic.Syndication.RssImage.HeightDefault*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Syndication.RssImage.HeightMaximum
+  commentId: P:Argotic.Syndication.RssImage.HeightMaximum
+  id: HeightMaximum
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: HeightMaximum
+  nameWithType: RssImage.HeightMaximum
+  fullName: Argotic.Syndication.RssImage.HeightMaximum
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HeightMaximum
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 114
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the maximum permissible height for an image.\n"
+  example: []
+  syntax:
+    content: public static int HeightMaximum { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The maximum permissible height, in pixels, for an image.
+    content.vb: Public Shared ReadOnly Property HeightMaximum As Integer
+  overload: Argotic.Syndication.RssImage.HeightMaximum*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Syndication.RssImage.WidthDefault
+  commentId: P:Argotic.Syndication.RssImage.WidthDefault
+  id: WidthDefault
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: WidthDefault
+  nameWithType: RssImage.WidthDefault
+  fullName: Argotic.Syndication.RssImage.WidthDefault
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WidthDefault
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 120
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the default width that should be assumed for images that do not explicitly define a width.\n"
+  example: []
+  syntax:
+    content: public static int WidthDefault { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The default width, in pixels, that should be assumed for images that do not explicitly define a width.
+    content.vb: Public Shared ReadOnly Property WidthDefault As Integer
+  overload: Argotic.Syndication.RssImage.WidthDefault*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Syndication.RssImage.WidthMaximum
+  commentId: P:Argotic.Syndication.RssImage.WidthMaximum
+  id: WidthMaximum
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: WidthMaximum
+  nameWithType: RssImage.WidthMaximum
+  fullName: Argotic.Syndication.RssImage.WidthMaximum
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WidthMaximum
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 126
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets the maximum permissible width for an image.\n"
+  example: []
+  syntax:
+    content: public static int WidthMaximum { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The maximum permissible width, in pixels, for an image.
+    content.vb: Public Shared ReadOnly Property WidthMaximum As Integer
+  overload: Argotic.Syndication.RssImage.WidthMaximum*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Syndication.RssImage.Description
+  commentId: P:Argotic.Syndication.RssImage.Description
+  id: Description
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: RssImage.Description
+  fullName: Argotic.Syndication.RssImage.Description
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Description
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 135
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets character data that provides a human-readable characterization of the site linked to this image.\n"
+  remarks: "\nThe value of this property <em>should</em> be suitable for use as the <em>title</em> attribute of the <strong>a</strong> tag in an HTML rendering.\n"
+  example: []
+  syntax:
+    content: public string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Character data that provides a human-readable characterization of the site linked to this image.
+    content.vb: Public Property Description As String
+  overload: Argotic.Syndication.RssImage.Description*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Extensions
+  commentId: P:Argotic.Syndication.RssImage.Extensions
+  id: Extensions
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: RssImage.Extensions
+  fullName: Argotic.Syndication.RssImage.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 156
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Syndication.RssImage.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.HasExtensions
+  commentId: P:Argotic.Syndication.RssImage.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: RssImage.HasExtensions
+  fullName: Argotic.Syndication.RssImage.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 174
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssImage.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Syndication.RssImage.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Syndication.RssImage.Height
+  commentId: P:Argotic.Syndication.RssImage.Height
+  id: Height
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: RssImage.Height
+  fullName: Argotic.Syndication.RssImage.Height
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Height
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 184
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the height of this image.\n"
+  remarks: "\nIf no height is specified for the image, the image is assumed to be 31 pixels tall.\n"
+  example: []
+  syntax:
+    content: public int Height { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The height, in pixels, of this image. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates no height was specified.
+    content.vb: Public Property Height As Integer
+  overload: Argotic.Syndication.RssImage.Height*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is greater than <em>400</em>.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Link
+  commentId: P:Argotic.Syndication.RssImage.Link
+  id: Link
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Link
+  nameWithType: RssImage.Link
+  fullName: Argotic.Syndication.RssImage.Link
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Link
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 206
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the URL of the web site represented by this image.\n"
+  remarks: "\nThe value of this property <em>should</em> be the same URL as the channel&apos;s <xref href=\"Argotic.Syndication.RssChannel.Link\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
+  example: []
+  syntax:
+    content: public Uri Link { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the web site represented by this image.
+    content.vb: Public Property Link As Uri
+  overload: Argotic.Syndication.RssImage.Link*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Title
+  commentId: P:Argotic.Syndication.RssImage.Title
+  id: Title
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: RssImage.Title
+  fullName: Argotic.Syndication.RssImage.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 230
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets character data that provides a human-readable description of this image.\n"
+  remarks: "\nThe value of this property <em>should</em> be the same as the channel&apos;s <xref href=\"Argotic.Syndication.RssChannel.Title\" data-throw-if-not-resolved=\"false\"></xref> property\nand be suitable for use as the <em>alt</em> attribute of the <strong>img</strong> tag in an HTML rendering.\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: Character data that provides a human-readable description of this image.
+    content.vb: Public Property Title As String
+  overload: Argotic.Syndication.RssImage.Title*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Url
+  commentId: P:Argotic.Syndication.RssImage.Url
+  id: Url
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: RssImage.Url
+  fullName: Argotic.Syndication.RssImage.Url
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Url
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 252
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the URL of this image.\n"
+  remarks: "\nThe image <strong>must</strong> be in the <em>GIF</em>, <em>JPEG</em> or <em>PNG</em> formats.\n"
+  example: []
+  syntax:
+    content: public Uri Url { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of this image.
+    content.vb: Public Property Url As Uri
+  overload: Argotic.Syndication.RssImage.Url*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Width
+  commentId: P:Argotic.Syndication.RssImage.Width
+  id: Width
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: RssImage.Width
+  fullName: Argotic.Syndication.RssImage.Width
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Width
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 274
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the width of this image.\n"
+  remarks: "\nIf no width is specified for the image, the image is assumed to be 88 pixels wide.\n"
+  example: []
+  syntax:
+    content: public int Width { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The width, in pixels, of this image. The default value is <xref href="System.Int32.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates no width was specified.
+    content.vb: Public Property Width As Integer
+  overload: Argotic.Syndication.RssImage.Width*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is greater than <em>144</em>.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.op_Equality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  commentId: M:Argotic.Syndication.RssImage.op_Equality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  id: op_Equality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Equality(RssImage, RssImage)
+  nameWithType: RssImage.Equality(RssImage, RssImage)
+  fullName: Argotic.Syndication.RssImage.Equality(Argotic.Syndication.RssImage, Argotic.Syndication.RssImage)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 294
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(RssImage first, RssImage second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssImage
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssImage
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As RssImage, second As RssImage) As Boolean
+  overload: Argotic.Syndication.RssImage.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssImage.op_GreaterThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  commentId: M:Argotic.Syndication.RssImage.op_GreaterThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  id: op_GreaterThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(RssImage, RssImage)
+  nameWithType: RssImage.GreaterThan(RssImage, RssImage)
+  fullName: Argotic.Syndication.RssImage.GreaterThan(Argotic.Syndication.RssImage, Argotic.Syndication.RssImage)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 315
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(RssImage first, RssImage second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssImage
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssImage
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As RssImage, second As RssImage) As Boolean
+  overload: Argotic.Syndication.RssImage.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssImage.op_Inequality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  commentId: M:Argotic.Syndication.RssImage.op_Inequality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  id: op_Inequality(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Inequality(RssImage, RssImage)
+  nameWithType: RssImage.Inequality(RssImage, RssImage)
+  fullName: Argotic.Syndication.RssImage.Inequality(Argotic.Syndication.RssImage, Argotic.Syndication.RssImage)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 336
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(RssImage first, RssImage second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssImage
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssImage
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As RssImage, second As RssImage) As Boolean
+  overload: Argotic.Syndication.RssImage.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssImage.op_LessThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  commentId: M:Argotic.Syndication.RssImage.op_LessThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  id: op_LessThan(Argotic.Syndication.RssImage,Argotic.Syndication.RssImage)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: LessThan(RssImage, RssImage)
+  nameWithType: RssImage.LessThan(RssImage, RssImage)
+  fullName: Argotic.Syndication.RssImage.LessThan(Argotic.Syndication.RssImage, Argotic.Syndication.RssImage)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 347
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(RssImage first, RssImage second)
+    parameters:
+    - id: first
+      type: Argotic.Syndication.RssImage
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Syndication.RssImage
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As RssImage, second As RssImage) As Boolean
+  overload: Argotic.Syndication.RssImage.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Syndication.RssImage.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.RssImage.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: RssImage.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.RssImage.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 368
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.RssImage.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.CompareTo(System.Object)
+  commentId: M:Argotic.Syndication.RssImage.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: RssImage.CompareTo(Object)
+  fullName: Argotic.Syndication.RssImage.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 386
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Syndication.RssImage.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Equals(System.Object)
+  commentId: M:Argotic.Syndication.RssImage.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: RssImage.Equals(Object)
+  fullName: Argotic.Syndication.RssImage.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 415
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Syndication.RssImage.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssImage.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Syndication.RssImage.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: RssImage.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Syndication.RssImage.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 438
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Syndication.RssImage.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Syndication.RssImage.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Syndication.RssImage.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Syndication.RssImage.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: RssImage.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Syndication.RssImage.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Syndication.RssImage.GetHashCode
+  commentId: M:Argotic.Syndication.RssImage.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: RssImage.GetHashCode()
+  fullName: Argotic.Syndication.RssImage.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 451
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Syndication.RssImage.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: RssImage.Load(XPathNavigator)
+  fullName: Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 468
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>This method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n<p>If the specified height or width of the image exceeeds the maximum permissble values defined in the specification, the maximum value is used instead of the non-conformant value.</p>\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssImage" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Syndication.RssImage.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: RssImage.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.RssImage.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 551
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Syndication.RssImage" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Syndication.RssImage.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.RssImage.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: RssImage.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.RssImage.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 574
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Syndication.RssImage.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Syndication.RssImage.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Syndication.RssImage.ToString
+  commentId: M:Argotic.Syndication.RssImage.ToString
+  id: ToString
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: RssImage.ToString()
+  fullName: Argotic.Syndication.RssImage.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 596
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Syndication.RssImage" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Syndication.RssImage.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Syndication.RssImage.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Syndication.RssImage.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Syndication.RssImage
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: RssImage.WriteTo(XmlWriter)
+  fullName: Argotic.Syndication.RssImage.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Syndication/Rss/RssImage.cs
+    startLine: 621
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nSaves the current <xref href=\"Argotic.Syndication.RssImage\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Syndication.RssImage.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Syndication.RssFeed
+  commentId: T:Argotic.Syndication.RssFeed
+  parent: Argotic.Syndication
+  name: RssFeed
+  nameWithType: RssFeed
+  fullName: Argotic.Syndication.RssFeed
+- uid: Argotic.Syndication.RssChannel.Image
+  commentId: P:Argotic.Syndication.RssChannel.Image
+  isExternal: true
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Syndication.RssImage
+  commentId: T:Argotic.Syndication.RssImage
+  parent: Argotic.Syndication
+  name: RssImage
+  nameWithType: RssImage
+  fullName: Argotic.Syndication.RssImage
+- uid: Argotic.Syndication.RssImage.#ctor*
+  commentId: Overload:Argotic.Syndication.RssImage.#ctor
+  name: RssImage
+  nameWithType: RssImage.RssImage
+  fullName: Argotic.Syndication.RssImage.RssImage
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Syndication.RssImage.HeightDefault*
+  commentId: Overload:Argotic.Syndication.RssImage.HeightDefault
+  name: HeightDefault
+  nameWithType: RssImage.HeightDefault
+  fullName: Argotic.Syndication.RssImage.HeightDefault
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Syndication.RssImage.HeightMaximum*
+  commentId: Overload:Argotic.Syndication.RssImage.HeightMaximum
+  name: HeightMaximum
+  nameWithType: RssImage.HeightMaximum
+  fullName: Argotic.Syndication.RssImage.HeightMaximum
+- uid: Argotic.Syndication.RssImage.WidthDefault*
+  commentId: Overload:Argotic.Syndication.RssImage.WidthDefault
+  name: WidthDefault
+  nameWithType: RssImage.WidthDefault
+  fullName: Argotic.Syndication.RssImage.WidthDefault
+- uid: Argotic.Syndication.RssImage.WidthMaximum*
+  commentId: Overload:Argotic.Syndication.RssImage.WidthMaximum
+  name: WidthMaximum
+  nameWithType: RssImage.WidthMaximum
+  fullName: Argotic.Syndication.RssImage.WidthMaximum
+- uid: Argotic.Syndication.RssImage.Description*
+  commentId: Overload:Argotic.Syndication.RssImage.Description
+  name: Description
+  nameWithType: RssImage.Description
+  fullName: Argotic.Syndication.RssImage.Description
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssImage.Extensions*
+  commentId: Overload:Argotic.Syndication.RssImage.Extensions
+  name: Extensions
+  nameWithType: RssImage.Extensions
+  fullName: Argotic.Syndication.RssImage.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Syndication.RssImage.Extensions
+  commentId: P:Argotic.Syndication.RssImage.Extensions
+  isExternal: true
+- uid: Argotic.Syndication.RssImage.HasExtensions*
+  commentId: Overload:Argotic.Syndication.RssImage.HasExtensions
+  name: HasExtensions
+  nameWithType: RssImage.HasExtensions
+  fullName: Argotic.Syndication.RssImage.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Int32.MinValue
+  commentId: F:System.Int32.MinValue
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: Argotic.Syndication.RssImage.Height*
+  commentId: Overload:Argotic.Syndication.RssImage.Height
+  name: Height
+  nameWithType: RssImage.Height
+  fullName: Argotic.Syndication.RssImage.Height
+- uid: Argotic.Syndication.RssChannel.Link
+  commentId: P:Argotic.Syndication.RssChannel.Link
+  isExternal: true
+- uid: Argotic.Syndication.RssImage.Link*
+  commentId: Overload:Argotic.Syndication.RssImage.Link
+  name: Link
+  nameWithType: RssImage.Link
+  fullName: Argotic.Syndication.RssImage.Link
+- uid: Argotic.Syndication.RssChannel.Title
+  commentId: P:Argotic.Syndication.RssChannel.Title
+  isExternal: true
+- uid: Argotic.Syndication.RssImage.Title*
+  commentId: Overload:Argotic.Syndication.RssImage.Title
+  name: Title
+  nameWithType: RssImage.Title
+  fullName: Argotic.Syndication.RssImage.Title
+- uid: Argotic.Syndication.RssImage.Url*
+  commentId: Overload:Argotic.Syndication.RssImage.Url
+  name: Url
+  nameWithType: RssImage.Url
+  fullName: Argotic.Syndication.RssImage.Url
+- uid: Argotic.Syndication.RssImage.Width*
+  commentId: Overload:Argotic.Syndication.RssImage.Width
+  name: Width
+  nameWithType: RssImage.Width
+  fullName: Argotic.Syndication.RssImage.Width
+- uid: Argotic.Syndication.RssImage.op_Equality*
+  commentId: Overload:Argotic.Syndication.RssImage.op_Equality
+  name: Equality
+  nameWithType: RssImage.Equality
+  fullName: Argotic.Syndication.RssImage.Equality
+- uid: Argotic.Syndication.RssImage.op_GreaterThan*
+  commentId: Overload:Argotic.Syndication.RssImage.op_GreaterThan
+  name: GreaterThan
+  nameWithType: RssImage.GreaterThan
+  fullName: Argotic.Syndication.RssImage.GreaterThan
+- uid: Argotic.Syndication.RssImage.op_Inequality*
+  commentId: Overload:Argotic.Syndication.RssImage.op_Inequality
+  name: Inequality
+  nameWithType: RssImage.Inequality
+  fullName: Argotic.Syndication.RssImage.Inequality
+- uid: Argotic.Syndication.RssImage.op_LessThan*
+  commentId: Overload:Argotic.Syndication.RssImage.op_LessThan
+  name: LessThan
+  nameWithType: RssImage.LessThan
+  fullName: Argotic.Syndication.RssImage.LessThan
+- uid: Argotic.Syndication.RssImage.AddExtension*
+  commentId: Overload:Argotic.Syndication.RssImage.AddExtension
+  name: AddExtension
+  nameWithType: RssImage.AddExtension
+  fullName: Argotic.Syndication.RssImage.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Syndication.RssImage.CompareTo*
+  commentId: Overload:Argotic.Syndication.RssImage.CompareTo
+  name: CompareTo
+  nameWithType: RssImage.CompareTo
+  fullName: Argotic.Syndication.RssImage.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssImage.Equals*
+  commentId: Overload:Argotic.Syndication.RssImage.Equals
+  name: Equals
+  nameWithType: RssImage.Equals
+  fullName: Argotic.Syndication.RssImage.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssImage.FindExtension*
+  commentId: Overload:Argotic.Syndication.RssImage.FindExtension
+  name: FindExtension
+  nameWithType: RssImage.FindExtension
+  fullName: Argotic.Syndication.RssImage.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssImage.GetHashCode*
+  commentId: Overload:Argotic.Syndication.RssImage.GetHashCode
+  name: GetHashCode
+  nameWithType: RssImage.GetHashCode
+  fullName: Argotic.Syndication.RssImage.GetHashCode
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Syndication.RssImage.Load*
+  commentId: Overload:Argotic.Syndication.RssImage.Load
+  name: Load
+  nameWithType: RssImage.Load
+  fullName: Argotic.Syndication.RssImage.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Syndication.RssImage.RemoveExtension*
+  commentId: Overload:Argotic.Syndication.RssImage.RemoveExtension
+  name: RemoveExtension
+  nameWithType: RssImage.RemoveExtension
+  fullName: Argotic.Syndication.RssImage.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.RssImage.ToString*
+  commentId: Overload:Argotic.Syndication.RssImage.ToString
+  name: ToString
+  nameWithType: RssImage.ToString
+  fullName: Argotic.Syndication.RssImage.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Syndication.RssImage.WriteTo*
+  commentId: Overload:Argotic.Syndication.RssImage.WriteTo
+  name: WriteTo
+  nameWithType: RssImage.WriteTo
+  fullName: Argotic.Syndication.RssImage.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

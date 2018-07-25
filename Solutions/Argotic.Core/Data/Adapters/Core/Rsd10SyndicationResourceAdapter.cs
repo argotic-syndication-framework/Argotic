@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="RsdDocument"/>.
     /// </summary>
@@ -20,7 +20,10 @@ namespace Argotic.Data.Adapters
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 1.0 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Rsd")]
     public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -33,7 +36,8 @@ namespace Argotic.Data.Adapters
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Rsd10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Rsd10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -46,26 +50,36 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
+            XPathNavigator serviceNavigator =
+                RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
 
             if (serviceNavigator == null)
             {
-                //  dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
+                // dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
                 serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/service", manager);
             }
 
             if (serviceNavigator != null)
             {
-                XPathNavigator engineNameNavigator      = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
-                XPathNavigator engineLinkNavigator      = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
-                XPathNavigator homePageLinkNavigator    = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
-                XPathNodeIterator apiIterator           = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
+                XPathNavigator engineNameNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:engineName",
+                    manager);
+                XPathNavigator engineLinkNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:engineLink",
+                    manager);
+                XPathNavigator homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(
+                    serviceNavigator,
+                    "rsd:homePageLink",
+                    manager);
+                XPathNodeIterator apiIterator = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
-                if (engineNameNavigator != null && !String.IsNullOrEmpty(engineNameNavigator.Value))
+                if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
                 {
-                    resource.EngineName     = engineNameNavigator.Value;
+                    resource.EngineName = engineNameNavigator.Value;
                 }
 
                 if (engineLinkNavigator != null)
@@ -82,7 +96,7 @@ namespace Argotic.Data.Adapters
                     Uri homepage;
                     if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out homepage))
                     {
-                        resource.Homepage   = homepage;
+                        resource.Homepage = homepage;
                     }
                 }
 
@@ -107,7 +121,9 @@ namespace Argotic.Data.Adapters
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager), this.Settings);
+            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(
+                RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager),
+                this.Settings);
             adapter.Fill(resource, manager);
         }
     }

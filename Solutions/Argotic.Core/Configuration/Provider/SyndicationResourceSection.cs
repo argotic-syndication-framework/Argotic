@@ -1,37 +1,46 @@
-﻿using System;
-using System.ComponentModel;
-using System.Configuration;
-using System.Security.Permissions;
-using System.Web;
-
-namespace Argotic.Configuration.Provider
+﻿namespace Argotic.Configuration.Provider
 {
+    using System.ComponentModel;
+    using System.Configuration;
+
     /// <summary>
     /// Defines configuration settings to support the infrastructure for configuring and managing syndication resource details. This class cannot be inherited.
     /// </summary>
-    //[AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    // [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     public sealed class SyndicationResourceSection : ConfigurationSection
     {
         /// <summary>
         /// Private member to hold the default provider configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionDefaultProviderProperty   = new ConfigurationProperty("defaultProvider", typeof(System.String), "XmlSyndicationResourceProvider", new StringConverter(), new StringValidator(1), ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionDefaultProviderProperty = new ConfigurationProperty(
+            "defaultProvider",
+            typeof(string),
+            "XmlSyndicationResourceProvider",
+            new StringConverter(),
+            new StringValidator(1),
+            ConfigurationPropertyOptions.None);
+
         /// <summary>
         /// Private member to hold the providers configuration property for the section.
         /// </summary>
-        private static readonly ConfigurationProperty configurationSectionProvidersProperty         = new ConfigurationProperty("providers", typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty ConfigurationSectionProvidersProperty = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None);
+
         /// <summary>
         /// Private member to hold a collection of configuration properties for the section.
         /// </summary>
-        private static ConfigurationPropertyCollection configurationSectionProperties               = new ConfigurationPropertyCollection();
+        private static ConfigurationPropertyCollection configurationSectionProperties = new ConfigurationPropertyCollection();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceSection"/> class.
         /// </summary>
         public SyndicationResourceSection()
         {
-            configurationSectionProperties.Add(configurationSectionProvidersProperty);
-            configurationSectionProperties.Add(configurationSectionDefaultProviderProperty);
+            configurationSectionProperties.Add(ConfigurationSectionProvidersProperty);
+            configurationSectionProperties.Add(ConfigurationSectionDefaultProviderProperty);
         }
 
         /// <summary>
@@ -43,16 +52,17 @@ namespace Argotic.Configuration.Provider
         ///     An empty string ("") is not a valid value for the <see cref="DefaultProvider"/> property.
         /// </remarks>
         [ConfigurationProperty("defaultProvider", DefaultValue = "XmlSyndicationResourceProvider", Options = ConfigurationPropertyOptions.None)]
-        [StringValidator(MinLength=1)]
+        [StringValidator(MinLength = 1)]
         public string DefaultProvider
         {
             get
             {
-                return (string)base[configurationSectionDefaultProviderProperty];
+                return (string)this[ConfigurationSectionDefaultProviderProperty];
             }
+
             set
             {
-                base[configurationSectionDefaultProviderProperty] = value;
+                this[ConfigurationSectionDefaultProviderProperty] = value;
             }
         }
 
@@ -77,7 +87,7 @@ namespace Argotic.Configuration.Provider
         {
             get
             {
-                return (ProviderSettingsCollection)base[configurationSectionProvidersProperty];
+                return (ProviderSettingsCollection)this[ConfigurationSectionProvidersProperty];
             }
         }
 

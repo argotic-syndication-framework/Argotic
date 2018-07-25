@@ -1,0 +1,282 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  id: SiteSummaryUpdatePeriod
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Daily
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Hourly
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Monthly
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.None
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Weekly
+  - Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Yearly
+  langs:
+  - csharp
+  - vb
+  name: SiteSummaryUpdatePeriod
+  nameWithType: SiteSummaryUpdatePeriod
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SiteSummaryUpdatePeriod
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the period over which the feed format is updated.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum SiteSummaryUpdatePeriod
+    content.vb: >-
+      <Serializable>
+
+      Public Enum SiteSummaryUpdatePeriod
+  seealso:
+  - linkId: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.Period
+    commentId: P:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.Period
+  - linkId: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+    commentId: T:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.None
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.None
+  id: None
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: SiteSummaryUpdatePeriod.None
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo update period specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Daily
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Daily
+  id: Daily
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: Daily
+  nameWithType: SiteSummaryUpdatePeriod.Daily
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Daily
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Daily
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nFeed format is updated on a daily basis.\n"
+  example: []
+  syntax:
+    content: Daily = 1
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Hourly
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Hourly
+  id: Hourly
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: Hourly
+  nameWithType: SiteSummaryUpdatePeriod.Hourly
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Hourly
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Hourly
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nFeed format is updated on an hourly basis.\n"
+  example: []
+  syntax:
+    content: Hourly = 2
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Monthly
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Monthly
+  id: Monthly
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: Monthly
+  nameWithType: SiteSummaryUpdatePeriod.Monthly
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Monthly
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Monthly
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nFeed format is updated on a monthly basis.\n"
+  example: []
+  syntax:
+    content: Monthly = 3
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Weekly
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Weekly
+  id: Weekly
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: Weekly
+  nameWithType: SiteSummaryUpdatePeriod.Weekly
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Weekly
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Weekly
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nFeed format is updated on a weekly basis.\n"
+  example: []
+  syntax:
+    content: Weekly = 4
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Yearly
+  commentId: F:Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Yearly
+  id: Yearly
+  parent: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  langs:
+  - csharp
+  - vb
+  name: Yearly
+  nameWithType: SiteSummaryUpdatePeriod.Yearly
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod.Yearly
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Yearly
+    path: ../Solutions/Argotic.Extensions/Core/SiteSummarySyndication/SiteSummaryUpdatePeriod.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nFeed format is updated on a yearly basis.\n"
+  example: []
+  syntax:
+    content: Yearly = 5
+    return:
+      type: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.Period
+  commentId: P:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext.Period
+  isExternal: true
+- uid: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: SiteSummaryUpdateSyndicationExtensionContext
+  nameWithType: SiteSummaryUpdateSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdateSyndicationExtensionContext
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  commentId: T:Argotic.Extensions.Core.SiteSummaryUpdatePeriod
+  parent: Argotic.Extensions.Core
+  name: SiteSummaryUpdatePeriod
+  nameWithType: SiteSummaryUpdatePeriod
+  fullName: Argotic.Extensions.Core.SiteSummaryUpdatePeriod

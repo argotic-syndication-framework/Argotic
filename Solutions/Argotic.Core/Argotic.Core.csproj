@@ -1,5 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common.netstandard2_0.proj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
@@ -13,11 +13,19 @@
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description></Description>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Configuration\Provider\XmlSyndicationResourceProvider.cs" />
     <Compile Remove="Syndication\SyndicationManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

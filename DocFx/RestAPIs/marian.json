@@ -1,0 +1,3674 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "marain.io"
+    },
+    "host": "marain.io",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/api/licensing": {
+            "post": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Create license",
+                "operationId": "Licensing_CreateLicense",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Criteria used to generate the License document.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LicenseCriteria"
+                        }
+                    },
+                    {
+                        "name": "privateKeyId",
+                        "in": "query",
+                        "description": "Id of the Private Key to be used to sign the License document.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/licensing/key": {
+            "get": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - List all keys",
+                "operationId": "Licensing_GetKeys",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to return. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to page to the next set of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatableResults[CryptoKeyResponse]"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "self": {
+                                    "href": "https://marain.io/api/licensing/key?PageSize=1000",
+                                    "rel": "self"
+                                },
+                                "nextPage": {
+                                    "href": null,
+                                    "rel": null
+                                },
+                                "results": [
+                                    {
+                                        "friendlyName": "Marain Enterprise Client v20.11",
+                                        "privateKeyId": "35527d72-7cd9-4dec-894d-0953e006f964",
+                                        "publicKey": "<RSAKeyValue><Modulus>rjsCV9oiqChuIyoZuCHuQW2MSWKKqpr6zwCkOEvsCy+xHx2SzB/34TcjEzYh/Y681p4OqcVV6sp0KaQJO1TNakV7O73pkWPdch7ZljXlc9sAzmKd60zZU1sYBni/yyD7MuzD3an7ay+PRQoGcWAZTFWT+YCR1/oj8z6ppykW/Ps=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Create keys",
+                "operationId": "Licensing_CreateKey",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "friendlyName",
+                        "in": "query",
+                        "description": "A memorable name to help you identify the Public / Private key set.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/CryptoKeyResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "friendlyName": "Marain Enterprise Client v20.11",
+                                "privateKeyId": "35527d72-7cd9-4dec-894d-0953e006f964",
+                                "publicKey": "<RSAKeyValue><Modulus>rjsCV9oiqChuIyoZuCHuQW2MSWKKqpr6zwCkOEvsCy+xHx2SzB/34TcjEzYh/Y681p4OqcVV6sp0KaQJO1TNakV7O73pkWPdch7ZljXlc9sAzmKd60zZU1sYBni/yyD7MuzD3an7ay+PRQoGcWAZTFWT+YCR1/oj8z6ppykW/Ps=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/licensing/telemetry": {
+            "get": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Retrieve telemetry by id",
+                "operationId": "Licensing_GetTelemetryById",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "telemetryId",
+                        "in": "query",
+                        "description": "Id of the Telemetry.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/LicenseTelemetry"
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Persist telemetry",
+                "operationId": "Licensing_PersistTelemetry",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Information about License, and it's current status.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LicenseTelemetry"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/api/licensing/telemetry/customer": {
+            "get": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Retrieve telemetry for customer",
+                "operationId": "Licensing_GetTelemetryByCustomerId",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "customerId",
+                        "in": "query",
+                        "description": "Id of the Customer",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/licensing/telemetry/license": {
+            "get": {
+                "tags": [
+                    "Licensing"
+                ],
+                "summary": "Licensing - Retrieve telemetry for license",
+                "operationId": "Licensing_GetTelemetryByLicenseId",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "licenseId",
+                        "in": "query",
+                        "description": "Id of the License.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/localization": {
+            "get": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Retrieve all content",
+                "operationId": "Localization_GetLocalizedContentByTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LocalizableContent"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "content": "Warning! The current operation failed.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "en-GB"
+                                },
+                                {
+                                    "content": "Attention! L'opération en cours a échoué.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "fr-FR"
+                                },
+                                {
+                                    "content": "The current operation ran to completion.",
+                                    "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                    "locale": "en-GB"
+                                },
+                                {
+                                    "content": "L'opération en cours s'est terminée",
+                                    "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                    "locale": "fr-FR"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Persist content",
+                "operationId": "Localization_CreateLocalizedContent",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Localised Content to be persisted.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LocalizedContentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/localization/{contentId}": {
+            "get": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Retrieve content",
+                "operationId": "Localization_GetLocalizedContent",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "path",
+                        "description": "Id of the Content.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LocalizableContent"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "content": "Warning! The current operation failed.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "en-GB"
+                                },
+                                {
+                                    "content": "Attention! L'opération en cours a échoué.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "fr-FR"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Insert or update content",
+                "operationId": "Localization_UpsertLocalizedContent",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "path",
+                        "description": "Id of Content.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Content to insert / update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LocalizedContentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Delete content",
+                "operationId": "Localization_DeleteLocalizedContent",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "path",
+                        "description": "Id of the Content to delete.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/localization/{contentId}/{locale}": {
+            "get": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Retrieve content for a locale",
+                "operationId": "Localization_GetLocalizedContentByLocale",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "path",
+                        "description": "Id of the Content.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "description": "Id of Locale.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/LocalizableContent"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "content": "Warning! The current operation failed.",
+                                "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                "locale": "en-GB"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Delete content for a locale",
+                "operationId": "Localization_DeleteLocalizedContentLocale",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "contentId",
+                        "in": "path",
+                        "description": "Id of Content to delete.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "description": "Locale version of Content to delete.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/operations": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Retrieve all",
+                "operationId": "Operations_GetOperationsForTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to list. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to retrieve next page of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatableResults[Operation]"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "self": {
+                                    "href": "https://marain.io/api/operations?PageSize=1000",
+                                    "rel": "self"
+                                },
+                                "nextPage": {
+                                    "href": null,
+                                    "rel": null
+                                },
+                                "results": [
+                                    {
+                                        "createdDateTime": "2016-10-23T13:44:28.8183211+00:00",
+                                        "id": "0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                        "lastActionDateTime": "2016-10-23T13:44:29.6046585+00:00",
+                                        "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                        "percentComplete": 100,
+                                        "resourceLocation": "https://marain.io/api/text/extract?OperationId=0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                        "status": "Succeeded",
+                                        "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/operations/{operationId}": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Retrieve operation",
+                "operationId": "Operations_GetOperationById",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Id of the Operation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Operation"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "createdDateTime": "2016-10-23T13:44:28.8183211+00:00",
+                                "id": "0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                "lastActionDateTime": "2016-10-23T13:44:29.6046585+00:00",
+                                "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                "percentComplete": 100,
+                                "resourceLocation": "https://marain.io/api/text/extract?OperationId=0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                "status": "Succeeded",
+                                "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/operations/{operationId}/failed": {
+            "put": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Set into the \"Failed\" state",
+                "operationId": "Operations_SetFailed",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Id of the Operation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
+        },
+        "/api/operations/{operationId}/notstarted": {
+            "put": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Set into the \"Not Started\" state",
+                "operationId": "Operations_SetNotStarted",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Id of the Operation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "resourceLocation",
+                        "in": "query",
+                        "description": "Optional URI based location of the result of the Operation.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
+        },
+        "/api/operations/{operationId}/running": {
+            "put": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Set into the \"Running\" state",
+                "operationId": "Operations_SetRunning",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Id of the Operation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "percentageComplete",
+                        "in": "query",
+                        "description": "Optional percentage completeness of the Operation.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "contentId",
+                        "in": "query",
+                        "description": "Optional Content Id of Localized Content status message.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
+        },
+        "/api/operations/{operationId}/succeeded": {
+            "put": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Set into the \"Succeeded\" state",
+                "operationId": "Operations_SetSucceeded",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "path",
+                        "description": "Id of Operation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "resourceLocation",
+                        "in": "query",
+                        "description": "Optional URI based location of the result of the Operation.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                }
+            }
+        },
+        "/api/speech/synthesis": {
+            "get": {
+                "tags": [
+                    "Speech"
+                ],
+                "summary": "Speech - Retrieve the text to speech output",
+                "operationId": "Speech_GetSynthesisResponse",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "query",
+                        "description": "Id of the speech synthesis operation.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "NoContent"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Speech"
+                ],
+                "summary": "Speech - Convert text to speech",
+                "operationId": "Speech_CreateSynthesisRequest",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains configuration options for generating the speech",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SpeechSynthesisRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "Location of the status of the long running operation",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/speech/synthesis/options-by-locale": {
+            "get": {
+                "tags": [
+                    "Speech"
+                ],
+                "summary": "Speech - Retrieve synthesis options for a locale",
+                "operationId": "Speech_GetSpeechSynthesisOptionsByLocale",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale used to filter options.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SpeechSynthesisOptions"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "locale": "en-GB",
+                                    "gender": "Female",
+                                    "serviceNameMapping": "Microsoft Server Speech Text to Speech Voice (en-GB, Susan, Apollo)"
+                                },
+                                {
+                                    "locale": "en-GB",
+                                    "gender": "Male",
+                                    "serviceNameMapping": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/speech/synthesis/output-formats": {
+            "get": {
+                "tags": [
+                    "Speech"
+                ],
+                "summary": "Speech - Retrieve supported output formats",
+                "operationId": "Speech_GetOutputFormats",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "raw-8khz-8bit-mono-mulaw",
+                                "raw-16khz-16bit-mono-pcm",
+                                "riff-8khz-8bit-mono-mulaw",
+                                "riff-16khz-16bit-mono-pcm"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/speech/synthesis/supported-locales": {
+            "get": {
+                "tags": [
+                    "Speech"
+                ],
+                "summary": "Speech - Retrieve supported locales",
+                "operationId": "Speech_GetSupportedLocales",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "ar-EG",
+                                "de-DE",
+                                "en-AU",
+                                "en-CA",
+                                "en-GB",
+                                "en-IN",
+                                "en-US",
+                                "es-ES",
+                                "es-MX",
+                                "fr-CA",
+                                "fr-FR",
+                                "it-IT",
+                                "ja-JP",
+                                "pt-BR",
+                                "ru-RU",
+                                "zh-CN",
+                                "zh-HK",
+                                "zh-TW"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tenant": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve your tenant details",
+                "operationId": "Tenant_GetTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Tenant"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "claims": [
+                                    "Tenant",
+                                    "SpeechSynthesis",
+                                    "Text",
+                                    "Operations",
+                                    "Localization",
+                                    "Licensing"
+                                ],
+                                "email": "T.Durden@paperstreetsoapcompany.com",
+                                "familyName": "Durden",
+                                "firstName": "Tyler",
+                                "isApproved": true,
+                                "id": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                "organisation": "Paper Street Soap Company"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/tenant/{tenantId}": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve the tenant",
+                "operationId": "Tenant_GetTenantById",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant to retrieve.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Tenant"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "claims": [
+                                    "Tenant",
+                                    "SpeechSynthesis",
+                                    "Text",
+                                    "Operations",
+                                    "Localization",
+                                    "Licensing"
+                                ],
+                                "email": "T.Durden@paperstreetsoapcompany.com",
+                                "familyName": "Durden",
+                                "firstName": "Tyler",
+                                "isApproved": true,
+                                "id": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                "organisation": "Paper Street Soap Company"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/tenant/{tenantId}/approve": {
+            "post": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Approve the tenant",
+                "operationId": "Tenant_ApproveTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant to approve.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/tenant/{tenantId}/claims": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve claims for the tenant",
+                "operationId": "Tenant_GetClaims",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant to retrieve Claims information about.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "Tenant",
+                                "SpeechSynthesis",
+                                "Text",
+                                "Operations",
+                                "Localization",
+                                "Licensing"
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Set the claims for the tenant",
+                "operationId": "Tenant_SetClaims",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "claims",
+                        "in": "body",
+                        "description": "Claims to Upsert.",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/tenant/{tenantId}/metering": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve metering information for tenant",
+                "operationId": "Tenant_GetTenantByIdMetering",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant to retrieve Metering information about.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to return. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to page to the next set of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatableResults[MeteredRequest]"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "self": {
+                                    "href": "https://marain.io/api/tenant/metering?PageSize=1000",
+                                    "rel": "self"
+                                },
+                                "nextPage": {
+                                    "href": null,
+                                    "rel": null
+                                },
+                                "results": [
+                                    {
+                                        "request": {
+                                            "method": "GET",
+                                            "absoluteUri": "/api/operations",
+                                            "timestamp": "2016-11-10T23:01:26.8368386+00:00"
+                                        },
+                                        "identity": {
+                                            "apiKey": "a205aa11-d41c-467e-8250-9f95808d5035",
+                                            "ipAddress": "127.0.0.1",
+                                            "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                            "userName": "T.Durden@paperstreetsoapcompany.com"
+                                        },
+                                        "response": {
+                                            "statusCode": 200,
+                                            "timeInMilliseconds": 803
+                                        },
+                                        "environment": {
+                                            "machineName": "RD07925A",
+                                            "releaseVersion": "1.23.17.1"
+                                        }
+                                    },
+                                    {
+                                        "request": {
+                                            "method": "POST",
+                                            "absoluteUri": "/api/licensing/key",
+                                            "timestamp": "2016-11-10T23:00:07.0744379+00:00"
+                                        },
+                                        "identity": {
+                                            "apiKey": "a205aa11-d41c-467e-8250-9f95808d5035",
+                                            "ipAddress": "127.0.0.1",
+                                            "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                            "userName": "T.Durden@paperstreetsoapcompany.com"
+                                        },
+                                        "response": {
+                                            "statusCode": 202,
+                                            "timeInMilliseconds": 63
+                                        },
+                                        "environment": {
+                                            "machineName": "RD07925A",
+                                            "releaseVersion": "1.23.17.1"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/tenant/all": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve all tenants",
+                "operationId": "Tenant_GetAllTenants",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to return. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to page to the next set of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Tenant"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "claims": [
+                                        "Tenant",
+                                        "SpeechSynthesis",
+                                        "Text",
+                                        "Operations",
+                                        "Localization",
+                                        "Licensing"
+                                    ],
+                                    "email": "T.Durden@paperstreetsoapcompany.com",
+                                    "familyName": "Durden",
+                                    "firstName": "Tyler",
+                                    "isApproved": true,
+                                    "id": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                    "organisation": "Paper Street Soap Company"
+                                },
+                                {
+                                    "claims": [
+                                        "Tenant",
+                                        "Text",
+                                        "Operations",
+                                        "Localization"
+                                    ],
+                                    "email": "R.Paulson@paperstreetsoapcompany.com",
+                                    "familyName": "Paulson",
+                                    "firstName": "Robert",
+                                    "isApproved": true,
+                                    "id": "17607a56-63cd-4901-b464-c338940bac91",
+                                    "organisation": "Paper Street Soap Company"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/tenant/metering": {
+            "get": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Retrieve your metering information",
+                "operationId": "Tenant_GetTenantMetering",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to return. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to page to the next set of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatableResults[MeteredRequest]"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "self": {
+                                    "href": "https://marain.io/api/tenant/metering?PageSize=1000",
+                                    "rel": "self"
+                                },
+                                "nextPage": {
+                                    "href": null,
+                                    "rel": null
+                                },
+                                "results": [
+                                    {
+                                        "request": {
+                                            "method": "GET",
+                                            "absoluteUri": "/api/operations",
+                                            "timestamp": "2016-11-10T23:01:26.8368386+00:00"
+                                        },
+                                        "identity": {
+                                            "apiKey": "a205aa11-d41c-467e-8250-9f95808d5035",
+                                            "ipAddress": "127.0.0.1",
+                                            "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                            "userName": "T.Durden@paperstreetsoapcompany.com"
+                                        },
+                                        "response": {
+                                            "statusCode": 200,
+                                            "timeInMilliseconds": 803
+                                        },
+                                        "environment": {
+                                            "machineName": "RD07925A",
+                                            "releaseVersion": "1.23.17.1"
+                                        }
+                                    },
+                                    {
+                                        "request": {
+                                            "method": "POST",
+                                            "absoluteUri": "/api/licensing/key",
+                                            "timestamp": "2016-11-10T23:00:07.0744379+00:00"
+                                        },
+                                        "identity": {
+                                            "apiKey": "a205aa11-d41c-467e-8250-9f95808d5035",
+                                            "ipAddress": "127.0.0.1",
+                                            "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc",
+                                            "userName": "T.Durden@paperstreetsoapcompany.com"
+                                        },
+                                        "response": {
+                                            "statusCode": 202,
+                                            "timeInMilliseconds": 63
+                                        },
+                                        "environment": {
+                                            "machineName": "RD07925A",
+                                            "releaseVersion": "1.23.17.1"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/tenant/register": {
+            "post": {
+                "tags": [
+                    "Tenant"
+                ],
+                "summary": "Tenant - Register a new tenant",
+                "operationId": "Tenant_CreateTenant",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Tenant details.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TenantModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    }
+                }
+            }
+        },
+        "/api/text/classify": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Classify the content",
+                "operationId": "Text_Classify",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for classification process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClassificationResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "classifierId": "Politics",
+                                    "score": 0.93
+                                },
+                                {
+                                    "classifierId": "Sport",
+                                    "score": 0.05
+                                },
+                                {
+                                    "classifierId": "Technology",
+                                    "score": 0.67
+                                },
+                                {
+                                    "classifierId": "Entertainment",
+                                    "score": 0.32
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/classify/batch": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Classify a batch of content",
+                "operationId": "Text_ClassifyBatch",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for classification process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BatchClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BatchClassificationResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "classification": [
+                                        {
+                                            "classifierId": "Politics",
+                                            "score": 0.93
+                                        },
+                                        {
+                                            "classifierId": "Sport",
+                                            "score": 0.05
+                                        },
+                                        {
+                                            "classifierId": "Technology",
+                                            "score": 0.67
+                                        },
+                                        {
+                                            "classifierId": "Entertainment",
+                                            "score": 0.32
+                                        }
+                                    ],
+                                    "textId": "3ba524cc-32de-4ded-bcf1-8f34d5a8f5b1"
+                                },
+                                {
+                                    "classification": [
+                                        {
+                                            "classifierId": "Politics",
+                                            "score": 0.05
+                                        },
+                                        {
+                                            "classifierId": "Sport",
+                                            "score": 0.35
+                                        },
+                                        {
+                                            "classifierId": "Technology",
+                                            "score": 0.93
+                                        },
+                                        {
+                                            "classifierId": "Entertainment",
+                                            "score": 0.05
+                                        }
+                                    ],
+                                    "textId": "30705aa2-8117-4a71-81ea-5602bc37099b"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/classify/batch/best": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Classify a batch of content, return best",
+                "operationId": "Text_ClassifyBatchBest",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for classification process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BatchClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BatchClassificationBestResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "classification": [
+                                        {
+                                            "classifierId": "Politics",
+                                            "score": 0.93
+                                        },
+                                        {
+                                            "classifierId": "Sport",
+                                            "score": 0.05
+                                        },
+                                        {
+                                            "classifierId": "Technology",
+                                            "score": 0.67
+                                        },
+                                        {
+                                            "classifierId": "Entertainment",
+                                            "score": 0.32
+                                        }
+                                    ],
+                                    "textId": "3ba524cc-32de-4ded-bcf1-8f34d5a8f5b1"
+                                },
+                                {
+                                    "classification": [
+                                        {
+                                            "classifierId": "Politics",
+                                            "score": 0.05
+                                        },
+                                        {
+                                            "classifierId": "Sport",
+                                            "score": 0.35
+                                        },
+                                        {
+                                            "classifierId": "Technology",
+                                            "score": 0.93
+                                        },
+                                        {
+                                            "classifierId": "Entertainment",
+                                            "score": 0.05
+                                        }
+                                    ],
+                                    "textId": "30705aa2-8117-4a71-81ea-5602bc37099b"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/classify/best": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Classify content, return best",
+                "operationId": "Text_ClassifyBest",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for classification process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ClassificationResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "classifierId": "Politics",
+                                "score": 0.93
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/detect/language": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Detect the language",
+                "operationId": "Text_DetectTextLanguage",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for detection process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LanguageDetectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LanguageDetectionResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "culture": "en",
+                                    "score": 1.0
+                                },
+                                {
+                                    "culture": "nl",
+                                    "score": 0.81726073004622524
+                                },
+                                {
+                                    "culture": "no",
+                                    "score": 0.78387574661438753
+                                },
+                                {
+                                    "culture": "da",
+                                    "score": 0.78002554585952955
+                                },
+                                {
+                                    "culture": "fr",
+                                    "score": 0.755770066325009
+                                },
+                                {
+                                    "culture": "it",
+                                    "score": 0.73744300603573243
+                                },
+                                {
+                                    "culture": "es",
+                                    "score": 0.72432196158698159
+                                },
+                                {
+                                    "culture": "de",
+                                    "score": 0.71875474404409911
+                                },
+                                {
+                                    "culture": "sv",
+                                    "score": 0.71109883839626264
+                                },
+                                {
+                                    "culture": "pt",
+                                    "score": 0.70683770526988188
+                                },
+                                {
+                                    "culture": "ru",
+                                    "score": 0.4927367048982077
+                                },
+                                {
+                                    "culture": "ko",
+                                    "score": 0.4074852509304856
+                                },
+                                {
+                                    "culture": "zh",
+                                    "score": 0.074224332431197415
+                                },
+                                {
+                                    "culture": "ja",
+                                    "score": 0.0
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/detect/language/batch": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Batch detect the language",
+                "operationId": "Text_BatchDetectTextLanguage",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for detection process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BatchLanguageDetectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BatchLanguageDetectionResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "detection": [
+                                        {
+                                            "culture": "en",
+                                            "score": 1.0
+                                        },
+                                        {
+                                            "culture": "nl",
+                                            "score": 0.81726073004622524
+                                        },
+                                        {
+                                            "culture": "no",
+                                            "score": 0.78387574661438753
+                                        },
+                                        {
+                                            "culture": "da",
+                                            "score": 0.78002554585952955
+                                        },
+                                        {
+                                            "culture": "fr",
+                                            "score": 0.755770066325009
+                                        },
+                                        {
+                                            "culture": "it",
+                                            "score": 0.73744300603573243
+                                        },
+                                        {
+                                            "culture": "es",
+                                            "score": 0.72432196158698159
+                                        },
+                                        {
+                                            "culture": "de",
+                                            "score": 0.71875474404409911
+                                        },
+                                        {
+                                            "culture": "sv",
+                                            "score": 0.71109883839626264
+                                        },
+                                        {
+                                            "culture": "pt",
+                                            "score": 0.70683770526988188
+                                        },
+                                        {
+                                            "culture": "ru",
+                                            "score": 0.4927367048982077
+                                        },
+                                        {
+                                            "culture": "ko",
+                                            "score": 0.4074852509304856
+                                        },
+                                        {
+                                            "culture": "zh",
+                                            "score": 0.074224332431197415
+                                        },
+                                        {
+                                            "culture": "ja",
+                                            "score": 0.0
+                                        }
+                                    ],
+                                    "textId": "df3a8eba-7f37-4658-b11c-4cb9df60a56d"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/detect/language/batch/best": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Batch detect the most likely language",
+                "operationId": "Text_BatchDetectTextLanguageBest",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for detection process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BatchLanguageDetectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BatchLanguageDetectionResponse"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "detection": [
+                                        {
+                                            "culture": "en",
+                                            "score": 1.0
+                                        }
+                                    ],
+                                    "textId": "daeecd03-7e7e-4c31-bf98-99549aacf868"
+                                },
+                                {
+                                    "detection": [
+                                        {
+                                            "culture": "en",
+                                            "score": 1.0
+                                        }
+                                    ],
+                                    "textId": "60a75783-1ae9-4e1e-99ff-0e720db90655"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/detect/language/best": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Detects the most likely language",
+                "operationId": "Text_DetectTextLanguageBest",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for detection process and the payload to be processed.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LanguageDetectionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/LanguageDetectionResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "culture": "en",
+                                "score": 1.0
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/detect/language/identifiers": {
+            "get": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - List available language identifiers",
+                "operationId": "Text_GetLanguageIdentifiers",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "english",
+                                "iso6391",
+                                "iso6393",
+                                "native"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/extract": {
+            "get": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Retrieve the plain text document",
+                "operationId": "Text_GetTextExtractionResponse",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "query",
+                        "description": "Id of the extracted text document.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TextExtractionResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Extract plain text from document",
+                "operationId": "Text_CreateTextExtractionRequest",
+                "consumes": [
+                    "application/form-data"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "File to Upload",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "Location of the status of the long running operation",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "415": {
+                        "description": "UnsupportedMediaType"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Delete the plain text document",
+                "operationId": "Text_DeleteTextExtractionResponse",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "query",
+                        "description": "Id of the extracted text document.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/text/extract/document": {
+            "get": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Retrieve the plain text source document",
+                "operationId": "Text_GetTextExtractionDocument",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "query",
+                        "description": "Id of the original document.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "byte",
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Delete plain text source document",
+                "operationId": "Text_DeleteTextExtractionDocument",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "operationId",
+                        "in": "query",
+                        "description": "Id of the original document",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/text/score": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Score content",
+                "operationId": "Text_Score",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for the scoring process and the payload to be evaluated.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ScoringRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/score/normalizer/exponential": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Score content (exponentially normalized)",
+                "operationId": "Text_ExponentialNormalizerScore",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for the scoring process and the payload to be evaluated.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExponentialNormalizerScoringRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/score/normalizer/linear": {
+            "post": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Score content (linearly normalized)",
+                "operationId": "Text_LinearNormalizerScore",
+                "consumes": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Contains the configuration for the scoring process and the payload to be evaluated.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LinearNormalizerScoringRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/score/scoring-types": {
+            "get": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Retrieve scoring approaches",
+                "operationId": "Text_GetScoringTypeDescription",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "ScoreBestFragmentForKeyword",
+                                "ScoreDocument"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/strategy": {
+            "get": {
+                "tags": [
+                    "Text"
+                ],
+                "summary": "Text - Retrieve scoring and classification strategies",
+                "operationId": "Text_GetStrategies",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "ComplexDocumentWithManyHits",
+                                "ComplexDocumentWithManyHitsSmoothlyDistributeScores",
+                                "SimpleDocumentWithFewHits",
+                                "SimpleDocumentWithFewHitsSmoothlyDistributeScores"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/{tenantId}/localization": {
+            "get": {
+                "tags": [
+                    "Localization"
+                ],
+                "summary": "Localization - Retrieve content for a tenant",
+                "operationId": "Localization_GetLocalizedContentForTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LocalizableContent"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "content": "Warning! The current operation failed.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "en-GB"
+                                },
+                                {
+                                    "content": "Attention! L'opération en cours a échoué.",
+                                    "contentId": "652fd4c7-e708-4fb5-8efe-48b61536c1f9",
+                                    "locale": "fr-FR"
+                                },
+                                {
+                                    "content": "The current operation ran to completion.",
+                                    "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                    "locale": "en-GB"
+                                },
+                                {
+                                    "content": "L'opération en cours s'est terminée",
+                                    "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                    "locale": "fr-FR"
+                                }
+                            ]
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        },
+        "/api/{tenantId}/operations": {
+            "get": {
+                "tags": [
+                    "Operations"
+                ],
+                "summary": "Operations - Retrieve all for tenant",
+                "operationId": "Operations_GetOperationsByTenant",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "in": "path",
+                        "description": "Id of the Tenant.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Optional number of items to list. Max value is 1000.",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "continuationToken",
+                        "in": "query",
+                        "description": "Optional token required to retrieve next page of results.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaginatableResults[Operation]"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "self": {
+                                    "href": "https://marain.io/api/operations?PageSize=1000",
+                                    "rel": "self"
+                                },
+                                "nextPage": {
+                                    "href": null,
+                                    "rel": null
+                                },
+                                "results": [
+                                    {
+                                        "createdDateTime": "2016-10-23T13:44:28.8183211+00:00",
+                                        "id": "0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                        "lastActionDateTime": "2016-10-23T13:44:29.6046585+00:00",
+                                        "contentId": "8b9fb498-c5af-4237-a0a3-dabcd932fd56",
+                                        "percentComplete": 100,
+                                        "resourceLocation": "https://marain.io/api/text/extract?OperationId=0f70fbad-2c48-48d6-8ce8-043fdc07156a",
+                                        "status": "Succeeded",
+                                        "tenantId": "c3952b2e-be67-4a33-a620-10b3957ba6fc"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CryptoKeyResponse": {
+            "type": "object",
+            "properties": {
+                "FriendlyName": {
+                    "type": "string"
+                },
+                "PrivateKeyId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "PublicKey": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaginatableResults[CryptoKeyResponse]": {
+            "type": "object",
+            "properties": {
+                "Self": {
+                    "$ref": "#/definitions/Link"
+                },
+                "NextPage": {
+                    "$ref": "#/definitions/Link"
+                },
+                "Results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CryptoKeyResponse"
+                    }
+                }
+            }
+        },
+        "Link": {
+            "type": "object",
+            "properties": {
+                "Href": {
+                    "type": "string",
+                    "readOnly": true
+                },
+                "Rel": {
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "LicenseCriteria": {
+            "type": "object",
+            "properties": {
+                "ExpirationDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "IssueDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "Type": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "expirationDate": "2018-08-20T12:10:44.9947667+00:00",
+                "id": "9c8ee6d9-3125-40cc-86e5-078f8ab9caca",
+                "issueDate": "2018-07-20T12:10:44.9947667+00:00",
+                "metadata": {
+                    "machineName": "Home-Desktop",
+                    "licensedCores": "2"
+                },
+                "type": "Subscription"
+            }
+        },
+        "LocalizedContentRequest": {
+            "type": "object",
+            "properties": {
+                "LocalizedContent": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LocalizedContent"
+                    }
+                }
+            },
+            "example": {
+                "localizedContent": [
+                    {
+                        "content": "This is a sentence in English",
+                        "locale": "en-GB"
+                    },
+                    {
+                        "content": "Il s'agit d'une phrase en français",
+                        "locale": "fr-FR"
+                    }
+                ]
+            }
+        },
+        "LocalizedContent": {
+            "type": "object",
+            "properties": {
+                "Content": {
+                    "type": "string"
+                },
+                "Locale": {
+                    "type": "string"
+                }
+            }
+        },
+        "LocalizableContent": {
+            "type": "object",
+            "properties": {
+                "Content": {
+                    "type": "string"
+                },
+                "ContentId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "Locale": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaginatableResults[Operation]": {
+            "type": "object",
+            "properties": {
+                "Self": {
+                    "$ref": "#/definitions/Link"
+                },
+                "NextPage": {
+                    "$ref": "#/definitions/Link"
+                },
+                "Results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Operation"
+                    }
+                }
+            }
+        },
+        "Operation": {
+            "type": "object",
+            "properties": {
+                "CreatedDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "LastActionDateTime": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ContentId": {
+                    "type": "string"
+                },
+                "PercentComplete": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "ResourceLocation": {
+                    "type": "string"
+                },
+                "Status": {
+                    "enum": [
+                        "NotStarted",
+                        "Running",
+                        "Succeeded",
+                        "Failed"
+                    ],
+                    "type": "string"
+                },
+                "TenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            }
+        },
+        "TenantModel": {
+            "required": [
+                "Organisation",
+                "Email",
+                "FamilyName",
+                "FirstName"
+            ],
+            "type": "object",
+            "properties": {
+                "Organisation": {
+                    "description": "Set to Personal, if no organisation.",
+                    "type": "string"
+                },
+                "Email": {
+                    "type": "string"
+                },
+                "FamilyName": {
+                    "type": "string"
+                },
+                "FirstName": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "organisation": "Paper Street Soap Company",
+                "email": "T.Durden@paperstreetsoapcompany.com",
+                "familyName": "Durden",
+                "firstName": "Tyler"
+            }
+        },
+        "SpeechSynthesisRequest": {
+            "type": "object",
+            "properties": {
+                "Configuration": {
+                    "$ref": "#/definitions/Configuration"
+                },
+                "Text": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "configuration": {
+                    "locale": "en-GB",
+                    "gender": "Female",
+                    "outputFormat": "riff-16khz-16bit-mono-pcm",
+                    "serviceNameMapping": "Microsoft Server Speech Text to Speech Voice (en-GB, Susan, Apollo)"
+                },
+                "text": "This is an Emergency Broadcast System Test"
+            }
+        },
+        "Configuration": {
+            "type": "object",
+            "properties": {
+                "Locale": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "OutputFormat": {
+                    "type": "string"
+                },
+                "ServiceNameMapping": {
+                    "type": "string"
+                }
+            }
+        },
+        "SpeechSynthesisOptions": {
+            "type": "object",
+            "properties": {
+                "Locale": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "ServiceNameMapping": {
+                    "type": "string"
+                }
+            }
+        },
+        "LicenseTelemetry": {
+            "type": "object",
+            "properties": {
+                "LicenseSummary": {
+                    "$ref": "#/definitions/LicenseSummary"
+                },
+                "MetaData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "Timestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Id": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            },
+            "example": {
+                "licenseSummary": {
+                    "customerId": "e3d8e03f-7d8f-4e25-b39f-92025ffc1b4b",
+                    "expirationDate": "2018-08-20T12:10:45.0260174+00:00",
+                    "expirationDateGracePeriod": "2018-09-20T12:10:45.0260174+00:00",
+                    "isValid": false,
+                    "licenseId": "9c8ee6d9-3125-40cc-86e5-078f8ab9caca",
+                    "sku": "MAL-42G",
+                    "subscriptionId": "27223687-4ed5-4c8e-9ad2-28480914d46c",
+                    "violations": [
+                        "License has expired"
+                    ]
+                },
+                "metaData": {
+                    "ipAddress": "127.0.0.1"
+                },
+                "timestamp": "2018-07-20T12:10:45.0260174+00:00",
+                "id": "3d0ce5f4-e8af-4dc4-8cf7-65591ad302c2"
+            }
+        },
+        "LicenseSummary": {
+            "type": "object",
+            "properties": {
+                "CustomerId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "ExpirationDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ExpirationDateGracePeriod": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "IsValid": {
+                    "type": "boolean"
+                },
+                "LicenseId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "Sku": {
+                    "type": "string"
+                },
+                "SubscriptionId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "Violations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Tenant": {
+            "type": "object",
+            "properties": {
+                "Claims": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "Email": {
+                    "type": "string"
+                },
+                "FamilyName": {
+                    "type": "string"
+                },
+                "FirstName": {
+                    "type": "string"
+                },
+                "IsApproved": {
+                    "type": "boolean"
+                },
+                "Id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "Organisation": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaginatableResults[MeteredRequest]": {
+            "type": "object",
+            "properties": {
+                "Self": {
+                    "$ref": "#/definitions/Link"
+                },
+                "NextPage": {
+                    "$ref": "#/definitions/Link"
+                },
+                "Results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MeteredRequest"
+                    }
+                }
+            }
+        },
+        "MeteredRequest": {
+            "type": "object",
+            "properties": {
+                "Request": {
+                    "$ref": "#/definitions/MeteredRequestDetails"
+                },
+                "Identity": {
+                    "$ref": "#/definitions/MeteredIdentity"
+                },
+                "Response": {
+                    "$ref": "#/definitions/MeteredResponseDetails"
+                },
+                "Environment": {
+                    "$ref": "#/definitions/MeteredEnvironment"
+                }
+            }
+        },
+        "MeteredRequestDetails": {
+            "type": "object",
+            "properties": {
+                "Method": {
+                    "type": "string"
+                },
+                "AbsoluteUri": {
+                    "type": "string"
+                },
+                "Timestamp": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
+        "MeteredIdentity": {
+            "type": "object",
+            "properties": {
+                "ApiKey": {
+                    "type": "string"
+                },
+                "IpAddress": {
+                    "type": "string"
+                },
+                "TenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "UserName": {
+                    "type": "string"
+                }
+            }
+        },
+        "MeteredResponseDetails": {
+            "type": "object",
+            "properties": {
+                "StatusCode": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "TimeInMilliseconds": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "MeteredEnvironment": {
+            "type": "object",
+            "properties": {
+                "MachineName": {
+                    "type": "string"
+                },
+                "ReleaseVersion": {
+                    "type": "string"
+                }
+            }
+        },
+        "ClassificationRequest": {
+            "type": "object",
+            "properties": {
+                "Classifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Classifier"
+                    }
+                },
+                "Text": {
+                    "type": "string"
+                },
+                "Strategy": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "classifiers": [
+                    {
+                        "id": "Politics",
+                        "primaryTerms": [
+                            "Parliament",
+                            "Government",
+                            "Legislation"
+                        ],
+                        "secondaryTerms": [
+                            "Cabinet",
+                            "Prime Minister",
+                            "MP"
+                        ]
+                    }
+                ],
+                "text": "The Government must do more to demonstrate that it has fulfilled its obligations to assess the equalities impacts of future Spending Reviews, Budgets and Autumn Statements, says the report by the Women and Equalities Committee.",
+                "strategy": "SimpleDocumentWithFewHits"
+            }
+        },
+        "Classifier": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "PrimaryTerms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "SecondaryTerms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ClassificationResponse": {
+            "type": "object",
+            "properties": {
+                "ClassifierId": {
+                    "type": "string"
+                },
+                "Score": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "BatchClassificationRequest": {
+            "type": "object",
+            "properties": {
+                "Classifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Classifier"
+                    }
+                },
+                "Content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextItem"
+                    }
+                },
+                "Strategy": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "classifiers": [
+                    {
+                        "id": "Politics",
+                        "primaryTerms": [
+                            "Parliament",
+                            "Government",
+                            "Legislation"
+                        ],
+                        "secondaryTerms": [
+                            "Cabinet",
+                            "Prime Minister",
+                            "MP"
+                        ]
+                    }
+                ],
+                "content": [
+                    {
+                        "id": "daeecd03-7e7e-4c31-bf98-99549aacf868",
+                        "text": "I am trying to address that point. If we are to have proper democracy rather than mathematics, we need a reasonable period within which the boundary commissions in Wales and England can look at the evidence and work out where it will be best for the boundaries to be situated. They could then consult and hold public inquiries on that basis. We have already heard, however, that if the Bill were to be put on to the statute book with a requirement for the new arrangements to be implemented no later than October 2018, it would not be possible for the boundary commissions—certainly those in England—to do the necessary spadework to ensure an equitable outcome, rather than one that would be subject to judicial review as a result of having been rushed and not taking into account the representations that had been made."
+                    },
+                    {
+                        "id": "60a75783-1ae9-4e1e-99ff-0e720db90655",
+                        "text": "My hon. Friend is making a powerful speech. I want to get it clear in my mind what he is saying. Is he suggesting that we should equalise the seats and keep the same number of Members of Parliament, for reasons of democracy and scrutinising the Government, but that this cannot be achieved in the proposed timescale? Should we not simply allow the Bill to have its Second Reading and then amend it in Committee?"
+                    }
+                ],
+                "strategy": "SimpleDocumentWithFewHits"
+            }
+        },
+        "TextItem": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "Text": {
+                    "type": "string"
+                }
+            }
+        },
+        "BatchClassificationResponse": {
+            "type": "object",
+            "properties": {
+                "Classification": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ClassificationResponse"
+                    }
+                },
+                "TextId": {
+                    "type": "string"
+                }
+            }
+        },
+        "BatchClassificationBestResponse": {
+            "type": "object",
+            "properties": {
+                "Classification": {
+                    "$ref": "#/definitions/ClassificationResponse"
+                },
+                "TextId": {
+                    "type": "string"
+                }
+            }
+        },
+        "TextExtractionResponse": {
+            "type": "object",
+            "properties": {
+                "Content": {
+                    "type": "string"
+                }
+            }
+        },
+        "BatchLanguageDetectionRequest": {
+            "type": "object",
+            "properties": {
+                "LanguageIdentifier": {
+                    "type": "string"
+                },
+                "Content": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextItem"
+                    }
+                }
+            },
+            "example": {
+                "languageIdentifier": "iso6393",
+                "content": [
+                    {
+                        "id": "daeecd03-7e7e-4c31-bf98-99549aacf868",
+                        "text": "I am trying to address that point. If we are to have proper democracy rather than mathematics, we need a reasonable period within which the boundary commissions in Wales and England can look at the evidence and work out where it will be best for the boundaries to be situated. They could then consult and hold public inquiries on that basis. We have already heard, however, that if the Bill were to be put on to the statute book with a requirement for the new arrangements to be implemented no later than October 2018, it would not be possible for the boundary commissions—certainly those in England—to do the necessary spadework to ensure an equitable outcome, rather than one that would be subject to judicial review as a result of having been rushed and not taking into account the representations that had been made."
+                    },
+                    {
+                        "id": "60a75783-1ae9-4e1e-99ff-0e720db90655",
+                        "text": "My hon. Friend is making a powerful speech. I want to get it clear in my mind what he is saying. Is he suggesting that we should equalise the seats and keep the same number of Members of Parliament, for reasons of democracy and scrutinising the Government, but that this cannot be achieved in the proposed timescale? Should we not simply allow the Bill to have its Second Reading and then amend it in Committee?"
+                    }
+                ]
+            }
+        },
+        "BatchLanguageDetectionResponse": {
+            "type": "object",
+            "properties": {
+                "Detection": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LanguageDetectionResponse"
+                    }
+                },
+                "TextId": {
+                    "type": "string"
+                }
+            }
+        },
+        "LanguageDetectionResponse": {
+            "type": "object",
+            "properties": {
+                "Culture": {
+                    "type": "string"
+                },
+                "Score": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "LanguageDetectionRequest": {
+            "type": "object",
+            "properties": {
+                "LanguageIdentifier": {
+                    "type": "string"
+                },
+                "Content": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "languageIdentifier": "iso6393",
+                "content": "This is a sentence in English, or so I have been led to believe!"
+            }
+        },
+        "ExponentialNormalizerScoringRequest": {
+            "type": "object",
+            "properties": {
+                "Keywords": {
+                    "$ref": "#/definitions/Keywords"
+                },
+                "FragmenterConfiguration": {
+                    "$ref": "#/definitions/FragmenterConfigurationRequest"
+                },
+                "SimpleFragmenterConfiguration": {
+                    "$ref": "#/definitions/SimpleFragmenterConfigurationRequest"
+                },
+                "PrimaryKeywordScoreRatio": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "MappingCoefficient": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "ScoringType": {
+                    "type": "string"
+                },
+                "Text": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "keywords": {
+                    "primary": "VM, batch, RemoteApp, \"virtual machine\", \"cloud platform\", \"cloud service\", \"cloud services\", \"cloud computing platform\", infrastructure, PaaS, IaaS, \"Worker Role\", \"Web Role\", VHD, \"linux virtual machine\", \"Nano Server\", \"Service Fabric\", \"vm scale sets\", \"Azure Functions\", VHD, , \"Nano Server\", \"azure container service\"",
+                    "secondary": "\"H Series\", \"G Series\", \"Red Hat\""
+                },
+                "fragmenterConfiguration": {
+                    "mergeContiguousFragments": true,
+                    "maxNumFragments": 1
+                },
+                "simpleFragmenterConfiguration": {
+                    "fragmentSize": 5
+                },
+                "primaryKeywordScoreRatio": 0.5,
+                "mappingCoefficient": 0.2,
+                "scoringType": "ScoreBestFragmentForKeyword",
+                "text": "Today organizations are turning to the cloud not only to accelerate – but to transform – their business. Platform as a Service (PaaS) enables businesses to innovate at a scale that fuels their business transformation – with a focus on application innovation rather than infrastructure management and maintenance. Microsoft Azure has led the way with PaaS in alignment with our decades long commitment to enable developers with world class tools and services. Part of the Azure PaaS portfolio, Azure Functions, offers a serverless compute experience for rapid application development and operational agility. Released in preview in March 2016, we’re excited to announce the general availability of Azure Functions today."
+            }
+        },
+        "Keywords": {
+            "type": "object",
+            "properties": {
+                "Primary": {
+                    "type": "string"
+                },
+                "Secondary": {
+                    "type": "string"
+                }
+            }
+        },
+        "FragmenterConfigurationRequest": {
+            "type": "object",
+            "properties": {
+                "MergeContiguousFragments": {
+                    "type": "boolean"
+                },
+                "MaxNumFragments": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "SimpleFragmenterConfigurationRequest": {
+            "type": "object",
+            "properties": {
+                "FragmentSize": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "LinearNormalizerScoringRequest": {
+            "type": "object",
+            "properties": {
+                "Keywords": {
+                    "$ref": "#/definitions/Keywords"
+                },
+                "FragmenterConfiguration": {
+                    "$ref": "#/definitions/FragmenterConfigurationRequest"
+                },
+                "SimpleFragmenterConfiguration": {
+                    "$ref": "#/definitions/SimpleFragmenterConfigurationRequest"
+                },
+                "PrimaryKeywordScoreRatio": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Gradient": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "ScoringType": {
+                    "type": "string"
+                },
+                "Text": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "keywords": {
+                    "primary": "VM, batch, RemoteApp, \"virtual machine\", \"cloud platform\", \"cloud service\", \"cloud services\", \"cloud computing platform\", infrastructure, PaaS, IaaS, \"Worker Role\", \"Web Role\", VHD, \"linux virtual machine\", \"Nano Server\", \"Service Fabric\", \"vm scale sets\", \"Azure Functions\", VHD, , \"Nano Server\", \"azure container service\"",
+                    "secondary": "\"H Series\", \"G Series\", \"Red Hat\""
+                },
+                "fragmenterConfiguration": {
+                    "mergeContiguousFragments": true,
+                    "maxNumFragments": 1
+                },
+                "simpleFragmenterConfiguration": {
+                    "fragmentSize": 5
+                },
+                "primaryKeywordScoreRatio": 0.5,
+                "gradient": 0.6,
+                "scoringType": "ScoreBestFragmentForKeyword",
+                "text": "Today organizations are turning to the cloud not only to accelerate – but to transform – their business. Platform as a Service (PaaS) enables businesses to innovate at a scale that fuels their business transformation – with a focus on application innovation rather than infrastructure management and maintenance. Microsoft Azure has led the way with PaaS in alignment with our decades long commitment to enable developers with world class tools and services. Part of the Azure PaaS portfolio, Azure Functions, offers a serverless compute experience for rapid application development and operational agility. Released in preview in March 2016, we’re excited to announce the general availability of Azure Functions today."
+            }
+        },
+        "ScoringRequest": {
+            "type": "object",
+            "properties": {
+                "Keywords": {
+                    "$ref": "#/definitions/Keywords"
+                },
+                "Text": {
+                    "type": "string"
+                },
+                "Strategy": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "keywords": {
+                    "primary": "VM, batch, RemoteApp, \"virtual machine\", \"cloud platform\", \"cloud service\", \"cloud services\", \"cloud computing platform\", infrastructure, PaaS, IaaS, \"Worker Role\", \"Web Role\", VHD, \"linux virtual machine\", \"Nano Server\", \"Service Fabric\", \"vm scale sets\", \"Azure Functions\", VHD, , \"Nano Server\", \"azure container service\"",
+                    "secondary": "\"H Series\", \"G Series\", \"Red Hat\""
+                },
+                "text": "Today organizations are turning to the cloud not only to accelerate – but to transform – their business. Platform as a Service (PaaS) enables businesses to innovate at a scale that fuels their business transformation – with a focus on application innovation rather than infrastructure management and maintenance. Microsoft Azure has led the way with PaaS in alignment with our decades long commitment to enable developers with world class tools and services. Part of the Azure PaaS portfolio, Azure Functions, offers a serverless compute experience for rapid application development and operational agility. Released in preview in March 2016, we’re excited to announce the general availability of Azure Functions today.",
+                "strategy": "SimpleDocumentWithFewHits"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "apiKey": {
+            "type": "apiKey",
+            "description": "API Key Authentication",
+            "name": "X-Api-Key",
+            "in": "header"
+        }
+    }
+}

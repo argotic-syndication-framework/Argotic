@@ -1,0 +1,2143 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration.TrackbackClientSection
+  commentId: T:Argotic.Configuration.TrackbackClientSection
+  id: TrackbackClientSection
+  parent: Argotic.Configuration
+  children:
+  - Argotic.Configuration.TrackbackClientSection.#ctor
+  - Argotic.Configuration.TrackbackClientSection.Network
+  - Argotic.Configuration.TrackbackClientSection.Properties
+  - Argotic.Configuration.TrackbackClientSection.Timeout
+  - Argotic.Configuration.TrackbackClientSection.UserAgent
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClientSection
+  nameWithType: TrackbackClientSection
+  fullName: Argotic.Configuration.TrackbackClientSection
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TrackbackClientSection
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nRepresents the configuration section used to declarativly configure the <xref href=\"Argotic.Net.TrackbackClient\" data-throw-if-not-resolved=\"false\"></xref> class. This class cannot be inheritied.\n"
+  example: []
+  syntax:
+    content: 'public sealed class TrackbackClientSection : ConfigurationSection'
+    content.vb: >-
+      Public NotInheritable Class TrackbackClientSection
+
+          Inherits ConfigurationSection
+  inheritance:
+  - System.Object
+  - System.Configuration.ConfigurationElement
+  - System.Configuration.ConfigurationSection
+  inheritedMembers:
+  - System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+  - System.Configuration.ConfigurationSection.GetRuntimeObject
+  - System.Configuration.ConfigurationSection.IsModified
+  - System.Configuration.ConfigurationSection.ResetModified
+  - System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)
+  - System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)
+  - System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)
+  - System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+  - System.Configuration.ConfigurationSection.SectionInformation
+  - System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader,System.Boolean)
+  - System.Configuration.ConfigurationElement.Equals(System.Object)
+  - System.Configuration.ConfigurationElement.GetHashCode
+  - System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+  - System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+  - System.Configuration.ConfigurationElement.Init
+  - System.Configuration.ConfigurationElement.InitializeDefault
+  - System.Configuration.ConfigurationElement.IsReadOnly
+  - System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+  - System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String,System.String)
+  - System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)
+  - System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+  - System.Configuration.ConfigurationElement.PostDeserialize
+  - System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+  - System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+  - System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter,System.Boolean)
+  - System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter,System.String)
+  - System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty,System.Object,System.Boolean)
+  - System.Configuration.ConfigurationElement.SetReadOnly
+  - System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)
+  - System.Configuration.ConfigurationElement.CurrentConfiguration
+  - System.Configuration.ConfigurationElement.ElementInformation
+  - System.Configuration.ConfigurationElement.ElementProperty
+  - System.Configuration.ConfigurationElement.EvaluationContext
+  - System.Configuration.ConfigurationElement.HasContext
+  - System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+  - System.Configuration.ConfigurationElement.Item(System.String)
+  - System.Configuration.ConfigurationElement.LockAllAttributesExcept
+  - System.Configuration.ConfigurationElement.LockAllElementsExcept
+  - System.Configuration.ConfigurationElement.LockAttributes
+  - System.Configuration.ConfigurationElement.LockElements
+  - System.Configuration.ConfigurationElement.LockItem
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - sealed
+  - class
+  modifiers.vb:
+  - Public
+  - NotInheritable
+  - Class
+- uid: Argotic.Configuration.TrackbackClientSection.#ctor
+  commentId: M:Argotic.Configuration.TrackbackClientSection.#ctor
+  id: '#ctor'
+  parent: Argotic.Configuration.TrackbackClientSection
+  langs:
+  - csharp
+  - vb
+  name: TrackbackClientSection()
+  nameWithType: TrackbackClientSection.TrackbackClientSection()
+  fullName: Argotic.Configuration.TrackbackClientSection.TrackbackClientSection()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 55
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Configuration.TrackbackClientSection\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public TrackbackClientSection()
+    content.vb: Public Sub New
+  overload: Argotic.Configuration.TrackbackClientSection.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.TrackbackClientSection.Network
+  commentId: P:Argotic.Configuration.TrackbackClientSection.Network
+  id: Network
+  parent: Argotic.Configuration.TrackbackClientSection
+  langs:
+  - csharp
+  - vb
+  name: Network
+  nameWithType: TrackbackClientSection.Network
+  fullName: Argotic.Configuration.TrackbackClientSection.Network
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Network
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 66
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nGets the network connection information.\n"
+  example: []
+  syntax:
+    content: >-
+      [ConfigurationProperty("network", DefaultValue = null, Options = ConfigurationPropertyOptions.None)]
+
+      public TrackbackClientNetworkElement Network { get; }
+    parameters: []
+    return:
+      type: Argotic.Configuration.TrackbackClientNetworkElement
+      description: A <xref href="Argotic.Configuration.TrackbackClientNetworkElement" data-throw-if-not-resolved="false"></xref> object that represents the configured network connection information.
+    content.vb: >-
+      <ConfigurationProperty("network", DefaultValue:=Nothing, Options:=ConfigurationPropertyOptions.None)>
+
+      Public ReadOnly Property Network As TrackbackClientNetworkElement
+  overload: Argotic.Configuration.TrackbackClientSection.Network*
+  attributes:
+  - type: System.Configuration.ConfigurationPropertyAttribute
+    ctor: System.Configuration.ConfigurationPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: network
+    namedArguments:
+    - name: DefaultValue
+      type: System.Object
+    - name: Options
+      type: System.Configuration.ConfigurationPropertyOptions
+      value: 0
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Configuration.TrackbackClientSection.Timeout
+  commentId: P:Argotic.Configuration.TrackbackClientSection.Timeout
+  id: Timeout
+  parent: Argotic.Configuration.TrackbackClientSection
+  langs:
+  - csharp
+  - vb
+  name: Timeout
+  nameWithType: TrackbackClientSection.Timeout
+  fullName: Argotic.Configuration.TrackbackClientSection.Timeout
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Timeout
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 79
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nGets or sets a value that specifies the amount of time after which asynchronous send operations will time out.\n"
+  example: []
+  syntax:
+    content: >-
+      [ConfigurationProperty("timeout", DefaultValue = "0:0:15.0", Options = ConfigurationPropertyOptions.None)]
+
+      [TypeConverter(typeof(TimeSpan))]
+
+      public TimeSpan Timeout { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+      description: A <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref> that specifies the time-out period. The default value is 15 seconds.
+    content.vb: >-
+      <ConfigurationProperty("timeout", DefaultValue:="0:0:15.0", Options:=ConfigurationPropertyOptions.None)>
+
+      <TypeConverter(GetType(TimeSpan))>
+
+      Public Property Timeout As TimeSpan
+  overload: Argotic.Configuration.TrackbackClientSection.Timeout*
+  attributes:
+  - type: System.Configuration.ConfigurationPropertyAttribute
+    ctor: System.Configuration.ConfigurationPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: timeout
+    namedArguments:
+    - name: DefaultValue
+      type: System.String
+      value: 0:0:15.0
+    - name: Options
+      type: System.Configuration.ConfigurationPropertyOptions
+      value: 0
+  - type: System.ComponentModel.TypeConverterAttribute
+    ctor: System.ComponentModel.TypeConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: System.TimeSpan
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.TrackbackClientSection.UserAgent
+  commentId: P:Argotic.Configuration.TrackbackClientSection.UserAgent
+  id: UserAgent
+  parent: Argotic.Configuration.TrackbackClientSection
+  langs:
+  - csharp
+  - vb
+  name: UserAgent
+  nameWithType: TrackbackClientSection.UserAgent
+  fullName: Argotic.Configuration.TrackbackClientSection.UserAgent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UserAgent
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 98
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nGets or sets information such as the client application name, version, host operating system, and language.\n"
+  example: []
+  syntax:
+    content: >-
+      [ConfigurationProperty("agent", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+
+      public string UserAgent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A string that represents information such as the client application name, version, host operating system, and language.
+    content.vb: >-
+      <ConfigurationProperty("agent", DefaultValue:="", Options:=ConfigurationPropertyOptions.None)>
+
+      Public Property UserAgent As String
+  overload: Argotic.Configuration.TrackbackClientSection.UserAgent*
+  attributes:
+  - type: System.Configuration.ConfigurationPropertyAttribute
+    ctor: System.Configuration.ConfigurationPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: agent
+    namedArguments:
+    - name: DefaultValue
+      type: System.String
+      value: ''
+    - name: Options
+      type: System.Configuration.ConfigurationPropertyOptions
+      value: 0
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Configuration.TrackbackClientSection.Properties
+  commentId: P:Argotic.Configuration.TrackbackClientSection.Properties
+  id: Properties
+  parent: Argotic.Configuration.TrackbackClientSection
+  langs:
+  - csharp
+  - vb
+  name: Properties
+  nameWithType: TrackbackClientSection.Properties
+  fullName: Argotic.Configuration.TrackbackClientSection.Properties
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Properties
+    path: ../Solutions/Argotic.Core/Configuration/TrackbackClientSection.cs
+    startLine: 116
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration
+  summary: "\nGets the configuration properties for this section.\n"
+  example: []
+  syntax:
+    content: protected override ConfigurationPropertyCollection Properties { get; }
+    parameters: []
+    return:
+      type: System.Configuration.ConfigurationPropertyCollection
+      description: A <xref href="System.Configuration.ConfigurationPropertyCollection" data-throw-if-not-resolved="false"></xref> object that represents the configuration properties for this section.
+    content.vb: Protected Overrides ReadOnly Property Properties As ConfigurationPropertyCollection
+  overridden: System.Configuration.ConfigurationElement.Properties
+  overload: Argotic.Configuration.TrackbackClientSection.Properties*
+  modifiers.csharp:
+  - protected
+  - override
+  - get
+  modifiers.vb:
+  - Protected
+  - Overrides
+  - ReadOnly
+references:
+- uid: Argotic.Net.TrackbackClient
+  commentId: T:Argotic.Net.TrackbackClient
+  name: TrackbackClient
+  nameWithType: TrackbackClient
+  fullName: Argotic.Net.TrackbackClient
+- uid: Argotic.Configuration
+  commentId: N:Argotic.Configuration
+  name: Argotic.Configuration
+  nameWithType: Argotic.Configuration
+  fullName: Argotic.Configuration
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Configuration.ConfigurationElement
+  commentId: T:System.Configuration.ConfigurationElement
+  parent: System.Configuration
+  isExternal: true
+  name: ConfigurationElement
+  nameWithType: ConfigurationElement
+  fullName: System.Configuration.ConfigurationElement
+- uid: System.Configuration.ConfigurationSection
+  commentId: T:System.Configuration.ConfigurationSection
+  parent: System.Configuration
+  isExternal: true
+  name: ConfigurationSection
+  nameWithType: ConfigurationSection
+  fullName: System.Configuration.ConfigurationSection
+- uid: System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+  commentId: M:System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: DeserializeSection(XmlReader)
+  nameWithType: ConfigurationSection.DeserializeSection(XmlReader)
+  fullName: System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+    name: DeserializeSection
+    nameWithType: ConfigurationSection.DeserializeSection
+    fullName: System.Configuration.ConfigurationSection.DeserializeSection
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.DeserializeSection(System.Xml.XmlReader)
+    name: DeserializeSection
+    nameWithType: ConfigurationSection.DeserializeSection
+    fullName: System.Configuration.ConfigurationSection.DeserializeSection
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.GetRuntimeObject
+  commentId: M:System.Configuration.ConfigurationSection.GetRuntimeObject
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: GetRuntimeObject()
+  nameWithType: ConfigurationSection.GetRuntimeObject()
+  fullName: System.Configuration.ConfigurationSection.GetRuntimeObject()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.GetRuntimeObject
+    name: GetRuntimeObject
+    nameWithType: ConfigurationSection.GetRuntimeObject
+    fullName: System.Configuration.ConfigurationSection.GetRuntimeObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.GetRuntimeObject
+    name: GetRuntimeObject
+    nameWithType: ConfigurationSection.GetRuntimeObject
+    fullName: System.Configuration.ConfigurationSection.GetRuntimeObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.IsModified
+  commentId: M:System.Configuration.ConfigurationSection.IsModified
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: IsModified()
+  nameWithType: ConfigurationSection.IsModified()
+  fullName: System.Configuration.ConfigurationSection.IsModified()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.IsModified
+    name: IsModified
+    nameWithType: ConfigurationSection.IsModified
+    fullName: System.Configuration.ConfigurationSection.IsModified
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.IsModified
+    name: IsModified
+    nameWithType: ConfigurationSection.IsModified
+    fullName: System.Configuration.ConfigurationSection.IsModified
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.ResetModified
+  commentId: M:System.Configuration.ConfigurationSection.ResetModified
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: ResetModified()
+  nameWithType: ConfigurationSection.ResetModified()
+  fullName: System.Configuration.ConfigurationSection.ResetModified()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.ResetModified
+    name: ResetModified
+    nameWithType: ConfigurationSection.ResetModified
+    fullName: System.Configuration.ConfigurationSection.ResetModified
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.ResetModified
+    name: ResetModified
+    nameWithType: ConfigurationSection.ResetModified
+    fullName: System.Configuration.ConfigurationSection.ResetModified
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)
+  commentId: M:System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: SerializeSection(ConfigurationElement, String, ConfigurationSaveMode)
+  nameWithType: ConfigurationSection.SerializeSection(ConfigurationElement, String, ConfigurationSaveMode)
+  fullName: System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement, System.String, System.Configuration.ConfigurationSaveMode)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)
+    name: SerializeSection
+    nameWithType: ConfigurationSection.SerializeSection
+    fullName: System.Configuration.ConfigurationSection.SerializeSection
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationSaveMode
+    name: ConfigurationSaveMode
+    nameWithType: ConfigurationSaveMode
+    fullName: System.Configuration.ConfigurationSaveMode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)
+    name: SerializeSection
+    nameWithType: ConfigurationSection.SerializeSection
+    fullName: System.Configuration.ConfigurationSection.SerializeSection
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationSaveMode
+    name: ConfigurationSaveMode
+    nameWithType: ConfigurationSaveMode
+    fullName: System.Configuration.ConfigurationSaveMode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)
+  commentId: M:System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: ShouldSerializeElementInTargetVersion(ConfigurationElement, String, FrameworkName)
+  nameWithType: ConfigurationSection.ShouldSerializeElementInTargetVersion(ConfigurationElement, String, FrameworkName)
+  fullName: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement, System.String, System.Runtime.Versioning.FrameworkName)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)
+    name: ShouldSerializeElementInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializeElementInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)
+    name: ShouldSerializeElementInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializeElementInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializeElementInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)
+  commentId: M:System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: ShouldSerializePropertyInTargetVersion(ConfigurationProperty, String, FrameworkName, ConfigurationElement)
+  nameWithType: ConfigurationSection.ShouldSerializePropertyInTargetVersion(ConfigurationProperty, String, FrameworkName, ConfigurationElement)
+  fullName: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty, System.String, System.Runtime.Versioning.FrameworkName, System.Configuration.ConfigurationElement)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)
+    name: ShouldSerializePropertyInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializePropertyInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)
+    name: ShouldSerializePropertyInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializePropertyInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializePropertyInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+  commentId: M:System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: ShouldSerializeSectionInTargetVersion(FrameworkName)
+  nameWithType: ConfigurationSection.ShouldSerializeSectionInTargetVersion(FrameworkName)
+  fullName: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+    name: ShouldSerializeSectionInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializeSectionInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)
+    name: ShouldSerializeSectionInTargetVersion
+    nameWithType: ConfigurationSection.ShouldSerializeSectionInTargetVersion
+    fullName: System.Configuration.ConfigurationSection.ShouldSerializeSectionInTargetVersion
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Runtime.Versioning.FrameworkName
+    name: FrameworkName
+    nameWithType: FrameworkName
+    fullName: System.Runtime.Versioning.FrameworkName
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationSection.SectionInformation
+  commentId: P:System.Configuration.ConfigurationSection.SectionInformation
+  parent: System.Configuration.ConfigurationSection
+  isExternal: true
+  name: SectionInformation
+  nameWithType: ConfigurationSection.SectionInformation
+  fullName: System.Configuration.ConfigurationSection.SectionInformation
+- uid: System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader,System.Boolean)
+  commentId: M:System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader,System.Boolean)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: DeserializeElement(XmlReader, Boolean)
+  nameWithType: ConfigurationElement.DeserializeElement(XmlReader, Boolean)
+  fullName: System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader, System.Boolean)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader,System.Boolean)
+    name: DeserializeElement
+    nameWithType: ConfigurationElement.DeserializeElement
+    fullName: System.Configuration.ConfigurationElement.DeserializeElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.DeserializeElement(System.Xml.XmlReader,System.Boolean)
+    name: DeserializeElement
+    nameWithType: ConfigurationElement.DeserializeElement
+    fullName: System.Configuration.ConfigurationElement.DeserializeElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.Equals(System.Object)
+  commentId: M:System.Configuration.ConfigurationElement.Equals(System.Object)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: ConfigurationElement.Equals(Object)
+  fullName: System.Configuration.ConfigurationElement.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Equals(System.Object)
+    name: Equals
+    nameWithType: ConfigurationElement.Equals
+    fullName: System.Configuration.ConfigurationElement.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Equals(System.Object)
+    name: Equals
+    nameWithType: ConfigurationElement.Equals
+    fullName: System.Configuration.ConfigurationElement.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.GetHashCode
+  commentId: M:System.Configuration.ConfigurationElement.GetHashCode
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: ConfigurationElement.GetHashCode()
+  fullName: System.Configuration.ConfigurationElement.GetHashCode()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.GetHashCode
+    name: GetHashCode
+    nameWithType: ConfigurationElement.GetHashCode
+    fullName: System.Configuration.ConfigurationElement.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.GetHashCode
+    name: GetHashCode
+    nameWithType: ConfigurationElement.GetHashCode
+    fullName: System.Configuration.ConfigurationElement.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+  commentId: M:System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: GetTransformedAssemblyString(String)
+  nameWithType: ConfigurationElement.GetTransformedAssemblyString(String)
+  fullName: System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+    name: GetTransformedAssemblyString
+    nameWithType: ConfigurationElement.GetTransformedAssemblyString
+    fullName: System.Configuration.ConfigurationElement.GetTransformedAssemblyString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.GetTransformedAssemblyString(System.String)
+    name: GetTransformedAssemblyString
+    nameWithType: ConfigurationElement.GetTransformedAssemblyString
+    fullName: System.Configuration.ConfigurationElement.GetTransformedAssemblyString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+  commentId: M:System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: GetTransformedTypeString(String)
+  nameWithType: ConfigurationElement.GetTransformedTypeString(String)
+  fullName: System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+    name: GetTransformedTypeString
+    nameWithType: ConfigurationElement.GetTransformedTypeString
+    fullName: System.Configuration.ConfigurationElement.GetTransformedTypeString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.GetTransformedTypeString(System.String)
+    name: GetTransformedTypeString
+    nameWithType: ConfigurationElement.GetTransformedTypeString
+    fullName: System.Configuration.ConfigurationElement.GetTransformedTypeString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.Init
+  commentId: M:System.Configuration.ConfigurationElement.Init
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Init()
+  nameWithType: ConfigurationElement.Init()
+  fullName: System.Configuration.ConfigurationElement.Init()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Init
+    name: Init
+    nameWithType: ConfigurationElement.Init
+    fullName: System.Configuration.ConfigurationElement.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Init
+    name: Init
+    nameWithType: ConfigurationElement.Init
+    fullName: System.Configuration.ConfigurationElement.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.InitializeDefault
+  commentId: M:System.Configuration.ConfigurationElement.InitializeDefault
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: InitializeDefault()
+  nameWithType: ConfigurationElement.InitializeDefault()
+  fullName: System.Configuration.ConfigurationElement.InitializeDefault()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.InitializeDefault
+    name: InitializeDefault
+    nameWithType: ConfigurationElement.InitializeDefault
+    fullName: System.Configuration.ConfigurationElement.InitializeDefault
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.InitializeDefault
+    name: InitializeDefault
+    nameWithType: ConfigurationElement.InitializeDefault
+    fullName: System.Configuration.ConfigurationElement.InitializeDefault
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.IsReadOnly
+  commentId: M:System.Configuration.ConfigurationElement.IsReadOnly
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: IsReadOnly()
+  nameWithType: ConfigurationElement.IsReadOnly()
+  fullName: System.Configuration.ConfigurationElement.IsReadOnly()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.IsReadOnly
+    name: IsReadOnly
+    nameWithType: ConfigurationElement.IsReadOnly
+    fullName: System.Configuration.ConfigurationElement.IsReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.IsReadOnly
+    name: IsReadOnly
+    nameWithType: ConfigurationElement.IsReadOnly
+    fullName: System.Configuration.ConfigurationElement.IsReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+  commentId: M:System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: ListErrors(IList)
+  nameWithType: ConfigurationElement.ListErrors(IList)
+  fullName: System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+    name: ListErrors
+    nameWithType: ConfigurationElement.ListErrors
+    fullName: System.Configuration.ConfigurationElement.ListErrors
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.IList
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.IList
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.ListErrors(System.Collections.IList)
+    name: ListErrors
+    nameWithType: ConfigurationElement.ListErrors
+    fullName: System.Configuration.ConfigurationElement.ListErrors
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.IList
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.IList
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String,System.String)
+  commentId: M:System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String,System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: OnDeserializeUnrecognizedAttribute(String, String)
+  nameWithType: ConfigurationElement.OnDeserializeUnrecognizedAttribute(String, String)
+  fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String, System.String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String,System.String)
+    name: OnDeserializeUnrecognizedAttribute
+    nameWithType: ConfigurationElement.OnDeserializeUnrecognizedAttribute
+    fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute(System.String,System.String)
+    name: OnDeserializeUnrecognizedAttribute
+    nameWithType: ConfigurationElement.OnDeserializeUnrecognizedAttribute
+    fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedAttribute
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)
+  commentId: M:System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: OnDeserializeUnrecognizedElement(String, XmlReader)
+  nameWithType: ConfigurationElement.OnDeserializeUnrecognizedElement(String, XmlReader)
+  fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String, System.Xml.XmlReader)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)
+    name: OnDeserializeUnrecognizedElement
+    nameWithType: ConfigurationElement.OnDeserializeUnrecognizedElement
+    fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)
+    name: OnDeserializeUnrecognizedElement
+    nameWithType: ConfigurationElement.OnDeserializeUnrecognizedElement
+    fullName: System.Configuration.ConfigurationElement.OnDeserializeUnrecognizedElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+  commentId: M:System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: OnRequiredPropertyNotFound(String)
+  nameWithType: ConfigurationElement.OnRequiredPropertyNotFound(String)
+  fullName: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+    name: OnRequiredPropertyNotFound
+    nameWithType: ConfigurationElement.OnRequiredPropertyNotFound
+    fullName: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound(System.String)
+    name: OnRequiredPropertyNotFound
+    nameWithType: ConfigurationElement.OnRequiredPropertyNotFound
+    fullName: System.Configuration.ConfigurationElement.OnRequiredPropertyNotFound
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.PostDeserialize
+  commentId: M:System.Configuration.ConfigurationElement.PostDeserialize
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: PostDeserialize()
+  nameWithType: ConfigurationElement.PostDeserialize()
+  fullName: System.Configuration.ConfigurationElement.PostDeserialize()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.PostDeserialize
+    name: PostDeserialize
+    nameWithType: ConfigurationElement.PostDeserialize
+    fullName: System.Configuration.ConfigurationElement.PostDeserialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.PostDeserialize
+    name: PostDeserialize
+    nameWithType: ConfigurationElement.PostDeserialize
+    fullName: System.Configuration.ConfigurationElement.PostDeserialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+  commentId: M:System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: PreSerialize(XmlWriter)
+  nameWithType: ConfigurationElement.PreSerialize(XmlWriter)
+  fullName: System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+    name: PreSerialize
+    nameWithType: ConfigurationElement.PreSerialize
+    fullName: System.Configuration.ConfigurationElement.PreSerialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.PreSerialize(System.Xml.XmlWriter)
+    name: PreSerialize
+    nameWithType: ConfigurationElement.PreSerialize
+    fullName: System.Configuration.ConfigurationElement.PreSerialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+  commentId: M:System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Reset(ConfigurationElement)
+  nameWithType: ConfigurationElement.Reset(ConfigurationElement)
+  fullName: System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+    name: Reset
+    nameWithType: ConfigurationElement.Reset
+    fullName: System.Configuration.ConfigurationElement.Reset
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Reset(System.Configuration.ConfigurationElement)
+    name: Reset
+    nameWithType: ConfigurationElement.Reset
+    fullName: System.Configuration.ConfigurationElement.Reset
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter,System.Boolean)
+  commentId: M:System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter,System.Boolean)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: SerializeElement(XmlWriter, Boolean)
+  nameWithType: ConfigurationElement.SerializeElement(XmlWriter, Boolean)
+  fullName: System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter, System.Boolean)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter,System.Boolean)
+    name: SerializeElement
+    nameWithType: ConfigurationElement.SerializeElement
+    fullName: System.Configuration.ConfigurationElement.SerializeElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.SerializeElement(System.Xml.XmlWriter,System.Boolean)
+    name: SerializeElement
+    nameWithType: ConfigurationElement.SerializeElement
+    fullName: System.Configuration.ConfigurationElement.SerializeElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter,System.String)
+  commentId: M:System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter,System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: SerializeToXmlElement(XmlWriter, String)
+  nameWithType: ConfigurationElement.SerializeToXmlElement(XmlWriter, String)
+  fullName: System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter, System.String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter,System.String)
+    name: SerializeToXmlElement
+    nameWithType: ConfigurationElement.SerializeToXmlElement
+    fullName: System.Configuration.ConfigurationElement.SerializeToXmlElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.SerializeToXmlElement(System.Xml.XmlWriter,System.String)
+    name: SerializeToXmlElement
+    nameWithType: ConfigurationElement.SerializeToXmlElement
+    fullName: System.Configuration.ConfigurationElement.SerializeToXmlElement
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty,System.Object,System.Boolean)
+  commentId: M:System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty,System.Object,System.Boolean)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: SetPropertyValue(ConfigurationProperty, Object, Boolean)
+  nameWithType: ConfigurationElement.SetPropertyValue(ConfigurationProperty, Object, Boolean)
+  fullName: System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty, System.Object, System.Boolean)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty,System.Object,System.Boolean)
+    name: SetPropertyValue
+    nameWithType: ConfigurationElement.SetPropertyValue
+    fullName: System.Configuration.ConfigurationElement.SetPropertyValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.SetPropertyValue(System.Configuration.ConfigurationProperty,System.Object,System.Boolean)
+    name: SetPropertyValue
+    nameWithType: ConfigurationElement.SetPropertyValue
+    fullName: System.Configuration.ConfigurationElement.SetPropertyValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.SetReadOnly
+  commentId: M:System.Configuration.ConfigurationElement.SetReadOnly
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: SetReadOnly()
+  nameWithType: ConfigurationElement.SetReadOnly()
+  fullName: System.Configuration.ConfigurationElement.SetReadOnly()
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.SetReadOnly
+    name: SetReadOnly
+    nameWithType: ConfigurationElement.SetReadOnly
+    fullName: System.Configuration.ConfigurationElement.SetReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.SetReadOnly
+    name: SetReadOnly
+    nameWithType: ConfigurationElement.SetReadOnly
+    fullName: System.Configuration.ConfigurationElement.SetReadOnly
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)
+  commentId: M:System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Unmerge(ConfigurationElement, ConfigurationElement, ConfigurationSaveMode)
+  nameWithType: ConfigurationElement.Unmerge(ConfigurationElement, ConfigurationElement, ConfigurationSaveMode)
+  fullName: System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement, System.Configuration.ConfigurationElement, System.Configuration.ConfigurationSaveMode)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)
+    name: Unmerge
+    nameWithType: ConfigurationElement.Unmerge
+    fullName: System.Configuration.ConfigurationElement.Unmerge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationSaveMode
+    name: ConfigurationSaveMode
+    nameWithType: ConfigurationSaveMode
+    fullName: System.Configuration.ConfigurationSaveMode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)
+    name: Unmerge
+    nameWithType: ConfigurationElement.Unmerge
+    fullName: System.Configuration.ConfigurationElement.Unmerge
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationElement
+    name: ConfigurationElement
+    nameWithType: ConfigurationElement
+    fullName: System.Configuration.ConfigurationElement
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Configuration.ConfigurationSaveMode
+    name: ConfigurationSaveMode
+    nameWithType: ConfigurationSaveMode
+    fullName: System.Configuration.ConfigurationSaveMode
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.CurrentConfiguration
+  commentId: P:System.Configuration.ConfigurationElement.CurrentConfiguration
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: CurrentConfiguration
+  nameWithType: ConfigurationElement.CurrentConfiguration
+  fullName: System.Configuration.ConfigurationElement.CurrentConfiguration
+- uid: System.Configuration.ConfigurationElement.ElementInformation
+  commentId: P:System.Configuration.ConfigurationElement.ElementInformation
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: ElementInformation
+  nameWithType: ConfigurationElement.ElementInformation
+  fullName: System.Configuration.ConfigurationElement.ElementInformation
+- uid: System.Configuration.ConfigurationElement.ElementProperty
+  commentId: P:System.Configuration.ConfigurationElement.ElementProperty
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: ElementProperty
+  nameWithType: ConfigurationElement.ElementProperty
+  fullName: System.Configuration.ConfigurationElement.ElementProperty
+- uid: System.Configuration.ConfigurationElement.EvaluationContext
+  commentId: P:System.Configuration.ConfigurationElement.EvaluationContext
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: EvaluationContext
+  nameWithType: ConfigurationElement.EvaluationContext
+  fullName: System.Configuration.ConfigurationElement.EvaluationContext
+- uid: System.Configuration.ConfigurationElement.HasContext
+  commentId: P:System.Configuration.ConfigurationElement.HasContext
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: HasContext
+  nameWithType: ConfigurationElement.HasContext
+  fullName: System.Configuration.ConfigurationElement.HasContext
+- uid: System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+  commentId: P:System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Item[ConfigurationProperty]
+  nameWithType: ConfigurationElement.Item[ConfigurationProperty]
+  fullName: System.Configuration.ConfigurationElement.Item[System.Configuration.ConfigurationProperty]
+  nameWithType.vb: ConfigurationElement.Item(ConfigurationProperty)
+  fullName.vb: System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+  name.vb: Item(ConfigurationProperty)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+    name: Item
+    nameWithType: ConfigurationElement.Item
+    fullName: System.Configuration.ConfigurationElement.Item
+    isExternal: true
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Item(System.Configuration.ConfigurationProperty)
+    name: Item
+    nameWithType: ConfigurationElement.Item
+    fullName: System.Configuration.ConfigurationElement.Item
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Configuration.ConfigurationProperty
+    name: ConfigurationProperty
+    nameWithType: ConfigurationProperty
+    fullName: System.Configuration.ConfigurationProperty
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.Item(System.String)
+  commentId: P:System.Configuration.ConfigurationElement.Item(System.String)
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Item[String]
+  nameWithType: ConfigurationElement.Item[String]
+  fullName: System.Configuration.ConfigurationElement.Item[System.String]
+  nameWithType.vb: ConfigurationElement.Item(String)
+  fullName.vb: System.Configuration.ConfigurationElement.Item(System.String)
+  name.vb: Item(String)
+  spec.csharp:
+  - uid: System.Configuration.ConfigurationElement.Item(System.String)
+    name: Item
+    nameWithType: ConfigurationElement.Item
+    fullName: System.Configuration.ConfigurationElement.Item
+    isExternal: true
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Configuration.ConfigurationElement.Item(System.String)
+    name: Item
+    nameWithType: ConfigurationElement.Item
+    fullName: System.Configuration.ConfigurationElement.Item
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.ConfigurationElement.LockAllAttributesExcept
+  commentId: P:System.Configuration.ConfigurationElement.LockAllAttributesExcept
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: LockAllAttributesExcept
+  nameWithType: ConfigurationElement.LockAllAttributesExcept
+  fullName: System.Configuration.ConfigurationElement.LockAllAttributesExcept
+- uid: System.Configuration.ConfigurationElement.LockAllElementsExcept
+  commentId: P:System.Configuration.ConfigurationElement.LockAllElementsExcept
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: LockAllElementsExcept
+  nameWithType: ConfigurationElement.LockAllElementsExcept
+  fullName: System.Configuration.ConfigurationElement.LockAllElementsExcept
+- uid: System.Configuration.ConfigurationElement.LockAttributes
+  commentId: P:System.Configuration.ConfigurationElement.LockAttributes
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: LockAttributes
+  nameWithType: ConfigurationElement.LockAttributes
+  fullName: System.Configuration.ConfigurationElement.LockAttributes
+- uid: System.Configuration.ConfigurationElement.LockElements
+  commentId: P:System.Configuration.ConfigurationElement.LockElements
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: LockElements
+  nameWithType: ConfigurationElement.LockElements
+  fullName: System.Configuration.ConfigurationElement.LockElements
+- uid: System.Configuration.ConfigurationElement.LockItem
+  commentId: P:System.Configuration.ConfigurationElement.LockItem
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: LockItem
+  nameWithType: ConfigurationElement.LockItem
+  fullName: System.Configuration.ConfigurationElement.LockItem
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Configuration
+  commentId: N:System.Configuration
+  isExternal: true
+  name: System.Configuration
+  nameWithType: System.Configuration
+  fullName: System.Configuration
+- uid: Argotic.Configuration.TrackbackClientSection
+  commentId: T:Argotic.Configuration.TrackbackClientSection
+  name: TrackbackClientSection
+  nameWithType: TrackbackClientSection
+  fullName: Argotic.Configuration.TrackbackClientSection
+- uid: Argotic.Configuration.TrackbackClientSection.#ctor*
+  commentId: Overload:Argotic.Configuration.TrackbackClientSection.#ctor
+  name: TrackbackClientSection
+  nameWithType: TrackbackClientSection.TrackbackClientSection
+  fullName: Argotic.Configuration.TrackbackClientSection.TrackbackClientSection
+- uid: Argotic.Configuration.TrackbackClientNetworkElement
+  commentId: T:Argotic.Configuration.TrackbackClientNetworkElement
+  parent: Argotic.Configuration
+  name: TrackbackClientNetworkElement
+  nameWithType: TrackbackClientNetworkElement
+  fullName: Argotic.Configuration.TrackbackClientNetworkElement
+- uid: Argotic.Configuration.TrackbackClientSection.Network*
+  commentId: Overload:Argotic.Configuration.TrackbackClientSection.Network
+  name: Network
+  nameWithType: TrackbackClientSection.Network
+  fullName: Argotic.Configuration.TrackbackClientSection.Network
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Argotic.Configuration.TrackbackClientSection.Timeout*
+  commentId: Overload:Argotic.Configuration.TrackbackClientSection.Timeout
+  name: Timeout
+  nameWithType: TrackbackClientSection.Timeout
+  fullName: Argotic.Configuration.TrackbackClientSection.Timeout
+- uid: Argotic.Configuration.TrackbackClientSection.UserAgent*
+  commentId: Overload:Argotic.Configuration.TrackbackClientSection.UserAgent
+  name: UserAgent
+  nameWithType: TrackbackClientSection.UserAgent
+  fullName: Argotic.Configuration.TrackbackClientSection.UserAgent
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Configuration.ConfigurationPropertyCollection
+  commentId: T:System.Configuration.ConfigurationPropertyCollection
+  parent: System.Configuration
+  isExternal: true
+  name: ConfigurationPropertyCollection
+  nameWithType: ConfigurationPropertyCollection
+  fullName: System.Configuration.ConfigurationPropertyCollection
+- uid: System.Configuration.ConfigurationElement.Properties
+  commentId: P:System.Configuration.ConfigurationElement.Properties
+  parent: System.Configuration.ConfigurationElement
+  isExternal: true
+  name: Properties
+  nameWithType: ConfigurationElement.Properties
+  fullName: System.Configuration.ConfigurationElement.Properties
+- uid: Argotic.Configuration.TrackbackClientSection.Properties*
+  commentId: Overload:Argotic.Configuration.TrackbackClientSection.Properties
+  name: Properties
+  nameWithType: TrackbackClientSection.Properties
+  fullName: Argotic.Configuration.TrackbackClientSection.Properties

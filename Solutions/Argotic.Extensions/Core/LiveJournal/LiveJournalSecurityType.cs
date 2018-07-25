@@ -1,25 +1,24 @@
-﻿using System;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents the access level type of a LiveJournal entry.
     /// </summary>
     /// <seealso cref="LiveJournalSecurity.Accessibility"/>
     /// <seealso cref="LiveJournalSecurity"/>
-    [Serializable()]
+    [Serializable]
     public enum LiveJournalSecurityType
     {
         /// <summary>
         /// No access level specified.
         /// </summary>
         [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None    = 0,
+        None = 0,
 
         /// <summary>
-        /// The LiveJournal entry is accessible to friends of the author. 
+        /// The LiveJournal entry is accessible to friends of the author.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Friends", AlternateValue = "friends")]
         Friends = 1,
@@ -31,9 +30,9 @@ namespace Argotic.Extensions.Core
         Private = 2,
 
         /// <summary>
-        /// The LiveJournal entry is publicly accessible. 
+        /// The LiveJournal entry is publicly accessible.
         /// </summary>
         [EnumerationMetadata(DisplayName = "Public", AlternateValue = "public")]
-        Public  = 3
+        Public = 3,
     }
 }

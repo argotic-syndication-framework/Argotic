@@ -1,0 +1,172 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  id: YahooMediaRestrictionRelationship
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Allow
+  - Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Deny
+  - Argotic.Extensions.Core.YahooMediaRestrictionRelationship.None
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRestrictionRelationship
+  nameWithType: YahooMediaRestrictionRelationship
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaRestrictionRelationship
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates the type of relationship that a restriction represents.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum YahooMediaRestrictionRelationship
+    content.vb: >-
+      <Serializable>
+
+      Public Enum YahooMediaRestrictionRelationship
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaRestriction
+    commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionRelationship.None
+  id: None
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: YahooMediaRestrictionRelationship.None
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo restriction relationship specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Allow
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Allow
+  id: Allow
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  langs:
+  - csharp
+  - vb
+  name: Allow
+  nameWithType: YahooMediaRestrictionRelationship.Allow
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Allow
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Allow
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that the type of relationship is permissive.\n"
+  example: []
+  syntax:
+    content: Allow = 1
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Deny
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Deny
+  id: Deny
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  langs:
+  - csharp
+  - vb
+  name: Deny
+  nameWithType: YahooMediaRestrictionRelationship.Deny
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship.Deny
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Deny
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionRelationship.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that the type of relationship is restrictive.\n"
+  example: []
+  syntax:
+    content: Deny = 2
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionRelationship
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestrictionRelationship
+  nameWithType: YahooMediaRestrictionRelationship
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionRelationship

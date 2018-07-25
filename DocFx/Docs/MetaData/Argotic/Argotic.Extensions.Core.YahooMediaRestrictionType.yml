@@ -1,0 +1,172 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionType
+  id: YahooMediaRestrictionType
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  - Argotic.Extensions.Core.YahooMediaRestrictionType.None
+  - Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaRestrictionType
+  nameWithType: YahooMediaRestrictionType
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaRestrictionType
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates the type of media that a restriction applies to.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum YahooMediaRestrictionType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum YahooMediaRestrictionType
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaRestriction
+    commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionType.None
+  id: None
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: YahooMediaRestrictionType.None
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo restriction type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  id: Country
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionType
+  langs:
+  - csharp
+  - vb
+  name: Country
+  nameWithType: YahooMediaRestrictionType.Country
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType.Country
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Country
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that restrictions are be placed based on country code.\n"
+  example: []
+  syntax:
+    content: Country = 1
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  commentId: F:Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  id: Uri
+  parent: Argotic.Extensions.Core.YahooMediaRestrictionType
+  langs:
+  - csharp
+  - vb
+  name: Uri
+  nameWithType: YahooMediaRestrictionType.Uri
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType.Uri
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Uri
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestrictionType.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that restrictions are be placed based on URI.\n"
+  example: []
+  syntax:
+    content: Uri = 2
+    return:
+      type: Argotic.Extensions.Core.YahooMediaRestrictionType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.YahooMediaRestriction
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestriction
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestriction
+  nameWithType: YahooMediaRestriction
+  fullName: Argotic.Extensions.Core.YahooMediaRestriction
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.YahooMediaRestrictionType
+  commentId: T:Argotic.Extensions.Core.YahooMediaRestrictionType
+  parent: Argotic.Extensions.Core
+  name: YahooMediaRestrictionType
+  nameWithType: YahooMediaRestrictionType
+  fullName: Argotic.Extensions.Core.YahooMediaRestrictionType

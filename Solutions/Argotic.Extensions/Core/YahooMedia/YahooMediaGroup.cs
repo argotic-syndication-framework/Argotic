@@ -1,74 +1,65 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a means of grouping of <see cref="YahooMediaContent"/> objects that are effectively the same content, yet different representations.
     /// </summary>
     /// <seealso cref="YahooMediaContent"/>
     /// <seealso cref="IYahooMediaCommonObjectEntities"/>
-    [Serializable()]
+    [Serializable]
     public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
-
         /// <summary>
         /// Private member to hold a collection of media objects that are effectively the same content, yet different representations.
         /// </summary>
         private Collection<YahooMediaContent> groupContents;
+
         /// <summary>
         /// Private member to hold the permissible audiences for the media group.
         /// </summary>
         private Collection<YahooMediaRating> mediaObjectRatings;
-        /// <summary>
-        /// Private member to hold the title of the media group.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectTitle;
-        /// <summary>
-        /// Private member to hold a short description of the media group.
-        /// </summary>
-        private YahooMediaTextConstruct mediaObjectDescription;
+
         /// <summary>
         /// Private member to hold the relevant keywords that describe the media group.
         /// </summary>
         private Collection<string> mediaObjectKeywords;
+
         /// <summary>
         /// Private member to hold the representative images for the media group.
         /// </summary>
         private Collection<YahooMediaThumbnail> mediaObjectThumbnails;
+
         /// <summary>
         /// Private member to hold a taxonomy that gives an indication of the type of content for the media group.
         /// </summary>
         private Collection<YahooMediaCategory> mediaObjectCategories;
+
         /// <summary>
         /// Private member to hold the hash digests for the media group.
         /// </summary>
         private Collection<YahooMediaHash> mediaObjectHashes;
-        /// <summary>
-        /// Private member to hold a web browser media player console the media group can be accessed through.
-        /// </summary>
-        private YahooMediaPlayer mediaObjectPlayer;
+
         /// <summary>
         /// Private member to hold the entities that contributed to the creation of the media group.
         /// </summary>
         private Collection<YahooMediaCredit> mediaObjectCredits;
-        /// <summary>
-        /// Private member to hold the copyright information for the media group.
-        /// </summary>
-        private YahooMediaCopyright mediaObjectCopyright;
+
         /// <summary>
         /// Private member to hold the text transcript, closed captioning, or lyrics for the media group.
         /// </summary>
         private Collection<YahooMediaText> mediaObjectTextSeries;
+
         /// <summary>
         /// Private member to hold the restrictions to be placed on aggregators that are rendering the media group.
         /// </summary>
         private Collection<YahooMediaRestriction> mediaObjectRestrictions;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="YahooMediaGroup"/> class.
         /// </summary>
@@ -80,18 +71,19 @@ namespace Argotic.Extensions.Core
         /// Gets a collection of media objects that are effectively the same content, yet different representations.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent media objects that are effectively the same content, yet different representations. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent media objects that are effectively the same content, yet different representations.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaContent> Contents
         {
             get
             {
-                if (groupContents == null)
+                if (this.groupContents == null)
                 {
-                    groupContents = new Collection<YahooMediaContent>();
+                    this.groupContents = new Collection<YahooMediaContent>();
                 }
-                return groupContents;
+
+                return this.groupContents;
             }
         }
 
@@ -99,18 +91,19 @@ namespace Argotic.Extensions.Core
         /// Gets a taxonomy that gives an indication of the type of content for this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaCategory> Categories
         {
             get
             {
-                if (mediaObjectCategories == null)
+                if (this.mediaObjectCategories == null)
                 {
-                    mediaObjectCategories = new Collection<YahooMediaCategory>();
+                    this.mediaObjectCategories = new Collection<YahooMediaCategory>();
                 }
-                return mediaObjectCategories;
+
+                return this.mediaObjectCategories;
             }
         }
 
@@ -121,39 +114,29 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
         /// </remarks>
-        public YahooMediaCopyright Copyright
-        {
-            get
-            {
-                return mediaObjectCopyright;
-            }
-
-            set
-            {
-                mediaObjectCopyright = value;
-            }
-        }
+        public YahooMediaCopyright Copyright { get; set; }
 
         /// <summary>
         /// Gets the entities that contributed to the creation of this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+        ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
         ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
         /// </remarks>
         public Collection<YahooMediaCredit> Credits
         {
             get
             {
-                if (mediaObjectCredits == null)
+                if (this.mediaObjectCredits == null)
                 {
-                    mediaObjectCredits = new Collection<YahooMediaCredit>();
+                    this.mediaObjectCredits = new Collection<YahooMediaCredit>();
                 }
-                return mediaObjectCredits;
+
+                return this.mediaObjectCredits;
             }
         }
 
@@ -164,24 +147,13 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     Media object descriptions are typically a sentence in length.
         /// </remarks>
-        public YahooMediaTextConstruct Description
-        {
-            get
-            {
-                return mediaObjectDescription;
-            }
-
-            set
-            {
-                mediaObjectDescription = value;
-            }
-        }
+        public YahooMediaTextConstruct Description { get; set; }
 
         /// <summary>
         /// Gets the hash digests for this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -191,11 +163,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectHashes == null)
+                if (this.mediaObjectHashes == null)
                 {
-                    mediaObjectHashes = new Collection<YahooMediaHash>();
+                    this.mediaObjectHashes = new Collection<YahooMediaHash>();
                 }
-                return mediaObjectHashes;
+
+                return this.mediaObjectHashes;
             }
         }
 
@@ -203,7 +176,7 @@ namespace Argotic.Extensions.Core
         /// Gets the relevant keywords that describe this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -213,11 +186,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectKeywords == null)
+                if (this.mediaObjectKeywords == null)
                 {
-                    mediaObjectKeywords = new Collection<string>();
+                    this.mediaObjectKeywords = new Collection<string>();
                 }
-                return mediaObjectKeywords;
+
+                return this.mediaObjectKeywords;
             }
         }
 
@@ -225,24 +199,13 @@ namespace Argotic.Extensions.Core
         /// Gets or sets a web browser media player console this media group can be accessed through.
         /// </summary>
         /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
-        public YahooMediaPlayer Player
-        {
-            get
-            {
-                return mediaObjectPlayer;
-            }
-
-            set
-            {
-                mediaObjectPlayer = value;
-            }
-        }
+        public YahooMediaPlayer Player { get; set; }
 
         /// <summary>
         /// Gets the permissible audiences for this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -252,11 +215,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectRatings == null)
+                if (this.mediaObjectRatings == null)
                 {
-                    mediaObjectRatings = new Collection<YahooMediaRating>();
+                    this.mediaObjectRatings = new Collection<YahooMediaRating>();
                 }
-                return mediaObjectRatings;
+
+                return this.mediaObjectRatings;
             }
         }
 
@@ -264,18 +228,19 @@ namespace Argotic.Extensions.Core
         /// Gets the restrictions to be placed on aggregators that are rendering this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<YahooMediaRestriction> Restrictions
         {
             get
             {
-                if (mediaObjectRestrictions == null)
+                if (this.mediaObjectRestrictions == null)
                 {
-                    mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
+                    this.mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
                 }
-                return mediaObjectRestrictions;
+
+                return this.mediaObjectRestrictions;
             }
         }
 
@@ -283,23 +248,24 @@ namespace Argotic.Extensions.Core
         /// Gets the text transcript, closed captioning, or lyrics for this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
-        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+        ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+        ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
         ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
         /// </remarks>
         public Collection<YahooMediaText> TextSeries
         {
             get
             {
-                if (mediaObjectTextSeries == null)
+                if (this.mediaObjectTextSeries == null)
                 {
-                    mediaObjectTextSeries = new Collection<YahooMediaText>();
+                    this.mediaObjectTextSeries = new Collection<YahooMediaText>();
                 }
-                return mediaObjectTextSeries;
+
+                return this.mediaObjectTextSeries;
             }
         }
 
@@ -307,7 +273,7 @@ namespace Argotic.Extensions.Core
         /// Gets the representative images for this media group.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media group. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media group.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         /// <remarks>
@@ -317,11 +283,12 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (mediaObjectThumbnails == null)
+                if (this.mediaObjectThumbnails == null)
                 {
-                    mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
+                    this.mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
                 }
-                return mediaObjectThumbnails;
+
+                return this.mediaObjectThumbnails;
             }
         }
 
@@ -329,164 +296,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the title of this media group.
         /// </summary>
         /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
-        public YahooMediaTextConstruct Title
-        {
-            get
-            {
-                return mediaObjectTitle;
-            }
-
-            set
-            {
-                mediaObjectTitle = value;
-            }
-        }
-
-        /// <summary>
-        /// Loads this <see cref="YahooMediaGroup"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaGroup"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded              = false;
-            Guard.ArgumentNotNull(source, "source");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-            XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
-            if(source.HasChildren)
-            {
-                XPathNodeIterator contentIterator   = source.Select("media:content", manager);
-
-                if (contentIterator != null && contentIterator.Count > 0)
-                {
-                    while (contentIterator.MoveNext())
-                    {
-                        YahooMediaContent content   = new YahooMediaContent();
-                        if (content.Load(contentIterator.Current))
-                        {
-                            this.Contents.Add(content);
-                            wasLoaded   = true;
-                        }
-                    }
-                }
-            }
-
-            if (YahooMediaUtility.FillCommonObjectEntities(this, source))
-            {
-                wasLoaded   = true;
-            }
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="YahooMediaGroup"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-            writer.WriteStartElement("group", extension.XmlNamespace);
-
-            foreach (YahooMediaContent content in this.Contents)
-            {
-                content.WriteTo(writer);
-            }
-
-            YahooMediaUtility.WriteCommonObjectEntities(this, writer);
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaGroup"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaGroup"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-            YahooMediaGroup value  = obj as YahooMediaGroup;
-
-            if (value != null)
-            {
-                int result  = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
-
-                result      = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is YahooMediaGroup))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
+        public YahooMediaTextConstruct Title { get; set; }
 
         /// <summary>
         /// Determines if operands are equal.
@@ -536,7 +346,7 @@ namespace Argotic.Extensions.Core
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -556,7 +366,154 @@ namespace Argotic.Extensions.Core
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is YahooMediaGroup))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Loads this <see cref="YahooMediaGroup"/> using the supplied <see cref="XPathNavigator"/>.
+        /// </summary>
+        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <remarks>
+        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaGroup"/>.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        public bool Load(XPathNavigator source)
+        {
+            bool wasLoaded = false;
+            Guard.ArgumentNotNull(source, "source");
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+            XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
+            if (source.HasChildren)
+            {
+                XPathNodeIterator contentIterator = source.Select("media:content", manager);
+
+                if (contentIterator != null && contentIterator.Count > 0)
+                {
+                    while (contentIterator.MoveNext())
+                    {
+                        YahooMediaContent content = new YahooMediaContent();
+                        if (content.Load(contentIterator.Current))
+                        {
+                            this.Contents.Add(content);
+                            wasLoaded = true;
+                        }
+                    }
+                }
+            }
+
+            if (YahooMediaUtility.FillCommonObjectEntities(this, source))
+            {
+                wasLoaded = true;
+            }
+
+            return wasLoaded;
+        }
+
+        /// <summary>
+        /// Saves the current <see cref="YahooMediaGroup"/> to the specified <see cref="XmlWriter"/>.
+        /// </summary>
+        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        public void WriteTo(XmlWriter writer)
+        {
+            Guard.ArgumentNotNull(writer, "writer");
+            YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+            writer.WriteStartElement("group", extension.XmlNamespace);
+
+            foreach (YahooMediaContent content in this.Contents)
+            {
+                content.WriteTo(writer);
+            }
+
+            YahooMediaUtility.WriteCommonObjectEntities(this, writer);
+
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            YahooMediaGroup value = obj as YahooMediaGroup;
+
+            if (value != null)
+            {
+                int result = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
+
+                result = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
+
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            }
         }
     }
 }

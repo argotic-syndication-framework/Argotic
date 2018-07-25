@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Argotic.Extensions
+﻿namespace Argotic.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Defines generalized extension properties, methods, indexers and events that a value type or class 
+    /// Defines generalized extension properties, methods, indexers and events that a value type or class
     /// implements to create a type-specific implementation of extension properties, methods, indexers and events.
     /// </summary>
     public interface IExtensibleSyndicationObject
@@ -22,7 +22,7 @@ namespace Argotic.Extensions
         }
 
         /// <summary>
-        /// Gets a value indicating if the syndication entity has one or more syndication extensions applied to it.
+        /// Gets a value indicating whether gets a value indicating if the syndication entity has one or more syndication extensions applied to it.
         /// </summary>
         /// <value><b>true</b> if the <see cref="Extensions"/> collection contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
         bool HasExtensions
@@ -46,8 +46,8 @@ namespace Argotic.Extensions
         ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
         /// </returns>
         /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>

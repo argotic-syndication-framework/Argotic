@@ -1,0 +1,177 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  id: FeedSynchronizationTombstoneStatus
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Deleted
+  - Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.None
+  - Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Present
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationTombstoneStatus
+  nameWithType: FeedSynchronizationTombstoneStatus
+  fullName: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedSynchronizationTombstoneStatus
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents whether an item has been deleted and represents a tombstone.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum FeedSynchronizationTombstoneStatus
+    content.vb: >-
+      <Serializable>
+
+      Public Enum FeedSynchronizationTombstoneStatus
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus
+    commentId: P:Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationItem
+    commentId: T:Argotic.Extensions.Core.FeedSynchronizationItem
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.None
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.None
+  id: None
+  parent: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: FeedSynchronizationTombstoneStatus.None
+  fullName: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo deletion status specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Deleted
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Deleted
+  id: Deleted
+  parent: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  langs:
+  - csharp
+  - vb
+  name: Deleted
+  nameWithType: FeedSynchronizationTombstoneStatus.Deleted
+  fullName: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Deleted
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Deleted
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe item has been deleted.\n"
+  example: []
+  syntax:
+    content: Deleted = 1
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Present
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Present
+  id: Present
+  parent: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  langs:
+  - csharp
+  - vb
+  name: Present
+  nameWithType: FeedSynchronizationTombstoneStatus.Present
+  fullName: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.Present
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Present
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationTombstoneStatus.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe item has not been deleted.\n"
+  example: []
+  syntax:
+    content: Present = 2
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus
+  isExternal: true
+- uid: Argotic.Extensions.Core.FeedSynchronizationItem
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationItem
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationItem
+  nameWithType: FeedSynchronizationItem
+  fullName: Argotic.Extensions.Core.FeedSynchronizationItem
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationTombstoneStatus
+  nameWithType: FeedSynchronizationTombstoneStatus
+  fullName: Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus

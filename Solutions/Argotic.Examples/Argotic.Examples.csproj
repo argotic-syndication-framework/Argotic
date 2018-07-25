@@ -1,17 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Common.netstandard2_0.proj" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon>Argotic.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Company>endjin</Company>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
     <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

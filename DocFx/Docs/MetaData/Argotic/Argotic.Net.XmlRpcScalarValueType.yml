@@ -1,0 +1,317 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Net.XmlRpcScalarValueType
+  commentId: T:Argotic.Net.XmlRpcScalarValueType
+  id: XmlRpcScalarValueType
+  parent: Argotic.Net
+  children:
+  - Argotic.Net.XmlRpcScalarValueType.Base64
+  - Argotic.Net.XmlRpcScalarValueType.Boolean
+  - Argotic.Net.XmlRpcScalarValueType.DateTime
+  - Argotic.Net.XmlRpcScalarValueType.Double
+  - Argotic.Net.XmlRpcScalarValueType.Integer
+  - Argotic.Net.XmlRpcScalarValueType.None
+  - Argotic.Net.XmlRpcScalarValueType.String
+  langs:
+  - csharp
+  - vb
+  name: XmlRpcScalarValueType
+  nameWithType: XmlRpcScalarValueType
+  fullName: Argotic.Net.XmlRpcScalarValueType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: XmlRpcScalarValueType
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nRepresents the permissible data types for a <xref href=\"Argotic.Net.XmlRpcScalarValue\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum XmlRpcScalarValueType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum XmlRpcScalarValueType
+  seealso:
+  - linkId: Argotic.Net.XmlRpcScalarValue.ValueType
+    commentId: P:Argotic.Net.XmlRpcScalarValue.ValueType
+  - linkId: Argotic.Net.XmlRpcScalarValue
+    commentId: T:Argotic.Net.XmlRpcScalarValue
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Net.XmlRpcScalarValueType.None
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.None
+  id: None
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: XmlRpcScalarValueType.None
+  fullName: Argotic.Net.XmlRpcScalarValueType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nNo scalar parameter type specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.Base64
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.Base64
+  id: Base64
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: Base64
+  nameWithType: XmlRpcScalarValueType.Base64
+  fullName: Argotic.Net.XmlRpcScalarValueType.Base64
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Base64
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents binary data that has been encoded to its base64 representation.\n"
+  example: []
+  syntax:
+    content: Base64 = 1
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.Boolean
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.Boolean
+  id: Boolean
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: Boolean
+  nameWithType: XmlRpcScalarValueType.Boolean
+  fullName: Argotic.Net.XmlRpcScalarValueType.Boolean
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Boolean
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 33
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents a logical boolean.\n"
+  example: []
+  syntax:
+    content: Boolean = 2
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.DateTime
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.DateTime
+  id: DateTime
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: DateTime
+  nameWithType: XmlRpcScalarValueType.DateTime
+  fullName: Argotic.Net.XmlRpcScalarValueType.DateTime
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DateTime
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 39
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents an instant in time, typically expressed as a date and time of day.\n"
+  example: []
+  syntax:
+    content: DateTime = 3
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.Double
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.Double
+  id: Double
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: Double
+  nameWithType: XmlRpcScalarValueType.Double
+  fullName: Argotic.Net.XmlRpcScalarValueType.Double
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Double
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 45
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents a double-precision signed floating-point number.\n"
+  example: []
+  syntax:
+    content: Double = 4
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.Integer
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.Integer
+  id: Integer
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: Integer
+  nameWithType: XmlRpcScalarValueType.Integer
+  fullName: Argotic.Net.XmlRpcScalarValueType.Integer
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Integer
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 51
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents a 32-bit signed integer.\n"
+  example: []
+  syntax:
+    content: Integer = 5
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Net.XmlRpcScalarValueType.String
+  commentId: F:Argotic.Net.XmlRpcScalarValueType.String
+  id: String
+  parent: Argotic.Net.XmlRpcScalarValueType
+  langs:
+  - csharp
+  - vb
+  name: String
+  nameWithType: XmlRpcScalarValueType.String
+  fullName: Argotic.Net.XmlRpcScalarValueType.String
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: String
+    path: ../Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValueType.cs
+    startLine: 57
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Net
+  summary: "\nThe parameter value represents text as a series of characters.\n"
+  example: []
+  syntax:
+    content: String = 6
+    return:
+      type: Argotic.Net.XmlRpcScalarValueType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Net.XmlRpcScalarValue
+  commentId: T:Argotic.Net.XmlRpcScalarValue
+  parent: Argotic.Net
+  name: XmlRpcScalarValue
+  nameWithType: XmlRpcScalarValue
+  fullName: Argotic.Net.XmlRpcScalarValue
+- uid: Argotic.Net.XmlRpcScalarValue.ValueType
+  commentId: P:Argotic.Net.XmlRpcScalarValue.ValueType
+  isExternal: true
+- uid: Argotic.Net
+  commentId: N:Argotic.Net
+  name: Argotic.Net
+  nameWithType: Argotic.Net
+  fullName: Argotic.Net
+- uid: Argotic.Net.XmlRpcScalarValueType
+  commentId: T:Argotic.Net.XmlRpcScalarValueType
+  parent: Argotic.Net
+  name: XmlRpcScalarValueType
+  nameWithType: XmlRpcScalarValueType
+  fullName: Argotic.Net.XmlRpcScalarValueType

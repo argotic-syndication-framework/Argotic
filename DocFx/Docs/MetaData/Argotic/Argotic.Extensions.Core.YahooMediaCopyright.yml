@@ -1,0 +1,1130 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaCopyright
+  commentId: T:Argotic.Extensions.Core.YahooMediaCopyright
+  id: YahooMediaCopyright
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaCopyright.#ctor
+  - Argotic.Extensions.Core.YahooMediaCopyright.#ctor(System.String)
+  - Argotic.Extensions.Core.YahooMediaCopyright.CompareTo(System.Object)
+  - Argotic.Extensions.Core.YahooMediaCopyright.Equals(System.Object)
+  - Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode
+  - Argotic.Extensions.Core.YahooMediaCopyright.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.YahooMediaCopyright.op_Equality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  - Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  - Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  - Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  - Argotic.Extensions.Core.YahooMediaCopyright.Text
+  - Argotic.Extensions.Core.YahooMediaCopyright.ToString
+  - Argotic.Extensions.Core.YahooMediaCopyright.Url
+  - Argotic.Extensions.Core.YahooMediaCopyright.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaCopyright
+  nameWithType: YahooMediaCopyright
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaCopyright
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the copyright information for a media object.\n"
+  remarks: "\n<p>\n    If the media is operating under a <em>Creative Commons license</em>, the <xref href=\"Argotic.Extensions.Core.CreativeCommonsSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> should be used instead.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class YahooMediaCopyright : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class YahooMediaCopyright
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.#ctor
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaCopyright()
+  nameWithType: YahooMediaCopyright.YahooMediaCopyright()
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.YahooMediaCopyright()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 32
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public YahooMediaCopyright()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.#ctor(System.String)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaCopyright(String)
+  nameWithType: YahooMediaCopyright.YahooMediaCopyright(String)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.YahooMediaCopyright(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied human-readable copyright information.\n"
+  example: []
+  syntax:
+    content: public YahooMediaCopyright(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: The human-readable copyright information.
+    content.vb: Public Sub New(text As String)
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Text
+  commentId: P:Argotic.Extensions.Core.YahooMediaCopyright.Text
+  id: Text
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Text
+  nameWithType: YahooMediaCopyright.Text
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Text
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Text
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 49
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the human-readable copyright information.\n"
+  example: []
+  syntax:
+    content: public string Text { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The human-readable copyright information.
+    content.vb: Public Property Text As String
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.Text*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Url
+  commentId: P:Argotic.Extensions.Core.YahooMediaCopyright.Url
+  id: Url
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Url
+  nameWithType: YahooMediaCopyright.Url
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Url
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Url
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 73
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the location of a terms of use page or additional copyright information.\n"
+  example: []
+  syntax:
+    content: public Uri Url { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL for a terms of use page or additional copyright information.
+    content.vb: Public Property Url As Uri
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.Url*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_Equality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.op_Equality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  id: op_Equality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Equality(YahooMediaCopyright, YahooMediaCopyright)
+  nameWithType: YahooMediaCopyright.Equality(YahooMediaCopyright, YahooMediaCopyright)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Equality(Argotic.Extensions.Core.YahooMediaCopyright, Argotic.Extensions.Core.YahooMediaCopyright)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 92
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(YahooMediaCopyright first, YahooMediaCopyright second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As YahooMediaCopyright, second As YahooMediaCopyright) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  id: op_Inequality(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Inequality(YahooMediaCopyright, YahooMediaCopyright)
+  nameWithType: YahooMediaCopyright.Inequality(YahooMediaCopyright, YahooMediaCopyright)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Inequality(Argotic.Extensions.Core.YahooMediaCopyright, Argotic.Extensions.Core.YahooMediaCopyright)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(YahooMediaCopyright first, YahooMediaCopyright second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As YahooMediaCopyright, second As YahooMediaCopyright) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  id: op_LessThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: LessThan(YahooMediaCopyright, YahooMediaCopyright)
+  nameWithType: YahooMediaCopyright.LessThan(YahooMediaCopyright, YahooMediaCopyright)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.LessThan(Argotic.Extensions.Core.YahooMediaCopyright, Argotic.Extensions.Core.YahooMediaCopyright)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 123
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(YahooMediaCopyright first, YahooMediaCopyright second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As YahooMediaCopyright, second As YahooMediaCopyright) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  id: op_GreaterThan(Argotic.Extensions.Core.YahooMediaCopyright,Argotic.Extensions.Core.YahooMediaCopyright)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(YahooMediaCopyright, YahooMediaCopyright)
+  nameWithType: YahooMediaCopyright.GreaterThan(YahooMediaCopyright, YahooMediaCopyright)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.GreaterThan(Argotic.Extensions.Core.YahooMediaCopyright, Argotic.Extensions.Core.YahooMediaCopyright)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 143
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(YahooMediaCopyright first, YahooMediaCopyright second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.YahooMediaCopyright
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As YahooMediaCopyright, second As YahooMediaCopyright) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: YahooMediaCopyright.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 166
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.YahooMediaCopyright" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: YahooMediaCopyright.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 198
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.ToString
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: YahooMediaCopyright.ToString()
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 224
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.YahooMediaCopyright\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.YahooMediaCopyright" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: YahooMediaCopyright.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 253
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: YahooMediaCopyright.Equals(Object)
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 280
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode
+  commentId: M:Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.YahooMediaCopyright
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: YahooMediaCopyright.GetHashCode()
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaCopyright.cs
+    startLine: 294
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: CreativeCommonsSyndicationExtension
+  nameWithType: CreativeCommonsSyndicationExtension
+  fullName: Argotic.Extensions.Core.CreativeCommonsSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.YahooMediaCopyright
+  commentId: T:Argotic.Extensions.Core.YahooMediaCopyright
+  parent: Argotic.Extensions.Core
+  name: YahooMediaCopyright
+  nameWithType: YahooMediaCopyright
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.#ctor
+  name: YahooMediaCopyright
+  nameWithType: YahooMediaCopyright.YahooMediaCopyright
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.YahooMediaCopyright
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Text*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.Text
+  name: Text
+  nameWithType: YahooMediaCopyright.Text
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Text
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Url*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.Url
+  name: Url
+  nameWithType: YahooMediaCopyright.Url
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Url
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.op_Equality
+  name: Equality
+  nameWithType: YahooMediaCopyright.Equality
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.op_Inequality
+  name: Inequality
+  nameWithType: YahooMediaCopyright.Inequality
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Inequality
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.op_LessThan
+  name: LessThan
+  nameWithType: YahooMediaCopyright.LessThan
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.LessThan
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.op_GreaterThan
+  name: GreaterThan
+  nameWithType: YahooMediaCopyright.GreaterThan
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.GreaterThan
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Load*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.Load
+  name: Load
+  nameWithType: YahooMediaCopyright.Load
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.WriteTo
+  name: WriteTo
+  nameWithType: YahooMediaCopyright.WriteTo
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.ToString*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.ToString
+  name: ToString
+  nameWithType: YahooMediaCopyright.ToString
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.CompareTo
+  name: CompareTo
+  nameWithType: YahooMediaCopyright.CompareTo
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.Equals*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.Equals
+  name: Equals
+  nameWithType: YahooMediaCopyright.Equals
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode
+  name: GetHashCode
+  nameWithType: YahooMediaCopyright.GetHashCode
+  fullName: Argotic.Extensions.Core.YahooMediaCopyright.GetHashCode

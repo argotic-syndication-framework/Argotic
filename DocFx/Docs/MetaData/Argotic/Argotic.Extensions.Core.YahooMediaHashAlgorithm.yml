@@ -1,0 +1,172 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  commentId: T:Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  id: YahooMediaHashAlgorithm
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  - Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  - Argotic.Extensions.Core.YahooMediaHashAlgorithm.Sha1
+  langs:
+  - csharp
+  - vb
+  name: YahooMediaHashAlgorithm
+  nameWithType: YahooMediaHashAlgorithm
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: YahooMediaHashAlgorithm
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the hashing algorithm used to create a hash value.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum YahooMediaHashAlgorithm
+    content.vb: >-
+      <Serializable>
+
+      Public Enum YahooMediaHashAlgorithm
+  seealso:
+  - linkId: Argotic.Extensions.Core.YahooMediaHash
+    commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  commentId: F:Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  id: None
+  parent: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: YahooMediaHashAlgorithm.None
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo hashing algorithm was specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  commentId: F:Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  id: MD5
+  parent: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  langs:
+  - csharp
+  - vb
+  name: MD5
+  nameWithType: YahooMediaHashAlgorithm.MD5
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm.MD5
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MD5
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that the <strong>Message-Digest 5</strong> algorithm was used to generate the hash.\n"
+  example: []
+  syntax:
+    content: MD5 = 1
+    return:
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm.Sha1
+  commentId: F:Argotic.Extensions.Core.YahooMediaHashAlgorithm.Sha1
+  id: Sha1
+  parent: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  langs:
+  - csharp
+  - vb
+  name: Sha1
+  nameWithType: YahooMediaHashAlgorithm.Sha1
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm.Sha1
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Sha1
+    path: ../Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaHashAlgorithm.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nIndicates that the <strong>Secure Hash Algorithm 1</strong> algorithm was used to generate the hash.\n"
+  example: []
+  syntax:
+    content: Sha1 = 2
+    return:
+      type: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.YahooMediaHash
+  commentId: T:Argotic.Extensions.Core.YahooMediaHash
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHash
+  nameWithType: YahooMediaHash
+  fullName: Argotic.Extensions.Core.YahooMediaHash
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  commentId: T:Argotic.Extensions.Core.YahooMediaHashAlgorithm
+  parent: Argotic.Extensions.Core
+  name: YahooMediaHashAlgorithm
+  nameWithType: YahooMediaHashAlgorithm
+  fullName: Argotic.Extensions.Core.YahooMediaHashAlgorithm

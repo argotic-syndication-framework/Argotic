@@ -1,0 +1,212 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType
+  commentId: T:Argotic.Extensions.Core.LiveJournalSecurityType
+  id: LiveJournalSecurityType
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.LiveJournalSecurityType.Friends
+  - Argotic.Extensions.Core.LiveJournalSecurityType.None
+  - Argotic.Extensions.Core.LiveJournalSecurityType.Private
+  - Argotic.Extensions.Core.LiveJournalSecurityType.Public
+  langs:
+  - csharp
+  - vb
+  name: LiveJournalSecurityType
+  nameWithType: LiveJournalSecurityType
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LiveJournalSecurityType
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents the access level type of a LiveJournal entry.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum LiveJournalSecurityType
+    content.vb: >-
+      <Serializable>
+
+      Public Enum LiveJournalSecurityType
+  seealso:
+  - linkId: Argotic.Extensions.Core.LiveJournalSecurity.Accessibility
+    commentId: P:Argotic.Extensions.Core.LiveJournalSecurity.Accessibility
+  - linkId: Argotic.Extensions.Core.LiveJournalSecurity
+    commentId: T:Argotic.Extensions.Core.LiveJournalSecurity
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType.None
+  commentId: F:Argotic.Extensions.Core.LiveJournalSecurityType.None
+  id: None
+  parent: Argotic.Extensions.Core.LiveJournalSecurityType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: LiveJournalSecurityType.None
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nNo access level specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Extensions.Core.LiveJournalSecurityType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType.Friends
+  commentId: F:Argotic.Extensions.Core.LiveJournalSecurityType.Friends
+  id: Friends
+  parent: Argotic.Extensions.Core.LiveJournalSecurityType
+  langs:
+  - csharp
+  - vb
+  name: Friends
+  nameWithType: LiveJournalSecurityType.Friends
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType.Friends
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Friends
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+    startLine: 22
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe LiveJournal entry is accessible to friends of the author.\n"
+  example: []
+  syntax:
+    content: Friends = 1
+    return:
+      type: Argotic.Extensions.Core.LiveJournalSecurityType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType.Private
+  commentId: F:Argotic.Extensions.Core.LiveJournalSecurityType.Private
+  id: Private
+  parent: Argotic.Extensions.Core.LiveJournalSecurityType
+  langs:
+  - csharp
+  - vb
+  name: Private
+  nameWithType: LiveJournalSecurityType.Private
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType.Private
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Private
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+    startLine: 28
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe LiveJournal entry is accessible to the author.\n"
+  example: []
+  syntax:
+    content: Private = 2
+    return:
+      type: Argotic.Extensions.Core.LiveJournalSecurityType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType.Public
+  commentId: F:Argotic.Extensions.Core.LiveJournalSecurityType.Public
+  id: Public
+  parent: Argotic.Extensions.Core.LiveJournalSecurityType
+  langs:
+  - csharp
+  - vb
+  name: Public
+  nameWithType: LiveJournalSecurityType.Public
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType.Public
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Public
+    path: ../Solutions/Argotic.Extensions/Core/LiveJournal/LiveJournalSecurityType.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nThe LiveJournal entry is publicly accessible.\n"
+  example: []
+  syntax:
+    content: Public = 3
+    return:
+      type: Argotic.Extensions.Core.LiveJournalSecurityType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Extensions.Core.LiveJournalSecurity.Accessibility
+  commentId: P:Argotic.Extensions.Core.LiveJournalSecurity.Accessibility
+  isExternal: true
+- uid: Argotic.Extensions.Core.LiveJournalSecurity
+  commentId: T:Argotic.Extensions.Core.LiveJournalSecurity
+  parent: Argotic.Extensions.Core
+  name: LiveJournalSecurity
+  nameWithType: LiveJournalSecurity
+  fullName: Argotic.Extensions.Core.LiveJournalSecurity
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.LiveJournalSecurityType
+  commentId: T:Argotic.Extensions.Core.LiveJournalSecurityType
+  parent: Argotic.Extensions.Core
+  name: LiveJournalSecurityType
+  nameWithType: LiveJournalSecurityType
+  fullName: Argotic.Extensions.Core.LiveJournalSecurityType

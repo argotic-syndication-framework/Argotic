@@ -1,0 +1,2466 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  id: WebRequestOptions
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.WebRequestOptions.#ctor
+  - Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials)
+  - Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Common.WebRequestOptions.Accept
+  - Argotic.Common.WebRequestOptions.AllowAutoRedirect
+  - Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+  - Argotic.Common.WebRequestOptions.ApplyOptions(System.Net.WebRequest)
+  - Argotic.Common.WebRequestOptions.AuthenticationLevel
+  - Argotic.Common.WebRequestOptions.AutomaticDecompression
+  - Argotic.Common.WebRequestOptions.CachePolicy
+  - Argotic.Common.WebRequestOptions.ClientCertificates
+  - Argotic.Common.WebRequestOptions.Connection
+  - Argotic.Common.WebRequestOptions.ConnectionGroupName
+  - Argotic.Common.WebRequestOptions.ContentOffset
+  - Argotic.Common.WebRequestOptions.ContinueDelegate
+  - Argotic.Common.WebRequestOptions.CookieContainer
+  - Argotic.Common.WebRequestOptions.Credentials
+  - Argotic.Common.WebRequestOptions.EnableSsl
+  - Argotic.Common.WebRequestOptions.Expect
+  - Argotic.Common.WebRequestOptions.Headers
+  - Argotic.Common.WebRequestOptions.ImpersonationLevel
+  - Argotic.Common.WebRequestOptions.KeepAlive
+  - Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+  - Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+  - Argotic.Common.WebRequestOptions.MediaType
+  - Argotic.Common.WebRequestOptions.Pipelined
+  - Argotic.Common.WebRequestOptions.PreAuthenticate
+  - Argotic.Common.WebRequestOptions.ProtocolVersion
+  - Argotic.Common.WebRequestOptions.Proxy
+  - Argotic.Common.WebRequestOptions.ReadWriteTimeout
+  - Argotic.Common.WebRequestOptions.Referer
+  - Argotic.Common.WebRequestOptions.RenameTo
+  - Argotic.Common.WebRequestOptions.SendChunked
+  - Argotic.Common.WebRequestOptions.Timeout
+  - Argotic.Common.WebRequestOptions.TransferEncoding
+  - Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  - Argotic.Common.WebRequestOptions.UseBinary
+  - Argotic.Common.WebRequestOptions.UseDefaultCredentials
+  - Argotic.Common.WebRequestOptions.UsePassive
+  - Argotic.Common.WebRequestOptions.UserAgent
+  langs:
+  - csharp
+  - vb
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WebRequestOptions
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nHolds options that should be applied to web requests.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class WebRequestOptions
+    content.vb: >-
+      <Serializable>
+
+      Public Class WebRequestOptions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Common.WebRequestOptions.#ctor
+  commentId: M:Argotic.Common.WebRequestOptions.#ctor
+  id: '#ctor'
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: WebRequestOptions()
+  nameWithType: WebRequestOptions.WebRequestOptions()
+  fullName: Argotic.Common.WebRequestOptions.WebRequestOptions()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.WebRequestOptions\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public WebRequestOptions()
+    content.vb: Public Sub New
+  overload: Argotic.Common.WebRequestOptions.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials)
+  commentId: M:Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials)
+  id: '#ctor(System.Net.ICredentials)'
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: WebRequestOptions(ICredentials)
+  nameWithType: WebRequestOptions.WebRequestOptions(ICredentials)
+  fullName: Argotic.Common.WebRequestOptions.WebRequestOptions(System.Net.ICredentials)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 32
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.WebRequestOptions\" data-throw-if-not-resolved=\"false\"></xref> class using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public WebRequestOptions(ICredentials credentials)
+    parameters:
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the source resource when required. This value can be <strong>null</strong>.\n"
+    content.vb: Public Sub New(credentials As ICredentials)
+  overload: Argotic.Common.WebRequestOptions.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.WebRequestOptions.#ctor(System.Net.ICredentials,System.Net.IWebProxy)
+  id: '#ctor(System.Net.ICredentials,System.Net.IWebProxy)'
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: WebRequestOptions(ICredentials, IWebProxy)
+  nameWithType: WebRequestOptions.WebRequestOptions(ICredentials, IWebProxy)
+  fullName: Argotic.Common.WebRequestOptions.WebRequestOptions(System.Net.ICredentials, System.Net.IWebProxy)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.WebRequestOptions\" data-throw-if-not-resolved=\"false\"></xref> class using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> and  <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public WebRequestOptions(ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the source resource when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the source resource when required. This value can be <strong>null</strong>.\n"
+    content.vb: Public Sub New(credentials As ICredentials, proxy As IWebProxy)
+  overload: Argotic.Common.WebRequestOptions.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.AuthenticationLevel
+  commentId: P:Argotic.Common.WebRequestOptions.AuthenticationLevel
+  id: AuthenticationLevel
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: AuthenticationLevel
+  nameWithType: WebRequestOptions.AuthenticationLevel
+  fullName: Argotic.Common.WebRequestOptions.AuthenticationLevel
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AuthenticationLevel
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 60
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets values indicating the level of authentication and impersonation used for this request.
+  example: []
+  syntax:
+    content: public AuthenticationLevel? AuthenticationLevel { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Net.Security.AuthenticationLevel}
+    content.vb: Public Property AuthenticationLevel As AuthenticationLevel?
+  overload: Argotic.Common.WebRequestOptions.AuthenticationLevel*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.CachePolicy
+  commentId: P:Argotic.Common.WebRequestOptions.CachePolicy
+  id: CachePolicy
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: CachePolicy
+  nameWithType: WebRequestOptions.CachePolicy
+  fullName: Argotic.Common.WebRequestOptions.CachePolicy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CachePolicy
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the cache policy for this request.
+  example: []
+  syntax:
+    content: public RequestCachePolicy CachePolicy { get; set; }
+    parameters: []
+    return:
+      type: System.Net.Cache.RequestCachePolicy
+    content.vb: Public Property CachePolicy As RequestCachePolicy
+  overload: Argotic.Common.WebRequestOptions.CachePolicy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ConnectionGroupName
+  commentId: P:Argotic.Common.WebRequestOptions.ConnectionGroupName
+  id: ConnectionGroupName
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ConnectionGroupName
+  nameWithType: WebRequestOptions.ConnectionGroupName
+  fullName: Argotic.Common.WebRequestOptions.ConnectionGroupName
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConnectionGroupName
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 70
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the name of the connection group for the request.
+  example: []
+  syntax:
+    content: public string ConnectionGroupName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ConnectionGroupName As String
+  overload: Argotic.Common.WebRequestOptions.ConnectionGroupName*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Credentials
+  commentId: P:Argotic.Common.WebRequestOptions.Credentials
+  id: Credentials
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Credentials
+  nameWithType: WebRequestOptions.Credentials
+  fullName: Argotic.Common.WebRequestOptions.Credentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Credentials
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 73
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the network credentials used for authenticating the request with the Internet resource.
+  example: []
+  syntax:
+    content: public ICredentials Credentials { get; set; }
+    parameters: []
+    return:
+      type: System.Net.ICredentials
+    content.vb: Public Property Credentials As ICredentials
+  overload: Argotic.Common.WebRequestOptions.Credentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Headers
+  commentId: P:Argotic.Common.WebRequestOptions.Headers
+  id: Headers
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Headers
+  nameWithType: WebRequestOptions.Headers
+  fullName: Argotic.Common.WebRequestOptions.Headers
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Headers
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 76
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the collection of header name/value pairs associated with the request.
+  example: []
+  syntax:
+    content: public WebHeaderCollection Headers { get; set; }
+    parameters: []
+    return:
+      type: System.Net.WebHeaderCollection
+    content.vb: Public Property Headers As WebHeaderCollection
+  overload: Argotic.Common.WebRequestOptions.Headers*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ImpersonationLevel
+  commentId: P:Argotic.Common.WebRequestOptions.ImpersonationLevel
+  id: ImpersonationLevel
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ImpersonationLevel
+  nameWithType: WebRequestOptions.ImpersonationLevel
+  fullName: Argotic.Common.WebRequestOptions.ImpersonationLevel
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ImpersonationLevel
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 79
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the impersonation level for the current request.
+  example: []
+  syntax:
+    content: public TokenImpersonationLevel? ImpersonationLevel { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Security.Principal.TokenImpersonationLevel}
+    content.vb: Public Property ImpersonationLevel As TokenImpersonationLevel?
+  overload: Argotic.Common.WebRequestOptions.ImpersonationLevel*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.PreAuthenticate
+  commentId: P:Argotic.Common.WebRequestOptions.PreAuthenticate
+  id: PreAuthenticate
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: PreAuthenticate
+  nameWithType: WebRequestOptions.PreAuthenticate
+  fullName: Argotic.Common.WebRequestOptions.PreAuthenticate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: PreAuthenticate
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 82
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets indicates whether to pre-authenticate the request.
+  example: []
+  syntax:
+    content: public bool? PreAuthenticate { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property PreAuthenticate As Boolean?
+  overload: Argotic.Common.WebRequestOptions.PreAuthenticate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Proxy
+  commentId: P:Argotic.Common.WebRequestOptions.Proxy
+  id: Proxy
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Proxy
+  nameWithType: WebRequestOptions.Proxy
+  fullName: Argotic.Common.WebRequestOptions.Proxy
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Proxy
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 85
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the network proxy to use to access this Internet resource.
+  example: []
+  syntax:
+    content: public IWebProxy Proxy { get; set; }
+    parameters: []
+    return:
+      type: System.Net.IWebProxy
+    content.vb: Public Property Proxy As IWebProxy
+  overload: Argotic.Common.WebRequestOptions.Proxy*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Timeout
+  commentId: P:Argotic.Common.WebRequestOptions.Timeout
+  id: Timeout
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Timeout
+  nameWithType: WebRequestOptions.Timeout
+  fullName: Argotic.Common.WebRequestOptions.Timeout
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Timeout
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 88
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the length of time before the request times out.
+  example: []
+  syntax:
+    content: public int? Timeout { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property Timeout As Integer?
+  overload: Argotic.Common.WebRequestOptions.Timeout*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.UseDefaultCredentials
+  commentId: P:Argotic.Common.WebRequestOptions.UseDefaultCredentials
+  id: UseDefaultCredentials
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: UseDefaultCredentials
+  nameWithType: WebRequestOptions.UseDefaultCredentials
+  fullName: Argotic.Common.WebRequestOptions.UseDefaultCredentials
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UseDefaultCredentials
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 91
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> value that controls whether <xref href="System.Net.CredentialCache.DefaultCredentials" data-throw-if-not-resolved="false"></xref> are sent with requests.
+  example: []
+  syntax:
+    content: public bool? UseDefaultCredentials { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property UseDefaultCredentials As Boolean?
+  overload: Argotic.Common.WebRequestOptions.UseDefaultCredentials*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ContentOffset
+  commentId: P:Argotic.Common.WebRequestOptions.ContentOffset
+  id: ContentOffset
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ContentOffset
+  nameWithType: WebRequestOptions.ContentOffset
+  fullName: Argotic.Common.WebRequestOptions.ContentOffset
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContentOffset
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 94
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a byte offset into the file being downloaded by this request.
+  example: []
+  syntax:
+    content: public long? ContentOffset { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: Public Property ContentOffset As Long?
+  overload: Argotic.Common.WebRequestOptions.ContentOffset*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.EnableSsl
+  commentId: P:Argotic.Common.WebRequestOptions.EnableSsl
+  id: EnableSsl
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: EnableSsl
+  nameWithType: WebRequestOptions.EnableSsl
+  fullName: Argotic.Common.WebRequestOptions.EnableSsl
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: EnableSsl
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 97
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> that specifies that an SSL connection should be used.
+  example: []
+  syntax:
+    content: public bool? EnableSsl { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property EnableSsl As Boolean?
+  overload: Argotic.Common.WebRequestOptions.EnableSsl*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.RenameTo
+  commentId: P:Argotic.Common.WebRequestOptions.RenameTo
+  id: RenameTo
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: RenameTo
+  nameWithType: WebRequestOptions.RenameTo
+  fullName: Argotic.Common.WebRequestOptions.RenameTo
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RenameTo
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 100
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the new name of a file being renamed.
+  example: []
+  syntax:
+    content: public string RenameTo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RenameTo As String
+  overload: Argotic.Common.WebRequestOptions.RenameTo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.UseBinary
+  commentId: P:Argotic.Common.WebRequestOptions.UseBinary
+  id: UseBinary
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: UseBinary
+  nameWithType: WebRequestOptions.UseBinary
+  fullName: Argotic.Common.WebRequestOptions.UseBinary
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UseBinary
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 103
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a <xref href="System.Boolean" data-throw-if-not-resolved="false"></xref> value that specifies the data type for file transfers.
+  example: []
+  syntax:
+    content: public bool? UseBinary { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property UseBinary As Boolean?
+  overload: Argotic.Common.WebRequestOptions.UseBinary*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.UsePassive
+  commentId: P:Argotic.Common.WebRequestOptions.UsePassive
+  id: UsePassive
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: UsePassive
+  nameWithType: WebRequestOptions.UsePassive
+  fullName: Argotic.Common.WebRequestOptions.UsePassive
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UsePassive
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 106
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the behavior of a client application&apos;s data transfer process.
+  example: []
+  syntax:
+    content: public bool? UsePassive { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property UsePassive As Boolean?
+  overload: Argotic.Common.WebRequestOptions.UsePassive*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Accept
+  commentId: P:Argotic.Common.WebRequestOptions.Accept
+  id: Accept
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Accept
+  nameWithType: WebRequestOptions.Accept
+  fullName: Argotic.Common.WebRequestOptions.Accept
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Accept
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 109
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the Accept HTTP header.
+  example: []
+  syntax:
+    content: public string Accept { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Accept As String
+  overload: Argotic.Common.WebRequestOptions.Accept*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.AllowAutoRedirect
+  commentId: P:Argotic.Common.WebRequestOptions.AllowAutoRedirect
+  id: AllowAutoRedirect
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: AllowAutoRedirect
+  nameWithType: WebRequestOptions.AllowAutoRedirect
+  fullName: Argotic.Common.WebRequestOptions.AllowAutoRedirect
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AllowAutoRedirect
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether the request should follow redirection responses.
+  example: []
+  syntax:
+    content: public bool? AllowAutoRedirect { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property AllowAutoRedirect As Boolean?
+  overload: Argotic.Common.WebRequestOptions.AllowAutoRedirect*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+  commentId: P:Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+  id: AllowWriteStreamBuffering
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: AllowWriteStreamBuffering
+  nameWithType: WebRequestOptions.AllowWriteStreamBuffering
+  fullName: Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AllowWriteStreamBuffering
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 115
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether to buffer the data sent to the Internet resource.
+  example: []
+  syntax:
+    content: public bool? AllowWriteStreamBuffering { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property AllowWriteStreamBuffering As Boolean?
+  overload: Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.AutomaticDecompression
+  commentId: P:Argotic.Common.WebRequestOptions.AutomaticDecompression
+  id: AutomaticDecompression
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: AutomaticDecompression
+  nameWithType: WebRequestOptions.AutomaticDecompression
+  fullName: Argotic.Common.WebRequestOptions.AutomaticDecompression
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AutomaticDecompression
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 118
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the type of decompression that is used.
+  example: []
+  syntax:
+    content: public DecompressionMethods? AutomaticDecompression { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Net.DecompressionMethods}
+    content.vb: Public Property AutomaticDecompression As DecompressionMethods?
+  overload: Argotic.Common.WebRequestOptions.AutomaticDecompression*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Connection
+  commentId: P:Argotic.Common.WebRequestOptions.Connection
+  id: Connection
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Connection
+  nameWithType: WebRequestOptions.Connection
+  fullName: Argotic.Common.WebRequestOptions.Connection
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Connection
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 121
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the Connection HTTP header.
+  example: []
+  syntax:
+    content: public string Connection { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Connection As String
+  overload: Argotic.Common.WebRequestOptions.Connection*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ContinueDelegate
+  commentId: P:Argotic.Common.WebRequestOptions.ContinueDelegate
+  id: ContinueDelegate
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ContinueDelegate
+  nameWithType: WebRequestOptions.ContinueDelegate
+  fullName: Argotic.Common.WebRequestOptions.ContinueDelegate
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ContinueDelegate
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 124
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the delegate method called when an HTTP 100-continue response is received from the Internet resource.
+  example: []
+  syntax:
+    content: public HttpContinueDelegate ContinueDelegate { get; set; }
+    parameters: []
+    return:
+      type: System.Net.HttpContinueDelegate
+    content.vb: Public Property ContinueDelegate As HttpContinueDelegate
+  overload: Argotic.Common.WebRequestOptions.ContinueDelegate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.CookieContainer
+  commentId: P:Argotic.Common.WebRequestOptions.CookieContainer
+  id: CookieContainer
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: CookieContainer
+  nameWithType: WebRequestOptions.CookieContainer
+  fullName: Argotic.Common.WebRequestOptions.CookieContainer
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CookieContainer
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 127
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the cookies associated with the request.
+  example: []
+  syntax:
+    content: public CookieContainer CookieContainer { get; set; }
+    parameters: []
+    return:
+      type: System.Net.CookieContainer
+    content.vb: Public Property CookieContainer As CookieContainer
+  overload: Argotic.Common.WebRequestOptions.CookieContainer*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Expect
+  commentId: P:Argotic.Common.WebRequestOptions.Expect
+  id: Expect
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Expect
+  nameWithType: WebRequestOptions.Expect
+  fullName: Argotic.Common.WebRequestOptions.Expect
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Expect
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 130
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the Expect HTTP header.
+  example: []
+  syntax:
+    content: public string Expect { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Expect As String
+  overload: Argotic.Common.WebRequestOptions.Expect*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+  commentId: P:Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+  id: MaximumAutomaticRedirections
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: MaximumAutomaticRedirections
+  nameWithType: WebRequestOptions.MaximumAutomaticRedirections
+  fullName: Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MaximumAutomaticRedirections
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 133
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the maximum number of redirects that the request follows.
+  example: []
+  syntax:
+    content: public int? MaximumAutomaticRedirections { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property MaximumAutomaticRedirections As Integer?
+  overload: Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+  commentId: P:Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+  id: MaximumResponseHeadersLength
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: MaximumResponseHeadersLength
+  nameWithType: WebRequestOptions.MaximumResponseHeadersLength
+  fullName: Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MaximumResponseHeadersLength
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 136
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the maximum allowed length of the response headers.
+  example: []
+  syntax:
+    content: public int? MaximumResponseHeadersLength { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property MaximumResponseHeadersLength As Integer?
+  overload: Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.MediaType
+  commentId: P:Argotic.Common.WebRequestOptions.MediaType
+  id: MediaType
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: MediaType
+  nameWithType: WebRequestOptions.MediaType
+  fullName: Argotic.Common.WebRequestOptions.MediaType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MediaType
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 139
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the media type of the request.
+  example: []
+  syntax:
+    content: public string MediaType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MediaType As String
+  overload: Argotic.Common.WebRequestOptions.MediaType*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Pipelined
+  commentId: P:Argotic.Common.WebRequestOptions.Pipelined
+  id: Pipelined
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Pipelined
+  nameWithType: WebRequestOptions.Pipelined
+  fullName: Argotic.Common.WebRequestOptions.Pipelined
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Pipelined
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 142
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether to pipeline the request to the Internet resource.
+  example: []
+  syntax:
+    content: public bool? Pipelined { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property Pipelined As Boolean?
+  overload: Argotic.Common.WebRequestOptions.Pipelined*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ProtocolVersion
+  commentId: P:Argotic.Common.WebRequestOptions.ProtocolVersion
+  id: ProtocolVersion
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ProtocolVersion
+  nameWithType: WebRequestOptions.ProtocolVersion
+  fullName: Argotic.Common.WebRequestOptions.ProtocolVersion
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ProtocolVersion
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 145
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the version of HTTP to use for the request.
+  example: []
+  syntax:
+    content: public Version ProtocolVersion { get; set; }
+    parameters: []
+    return:
+      type: System.Version
+    content.vb: Public Property ProtocolVersion As Version
+  overload: Argotic.Common.WebRequestOptions.ProtocolVersion*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.Referer
+  commentId: P:Argotic.Common.WebRequestOptions.Referer
+  id: Referer
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: Referer
+  nameWithType: WebRequestOptions.Referer
+  fullName: Argotic.Common.WebRequestOptions.Referer
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Referer
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 148
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the Referer HTTP header.
+  example: []
+  syntax:
+    content: public string Referer { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Referer As String
+  overload: Argotic.Common.WebRequestOptions.Referer*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.SendChunked
+  commentId: P:Argotic.Common.WebRequestOptions.SendChunked
+  id: SendChunked
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: SendChunked
+  nameWithType: WebRequestOptions.SendChunked
+  fullName: Argotic.Common.WebRequestOptions.SendChunked
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SendChunked
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 151
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether to send data in segments to the Internet resource.
+  example: []
+  syntax:
+    content: public bool? SendChunked { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property SendChunked As Boolean?
+  overload: Argotic.Common.WebRequestOptions.SendChunked*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.TransferEncoding
+  commentId: P:Argotic.Common.WebRequestOptions.TransferEncoding
+  id: TransferEncoding
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: TransferEncoding
+  nameWithType: WebRequestOptions.TransferEncoding
+  fullName: Argotic.Common.WebRequestOptions.TransferEncoding
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TransferEncoding
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 154
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the Transfer-encoding HTTP header.
+  example: []
+  syntax:
+    content: public string TransferEncoding { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property TransferEncoding As String
+  overload: Argotic.Common.WebRequestOptions.TransferEncoding*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  commentId: P:Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  id: UnsafeAuthenticatedConnectionSharing
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: UnsafeAuthenticatedConnectionSharing
+  nameWithType: WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  fullName: Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UnsafeAuthenticatedConnectionSharing
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 157
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether to allow high-speed NTLM-authenticated connection sharing.
+  example: []
+  syntax:
+    content: public bool? UnsafeAuthenticatedConnectionSharing { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property UnsafeAuthenticatedConnectionSharing As Boolean?
+  overload: Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.UserAgent
+  commentId: P:Argotic.Common.WebRequestOptions.UserAgent
+  id: UserAgent
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: UserAgent
+  nameWithType: WebRequestOptions.UserAgent
+  fullName: Argotic.Common.WebRequestOptions.UserAgent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UserAgent
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 160
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the value of the User-agent HTTP header.
+  example: []
+  syntax:
+    content: public string UserAgent { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UserAgent As String
+  overload: Argotic.Common.WebRequestOptions.UserAgent*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ClientCertificates
+  commentId: P:Argotic.Common.WebRequestOptions.ClientCertificates
+  id: ClientCertificates
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ClientCertificates
+  nameWithType: WebRequestOptions.ClientCertificates
+  fullName: Argotic.Common.WebRequestOptions.ClientCertificates
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ClientCertificates
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 163
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets the collection of security certificates that are associated with this request.
+  example: []
+  syntax:
+    content: public X509CertificateCollection ClientCertificates { get; set; }
+    parameters: []
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509CertificateCollection
+    content.vb: Public Property ClientCertificates As X509CertificateCollection
+  overload: Argotic.Common.WebRequestOptions.ClientCertificates*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.KeepAlive
+  commentId: P:Argotic.Common.WebRequestOptions.KeepAlive
+  id: KeepAlive
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: KeepAlive
+  nameWithType: WebRequestOptions.KeepAlive
+  fullName: Argotic.Common.WebRequestOptions.KeepAlive
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: KeepAlive
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 166
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a value that indicates whether to make a persistent connection to the Internet resource.
+  example: []
+  syntax:
+    content: public bool? KeepAlive { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property KeepAlive As Boolean?
+  overload: Argotic.Common.WebRequestOptions.KeepAlive*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ReadWriteTimeout
+  commentId: P:Argotic.Common.WebRequestOptions.ReadWriteTimeout
+  id: ReadWriteTimeout
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ReadWriteTimeout
+  nameWithType: WebRequestOptions.ReadWriteTimeout
+  fullName: Argotic.Common.WebRequestOptions.ReadWriteTimeout
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ReadWriteTimeout
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 169
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: Gets or sets a time-out when writing to or reading from a stream.
+  example: []
+  syntax:
+    content: public int? ReadWriteTimeout { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property ReadWriteTimeout As Integer?
+  overload: Argotic.Common.WebRequestOptions.ReadWriteTimeout*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.WebRequestOptions.ApplyOptions(System.Net.WebRequest)
+  commentId: M:Argotic.Common.WebRequestOptions.ApplyOptions(System.Net.WebRequest)
+  id: ApplyOptions(System.Net.WebRequest)
+  parent: Argotic.Common.WebRequestOptions
+  langs:
+  - csharp
+  - vb
+  name: ApplyOptions(WebRequest)
+  nameWithType: WebRequestOptions.ApplyOptions(WebRequest)
+  fullName: Argotic.Common.WebRequestOptions.ApplyOptions(System.Net.WebRequest)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/WebRequestOptions.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ApplyOptions
+    path: ../Solutions/Argotic.Common/WebRequestOptions.cs
+    startLine: 175
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nApplies all options on the current instance to the supplied <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void ApplyOptions(WebRequest request)
+    parameters:
+    - id: request
+      type: System.Net.WebRequest
+      description: A <xref href="System.Net.WebRequest" data-throw-if-not-resolved="false"></xref> that should be configured.
+    content.vb: Public Sub ApplyOptions(request As WebRequest)
+  overload: Argotic.Common.WebRequestOptions.ApplyOptions*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Common.WebRequestOptions.#ctor*
+  commentId: Overload:Argotic.Common.WebRequestOptions.#ctor
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions.WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions.WebRequestOptions
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: Argotic.Common.WebRequestOptions.AuthenticationLevel*
+  commentId: Overload:Argotic.Common.WebRequestOptions.AuthenticationLevel
+  name: AuthenticationLevel
+  nameWithType: WebRequestOptions.AuthenticationLevel
+  fullName: Argotic.Common.WebRequestOptions.AuthenticationLevel
+- uid: System.Nullable{System.Net.Security.AuthenticationLevel}
+  commentId: T:System.Nullable{System.Net.Security.AuthenticationLevel}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<AuthenticationLevel>
+  nameWithType: Nullable<AuthenticationLevel>
+  fullName: System.Nullable<System.Net.Security.AuthenticationLevel>
+  nameWithType.vb: Nullable(Of AuthenticationLevel)
+  fullName.vb: System.Nullable(Of System.Net.Security.AuthenticationLevel)
+  name.vb: Nullable(Of AuthenticationLevel)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Security.AuthenticationLevel
+    name: AuthenticationLevel
+    nameWithType: AuthenticationLevel
+    fullName: System.Net.Security.AuthenticationLevel
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Security.AuthenticationLevel
+    name: AuthenticationLevel
+    nameWithType: AuthenticationLevel
+    fullName: System.Net.Security.AuthenticationLevel
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.WebRequestOptions.CachePolicy*
+  commentId: Overload:Argotic.Common.WebRequestOptions.CachePolicy
+  name: CachePolicy
+  nameWithType: WebRequestOptions.CachePolicy
+  fullName: Argotic.Common.WebRequestOptions.CachePolicy
+- uid: System.Net.Cache.RequestCachePolicy
+  commentId: T:System.Net.Cache.RequestCachePolicy
+  parent: System.Net.Cache
+  isExternal: true
+  name: RequestCachePolicy
+  nameWithType: RequestCachePolicy
+  fullName: System.Net.Cache.RequestCachePolicy
+- uid: System.Net.Cache
+  commentId: N:System.Net.Cache
+  isExternal: true
+  name: System.Net.Cache
+  nameWithType: System.Net.Cache
+  fullName: System.Net.Cache
+- uid: Argotic.Common.WebRequestOptions.ConnectionGroupName*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ConnectionGroupName
+  name: ConnectionGroupName
+  nameWithType: WebRequestOptions.ConnectionGroupName
+  fullName: Argotic.Common.WebRequestOptions.ConnectionGroupName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Common.WebRequestOptions.Credentials*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Credentials
+  name: Credentials
+  nameWithType: WebRequestOptions.Credentials
+  fullName: Argotic.Common.WebRequestOptions.Credentials
+- uid: Argotic.Common.WebRequestOptions.Headers*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Headers
+  name: Headers
+  nameWithType: WebRequestOptions.Headers
+  fullName: Argotic.Common.WebRequestOptions.Headers
+- uid: System.Net.WebHeaderCollection
+  commentId: T:System.Net.WebHeaderCollection
+  parent: System.Net
+  isExternal: true
+  name: WebHeaderCollection
+  nameWithType: WebHeaderCollection
+  fullName: System.Net.WebHeaderCollection
+- uid: Argotic.Common.WebRequestOptions.ImpersonationLevel*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ImpersonationLevel
+  name: ImpersonationLevel
+  nameWithType: WebRequestOptions.ImpersonationLevel
+  fullName: Argotic.Common.WebRequestOptions.ImpersonationLevel
+- uid: System.Nullable{System.Security.Principal.TokenImpersonationLevel}
+  commentId: T:System.Nullable{System.Security.Principal.TokenImpersonationLevel}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<TokenImpersonationLevel>
+  nameWithType: Nullable<TokenImpersonationLevel>
+  fullName: System.Nullable<System.Security.Principal.TokenImpersonationLevel>
+  nameWithType.vb: Nullable(Of TokenImpersonationLevel)
+  fullName.vb: System.Nullable(Of System.Security.Principal.TokenImpersonationLevel)
+  name.vb: Nullable(Of TokenImpersonationLevel)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Security.Principal.TokenImpersonationLevel
+    name: TokenImpersonationLevel
+    nameWithType: TokenImpersonationLevel
+    fullName: System.Security.Principal.TokenImpersonationLevel
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Security.Principal.TokenImpersonationLevel
+    name: TokenImpersonationLevel
+    nameWithType: TokenImpersonationLevel
+    fullName: System.Security.Principal.TokenImpersonationLevel
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.WebRequestOptions.PreAuthenticate*
+  commentId: Overload:Argotic.Common.WebRequestOptions.PreAuthenticate
+  name: PreAuthenticate
+  nameWithType: WebRequestOptions.PreAuthenticate
+  fullName: Argotic.Common.WebRequestOptions.PreAuthenticate
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Boolean>
+  nameWithType: Nullable<Boolean>
+  fullName: System.Nullable<System.Boolean>
+  nameWithType.vb: Nullable(Of Boolean)
+  fullName.vb: System.Nullable(Of System.Boolean)
+  name.vb: Nullable(Of Boolean)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.WebRequestOptions.Proxy*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Proxy
+  name: Proxy
+  nameWithType: WebRequestOptions.Proxy
+  fullName: Argotic.Common.WebRequestOptions.Proxy
+- uid: Argotic.Common.WebRequestOptions.Timeout*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Timeout
+  name: Timeout
+  nameWithType: WebRequestOptions.Timeout
+  fullName: Argotic.Common.WebRequestOptions.Timeout
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int32>
+  nameWithType: Nullable<Int32>
+  fullName: System.Nullable<System.Int32>
+  nameWithType.vb: Nullable(Of Int32)
+  fullName.vb: System.Nullable(Of System.Int32)
+  name.vb: Nullable(Of Int32)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Net.CredentialCache.DefaultCredentials
+  commentId: P:System.Net.CredentialCache.DefaultCredentials
+  isExternal: true
+- uid: Argotic.Common.WebRequestOptions.UseDefaultCredentials*
+  commentId: Overload:Argotic.Common.WebRequestOptions.UseDefaultCredentials
+  name: UseDefaultCredentials
+  nameWithType: WebRequestOptions.UseDefaultCredentials
+  fullName: Argotic.Common.WebRequestOptions.UseDefaultCredentials
+- uid: Argotic.Common.WebRequestOptions.ContentOffset*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ContentOffset
+  name: ContentOffset
+  nameWithType: WebRequestOptions.ContentOffset
+  fullName: Argotic.Common.WebRequestOptions.ContentOffset
+- uid: System.Nullable{System.Int64}
+  commentId: T:System.Nullable{System.Int64}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int64>
+  nameWithType: Nullable<Int64>
+  fullName: System.Nullable<System.Int64>
+  nameWithType.vb: Nullable(Of Int64)
+  fullName.vb: System.Nullable(Of System.Int64)
+  name.vb: Nullable(Of Int64)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int64
+    name: Int64
+    nameWithType: Int64
+    fullName: System.Int64
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.WebRequestOptions.EnableSsl*
+  commentId: Overload:Argotic.Common.WebRequestOptions.EnableSsl
+  name: EnableSsl
+  nameWithType: WebRequestOptions.EnableSsl
+  fullName: Argotic.Common.WebRequestOptions.EnableSsl
+- uid: Argotic.Common.WebRequestOptions.RenameTo*
+  commentId: Overload:Argotic.Common.WebRequestOptions.RenameTo
+  name: RenameTo
+  nameWithType: WebRequestOptions.RenameTo
+  fullName: Argotic.Common.WebRequestOptions.RenameTo
+- uid: Argotic.Common.WebRequestOptions.UseBinary*
+  commentId: Overload:Argotic.Common.WebRequestOptions.UseBinary
+  name: UseBinary
+  nameWithType: WebRequestOptions.UseBinary
+  fullName: Argotic.Common.WebRequestOptions.UseBinary
+- uid: Argotic.Common.WebRequestOptions.UsePassive*
+  commentId: Overload:Argotic.Common.WebRequestOptions.UsePassive
+  name: UsePassive
+  nameWithType: WebRequestOptions.UsePassive
+  fullName: Argotic.Common.WebRequestOptions.UsePassive
+- uid: Argotic.Common.WebRequestOptions.Accept*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Accept
+  name: Accept
+  nameWithType: WebRequestOptions.Accept
+  fullName: Argotic.Common.WebRequestOptions.Accept
+- uid: Argotic.Common.WebRequestOptions.AllowAutoRedirect*
+  commentId: Overload:Argotic.Common.WebRequestOptions.AllowAutoRedirect
+  name: AllowAutoRedirect
+  nameWithType: WebRequestOptions.AllowAutoRedirect
+  fullName: Argotic.Common.WebRequestOptions.AllowAutoRedirect
+- uid: Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering*
+  commentId: Overload:Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+  name: AllowWriteStreamBuffering
+  nameWithType: WebRequestOptions.AllowWriteStreamBuffering
+  fullName: Argotic.Common.WebRequestOptions.AllowWriteStreamBuffering
+- uid: Argotic.Common.WebRequestOptions.AutomaticDecompression*
+  commentId: Overload:Argotic.Common.WebRequestOptions.AutomaticDecompression
+  name: AutomaticDecompression
+  nameWithType: WebRequestOptions.AutomaticDecompression
+  fullName: Argotic.Common.WebRequestOptions.AutomaticDecompression
+- uid: System.Nullable{System.Net.DecompressionMethods}
+  commentId: T:System.Nullable{System.Net.DecompressionMethods}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<DecompressionMethods>
+  nameWithType: Nullable<DecompressionMethods>
+  fullName: System.Nullable<System.Net.DecompressionMethods>
+  nameWithType.vb: Nullable(Of DecompressionMethods)
+  fullName.vb: System.Nullable(Of System.Net.DecompressionMethods)
+  name.vb: Nullable(Of DecompressionMethods)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.DecompressionMethods
+    name: DecompressionMethods
+    nameWithType: DecompressionMethods
+    fullName: System.Net.DecompressionMethods
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.DecompressionMethods
+    name: DecompressionMethods
+    nameWithType: DecompressionMethods
+    fullName: System.Net.DecompressionMethods
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.WebRequestOptions.Connection*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Connection
+  name: Connection
+  nameWithType: WebRequestOptions.Connection
+  fullName: Argotic.Common.WebRequestOptions.Connection
+- uid: Argotic.Common.WebRequestOptions.ContinueDelegate*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ContinueDelegate
+  name: ContinueDelegate
+  nameWithType: WebRequestOptions.ContinueDelegate
+  fullName: Argotic.Common.WebRequestOptions.ContinueDelegate
+- uid: System.Net.HttpContinueDelegate
+  commentId: T:System.Net.HttpContinueDelegate
+  parent: System.Net
+  isExternal: true
+  name: HttpContinueDelegate
+  nameWithType: HttpContinueDelegate
+  fullName: System.Net.HttpContinueDelegate
+- uid: Argotic.Common.WebRequestOptions.CookieContainer*
+  commentId: Overload:Argotic.Common.WebRequestOptions.CookieContainer
+  name: CookieContainer
+  nameWithType: WebRequestOptions.CookieContainer
+  fullName: Argotic.Common.WebRequestOptions.CookieContainer
+- uid: System.Net.CookieContainer
+  commentId: T:System.Net.CookieContainer
+  parent: System.Net
+  isExternal: true
+  name: CookieContainer
+  nameWithType: CookieContainer
+  fullName: System.Net.CookieContainer
+- uid: Argotic.Common.WebRequestOptions.Expect*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Expect
+  name: Expect
+  nameWithType: WebRequestOptions.Expect
+  fullName: Argotic.Common.WebRequestOptions.Expect
+- uid: Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections*
+  commentId: Overload:Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+  name: MaximumAutomaticRedirections
+  nameWithType: WebRequestOptions.MaximumAutomaticRedirections
+  fullName: Argotic.Common.WebRequestOptions.MaximumAutomaticRedirections
+- uid: Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength*
+  commentId: Overload:Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+  name: MaximumResponseHeadersLength
+  nameWithType: WebRequestOptions.MaximumResponseHeadersLength
+  fullName: Argotic.Common.WebRequestOptions.MaximumResponseHeadersLength
+- uid: Argotic.Common.WebRequestOptions.MediaType*
+  commentId: Overload:Argotic.Common.WebRequestOptions.MediaType
+  name: MediaType
+  nameWithType: WebRequestOptions.MediaType
+  fullName: Argotic.Common.WebRequestOptions.MediaType
+- uid: Argotic.Common.WebRequestOptions.Pipelined*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Pipelined
+  name: Pipelined
+  nameWithType: WebRequestOptions.Pipelined
+  fullName: Argotic.Common.WebRequestOptions.Pipelined
+- uid: Argotic.Common.WebRequestOptions.ProtocolVersion*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ProtocolVersion
+  name: ProtocolVersion
+  nameWithType: WebRequestOptions.ProtocolVersion
+  fullName: Argotic.Common.WebRequestOptions.ProtocolVersion
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: Argotic.Common.WebRequestOptions.Referer*
+  commentId: Overload:Argotic.Common.WebRequestOptions.Referer
+  name: Referer
+  nameWithType: WebRequestOptions.Referer
+  fullName: Argotic.Common.WebRequestOptions.Referer
+- uid: Argotic.Common.WebRequestOptions.SendChunked*
+  commentId: Overload:Argotic.Common.WebRequestOptions.SendChunked
+  name: SendChunked
+  nameWithType: WebRequestOptions.SendChunked
+  fullName: Argotic.Common.WebRequestOptions.SendChunked
+- uid: Argotic.Common.WebRequestOptions.TransferEncoding*
+  commentId: Overload:Argotic.Common.WebRequestOptions.TransferEncoding
+  name: TransferEncoding
+  nameWithType: WebRequestOptions.TransferEncoding
+  fullName: Argotic.Common.WebRequestOptions.TransferEncoding
+- uid: Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing*
+  commentId: Overload:Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  name: UnsafeAuthenticatedConnectionSharing
+  nameWithType: WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+  fullName: Argotic.Common.WebRequestOptions.UnsafeAuthenticatedConnectionSharing
+- uid: Argotic.Common.WebRequestOptions.UserAgent*
+  commentId: Overload:Argotic.Common.WebRequestOptions.UserAgent
+  name: UserAgent
+  nameWithType: WebRequestOptions.UserAgent
+  fullName: Argotic.Common.WebRequestOptions.UserAgent
+- uid: Argotic.Common.WebRequestOptions.ClientCertificates*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ClientCertificates
+  name: ClientCertificates
+  nameWithType: WebRequestOptions.ClientCertificates
+  fullName: Argotic.Common.WebRequestOptions.ClientCertificates
+- uid: System.Security.Cryptography.X509Certificates.X509CertificateCollection
+  commentId: T:System.Security.Cryptography.X509Certificates.X509CertificateCollection
+  parent: System.Security.Cryptography.X509Certificates
+  isExternal: true
+  name: X509CertificateCollection
+  nameWithType: X509CertificateCollection
+  fullName: System.Security.Cryptography.X509Certificates.X509CertificateCollection
+- uid: System.Security.Cryptography.X509Certificates
+  commentId: N:System.Security.Cryptography.X509Certificates
+  isExternal: true
+  name: System.Security.Cryptography.X509Certificates
+  nameWithType: System.Security.Cryptography.X509Certificates
+  fullName: System.Security.Cryptography.X509Certificates
+- uid: Argotic.Common.WebRequestOptions.KeepAlive*
+  commentId: Overload:Argotic.Common.WebRequestOptions.KeepAlive
+  name: KeepAlive
+  nameWithType: WebRequestOptions.KeepAlive
+  fullName: Argotic.Common.WebRequestOptions.KeepAlive
+- uid: Argotic.Common.WebRequestOptions.ReadWriteTimeout*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ReadWriteTimeout
+  name: ReadWriteTimeout
+  nameWithType: WebRequestOptions.ReadWriteTimeout
+  fullName: Argotic.Common.WebRequestOptions.ReadWriteTimeout
+- uid: System.Net.WebRequest
+  commentId: T:System.Net.WebRequest
+  parent: System.Net
+  isExternal: true
+  name: WebRequest
+  nameWithType: WebRequest
+  fullName: System.Net.WebRequest
+- uid: Argotic.Common.WebRequestOptions.ApplyOptions*
+  commentId: Overload:Argotic.Common.WebRequestOptions.ApplyOptions
+  name: ApplyOptions
+  nameWithType: WebRequestOptions.ApplyOptions
+  fullName: Argotic.Common.WebRequestOptions.ApplyOptions

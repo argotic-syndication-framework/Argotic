@@ -1,0 +1,163 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  commentId: T:Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  id: BlogMLApprovalStatus
+  parent: Argotic.Syndication.Specialized
+  children:
+  - Argotic.Syndication.Specialized.BlogMLApprovalStatus.Approved
+  - Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  - Argotic.Syndication.Specialized.BlogMLApprovalStatus.NotApproved
+  langs:
+  - csharp
+  - vb
+  name: BlogMLApprovalStatus
+  nameWithType: BlogMLApprovalStatus
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BlogMLApprovalStatus
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nRepresents the approval status of a web log entity.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public enum BlogMLApprovalStatus
+    content.vb: >-
+      <Serializable>
+
+      Public Enum BlogMLApprovalStatus
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  commentId: F:Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  id: None
+  parent: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: BlogMLApprovalStatus.None
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+    startLine: 15
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nNo approval status specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus.Approved
+  commentId: F:Argotic.Syndication.Specialized.BlogMLApprovalStatus.Approved
+  id: Approved
+  parent: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  langs:
+  - csharp
+  - vb
+  name: Approved
+  nameWithType: BlogMLApprovalStatus.Approved
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus.Approved
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Approved
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the web log entity is approved.\n"
+  example: []
+  syntax:
+    content: Approved = 1
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus.NotApproved
+  commentId: F:Argotic.Syndication.Specialized.BlogMLApprovalStatus.NotApproved
+  id: NotApproved
+  parent: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  langs:
+  - csharp
+  - vb
+  name: NotApproved
+  nameWithType: BlogMLApprovalStatus.NotApproved
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus.NotApproved
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: NotApproved
+    path: ../Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLApprovalStatus.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication.Specialized
+  summary: "\nIndicates that the web log entity is not approved.\n"
+  example: []
+  syntax:
+    content: NotApproved = 2
+    return:
+      type: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Syndication.Specialized
+  commentId: N:Argotic.Syndication.Specialized
+  name: Argotic.Syndication.Specialized
+  nameWithType: Argotic.Syndication.Specialized
+  fullName: Argotic.Syndication.Specialized
+- uid: Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  commentId: T:Argotic.Syndication.Specialized.BlogMLApprovalStatus
+  parent: Argotic.Syndication.Specialized
+  name: BlogMLApprovalStatus
+  nameWithType: BlogMLApprovalStatus
+  fullName: Argotic.Syndication.Specialized.BlogMLApprovalStatus

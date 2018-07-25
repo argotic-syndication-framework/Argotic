@@ -1,0 +1,1220 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  id: ITunesSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+  - Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: ITunesSyndicationExtensionContext
+  nameWithType: ITunesSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ITunesSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.ITunesSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ITunesSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class ITunesSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: ITunesSyndicationExtensionContext()
+  nameWithType: ITunesSyndicationExtensionContext.ITunesSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ITunesSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 73
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.ITunesSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public ITunesSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+  id: Author
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Author
+  nameWithType: ITunesSyndicationExtensionContext.Author
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Author
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 81
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name of the artist of this podcast.\n"
+  example: []
+  syntax:
+    content: public string Author { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name of the artist of this podcast.
+    content.vb: Public Property Author As String
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+  id: Categories
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: ITunesSyndicationExtensionContext.Categories
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 107
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the categories to which this podcast belongs.\n"
+  example: []
+  syntax:
+    content: public Collection<ITunesCategory> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.ITunesCategory}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.ITunesCategory\" data-throw-if-not-resolved=\"false\"></xref> objects that represent the categories to which this podcast belongs. The default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Categories As Collection(Of ITunesCategory)
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+  id: Duration
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Duration
+  nameWithType: ITunesSyndicationExtensionContext.Duration
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Duration
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 124
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the total duration of this podcast.\n"
+  example: []
+  syntax:
+    content: public TimeSpan Duration { get; set; }
+    parameters: []
+    return:
+      type: System.TimeSpan
+      description: A <xref href="System.TimeSpan" data-throw-if-not-resolved="false"></xref> that represents total duration of this podcast. The default value is <xref href="System.TimeSpan.MinValue" data-throw-if-not-resolved="false"></xref>, which indicates that no duration was specified.
+    content.vb: Public Property Duration As TimeSpan
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+  id: ExplicitMaterial
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: ExplicitMaterial
+  nameWithType: ITunesSyndicationExtensionContext.ExplicitMaterial
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExplicitMaterial
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 144
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the explicit language or adult content advisory information for this podcast.\n"
+  example: []
+  syntax:
+    content: public ITunesExplicitMaterial ExplicitMaterial { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.ITunesExplicitMaterial
+      description: "\nAn <xref href=\"Argotic.Extensions.Core.ITunesExplicitMaterial\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that indicates whether the podcast contains explicit material.\nThe default value is <xref href=\"Argotic.Extensions.Core.ITunesExplicitMaterial.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property ExplicitMaterial As ITunesExplicitMaterial
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+  id: Image
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Image
+  nameWithType: ITunesSyndicationExtensionContext.Image
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Image
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 166
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a URL that points to the album artwork for this podcast.\n"
+  remarks: "\niTunes recommends the use of square images that are at least 600 by 600 pixels.\niTunes supports images in <em>JPEG</em> and <em>PNG</em> formats.\nThe URL <strong>must</strong> end in &quot;.jpg&quot; or &quot;.png&quot;.\n"
+  example: []
+  syntax:
+    content: public Uri Image { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents a URL that points to the album artwork for this podcast.
+    content.vb: Public Property Image As Uri
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+  id: IsBlocked
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: IsBlocked
+  nameWithType: ITunesSyndicationExtensionContext.IsBlocked
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsBlocked
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 183
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a value indicating whether gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.\n"
+  example: []
+  syntax:
+    content: public bool IsBlocked { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if this podcast is blocked from appearing in the iTunes Podcast directory; otherwise <strong>false</strong>. The default value is <strong>false</strong>.
+    content.vb: Public Property IsBlocked As Boolean
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+  id: Keywords
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Keywords
+  nameWithType: ITunesSyndicationExtensionContext.Keywords
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Keywords
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 200
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets the search keywords for this podcast.\n"
+  example: []
+  syntax:
+    content: public Collection<string> Keywords { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{System.String}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> collection of strings that allows users to search on a maximum of 12 text keywords.
+    content.vb: Public ReadOnly Property Keywords As Collection(Of String)
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+  id: NewFeedUrl
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: NewFeedUrl
+  nameWithType: ITunesSyndicationExtensionContext.NewFeedUrl
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: NewFeedUrl
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 220
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URL where this podcast feed has been relocated to.\n"
+  remarks: "\nIt is recommended that you should maintain the old feed for 48 hours before retiring it. At that point, iTunes will have updated the directory with the new feed URL.\n"
+  example: []
+  syntax:
+    content: public Uri NewFeedUrl { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL where this podcast feed has been relocated to.
+    content.vb: Public Property NewFeedUrl As Uri
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+  id: Owner
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Owner
+  nameWithType: ITunesSyndicationExtensionContext.Owner
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Owner
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 240
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets information that can be used to contact the owner of this podcast.\n"
+  example: []
+  syntax:
+    content: public ITunesOwner Owner { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.ITunesOwner
+      description: "\nA <xref href=\"Argotic.Extensions.Core.ITunesOwner\" data-throw-if-not-resolved=\"false\"></xref> object that represents information that can be used to contact the owner of this podcast.\nThe default value is a <strong>null</strong> reference.\n"
+    content.vb: Public Property Owner As ITunesOwner
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+  id: Subtitle
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Subtitle
+  nameWithType: ITunesSyndicationExtensionContext.Subtitle
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Subtitle
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 260
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a brief synopsis of this podcast.\n"
+  remarks: "\nIt is recommended that the subtitle is only a few words long.\n"
+  example: []
+  syntax:
+    content: public string Subtitle { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: A brief synopsis of this podcast.
+    content.vb: Public Property Subtitle As String
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+  commentId: P:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+  id: Summary
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Summary
+  nameWithType: ITunesSyndicationExtensionContext.Summary
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Summary
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 284
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the full description of this podcast.\n"
+  example: []
+  syntax:
+    content: public string Summary { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The full description of this podcast.
+    content.vb: Public Property Summary As String
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: ITunesSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 312
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.ITunesSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.ITunesSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: ITunesSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/iTunes/ITunesSyndicationExtensionContext.cs
+    startLine: 338
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.ITunesSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: ITunesSyndicationExtension
+  nameWithType: ITunesSyndicationExtension
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: ITunesSyndicationExtensionContext
+  nameWithType: ITunesSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.#ctor
+  name: ITunesSyndicationExtensionContext
+  nameWithType: ITunesSyndicationExtensionContext.ITunesSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ITunesSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+  name: Author
+  nameWithType: ITunesSyndicationExtensionContext.Author
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Author
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.ITunesCategory
+  commentId: T:Argotic.Extensions.Core.ITunesCategory
+  parent: Argotic.Extensions.Core
+  name: ITunesCategory
+  nameWithType: ITunesCategory
+  fullName: Argotic.Extensions.Core.ITunesCategory
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+  name: Categories
+  nameWithType: ITunesSyndicationExtensionContext.Categories
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Categories
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.ITunesCategory}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.ITunesCategory}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<ITunesCategory>
+  nameWithType: Collection<ITunesCategory>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.ITunesCategory>
+  nameWithType.vb: Collection(Of ITunesCategory)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.ITunesCategory)
+  name.vb: Collection(Of ITunesCategory)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.ITunesCategory
+    name: ITunesCategory
+    nameWithType: ITunesCategory
+    fullName: Argotic.Extensions.Core.ITunesCategory
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.ITunesCategory
+    name: ITunesCategory
+    nameWithType: ITunesCategory
+    fullName: Argotic.Extensions.Core.ITunesCategory
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: System.TimeSpan.MinValue
+  commentId: F:System.TimeSpan.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+  name: Duration
+  nameWithType: ITunesSyndicationExtensionContext.Duration
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Duration
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial
+  commentId: T:Argotic.Extensions.Core.ITunesExplicitMaterial
+  parent: Argotic.Extensions.Core
+  name: ITunesExplicitMaterial
+  nameWithType: ITunesExplicitMaterial
+  fullName: Argotic.Extensions.Core.ITunesExplicitMaterial
+- uid: Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  commentId: F:Argotic.Extensions.Core.ITunesExplicitMaterial.None
+  isExternal: true
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+  name: ExplicitMaterial
+  nameWithType: ITunesSyndicationExtensionContext.ExplicitMaterial
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.ExplicitMaterial
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+  name: Image
+  nameWithType: ITunesSyndicationExtensionContext.Image
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Image
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+  name: IsBlocked
+  nameWithType: ITunesSyndicationExtensionContext.IsBlocked
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.IsBlocked
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+  name: Keywords
+  nameWithType: ITunesSyndicationExtensionContext.Keywords
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Keywords
+- uid: System.Collections.ObjectModel.Collection{System.String}
+  commentId: T:System.Collections.ObjectModel.Collection{System.String}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<String>
+  nameWithType: Collection<String>
+  fullName: System.Collections.ObjectModel.Collection<System.String>
+  nameWithType.vb: Collection(Of String)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.String)
+  name.vb: Collection(Of String)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+  name: NewFeedUrl
+  nameWithType: ITunesSyndicationExtensionContext.NewFeedUrl
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.NewFeedUrl
+- uid: Argotic.Extensions.Core.ITunesOwner
+  commentId: T:Argotic.Extensions.Core.ITunesOwner
+  parent: Argotic.Extensions.Core
+  name: ITunesOwner
+  nameWithType: ITunesOwner
+  fullName: Argotic.Extensions.Core.ITunesOwner
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+  name: Owner
+  nameWithType: ITunesSyndicationExtensionContext.Owner
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Owner
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+  name: Subtitle
+  nameWithType: ITunesSyndicationExtensionContext.Subtitle
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Subtitle
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+  name: Summary
+  nameWithType: ITunesSyndicationExtensionContext.Summary
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Summary
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: ITunesSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: ITunesSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.ITunesSyndicationExtensionContext.WriteTo

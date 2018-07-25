@@ -1,40 +1,39 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+
     /// <summary>
     /// Represents a remote procedure call that can be sent using the <see cref="XmlRpcClient"/> class.
     /// </summary>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcMessage class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
-    ///             region="XmlRpcClient"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" region="XmlRpcClient" />
     ///     </code>
     /// </example>
-    [Serializable()]
+    [Serializable]
     public class XmlRpcMessage : IComparable
     {
         /// <summary>
+        /// Private member to hold the character encoding of the message.
+        /// </summary>
+        private Encoding messageEncoding = Encoding.UTF8;
+
+        /// <summary>
         /// Private member to hold the name of the method to be called.
         /// </summary>
-        private string messageMethodName    = String.Empty;
+        private string messageMethodName = string.Empty;
+
         /// <summary>
         /// Private member to hold the method parameters.
         /// </summary>
         private Collection<IXmlRpcValue> messageParameters;
-        /// <summary>
-        /// Private member to hold the character encoding of the message.
-        /// </summary>
-        private Encoding messageEncoding    = Encoding.UTF8;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
@@ -62,11 +61,12 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is a null reference (Nothing in Visual Basic).</exception>
-        public XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters) : this(methodName)
+        public XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters)
+            : this(methodName)
         {
             Guard.ArgumentNotNull(parameters, "parameters");
 
-            foreach(IXmlRpcValue parameter in parameters)
+            foreach (IXmlRpcValue parameter in parameters)
             {
                 this.Parameters.Add(parameter);
             }
@@ -81,13 +81,13 @@ namespace Argotic.Net
         {
             get
             {
-                return messageEncoding;
+                return this.messageEncoding;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                messageEncoding = value;
+                this.messageEncoding = value;
             }
         }
 
@@ -101,13 +101,13 @@ namespace Argotic.Net
         {
             get
             {
-                return messageMethodName;
+                return this.messageMethodName;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                messageMethodName   = value.Trim();
+                this.messageMethodName = value.Trim();
             }
         }
 
@@ -122,12 +122,87 @@ namespace Argotic.Net
         {
             get
             {
-                if (messageParameters == null)
+                if (this.messageParameters == null)
                 {
-                    messageParameters = new Collection<IXmlRpcValue>();
+                    this.messageParameters = new Collection<IXmlRpcValue>();
                 }
-                return messageParameters;
+
+                return this.messageParameters;
             }
+        }
+
+        /// <summary>
+        /// Determines if operands are equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+        public static bool operator ==(XmlRpcMessage first, XmlRpcMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return true;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.Equals(second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is greater than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator >(XmlRpcMessage first, XmlRpcMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Determines if operands are not equal.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+        public static bool operator !=(XmlRpcMessage first, XmlRpcMessage second)
+        {
+            return !(first == second);
+        }
+
+        /// <summary>
+        /// Determines if first operand is less than second operand.
+        /// </summary>
+        /// <param name="first">Operand to be compared.</param>
+        /// <param name="second">Operand to compare to.</param>
+        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+        public static bool operator <(XmlRpcMessage first, XmlRpcMessage second)
+        {
+            if (Equals(first, null) && Equals(second, null))
+            {
+                return false;
+            }
+
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return true;
+            }
+
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -151,7 +226,7 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
         public static int CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
         {
-            int result  = 0;
+            int result = 0;
 
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(target, "target");
@@ -160,10 +235,10 @@ namespace Argotic.Net
             {
                 for (int i = 0; i < source.Count; i++)
                 {
-                    IXmlRpcValue value  = source[i];
-                    if(!target.Contains(value))
+                    IXmlRpcValue value = source[i];
+                    if (!target.Contains(value))
                     {
-                        result  = -1;
+                        result = -1;
                         break;
                     }
                 }
@@ -178,6 +253,68 @@ namespace Argotic.Net
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            XmlRpcMessage value = obj as XmlRpcMessage;
+
+            if (value != null)
+            {
+                int result = string.Compare(
+                    this.Encoding.WebName,
+                    value.Encoding.WebName,
+                    StringComparison.OrdinalIgnoreCase);
+                result = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
+                result = result | CompareSequence(this.Parameters, value.Parameters);
+
+                return result;
+            }
+
+            throw new ArgumentException(
+                string.Format(
+                    null,
+                    "obj is not of type {0}, type was found to be '{1}'.",
+                    this.GetType().FullName,
+                    obj.GetType().FullName),
+                "obj");
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is XmlRpcMessage))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -197,13 +334,13 @@ namespace Argotic.Net
 
             if (source.HasChildren)
             {
-                XPathNavigator methodNameNavigator  = source.SelectSingleNode("methodName");
-                XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
+                XPathNavigator methodNameNavigator = source.SelectSingleNode("methodName");
+                XPathNavigator parametersNavigator = source.SelectSingleNode("params");
 
-                if (methodNameNavigator != null && !String.IsNullOrEmpty(methodNameNavigator.Value))
+                if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
                 {
                     this.MethodName = methodNameNavigator.Value;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
 
                 if (parametersNavigator != null)
@@ -217,7 +354,7 @@ namespace Argotic.Net
                             if (XmlRpcClient.TryParseValue(valueIterator.Current, out value))
                             {
                                 this.Parameters.Add(value);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -225,6 +362,36 @@ namespace Argotic.Net
             }
 
             return wasLoaded;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
+        /// <remarks>
+        ///     This method returns the XML representation for the current instance.
+        /// </remarks>
+        public override string ToString()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Fragment;
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                {
+                    this.WriteTo(writer);
+                }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
 
         /// <summary>
@@ -240,175 +407,20 @@ namespace Argotic.Net
 
             writer.WriteElementString("methodName", this.MethodName);
 
-            if(this.Parameters.Count > 0)
+            if (this.Parameters.Count > 0)
             {
                 writer.WriteStartElement("params");
-                foreach(IXmlRpcValue value in this.Parameters)
+                foreach (IXmlRpcValue value in this.Parameters)
                 {
                     writer.WriteStartElement("param");
                     value.WriteTo(writer);
                     writer.WriteEndElement();
                 }
+
                 writer.WriteEndElement();
             }
 
             writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            XmlRpcMessage value  = obj as XmlRpcMessage;
-
-            if (value != null)
-            {
-                int result  = String.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-                result      = result | String.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
-                result      = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is XmlRpcMessage))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(XmlRpcMessage first, XmlRpcMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(XmlRpcMessage first, XmlRpcMessage second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(XmlRpcMessage first, XmlRpcMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(XmlRpcMessage first, XmlRpcMessage second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
         }
     }
 }

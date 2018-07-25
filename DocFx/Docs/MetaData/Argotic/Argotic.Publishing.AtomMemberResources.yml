@@ -1,0 +1,3230 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Publishing.AtomMemberResources
+  commentId: T:Argotic.Publishing.AtomMemberResources
+  id: AtomMemberResources
+  parent: Argotic.Publishing
+  children:
+  - Argotic.Publishing.AtomMemberResources.#ctor
+  - Argotic.Publishing.AtomMemberResources.#ctor(System.Uri,Argotic.Syndication.AtomTextConstruct)
+  - Argotic.Publishing.AtomMemberResources.Accepts
+  - Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Publishing.AtomMemberResources.BaseUri
+  - Argotic.Publishing.AtomMemberResources.Categories
+  - Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange})
+  - Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)
+  - Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)
+  - Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)
+  - Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)
+  - Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String,System.Globalization.CultureInfo)
+  - Argotic.Publishing.AtomMemberResources.Equals(System.Object)
+  - Argotic.Publishing.AtomMemberResources.Extensions
+  - Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Publishing.AtomMemberResources.GetHashCode
+  - Argotic.Publishing.AtomMemberResources.HasExtensions
+  - Argotic.Publishing.AtomMemberResources.Language
+  - Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)
+  - Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)
+  - Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Publishing.AtomMemberResources.op_Equality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomMemberResources.op_GreaterThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomMemberResources.op_Inequality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomMemberResources.op_LessThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  - Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)
+  - Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)
+  - Argotic.Publishing.AtomMemberResources.Title
+  - Argotic.Publishing.AtomMemberResources.ToString
+  - Argotic.Publishing.AtomMemberResources.Uri
+  - Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: AtomMemberResources
+  nameWithType: AtomMemberResources
+  fullName: Argotic.Publishing.AtomMemberResources
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomMemberResources
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 36
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDescribes the location and capabilities of a discoverable resource that contains a set of member resources.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> class implements the <em>app:collection</em> element of the <a href=\"http://bitworking.org/projects/atom/rfc5023.html\">Atom Publishing Protocol</a>.\n</p>\n<p>\n    The <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> describes a <xref href=\"Argotic.Syndication.AtomFeed\" data-throw-if-not-resolved=\"false\"></xref>. The <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <strong>must</strong> specify a <xref href=\"Argotic.Publishing.AtomMemberResources.Title\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Publishing.AtomMemberResources.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    The <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> contain any number of <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> entities,\n    indicating the types of representations accepted by the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>. The order of such elements is <u>not</u> significant.\n    Additionally, the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> contain any number of <xref href=\"Argotic.Publishing.AtomCategoryDocument\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    The <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> appear as a child of an <xref href=\"Argotic.Syndication.AtomFeed\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Argotic.Syndication.AtomSource\" data-throw-if-not-resolved=\"false\"></xref> element in an <xref href=\"Argotic.Syndication.AtomFeed\" data-throw-if-not-resolved=\"false\"></xref> document.\n    Its content identifies a collection by which new entries can be added to appear in the feed.\n</p>\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class AtomMemberResources : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+    content.vb: >-
+      <Serializable>
+
+      Public Class AtomMemberResources
+
+          Inherits SyndicationExtension
+
+          Implements ISyndicationExtension, IXmlSerializable, IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+  seealso:
+  - linkId: Argotic.Extensions.ISyndicationExtension
+    commentId: T:Argotic.Extensions.ISyndicationExtension
+  - linkId: Argotic.Extensions.SyndicationExtension
+    commentId: T:Argotic.Extensions.SyndicationExtension
+  inheritance:
+  - System.Object
+  - Argotic.Extensions.SyndicationExtension
+  implements:
+  - Argotic.Extensions.ISyndicationExtension
+  - System.Xml.Serialization.IXmlSerializable
+  - System.IComparable
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  - Argotic.Syndication.IAtomCommonObjectAttributes
+  inheritedMembers:
+  - Argotic.Extensions.SyndicationExtension.Loaded
+  - Argotic.Extensions.SyndicationExtension.Description
+  - Argotic.Extensions.SyndicationExtension.Documentation
+  - Argotic.Extensions.SyndicationExtension.Name
+  - Argotic.Extensions.SyndicationExtension.Version
+  - Argotic.Extensions.SyndicationExtension.XmlNamespace
+  - Argotic.Extensions.SyndicationExtension.XmlPrefix
+  - Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.GetSchema
+  - Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  - Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  - Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Publishing.AtomMemberResources.#ctor
+  commentId: M:Argotic.Publishing.AtomMemberResources.#ctor
+  id: '#ctor'
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: AtomMemberResources()
+  nameWithType: AtomMemberResources.AtomMemberResources()
+  fullName: Argotic.Publishing.AtomMemberResources.AtomMemberResources()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 70
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public AtomMemberResources()
+    content.vb: Public Sub New
+  overload: Argotic.Publishing.AtomMemberResources.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.#ctor(System.Uri,Argotic.Syndication.AtomTextConstruct)
+  commentId: M:Argotic.Publishing.AtomMemberResources.#ctor(System.Uri,Argotic.Syndication.AtomTextConstruct)
+  id: '#ctor(System.Uri,Argotic.Syndication.AtomTextConstruct)'
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: AtomMemberResources(Uri, AtomTextConstruct)
+  nameWithType: AtomMemberResources.AtomMemberResources(Uri, AtomTextConstruct)
+  fullName: Argotic.Publishing.AtomMemberResources.AtomMemberResources(System.Uri, Argotic.Syndication.AtomTextConstruct)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 88
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomMemberResources(Uri href, AtomTextConstruct title)
+    parameters:
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents a Internationalized Resource Identifier (IRI) that identifies the location of the collection.
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for the collection.
+    content.vb: Public Sub New(href As Uri, title As AtomTextConstruct)
+  overload: Argotic.Publishing.AtomMemberResources.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Accepts
+  commentId: P:Argotic.Publishing.AtomMemberResources.Accepts
+  id: Accepts
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Accepts
+  nameWithType: AtomMemberResources.Accepts
+  fullName: Argotic.Publishing.AtomMemberResources.Accepts
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Accepts
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 112
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets a list of media ranges that are accepted by this collection.\n"
+  remarks: "\n<p>\n    A value of <strong>application/atom+xml;type=entry</strong> <em>may</em> appear in any <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> list of media ranges\n    and indicates that <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> can be added to the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n    If no <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> is present, clients <em>should</em> treat this as equivalent to an <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> with the content <strong>application/atom+xml;type=entry</strong>.\n    The <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> class exposes a static string property named <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange.AtomEntryMediaRange\" data-throw-if-not-resolved=\"false\"></xref> that can be used to assign the\n<strong>application/atom+xml;type=entry</strong> media range value.\n</p>\n<p>\n    If one <xref href=\"Argotic.Publishing.AtomAcceptedMediaRange\" data-throw-if-not-resolved=\"false\"></xref> exists and is empty, clients <em>should</em> assume\n    that the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> <strong>does not</strong> support the creation of new <xref href=\"Argotic.Syndication.AtomFeed.Entries\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n"
+  example: []
+  syntax:
+    content: public Collection<AtomAcceptedMediaRange> Accepts { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> of <xref href="Argotic.Publishing.AtomAcceptedMediaRange" data-throw-if-not-resolved="false"></xref> objects that represent a list of media ranges that this collection will accept from clients.
+    content.vb: Public ReadOnly Property Accepts As Collection(Of AtomAcceptedMediaRange)
+  overload: Argotic.Publishing.AtomMemberResources.Accepts*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Publishing.AtomMemberResources.BaseUri
+  commentId: P:Argotic.Publishing.AtomMemberResources.BaseUri
+  id: BaseUri
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: BaseUri
+  nameWithType: AtomMemberResources.BaseUri
+  fullName: Argotic.Publishing.AtomMemberResources.BaseUri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BaseUri
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 134
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the base URI other than the base URI of the document or external entity.\n"
+  remarks: "\n<p>\n    The value of this property is interpreted as a URI Reference as defined in <a href=\"http://www.ietf.org/rfc/rfc2396.txt\">RFC 2396: Uniform Resource Identifiers</a>,\n    after processing according to <a href=\"http://www.w3.org/TR/xmlbase/#escaping\">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>\n"
+  example: []
+  syntax:
+    content: public Uri BaseUri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.
+    content.vb: Public Property BaseUri As Uri
+  overload: Argotic.Publishing.AtomMemberResources.BaseUri*
+  implements:
+  - Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Categories
+  commentId: P:Argotic.Publishing.AtomMemberResources.Categories
+  id: Categories
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Categories
+  nameWithType: AtomMemberResources.Categories
+  fullName: Argotic.Publishing.AtomMemberResources.Categories
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Categories
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 146
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets a list of categories that can be applied to members of this collection.\n"
+  remarks: "\nThe server <em>may</em> reject attempts to create or store members whose categories are not present in its categories list.\nA <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> that indicates the category set is open <strong>should not</strong> reject otherwise acceptable members whose categories are not in its categories list.\nThe absence of <xref href=\"Argotic.Publishing.AtomMemberResources.Categories\" data-throw-if-not-resolved=\"false\"></xref> means that the category handling of the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> is unspecified.\nA <xref href=\"Argotic.Publishing.AtomCategoryDocument.IsFixed\" data-throw-if-not-resolved=\"false\"></xref> category list that contains zero categories indicates the <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> does not accept category data.\n"
+  example: []
+  syntax:
+    content: public Collection<AtomCategoryDocument> Categories { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomCategoryDocument}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> of <xref href="Argotic.Publishing.AtomCategoryDocument" data-throw-if-not-resolved="false"></xref> objects that represent a list of categories that can be applied to members of this collection.
+    content.vb: Public ReadOnly Property Categories As Collection(Of AtomCategoryDocument)
+  overload: Argotic.Publishing.AtomMemberResources.Categories*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Publishing.AtomMemberResources.Extensions
+  commentId: P:Argotic.Publishing.AtomMemberResources.Extensions
+  id: Extensions
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Extensions
+  nameWithType: AtomMemberResources.Extensions
+  fullName: Argotic.Publishing.AtomMemberResources.Extensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Extensions
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 167
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the syndication extensions applied to this syndication entity.\n"
+  remarks: "\nThis <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> objects is internally represented as a <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public IEnumerable<ISyndicationExtension> Extensions { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+      description: A <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> collection of <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects that represent syndication extensions applied to this syndication entity.
+    content.vb: Public Property Extensions As IEnumerable(Of ISyndicationExtension)
+  overload: Argotic.Publishing.AtomMemberResources.Extensions*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.HasExtensions
+  commentId: P:Argotic.Publishing.AtomMemberResources.HasExtensions
+  id: HasExtensions
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: HasExtensions
+  nameWithType: AtomMemberResources.HasExtensions
+  fullName: Argotic.Publishing.AtomMemberResources.HasExtensions
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: HasExtensions
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 190
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets a value indicating whether gets a value indicating if this syndication entity has one or more syndication extensions applied to it.\n"
+  example: []
+  syntax:
+    content: public bool HasExtensions { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources.Extensions" data-throw-if-not-resolved="false"></xref> collection for this entity contains one or more <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> objects, otherwise returns <strong>false</strong>.
+    content.vb: Public ReadOnly Property HasExtensions As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.HasExtensions*
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Publishing.AtomMemberResources.Language
+  commentId: P:Argotic.Publishing.AtomMemberResources.Language
+  id: Language
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: AtomMemberResources.Language
+  fullName: Argotic.Publishing.AtomMemberResources.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 207
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets the natural or formal language in which the content is written.\n"
+  remarks: "\n<p>\n    The value of this property is a language identifier as defined by <a href=\"http://www.ietf.org/rfc/rfc3066.txt\">RFC 3066: Tags for the Identification of Languages</a>, or its successor.\n</p>\n"
+  example: []
+  syntax:
+    content: public CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.
+    content.vb: Public Property Language As CultureInfo
+  overload: Argotic.Publishing.AtomMemberResources.Language*
+  implements:
+  - Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Title
+  commentId: P:Argotic.Publishing.AtomMemberResources.Title
+  id: Title
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: AtomMemberResources.Title
+  fullName: Argotic.Publishing.AtomMemberResources.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 217
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets information that conveys a human-readable title for this collection.\n"
+  example: []
+  syntax:
+    content: public AtomTextConstruct Title { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Syndication.AtomTextConstruct
+      description: "\nA <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref> object that represents information that conveys a human-readable title for this collection.\nThe default value is an empty <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property Title As AtomTextConstruct
+  overload: Argotic.Publishing.AtomMemberResources.Title*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Uri
+  commentId: P:Argotic.Publishing.AtomMemberResources.Uri
+  id: Uri
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Uri
+  nameWithType: AtomMemberResources.Uri
+  fullName: Argotic.Publishing.AtomMemberResources.Uri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Uri
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 240
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets an IRI that identifies the location of this <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>See <a href=\"http://www.ietf.org/rfc/rfc3987.txt\">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</p>\n<p>See <a href=\"http://msdn2.microsoft.com/en-us/library/system.uri.aspx\">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</p>\n"
+  example: []
+  syntax:
+    content: public Uri Uri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents a Internationalized Resource Identifier (IRI) that identifies the location of this <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Property Uri As Uri
+  overload: Argotic.Publishing.AtomMemberResources.Uri*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.op_Equality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomMemberResources.op_Equality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  id: op_Equality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Equality(AtomMemberResources, AtomMemberResources)
+  nameWithType: AtomMemberResources.Equality(AtomMemberResources, AtomMemberResources)
+  fullName: Argotic.Publishing.AtomMemberResources.Equality(Argotic.Publishing.AtomMemberResources, Argotic.Publishing.AtomMemberResources)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 260
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(AtomMemberResources first, AtomMemberResources second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As AtomMemberResources, second As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.op_GreaterThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomMemberResources.op_GreaterThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  id: op_GreaterThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(AtomMemberResources, AtomMemberResources)
+  nameWithType: AtomMemberResources.GreaterThan(AtomMemberResources, AtomMemberResources)
+  fullName: Argotic.Publishing.AtomMemberResources.GreaterThan(Argotic.Publishing.AtomMemberResources, Argotic.Publishing.AtomMemberResources)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 281
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(AtomMemberResources first, AtomMemberResources second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As AtomMemberResources, second As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.op_Inequality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomMemberResources.op_Inequality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  id: op_Inequality(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Inequality(AtomMemberResources, AtomMemberResources)
+  nameWithType: AtomMemberResources.Inequality(AtomMemberResources, AtomMemberResources)
+  fullName: Argotic.Publishing.AtomMemberResources.Inequality(Argotic.Publishing.AtomMemberResources, Argotic.Publishing.AtomMemberResources)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 302
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(AtomMemberResources first, AtomMemberResources second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As AtomMemberResources, second As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.op_LessThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  commentId: M:Argotic.Publishing.AtomMemberResources.op_LessThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  id: op_LessThan(Argotic.Publishing.AtomMemberResources,Argotic.Publishing.AtomMemberResources)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: LessThan(AtomMemberResources, AtomMemberResources)
+  nameWithType: AtomMemberResources.LessThan(AtomMemberResources, AtomMemberResources)
+  fullName: Argotic.Publishing.AtomMemberResources.LessThan(Argotic.Publishing.AtomMemberResources, Argotic.Publishing.AtomMemberResources)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 313
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(AtomMemberResources first, AtomMemberResources second)
+    parameters:
+    - id: first
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Publishing.AtomMemberResources
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As AtomMemberResources, second As AtomMemberResources) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange})
+  commentId: M:Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange})
+  id: CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange},System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange})
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CompareSequence(Collection<AtomAcceptedMediaRange>, Collection<AtomAcceptedMediaRange>)
+  nameWithType: AtomMemberResources.CompareSequence(Collection<AtomAcceptedMediaRange>, Collection<AtomAcceptedMediaRange>)
+  fullName: Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomAcceptedMediaRange>, System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomAcceptedMediaRange>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareSequence
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 347
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCompares two specified <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collections.\n"
+  remarks: "\n<p>\n    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>1</strong>.\n</p>\n<p>\n    If the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type=\"paramref\" class=\"paramref\">target</code> element count, returns <strong>-1</strong>.\n</p>\n"
+  example: []
+  syntax:
+    content: public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
+    parameters:
+    - id: source
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange}
+      description: The first collection.
+    - id: target
+      type: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange}
+      description: The second collection.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer indicating the lexical relationship between the two comparands.
+    content.vb: Public Shared Function CompareSequence(source As Collection(Of AtomAcceptedMediaRange), target As Collection(Of AtomAcceptedMediaRange)) As Integer
+  overload: Argotic.Publishing.AtomMemberResources.CompareSequence*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: AtomMemberResources.CompareSequence(Collection(Of AtomAcceptedMediaRange), Collection(Of AtomAcceptedMediaRange))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Publishing.AtomMemberResources.CompareSequence(System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomAcceptedMediaRange), System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomAcceptedMediaRange))
+  name.vb: CompareSequence(Collection(Of AtomAcceptedMediaRange), Collection(Of AtomAcceptedMediaRange))
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)
+  commentId: M:Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)
+  id: CreateEditLink(System.Uri)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CreateEditLink(Uri)
+  nameWithType: AtomMemberResources.CreateEditLink(Uri)
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditLink(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateEditLink
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 388
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that can be used to retrieve, update, and delete the Resource represented by an editable <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"Argotic.Publishing.AtomMemberResources.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that is returned has a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> of <strong>edit</strong>. The value of <em>edit</em> specifies\n    that the value of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">href</code> attribute is the IRI of an editable <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <strong>must not</strong> contain more than one <em>edit</em> link relation.</p>\n"
+  example: []
+  syntax:
+    content: public static AtomLink CreateEditLink(Uri href)
+    parameters:
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents the IRI of an editable <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: Argotic.Syndication.AtomLink
+      description: A <xref href="Argotic.Syndication.AtomLink" data-throw-if-not-resolved="false"></xref> object that can be used to retrieve, update, and delete the Resource represented by an editable <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function CreateEditLink(href As Uri) As AtomLink
+  overload: Argotic.Publishing.AtomMemberResources.CreateEditLink*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)
+  commentId: M:Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)
+  id: CreateEditMediaLink(System.Uri)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CreateEditMediaLink(Uri)
+  nameWithType: AtomMemberResources.CreateEditMediaLink(Uri)
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateEditMediaLink
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 417
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"Argotic.Publishing.AtomMemberResources.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that is returned has a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies\n    that the value of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">href</code> attribute is an IRI that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> contain zero or more <em>edit-media</em> link relations.\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <strong>must not</strong> contain more than one <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> with a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> value of <em>edit-media</em>\n    that has the same <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> values.\n    All <em>edit-media</em> link relations in the same <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> reference the same Resource.\n    If a client encounters multiple <em>edit-media</em> link relations in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> then it <em>should</em> choose a link based on the client\n    preferences for <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref>. If a client encounters multiple <em>edit-media</em> link relations\n    in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> and has no preference based on the <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> then the\n    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.\n</p>\n"
+  example: []
+  syntax:
+    content: public static AtomLink CreateEditMediaLink(Uri href)
+    parameters:
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents an IRI that can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: Argotic.Syndication.AtomLink
+      description: A <xref href="Argotic.Syndication.AtomLink" data-throw-if-not-resolved="false"></xref> object that can be can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function CreateEditMediaLink(href As Uri) As AtomLink
+  overload: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)
+  commentId: M:Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)
+  id: CreateEditMediaLink(System.Uri,System.String)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CreateEditMediaLink(Uri, String)
+  nameWithType: AtomMemberResources.CreateEditMediaLink(Uri, String)
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateEditMediaLink
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 447
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> using the supplied parameters.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that is returned has a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies\n    that the value of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">href</code> attribute is an IRI that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> contain zero or more <em>edit-media</em> link relations.\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <strong>must not</strong> contain more than one <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> with a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> value of <em>edit-media</em>\n    that has the same <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> values.\n    All <em>edit-media</em> link relations in the same <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> reference the same Resource.\n    If a client encounters multiple <em>edit-media</em> link relations in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> then it <em>should</em> choose a link based on the client\n    preferences for <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref>. If a client encounters multiple <em>edit-media</em> link relations\n    in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> and has no preference based on the <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> then the\n    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.\n</p>\n"
+  example: []
+  syntax:
+    content: public static AtomLink CreateEditMediaLink(Uri href, string contentType)
+    parameters:
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents an IRI that can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    - id: contentType
+      type: System.String
+      description: An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.
+    return:
+      type: Argotic.Syndication.AtomLink
+      description: A <xref href="Argotic.Syndication.AtomLink" data-throw-if-not-resolved="false"></xref> object that can be can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function CreateEditMediaLink(href As Uri, contentType As String) As AtomLink
+  overload: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String,System.Globalization.CultureInfo)
+  commentId: M:Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String,System.Globalization.CultureInfo)
+  id: CreateEditMediaLink(System.Uri,System.String,System.Globalization.CultureInfo)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CreateEditMediaLink(Uri, String, CultureInfo)
+  nameWithType: AtomMemberResources.CreateEditMediaLink(Uri, String, CultureInfo)
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri, System.String, System.Globalization.CultureInfo)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateEditMediaLink
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 478
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCreates a new <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> using the supplied parameters.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> that is returned has a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> of <strong>edit-media</strong>. The value of <em>edit-media</em> specifies\n    that the value of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">href</code> attribute is an IRI that can be used to modify a media resource associated with an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <em>may</em> contain zero or more <em>edit-media</em> link relations.\n    An <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> <strong>must not</strong> contain more than one <xref href=\"Argotic.Syndication.AtomLink\" data-throw-if-not-resolved=\"false\"></xref> with a <xref href=\"Argotic.Syndication.AtomLink.Relation\" data-throw-if-not-resolved=\"false\"></xref> value of <em>edit-media</em>\n    that has the same <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> values.\n    All <em>edit-media</em> link relations in the same <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> reference the same Resource.\n    If a client encounters multiple <em>edit-media</em> link relations in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> then it <em>should</em> choose a link based on the client\n    preferences for <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref>. If a client encounters multiple <em>edit-media</em> link relations\n    in an <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> and has no preference based on the <xref href=\"Argotic.Syndication.AtomLink.ContentType\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Syndication.AtomLink.ContentLanguage\" data-throw-if-not-resolved=\"false\"></xref> then the\n    client <em>should</em> pick the first <em>edit-media</em> link relation in document order.\n</p>\n"
+  example: []
+  syntax:
+    content: public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
+    parameters:
+    - id: href
+      type: System.Uri
+      description: A <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref> that represents an IRI that can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    - id: contentType
+      type: System.String
+      description: An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.
+    - id: contentLanguage
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which this resource content is written.
+    return:
+      type: Argotic.Syndication.AtomLink
+      description: A <xref href="Argotic.Syndication.AtomLink" data-throw-if-not-resolved="false"></xref> object that can be can be used to modify a media resource associated with an <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function CreateEditMediaLink(href As Uri, contentType As String, contentLanguage As CultureInfo) As AtomLink
+  overload: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">href</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  id: MatchByType(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: MatchByType(ISyndicationExtension)
+  nameWithType: AtomMemberResources.MatchByType(ISyndicationExtension)
+  fullName: Argotic.Publishing.AtomMemberResources.MatchByType(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: MatchByType
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 500
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nPredicate delegate that returns a value indicating if the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>\nrepresents the same <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> as this <xref href=\"Argotic.Extensions.SyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool MatchByType(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be compared.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <xref href="System.Type" data-throw-if-not-resolved="false"></xref> as this <xref href="Argotic.Extensions.SyndicationExtension" data-throw-if-not-resolved="false"></xref>; otherwise, <strong>false</strong>.
+    content.vb: Public Shared Function MatchByType(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.MatchByType*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)
+  commentId: M:Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)
+  id: SlugDecode(System.String)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: SlugDecode(String)
+  nameWithType: AtomMemberResources.SlugDecode(String)
+  fullName: Argotic.Publishing.AtomMemberResources.SlugDecode(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SlugDecode
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 534
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDecodes the percent-encoded value of the UTF-8 encoding of a character sequence that represents a Slug HTTP entity-header value.\n"
+  remarks: "\n<p>\n<em>Slug</em> is an HTTP entity-header whose presence in a POST to a <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> constitutes a request by the client\nto use the header&apos;s value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.\n</p>\n<p>\n    Servers <em>may</em> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,\n    by using some or all of the words in the value for the last URI segment. Servers <em>may</em> also use the value when creating\n    the <xref href=\"Argotic.Syndication.AtomId\" data-throw-if-not-resolved=\"false\"></xref>, or as the <xref href=\"Argotic.Syndication.AtomEntry.Title\" data-throw-if-not-resolved=\"false\"></xref> of a Media Link Entry.\n</p>\n<p>\n    Servers <em>may</em> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it.\n    For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.\n</p>\n"
+  example: []
+  syntax:
+    content: public static string SlugDecode(string slug)
+    parameters:
+    - id: slug
+      type: System.String
+      description: The percent-encoded value of the UTF-8 encoding of a character sequence to be included in a <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.String
+      description: Returns a decoded url.
+    content.vb: Public Shared Function SlugDecode(slug As String) As String
+  overload: Argotic.Publishing.AtomMemberResources.SlugDecode*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">slug</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">slug</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)
+  commentId: M:Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)
+  id: SlugEncode(System.String)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: SlugEncode(String)
+  nameWithType: AtomMemberResources.SlugEncode(String)
+  fullName: Argotic.Publishing.AtomMemberResources.SlugEncode(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SlugEncode
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 566
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nEncodes a sequence of characters that may be safely used as the value of a Slug HTTP entity-header.\n"
+  remarks: "\n<p>\n<em>Slug</em> is an HTTP entity-header whose presence in a POST to a <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> constitutes a request by the client\nto use the header&apos;s value as part of any URIs that would normally be used to retrieve the to-be-created Entry or Media Resources.\n</p>\n<p>\n    Servers <em>may</em> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,\n    by using some or all of the words in the value for the last URI segment. Servers <em>may</em> also use the value when creating\n    the <xref href=\"Argotic.Syndication.AtomId\" data-throw-if-not-resolved=\"false\"></xref>, or as the <xref href=\"Argotic.Syndication.AtomEntry.Title\" data-throw-if-not-resolved=\"false\"></xref> of a Media Link Entry.\n</p>\n<p>\n    Servers <em>may</em> choose to ignore the Slug entity-header. Servers <I>may</I> alter the header value before using it.\n    For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.\n</p>\n"
+  example: []
+  syntax:
+    content: public static string SlugEncode(string characterSequence)
+    parameters:
+    - id: characterSequence
+      type: System.String
+      description: "\nA sequence of characters that constitutes a request by a client to use the <code data-dev-comment-type=\"paramref\" class=\"paramref\">characterSequence</code> as part of any <xref href=\"Argotic.Publishing.AtomMemberResources.Uri\" data-throw-if-not-resolved=\"false\"></xref>\nthat would normally be used to retrieve the web resource.\n"
+    return:
+      type: System.String
+      description: The percent-encoded value of the UTF-8 encoding of the <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> to be included in a <xref href="Argotic.Publishing.AtomMemberResources.Uri" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Shared Function SlugEncode(characterSequence As String) As String
+  overload: Argotic.Publishing.AtomMemberResources.SlugEncode*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">characterSequence</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  id: AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: AtomMemberResources.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Publishing.AtomMemberResources.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AddExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 579
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nAdds the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> to the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  example: []
+  syntax:
+    content: public bool AddExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be added.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was added to the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function AddExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.AddExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)
+  commentId: M:Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: AtomMemberResources.CompareTo(Object)
+  fullName: Argotic.Publishing.AtomMemberResources.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 597
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Publishing.AtomMemberResources.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Equals(System.Object)
+  commentId: M:Argotic.Publishing.AtomMemberResources.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: AtomMemberResources.Equals(Object)
+  fullName: Argotic.Publishing.AtomMemberResources.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 635
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Publishing.AtomMemberResources.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  id: FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: AtomMemberResources.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FindExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 658
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSearches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <xref href=\"Argotic.Publishing.AtomMemberResources.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nThe <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.\nThe elements of the current <xref href=\"Argotic.Publishing.AtomMemberResources.Extensions\" data-throw-if-not-resolved=\"false\"></xref> are individually passed to the <xref href=\"System.Predicate%601\" data-throw-if-not-resolved=\"false\"></xref> delegate, moving forward in\nthe <xref href=\"Argotic.Publishing.AtomMemberResources.Extensions\" data-throw-if-not-resolved=\"false\"></xref>, starting with the first element and ending with the last element. Processing is stopped when a match is found.\n"
+  example: []
+  syntax:
+    content: public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    parameters:
+    - id: match
+      type: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+      description: The <xref href="System.Predicate%601" data-throw-if-not-resolved="false"></xref> delegate that defines the conditions of the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to search for.
+    return:
+      type: Argotic.Extensions.ISyndicationExtension
+      description: "\nThe first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function FindExtension(match As Predicate(Of ISyndicationExtension)) As ISyndicationExtension
+  overload: Argotic.Publishing.AtomMemberResources.FindExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  nameWithType.vb: AtomMemberResources.FindExtension(Predicate(Of ISyndicationExtension))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Argotic.Publishing.AtomMemberResources.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+- uid: Argotic.Publishing.AtomMemberResources.GetHashCode
+  commentId: M:Argotic.Publishing.AtomMemberResources.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: AtomMemberResources.GetHashCode()
+  fullName: Argotic.Publishing.AtomMemberResources.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 670
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Publishing.AtomMemberResources.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)
+  id: Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable)
+  nameWithType: AtomMemberResources.Load(IXPathNavigable)
+  fullName: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.IXPathNavigable)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 686
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override bool Load(IXPathNavigable source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <xref href="System.Xml.XPath.IXPathNavigable" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Overrides Function Load(source As IXPathNavigable) As Boolean
+  overridden: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  overload: Argotic.Publishing.AtomMemberResources.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: AtomMemberResources.Load(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 769
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)
+  id: Load(System.Xml.XmlReader)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader)
+  nameWithType: AtomMemberResources.Load(XmlReader)
+  fullName: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 790
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override bool Load(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load this <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.
+    content.vb: Public Overrides Function Load(reader As XmlReader) As Boolean
+  overridden: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  overload: Argotic.Publishing.AtomMemberResources.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: Load(XmlReader, SyndicationResourceLoadSettings)
+  nameWithType: AtomMemberResources.Load(XmlReader, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomMemberResources.Load(System.Xml.XmlReader, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 804
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: The <strong>XmlReader</strong> used to load this <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref>.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> used to configure the load operation.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(reader As XmlReader, settings As SyndicationResourceLoadSettings) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  id: RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: AtomMemberResources.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Publishing.AtomMemberResources.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RemoveExtension
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 827
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nRemoves the supplied <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref> from the current instance&apos;s <xref href=\"Argotic.Extensions.IExtensibleSyndicationObject.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection.\n"
+  remarks: "\nIf the <xref href=\"Argotic.Publishing.AtomMemberResources.Extensions\" data-throw-if-not-resolved=\"false\"></xref> collection of the current instance does not contain the specified <xref href=\"Argotic.Extensions.ISyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>, will return <strong>false</strong>.\n"
+  example: []
+  syntax:
+    content: public bool RemoveExtension(ISyndicationExtension extension)
+    parameters:
+    - id: extension
+      type: Argotic.Extensions.ISyndicationExtension
+      description: The <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.ISyndicationExtension" data-throw-if-not-resolved="false"></xref> was removed from the <xref href="Argotic.Extensions.IExtensibleSyndicationObject.Extensions" data-throw-if-not-resolved="false"></xref> collection, otherwise <strong>false</strong>.
+    content.vb: Public Function RemoveExtension(extension As ISyndicationExtension) As Boolean
+  overload: Argotic.Publishing.AtomMemberResources.RemoveExtension*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).
+  implements:
+  - Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomMemberResources.ToString
+  commentId: M:Argotic.Publishing.AtomMemberResources.ToString
+  id: ToString
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: AtomMemberResources.ToString()
+  fullName: Argotic.Publishing.AtomMemberResources.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 849
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Publishing.AtomMemberResources" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Publishing.AtomMemberResources.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Publishing.AtomMemberResources
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: AtomMemberResources.WriteTo(XmlWriter)
+  fullName: Argotic.Publishing.AtomMemberResources.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Core/Publishing/AtomMemberResources.cs
+    startLine: 877
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSaves the current <xref href=\"Argotic.Publishing.AtomMemberResources\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Overrides Sub WriteTo(writer As XmlWriter)
+  overridden: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  overload: Argotic.Publishing.AtomMemberResources.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Publishing.AtomMemberResources
+  commentId: T:Argotic.Publishing.AtomMemberResources
+  parent: Argotic.Publishing
+  name: AtomMemberResources
+  nameWithType: AtomMemberResources
+  fullName: Argotic.Publishing.AtomMemberResources
+- uid: Argotic.Syndication.AtomFeed
+  commentId: T:Argotic.Syndication.AtomFeed
+  parent: Argotic.Syndication
+  name: AtomFeed
+  nameWithType: AtomFeed
+  fullName: Argotic.Syndication.AtomFeed
+- uid: Argotic.Publishing.AtomMemberResources.Title
+  commentId: P:Argotic.Publishing.AtomMemberResources.Title
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.Uri
+  commentId: P:Argotic.Publishing.AtomMemberResources.Uri
+  isExternal: true
+- uid: Argotic.Publishing.AtomAcceptedMediaRange
+  commentId: T:Argotic.Publishing.AtomAcceptedMediaRange
+  parent: Argotic.Publishing
+  name: AtomAcceptedMediaRange
+  nameWithType: AtomAcceptedMediaRange
+  fullName: Argotic.Publishing.AtomAcceptedMediaRange
+- uid: Argotic.Publishing.AtomCategoryDocument
+  commentId: T:Argotic.Publishing.AtomCategoryDocument
+  parent: Argotic.Publishing
+  name: AtomCategoryDocument
+  nameWithType: AtomCategoryDocument
+  fullName: Argotic.Publishing.AtomCategoryDocument
+- uid: Argotic.Syndication.AtomSource
+  commentId: T:Argotic.Syndication.AtomSource
+  parent: Argotic.Syndication
+  name: AtomSource
+  nameWithType: AtomSource
+  fullName: Argotic.Syndication.AtomSource
+- uid: Argotic.Extensions.ISyndicationExtension
+  commentId: T:Argotic.Extensions.ISyndicationExtension
+  parent: Argotic.Extensions
+  name: ISyndicationExtension
+  nameWithType: ISyndicationExtension
+  fullName: Argotic.Extensions.ISyndicationExtension
+- uid: Argotic.Extensions.SyndicationExtension
+  commentId: T:Argotic.Extensions.SyndicationExtension
+  parent: Argotic.Extensions
+  name: SyndicationExtension
+  nameWithType: SyndicationExtension
+  fullName: Argotic.Extensions.SyndicationExtension
+- uid: Argotic.Publishing
+  commentId: N:Argotic.Publishing
+  name: Argotic.Publishing
+  nameWithType: Argotic.Publishing
+  fullName: Argotic.Publishing
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Xml.Serialization.IXmlSerializable
+  commentId: T:System.Xml.Serialization.IXmlSerializable
+  parent: System.Xml.Serialization
+  isExternal: true
+  name: IXmlSerializable
+  nameWithType: IXmlSerializable
+  fullName: System.Xml.Serialization.IXmlSerializable
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes
+  commentId: T:Argotic.Syndication.IAtomCommonObjectAttributes
+  parent: Argotic.Syndication
+  name: IAtomCommonObjectAttributes
+  nameWithType: IAtomCommonObjectAttributes
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes
+- uid: Argotic.Extensions.SyndicationExtension.Loaded
+  commentId: E:Argotic.Extensions.SyndicationExtension.Loaded
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Loaded
+  nameWithType: SyndicationExtension.Loaded
+  fullName: Argotic.Extensions.SyndicationExtension.Loaded
+- uid: Argotic.Extensions.SyndicationExtension.Description
+  commentId: P:Argotic.Extensions.SyndicationExtension.Description
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Description
+  nameWithType: SyndicationExtension.Description
+  fullName: Argotic.Extensions.SyndicationExtension.Description
+- uid: Argotic.Extensions.SyndicationExtension.Documentation
+  commentId: P:Argotic.Extensions.SyndicationExtension.Documentation
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Documentation
+  nameWithType: SyndicationExtension.Documentation
+  fullName: Argotic.Extensions.SyndicationExtension.Documentation
+- uid: Argotic.Extensions.SyndicationExtension.Name
+  commentId: P:Argotic.Extensions.SyndicationExtension.Name
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Name
+  nameWithType: SyndicationExtension.Name
+  fullName: Argotic.Extensions.SyndicationExtension.Name
+- uid: Argotic.Extensions.SyndicationExtension.Version
+  commentId: P:Argotic.Extensions.SyndicationExtension.Version
+  parent: Argotic.Extensions.SyndicationExtension
+  name: Version
+  nameWithType: SyndicationExtension.Version
+  fullName: Argotic.Extensions.SyndicationExtension.Version
+- uid: Argotic.Extensions.SyndicationExtension.XmlNamespace
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlNamespace
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlNamespace
+  nameWithType: SyndicationExtension.XmlNamespace
+  fullName: Argotic.Extensions.SyndicationExtension.XmlNamespace
+- uid: Argotic.Extensions.SyndicationExtension.XmlPrefix
+  commentId: P:Argotic.Extensions.SyndicationExtension.XmlPrefix
+  parent: Argotic.Extensions.SyndicationExtension
+  name: XmlPrefix
+  nameWithType: SyndicationExtension.XmlPrefix
+  fullName: Argotic.Extensions.SyndicationExtension.XmlPrefix
+- uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: CreateNamespaceManager(XPathNavigator)
+  nameWithType: SyndicationExtension.CreateNamespaceManager(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: SyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)
+    name: CreateNamespaceManager
+    nameWithType: SyndicationExtension.CreateNamespaceManager
+    fullName: Argotic.Extensions.SyndicationExtension.CreateNamespaceManager
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: ExistsInSource(XPathNavigator)
+  nameWithType: SyndicationExtension.ExistsInSource(XPathNavigator)
+  fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: SyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)
+    name: ExistsInSource
+    nameWithType: SyndicationExtension.ExistsInSource
+    fullName: Argotic.Extensions.SyndicationExtension.ExistsInSource
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.XPathNavigator
+    name: XPathNavigator
+    nameWithType: XPathNavigator
+    fullName: System.Xml.XPath.XPathNavigator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteXmlNamespaceDeclaration(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)
+    name: WriteXmlNamespaceDeclaration
+    nameWithType: SyndicationExtension.WriteXmlNamespaceDeclaration
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXmlNamespaceDeclaration
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.GetSchema
+  commentId: M:Argotic.Extensions.SyndicationExtension.GetSchema
+  parent: Argotic.Extensions.SyndicationExtension
+  name: GetSchema()
+  nameWithType: SyndicationExtension.GetSchema()
+  fullName: Argotic.Extensions.SyndicationExtension.GetSchema()
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.GetSchema
+    name: GetSchema
+    nameWithType: SyndicationExtension.GetSchema
+    fullName: Argotic.Extensions.SyndicationExtension.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.GetSchema
+    name: GetSchema
+    nameWithType: SyndicationExtension.GetSchema
+    fullName: Argotic.Extensions.SyndicationExtension.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: ReadXml(XmlReader)
+  nameWithType: SyndicationExtension.ReadXml(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: SyndicationExtension.ReadXml
+    fullName: Argotic.Extensions.SyndicationExtension.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: SyndicationExtension.ReadXml
+    fullName: Argotic.Extensions.SyndicationExtension.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: SyndicationExtension.WriteXml(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: SyndicationExtension.WriteXml
+    fullName: Argotic.Extensions.SyndicationExtension.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  commentId: M:Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  parent: Argotic.Extensions.SyndicationExtension
+  name: OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  nameWithType: SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)
+  fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+    name: OnExtensionLoaded
+    nameWithType: SyndicationExtension.OnExtensionLoaded
+    fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded(Argotic.Extensions.SyndicationExtensionLoadedEventArgs)
+    name: OnExtensionLoaded
+    nameWithType: SyndicationExtension.OnExtensionLoaded
+    fullName: Argotic.Extensions.SyndicationExtension.OnExtensionLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+    name: SyndicationExtensionLoadedEventArgs
+    nameWithType: SyndicationExtensionLoadedEventArgs
+    fullName: Argotic.Extensions.SyndicationExtensionLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml.Serialization
+  commentId: N:System.Xml.Serialization
+  isExternal: true
+  name: System.Xml.Serialization
+  nameWithType: System.Xml.Serialization
+  fullName: System.Xml.Serialization
+- uid: Argotic.Publishing.AtomMemberResources.#ctor*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.#ctor
+  name: AtomMemberResources
+  nameWithType: AtomMemberResources.AtomMemberResources
+  fullName: Argotic.Publishing.AtomMemberResources.AtomMemberResources
+- uid: Argotic.Syndication.AtomTextConstruct
+  commentId: T:Argotic.Syndication.AtomTextConstruct
+  parent: Argotic.Syndication
+  name: AtomTextConstruct
+  nameWithType: AtomTextConstruct
+  fullName: Argotic.Syndication.AtomTextConstruct
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry
+  commentId: T:Argotic.Syndication.AtomEntry
+  parent: Argotic.Syndication
+  name: AtomEntry
+  nameWithType: AtomEntry
+  fullName: Argotic.Syndication.AtomEntry
+- uid: Argotic.Publishing.AtomAcceptedMediaRange.AtomEntryMediaRange
+  commentId: P:Argotic.Publishing.AtomAcceptedMediaRange.AtomEntryMediaRange
+  isExternal: true
+- uid: Argotic.Syndication.AtomFeed.Entries
+  commentId: P:Argotic.Syndication.AtomFeed.Entries
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.Accepts*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Accepts
+  name: Accepts
+  nameWithType: AtomMemberResources.Accepts
+  fullName: Argotic.Publishing.AtomMemberResources.Accepts
+- uid: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomAcceptedMediaRange}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<AtomAcceptedMediaRange>
+  nameWithType: Collection<AtomAcceptedMediaRange>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomAcceptedMediaRange>
+  nameWithType.vb: Collection(Of AtomAcceptedMediaRange)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomAcceptedMediaRange)
+  name.vb: Collection(Of AtomAcceptedMediaRange)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Publishing.AtomAcceptedMediaRange
+    name: AtomAcceptedMediaRange
+    nameWithType: AtomAcceptedMediaRange
+    fullName: Argotic.Publishing.AtomAcceptedMediaRange
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Publishing.AtomAcceptedMediaRange
+    name: AtomAcceptedMediaRange
+    nameWithType: AtomAcceptedMediaRange
+    fullName: Argotic.Publishing.AtomAcceptedMediaRange
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Publishing.AtomMemberResources.BaseUri*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.BaseUri
+  name: BaseUri
+  nameWithType: AtomMemberResources.BaseUri
+  fullName: Argotic.Publishing.AtomMemberResources.BaseUri
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  name: BaseUri
+  nameWithType: IAtomCommonObjectAttributes.BaseUri
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+- uid: Argotic.Publishing.AtomMemberResources.Categories
+  commentId: P:Argotic.Publishing.AtomMemberResources.Categories
+  isExternal: true
+- uid: Argotic.Publishing.AtomCategoryDocument.IsFixed
+  commentId: P:Argotic.Publishing.AtomCategoryDocument.IsFixed
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.Categories*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Categories
+  name: Categories
+  nameWithType: AtomMemberResources.Categories
+  fullName: Argotic.Publishing.AtomMemberResources.Categories
+- uid: System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomCategoryDocument}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Publishing.AtomCategoryDocument}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<AtomCategoryDocument>
+  nameWithType: Collection<AtomCategoryDocument>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Publishing.AtomCategoryDocument>
+  nameWithType.vb: Collection(Of AtomCategoryDocument)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Publishing.AtomCategoryDocument)
+  name.vb: Collection(Of AtomCategoryDocument)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Publishing.AtomCategoryDocument
+    name: AtomCategoryDocument
+    nameWithType: AtomCategoryDocument
+    fullName: Argotic.Publishing.AtomCategoryDocument
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Publishing.AtomCategoryDocument
+    name: AtomCategoryDocument
+    nameWithType: AtomCategoryDocument
+    fullName: Argotic.Publishing.AtomCategoryDocument
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.Extensions*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Extensions
+  name: Extensions
+  nameWithType: AtomMemberResources.Extensions
+  fullName: Argotic.Publishing.AtomMemberResources.Extensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: Extensions
+  nameWithType: IExtensibleSyndicationObject.Extensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.Extensions
+- uid: System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Collections.Generic.IEnumerable{Argotic.Extensions.ISyndicationExtension}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<ISyndicationExtension>
+  nameWithType: IEnumerable<ISyndicationExtension>
+  fullName: System.Collections.Generic.IEnumerable<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: IEnumerable(Of ISyndicationExtension)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: IEnumerable(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Publishing.AtomMemberResources.Extensions
+  commentId: P:Argotic.Publishing.AtomMemberResources.Extensions
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.HasExtensions*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.HasExtensions
+  name: HasExtensions
+  nameWithType: AtomMemberResources.HasExtensions
+  fullName: Argotic.Publishing.AtomMemberResources.HasExtensions
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  commentId: P:Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: HasExtensions
+  nameWithType: IExtensibleSyndicationObject.HasExtensions
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.HasExtensions
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Publishing.AtomMemberResources.Language*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Language
+  name: Language
+  nameWithType: AtomMemberResources.Language
+  fullName: Argotic.Publishing.AtomMemberResources.Language
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  name: Language
+  nameWithType: IAtomCommonObjectAttributes.Language
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+- uid: Argotic.Publishing.AtomMemberResources.Title*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Title
+  name: Title
+  nameWithType: AtomMemberResources.Title
+  fullName: Argotic.Publishing.AtomMemberResources.Title
+- uid: Argotic.Publishing.AtomMemberResources.Uri*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Uri
+  name: Uri
+  nameWithType: AtomMemberResources.Uri
+  fullName: Argotic.Publishing.AtomMemberResources.Uri
+- uid: Argotic.Publishing.AtomMemberResources.op_Equality*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.op_Equality
+  name: Equality
+  nameWithType: AtomMemberResources.Equality
+  fullName: Argotic.Publishing.AtomMemberResources.Equality
+- uid: Argotic.Publishing.AtomMemberResources.op_GreaterThan*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.op_GreaterThan
+  name: GreaterThan
+  nameWithType: AtomMemberResources.GreaterThan
+  fullName: Argotic.Publishing.AtomMemberResources.GreaterThan
+- uid: Argotic.Publishing.AtomMemberResources.op_Inequality*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.op_Inequality
+  name: Inequality
+  nameWithType: AtomMemberResources.Inequality
+  fullName: Argotic.Publishing.AtomMemberResources.Inequality
+- uid: Argotic.Publishing.AtomMemberResources.op_LessThan*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.op_LessThan
+  name: LessThan
+  nameWithType: AtomMemberResources.LessThan
+  fullName: Argotic.Publishing.AtomMemberResources.LessThan
+- uid: Argotic.Publishing.AtomMemberResources.CompareSequence*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.CompareSequence
+  name: CompareSequence
+  nameWithType: AtomMemberResources.CompareSequence
+  fullName: Argotic.Publishing.AtomMemberResources.CompareSequence
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Syndication.AtomLink
+  commentId: T:Argotic.Syndication.AtomLink
+  parent: Argotic.Syndication
+  name: AtomLink
+  nameWithType: AtomLink
+  fullName: Argotic.Syndication.AtomLink
+- uid: Argotic.Syndication.AtomLink.Relation
+  commentId: P:Argotic.Syndication.AtomLink.Relation
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditLink*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.CreateEditLink
+  name: CreateEditLink
+  nameWithType: AtomMemberResources.CreateEditLink
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditLink
+- uid: Argotic.Syndication.AtomLink.ContentType
+  commentId: P:Argotic.Syndication.AtomLink.ContentType
+  isExternal: true
+- uid: Argotic.Syndication.AtomLink.ContentLanguage
+  commentId: P:Argotic.Syndication.AtomLink.ContentLanguage
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.CreateEditMediaLink
+  name: CreateEditMediaLink
+  nameWithType: AtomMemberResources.CreateEditMediaLink
+  fullName: Argotic.Publishing.AtomMemberResources.CreateEditMediaLink
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Argotic.Publishing.AtomMemberResources.MatchByType*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.MatchByType
+  name: MatchByType
+  nameWithType: AtomMemberResources.MatchByType
+  fullName: Argotic.Publishing.AtomMemberResources.MatchByType
+- uid: Argotic.Syndication.AtomId
+  commentId: T:Argotic.Syndication.AtomId
+  parent: Argotic.Syndication
+  name: AtomId
+  nameWithType: AtomId
+  fullName: Argotic.Syndication.AtomId
+- uid: Argotic.Syndication.AtomEntry.Title
+  commentId: P:Argotic.Syndication.AtomEntry.Title
+  parent: Argotic.Syndication.AtomEntry
+  name: Title
+  nameWithType: AtomEntry.Title
+  fullName: Argotic.Syndication.AtomEntry.Title
+- uid: Argotic.Publishing.AtomMemberResources.SlugDecode*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.SlugDecode
+  name: SlugDecode
+  nameWithType: AtomMemberResources.SlugDecode
+  fullName: Argotic.Publishing.AtomMemberResources.SlugDecode
+- uid: Argotic.Publishing.AtomMemberResources.SlugEncode*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.SlugEncode
+  name: SlugEncode
+  nameWithType: AtomMemberResources.SlugEncode
+  fullName: Argotic.Publishing.AtomMemberResources.SlugEncode
+- uid: Argotic.Publishing.AtomMemberResources.AddExtension*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.AddExtension
+  name: AddExtension
+  nameWithType: AtomMemberResources.AddExtension
+  fullName: Argotic.Publishing.AtomMemberResources.AddExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: IExtensibleSyndicationObject.AddExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Publishing.AtomMemberResources.CompareTo*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.CompareTo
+  name: CompareTo
+  nameWithType: AtomMemberResources.CompareTo
+  fullName: Argotic.Publishing.AtomMemberResources.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.Equals*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Equals
+  name: Equals
+  nameWithType: AtomMemberResources.Equals
+  fullName: Argotic.Publishing.AtomMemberResources.Equals
+- uid: System.Predicate`1
+  commentId: T:System.Predicate`1
+  isExternal: true
+  name: Predicate<T>
+  nameWithType: Predicate<T>
+  fullName: System.Predicate<T>
+  nameWithType.vb: Predicate(Of T)
+  fullName.vb: System.Predicate(Of T)
+  name.vb: Predicate(Of T)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.FindExtension*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.FindExtension
+  name: FindExtension
+  nameWithType: AtomMemberResources.FindExtension
+  fullName: Argotic.Publishing.AtomMemberResources.FindExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: IExtensibleSyndicationObject.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: IExtensibleSyndicationObject.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: IExtensibleSyndicationObject.FindExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  commentId: T:System.Predicate{Argotic.Extensions.ISyndicationExtension}
+  parent: System
+  definition: System.Predicate`1
+  name: Predicate<ISyndicationExtension>
+  nameWithType: Predicate<ISyndicationExtension>
+  fullName: System.Predicate<Argotic.Extensions.ISyndicationExtension>
+  nameWithType.vb: Predicate(Of ISyndicationExtension)
+  fullName.vb: System.Predicate(Of Argotic.Extensions.ISyndicationExtension)
+  name.vb: Predicate(Of ISyndicationExtension)
+  spec.csharp:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.GetHashCode*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.GetHashCode
+  name: GetHashCode
+  nameWithType: AtomMemberResources.GetHashCode
+  fullName: Argotic.Publishing.AtomMemberResources.GetHashCode
+- uid: System.Xml.XPath.IXPathNavigable
+  commentId: T:System.Xml.XPath.IXPathNavigable
+  parent: System.Xml.XPath
+  isExternal: true
+  name: IXPathNavigable
+  nameWithType: IXPathNavigable
+  fullName: System.Xml.XPath.IXPathNavigable
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: SyndicationExtension.Load(IXPathNavigable)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.Load*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.Load
+  name: Load
+  nameWithType: AtomMemberResources.Load
+  fullName: Argotic.Publishing.AtomMemberResources.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Xml.XmlReader
+  commentId: T:System.Xml.XmlReader
+  parent: System.Xml
+  isExternal: true
+  name: XmlReader
+  nameWithType: XmlReader
+  fullName: System.Xml.XmlReader
+- uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: SyndicationExtension.Load(XmlReader)
+  fullName: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: SyndicationExtension.Load
+    fullName: Argotic.Extensions.SyndicationExtension.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: Argotic.Publishing.AtomMemberResources.RemoveExtension*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.RemoveExtension
+  name: RemoveExtension
+  nameWithType: AtomMemberResources.RemoveExtension
+  fullName: Argotic.Publishing.AtomMemberResources.RemoveExtension
+- uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Extensions.IExtensibleSyndicationObject
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: IExtensibleSyndicationObject.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: IExtensibleSyndicationObject.RemoveExtension
+    fullName: Argotic.Extensions.IExtensibleSyndicationObject.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.ToString*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.ToString
+  name: ToString
+  nameWithType: AtomMemberResources.ToString
+  fullName: Argotic.Publishing.AtomMemberResources.ToString
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.SyndicationExtension
+  isExternal: true
+  name: WriteTo(XmlWriter)
+  nameWithType: SyndicationExtension.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: SyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.SyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Extensions.SyndicationExtension.WriteTo(System.Xml.XmlWriter)
+    name: WriteTo
+    nameWithType: SyndicationExtension.WriteTo
+    fullName: Argotic.Extensions.SyndicationExtension.WriteTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Publishing.AtomMemberResources.WriteTo*
+  commentId: Overload:Argotic.Publishing.AtomMemberResources.WriteTo
+  name: WriteTo
+  nameWithType: AtomMemberResources.WriteTo
+  fullName: Argotic.Publishing.AtomMemberResources.WriteTo

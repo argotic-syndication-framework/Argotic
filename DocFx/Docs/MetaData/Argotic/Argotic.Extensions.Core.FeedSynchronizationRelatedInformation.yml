@@ -1,0 +1,1358 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  id: FeedSynchronizationRelatedInformation
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType,System.String)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo(System.Object)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals(System.Object)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load(System.Xml.XPath.XPathNavigator)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString(Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName(System.String)
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString
+  - Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo(System.Xml.XmlWriter)
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationRelatedInformation
+  nameWithType: FeedSynchronizationRelatedInformation
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FeedSynchronizationRelatedInformation
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 17
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nRepresents information about related feeds or locations.\n"
+  remarks: "\nIn the case where a publisher’s feed has incorporated items from other feeds, it can be useful for subscribers to see more detailed information about the other feeds.\nIn the case of feed sharing as envisioned by the <em>FeedSync</em> specification, this class can also be used to notify subscribing feeds of the feeds of other participants\nwhich they might also wish to subscribe to.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class FeedSynchronizationRelatedInformation : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class FeedSynchronizationRelatedInformation
+
+          Implements IComparable
+  seealso:
+  - linkId: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+    commentId: T:Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationRelatedInformation()
+  nameWithType: FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation()
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 38
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public FeedSynchronizationRelatedInformation()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  id: '#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)'
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationRelatedInformation(Uri, FeedSynchronizationRelatedInformationType)
+  nameWithType: FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation(Uri, FeedSynchronizationRelatedInformationType)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation(System.Uri, Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 49
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type)
+    parameters:
+    - id: link
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URI for this related feed.
+    - id: type
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+      description: A <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType" data-throw-if-not-resolved="false"></xref> enumeration values that represents the type of the related feed.
+    content.vb: Public Sub New(link As Uri, type As FeedSynchronizationRelatedInformationType)
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">link</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is equal to <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None" data-throw-if-not-resolved="false"></xref>.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType,System.String)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType,System.String)
+  id: '#ctor(System.Uri,Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType,System.String)'
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: FeedSynchronizationRelatedInformation(Uri, FeedSynchronizationRelatedInformationType, String)
+  nameWithType: FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation(Uri, FeedSynchronizationRelatedInformationType, String)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation(System.Uri, Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type, string title)
+    parameters:
+    - id: link
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URI for this related feed.
+    - id: type
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+      description: A <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType" data-throw-if-not-resolved="false"></xref> enumeration values that represents the type of the related feed.
+    - id: title
+      type: System.String
+      description: The name or description of this related feed.
+    content.vb: Public Sub New(link As Uri, type As FeedSynchronizationRelatedInformationType, title As String)
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">link</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">type</code> is equal to <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None" data-throw-if-not-resolved="false"></xref>.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  id: Link
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Link
+  nameWithType: FeedSynchronizationRelatedInformation.Link
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Link
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 77
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the URI for this related feed.\n"
+  remarks: "\nThe value <strong>must not</strong> be a relative reference.\n"
+  example: []
+  syntax:
+    content: public Uri Link { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URI for this related feed.
+    content.vb: Public Property Link As Uri
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  id: RelationType
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: RelationType
+  nameWithType: FeedSynchronizationRelatedInformation.RelationType
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationType
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 110
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the type of the related feed.\n"
+  remarks: "\n<p>\n    Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window.\n    These feeds are referred to as <em>partial feeds</em>, whereas feeds containing the complete set of items are referred to as <em>complete feeds</em>.\n</p>\n<p>\n    In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially\n    copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the\n    ability for the latter feed to reference the complete feed.\n</p>\n"
+  example: []
+  syntax:
+    content: public FeedSynchronizationRelatedInformationType RelationType { get; set; }
+    parameters: []
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+      description: "\nA <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType\" data-throw-if-not-resolved=\"false\"></xref> enumeration values that represents the type of the related feed.\nThe default value is <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no relation type has been specified.\n"
+    content.vb: Public Property RelationType As FeedSynchronizationRelatedInformationType
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">value</code> is equal to <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None" data-throw-if-not-resolved="false"></xref>.
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+  commentId: P:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+  id: Title
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: FeedSynchronizationRelatedInformation.Title
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Title
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 132
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the name or description of this related feed.\n"
+  example: []
+  syntax:
+    content: public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name or description of this related feed.
+    content.vb: Public Property Title As String
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  id: op_Equality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Equality(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  nameWithType: FeedSynchronizationRelatedInformation.Equality(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation, Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 158
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(FeedSynchronizationRelatedInformation first, FeedSynchronizationRelatedInformation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As FeedSynchronizationRelatedInformation, second As FeedSynchronizationRelatedInformation) As Boolean
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  id: op_Inequality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Inequality(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  nameWithType: FeedSynchronizationRelatedInformation.Inequality(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Inequality(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation, Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 178
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(FeedSynchronizationRelatedInformation first, FeedSynchronizationRelatedInformation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As FeedSynchronizationRelatedInformation, second As FeedSynchronizationRelatedInformation) As Boolean
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  id: op_LessThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: LessThan(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  nameWithType: FeedSynchronizationRelatedInformation.LessThan(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.LessThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation, Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 189
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(FeedSynchronizationRelatedInformation first, FeedSynchronizationRelatedInformation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As FeedSynchronizationRelatedInformation, second As FeedSynchronizationRelatedInformation) As Boolean
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  id: op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation,Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  nameWithType: FeedSynchronizationRelatedInformation.GreaterThan(FeedSynchronizationRelatedInformation, FeedSynchronizationRelatedInformation)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GreaterThan(Argotic.Extensions.Core.FeedSynchronizationRelatedInformation, Argotic.Extensions.Core.FeedSynchronizationRelatedInformation)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 209
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(FeedSynchronizationRelatedInformation first, FeedSynchronizationRelatedInformation second)
+    parameters:
+    - id: first
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As FeedSynchronizationRelatedInformation, second As FeedSynchronizationRelatedInformation) As Boolean
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString(Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString(Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  id: RelationTypeAsString(Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: RelationTypeAsString(FeedSynchronizationRelatedInformationType)
+  nameWithType: FeedSynchronizationRelatedInformation.RelationTypeAsString(FeedSynchronizationRelatedInformationType)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString(Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationTypeAsString
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 228
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the relation type identifier for the supplied <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type)
+    parameters:
+    - id: type
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+      description: The <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType" data-throw-if-not-resolved="false"></xref> to get the relation type identifier for.
+    return:
+      type: System.String
+      description: The relation type identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">type</code>, otherwise returns an empty string.
+    content.vb: Public Shared Function RelationTypeAsString(type As FeedSynchronizationRelatedInformationType) As String
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName(System.String)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName(System.String)
+  id: RelationTypeByName(System.String)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: RelationTypeByName(String)
+  nameWithType: FeedSynchronizationRelatedInformation.RelationTypeByName(String)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: RelationTypeByName
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 263
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns the <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified relation type name.\n"
+  remarks: This method disregards case of specified relation type name.
+  example: []
+  syntax:
+    content: public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the relation type.
+    return:
+      type: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+      description: A <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>FeedSynchronizationRelatedInformationType.None</strong>.
+    content.vb: Public Shared Function RelationTypeByName(name As String) As FeedSynchronizationRelatedInformationType
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load(System.Xml.XPath.XPathNavigator)
+  id: Load(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator)
+  nameWithType: FeedSynchronizationRelatedInformation.Load(XPathNavigator)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 299
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nLoads this <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract information from.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformation" data-throw-if-not-resolved="false"></xref> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator) As Boolean
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo(System.Xml.XmlWriter)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo(System.Xml.XmlWriter)
+  id: WriteTo(System.Xml.XmlWriter)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter)
+  nameWithType: FeedSynchronizationRelatedInformation.WriteTo(XmlWriter)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo(System.Xml.XmlWriter)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 344
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nSaves the current <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref> to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <xref href="System.Xml.XmlWriter" data-throw-if-not-resolved="false"></xref> to which you want to save.
+    content.vb: Public Sub WriteTo(writer As XmlWriter)
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString
+  id: ToString
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: FeedSynchronizationRelatedInformation.ToString()
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 368
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Extensions.Core.FeedSynchronizationRelatedInformation\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns the XML representation for the current instance.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Extensions.Core.FeedSynchronizationRelatedInformation" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo(System.Object)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: FeedSynchronizationRelatedInformation.CompareTo(Object)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 397
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals(System.Object)
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: FeedSynchronizationRelatedInformation.Equals(Object)
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 425
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode
+  commentId: M:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: FeedSynchronizationRelatedInformation.GetHashCode()
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationRelatedInformation.cs
+    startLine: 439
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationSyndicationExtensionContext
+  nameWithType: FeedSynchronizationSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationRelatedInformation
+  nameWithType: FeedSynchronizationRelatedInformation
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.#ctor
+  name: FeedSynchronizationRelatedInformation
+  nameWithType: FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.FeedSynchronizationRelatedInformation
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  commentId: T:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+  parent: Argotic.Extensions.Core
+  name: FeedSynchronizationRelatedInformationType
+  nameWithType: FeedSynchronizationRelatedInformationType
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  commentId: F:Argotic.Extensions.Core.FeedSynchronizationRelatedInformationType.None
+  isExternal: true
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+  name: Link
+  nameWithType: FeedSynchronizationRelatedInformation.Link
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Link
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+  name: RelationType
+  nameWithType: FeedSynchronizationRelatedInformation.RelationType
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationType
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+  name: Title
+  nameWithType: FeedSynchronizationRelatedInformation.Title
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Title
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Equality
+  name: Equality
+  nameWithType: FeedSynchronizationRelatedInformation.Equality
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_Inequality
+  name: Inequality
+  nameWithType: FeedSynchronizationRelatedInformation.Inequality
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Inequality
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_LessThan
+  name: LessThan
+  nameWithType: FeedSynchronizationRelatedInformation.LessThan
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.LessThan
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.op_GreaterThan
+  name: GreaterThan
+  nameWithType: FeedSynchronizationRelatedInformation.GreaterThan
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GreaterThan
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString
+  name: RelationTypeAsString
+  nameWithType: FeedSynchronizationRelatedInformation.RelationTypeAsString
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeAsString
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName
+  name: RelationTypeByName
+  nameWithType: FeedSynchronizationRelatedInformation.RelationTypeByName
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.RelationTypeByName
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load
+  name: Load
+  nameWithType: FeedSynchronizationRelatedInformation.Load
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo
+  name: WriteTo
+  nameWithType: FeedSynchronizationRelatedInformation.WriteTo
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.WriteTo
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString
+  name: ToString
+  nameWithType: FeedSynchronizationRelatedInformation.ToString
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo
+  name: CompareTo
+  nameWithType: FeedSynchronizationRelatedInformation.CompareTo
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals
+  name: Equals
+  nameWithType: FeedSynchronizationRelatedInformation.Equals
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode*
+  commentId: Overload:Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode
+  name: GetHashCode
+  nameWithType: FeedSynchronizationRelatedInformation.GetHashCode
+  fullName: Argotic.Extensions.Core.FeedSynchronizationRelatedInformation.GetHashCode

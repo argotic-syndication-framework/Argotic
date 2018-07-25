@@ -1,0 +1,1930 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.SyndicationResourceMetadata
+  commentId: T:Argotic.Common.SyndicationResourceMetadata
+  id: SyndicationResourceMetadata
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.SyndicationResourceMetadata.#ctor(System.Xml.XPath.XPathNavigator)
+  - Argotic.Common.SyndicationResourceMetadata.CompareTo(System.Object)
+  - Argotic.Common.SyndicationResourceMetadata.Equals(System.Object)
+  - Argotic.Common.SyndicationResourceMetadata.Format
+  - Argotic.Common.SyndicationResourceMetadata.GetHashCode
+  - Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute(System.Xml.XPath.XPathNavigator,System.String)
+  - Argotic.Common.SyndicationResourceMetadata.Namespaces
+  - Argotic.Common.SyndicationResourceMetadata.op_Equality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  - Argotic.Common.SyndicationResourceMetadata.op_GreaterThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  - Argotic.Common.SyndicationResourceMetadata.op_Inequality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  - Argotic.Common.SyndicationResourceMetadata.op_LessThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  - Argotic.Common.SyndicationResourceMetadata.Resource
+  - Argotic.Common.SyndicationResourceMetadata.ToString
+  - Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.TryParseRssResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  - Argotic.Common.SyndicationResourceMetadata.Version
+  langs:
+  - csharp
+  - vb
+  name: SyndicationResourceMetadata
+  nameWithType: SyndicationResourceMetadata
+  fullName: Argotic.Common.SyndicationResourceMetadata
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationResourceMetadata
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 12
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nRepresents metadata associated with a <xref href=\"Argotic.Common.ISyndicationResource\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class SyndicationResourceMetadata : IComparable
+    content.vb: >-
+      <Serializable>
+
+      Public Class SyndicationResourceMetadata
+
+          Implements IComparable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IComparable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Common.SyndicationResourceMetadata.#ctor(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.#ctor(System.Xml.XPath.XPathNavigator)
+  id: '#ctor(System.Xml.XPath.XPathNavigator)'
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: SyndicationResourceMetadata(XPathNavigator)
+  nameWithType: SyndicationResourceMetadata.SyndicationResourceMetadata(XPathNavigator)
+  fullName: Argotic.Common.SyndicationResourceMetadata.SyndicationResourceMetadata(System.Xml.XPath.XPathNavigator)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 26
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Common.SyndicationResourceMetadata\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public SyndicationResourceMetadata(XPathNavigator navigator)
+    parameters:
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract the syndication resource meta-data from.
+    content.vb: Public Sub New(navigator As XPathNavigator)
+  overload: Argotic.Common.SyndicationResourceMetadata.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.SyndicationResourceMetadata.Format
+  commentId: P:Argotic.Common.SyndicationResourceMetadata.Format
+  id: Format
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Format
+  nameWithType: SyndicationResourceMetadata.Format
+  fullName: Argotic.Common.SyndicationResourceMetadata.Format
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Format
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets or sets the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> that the syndication resource conforms to.\n"
+  example: []
+  syntax:
+    content: public SyndicationContentFormat Format { get; protected set; }
+    parameters: []
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that indicates the syndication specification the resource conforms to.\nIf the syndication content format is unable to be determined, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property Format As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationResourceMetadata.Format*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Argotic.Common.SyndicationResourceMetadata.Namespaces
+  commentId: P:Argotic.Common.SyndicationResourceMetadata.Namespaces
+  id: Namespaces
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Namespaces
+  nameWithType: SyndicationResourceMetadata.Namespaces
+  fullName: Argotic.Common.SyndicationResourceMetadata.Namespaces
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Namespaces
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets a dictionary of the XML namespaces declared in the syndication resource.\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, string> Namespaces { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: A dictionary of the resource&apos;s XML namespaces, keyed off of the namespace prefix. If no XML namespaces are declared on the root element of the resource, returns an empty dictionary.
+    content.vb: Public ReadOnly Property Namespaces As Dictionary(Of String, String)
+  overload: Argotic.Common.SyndicationResourceMetadata.Namespaces*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Common.SyndicationResourceMetadata.Resource
+  commentId: P:Argotic.Common.SyndicationResourceMetadata.Resource
+  id: Resource
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Resource
+  nameWithType: SyndicationResourceMetadata.Resource
+  fullName: Argotic.Common.SyndicationResourceMetadata.Resource
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Resource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 52
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets a read-only <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> object that can be used to navigate the root element of the syndication resource.\n"
+  example: []
+  syntax:
+    content: public XPathNavigator Resource { get; }
+    parameters: []
+    return:
+      type: System.Xml.XPath.XPathNavigator
+      description: A read-only <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> object that can be used to navigate the root element of the syndication resource.
+    content.vb: Public ReadOnly Property Resource As XPathNavigator
+  overload: Argotic.Common.SyndicationResourceMetadata.Resource*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Common.SyndicationResourceMetadata.Version
+  commentId: P:Argotic.Common.SyndicationResourceMetadata.Version
+  id: Version
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Version
+  nameWithType: SyndicationResourceMetadata.Version
+  fullName: Argotic.Common.SyndicationResourceMetadata.Version
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Version
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 64
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets the <xref href=\"Argotic.Common.SyndicationResourceMetadata.Version\" data-throw-if-not-resolved=\"false\"></xref> of the syndication specification that the resource conforms to.\n"
+  example: []
+  syntax:
+    content: public Version Version { get; }
+    parameters: []
+    return:
+      type: System.Version
+      description: The version number of the syndication specification that the resource conforms to. If format version is unable to be determined, returns <strong>null</strong>.
+    content.vb: Public ReadOnly Property Version As Version
+  overload: Argotic.Common.SyndicationResourceMetadata.Version*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Common.SyndicationResourceMetadata.op_Equality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.op_Equality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  id: op_Equality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Equality(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  nameWithType: SyndicationResourceMetadata.Equality(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  fullName: Argotic.Common.SyndicationResourceMetadata.Equality(Argotic.Common.SyndicationResourceMetadata, Argotic.Common.SyndicationResourceMetadata)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Equality
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 72
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if operands are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+    parameters:
+    - id: first
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator =(first As SyndicationResourceMetadata, second As SyndicationResourceMetadata) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationResourceMetadata.op_Inequality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.op_Inequality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  id: op_Inequality(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Inequality(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  nameWithType: SyndicationResourceMetadata.Inequality(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  fullName: Argotic.Common.SyndicationResourceMetadata.Inequality(Argotic.Common.SyndicationResourceMetadata, Argotic.Common.SyndicationResourceMetadata)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_Inequality
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 93
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if operands are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+    parameters:
+    - id: first
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.
+    content.vb: Public Shared Operator <>(first As SyndicationResourceMetadata, second As SyndicationResourceMetadata) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationResourceMetadata.op_LessThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.op_LessThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  id: op_LessThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: LessThan(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  nameWithType: SyndicationResourceMetadata.LessThan(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  fullName: Argotic.Common.SyndicationResourceMetadata.LessThan(Argotic.Common.SyndicationResourceMetadata, Argotic.Common.SyndicationResourceMetadata)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_LessThan
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if first operand is less than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+    parameters:
+    - id: first
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator <(first As SyndicationResourceMetadata, second As SyndicationResourceMetadata) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationResourceMetadata.op_GreaterThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.op_GreaterThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  id: op_GreaterThan(Argotic.Common.SyndicationResourceMetadata,Argotic.Common.SyndicationResourceMetadata)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  nameWithType: SyndicationResourceMetadata.GreaterThan(SyndicationResourceMetadata, SyndicationResourceMetadata)
+  fullName: Argotic.Common.SyndicationResourceMetadata.GreaterThan(Argotic.Common.SyndicationResourceMetadata, Argotic.Common.SyndicationResourceMetadata)
+  type: Operator
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: op_GreaterThan
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 125
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if first operand is greater than second operand.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+    parameters:
+    - id: first
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to be compared.
+    - id: second
+      type: Argotic.Common.SyndicationResourceMetadata
+      description: Operand to compare to.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.
+    content.vb: Public Shared Operator>(first As SyndicationResourceMetadata, second As SyndicationResourceMetadata) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationResourceMetadata.ToString
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.ToString
+  id: ToString
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: SyndicationResourceMetadata.ToString()
+  fullName: Argotic.Common.SyndicationResourceMetadata.ToString()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ToString
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 147
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents the current <xref href=\"Argotic.Common.SyndicationResourceMetadata\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: A <xref href="System.String" data-throw-if-not-resolved="false"></xref> that represents the current <xref href="Argotic.Common.SyndicationResourceMetadata" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.Object.ToString
+  overload: Argotic.Common.SyndicationResourceMetadata.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Common.SyndicationResourceMetadata.CompareTo(System.Object)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.CompareTo(System.Object)
+  id: CompareTo(System.Object)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Object)
+  nameWithType: SyndicationResourceMetadata.CompareTo(Object)
+  fullName: Argotic.Common.SyndicationResourceMetadata.CompareTo(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CompareTo
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 163
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nCompares the current instance with another object of the same type.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that indicates the relative order of the objects being compared.
+    content.vb: Public Function CompareTo(obj As Object) As Integer
+  overload: Argotic.Common.SyndicationResourceMetadata.CompareTo*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
+  implements:
+  - System.IComparable.CompareTo(System.Object)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Common.SyndicationResourceMetadata.Equals(System.Object)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: SyndicationResourceMetadata.Equals(Object)
+  fullName: Argotic.Common.SyndicationResourceMetadata.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Equals
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 222
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines whether the specified <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current instance.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the specified <xref href="System.Object" data-throw-if-not-resolved="false"></xref> is equal to the current instance; otherwise, <strong>false</strong>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Argotic.Common.SyndicationResourceMetadata.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Common.SyndicationResourceMetadata.GetHashCode
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.GetHashCode
+  id: GetHashCode
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: SyndicationResourceMetadata.GetHashCode()
+  fullName: Argotic.Common.SyndicationResourceMetadata.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetHashCode
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 236
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a hash code for the current instance.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer hash code.
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Argotic.Common.SyndicationResourceMetadata.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute(System.Xml.XPath.XPathNavigator,System.String)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute(System.Xml.XPath.XPathNavigator,System.String)
+  id: GetVersionFromAttribute(System.Xml.XPath.XPathNavigator,System.String)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: GetVersionFromAttribute(XPathNavigator, String)
+  nameWithType: SyndicationResourceMetadata.GetVersionFromAttribute(XPathNavigator, String)
+  fullName: Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute(System.Xml.XPath.XPathNavigator, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetVersionFromAttribute
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 252
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"Argotic.Common.SyndicationResourceMetadata.Version\" data-throw-if-not-resolved=\"false\"></xref> object for the value of the XML attribute in <code data-dev-comment-type=\"paramref\" class=\"paramref\">navigator</code> with a local name specified by <code data-dev-comment-type=\"paramref\" class=\"paramref\">name</code>.\n"
+  example: []
+  syntax:
+    content: protected static Version GetVersionFromAttribute(XPathNavigator navigator, string name)
+    parameters:
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: The <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> to extract the XML attribute value from.
+    - id: name
+      type: System.String
+      description: The name of the attribute to parse in the <code data-dev-comment-type="paramref" class="paramref">navigator</code>.
+    return:
+      type: System.Version
+      description: The <xref href="Argotic.Common.SyndicationResourceMetadata.Version" data-throw-if-not-resolved="false"></xref> represented by the value of the specified XML attribute. If unable to determine version, returns <strong>null</strong>.
+    content.vb: Protected Shared Function GetVersionFromAttribute(navigator As XPathNavigator, name As String) As Version
+  overload: Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseApmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseApmlResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseApmlResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseApmlResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 296
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Attention Profiling Markup Language (APML) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseApmlResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseApmlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseApmlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseAtomResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseAtomResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseAtomResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseAtomResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 335
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Atom formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Atom formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseAtomResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseAtomResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseAtomResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseAtomPublishingCategoriesResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseAtomPublishingCategoriesResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 404
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Atom Publishing Protocol category document formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Atom formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseAtomPublishingCategoriesResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseAtomPublishingCategoriesResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseAtomPublishingServiceResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseAtomPublishingServiceResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 444
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Atom Publishing Protocol service document formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Atom formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseAtomPublishingServiceResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseAtomPublishingServiceResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseBlogMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseBlogMlResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseBlogMlResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseBlogMlResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 484
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a  Web Log Markup Language (BlogML) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseBlogMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseBlogMlResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseBlogMlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseBlogMlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseMicroSummaryGeneratorResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseMicroSummaryGeneratorResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 522
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Microsummary Generator formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Microsummary Generator formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseMicroSummaryGeneratorResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseMicroSummaryGeneratorResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseNewsMlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseNewsMlResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseNewsMlResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseNewsMlResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 560
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a News Markup Language (NewsML) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseNewsMlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseNewsMlResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseNewsMlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseNewsMlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseOpenSearchDescriptionResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseOpenSearchDescriptionResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 590
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a OpenSearch Description formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a OpenSearch Description formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseOpenSearchDescriptionResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseOpenSearchDescriptionResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseOpmlResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseOpmlResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseOpmlResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseOpmlResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 628
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a  Outline Processor Markup Language (OPML) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseOpmlResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseOpmlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseOpmlResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseRsdResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseRsdResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseRsdResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseRsdResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 659
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Really Simple Discovery (RSD) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseRsdResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseRsdResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseRsdResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  commentId: M:Argotic.Common.SyndicationResourceMetadata.TryParseRssResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  id: TryParseRssResource(System.Xml.XPath.XPathNavigator,System.Xml.XPath.XPathNavigator@,System.Version@)
+  parent: Argotic.Common.SyndicationResourceMetadata
+  langs:
+  - csharp
+  - vb
+  name: TryParseRssResource(XPathNavigator, out XPathNavigator, out Version)
+  nameWithType: SyndicationResourceMetadata.TryParseRssResource(XPathNavigator, out XPathNavigator, out Version)
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource(System.Xml.XPath.XPathNavigator, out System.Xml.XPath.XPathNavigator, out System.Version)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryParseRssResource
+    path: ../Solutions/Argotic.Common/SyndicationResourceMetadata.cs
+    startLine: 703
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nDetermines if the specified <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> represents a Really Simple Syndication (RSS) formatted syndication resource.\n"
+  example: []
+  syntax:
+    content: protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    parameters:
+    - id: resource
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the syndication resource to attempt to parse.
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.
+    - id: version
+      type: System.Version
+      description: The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">resource</code> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <strong>false</strong>.
+    content.vb: Protected Shared Function TryParseRssResource(resource As XPathNavigator, ByRef navigator As XPathNavigator, ByRef version As Version) As Boolean
+  overload: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationResourceMetadata.TryParseRssResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+  modifiers.csharp:
+  - protected
+  - static
+  modifiers.vb:
+  - Protected
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource(System.Xml.XPath.XPathNavigator, ByRef System.Xml.XPath.XPathNavigator, ByRef System.Version)
+  name.vb: TryParseRssResource(XPathNavigator, ByRef XPathNavigator, ByRef Version)
+references:
+- uid: Argotic.Common.ISyndicationResource
+  commentId: T:Argotic.Common.ISyndicationResource
+  parent: Argotic.Common
+  name: ISyndicationResource
+  nameWithType: ISyndicationResource
+  fullName: Argotic.Common.ISyndicationResource
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IComparable
+  commentId: T:System.IComparable
+  parent: System
+  isExternal: true
+  name: IComparable
+  nameWithType: IComparable
+  fullName: System.IComparable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Common.SyndicationResourceMetadata
+  commentId: T:Argotic.Common.SyndicationResourceMetadata
+  parent: Argotic.Common
+  name: SyndicationResourceMetadata
+  nameWithType: SyndicationResourceMetadata
+  fullName: Argotic.Common.SyndicationResourceMetadata
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Common.SyndicationResourceMetadata.#ctor*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.#ctor
+  name: SyndicationResourceMetadata
+  nameWithType: SyndicationResourceMetadata.SyndicationResourceMetadata
+  fullName: Argotic.Common.SyndicationResourceMetadata.SyndicationResourceMetadata
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: Argotic.Common.SyndicationContentFormat.None
+  commentId: F:Argotic.Common.SyndicationContentFormat.None
+  isExternal: true
+- uid: Argotic.Common.SyndicationResourceMetadata.Format*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.Format
+  name: Format
+  nameWithType: SyndicationResourceMetadata.Format
+  fullName: Argotic.Common.SyndicationResourceMetadata.Format
+- uid: Argotic.Common.SyndicationResourceMetadata.Namespaces*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.Namespaces
+  name: Namespaces
+  nameWithType: SyndicationResourceMetadata.Namespaces
+  fullName: Argotic.Common.SyndicationResourceMetadata.Namespaces
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Argotic.Common.SyndicationResourceMetadata.Resource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.Resource
+  name: Resource
+  nameWithType: SyndicationResourceMetadata.Resource
+  fullName: Argotic.Common.SyndicationResourceMetadata.Resource
+- uid: Argotic.Common.SyndicationResourceMetadata.Version
+  commentId: P:Argotic.Common.SyndicationResourceMetadata.Version
+  isExternal: true
+- uid: Argotic.Common.SyndicationResourceMetadata.Version*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.Version
+  name: Version
+  nameWithType: SyndicationResourceMetadata.Version
+  fullName: Argotic.Common.SyndicationResourceMetadata.Version
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: Argotic.Common.SyndicationResourceMetadata.op_Equality*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.op_Equality
+  name: Equality
+  nameWithType: SyndicationResourceMetadata.Equality
+  fullName: Argotic.Common.SyndicationResourceMetadata.Equality
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Common.SyndicationResourceMetadata.op_Inequality*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.op_Inequality
+  name: Inequality
+  nameWithType: SyndicationResourceMetadata.Inequality
+  fullName: Argotic.Common.SyndicationResourceMetadata.Inequality
+- uid: Argotic.Common.SyndicationResourceMetadata.op_LessThan*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.op_LessThan
+  name: LessThan
+  nameWithType: SyndicationResourceMetadata.LessThan
+  fullName: Argotic.Common.SyndicationResourceMetadata.LessThan
+- uid: Argotic.Common.SyndicationResourceMetadata.op_GreaterThan*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.op_GreaterThan
+  name: GreaterThan
+  nameWithType: SyndicationResourceMetadata.GreaterThan
+  fullName: Argotic.Common.SyndicationResourceMetadata.GreaterThan
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceMetadata.ToString*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.ToString
+  name: ToString
+  nameWithType: SyndicationResourceMetadata.ToString
+  fullName: Argotic.Common.SyndicationResourceMetadata.ToString
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: Argotic.Common.SyndicationResourceMetadata.CompareTo*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.CompareTo
+  name: CompareTo
+  nameWithType: SyndicationResourceMetadata.CompareTo
+  fullName: Argotic.Common.SyndicationResourceMetadata.CompareTo
+- uid: System.IComparable.CompareTo(System.Object)
+  commentId: M:System.IComparable.CompareTo(System.Object)
+  parent: System.IComparable
+  isExternal: true
+  name: CompareTo(Object)
+  nameWithType: IComparable.CompareTo(Object)
+  fullName: System.IComparable.CompareTo(System.Object)
+  spec.csharp:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable.CompareTo(System.Object)
+    name: CompareTo
+    nameWithType: IComparable.CompareTo
+    fullName: System.IComparable.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceMetadata.Equals*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.Equals
+  name: Equals
+  nameWithType: SyndicationResourceMetadata.Equals
+  fullName: Argotic.Common.SyndicationResourceMetadata.Equals
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationResourceMetadata.GetHashCode*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.GetHashCode
+  name: GetHashCode
+  nameWithType: SyndicationResourceMetadata.GetHashCode
+  fullName: Argotic.Common.SyndicationResourceMetadata.GetHashCode
+- uid: Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute
+  name: GetVersionFromAttribute
+  nameWithType: SyndicationResourceMetadata.GetVersionFromAttribute
+  fullName: Argotic.Common.SyndicationResourceMetadata.GetVersionFromAttribute
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource
+  name: TryParseApmlResource
+  nameWithType: SyndicationResourceMetadata.TryParseApmlResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseApmlResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource
+  name: TryParseAtomResource
+  nameWithType: SyndicationResourceMetadata.TryParseAtomResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource
+  name: TryParseAtomPublishingCategoriesResource
+  nameWithType: SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource
+  name: TryParseAtomPublishingServiceResource
+  nameWithType: SyndicationResourceMetadata.TryParseAtomPublishingServiceResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseAtomPublishingServiceResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource
+  name: TryParseBlogMlResource
+  nameWithType: SyndicationResourceMetadata.TryParseBlogMlResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseBlogMlResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource
+  name: TryParseMicroSummaryGeneratorResource
+  nameWithType: SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource
+  name: TryParseNewsMlResource
+  nameWithType: SyndicationResourceMetadata.TryParseNewsMlResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseNewsMlResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource
+  name: TryParseOpenSearchDescriptionResource
+  nameWithType: SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource
+  name: TryParseOpmlResource
+  nameWithType: SyndicationResourceMetadata.TryParseOpmlResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseOpmlResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource
+  name: TryParseRsdResource
+  nameWithType: SyndicationResourceMetadata.TryParseRsdResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseRsdResource
+- uid: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource*
+  commentId: Overload:Argotic.Common.SyndicationResourceMetadata.TryParseRssResource
+  name: TryParseRssResource
+  nameWithType: SyndicationResourceMetadata.TryParseRssResource
+  fullName: Argotic.Common.SyndicationResourceMetadata.TryParseRssResource

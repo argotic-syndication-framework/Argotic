@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="SiteSummarySlashSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class SiteSummarySlashSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold the section name.
         /// </summary>
-        private string extensionSection     = String.Empty;
+        private string extensionSection = string.Empty;
+
         /// <summary>
         /// Private member to hold the department name.
         /// </summary>
-        private string extensionDepartment  = String.Empty;
-        /// <summary>
-        /// Private member to hold the number of comments.
-        /// </summary>
-        private int extensionComments       = Int32.MinValue;
+        private string extensionDepartment = string.Empty;
+
         /// <summary>
         /// Private member to hold the hit parade identifiers.
         /// </summary>
@@ -42,19 +38,8 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets the number of comments.
         /// </summary>
-        /// <value>The number of comments. The default value is <see cref="Int32.MinValue"/>, which indicates that no comment count was specified.</value>
-        public int Comments
-        {
-            get
-            {
-                return extensionComments;
-            }
-
-            set
-            {
-                extensionComments = value;
-            }
-        }
+        /// <value>The number of comments. The default value is <see cref="int.MinValue"/>, which indicates that no comment count was specified.</value>
+        public int Comments { get; set; } = int.MinValue;
 
         /// <summary>
         /// Gets or sets the name of the department.
@@ -64,18 +49,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionDepartment;
+                return this.extensionDepartment;
             }
 
             set
             {
-                if(String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionDepartment = String.Empty;
+                    this.extensionDepartment = string.Empty;
                 }
                 else
                 {
-                    extensionDepartment = value.Trim();
+                    this.extensionDepartment = value.Trim();
                 }
             }
         }
@@ -84,18 +69,19 @@ namespace Argotic.Extensions.Core
         /// Gets the hit parade identifiers.
         /// </summary>
         /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers. 
+        ///     A <see cref="Collection{T}"/> collection of <see cref="int"/> objects that represent the hit parade identifiers.
         ///     The default value is an <i>empty</i> collection.
         /// </value>
         public Collection<int> HitParade
         {
             get
             {
-                if (extensionHitParade == null)
+                if (this.extensionHitParade == null)
                 {
-                    extensionHitParade = new Collection<int>();
+                    this.extensionHitParade = new Collection<int>();
                 }
-                return extensionHitParade;
+
+                return this.extensionHitParade;
             }
         }
 
@@ -107,18 +93,18 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                return extensionSection;
+                return this.extensionSection;
             }
 
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    extensionSection = String.Empty;
+                    this.extensionSection = string.Empty;
                 }
                 else
                 {
-                    extensionSection = value.Trim();
+                    this.extensionSection = value.Trim();
                 }
             }
         }
@@ -133,52 +119,52 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator sectionNavigator     = source.SelectSingleNode("slash:section", manager);
-                XPathNavigator departmentNavigator  = source.SelectSingleNode("slash:department", manager);
-                XPathNavigator commentsNavigator    = source.SelectSingleNode("slash:comments", manager);
-                XPathNavigator hitParadeNavigator   = source.SelectSingleNode("slash:hit_parade", manager);
+                XPathNavigator sectionNavigator = source.SelectSingleNode("slash:section", manager);
+                XPathNavigator departmentNavigator = source.SelectSingleNode("slash:department", manager);
+                XPathNavigator commentsNavigator = source.SelectSingleNode("slash:comments", manager);
+                XPathNavigator hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
 
-                if (sectionNavigator != null && !String.IsNullOrEmpty(sectionNavigator.Value))
+                if (sectionNavigator != null && !string.IsNullOrEmpty(sectionNavigator.Value))
                 {
-                    this.Section    = sectionNavigator.Value;
-                    wasLoaded       = true;
+                    this.Section = sectionNavigator.Value;
+                    wasLoaded = true;
                 }
 
-                if (departmentNavigator != null && !String.IsNullOrEmpty(departmentNavigator.Value))
+                if (departmentNavigator != null && !string.IsNullOrEmpty(departmentNavigator.Value))
                 {
                     this.Department = departmentNavigator.Value;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
 
                 if (commentsNavigator != null)
                 {
                     int comments;
-                    if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out comments))
+                    if (int.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out comments))
                     {
-                        this.Comments   = comments;
-                        wasLoaded       = true;
+                        this.Comments = comments;
+                        wasLoaded = true;
                     }
                 }
 
-                if (hitParadeNavigator != null && !String.IsNullOrEmpty(hitParadeNavigator.Value))
+                if (hitParadeNavigator != null && !string.IsNullOrEmpty(hitParadeNavigator.Value))
                 {
                     if (hitParadeNavigator.Value.Contains(","))
                     {
-                        string[] identifiers    = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        string[] identifiers = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         if (identifiers != null && identifiers.Length > 0)
                         {
-                            foreach(string identifier in identifiers)
+                            foreach (string identifier in identifiers)
                             {
                                 int paradeId;
-                                if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out paradeId))
+                                if (int.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out paradeId))
                                 {
                                     this.HitParade.Add(paradeId);
-                                    wasLoaded   = true;
+                                    wasLoaded = true;
                                 }
                             }
                         }
@@ -186,10 +172,10 @@ namespace Argotic.Extensions.Core
                     else
                     {
                         int hitParade;
-                        if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hitParade))
+                        if (int.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hitParade))
                         {
                             this.HitParade.Add(hitParade);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -210,34 +196,34 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(!String.IsNullOrEmpty(this.Section))
+            if (!string.IsNullOrEmpty(this.Section))
             {
                 writer.WriteStartElement("section", xmlNamespace);
                 writer.WriteCData(this.Section);
                 writer.WriteEndElement();
             }
 
-            if (!String.IsNullOrEmpty(this.Department))
+            if (!string.IsNullOrEmpty(this.Department))
             {
                 writer.WriteStartElement("department", xmlNamespace);
                 writer.WriteCData(this.Department);
                 writer.WriteEndElement();
             }
 
-            if(this.Comments != Int32.MinValue)
+            if (this.Comments != int.MinValue)
             {
                 writer.WriteElementString("comments", xmlNamespace, this.Comments.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            if(this.HitParade.Count > 0)
+            if (this.HitParade.Count > 0)
             {
                 string[] hitParade = new string[this.HitParade.Count];
                 for (int i = 0; i < this.HitParade.Count; i++)
                 {
-                    hitParade[i]    = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                    hitParade[i] = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
                 }
 
-                writer.WriteElementString("hit_parade", xmlNamespace, String.Join(",", hitParade));
+                writer.WriteElementString("hit_parade", xmlNamespace, string.Join(",", hitParade));
             }
         }
     }

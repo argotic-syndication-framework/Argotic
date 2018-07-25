@@ -1,9 +1,10 @@
-﻿using System;
-using System.Net;
-using System.Xml.XPath;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
+    using System;
+    using System.Globalization;
+    using System.Net;
+    using System.Xml.XPath;
+
     /// <summary>
     /// Provides data for the <see cref="ISyndicationResource.Loaded"/> event.
     /// </summary>
@@ -14,48 +15,48 @@ namespace Argotic.Common
     /// <seealso cref="ISyndicationResource"/>
     /// <seealso cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/>
     /// <seealso cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
-    [Serializable()]
+    [Serializable]
     public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
         /// <summary>
         /// Private member to hold instance of event with no event data.
         /// </summary>
-        private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments  = new SyndicationResourceLoadedEventArgs();
+        private static readonly SyndicationResourceLoadedEventArgs EmptyEventArguments = new SyndicationResourceLoadedEventArgs();
+
         /// <summary>
         /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
         /// </summary>
-        [NonSerialized()]
+        [NonSerialized]
         private XPathNavigator eventNavigator;
-        /// <summary>
-        /// Private member to hold the URI that the syndication resource information was retrieved from.
-        /// </summary>
-        private Uri eventSource;
+
         /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions eventOptions = new WebRequestOptions();
+
         /// <summary>
         /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
         /// </summary>
-        private Object eventUserToken;
+        private object eventUserToken;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
         /// </summary>
         public SyndicationResourceLoadedEventArgs()
-		{
-		}
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceLoadedEventArgs(IXPathNavigable data) : this()
+        public SyndicationResourceLoadedEventArgs(IXPathNavigable data)
+            : this()
         {
             Guard.ArgumentNotNull(data, "data");
 
-            eventNavigator  = data.CreateNavigator();
+            this.eventNavigator = data.CreateNavigator();
         }
 
         /// <summary>
@@ -73,12 +74,13 @@ namespace Argotic.Common
         /// </param>
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy) : this(data)
+        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy)
+            : this(data)
         {
             Guard.ArgumentNotNull(source, "source");
 
-            eventSource         = source;
-            eventOptions        = new WebRequestOptions(credentials, proxy);
+            this.Source = source;
+            this.eventOptions = new WebRequestOptions(credentials, proxy);
         }
 
         /// <summary>
@@ -91,12 +93,13 @@ namespace Argotic.Common
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options) : this(data)
+        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options)
+            : this(data)
         {
             Guard.ArgumentNotNull(source, "source");
 
-            eventSource         = source;
-            eventOptions        = options ?? new WebRequestOptions();
+            this.Source = source;
+            this.eventOptions = options ?? new WebRequestOptions();
         }
 
         /// <summary>
@@ -115,9 +118,10 @@ namespace Argotic.Common
         /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state) : this(data, source, credentials, proxy)
+        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, object state)
+            : this(data, source, credentials, proxy)
         {
-            eventUserToken  = state;
+            this.eventUserToken = state;
         }
 
         /// <summary>
@@ -131,13 +135,14 @@ namespace Argotic.Common
         /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state) : this(data, source, options)
+        public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, object state)
+            : this(data, source, options)
         {
-            eventUserToken  = state;
+            this.eventUserToken = state;
         }
 
         /// <summary>
-        /// Represents an syndication resource loaded event with no event data.
+        /// Gets represents an syndication resource loaded event with no event data.
         /// </summary>
         /// <value>An uninitialized instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.</value>
         /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationResourceLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationResourceLoadedEventArgs()"/> constructor.</remarks>
@@ -145,7 +150,7 @@ namespace Argotic.Common
         {
             get
             {
-                return emptyEventArguments;
+                return EmptyEventArguments;
             }
         }
 
@@ -161,7 +166,7 @@ namespace Argotic.Common
         {
             get
             {
-                return eventOptions.Credentials;
+                return this.eventOptions.Credentials;
             }
         }
 
@@ -175,7 +180,7 @@ namespace Argotic.Common
         {
             get
             {
-                return eventNavigator;
+                return this.eventNavigator;
             }
         }
 
@@ -191,7 +196,7 @@ namespace Argotic.Common
         {
             get
             {
-                return eventOptions.Proxy;
+                return this.eventOptions.Proxy;
             }
         }
 
@@ -203,101 +208,22 @@ namespace Argotic.Common
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
         /// </value>
         /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
-        public Uri Source
-        {
-            get
-            {
-                return eventSource;
-            }
-        }
+        public Uri Source { get; }
 
         /// <summary>
-        /// Gets an <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
+        /// Gets an <see cref="object"/> containing state information that was passed to the asynchronous load operation.
         /// </summary>
         /// <value>
-        ///     A <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
+        ///     A <see cref="object"/> containing state information that was passed to the asynchronous load operation.
         ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no user token provided, returns <b>null</b>.
         /// </value>
-        /// <seealso cref="ISyndicationResource.LoadAsync(Uri, Object)"/>
-        public Object State
+        /// <seealso cref="ISyndicationResource.LoadAsync(Uri, object)"/>
+        public object State
         {
             get
             {
-                return eventUserToken;
+                return this.eventUserToken;
             }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-        /// </remarks>
-        public override string ToString()
-        {
-            string source       = this.Source != null ? this.Source.ToString() : String.Empty;
-            string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-
-            return String.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            SyndicationResourceLoadedEventArgs value  = obj as SyndicationResourceLoadedEventArgs;
-
-            if (value != null)
-            {
-                int result  = 0;
-                result      = result | String.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
-                result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is SyndicationResourceLoadedEventArgs))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
         }
 
         /// <summary>
@@ -308,11 +234,12 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
         public static bool operator ==(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return true;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return false;
             }
@@ -339,16 +266,17 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
         public static bool operator <(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+
+            if (Equals(first, null) && !Equals(second, null))
             {
                 return true;
             }
 
-            return (first.CompareTo(second) < 0);
+            return first.CompareTo(second) < 0;
         }
 
         /// <summary>
@@ -359,16 +287,88 @@ namespace Argotic.Common
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
         public static bool operator >(SyndicationResourceLoadedEventArgs first, SyndicationResourceLoadedEventArgs second)
         {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
+            if (Equals(first, null) && Equals(second, null))
             {
                 return false;
             }
 
-            return (first.CompareTo(second) > 0);
+            if (Equals(first, null) && !Equals(second, null))
+            {
+                return false;
+            }
+
+            return first.CompareTo(second) > 0;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
+        /// </summary>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.</returns>
+        /// <remarks>
+        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
+        /// </remarks>
+        public override string ToString()
+        {
+            string source = this.Source != null ? this.Source.ToString() : string.Empty;
+            string data = this.Data != null ? this.Data.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+            string state = this.State != null ? this.State.GetHashCode().ToString(NumberFormatInfo.InvariantInfo) : string.Empty;
+
+            return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
+        }
+
+        /// <summary>
+        /// Compares the current instance with another object of the same type.
+        /// </summary>
+        /// <param name="obj">An object to compare with this instance.</param>
+        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            SyndicationResourceLoadedEventArgs value = obj as SyndicationResourceLoadedEventArgs;
+
+            if (value != null)
+            {
+                int result = 0;
+                result = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+                result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+
+                return result;
+            }
+
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+        /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SyndicationResourceLoadedEventArgs))
+            {
+                return false;
+            }
+
+            return this.CompareTo(obj) == 0;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the current instance.
+        /// </summary>
+        /// <returns>A 32-bit signed integer hash code.</returns>
+        public override int GetHashCode()
+        {
+            char[] charArray = this.ToString().ToCharArray();
+
+            return charArray.GetHashCode();
         }
     }
 }

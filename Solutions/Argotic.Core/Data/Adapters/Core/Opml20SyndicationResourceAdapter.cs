@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="OpmlDocument"/>.
     /// </summary>
@@ -20,7 +20,10 @@ namespace Argotic.Data.Adapters
     ///     </para>
     ///     <para>This syndication resource adapter is designed to fill <see cref="OpmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the OPML 2.0 specification.</para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Opml")]
     public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         /// <summary>
@@ -33,7 +36,8 @@ namespace Argotic.Data.Adapters
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -46,18 +50,18 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("opml", manager);
+            XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
             if (documentNavigator != null)
             {
-                XPathNavigator headNavigator    = documentNavigator.SelectSingleNode("head", manager);
+                XPathNavigator headNavigator = documentNavigator.SelectSingleNode("head", manager);
                 if (headNavigator != null)
                 {
                     resource.Head.Load(headNavigator, this.Settings);
                 }
 
-                XPathNodeIterator outlineIterator   = documentNavigator.Select("body/outline", manager);
+                XPathNodeIterator outlineIterator = documentNavigator.Select("body/outline", manager);
                 if (outlineIterator != null && outlineIterator.Count > 0)
                 {
                     int counter = 0;

@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
-namespace Argotic.Extensions.Core
+﻿namespace Argotic.Extensions.Core
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+    using Argotic.Common;
+
     /// <summary>
     /// Encapsulates specific information about an individual <see cref="CreativeCommonsSyndicationExtension"/>.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class CreativeCommonsSyndicationExtensionContext
     {
-
         /// <summary>
         /// Private member to hold a collection of URI's that represent creative commons licenses that apply to published content.
         /// </summary>
         private Collection<Uri> extensionLicenses;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtensionContext"/> class.
         /// </summary>
         public CreativeCommonsSyndicationExtensionContext()
         {
-
         }
+
         /// <summary>
-        /// Gets or sets the creative commons licenses that apply to the published content.
+        /// Gets the creative commons licenses that apply to the published content.
         /// </summary>
         /// <value>A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent the creative commons licenses that apply to the published content.</value>
         /// <remarks>
@@ -36,13 +35,15 @@ namespace Argotic.Extensions.Core
         {
             get
             {
-                if (extensionLicenses == null)
+                if (this.extensionLicenses == null)
                 {
-                    extensionLicenses = new Collection<Uri>();
+                    this.extensionLicenses = new Collection<Uri>();
                 }
-                return extensionLicenses;
+
+                return this.extensionLicenses;
             }
         }
+
         /// <summary>
         /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
@@ -53,12 +54,12 @@ namespace Argotic.Extensions.Core
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
-            bool wasLoaded  = false;
+            bool wasLoaded = false;
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNodeIterator licenseIterator   = source.Select("creativeCommons:license", manager);
+                XPathNodeIterator licenseIterator = source.Select("creativeCommons:license", manager);
                 if (licenseIterator != null && licenseIterator.Count > 0)
                 {
                     while (licenseIterator.MoveNext())
@@ -67,7 +68,7 @@ namespace Argotic.Extensions.Core
                         if (Uri.TryCreate(licenseIterator.Current.Value, UriKind.RelativeOrAbsolute, out license))
                         {
                             this.Licenses.Add(license);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -88,9 +89,9 @@ namespace Argotic.Extensions.Core
         {
             Guard.ArgumentNotNull(writer, "writer");
             Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.Licenses.Count > 0)
+            if (this.Licenses.Count > 0)
             {
-                foreach(Uri license in this.Licenses)
+                foreach (Uri license in this.Licenses)
                 {
                     writer.WriteElementString("license", xmlNamespace, license.ToString());
                 }

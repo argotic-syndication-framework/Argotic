@@ -1,0 +1,838 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  id: SimpleListSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+  - Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  langs:
+  - csharp
+  - vb
+  name: SimpleListSyndicationExtensionContext
+  nameWithType: SimpleListSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SimpleListSyndicationExtensionContext
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 11
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nEncapsulates specific information about an individual <xref href=\"Argotic.Extensions.Core.SimpleListSyndicationExtension\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class SimpleListSyndicationExtensionContext
+    content.vb: >-
+      <Serializable>
+
+      Public Class SimpleListSyndicationExtensionContext
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor
+  commentId: M:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor
+  id: '#ctor'
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: SimpleListSyndicationExtensionContext()
+  nameWithType: SimpleListSyndicationExtensionContext.SimpleListSyndicationExtensionContext()
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.SimpleListSyndicationExtensionContext()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 32
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Extensions.Core.SimpleListSyndicationExtensionContext\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public SimpleListSyndicationExtensionContext()
+    content.vb: Public Sub New
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+  commentId: P:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+  id: Grouping
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Grouping
+  nameWithType: SimpleListSyndicationExtensionContext.Grouping
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Grouping
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 43
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets information that allows the client to group or filter on the values of feed properties.\n"
+  example: []
+  syntax:
+    content: public Collection<SimpleListGroup> Grouping { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListGroup}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.SimpleListGroup\" data-throw-if-not-resolved=\"false\"></xref> objects that represent information that allows the client to group or filter on the values of feed properties.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Grouping As Collection(Of SimpleListGroup)
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+  commentId: P:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+  id: Sorting
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Sorting
+  nameWithType: SimpleListSyndicationExtensionContext.Sorting
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Sorting
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 63
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets information that allows the client to sort on the values of feed properties.\n"
+  example: []
+  syntax:
+    content: public Collection<SimpleListSort> Sorting { get; }
+    parameters: []
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListSort}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> collection of <xref href=\"Argotic.Extensions.Core.SimpleListSort\" data-throw-if-not-resolved=\"false\"></xref> objects that represent information that allows the client to sort on the values of feed properties.\nThe default value is an <em>empty</em> collection.\n"
+    content.vb: Public ReadOnly Property Sorting As Collection(Of SimpleListSort)
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+  commentId: P:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+  id: TreatAsList
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: TreatAsList
+  nameWithType: SimpleListSyndicationExtensionContext.TreatAsList
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TreatAsList
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 84
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets a value indicating whether gets or sets a value indicating if this feed is intended to be consumed as a list.\n"
+  remarks: "\nThis property allows the publisher of a feed document to indicate to the consumers of the feed that the feed is intended to be consumed as a list,\nand as such is the primary means for feed consumers to identify lists.\n"
+  example: []
+  syntax:
+    content: public bool TreatAsList { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the syndication feed is intended to be consumed as a list; otherwise false.
+    content.vb: Public Property TreatAsList As Boolean
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  commentId: M:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  id: Load(System.Xml.XPath.XPathNavigator,System.Xml.XmlNamespaceManager)
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: Load(XPathNavigator, XmlNamespaceManager)
+  nameWithType: SimpleListSyndicationExtensionContext.Load(XPathNavigator, XmlNamespaceManager)
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 105
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nInitializes the syndication extension context using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.XPathNavigator
+      description: The <strong>XPathNavigator</strong> used to load this <xref href="Argotic.Extensions.Core.SimpleListSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref>.
+    - id: manager
+      type: System.Xml.XmlNamespaceManager
+      description: The <xref href="System.Xml.XmlNamespaceManager" data-throw-if-not-resolved="false"></xref> object used to resolve prefixed syndication extension elements and attributes.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <xref href="Argotic.Extensions.Core.SimpleListSyndicationExtensionContext" data-throw-if-not-resolved="false"></xref> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.
+    content.vb: Public Function Load(source As XPathNavigator, manager As XmlNamespaceManager) As Boolean
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">manager</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  commentId: M:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter,System.String)
+  id: WriteTo(System.Xml.XmlWriter,System.String)
+  parent: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  langs:
+  - csharp
+  - vb
+  name: WriteTo(XmlWriter, String)
+  nameWithType: SimpleListSyndicationExtensionContext.WriteTo(XmlWriter, String)
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo(System.Xml.XmlWriter, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: WriteTo
+    path: ../Solutions/Argotic.Extensions/Core/SimpleList/SimpleListSyndicationExtensionContext.cs
+    startLine: 165
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nWrites the current context to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void WriteTo(XmlWriter writer, string xmlNamespace)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to write the current context.
+    - id: xmlNamespace
+      type: System.String
+      description: The XML namespace used to qualify prefixed syndication extension elements and attributes.
+    content.vb: Public Sub WriteTo(writer As XmlWriter, xmlNamespace As String)
+  overload: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">xmlNamespace</code> is an empty string.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.SimpleListSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: SimpleListSyndicationExtension
+  nameWithType: SimpleListSyndicationExtension
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtension
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  commentId: T:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+  parent: Argotic.Extensions.Core
+  name: SimpleListSyndicationExtensionContext
+  nameWithType: SimpleListSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.#ctor
+  name: SimpleListSyndicationExtensionContext
+  nameWithType: SimpleListSyndicationExtensionContext.SimpleListSyndicationExtensionContext
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.SimpleListSyndicationExtensionContext
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SimpleListGroup
+  commentId: T:Argotic.Extensions.Core.SimpleListGroup
+  parent: Argotic.Extensions.Core
+  name: SimpleListGroup
+  nameWithType: SimpleListGroup
+  fullName: Argotic.Extensions.Core.SimpleListGroup
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+  name: Grouping
+  nameWithType: SimpleListSyndicationExtensionContext.Grouping
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Grouping
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListGroup}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListGroup}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<SimpleListGroup>
+  nameWithType: Collection<SimpleListGroup>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.SimpleListGroup>
+  nameWithType.vb: Collection(Of SimpleListGroup)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.SimpleListGroup)
+  name.vb: Collection(Of SimpleListGroup)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.SimpleListGroup
+    name: SimpleListGroup
+    nameWithType: SimpleListGroup
+    fullName: Argotic.Extensions.Core.SimpleListGroup
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.SimpleListGroup
+    name: SimpleListGroup
+    nameWithType: SimpleListGroup
+    fullName: Argotic.Extensions.Core.SimpleListGroup
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Extensions.Core.SimpleListSort
+  commentId: T:Argotic.Extensions.Core.SimpleListSort
+  parent: Argotic.Extensions.Core
+  name: SimpleListSort
+  nameWithType: SimpleListSort
+  fullName: Argotic.Extensions.Core.SimpleListSort
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+  name: Sorting
+  nameWithType: SimpleListSyndicationExtensionContext.Sorting
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Sorting
+- uid: System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListSort}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Extensions.Core.SimpleListSort}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<SimpleListSort>
+  nameWithType: Collection<SimpleListSort>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Extensions.Core.SimpleListSort>
+  nameWithType.vb: Collection(Of SimpleListSort)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Extensions.Core.SimpleListSort)
+  name.vb: Collection(Of SimpleListSort)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.Core.SimpleListSort
+    name: SimpleListSort
+    nameWithType: SimpleListSort
+    fullName: Argotic.Extensions.Core.SimpleListSort
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.Core.SimpleListSort
+    name: SimpleListSort
+    nameWithType: SimpleListSort
+    fullName: Argotic.Extensions.Core.SimpleListSort
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+  name: TreatAsList
+  nameWithType: SimpleListSyndicationExtensionContext.TreatAsList
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.TreatAsList
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XmlNamespaceManager
+  commentId: T:System.Xml.XmlNamespaceManager
+  parent: System.Xml
+  isExternal: true
+  name: XmlNamespaceManager
+  nameWithType: XmlNamespaceManager
+  fullName: System.Xml.XmlNamespaceManager
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load
+  name: Load
+  nameWithType: SimpleListSyndicationExtensionContext.Load
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo*
+  commentId: Overload:Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo
+  name: WriteTo
+  nameWithType: SimpleListSyndicationExtensionContext.WriteTo
+  fullName: Argotic.Extensions.Core.SimpleListSyndicationExtensionContext.WriteTo
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String

@@ -1,0 +1,2500 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Common.SyndicationDiscoveryUtility
+  commentId: T:Argotic.Common.SyndicationDiscoveryUtility
+  id: SyndicationDiscoveryUtility
+  parent: Argotic.Common
+  children:
+  - Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions)
+  - Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+  - Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName(System.String)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri,System.Net.ICredentials)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)
+  - Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)
+  - Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions,System.Net.HttpWebResponse@)
+  - Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.HttpWebResponse@)
+  - Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.HttpWebResponse@)
+  - Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy,System.Net.HttpWebResponse@)
+  - Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)
+  - Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri,System.Net.ICredentials)
+  langs:
+  - csharp
+  - vb
+  name: SyndicationDiscoveryUtility
+  nameWithType: SyndicationDiscoveryUtility
+  fullName: Argotic.Common.SyndicationDiscoveryUtility
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationDiscoveryUtility
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 16
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nProvides methods for extracting peer-to-peer auto-discovery and resource information from syndicated content. This class cannot be inherited.\n"
+  example: []
+  syntax:
+    content: public static class SyndicationDiscoveryUtility
+    content.vb: Public Module SyndicationDiscoveryUtility
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+  commentId: P:Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+  id: FrameworkUserAgent
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: FrameworkUserAgent
+  nameWithType: SyndicationDiscoveryUtility.FrameworkUserAgent
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: FrameworkUserAgent
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nGets the raw user agent string used by the framework when sending web requests.\n"
+  example: []
+  syntax:
+    content: public static string FrameworkUserAgent { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: A string that represents information such as the client application name, version, host operating system, and language.
+    content.vb: Public Shared ReadOnly Property FrameworkUserAgent As String
+  overload: Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName(System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName(System.String)
+  id: SyndicationContentFormatByName(System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatByName(String)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatByName(String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatByName
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 43
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value that corresponds to the specified format name.\n"
+  remarks: This method disregards case of specified format name.
+  example: []
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the syndication content format.
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: A <xref href="Argotic.Common.SyndicationContentFormat" data-throw-if-not-resolved="false"></xref> enumeration value that corresponds to the specified string, otherwise returns <strong>SyndicationContentFormat.None</strong>.
+    content.vb: Public Shared Function SyndicationContentFormatByName(name As String) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)
+  id: SyndicationContentFormatGet(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGet(Uri)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 89
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndicated resource located at the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"SyndicationContentFormatGet(Uri source)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatGet(Uri source)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> of the syndication resource to determine syndication content format for.
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value indicating the format of the syndicated resource.\nIf unable to determine format, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function SyndicationContentFormatGet(source As Uri) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri,System.Net.ICredentials)
+  id: SyndicationContentFormatGet(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGet(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 107
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndicated resource located at the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the supplied <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatGet(Uri source, ICredentials credentials)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> of the syndication resource to determine syndication content format for.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value indicating the format of the syndicated resource.\nIf unable to determine format, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function SyndicationContentFormatGet(source As Uri, credentials As ICredentials) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)
+  id: SyndicationContentFormatGet(System.IO.Stream)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGet(Stream)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet(Stream)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 131
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndicated resource represented by the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatGet(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> that represents the XML data for the syndicated resource.
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value indicating the format of the syndicated resource.\nIf unable to determine format, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function SyndicationContentFormatGet(stream As Stream) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)
+  id: SyndicationContentFormatGet(System.Xml.XmlReader)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGet(XmlReader)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet(XmlReader)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 154
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndicated resource represented by the supplied <xref href=\"System.Xml.XmlReader\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
+    parameters:
+    - id: reader
+      type: System.Xml.XmlReader
+      description: A <xref href="System.Xml.XmlReader" data-throw-if-not-resolved="false"></xref> that represents the XML data for the syndicated resource.
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value indicating the format of the syndicated resource.\nIf unable to determine format, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function SyndicationContentFormatGet(reader As XmlReader) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)
+  id: SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SyndicationContentFormatGet(XPathNavigator)
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet(XPathNavigator)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationContentFormatGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 197
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> of the syndicated resource represented by the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
+    parameters:
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> that represents the XML data for the syndicated resource.
+    return:
+      type: Argotic.Common.SyndicationContentFormat
+      description: "\nA <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> enumeration value indicating the format of the syndicated resource.\nIf unable to determine format, returns <xref href=\"Argotic.Common.SyndicationContentFormat.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function SyndicationContentFormatGet(navigator As XPathNavigator) As SyndicationContentFormat
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)
+  id: ExtractUrls(System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractUrls(String)
+  nameWithType: SyndicationDiscoveryUtility.ExtractUrls(String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractUrls
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 243
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a collection of <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> instances that represent HTML header links and/or anchor tags in the supplied HTML markup.\n"
+  example: []
+  syntax:
+    content: public static Collection<Uri> ExtractUrls(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: The HTML markup to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{System.Uri}
+      description: A collection of <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> instances that represent HTML anchor elements and header links in the supplied HTML markup.
+    content.vb: Public Shared Function ExtractUrls(content As String) As Collection(Of Uri)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri)
+  id: SourceReferencesTarget(System.Uri,System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SourceReferencesTarget(Uri, Uri)
+  nameWithType: SyndicationDiscoveryUtility.SourceReferencesTarget(Uri, Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri, System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SourceReferencesTarget
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 327
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the source <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> references the target <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"SourceReferencesTarget()\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static bool SourceReferencesTarget(Uri source, Uri target)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the source web resource that will be searched.
+    - id: target
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the target web resource being searched for.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> contains at least one link to the <code data-dev-comment-type="paramref" class="paramref">target</code>, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function SourceReferencesTarget(source As Uri, target As Uri) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)
+  id: SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: SourceReferencesTarget(Uri, Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.SourceReferencesTarget(Uri, Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri, System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SourceReferencesTarget
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 344
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the source <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> references the target <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, using the specifed <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool SourceReferencesTarget(Uri source, Uri target, ICredentials credentials)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the source web resource that will be searched.
+    - id: target
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the target web resource being searched for.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> contains at least one link to the <code data-dev-comment-type="paramref" class="paramref">target</code>, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function SourceReferencesTarget(source As Uri, target As Uri, credentials As ICredentials) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)
+  id: UriExists(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: UriExists(Uri)
+  nameWithType: SyndicationDiscoveryUtility.UriExists(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UriExists
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 396
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> exists.\n"
+  remarks: "\nThis method will return <strong>false</strong> if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code> is a null reference or the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code> is otherwise inaccessible.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"UriExists(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static bool UriExists(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> exists, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function UriExists(uri As Uri) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.UriExists*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri,System.Net.ICredentials)
+  id: UriExists(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: UriExists(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.UriExists(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UriExists
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 413
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> exists using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method will return <strong>false</strong> if the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code> is a null reference or the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code> is otherwise inaccessible.\n"
+  example: []
+  syntax:
+    content: public static bool UriExists(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> exists, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function UriExists(uri As Uri, credentials As ICredentials) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.UriExists*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String)
+  id: ConditionalGet(System.Uri,System.DateTime,System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ConditionalGet(Uri, DateTime, String)
+  nameWithType: SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri, System.DateTime, System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 456
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> and entity tag.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"ConditionalGet(Uri source, DateTime lastModified, string entityTag)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    return:
+      type: System.Net.HttpWebResponse
+      description: A <xref href="System.Net.HttpWebResponse" data-throw-if-not-resolved="false"></xref> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.
+    content.vb: Public Shared Function ConditionalGet(source As Uri, lastModified As Date, entityTag As String) As HttpWebResponse
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials)
+  id: ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ConditionalGet(Uri, DateTime, String, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, String, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 473
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Net.HttpWebResponse
+      description: A <xref href="System.Net.HttpWebResponse" data-throw-if-not-resolved="false"></xref> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.
+    content.vb: Public Shared Function ConditionalGet(source As Uri, lastModified As Date, entityTag As String, credentials As ICredentials) As HttpWebResponse
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy)
+  id: ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy)
+  nameWithType: SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials, System.Net.IWebProxy)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 500
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    return:
+      type: System.Net.HttpWebResponse
+      description: A <xref href="System.Net.HttpWebResponse" data-throw-if-not-resolved="false"></xref> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.
+    content.vb: Public Shared Function ConditionalGet(source As Uri, lastModified As Date, entityTag As String, credentials As ICredentials, proxy As IWebProxy) As HttpWebResponse
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions)
+  id: ConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ConditionalGet(Uri, DateTime, String, WebRequestOptions)
+  nameWithType: SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, String, WebRequestOptions)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri, System.DateTime, System.String, Argotic.Common.WebRequestOptions)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 514
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    return:
+      type: System.Net.HttpWebResponse
+      description: A <xref href="System.Net.HttpWebResponse" data-throw-if-not-resolved="false"></xref> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.
+    content.vb: Public Shared Function ConditionalGet(source As Uri, lastModified As Date, entityTag As String, options As WebRequestOptions) As HttpWebResponse
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.HttpWebResponse@)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.HttpWebResponse@)
+  id: TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.HttpWebResponse@)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: TryConditionalGet(Uri, DateTime, String, out HttpWebResponse)
+  nameWithType: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, out HttpWebResponse)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, out System.Net.HttpWebResponse)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 546
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> and entity tag.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out WebResponse response)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out HttpWebResponse response)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: response
+      type: System.Net.HttpWebResponse
+      description: "\nWhen this method returns, contains the <xref href=\"System.Net.HttpWebResponse\" data-throw-if-not-resolved=\"false\"></xref> for the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> has been modified, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function TryConditionalGet(source As Uri, lastModified As Date, entityTag As String, ByRef response As HttpWebResponse) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, ByRef HttpWebResponse)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, ByRef System.Net.HttpWebResponse)
+  name.vb: TryConditionalGet(Uri, DateTime, String, ByRef HttpWebResponse)
+- uid: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.HttpWebResponse@)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.HttpWebResponse@)
+  id: TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.HttpWebResponse@)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: TryConditionalGet(Uri, DateTime, String, ICredentials, out HttpWebResponse)
+  nameWithType: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, ICredentials, out HttpWebResponse)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials, out System.Net.HttpWebResponse)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 567
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    - id: response
+      type: System.Net.HttpWebResponse
+      description: "\nWhen this method returns, contains the <xref href=\"System.Net.HttpWebResponse\" data-throw-if-not-resolved=\"false\"></xref> for the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> has been modified, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function TryConditionalGet(source As Uri, lastModified As Date, entityTag As String, credentials As ICredentials, ByRef response As HttpWebResponse) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, ICredentials, ByRef HttpWebResponse)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials, ByRef System.Net.HttpWebResponse)
+  name.vb: TryConditionalGet(Uri, DateTime, String, ICredentials, ByRef HttpWebResponse)
+- uid: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy,System.Net.HttpWebResponse@)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy,System.Net.HttpWebResponse@)
+  id: TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy,System.Net.HttpWebResponse@)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, out HttpWebResponse)
+  nameWithType: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, out HttpWebResponse)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials, System.Net.IWebProxy, out System.Net.HttpWebResponse)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 623
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy, out HttpWebResponse response)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    - id: response
+      type: System.Net.HttpWebResponse
+      description: "\nWhen this method returns, contains the <xref href=\"System.Net.HttpWebResponse\" data-throw-if-not-resolved=\"false\"></xref> for the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> has been modified, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function TryConditionalGet(source As Uri, lastModified As Date, entityTag As String, credentials As ICredentials, proxy As IWebProxy, ByRef response As HttpWebResponse) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, ByRef HttpWebResponse)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, System.Net.ICredentials, System.Net.IWebProxy, ByRef System.Net.HttpWebResponse)
+  name.vb: TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, ByRef HttpWebResponse)
+- uid: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions,System.Net.HttpWebResponse@)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions,System.Net.HttpWebResponse@)
+  id: TryConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions,System.Net.HttpWebResponse@)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: TryConditionalGet(Uri, DateTime, String, WebRequestOptions, out HttpWebResponse)
+  nameWithType: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, WebRequestOptions, out HttpWebResponse)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, Argotic.Common.WebRequestOptions, out System.Net.HttpWebResponse)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: TryConditionalGet
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 641
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nPerforms a conditional get operation against the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>, entity tag and <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to perform a conditional GET operation against.
+    - id: lastModified
+      type: System.DateTime
+      description: A <xref href="System.DateTime" data-throw-if-not-resolved="false"></xref> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.
+    - id: entityTag
+      type: System.String
+      description: The entity tag provided by the <code data-dev-comment-type="paramref" class="paramref">source</code> that is used to determine change in content.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: response
+      type: System.Net.HttpWebResponse
+      description: "\nWhen this method returns, contains the <xref href=\"System.Net.HttpWebResponse\" data-throw-if-not-resolved=\"false\"></xref> for the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.\nThis parameter is passed uninitialized.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> has been modified, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function TryConditionalGet(source As Uri, lastModified As Date, entityTag As String, options As WebRequestOptions, ByRef response As HttpWebResponse) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  nameWithType.vb: SyndicationDiscoveryUtility.TryConditionalGet(Uri, DateTime, String, WebRequestOptions, ByRef HttpWebResponse)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri, System.DateTime, System.String, Argotic.Common.WebRequestOptions, ByRef System.Net.HttpWebResponse)
+  name.vb: TryConditionalGet(Uri, DateTime, String, WebRequestOptions, ByRef HttpWebResponse)
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.String)
+  id: ExtractDiscoverableSyndicationEndpoints(System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractDiscoverableSyndicationEndpoints(String)
+  nameWithType: SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractDiscoverableSyndicationEndpoints
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 694
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nExtracts auto-discoverable syndication endpoints from the supplied HTML markup.\n"
+  remarks: "\nSee <a href=\"http://www.rssboard.org/rss-autodiscovery\">http://www.rssboard.org/rss-autodiscovery</a> for\nfurther information about the auto-discovery of syndicated content.\n"
+  example: []
+  syntax:
+    content: public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: The HTML markup to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+      description: "\nA collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints contained within the <code data-dev-comment-type=\"paramref\" class=\"paramref\">content</code>.\n"
+    content.vb: Public Shared Function ExtractDiscoverableSyndicationEndpoints(content As String) As Collection(Of DiscoverableSyndicationEndpoint)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)
+  id: ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractDiscoverableSyndicationEndpoints(Stream)
+  nameWithType: SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(Stream)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractDiscoverableSyndicationEndpoints
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 755
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nExtracts auto-discoverable syndication endpoints from the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.rssboard.org/rss-autodiscovery\">http://www.rssboard.org/rss-autodiscovery</a> for\nfurther information about the auto-discovery of syndicated content.\n"
+  example: []
+  syntax:
+    content: public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> that represents the HTML markup to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+      description: "\nA collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints contained within the <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code>.\n"
+    content.vb: Public Shared Function ExtractDiscoverableSyndicationEndpoints(stream As Stream) As Collection(Of DiscoverableSyndicationEndpoint)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)
+  id: LocateDiscoverableSyndicationEndpoints(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocateDiscoverableSyndicationEndpoints(Uri)
+  nameWithType: SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateDiscoverableSyndicationEndpoints
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 785
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.rssboard.org/rss-autodiscovery\">http://www.rssboard.org/rss-autodiscovery</a> for\nfurther information about the auto-discovery of syndicated content.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"LocateDiscoverableSyndicationEndpoints(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the  web resource to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+      description: "\nA collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code>.\n"
+    content.vb: Public Shared Function LocateDiscoverableSyndicationEndpoints(uri As Uri) As Collection(Of DiscoverableSyndicationEndpoint)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri,System.Net.ICredentials)
+  id: LocateDiscoverableSyndicationEndpoints(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocateDiscoverableSyndicationEndpoints(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateDiscoverableSyndicationEndpoints
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 807
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>\nusing the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.rssboard.org/rss-autodiscovery\">http://www.rssboard.org/rss-autodiscovery</a> for\nfurther information about the auto-discovery of syndicated content.\n"
+  example: []
+  syntax:
+    content: public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the web resource to parse.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+      description: "\nA collection of <xref href=\"Argotic.Common.DiscoverableSyndicationEndpoint\" data-throw-if-not-resolved=\"false\"></xref> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code>.\n"
+    content.vb: Public Shared Function LocateDiscoverableSyndicationEndpoints(uri As Uri, credentials As ICredentials) As Collection(Of DiscoverableSyndicationEndpoint)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(System.String)
+  id: ExtractPingbackNotificationServer(System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractPingbackNotificationServer(String)
+  nameWithType: SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractPingbackNotificationServer
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 850
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nExtracts a <xref href=\"Argotic.Common.Link\" data-throw-if-not-resolved=\"false\"></xref> that represents a pingback auto-discovery link from the supplied HTML markup.\n"
+  remarks: "\n<p>\n    Pingback enabled resources that utilize the link mechanism will contain a\n    &lt;link rel=&quot;pingback&quot; href=&quot;{Absolute URI of the pingback XML-RPC server}&quot; /> element.\n</p>\n<p>\n    The <xref href=\"Argotic.Common.Link\" data-throw-if-not-resolved=\"false\"></xref> that is returned will have an <em>Href</em> property that points to the\n    absolute URI of the pingback XML-RPC server, and a <em>rel</em> attribute of pingback.\n    The <em>Title</em> property and <em>type</em> attribute will also be extracted if available.\n</p>\n<p>\n    See <a href=\"http://www.hixie.ch/specs/pingback/pingback\">http://www.hixie.ch/specs/pingback/pingback</a>\n    for more information about the pingback notification mechanism.\n</p>\n"
+  example: []
+  syntax:
+    content: public static Link ExtractPingbackNotificationServer(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: The HTML markup to parse.
+    return:
+      type: Argotic.Common.Link
+      description: "\nA <xref href=\"Argotic.Common.Link\" data-throw-if-not-resolved=\"false\"></xref> that represents the pingback auto-discovery link extracted from the <code data-dev-comment-type=\"paramref\" class=\"paramref\">content</code>.\nIf no pingback auto-discovery link was found, returns <strong>null</strong>.\n"
+    content.vb: Public Shared Function ExtractPingbackNotificationServer(content As String) As Link
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)
+  id: IsPingbackEnabled(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: IsPingbackEnabled(Uri)
+  nameWithType: SyndicationDiscoveryUtility.IsPingbackEnabled(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsPingbackEnabled
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 950
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> is a pingback enabled web resource.\n"
+  remarks: "\n<p>\n    There are two mechanisms used when determining if a web resource is pingback enabled;\n    the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>\n<u>or</u> an HTTP header named <strong>X-Pingback</strong>. A web resource is considered pingback enabled if it utilizes\neither or both of these mechanisms.\n</p>\n<p>\n    To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:\n<ul><li>\n            Pingback enabled resources that utilize the link mechanism will contain a\n            &lt;link rel=&quot;pingback&quot; href=&quot;{Absolute URI of the pingback XML-RPC server}&quot; /> element.\n</li><li>\n    Pingback enabled resources that utilize the HTTP header mechanism will contain an\n    HTTP header named <em>X-Pingback</em> whose value is the absolute URI of the pingback XML-RPC server.\n</li></ul>\n</p>\n<p>\n    This method is optimized to determine pingback enablement by examining the HTTP headers\n    before attempting to parse the response data for an pingback XML-RPC server link.\n</p>\n<p>\n    See <a href=\"http://www.hixie.ch/specs/pingback/pingback\">http://www.hixie.ch/specs/pingback/pingback</a>\n    for more information about the pingback notification mechanism.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"IsPingbackEnabled(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static bool IsPingbackEnabled(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is pingback enabled, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function IsPingbackEnabled(uri As Uri) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri,System.Net.ICredentials)
+  id: IsPingbackEnabled(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: IsPingbackEnabled(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.IsPingbackEnabled(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsPingbackEnabled
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 999
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> is a pingback enabled web resource using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    There are two mechanisms used when determining if a web resource is pingback enabled;\n    the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>\n<u>or</u> an HTTP header named <strong>X-Pingback</strong>. A web resource is considered pingback enabled if it utilizes\neither or both of these mechanisms.\n</p>\n<p>\n    To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:\n<ul><li>\n            Pingback enabled resources that utilize the link mechanism will contain a\n            &lt;link rel=&quot;pingback&quot; href=&quot;{Absolute URI of the pingback XML-RPC server}&quot; /> element.\n</li><li>\n    Pingback enabled resources that utilize the HTTP header mechanism will contain an\n    HTTP header named <em>X-Pingback</em> whose value is the absolute URI of the pingback XML-RPC server.\n</li></ul>\n</p>\n<p>\n    This method is optimized to determine pingback enablement by examining the HTTP headers\n    before attempting to parse the response data for an pingback XML-RPC server link.\n</p>\n<p>\n    See <a href=\"http://www.hixie.ch/specs/pingback/pingback\">http://www.hixie.ch/specs/pingback/pingback</a>\n    for more information about the pingback notification mechanism.\n</p>\n"
+  example: []
+  syntax:
+    content: public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is pingback enabled, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function IsPingbackEnabled(uri As Uri, credentials As ICredentials) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)
+  id: LocatePingbackNotificationServer(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocatePingbackNotificationServer(Uri)
+  nameWithType: SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocatePingbackNotificationServer
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1100
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    There are two mechanisms used when determining if a web resource is pingback enabled;\n    the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>\n<u>or</u> an HTTP header named <strong>X-Pingback</strong>. A web resource is considered pingback enabled if it utilizes\neither or both of these mechanisms.\n</p>\n<p>\n    To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:\n<ul><li>\n            Pingback enabled resources that utilize the link mechanism will contain a\n            &lt;link rel=&quot;pingback&quot; href=&quot;{Absolute URI of the pingback XML-RPC server}&quot; /> element.\n</li><li>\n    Pingback enabled resources that utilize the HTTP header mechanism will contain an\n    HTTP header named <em>X-Pingback</em> whose value is the absolute URI of the pingback XML-RPC server.\n</li></ul>\n</p>\n<p>\n    This method is optimized to locate the pingback XML-RPC server endpoint within the HTTP headers\n    before attempting to parse the response data for an pingback XML-RPC server link.\n</p>\n<p>\n    See <a href=\"http://www.hixie.ch/specs/pingback/pingback\">http://www.hixie.ch/specs/pingback/pingback</a>\n    for more information about the pingback notification mechanism.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"LocatePingbackNotificationServer(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static Uri LocatePingbackNotificationServer(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> of a web resource to perform pingback auto-discovery against.
+    return:
+      type: System.Uri
+      description: "\nA <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that represents the absolute URI of the pingback XML-RPC server.\nIf pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <strong>null</strong>.\n"
+    content.vb: Public Shared Function LocatePingbackNotificationServer(uri As Uri) As Uri
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri,System.Net.ICredentials)
+  id: LocatePingbackNotificationServer(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocatePingbackNotificationServer(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocatePingbackNotificationServer
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1153
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>\nusing the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    There are two mechanisms used when determining if a web resource is pingback enabled;\n    the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>\n<u>or</u> an HTTP header named <strong>X-Pingback</strong>. A web resource is considered pingback enabled if it utilizes\neither or both of these mechanisms.\n</p>\n<p>\n    To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:\n<ul><li>\n            Pingback enabled resources that utilize the link mechanism will contain a\n            &lt;link rel=&quot;pingback&quot; href=&quot;{Absolute URI of the pingback XML-RPC server}&quot; /> element.\n</li><li>\n    Pingback enabled resources that utilize the HTTP header mechanism will contain an\n    HTTP header named <em>X-Pingback</em> whose value is the absolute URI of the pingback XML-RPC server.\n</li></ul>\n</p>\n<p>\n    This method is optimized to locate the pingback XML-RPC server endpoint within the HTTP headers\n    before attempting to parse the response data for an pingback XML-RPC server link.\n</p>\n<p>\n    See <a href=\"http://www.hixie.ch/specs/pingback/pingback\">http://www.hixie.ch/specs/pingback/pingback</a>\n    for more information about the pingback notification mechanism.\n</p>\n"
+  example: []
+  syntax:
+    content: public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> of a web resource to perform pingback auto-discovery against.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Uri
+      description: "\nA <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> that represents the absolute URI of the pingback XML-RPC server.\nIf pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <strong>null</strong>.\n"
+    content.vb: Public Shared Function LocatePingbackNotificationServer(uri As Uri, credentials As ICredentials) As Uri
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.String)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.String)
+  id: ExtractTrackbackNotificationServers(System.String)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractTrackbackNotificationServers(String)
+  nameWithType: SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(String)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.String)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractTrackbackNotificationServers
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1221
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nExtracts embedded RDF Trackback discovery meta-data from the supplied HTML markup.\n"
+  remarks: "\nSee <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\nfurther information about the auto-discovery of Trackback ping URLs.\n"
+  example: []
+  syntax:
+    content: public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
+    parameters:
+    - id: content
+      type: System.String
+      description: The HTML markup to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+      description: "\nA collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent embedded Trackback ping URLs contained within the <code data-dev-comment-type=\"paramref\" class=\"paramref\">content</code>.\n"
+    content.vb: Public Shared Function ExtractTrackbackNotificationServers(content As String) As Collection(Of TrackbackDiscoveryMetadata)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)
+  id: ExtractTrackbackNotificationServers(System.IO.Stream)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: ExtractTrackbackNotificationServers(Stream)
+  nameWithType: SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(Stream)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ExtractTrackbackNotificationServers
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1266
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nExtracts embedded RDF Trackback discovery meta-data from the supplied <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\nfurther information about the auto-discovery of Trackback ping URLs.\n"
+  example: []
+  syntax:
+    content: public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> that represents the HTML markup to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+      description: "\nA collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent embedded Trackback ping URLs contained within the <code data-dev-comment-type=\"paramref\" class=\"paramref\">stream</code>.\n"
+    content.vb: Public Shared Function ExtractTrackbackNotificationServers(stream As Stream) As Collection(Of TrackbackDiscoveryMetadata)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)
+  id: IsTrackbackEnabled(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: IsTrackbackEnabled(Uri)
+  nameWithType: SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsTrackbackEnabled
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1325
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> is a trackback enabled web resource.\n"
+  remarks: "\n<p>\n    The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.\n</p>\n<p>\n    To conform to the Trackback 1.2 specification, the following information should apply to a trackback enabled resource:\n<ul><li>\n            Trackback enabled resources will contain one or more embedded RDF elements that describe where to send pings for web log entries.\n</li><li>\n    A sample embedded RDF element looks like this:\n<p>\n    &lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:trackback=&quot;http://madskills.com/public/xml/rss/module/trackback/&quot;>\n        &lt;rdf:Description\n            rdf:about=&quot;http://www.foo.com/archive.html#foo&quot;\n            dc:identifier=&quot;http://www.foo.com/archive.html#foo&quot;\n            dc:title=&quot;Foo Bar&quot;\n            trackback:ping=&quot;http://www.foo.com/tb.cgi/5&quot;\n        />\n    &lt;/rdf:RDF>\n</p>\n</li></ul>\n</p>\n<p>\n    See <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\n    further information about the auto-discovery of Trackback ping URLs.\n</p>\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"IsTrackbackEnabled(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static bool IsTrackbackEnabled(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is trackback enabled, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function IsTrackbackEnabled(uri As Uri) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri,System.Net.ICredentials)
+  id: IsTrackbackEnabled(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: IsTrackbackEnabled(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsTrackbackEnabled
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1375
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a value indicating if the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> is a trackback enabled web resource using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.\n</p>\n<p>\n    To conform to the Trackback 1.2 specification, the following information should apply to a trackback enabled resource:\n<ul><li>\n            Trackback enabled resources will contain one or more embedded RDF elements that describe where to send pings for web log entries.\n</li><li>\n    A sample embedded RDF element looks like this:\n<p>\n    &lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:trackback=&quot;http://madskills.com/public/xml/rss/module/trackback/&quot;>\n        &lt;rdf:Description\n            rdf:about=&quot;http://www.foo.com/archive.html#foo&quot;\n            dc:identifier=&quot;http://www.foo.com/archive.html#foo&quot;\n            dc:title=&quot;Foo Bar&quot;\n            trackback:ping=&quot;http://www.foo.com/tb.cgi/5&quot;\n        />\n    &lt;/rdf:RDF>\n</p>\n</li></ul>\n</p>\n<p>\n    See <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\n    further information about the auto-discovery of Trackback ping URLs.\n</p>\n"
+  example: []
+  syntax:
+    content: public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: The <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> to validate.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is trackback enabled, otherwise <strong>false</strong>.
+    content.vb: Public Shared Function IsTrackbackEnabled(uri As Uri, credentials As ICredentials) As Boolean
+  overload: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)
+  id: LocateTrackbackNotificationServers(System.Uri)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocateTrackbackNotificationServers(Uri)
+  nameWithType: SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateTrackbackNotificationServers
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1403
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent trackback ping URL endpoints for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\nfurther information about the auto-discovery of Trackback ping URLs.\n"
+  example:
+  - "\n<pre><code><pre><code source=\"..\\..\\Argotic.Examples\\Common\\SyndicationDiscoveryUtilityExample.cs\" region=\"LocateTrackbackNotificationServers(Uri uri)\"></code></pre>\n</code></pre>\n"
+  syntax:
+    content: public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the  web resource to parse.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+      description: "\nA collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent embedded Trackback ping URLs for the web resource located at the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code>.\n"
+    content.vb: Public Shared Function LocateTrackbackNotificationServers(uri As Uri) As Collection(Of TrackbackDiscoveryMetadata)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri,System.Net.ICredentials)
+  commentId: M:Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri,System.Net.ICredentials)
+  id: LocateTrackbackNotificationServers(System.Uri,System.Net.ICredentials)
+  parent: Argotic.Common.SyndicationDiscoveryUtility
+  langs:
+  - csharp
+  - vb
+  name: LocateTrackbackNotificationServers(Uri, ICredentials)
+  nameWithType: SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri, ICredentials)
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri, System.Net.ICredentials)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LocateTrackbackNotificationServers
+    path: ../Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs
+    startLine: 1426
+  assemblies:
+  - Argotic.Common
+  namespace: Argotic.Common
+  summary: "\nReturns a collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent trackback ping URL endpoints for the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>\nusing the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nSee <a href=\"http://www.sixapart.com/pronet/docs/trackback_spec\">http://www.sixapart.com/pronet/docs/trackback_spec</a> for\nfurther information about the auto-discovery of Trackback ping URLs.\n"
+  example: []
+  syntax:
+    content: public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
+    parameters:
+    - id: uri
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the web resource to parse.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the web resource when required.\nIf <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n"
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+      description: "\nA collection of <xref href=\"Argotic.Common.TrackbackDiscoveryMetadata\" data-throw-if-not-resolved=\"false\"></xref> objects that represent embedded Trackback ping URLs for the web resource located at the <code data-dev-comment-type=\"paramref\" class=\"paramref\">uri</code>.\n"
+    content.vb: Public Shared Function LocateTrackbackNotificationServers(uri As Uri, credentials As ICredentials) As Collection(Of TrackbackDiscoveryMetadata)
+  overload: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+  name: FrameworkUserAgent
+  nameWithType: SyndicationDiscoveryUtility.FrameworkUserAgent
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.FrameworkUserAgent
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName
+  name: SyndicationContentFormatByName
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatByName
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatByName
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Common.SyndicationContentFormat.None
+  commentId: F:Argotic.Common.SyndicationContentFormat.None
+  isExternal: true
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet
+  name: SyndicationContentFormatGet
+  nameWithType: SyndicationDiscoveryUtility.SyndicationContentFormatGet
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: System.Xml.XmlReader
+  commentId: T:System.Xml.XmlReader
+  parent: System.Xml
+  isExternal: true
+  name: XmlReader
+  nameWithType: XmlReader
+  fullName: System.Xml.XmlReader
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls
+  name: ExtractUrls
+  nameWithType: SyndicationDiscoveryUtility.ExtractUrls
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls
+- uid: System.Collections.ObjectModel.Collection{System.Uri}
+  commentId: T:System.Collections.ObjectModel.Collection{System.Uri}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<Uri>
+  nameWithType: Collection<Uri>
+  fullName: System.Collections.ObjectModel.Collection<System.Uri>
+  nameWithType.vb: Collection(Of Uri)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of System.Uri)
+  name.vb: Collection(Of Uri)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget
+  name: SourceReferencesTarget
+  nameWithType: SyndicationDiscoveryUtility.SourceReferencesTarget
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Common.SyndicationDiscoveryUtility.UriExists*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.UriExists
+  name: UriExists
+  nameWithType: SyndicationDiscoveryUtility.UriExists
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.UriExists
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.Net.HttpWebResponse
+  commentId: T:System.Net.HttpWebResponse
+  parent: System.Net
+  isExternal: true
+  name: HttpWebResponse
+  nameWithType: HttpWebResponse
+  fullName: System.Net.HttpWebResponse
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet
+  name: ConditionalGet
+  nameWithType: SyndicationDiscoveryUtility.ConditionalGet
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet
+  name: TryConditionalGet
+  nameWithType: SyndicationDiscoveryUtility.TryConditionalGet
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet
+- uid: Argotic.Common.DiscoverableSyndicationEndpoint
+  commentId: T:Argotic.Common.DiscoverableSyndicationEndpoint
+  parent: Argotic.Common
+  name: DiscoverableSyndicationEndpoint
+  nameWithType: DiscoverableSyndicationEndpoint
+  fullName: Argotic.Common.DiscoverableSyndicationEndpoint
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints
+  name: ExtractDiscoverableSyndicationEndpoints
+  nameWithType: SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints
+- uid: System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Common.DiscoverableSyndicationEndpoint}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<DiscoverableSyndicationEndpoint>
+  nameWithType: Collection<DiscoverableSyndicationEndpoint>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Common.DiscoverableSyndicationEndpoint>
+  nameWithType.vb: Collection(Of DiscoverableSyndicationEndpoint)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Common.DiscoverableSyndicationEndpoint)
+  name.vb: Collection(Of DiscoverableSyndicationEndpoint)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Common.DiscoverableSyndicationEndpoint
+    name: DiscoverableSyndicationEndpoint
+    nameWithType: DiscoverableSyndicationEndpoint
+    fullName: Argotic.Common.DiscoverableSyndicationEndpoint
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Common.DiscoverableSyndicationEndpoint
+    name: DiscoverableSyndicationEndpoint
+    nameWithType: DiscoverableSyndicationEndpoint
+    fullName: Argotic.Common.DiscoverableSyndicationEndpoint
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints
+  name: LocateDiscoverableSyndicationEndpoints
+  nameWithType: SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints
+- uid: Argotic.Common.Link
+  commentId: T:Argotic.Common.Link
+  parent: Argotic.Common
+  name: Link
+  nameWithType: Link
+  fullName: Argotic.Common.Link
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer
+  name: ExtractPingbackNotificationServer
+  nameWithType: SyndicationDiscoveryUtility.ExtractPingbackNotificationServer
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled
+  name: IsPingbackEnabled
+  nameWithType: SyndicationDiscoveryUtility.IsPingbackEnabled
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer
+  name: LocatePingbackNotificationServer
+  nameWithType: SyndicationDiscoveryUtility.LocatePingbackNotificationServer
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer
+- uid: Argotic.Common.TrackbackDiscoveryMetadata
+  commentId: T:Argotic.Common.TrackbackDiscoveryMetadata
+  parent: Argotic.Common
+  name: TrackbackDiscoveryMetadata
+  nameWithType: TrackbackDiscoveryMetadata
+  fullName: Argotic.Common.TrackbackDiscoveryMetadata
+- uid: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers
+  name: ExtractTrackbackNotificationServers
+  nameWithType: SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers
+- uid: System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Common.TrackbackDiscoveryMetadata}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<TrackbackDiscoveryMetadata>
+  nameWithType: Collection<TrackbackDiscoveryMetadata>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Common.TrackbackDiscoveryMetadata>
+  nameWithType.vb: Collection(Of TrackbackDiscoveryMetadata)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Common.TrackbackDiscoveryMetadata)
+  name.vb: Collection(Of TrackbackDiscoveryMetadata)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Common.TrackbackDiscoveryMetadata
+    name: TrackbackDiscoveryMetadata
+    nameWithType: TrackbackDiscoveryMetadata
+    fullName: Argotic.Common.TrackbackDiscoveryMetadata
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Common.TrackbackDiscoveryMetadata
+    name: TrackbackDiscoveryMetadata
+    nameWithType: TrackbackDiscoveryMetadata
+    fullName: Argotic.Common.TrackbackDiscoveryMetadata
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled
+  name: IsTrackbackEnabled
+  nameWithType: SyndicationDiscoveryUtility.IsTrackbackEnabled
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled
+- uid: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers*
+  commentId: Overload:Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers
+  name: LocateTrackbackNotificationServers
+  nameWithType: SyndicationDiscoveryUtility.LocateTrackbackNotificationServers
+  fullName: Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers

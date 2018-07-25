@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create Outline Processor Markup Language (OPML) outlines </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to create Outline Processor Markup Language (OPML) outlines ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-create-outline-processor-markup-language-opml-outlines">How to create Outline Processor Markup Language (OPML) outlines</h1>
+
+<p>Outline Processor Markup Language (OPML) describes a format for storing outlines in XML.The purpose of this format is to provide a way to exchange information between outliners and Internet services that can be browsed or controlled through an outliner. OPML has also become popular as a format for exchanging subscription lists between feed readers and aggregators. The framework provides a complete implementation of the Outline Processor Markup Language (OPML) 2.0 specification, which can be found at [url:http://www.opml.org/spec2].</p>
+<p>The classes and enumerations that together compose the implementation of OPML are located in the <em>Argotic.Syndication</em> namespace. The primary framework entity that you will use when working with OPML formated syndication resources is the <em>OpmlDocument</em> class. This class implements the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated content. The framework will by default automatically detect any syndication extensions that have been added to an <em>OpmlDocument</em> or its child entities and output the appropriate XML namespaces.</p>
+<p>One of the core principals of the framework is &quot;<em>Read flexibly, Write strictly</em>&quot;. The framework upholds this principal by consuming syndication resources as flexibly as possible, but always generates output that strictly matches the syndication format specification. This methodology ensures you can consume syndication resources with confidence while still publishing syndicated content that strictly conforms to its format specification.</p>
+<h2 id="subscription-lists-and-inclusion">Subscription lists and inclusion</h2>
+<p>The OPML 2.0 specification defines two special types of outlines, <strong>subscription lists</strong> and <strong>inclusion</strong> A subscription list is a possibly multiple-level list of subscriptions to feeds. An outline element whose type is <em>link</em> must have a <em>url</em> attribute whose value is an http address. The <em>text</em> element is, as usual, what's displayed in the outliner; it's also what is displayed in an HTML rendering. When a <em>link</em> element is expanded in an outliner, if the address ends with &quot;.opml&quot;, the outline expands in place. This is called inclusion.</p>
+<p>The framework has built-in support for both subscription list and inclusion outlines. The <em>OpmlOutline</em> class exposes the static methods <strong>CreateSubscriptionListOutline</strong> and <strong>CreateInclusionOutline</strong> that allow you to quickly create OPML outlines that conform to these specialized type of outlines.</p>
+<h2 id="creating-syndicated-content">Creating syndicated content</h2>
+<p>To create a new OPML outline, you simply instantiate a new instance of the <em>OpmlDocument</em> class and utilize its properties and methods to describe the web content you wish to syndicate. The framework API will as much as possible match the terminology used in the syndication format specification, which allows you to easily navigate the framework syndication entities.</p>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+OpmlDocument document = new OpmlDocument();
+
+document.Head.Title = &quot;Simple Blogroll&quot;;
+document.Head.Owner = new OpmlOwner(&quot;Brian William Kuhn&quot;, &quot;oppositional@gmail.com&quot;, new Uri(&quot;http://blog.oppositionallydefiant.com&quot;));
+document.Head.CreatedOn = new DateTime(2008, 1, 1);
+document.Head.ModifiedOn = DateTime.Now;
+
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Argotic Syndication Framework&quot;, &quot;rss&quot;, new Uri(&quot;http://www.codeplex.com/Argotic/Project/ProjectRss.aspx&quot;)));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Carl Franklin&quot;, &quot;rss&quot;, new Uri(&quot;http://www.intellectualhedonism.com/SyndicationService.asmx/GetRss&quot;), new Uri(&quot;http://www.intellectualhedonism.com&quot;), String.Empty, &quot;Carl Franklin&quot;, &quot;Podcasting pioneer&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Richard Campbell&quot;, &quot;rss&quot;, new Uri(&quot;http://www.campbellassociates.ca/blog/SyndicationService.asmx/GetRss&quot;), new Uri(&quot;http://www.campbellassociates.ca&quot;), String.Empty, &quot;Richard Campbell&quot;, &quot;Surrendering to the Inevitable&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Scott Hanselman&quot;, &quot;rss&quot;, new Uri(&quot;http://feeds.feedburner.com/ScottHanselman&quot;), new Uri(&quot;http://www.hanselman.com&quot;), String.Empty, &quot;Scott Hanselman&quot;, &quot;Programming Life and the Zen of Computers&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;The ZBuffer&quot;, &quot;rss&quot;, new Uri(&quot;http://www.thezbuffer.com/feeds/rss.aspx&quot;), new Uri(&quot;http://www.thezbuffer.com&quot;), String.Empty, &quot;The ZBuffer&quot;, &quot;News, Information and resources for Managed DirectX and XNA Framework&quot;, null));
+
+using (FileStream stream = new FileStream(&quot;SimpleBlogroll.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    document.Save(stream);
+}
+</code></pre>
+<p>The OPML outline generated in the above example represents a typical blog-roll you might find published on a web site.</p>
+<h2 id="specifying-the-set-of-features-to-support-when-generating-syndicated-content">Specifying the set of features to support when generating syndicated content</h2>
+<p>The framework provides a means of specifying the set of features that are supported when persisting a syndication resource via the <em>SyndicationResourceSaveSettings</em> class. This class is passed as an argument to the <em>Save</em> method of the syndication resource in order to configure how the save operation is performed.</p>
+<p>The <em>SyndicationResourceSaveSettings</em> class exposes the following properties:</p>
+<ul>
+<li><strong>AutoDetectExtensions</strong> - Indicates if syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities.</li>
+<li><strong>CharacterEncoding</strong> - Indicates the character encoding that is used when persisting a syndication resource.</li>
+<li><strong>MinimizeOutputSize</strong> - Indicates if syndication resource persist operations should attempt to minimize the physical size of the resulting output.</li>
+<li><strong>SupportedExtensions</strong> - Indicates the custom syndication extensions that you wish the save operation to support.</li>
+</ul>
+<p>Example:</p>
+<pre><code>using System.IO;
+using Argotic.Common;
+using Argotic.Syndication;
+
+OpmlDocument document = new OpmlDocument();
+document.Head.Title = &quot;Compact Blogroll&quot;;
+document.Head.Owner = new OpmlOwner(&quot;Brian William Kuhn&quot;, &quot;oppositional@gmail.com&quot;, new Uri(&quot;http://blog.oppositionallydefiant.com&quot;));
+document.Head.CreatedOn = new DateTime(2008, 1, 1);
+document.Head.ModifiedOn = DateTime.Now;
+
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Argotic Syndication Framework&quot;, &quot;rss&quot;, new Uri(&quot;http://www.codeplex.com/Argotic/Project/ProjectRss.aspx&quot;)));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Carl Franklin&quot;, &quot;rss&quot;, new Uri(&quot;http://www.intellectualhedonism.com/SyndicationService.asmx/GetRss&quot;), new Uri(&quot;http://www.intellectualhedonism.com&quot;), String.Empty, &quot;Carl Franklin&quot;, &quot;Podcasting pioneer&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Richard Campbell&quot;, &quot;rss&quot;, new Uri(&quot;http://www.campbellassociates.ca/blog/SyndicationService.asmx/GetRss&quot;), new Uri(&quot;http://www.campbellassociates.ca&quot;), String.Empty, &quot;Richard Campbell&quot;, &quot;Surrendering to the Inevitable&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;Scott Hanselman&quot;, &quot;rss&quot;, new Uri(&quot;http://feeds.feedburner.com/ScottHanselman&quot;), new Uri(&quot;http://www.hanselman.com&quot;), String.Empty, &quot;Scott Hanselman&quot;, &quot;Programming Life and the Zen of Computers&quot;, null));
+document.AddOutline(OpmlOutline.CreateSubscriptionListOutline(&quot;The ZBuffer&quot;, &quot;rss&quot;, new Uri(&quot;http://www.thezbuffer.com/feeds/rss.aspx&quot;), new Uri(&quot;http://www.thezbuffer.com&quot;), String.Empty, &quot;The ZBuffer&quot;, &quot;News, Information and resources for Managed DirectX and XNA Framework&quot;, null));
+
+using (FileStream stream = new FileStream(&quot;CompactBlogroll.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    SyndicationResourceSaveSettings settings = new SyndicationResourceSaveSettings();
+    settings.MinimizeOutputSize = true;
+
+    document.Save(stream, settings);
+}
+</code></pre>
+<p>In the example above, we are using the <em>SyndicationResourceSaveSettings</em> class to minimize the size of the raw XML data that represents the outline.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/generating-an-opml-outline.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

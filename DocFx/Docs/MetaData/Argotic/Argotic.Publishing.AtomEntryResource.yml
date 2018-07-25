@@ -1,0 +1,2563 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Publishing.AtomEntryResource
+  commentId: T:Argotic.Publishing.AtomEntryResource
+  id: AtomEntryResource
+  parent: Argotic.Publishing
+  children:
+  - Argotic.Publishing.AtomEntryResource.#ctor
+  - Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime)
+  - Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime)
+  - Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime,System.Boolean)
+  - Argotic.Publishing.AtomEntryResource.EditedOn
+  - Argotic.Publishing.AtomEntryResource.IsDraft
+  - Argotic.Publishing.AtomEntryResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomEntryResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomEntryResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  - Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  - Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  - Argotic.Publishing.AtomEntryResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  langs:
+  - csharp
+  - vb
+  name: AtomEntryResource
+  nameWithType: AtomEntryResource
+  fullName: Argotic.Publishing.AtomEntryResource
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: AtomEntryResource
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 20
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nRepresents a resource whose IRI is listed in a <xref href=\"Argotic.Syndication.AtomFeed\" data-throw-if-not-resolved=\"false\"></xref> and uses <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> as its representation.\n"
+  example: []
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class AtomEntryResource : AtomEntry, ISyndicationResource, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
+    content.vb: >-
+      <Serializable>
+
+      Public Class AtomEntryResource
+
+          Inherits AtomEntry
+
+          Implements ISyndicationResource, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
+  seealso:
+  - linkId: Argotic.Syndication.AtomEntry
+    commentId: T:Argotic.Syndication.AtomEntry
+  inheritance:
+  - System.Object
+  - Argotic.Syndication.AtomEntry
+  implements:
+  - Argotic.Common.ISyndicationResource
+  - Argotic.Syndication.IAtomCommonObjectAttributes
+  - Argotic.Extensions.IExtensibleSyndicationObject
+  inheritedMembers:
+  - Argotic.Syndication.AtomEntry.Loaded
+  - Argotic.Syndication.AtomEntry.Authors
+  - Argotic.Syndication.AtomEntry.BaseUri
+  - Argotic.Syndication.AtomEntry.Categories
+  - Argotic.Syndication.AtomEntry.Content
+  - Argotic.Syndication.AtomEntry.Contributors
+  - Argotic.Syndication.AtomEntry.Extensions
+  - Argotic.Syndication.AtomEntry.Format
+  - Argotic.Syndication.AtomEntry.HasExtensions
+  - Argotic.Syndication.AtomEntry.Id
+  - Argotic.Syndication.AtomEntry.Language
+  - Argotic.Syndication.AtomEntry.Links
+  - Argotic.Syndication.AtomEntry.PublishedOn
+  - Argotic.Syndication.AtomEntry.Rights
+  - Argotic.Syndication.AtomEntry.Source
+  - Argotic.Syndication.AtomEntry.Summary
+  - Argotic.Syndication.AtomEntry.Title
+  - Argotic.Syndication.AtomEntry.UpdatedOn
+  - Argotic.Syndication.AtomEntry.Version
+  - Argotic.Syndication.AtomEntry.Create(System.Uri)
+  - Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.AtomEntry.CreateNavigator
+  - Argotic.Syndication.AtomEntry.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  - Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+  - Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+  - Argotic.Syndication.AtomEntry.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+  - Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Syndication.AtomEntry.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  - Argotic.Syndication.AtomEntry.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  - Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,System.Object)
+  - Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  - Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  - Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+  - Argotic.Syndication.AtomEntry.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  - Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+  - Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Publishing.AtomEntryResource.#ctor
+  commentId: M:Argotic.Publishing.AtomEntryResource.#ctor
+  id: '#ctor'
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: AtomEntryResource()
+  nameWithType: AtomEntryResource.AtomEntryResource()
+  fullName: Argotic.Publishing.AtomEntryResource.AtomEntryResource()
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 31
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomEntryResource\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public AtomEntryResource()
+    content.vb: Public Sub New
+  overload: Argotic.Publishing.AtomEntryResource.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime)
+  commentId: M:Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime)
+  id: '#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime)'
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: AtomEntryResource(AtomId, AtomTextConstruct, DateTime)
+  nameWithType: AtomEntryResource.AtomEntryResource(AtomId, AtomTextConstruct, DateTime)
+  fullName: Argotic.Publishing.AtomEntryResource.AtomEntryResource(Argotic.Syndication.AtomId, Argotic.Syndication.AtomTextConstruct, System.DateTime)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 47
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomEntryResource\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomId\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn)
+    parameters:
+    - id: id
+      type: Argotic.Syndication.AtomId
+      description: A <xref href="Argotic.Syndication.AtomId" data-throw-if-not-resolved="false"></xref> object that represents a permanent, universally unique identifier for this entry.
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for this entry.
+    - id: updatedOn
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was modified in a way the publisher considers significant.\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+    content.vb: Public Sub New(id As AtomId, title As AtomTextConstruct, updatedOn As Date)
+  overload: Argotic.Publishing.AtomEntryResource.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">id</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime)
+  commentId: M:Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime)
+  id: '#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime)'
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: AtomEntryResource(AtomId, AtomTextConstruct, DateTime, DateTime)
+  nameWithType: AtomEntryResource.AtomEntryResource(AtomId, AtomTextConstruct, DateTime, DateTime)
+  fullName: Argotic.Publishing.AtomEntryResource.AtomEntryResource(Argotic.Syndication.AtomId, Argotic.Syndication.AtomTextConstruct, System.DateTime, System.DateTime)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 67
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomEntryResource\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomId\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn)
+    parameters:
+    - id: id
+      type: Argotic.Syndication.AtomId
+      description: A <xref href="Argotic.Syndication.AtomId" data-throw-if-not-resolved="false"></xref> object that represents a permanent, universally unique identifier for this entry.
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for this entry.
+    - id: updatedOn
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was modified in a way the publisher considers significant.\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+    - id: editedOn
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was edited.\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+    content.vb: Public Sub New(id As AtomId, title As AtomTextConstruct, updatedOn As Date, editedOn As Date)
+  overload: Argotic.Publishing.AtomEntryResource.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">id</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime,System.Boolean)
+  commentId: M:Argotic.Publishing.AtomEntryResource.#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime,System.Boolean)
+  id: '#ctor(Argotic.Syndication.AtomId,Argotic.Syndication.AtomTextConstruct,System.DateTime,System.DateTime,System.Boolean)'
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: AtomEntryResource(AtomId, AtomTextConstruct, DateTime, DateTime, Boolean)
+  nameWithType: AtomEntryResource.AtomEntryResource(AtomId, AtomTextConstruct, DateTime, DateTime, Boolean)
+  fullName: Argotic.Publishing.AtomEntryResource.AtomEntryResource(Argotic.Syndication.AtomId, Argotic.Syndication.AtomTextConstruct, System.DateTime, System.DateTime, System.Boolean)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 89
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Publishing.AtomEntryResource\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"Argotic.Syndication.AtomId\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Syndication.AtomTextConstruct\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft)
+    parameters:
+    - id: id
+      type: Argotic.Syndication.AtomId
+      description: A <xref href="Argotic.Syndication.AtomId" data-throw-if-not-resolved="false"></xref> object that represents a permanent, universally unique identifier for this entry.
+    - id: title
+      type: Argotic.Syndication.AtomTextConstruct
+      description: A <xref href="Argotic.Syndication.AtomTextConstruct" data-throw-if-not-resolved="false"></xref> object that represents information that conveys a human-readable title for this entry.
+    - id: updatedOn
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was modified in a way the publisher considers significant.\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+    - id: editedOn
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was edited.\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+    - id: isDraft
+      type: System.Boolean
+      description: A value indicating if client has requested to control the visibility of the entry.
+    content.vb: Public Sub New(id As AtomId, title As AtomTextConstruct, updatedOn As Date, editedOn As Date, isDraft As Boolean)
+  overload: Argotic.Publishing.AtomEntryResource.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">id</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">title</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.EditedOn
+  commentId: P:Argotic.Publishing.AtomEntryResource.EditedOn
+  id: EditedOn
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: EditedOn
+  nameWithType: AtomEntryResource.EditedOn
+  fullName: Argotic.Publishing.AtomEntryResource.EditedOn
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: EditedOn
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 111
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets a date-time indicating the most recent instant in time when this entry was edited.\n"
+  remarks: "\nThe <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> should be provided in Coordinated Universal Time (UTC).\n"
+  example: []
+  syntax:
+    content: public DateTime EditedOn { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+      description: "\nA <xref href=\"System.DateTime\" data-throw-if-not-resolved=\"false\"></xref> that indicates the most recent instant in time when this entry was edited.\nIf the entry has not been edited yet, indicates the time the entry was created. The default value is <xref href=\"System.DateTime.MinValue\" data-throw-if-not-resolved=\"false\"></xref>, which indicates that no edit time was provided.\n"
+    content.vb: Public Property EditedOn As Date
+  overload: Argotic.Publishing.AtomEntryResource.EditedOn*
+  seealso:
+  - linkId: Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+    commentId: T:Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.IsDraft
+  commentId: P:Argotic.Publishing.AtomEntryResource.IsDraft
+  id: IsDraft
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: IsDraft
+  nameWithType: AtomEntryResource.IsDraft
+  fullName: Argotic.Publishing.AtomEntryResource.IsDraft
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IsDraft
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 118
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nGets or sets a value indicating whether client has requested to control the visibility of this entry.\n"
+  example: []
+  syntax:
+    content: public bool IsDraft { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the client is requesting to control the visibility of this entry; otherwise <strong>false</strong>. The default value is <strong>false</strong>.
+    content.vb: Public Property IsDraft As Boolean
+  overload: Argotic.Publishing.AtomEntryResource.IsDraft*
+  seealso:
+  - linkId: Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+    commentId: T:Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomEntryResource.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntryResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomEntryResource.Load(System.Xml.XPath.IXPathNavigable, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 131
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads the syndication resource from the specified <xref href=\"System.Xml.XPath.IXPathNavigable\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAfter the load operation has successfully completed, the <xref href=\"Argotic.Syndication.AtomEntry.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n"
+  example: []
+  syntax:
+    content: public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Xml.XPath.IXPathNavigable
+      description: The <strong>IXPathNavigable</strong> used to load the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As IXPathNavigable, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Publishing.AtomEntryResource.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the entry remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the entry remains empty.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomEntryResource.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntryResource.Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomEntryResource.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 194
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n             If <code data-dev-comment-type=\"paramref\" class=\"paramref\">credentials</code> is <strong>null</strong>, request is made using the default application credentials.\n</li><li>\n    If <code data-dev-comment-type=\"paramref\" class=\"paramref\">proxy</code> is <strong>null</strong>, request is made using the <xref href=\"System.Net.WebRequest\" data-throw-if-not-resolved=\"false\"></xref> default proxy settings.\n</li><li>\n    If <code data-dev-comment-type=\"paramref\" class=\"paramref\">settings</code> has a <xref href=\"Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>\n    the character encoding of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used.\n    If automatic detection fails, a character encoding of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref> is used by default.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Syndication.AtomEntry.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> resource when required. This value can be <strong>null</strong>.\n"
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As Uri, credentials As ICredentials, proxy As IWebProxy, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Publishing.AtomEntryResource.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the entry remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the entry remains empty.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Publishing.AtomEntryResource.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  id: Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntryResource.Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  fullName: Argotic.Publishing.AtomEntryResource.Load(System.Uri, Argotic.Common.WebRequestOptions, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Load
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 230
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads the syndication resource from the supplied <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref> using the specified <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<ul><li>\n            If <code data-dev-comment-type=\"paramref\" class=\"paramref\">settings</code> has a <xref href=\"Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding\" data-throw-if-not-resolved=\"false\"></xref> of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref>\n            the character encoding of the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used.\n            If automatic detection fails, a character encoding of <xref href=\"System.Text.Encoding.UTF8\" data-throw-if-not-resolved=\"false\"></xref> is used by default.\n</li><li>\n    After the load operation has successfully completed, the <xref href=\"Argotic.Syndication.AtomEntry.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event will be raised.\n</li></ul>\n</p>\n"
+  example: []
+  syntax:
+    content: public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that points to the location of the web resource used to load the syndication resource.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    content.vb: Public Sub Load(source As Uri, options As WebRequestOptions, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Publishing.AtomEntryResource.Load*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the entry remains empty.
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: There is a load or parse error in the XML. In this case, the entry remains empty.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  id: LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  nameWithType: AtomEntryResource.LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)
+  fullName: Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Net.ICredentials, System.Net.IWebProxy, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 276
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Syndication.AtomEntry.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>,\n    you must wait for the load operation to complete before attempting to load the syndication resource using the <xref href=\"Argotic.Syndication.AtomEntry.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    - id: credentials
+      type: System.Net.ICredentials
+      description: "\nA <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref> that provides the proper set of credentials to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    - id: proxy
+      type: System.Net.IWebProxy
+      description: "\nA <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref> that provides proxy access to the <code data-dev-comment-type=\"paramref\" class=\"paramref\">source</code> when required. This value can be <strong>null</strong>.\n"
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, settings As SyndicationResourceLoadSettings, credentials As ICredentials, proxy As IWebProxy, userToken As Object)
+  overload: Argotic.Publishing.AtomEntryResource.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  commentId: M:Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  id: LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  nameWithType: AtomEntryResource.LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)
+  fullName: Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, Argotic.Common.WebRequestOptions, System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsync
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 306
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nLoads this <xref href=\"Argotic.Syndication.AtomEntry\" data-throw-if-not-resolved=\"false\"></xref> instance asynchronously using the specified <xref href=\"System.Uri\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Net.ICredentials\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.Net.IWebProxy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <xref href=\"Argotic.Syndication.AtomEntry.Loaded\" data-throw-if-not-resolved=\"false\"></xref> event.\n    You can cancel a <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation by calling the <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsyncCancel\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n<p>\n    After calling <xref href=\"Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>,\n    you must wait for the load operation to complete before attempting to load the syndication resource using the <xref href=\"Argotic.Syndication.AtomEntry.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> method.\n</p>\n"
+  example: []
+  syntax:
+    content: public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
+    parameters:
+    - id: source
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents the URL of the syndication resource XML data.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance. This value can be <strong>null</strong>.
+    - id: options
+      type: Argotic.Common.WebRequestOptions
+      description: A <xref href="Argotic.Common.WebRequestOptions" data-throw-if-not-resolved="false"></xref> that holds options that should be applied to web requests.
+    - id: userToken
+      type: System.Object
+      description: A user-defined object that is passed to the method invoked when the asynchronous operation completes.
+    content.vb: Public Sub LoadAsync(source As Uri, settings As SyndicationResourceLoadSettings, options As WebRequestOptions, userToken As Object)
+  overload: Argotic.Publishing.AtomEntryResource.LoadAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).
+  - type: System.FormatException
+    commentId: T:System.FormatException
+    description: The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: This <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> has a <xref href="Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri%2cArgotic.Common.SyndicationResourceLoadSettings%2cSystem.Net.ICredentials%2cSystem.Net.IWebProxy%2cSystem.Object)" data-throw-if-not-resolved="false"></xref> call in progress.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  commentId: M:Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  id: LoadAsyncCancel
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: LoadAsyncCancel()
+  nameWithType: AtomEntryResource.LoadAsyncCancel()
+  fullName: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel()
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: LoadAsyncCancel
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 352
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nCancels an asynchronous operation to load this syndication resource.\n"
+  remarks: "\nUse the LoadAsyncCancel method to cancel a pending <xref href=\"Argotic.Syndication.AtomEntry.LoadAsync(System.Uri%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref> operation.\nIf there is a load operation in progress, this method releases resources used to execute the load operation.\nIf there is no load operation pending, this method does nothing.\n"
+  example: []
+  syntax:
+    content: public void LoadAsyncCancel()
+    content.vb: Public Sub LoadAsyncCancel
+  overload: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Publishing.AtomEntryResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Publishing.AtomEntryResource.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  id: Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Publishing.AtomEntryResource
+  langs:
+  - csharp
+  - vb
+  name: Save(XmlWriter, SyndicationResourceSaveSettings)
+  nameWithType: AtomEntryResource.Save(XmlWriter, SyndicationResourceSaveSettings)
+  fullName: Argotic.Publishing.AtomEntryResource.Save(System.Xml.XmlWriter, Argotic.Common.SyndicationResourceSaveSettings)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Save
+    path: ../Solutions/Argotic.Core/Publishing/AtomEntryResource.cs
+    startLine: 370
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Publishing
+  summary: "\nSaves the syndication resource to the specified <xref href=\"System.Xml.XmlWriter\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceSaveSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+      description: The <strong>XmlWriter</strong> to which you want to save the syndication resource.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceSaveSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceSaveSettings" data-throw-if-not-resolved="false"></xref> object used to configure the persistence of the <xref href="Argotic.Syndication.AtomEntry" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Sub Save(writer As XmlWriter, settings As SyndicationResourceSaveSettings)
+  overload: Argotic.Publishing.AtomEntryResource.Save*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  - type: System.Xml.XmlException
+    commentId: T:System.Xml.XmlException
+    description: The operation would not result in well formed XML for the syndication resource.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Argotic.Syndication.AtomFeed
+  commentId: T:Argotic.Syndication.AtomFeed
+  parent: Argotic.Syndication
+  name: AtomFeed
+  nameWithType: AtomFeed
+  fullName: Argotic.Syndication.AtomFeed
+- uid: Argotic.Syndication.AtomEntry
+  commentId: T:Argotic.Syndication.AtomEntry
+  parent: Argotic.Syndication
+  name: AtomEntry
+  nameWithType: AtomEntry
+  fullName: Argotic.Syndication.AtomEntry
+- uid: Argotic.Publishing
+  commentId: N:Argotic.Publishing
+  name: Argotic.Publishing
+  nameWithType: Argotic.Publishing
+  fullName: Argotic.Publishing
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Argotic.Common.ISyndicationResource
+  commentId: T:Argotic.Common.ISyndicationResource
+  parent: Argotic.Common
+  name: ISyndicationResource
+  nameWithType: ISyndicationResource
+  fullName: Argotic.Common.ISyndicationResource
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes
+  commentId: T:Argotic.Syndication.IAtomCommonObjectAttributes
+  parent: Argotic.Syndication
+  name: IAtomCommonObjectAttributes
+  nameWithType: IAtomCommonObjectAttributes
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes
+- uid: Argotic.Extensions.IExtensibleSyndicationObject
+  commentId: T:Argotic.Extensions.IExtensibleSyndicationObject
+  parent: Argotic.Extensions
+  name: IExtensibleSyndicationObject
+  nameWithType: IExtensibleSyndicationObject
+  fullName: Argotic.Extensions.IExtensibleSyndicationObject
+- uid: Argotic.Syndication.AtomEntry.Loaded
+  commentId: E:Argotic.Syndication.AtomEntry.Loaded
+  parent: Argotic.Syndication.AtomEntry
+  name: Loaded
+  nameWithType: AtomEntry.Loaded
+  fullName: Argotic.Syndication.AtomEntry.Loaded
+- uid: Argotic.Syndication.AtomEntry.Authors
+  commentId: P:Argotic.Syndication.AtomEntry.Authors
+  parent: Argotic.Syndication.AtomEntry
+  name: Authors
+  nameWithType: AtomEntry.Authors
+  fullName: Argotic.Syndication.AtomEntry.Authors
+- uid: Argotic.Syndication.AtomEntry.BaseUri
+  commentId: P:Argotic.Syndication.AtomEntry.BaseUri
+  parent: Argotic.Syndication.AtomEntry
+  name: BaseUri
+  nameWithType: AtomEntry.BaseUri
+  fullName: Argotic.Syndication.AtomEntry.BaseUri
+- uid: Argotic.Syndication.AtomEntry.Categories
+  commentId: P:Argotic.Syndication.AtomEntry.Categories
+  parent: Argotic.Syndication.AtomEntry
+  name: Categories
+  nameWithType: AtomEntry.Categories
+  fullName: Argotic.Syndication.AtomEntry.Categories
+- uid: Argotic.Syndication.AtomEntry.Content
+  commentId: P:Argotic.Syndication.AtomEntry.Content
+  parent: Argotic.Syndication.AtomEntry
+  name: Content
+  nameWithType: AtomEntry.Content
+  fullName: Argotic.Syndication.AtomEntry.Content
+- uid: Argotic.Syndication.AtomEntry.Contributors
+  commentId: P:Argotic.Syndication.AtomEntry.Contributors
+  parent: Argotic.Syndication.AtomEntry
+  name: Contributors
+  nameWithType: AtomEntry.Contributors
+  fullName: Argotic.Syndication.AtomEntry.Contributors
+- uid: Argotic.Syndication.AtomEntry.Extensions
+  commentId: P:Argotic.Syndication.AtomEntry.Extensions
+  parent: Argotic.Syndication.AtomEntry
+  name: Extensions
+  nameWithType: AtomEntry.Extensions
+  fullName: Argotic.Syndication.AtomEntry.Extensions
+- uid: Argotic.Syndication.AtomEntry.Format
+  commentId: P:Argotic.Syndication.AtomEntry.Format
+  parent: Argotic.Syndication.AtomEntry
+  name: Format
+  nameWithType: AtomEntry.Format
+  fullName: Argotic.Syndication.AtomEntry.Format
+- uid: Argotic.Syndication.AtomEntry.HasExtensions
+  commentId: P:Argotic.Syndication.AtomEntry.HasExtensions
+  parent: Argotic.Syndication.AtomEntry
+  name: HasExtensions
+  nameWithType: AtomEntry.HasExtensions
+  fullName: Argotic.Syndication.AtomEntry.HasExtensions
+- uid: Argotic.Syndication.AtomEntry.Id
+  commentId: P:Argotic.Syndication.AtomEntry.Id
+  parent: Argotic.Syndication.AtomEntry
+  name: Id
+  nameWithType: AtomEntry.Id
+  fullName: Argotic.Syndication.AtomEntry.Id
+- uid: Argotic.Syndication.AtomEntry.Language
+  commentId: P:Argotic.Syndication.AtomEntry.Language
+  parent: Argotic.Syndication.AtomEntry
+  name: Language
+  nameWithType: AtomEntry.Language
+  fullName: Argotic.Syndication.AtomEntry.Language
+- uid: Argotic.Syndication.AtomEntry.Links
+  commentId: P:Argotic.Syndication.AtomEntry.Links
+  parent: Argotic.Syndication.AtomEntry
+  name: Links
+  nameWithType: AtomEntry.Links
+  fullName: Argotic.Syndication.AtomEntry.Links
+- uid: Argotic.Syndication.AtomEntry.PublishedOn
+  commentId: P:Argotic.Syndication.AtomEntry.PublishedOn
+  parent: Argotic.Syndication.AtomEntry
+  name: PublishedOn
+  nameWithType: AtomEntry.PublishedOn
+  fullName: Argotic.Syndication.AtomEntry.PublishedOn
+- uid: Argotic.Syndication.AtomEntry.Rights
+  commentId: P:Argotic.Syndication.AtomEntry.Rights
+  parent: Argotic.Syndication.AtomEntry
+  name: Rights
+  nameWithType: AtomEntry.Rights
+  fullName: Argotic.Syndication.AtomEntry.Rights
+- uid: Argotic.Syndication.AtomEntry.Source
+  commentId: P:Argotic.Syndication.AtomEntry.Source
+  parent: Argotic.Syndication.AtomEntry
+  name: Source
+  nameWithType: AtomEntry.Source
+  fullName: Argotic.Syndication.AtomEntry.Source
+- uid: Argotic.Syndication.AtomEntry.Summary
+  commentId: P:Argotic.Syndication.AtomEntry.Summary
+  parent: Argotic.Syndication.AtomEntry
+  name: Summary
+  nameWithType: AtomEntry.Summary
+  fullName: Argotic.Syndication.AtomEntry.Summary
+- uid: Argotic.Syndication.AtomEntry.Title
+  commentId: P:Argotic.Syndication.AtomEntry.Title
+  parent: Argotic.Syndication.AtomEntry
+  name: Title
+  nameWithType: AtomEntry.Title
+  fullName: Argotic.Syndication.AtomEntry.Title
+- uid: Argotic.Syndication.AtomEntry.UpdatedOn
+  commentId: P:Argotic.Syndication.AtomEntry.UpdatedOn
+  parent: Argotic.Syndication.AtomEntry
+  name: UpdatedOn
+  nameWithType: AtomEntry.UpdatedOn
+  fullName: Argotic.Syndication.AtomEntry.UpdatedOn
+- uid: Argotic.Syndication.AtomEntry.Version
+  commentId: P:Argotic.Syndication.AtomEntry.Version
+  parent: Argotic.Syndication.AtomEntry
+  name: Version
+  nameWithType: AtomEntry.Version
+  fullName: Argotic.Syndication.AtomEntry.Version
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri)
+  nameWithType: AtomEntry.Create(Uri)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntry.Create(Uri, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri, ICredentials, IWebProxy)
+  nameWithType: AtomEntry.Create(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri, WebRequestOptions)
+  nameWithType: AtomEntry.Create(Uri, WebRequestOptions)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri, Argotic.Common.WebRequestOptions)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntry.Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri, System.Net.ICredentials, System.Net.IWebProxy, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntry.Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.AtomEntry.Create(System.Uri, Argotic.Common.WebRequestOptions, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Create
+    nameWithType: AtomEntry.Create
+    fullName: Argotic.Syndication.AtomEntry.Create
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.AtomEntry
+  name: AddExtension(ISyndicationExtension)
+  nameWithType: AtomEntry.AddExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: AtomEntry.AddExtension
+    fullName: Argotic.Syndication.AtomEntry.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.AddExtension(Argotic.Extensions.ISyndicationExtension)
+    name: AddExtension
+    nameWithType: AtomEntry.AddExtension
+    fullName: Argotic.Syndication.AtomEntry.AddExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.CreateNavigator
+  commentId: M:Argotic.Syndication.AtomEntry.CreateNavigator
+  parent: Argotic.Syndication.AtomEntry
+  name: CreateNavigator()
+  nameWithType: AtomEntry.CreateNavigator()
+  fullName: Argotic.Syndication.AtomEntry.CreateNavigator()
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.CreateNavigator
+    name: CreateNavigator
+    nameWithType: AtomEntry.CreateNavigator
+    fullName: Argotic.Syndication.AtomEntry.CreateNavigator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.CreateNavigator
+    name: CreateNavigator
+    nameWithType: AtomEntry.CreateNavigator
+    fullName: Argotic.Syndication.AtomEntry.CreateNavigator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  commentId: M:Argotic.Syndication.AtomEntry.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: FindExtension(Predicate<ISyndicationExtension>)
+  nameWithType: AtomEntry.FindExtension(Predicate<ISyndicationExtension>)
+  fullName: Argotic.Syndication.AtomEntry.FindExtension(System.Predicate<Argotic.Extensions.ISyndicationExtension>)
+  nameWithType.vb: AtomEntry.FindExtension(Predicate(Of ISyndicationExtension))
+  fullName.vb: Argotic.Syndication.AtomEntry.FindExtension(System.Predicate(Of Argotic.Extensions.ISyndicationExtension))
+  name.vb: FindExtension(Predicate(Of ISyndicationExtension))
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: AtomEntry.FindExtension
+    fullName: Argotic.Syndication.AtomEntry.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})
+    name: FindExtension
+    nameWithType: AtomEntry.FindExtension
+    fullName: Argotic.Syndication.AtomEntry.FindExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Predicate`1
+    name: Predicate
+    nameWithType: Predicate
+    fullName: System.Predicate
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(IXPathNavigable)
+  nameWithType: AtomEntry.Load(IXPathNavigable)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XPath.IXPathNavigable)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XPath.IXPathNavigable
+    name: IXPathNavigable
+    nameWithType: IXPathNavigable
+    fullName: System.Xml.XPath.IXPathNavigable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(Stream)
+  nameWithType: AtomEntry.Load(Stream)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(Stream, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntry.Load(Stream, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.IO.Stream, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(XmlReader)
+  nameWithType: AtomEntry.Load(XmlReader)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(XmlReader, SyndicationResourceLoadSettings)
+  nameWithType: AtomEntry.Load(XmlReader, SyndicationResourceLoadSettings)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader, Argotic.Common.SyndicationResourceLoadSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(Uri, ICredentials, IWebProxy)
+  nameWithType: AtomEntry.Load(Uri, ICredentials, IWebProxy)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.Uri, System.Net.ICredentials, System.Net.IWebProxy)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.ICredentials
+    name: ICredentials
+    nameWithType: ICredentials
+    fullName: System.Net.ICredentials
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Net.IWebProxy
+    name: IWebProxy
+    nameWithType: IWebProxy
+    fullName: System.Net.IWebProxy
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  commentId: M:Argotic.Syndication.AtomEntry.Load(System.Uri,Argotic.Common.WebRequestOptions)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Load(Uri, WebRequestOptions)
+  nameWithType: AtomEntry.Load(Uri, WebRequestOptions)
+  fullName: Argotic.Syndication.AtomEntry.Load(System.Uri, Argotic.Common.WebRequestOptions)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Load(System.Uri,Argotic.Common.WebRequestOptions)
+    name: Load
+    nameWithType: AtomEntry.Load
+    fullName: Argotic.Syndication.AtomEntry.Load
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.WebRequestOptions
+    name: WebRequestOptions
+    nameWithType: WebRequestOptions
+    fullName: Argotic.Common.WebRequestOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,System.Object)
+  commentId: M:Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,System.Object)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: LoadAsync(Uri, Object)
+  nameWithType: AtomEntry.LoadAsync(Uri, Object)
+  fullName: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri, System.Object)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,System.Object)
+    name: LoadAsync
+    nameWithType: AtomEntry.LoadAsync
+    fullName: Argotic.Syndication.AtomEntry.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,System.Object)
+    name: LoadAsync
+    nameWithType: AtomEntry.LoadAsync
+    fullName: Argotic.Syndication.AtomEntry.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  commentId: M:Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  nameWithType: AtomEntry.LoadAsync(Uri, SyndicationResourceLoadSettings, Object)
+  fullName: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri, Argotic.Common.SyndicationResourceLoadSettings, System.Object)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+    name: LoadAsync
+    nameWithType: AtomEntry.LoadAsync
+    fullName: Argotic.Syndication.AtomEntry.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)
+    name: LoadAsync
+    nameWithType: AtomEntry.LoadAsync
+    fullName: Argotic.Syndication.AtomEntry.LoadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Uri
+    name: Uri
+    nameWithType: Uri
+    fullName: System.Uri
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceLoadSettings
+    name: SyndicationResourceLoadSettings
+    nameWithType: SyndicationResourceLoadSettings
+    fullName: Argotic.Common.SyndicationResourceLoadSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  commentId: M:Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  parent: Argotic.Syndication.AtomEntry
+  name: RemoveExtension(ISyndicationExtension)
+  nameWithType: AtomEntry.RemoveExtension(ISyndicationExtension)
+  fullName: Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: AtomEntry.RemoveExtension
+    fullName: Argotic.Syndication.AtomEntry.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.RemoveExtension(Argotic.Extensions.ISyndicationExtension)
+    name: RemoveExtension
+    nameWithType: AtomEntry.RemoveExtension
+    fullName: Argotic.Syndication.AtomEntry.RemoveExtension
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Extensions.ISyndicationExtension
+    name: ISyndicationExtension
+    nameWithType: ISyndicationExtension
+    fullName: Argotic.Extensions.ISyndicationExtension
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+  commentId: M:Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Save(Stream)
+  nameWithType: AtomEntry.Save(Stream)
+  fullName: Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  commentId: M:Argotic.Syndication.AtomEntry.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Save(Stream, SyndicationResourceSaveSettings)
+  nameWithType: AtomEntry.Save(Stream, SyndicationResourceSaveSettings)
+  fullName: Argotic.Syndication.AtomEntry.Save(System.IO.Stream, Argotic.Common.SyndicationResourceSaveSettings)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationResourceSaveSettings
+    name: SyndicationResourceSaveSettings
+    nameWithType: SyndicationResourceSaveSettings
+    fullName: Argotic.Common.SyndicationResourceSaveSettings
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+  commentId: M:Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+  parent: Argotic.Syndication.AtomEntry
+  isExternal: true
+  name: Save(XmlWriter)
+  nameWithType: AtomEntry.Save(XmlWriter)
+  fullName: Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.Save(System.Xml.XmlWriter)
+    name: Save
+    nameWithType: AtomEntry.Save
+    fullName: Argotic.Syndication.AtomEntry.Save
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  commentId: M:Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  parent: Argotic.Syndication.AtomEntry
+  name: OnEntryLoaded(SyndicationResourceLoadedEventArgs)
+  nameWithType: AtomEntry.OnEntryLoaded(SyndicationResourceLoadedEventArgs)
+  fullName: Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+  spec.csharp:
+  - uid: Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+    name: OnEntryLoaded
+    nameWithType: AtomEntry.OnEntryLoaded
+    fullName: Argotic.Syndication.AtomEntry.OnEntryLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+    name: SyndicationResourceLoadedEventArgs
+    nameWithType: SyndicationResourceLoadedEventArgs
+    fullName: Argotic.Common.SyndicationResourceLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Syndication.AtomEntry.OnEntryLoaded(Argotic.Common.SyndicationResourceLoadedEventArgs)
+    name: OnEntryLoaded
+    nameWithType: AtomEntry.OnEntryLoaded
+    fullName: Argotic.Syndication.AtomEntry.OnEntryLoaded
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Common.SyndicationResourceLoadedEventArgs
+    name: SyndicationResourceLoadedEventArgs
+    nameWithType: SyndicationResourceLoadedEventArgs
+    fullName: Argotic.Common.SyndicationResourceLoadedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Extensions
+  commentId: N:Argotic.Extensions
+  name: Argotic.Extensions
+  nameWithType: Argotic.Extensions
+  fullName: Argotic.Extensions
+- uid: Argotic.Publishing.AtomEntryResource
+  commentId: T:Argotic.Publishing.AtomEntryResource
+  name: AtomEntryResource
+  nameWithType: AtomEntryResource
+  fullName: Argotic.Publishing.AtomEntryResource
+- uid: Argotic.Publishing.AtomEntryResource.#ctor*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.#ctor
+  name: AtomEntryResource
+  nameWithType: AtomEntryResource.AtomEntryResource
+  fullName: Argotic.Publishing.AtomEntryResource.AtomEntryResource
+- uid: Argotic.Syndication.AtomId
+  commentId: T:Argotic.Syndication.AtomId
+  parent: Argotic.Syndication
+  name: AtomId
+  nameWithType: AtomId
+  fullName: Argotic.Syndication.AtomId
+- uid: Argotic.Syndication.AtomTextConstruct
+  commentId: T:Argotic.Syndication.AtomTextConstruct
+  parent: Argotic.Syndication
+  name: AtomTextConstruct
+  nameWithType: AtomTextConstruct
+  fullName: Argotic.Syndication.AtomTextConstruct
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.DateTime.MinValue
+  commentId: F:System.DateTime.MinValue
+  isExternal: true
+- uid: Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: AtomPublishingEditedSyndicationExtension
+  nameWithType: AtomPublishingEditedSyndicationExtension
+  fullName: Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension
+- uid: Argotic.Publishing.AtomEntryResource.EditedOn*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.EditedOn
+  name: EditedOn
+  nameWithType: AtomEntryResource.EditedOn
+  fullName: Argotic.Publishing.AtomEntryResource.EditedOn
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+  commentId: T:Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+  parent: Argotic.Extensions.Core
+  name: AtomPublishingControlSyndicationExtension
+  nameWithType: AtomPublishingControlSyndicationExtension
+  fullName: Argotic.Extensions.Core.AtomPublishingControlSyndicationExtension
+- uid: Argotic.Publishing.AtomEntryResource.IsDraft*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.IsDraft
+  name: IsDraft
+  nameWithType: AtomEntryResource.IsDraft
+  fullName: Argotic.Publishing.AtomEntryResource.IsDraft
+- uid: System.Xml.XPath.IXPathNavigable
+  commentId: T:System.Xml.XPath.IXPathNavigable
+  parent: System.Xml.XPath
+  isExternal: true
+  name: IXPathNavigable
+  nameWithType: IXPathNavigable
+  fullName: System.Xml.XPath.IXPathNavigable
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: System.FormatException
+  commentId: T:System.FormatException
+  isExternal: true
+- uid: System.Xml.XmlException
+  commentId: T:System.Xml.XmlException
+  isExternal: true
+- uid: Argotic.Publishing.AtomEntryResource.Load*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.Load
+  name: Load
+  nameWithType: AtomEntryResource.Load
+  fullName: Argotic.Publishing.AtomEntryResource.Load
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: System.Net.ICredentials
+  commentId: T:System.Net.ICredentials
+  parent: System.Net
+  isExternal: true
+  name: ICredentials
+  nameWithType: ICredentials
+  fullName: System.Net.ICredentials
+- uid: System.Net.IWebProxy
+  commentId: T:System.Net.IWebProxy
+  parent: System.Net
+  isExternal: true
+  name: IWebProxy
+  nameWithType: IWebProxy
+  fullName: System.Net.IWebProxy
+- uid: System.Net.WebRequest
+  commentId: T:System.Net.WebRequest
+  parent: System.Net
+  isExternal: true
+  name: WebRequest
+  nameWithType: WebRequest
+  fullName: System.Net.WebRequest
+- uid: Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding
+  commentId: P:Argotic.Common.SyndicationResourceLoadSettings.CharacterEncoding
+  isExternal: true
+- uid: System.Text.Encoding.UTF8
+  commentId: P:System.Text.Encoding.UTF8
+  isExternal: true
+- uid: System.Net
+  commentId: N:System.Net
+  isExternal: true
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
+- uid: Argotic.Common.WebRequestOptions
+  commentId: T:Argotic.Common.WebRequestOptions
+  parent: Argotic.Common
+  name: WebRequestOptions
+  nameWithType: WebRequestOptions
+  fullName: Argotic.Common.WebRequestOptions
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  commentId: M:Argotic.Publishing.AtomEntryResource.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)
+  isExternal: true
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  commentId: M:Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsync*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.LoadAsync
+  name: LoadAsync
+  nameWithType: AtomEntryResource.LoadAsync
+  fullName: Argotic.Publishing.AtomEntryResource.LoadAsync
+- uid: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+  name: LoadAsyncCancel
+  nameWithType: AtomEntryResource.LoadAsyncCancel
+  fullName: Argotic.Publishing.AtomEntryResource.LoadAsyncCancel
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: Argotic.Common.SyndicationResourceSaveSettings
+  commentId: T:Argotic.Common.SyndicationResourceSaveSettings
+  parent: Argotic.Common
+  name: SyndicationResourceSaveSettings
+  nameWithType: SyndicationResourceSaveSettings
+  fullName: Argotic.Common.SyndicationResourceSaveSettings
+- uid: Argotic.Publishing.AtomEntryResource.Save*
+  commentId: Overload:Argotic.Publishing.AtomEntryResource.Save
+  name: Save
+  nameWithType: AtomEntryResource.Save
+  fullName: Argotic.Publishing.AtomEntryResource.Save
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

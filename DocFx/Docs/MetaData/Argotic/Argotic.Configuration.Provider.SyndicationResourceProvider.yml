@@ -1,0 +1,953 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceProvider
+  id: SyndicationResourceProvider
+  parent: Argotic.Configuration.Provider
+  children:
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource(System.Object)
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource(System.Object)
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32,System.Int32,System.Int32@)
+  - Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource(System.Object,Argotic.Common.ISyndicationResource)
+  langs:
+  - csharp
+  - vb
+  name: SyndicationResourceProvider
+  nameWithType: SyndicationResourceProvider
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationResourceProvider
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 14
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nProvides a base implementation for the syndication resource extensible provider model.\n"
+  example: []
+  syntax:
+    content: 'public abstract class SyndicationResourceProvider : ProviderBase'
+    content.vb: >-
+      Public MustInherit Class SyndicationResourceProvider
+
+          Inherits ProviderBase
+  seealso:
+  - linkId: Argotic.Common.ISyndicationResource
+    commentId: T:Argotic.Common.ISyndicationResource
+  inheritance:
+  - System.Object
+  - System.Configuration.Provider.ProviderBase
+  inheritedMembers:
+  - System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)
+  - System.Configuration.Provider.ProviderBase.Description
+  - System.Configuration.Provider.ProviderBase.Name
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - abstract
+  - class
+  modifiers.vb:
+  - Public
+  - MustInherit
+  - Class
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  commentId: P:Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  id: ApplicationName
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: ApplicationName
+  nameWithType: SyndicationResourceProvider.ApplicationName
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ApplicationName
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 35
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets or sets the name of the application using the custom syndication resource provider.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref> property value is stored in the data source with related\n    syndication resource information to associate a resource with a particular application.\n</p>\n<p>\n    Because syndication resource providers store resource information uniquely for each application,\n    multiple applications can use the same data source without running into a conflict if duplicate syndication resources are created.\n    Alternatively, multiple applications can use the same syndication resource data source by specifying the same <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n    In your syndication resource provider implementation, you will need to ensure that your data schema includes the <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref>\n    and that data source queries and updates also include the <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n"
+  example: []
+  syntax:
+    content: public abstract string ApplicationName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+      description: The name of the application using the custom syndication resource provider.
+    content.vb: Public MustOverride Property ApplicationName As String
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName*
+  modifiers.csharp:
+  - public
+  - abstract
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  id: CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: CreateResource(Object, ISyndicationResource)
+  nameWithType: SyndicationResourceProvider.CreateResource(Object, ISyndicationResource)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object, Argotic.Common.ISyndicationResource)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: CreateResource
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 45
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nAdds a new syndication resource to the data source.\n"
+  example: []
+  syntax:
+    content: public abstract SyndicationResourceCreateStatus CreateResource(object providerResourceKey, ISyndicationResource resource)
+    parameters:
+    - id: providerResourceKey
+      type: System.Object
+      description: The unique identifier that identifies the resource within the syndication data source.
+    - id: resource
+      type: Argotic.Common.ISyndicationResource
+      description: The <xref href="Argotic.Common.ISyndicationResource" data-throw-if-not-resolved="false"></xref> to be created within the data source.
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+      description: A <xref href="Argotic.Configuration.Provider.SyndicationResourceCreateStatus" data-throw-if-not-resolved="false"></xref> enumeration value indicating whether the syndication resource was created successfully.
+    content.vb: Public MustOverride Function CreateResource(providerResourceKey As Object, resource As ISyndicationResource) As SyndicationResourceCreateStatus
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">providerResourceKey</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource(System.Object)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource(System.Object)
+  id: DeleteResource(System.Object)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: DeleteResource(Object)
+  nameWithType: SyndicationResourceProvider.DeleteResource(Object)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DeleteResource
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 53
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nRemoves a resource from the syndication data source.\n"
+  example: []
+  syntax:
+    content: public abstract bool DeleteResource(object providerResourceKey)
+    parameters:
+    - id: providerResourceKey
+      type: System.Object
+      description: The unique identifier that identifies the resource to be removed.
+    return:
+      type: System.Boolean
+      description: <strong>true</strong> if the syndication resource was successfully deleted; otherwise, <strong>false</strong>.
+    content.vb: Public MustOverride Function DeleteResource(providerResourceKey As Object) As Boolean
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">providerResourceKey</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource(System.Object)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource(System.Object)
+  id: GetResource(System.Object)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: GetResource(Object)
+  nameWithType: SyndicationResourceProvider.GetResource(Object)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource(System.Object)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetResource
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 61
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets resource information from the data source based on the unique identifier for the syndication resource.\n"
+  example: []
+  syntax:
+    content: public abstract ISyndicationResource GetResource(object providerResourceKey)
+    parameters:
+    - id: providerResourceKey
+      type: System.Object
+      description: The unique identifier that identifies the syndication resource to get information for.
+    return:
+      type: Argotic.Common.ISyndicationResource
+      description: An object that implements the <xref href="Argotic.Common.ISyndicationResource" data-throw-if-not-resolved="false"></xref> interface populated with the specified resources&apos;s information from the data source.
+    content.vb: Public MustOverride Function GetResource(providerResourceKey As Object) As ISyndicationResource
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">providerResourceKey</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  id: GetResources(Argotic.Common.SyndicationContentFormat)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: GetResources(SyndicationContentFormat)
+  nameWithType: SyndicationResourceProvider.GetResources(SyndicationContentFormat)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetResources
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 74
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets a collection of all the resources in the data source that conform to the specified <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n<xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)\" data-throw-if-not-resolved=\"false\"></xref> returns a list of all of the resources from the data source for the configured <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref> property.\nSyndication resources are returned in order of last time they were updated in the data source.\n</p>\n"
+  example: []
+  syntax:
+    content: public abstract Collection<ISyndicationResource> GetResources(SyndicationContentFormat format)
+    parameters:
+    - id: format
+      type: Argotic.Common.SyndicationContentFormat
+      description: A <xref href="Argotic.Common.SyndicationContentFormat" data-throw-if-not-resolved="false"></xref> enumeration values that indicates the format of the resources to be returned.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.ISyndicationResource}
+      description: A <xref href="System.Collections.ObjectModel.Collection%601" data-throw-if-not-resolved="false"></xref> of all of the syndication resources contained in the data source that conform to the specified <xref href="Argotic.Common.SyndicationContentFormat" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public MustOverride Function GetResources(format As SyndicationContentFormat) As Collection(Of ISyndicationResource)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources*
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32,System.Int32,System.Int32@)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32,System.Int32,System.Int32@)
+  id: GetResources(System.Int32,System.Int32,System.Int32@)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: GetResources(Int32, Int32, out Int32)
+  nameWithType: SyndicationResourceProvider.GetResources(Int32, Int32, out Int32)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32, System.Int32, out System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: GetResources
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 104
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nGets a collection of all the resources in the data source in pages of data.\n"
+  remarks: "\n<p>\n<xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32%2cSystem.Int32%2cSystem.Int32%40)\" data-throw-if-not-resolved=\"false\"></xref> returns a list of all of the resources from the data source for the configured <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName\" data-throw-if-not-resolved=\"false\"></xref> property.\nSyndication resources are returned in order of last time they were updated in the data source.\n</p>\n<p>\n    The results returned by <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32%2cSystem.Int32%2cSystem.Int32%40)\" data-throw-if-not-resolved=\"false\"></xref> are constrained by the <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageIndex</code> and <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageSize</code> parameters.\n    The <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageSize</code> parameter identifies the number of <xref href=\"Argotic.Common.ISyndicationResource\" data-throw-if-not-resolved=\"false\"></xref> objects to return in the collection.\n    The <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageIndex</code> parameter identifies which page of results to return, where 0 identifies the first page.\n    The <code data-dev-comment-type=\"paramref\" class=\"paramref\">totalRecords</code> parameter is an out parameter that is set to the total number of syndication resources in the data source.\n</p>\n<p>\n    For example, if there are 13 resources in the data source, and the <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageIndex</code> value was 1 with a <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageSize</code> of 5,\n    then the <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> would contain the sixth through the tenth resources returned. The <code data-dev-comment-type=\"paramref\" class=\"paramref\">totalRecords</code> parameter would be set to 13.\n</p>\n"
+  example: []
+  syntax:
+    content: public abstract Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords)
+    parameters:
+    - id: pageIndex
+      type: System.Int32
+      description: The index of the page of results to return. <code data-dev-comment-type="paramref" class="paramref">pageIndex</code> is zero-based.
+    - id: pageSize
+      type: System.Int32
+      description: The size of the page of results to return.
+    - id: totalRecords
+      type: System.Int32
+      description: The total number of matched resources.
+    return:
+      type: System.Collections.ObjectModel.Collection{Argotic.Common.ISyndicationResource}
+      description: "\nA <xref href=\"System.Collections.ObjectModel.Collection%601\" data-throw-if-not-resolved=\"false\"></xref> that contains a page of <xref href=\"Argotic.Common.ISyndicationResource\" data-throw-if-not-resolved=\"false\"></xref> objects\nwith a size of <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageSize</code>, beginning at the page specified by <code data-dev-comment-type=\"paramref\" class=\"paramref\">pageIndex</code>.\n"
+    content.vb: Public MustOverride Function GetResources(pageIndex As Integer, pageSize As Integer, ByRef totalRecords As Integer) As Collection(Of ISyndicationResource)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">pageIndex</code> is <em>less than</em> zero.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: The <code data-dev-comment-type="paramref" class="paramref">pageSize</code> is <em>less than or equal to</em> zero.
+  nameWithType.vb: SyndicationResourceProvider.GetResources(Int32, Int32, ByRef Int32)
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+  fullName.vb: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32, System.Int32, ByRef System.Int32)
+  name.vb: GetResources(Int32, Int32, ByRef Int32)
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource(System.Object,Argotic.Common.ISyndicationResource)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource(System.Object,Argotic.Common.ISyndicationResource)
+  id: UpdateResource(System.Object,Argotic.Common.ISyndicationResource)
+  parent: Argotic.Configuration.Provider.SyndicationResourceProvider
+  langs:
+  - csharp
+  - vb
+  name: UpdateResource(Object, ISyndicationResource)
+  nameWithType: SyndicationResourceProvider.UpdateResource(Object, ISyndicationResource)
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource(System.Object, Argotic.Common.ISyndicationResource)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: UpdateResource
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceProvider.cs
+    startLine: 116
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nUpdates information about a syndication resource in the data source.\n"
+  example: []
+  syntax:
+    content: public abstract void UpdateResource(object providerResourceKey, ISyndicationResource resource)
+    parameters:
+    - id: providerResourceKey
+      type: System.Object
+      description: The unique identifier that identifies the resource to be updated.
+    - id: resource
+      type: Argotic.Common.ISyndicationResource
+      description: "\nAn object that implements the <xref href=\"Argotic.Common.ISyndicationResource\" data-throw-if-not-resolved=\"false\"></xref> interface that represents the updated information for the resource.\n"
+    content.vb: Public MustOverride Sub UpdateResource(providerResourceKey As Object, resource As ISyndicationResource)
+  overload: Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">providerResourceKey</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  - abstract
+  modifiers.vb:
+  - Public
+  - MustOverride
+references:
+- uid: Argotic.Common.ISyndicationResource
+  commentId: T:Argotic.Common.ISyndicationResource
+  parent: Argotic.Common
+  name: ISyndicationResource
+  nameWithType: ISyndicationResource
+  fullName: Argotic.Common.ISyndicationResource
+- uid: Argotic.Configuration.Provider
+  commentId: N:Argotic.Configuration.Provider
+  name: Argotic.Configuration.Provider
+  nameWithType: Argotic.Configuration.Provider
+  fullName: Argotic.Configuration.Provider
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Configuration.Provider.ProviderBase
+  commentId: T:System.Configuration.Provider.ProviderBase
+  parent: System.Configuration.Provider
+  isExternal: true
+  name: ProviderBase
+  nameWithType: ProviderBase
+  fullName: System.Configuration.Provider.ProviderBase
+- uid: System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)
+  commentId: M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)
+  parent: System.Configuration.Provider.ProviderBase
+  isExternal: true
+  name: Initialize(String, NameValueCollection)
+  nameWithType: ProviderBase.Initialize(String, NameValueCollection)
+  fullName: System.Configuration.Provider.ProviderBase.Initialize(System.String, System.Collections.Specialized.NameValueCollection)
+  spec.csharp:
+  - uid: System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)
+    name: Initialize
+    nameWithType: ProviderBase.Initialize
+    fullName: System.Configuration.Provider.ProviderBase.Initialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Specialized.NameValueCollection
+    name: NameValueCollection
+    nameWithType: NameValueCollection
+    fullName: System.Collections.Specialized.NameValueCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)
+    name: Initialize
+    nameWithType: ProviderBase.Initialize
+    fullName: System.Configuration.Provider.ProviderBase.Initialize
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.Specialized.NameValueCollection
+    name: NameValueCollection
+    nameWithType: NameValueCollection
+    fullName: System.Collections.Specialized.NameValueCollection
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Configuration.Provider.ProviderBase.Description
+  commentId: P:System.Configuration.Provider.ProviderBase.Description
+  parent: System.Configuration.Provider.ProviderBase
+  isExternal: true
+  name: Description
+  nameWithType: ProviderBase.Description
+  fullName: System.Configuration.Provider.ProviderBase.Description
+- uid: System.Configuration.Provider.ProviderBase.Name
+  commentId: P:System.Configuration.Provider.ProviderBase.Name
+  parent: System.Configuration.Provider.ProviderBase
+  isExternal: true
+  name: Name
+  nameWithType: ProviderBase.Name
+  fullName: System.Configuration.Provider.ProviderBase.Name
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Configuration.Provider
+  commentId: N:System.Configuration.Provider
+  isExternal: true
+  name: System.Configuration.Provider
+  nameWithType: System.Configuration.Provider
+  fullName: System.Configuration.Provider
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  commentId: P:Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  isExternal: true
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+  name: ApplicationName
+  nameWithType: SyndicationResourceProvider.ApplicationName
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.ApplicationName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  parent: Argotic.Configuration.Provider
+  name: SyndicationResourceCreateStatus
+  nameWithType: SyndicationResourceCreateStatus
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource
+  name: CreateResource
+  nameWithType: SyndicationResourceProvider.CreateResource
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource
+  name: DeleteResource
+  nameWithType: SyndicationResourceProvider.DeleteResource
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.DeleteResource
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource
+  name: GetResource
+  nameWithType: SyndicationResourceProvider.GetResource
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResource
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: System.Collections.ObjectModel.Collection`1
+  commentId: T:System.Collections.ObjectModel.Collection`1
+  isExternal: true
+  name: Collection<T>
+  nameWithType: Collection<T>
+  fullName: System.Collections.ObjectModel.Collection<T>
+  nameWithType.vb: Collection(Of T)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of T)
+  name.vb: Collection(Of T)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(Argotic.Common.SyndicationContentFormat)
+  isExternal: true
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources
+  name: GetResources
+  nameWithType: SyndicationResourceProvider.GetResources
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources
+- uid: System.Collections.ObjectModel.Collection{Argotic.Common.ISyndicationResource}
+  commentId: T:System.Collections.ObjectModel.Collection{Argotic.Common.ISyndicationResource}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.Collection`1
+  name: Collection<ISyndicationResource>
+  nameWithType: Collection<ISyndicationResource>
+  fullName: System.Collections.ObjectModel.Collection<Argotic.Common.ISyndicationResource>
+  nameWithType.vb: Collection(Of ISyndicationResource)
+  fullName.vb: System.Collections.ObjectModel.Collection(Of Argotic.Common.ISyndicationResource)
+  name.vb: Collection(Of ISyndicationResource)
+  spec.csharp:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Argotic.Common.ISyndicationResource
+    name: ISyndicationResource
+    nameWithType: ISyndicationResource
+    fullName: Argotic.Common.ISyndicationResource
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.ObjectModel.Collection`1
+    name: Collection
+    nameWithType: Collection
+    fullName: System.Collections.ObjectModel.Collection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Argotic.Common.ISyndicationResource
+    name: ISyndicationResource
+    nameWithType: ISyndicationResource
+    fullName: Argotic.Common.ISyndicationResource
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  isExternal: true
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32,System.Int32,System.Int32@)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.GetResources(System.Int32,System.Int32,System.Int32@)
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource*
+  commentId: Overload:Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource
+  name: UpdateResource
+  nameWithType: SyndicationResourceProvider.UpdateResource
+  fullName: Argotic.Configuration.Provider.SyndicationResourceProvider.UpdateResource

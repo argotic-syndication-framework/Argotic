@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Extensions;
-using Argotic.Syndication.Specialized;
-
-namespace Argotic.Data.Adapters
+﻿namespace Argotic.Data.Adapters
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Extensions;
+    using Argotic.Syndication.Specialized;
+
     /// <summary>
     /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="BlogMLDocument"/>.
     /// </summary>
@@ -32,7 +32,8 @@ namespace Argotic.Data.Adapters
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+            : base(navigator, settings)
         {
         }
 
@@ -45,59 +46,59 @@ namespace Argotic.Data.Adapters
         {
             Guard.ArgumentNotNull(resource, "resource");
 
-            XmlNamespaceManager manager     = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
+            XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
             XPathNavigator blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
             if (blogNavigator != null)
             {
-                if(blogNavigator.HasAttributes)
+                if (blogNavigator.HasAttributes)
                 {
-                    string dateCreatedAttribute = blogNavigator.GetAttribute("date-created", String.Empty);
-                    string rootUrlAttribute     = blogNavigator.GetAttribute("root-url", String.Empty);
+                    string dateCreatedAttribute = blogNavigator.GetAttribute("date-created", string.Empty);
+                    string rootUrlAttribute = blogNavigator.GetAttribute("root-url", string.Empty);
 
-                    if (!String.IsNullOrEmpty(dateCreatedAttribute))
+                    if (!string.IsNullOrEmpty(dateCreatedAttribute))
                     {
                         DateTime createdOn;
                         if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
                         {
-                            resource.GeneratedOn    = createdOn;
+                            resource.GeneratedOn = createdOn;
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(rootUrlAttribute))
+                    if (!string.IsNullOrEmpty(rootUrlAttribute))
                     {
                         Uri rootUrl;
                         if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out rootUrl))
                         {
-                            resource.RootUrl    = rootUrl;
+                            resource.RootUrl = rootUrl;
                         }
                     }
                 }
 
                 if (blogNavigator.HasChildren)
                 {
-                    XPathNavigator titleNavigator       = blogNavigator.SelectSingleNode("blog:title", manager);
-                    XPathNavigator subtitleNavigator    = blogNavigator.SelectSingleNode("blog:sub-title", manager);
+                    XPathNavigator titleNavigator = blogNavigator.SelectSingleNode("blog:title", manager);
+                    XPathNavigator subtitleNavigator = blogNavigator.SelectSingleNode("blog:sub-title", manager);
 
                     if (titleNavigator != null)
                     {
-                        BlogMLTextConstruct title   = new BlogMLTextConstruct();
+                        BlogMLTextConstruct title = new BlogMLTextConstruct();
                         if (title.Load(titleNavigator))
                         {
-                            resource.Title          = title;
+                            resource.Title = title;
                         }
                     }
 
                     if (subtitleNavigator != null)
                     {
-                        BlogMLTextConstruct subtitle    = new BlogMLTextConstruct();
+                        BlogMLTextConstruct subtitle = new BlogMLTextConstruct();
                         if (subtitle.Load(subtitleNavigator))
                         {
-                            resource.Subtitle           = subtitle;
+                            resource.Subtitle = subtitle;
                         }
                     }
 
-                    BlogML20SyndicationResourceAdapter.FillDocumentCollections(resource, blogNavigator, manager, this.Settings);
+                    FillDocumentCollections(resource, blogNavigator, manager, this.Settings);
                 }
 
                 SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(blogNavigator, this.Settings);
@@ -119,17 +120,22 @@ namespace Argotic.Data.Adapters
         /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+        private static void FillDocumentCollections(
+            BlogMLDocument document,
+            XPathNavigator source,
+            XmlNamespaceManager manager,
+            SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(document, "document");
             Guard.ArgumentNotNull(source, "source");
             Guard.ArgumentNotNull(manager, "manager");
             Guard.ArgumentNotNull(settings, "settings");
 
-            XPathNodeIterator authorsIterator               = source.Select("blog:authors/blog:author", manager);
-            XPathNodeIterator extendedPropertiesIterator    = source.Select("blog:extended-properties/blog:property", manager);
-            XPathNodeIterator categoriesIterator            = source.Select("blog:categories/blog:category", manager);
-            XPathNodeIterator postsIterator                 = source.Select("blog:posts/blog:post", manager);
+            XPathNodeIterator authorsIterator = source.Select("blog:authors/blog:author", manager);
+            XPathNodeIterator extendedPropertiesIterator =
+                source.Select("blog:extended-properties/blog:property", manager);
+            XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
+            XPathNodeIterator postsIterator = source.Select("blog:posts/blog:post", manager);
 
             if (authorsIterator != null && authorsIterator.Count > 0)
             {
@@ -149,10 +155,11 @@ namespace Argotic.Data.Adapters
                 {
                     if (extendedPropertiesIterator.Current.HasAttributes)
                     {
-                        string propertyName     = extendedPropertiesIterator.Current.GetAttribute("name", String.Empty);
-                        string propertyValue    = extendedPropertiesIterator.Current.GetAttribute("value", String.Empty);
+                        string propertyName = extendedPropertiesIterator.Current.GetAttribute("name", string.Empty);
+                        string propertyValue = extendedPropertiesIterator.Current.GetAttribute("value", string.Empty);
 
-                        if (!String.IsNullOrEmpty(propertyName) && !document.ExtendedProperties.ContainsKey(propertyName))
+                        if (!string.IsNullOrEmpty(propertyName)
+                            && !document.ExtendedProperties.ContainsKey(propertyName))
                         {
                             document.ExtendedProperties.Add(propertyName, propertyValue);
                         }

@@ -1,0 +1,565 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  commentId: T:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  id: Rss091SyndicationResourceAdapter
+  parent: Argotic.Data.Adapters
+  children:
+  - Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  - Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  langs:
+  - csharp
+  - vb
+  name: Rss091SyndicationResourceAdapter
+  nameWithType: Rss091SyndicationResourceAdapter
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  type: Class
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Rss091SyndicationResourceAdapter
+    path: ../Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+    startLine: 23
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Data.Adapters
+  summary: "\nRepresents a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref> that are used to fill a <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<p>\n    The <xref href=\"Argotic.Data.Adapters.Rss091SyndicationResourceAdapter\" data-throw-if-not-resolved=\"false\"></xref> serves as a bridge between a <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> and an XML data source.\n    The <xref href=\"Argotic.Data.Adapters.Rss091SyndicationResourceAdapter\" data-throw-if-not-resolved=\"false\"></xref> provides this bridge by mapping <xref href=\"Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)\" data-throw-if-not-resolved=\"false\"></xref>, which changes the data\n    in the <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> to match the data in the data source.\n</p>\n<p>This syndication resource adapter is designed to fill <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> objects using a <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> that represents XML data that conforms to the RSS 0.91 specification.</p>\n"
+  example: []
+  syntax:
+    content: 'public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter'
+    content.vb: >-
+      Public Class Rss091SyndicationResourceAdapter
+
+          Inherits SyndicationResourceAdapter
+  inheritance:
+  - System.Object
+  - Argotic.Data.Adapters.SyndicationResourceAdapter
+  inheritedMembers:
+  - Argotic.Data.Adapters.SyndicationResourceAdapter.Navigator
+  - Argotic.Data.Adapters.SyndicationResourceAdapter.Settings
+  - Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource,Argotic.Common.SyndicationContentFormat)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  commentId: M:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)
+  id: '#ctor(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)'
+  parent: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  langs:
+  - csharp
+  - vb
+  name: Rss091SyndicationResourceAdapter(XPathNavigator, SyndicationResourceLoadSettings)
+  nameWithType: Rss091SyndicationResourceAdapter.Rss091SyndicationResourceAdapter(XPathNavigator, SyndicationResourceLoadSettings)
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Rss091SyndicationResourceAdapter(System.Xml.XPath.XPathNavigator, Argotic.Common.SyndicationResourceLoadSettings)
+  type: Constructor
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: .ctor
+    path: ../Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+    startLine: 39
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Data.Adapters
+  summary: "\nInitializes a new instance of the <xref href=\"Argotic.Data.Adapters.Rss091SyndicationResourceAdapter\" data-throw-if-not-resolved=\"false\"></xref> class using the supplied <xref href=\"System.Xml.XPath.XPathNavigator\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Argotic.Common.SyndicationResourceLoadSettings\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis class expects the supplied <code data-dev-comment-type=\"paramref\" class=\"paramref\">navigator</code> to be positioned on the XML element that represents a <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Rss091SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+    parameters:
+    - id: navigator
+      type: System.Xml.XPath.XPathNavigator
+      description: A read-only <xref href="System.Xml.XPath.XPathNavigator" data-throw-if-not-resolved="false"></xref> object for navigating through the syndication feed information.
+    - id: settings
+      type: Argotic.Common.SyndicationResourceLoadSettings
+      description: The <xref href="Argotic.Common.SyndicationResourceLoadSettings" data-throw-if-not-resolved="false"></xref> object used to configure the load operation of the <xref href="Argotic.Syndication.RssFeed" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(navigator As XPathNavigator, settings As SyndicationResourceLoadSettings)
+  overload: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  commentId: M:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  id: Fill(Argotic.Syndication.RssFeed)
+  parent: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  langs:
+  - csharp
+  - vb
+  name: Fill(RssFeed)
+  nameWithType: Rss091SyndicationResourceAdapter.Fill(RssFeed)
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  type: Method
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Fill
+    path: ../Solutions/Argotic.Core/Data/Adapters/Legacy/Rss091SyndicationResourceAdapter.cs
+    startLine: 49
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Data.Adapters
+  summary: "\nModifies the <xref href=\"Argotic.Syndication.RssFeed\" data-throw-if-not-resolved=\"false\"></xref> to match the data source.\n"
+  example: []
+  syntax:
+    content: public void Fill(RssFeed resource)
+    parameters:
+    - id: resource
+      type: Argotic.Syndication.RssFeed
+      description: The <xref href="Argotic.Syndication.RssFeed" data-throw-if-not-resolved="false"></xref> to be filled.
+    content.vb: Public Sub Fill(resource As RssFeed)
+  overload: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: The <code data-dev-comment-type="paramref" class="paramref">resource</code> is a null reference (Nothing in Visual Basic).
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: System.Xml.XPath.XPathNavigator
+  commentId: T:System.Xml.XPath.XPathNavigator
+  parent: System.Xml.XPath
+  isExternal: true
+  name: XPathNavigator
+  nameWithType: XPathNavigator
+  fullName: System.Xml.XPath.XPathNavigator
+- uid: Argotic.Common.SyndicationResourceLoadSettings
+  commentId: T:Argotic.Common.SyndicationResourceLoadSettings
+  parent: Argotic.Common
+  name: SyndicationResourceLoadSettings
+  nameWithType: SyndicationResourceLoadSettings
+  fullName: Argotic.Common.SyndicationResourceLoadSettings
+- uid: Argotic.Syndication.RssFeed
+  commentId: T:Argotic.Syndication.RssFeed
+  parent: Argotic.Syndication
+  name: RssFeed
+  nameWithType: RssFeed
+  fullName: Argotic.Syndication.RssFeed
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  commentId: T:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+  name: Rss091SyndicationResourceAdapter
+  nameWithType: Rss091SyndicationResourceAdapter
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  commentId: M:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill(Argotic.Syndication.RssFeed)
+  isExternal: true
+- uid: Argotic.Data.Adapters
+  commentId: N:Argotic.Data.Adapters
+  name: Argotic.Data.Adapters
+  nameWithType: Argotic.Data.Adapters
+  fullName: Argotic.Data.Adapters
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Argotic.Data.Adapters.SyndicationResourceAdapter
+  commentId: T:Argotic.Data.Adapters.SyndicationResourceAdapter
+  parent: Argotic.Data.Adapters
+  name: SyndicationResourceAdapter
+  nameWithType: SyndicationResourceAdapter
+  fullName: Argotic.Data.Adapters.SyndicationResourceAdapter
+- uid: Argotic.Data.Adapters.SyndicationResourceAdapter.Navigator
+  commentId: P:Argotic.Data.Adapters.SyndicationResourceAdapter.Navigator
+  parent: Argotic.Data.Adapters.SyndicationResourceAdapter
+  name: Navigator
+  nameWithType: SyndicationResourceAdapter.Navigator
+  fullName: Argotic.Data.Adapters.SyndicationResourceAdapter.Navigator
+- uid: Argotic.Data.Adapters.SyndicationResourceAdapter.Settings
+  commentId: P:Argotic.Data.Adapters.SyndicationResourceAdapter.Settings
+  parent: Argotic.Data.Adapters.SyndicationResourceAdapter
+  name: Settings
+  nameWithType: SyndicationResourceAdapter.Settings
+  fullName: Argotic.Data.Adapters.SyndicationResourceAdapter.Settings
+- uid: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource,Argotic.Common.SyndicationContentFormat)
+  commentId: M:Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource,Argotic.Common.SyndicationContentFormat)
+  parent: Argotic.Data.Adapters.SyndicationResourceAdapter
+  name: Fill(ISyndicationResource, SyndicationContentFormat)
+  nameWithType: SyndicationResourceAdapter.Fill(ISyndicationResource, SyndicationContentFormat)
+  fullName: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource, Argotic.Common.SyndicationContentFormat)
+  spec.csharp:
+  - uid: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource,Argotic.Common.SyndicationContentFormat)
+    name: Fill
+    nameWithType: SyndicationResourceAdapter.Fill
+    fullName: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Common.ISyndicationResource
+    name: ISyndicationResource
+    nameWithType: ISyndicationResource
+    fullName: Argotic.Common.ISyndicationResource
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationContentFormat
+    name: SyndicationContentFormat
+    nameWithType: SyndicationContentFormat
+    fullName: Argotic.Common.SyndicationContentFormat
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill(Argotic.Common.ISyndicationResource,Argotic.Common.SyndicationContentFormat)
+    name: Fill
+    nameWithType: SyndicationResourceAdapter.Fill
+    fullName: Argotic.Data.Adapters.SyndicationResourceAdapter.Fill
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Argotic.Common.ISyndicationResource
+    name: ISyndicationResource
+    nameWithType: ISyndicationResource
+    fullName: Argotic.Common.ISyndicationResource
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Argotic.Common.SyndicationContentFormat
+    name: SyndicationContentFormat
+    nameWithType: SyndicationContentFormat
+    fullName: Argotic.Common.SyndicationContentFormat
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xml.XPath
+  commentId: N:System.Xml.XPath
+  isExternal: true
+  name: System.Xml.XPath
+  nameWithType: System.Xml.XPath
+  fullName: System.Xml.XPath
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor*
+  commentId: Overload:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.#ctor
+  name: Rss091SyndicationResourceAdapter
+  nameWithType: Rss091SyndicationResourceAdapter.Rss091SyndicationResourceAdapter
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Rss091SyndicationResourceAdapter
+- uid: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill*
+  commentId: Overload:Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill
+  name: Fill
+  nameWithType: Rss091SyndicationResourceAdapter.Fill
+  fullName: Argotic.Data.Adapters.Rss091SyndicationResourceAdapter.Fill

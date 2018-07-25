@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to consume Outline Processor Markup Language (OPML) outlines </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to consume Outline Processor Markup Language (OPML) outlines ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-consume-outline-processor-markup-language-opml-outlines">How to consume Outline Processor Markup Language (OPML) outlines</h1>
+
+<p>Outline Processor Markup Language (OPML) describes a format for storing outlines in XML.The purpose of this format is to provide a way to exchange information between outliners and Internet services that can be browsed or controlled through an outliner. OPML has also become popular as a format for exchanging subscription lists between feed readers and aggregators. The framework provides a complete implementation of the Outline Processor Markup Language (OPML) 2.0 specification, which can be found at [url:http://www.opml.org/spec2].</p>
+<p>The classes and enumerations that together compose the implementation of OPML are located in the <em>Argotic.Syndication</em> namespace. The primary framework entity that you will use when working with OPML formated syndication resources is the <em>OpmlDocument</em> class. This class implements the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated content. The framework will by default automatically load any syndication extensions that are present in addition to the syndicated content information and attempt to handle malformed XML data.</p>
+<h2 id="consuming-syndicated-content">Consuming syndicated content</h2>
+<p>The <em>OpmlDocument</em> class provides two ways of consuming syndicated content that conforms to the OPML syndication format. The first way to consume an OPML outline is to use the static <em>Create</em> method exposed by the <em>OpmlDocument</em> class, which provides a means of quickly consuming web content that is available at a given <em>Uri</em>:</p>
+<pre><code>using Argotic.Syndication;
+
+OpmlDocument document = OpmlDocument.Create(new Uri(&quot;http://blog.oppositionallydefiant.com/opml.axd&quot;));
+</code></pre>
+<p>The other way to consume an OPML outline is to use the overloaded <em>Load</em> method exposed by the <em>OpmlDocument</em> class, which provides a means of consuming syndicated content from a variety of data sources such as <em>IXPathNavigable</em>, <em>Stream</em>, <em>XmlReader</em>, and <em>Uri</em>:</p>
+<pre><code>using System.IO;
+using System.Xml;
+using System.Xml.Xpath;
+using Argotic.Syndication;
+
+OpmlDocument document = new OpmlDocument();
+
+using (FileStream stream = new FileStream(&quot;SimpleBlogroll.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    document.Load(stream);
+}
+
+document = new OpmlDocument();
+using (FileStream stream = new FileStream(&quot;SimpleBlogroll.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    XmlReaderSettings settings = new XmlReaderSettings();
+    settings.IgnoreComments = true;
+    settings.IgnoreWhitespace = true;
+
+    using (XmlReader reader = XmlReader.Create(stream, settings))
+    {
+        document.Load(reader);
+    }
+}
+
+document = new OpmlDocument();
+using (FileStream stream = new FileStream(&quot;SimpleBlogroll.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    document.Load(new XPathDocument(stream));
+}
+</code></pre>
+<p>Sample file that can be used with the above code example: [file:SimpleBlogroll.xml]</p>
+<h2 id="specifying-the-set-of-features-to-support-when-loading-syndicated-content">Specifying the set of features to support when loading syndicated content</h2>
+<p>The framework provides a means of specifying the set of features that are supported when loading an OPML outline via the <em>SyndicationResourceLoadSettings</em> class. This class is passed as an argument to the <em>Create</em> or <em>Load</em> methods of the <em>OpmlDocument</em> class in order to configure how the load operation is performed.</p>
+<p>The <em>SyndicationResourceLoadSettings</em> class exposes the following properties:</p>
+<ul>
+<li><strong>AutoDetectExtensions</strong> - Indicates if syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on the syndication resource.</li>
+<li><strong>CharacterEncoding</strong> - Indicates the character encoding to use when parsing a syndication resource.</li>
+<li><strong>RetrievalLimit</strong> - Determines the maximum number of resource entities to retrieve from a syndication resource.</li>
+<li><strong>SupportedExtensions</strong> - Indicates the custom syndication extensions that you wish to support.</li>
+<li><strong>Timeout</strong> - Specifies the amount of time after which asynchronous load operations will time out.</li>
+</ul>
+<p>Example:</p>
+<pre><code>using Argotic.Common;
+using Argotic.Syndication;
+
+SyndicationResourceLoadSettings settings    = new SyndicationResourceLoadSettings();
+settings.RetrievalLimit                     = 5;
+
+Uri documentUrl         = new Uri(&quot;http://blog.oppositionallydefiant.com/opml.axd&quot;);
+OpmlDocument document   = OpmlDocument.Create(documentUrl, settings);
+
+foreach (OpmlOutline outline in document.Outlines)
+{
+    // The outlines have been limited to the first 5 in the OPML document
+}
+</code></pre>
+<p>In the example above, we are using the <em>SyndicationResourceLoadSettings</em> class to limit the number of OPML outlines that are read from the underlying XML data and added to the documents's <em>Outlines</em> collection. This can be useful when you are only interested in the a subset of the total available outlines, are working with a very large document, or want to reduce the time it takes to load a document. By default the <em>OpmlDocument</em> class loads all outlines and child outlines that are present in the document.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/consuming-an-opml-outline.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Generating syndication feeds and other syndicated content </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Generating syndication feeds and other syndicated content ">
+    <meta name="generator" content="docfx 2.37.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="generating-syndication-feeds-and-other-syndicated-content">Generating syndication feeds and other syndicated content</h1>
+
+<p>All of the framework API classes that represent syndication resources (RSS feeds, Atom feeds and entry documents, OPML documents, etc.) expose an overloaded <em>Save</em> method that allows you to persist a syndication resource. While the framework is flexible enough to load syndication resources that may not conform to their syndication specification, the framework will +always+ generate XML output that conforms strictly to the appropriate syndication specification. This &quot;<strong>load flexibly, write strictly</strong>&quot; methodology ensures you can consume syndication resources with confidence while still knowing that you will be publishing syndicated content that is standards based.</p>
+<h2 id="example-1-writing-syndicated-content">Example #1: Writing syndicated content</h2>
+<p>The simplest way to persist a syndication resource (e.g. feed) is to pass a <em>Stream</em> to the <strong>Save</strong> method that all framework syndication resources expose. If you want to have more control over the XML formatting of the persisted data, you can pass an <em>XmlWriter</em> as the argument to the Save method instead. When passing a <em>Stream</em> as the argument to the <strong>Save</strong> method, the framework uses the default <em>SyndicationResourceSaveSettings</em> class properties to determine the indenting and character encoding of the XmlWriter that is constructed against the supplied stream.</p>
+<h3 id="how-to-save-an-rss-feed">How to save an RSS feed</h3>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+RssFeed feed = new RssFeed();
+
+feed.Channel.Link = new Uri(&quot;http://localhost&quot;);
+feed.Channel.Title = &quot;Simple RSS Feed&quot;;
+feed.Channel.Description = &quot;A minimal RSS 2.0 syndication feed.&quot;;
+
+RssItem item = new RssItem();
+item.Title = &quot;Simple RSS Item&quot;;
+item.Link = new Uri(&quot;http://localhost/items/SimpleRSSItem.aspx&quot;);
+item.Description = &quot;A minimal RSS channel item.&quot;;
+
+feed.Channel.AddItem(item);
+
+using(FileStream stream = new FileStream(&quot;SimpleRssFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    feed.Save(stream);
+}
+</code></pre>
+<p>The RSS feed generated in the above example represents the minimal information required per the RSS 2.0 specification.</p>
+<h3 id="how-to-save-an-atom-feed">How to save an Atom feed</h3>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+AtomFeed feed = new AtomFeed();
+
+feed.Id = new AtomId(new Uri(&quot;http://localhost&quot;));
+feed.Title = new AtomTextConstruct(&quot;Simple Atom Feed&quot;);
+feed.UpdatedOn = DateTime.Now;
+
+feed.Authors.Add(new AtomPersonConstruct(&quot;Brian William Kuhn&quot;));
+
+AtomLink selfLink = new AtomLink();
+selfLink.Relation = &quot;self&quot;;
+selfLink.Uri = new Uri(&quot;http://localhost/atom.xml&quot;);
+feed.Links.Add(selfLink);
+
+AtomEntry entry = new AtomEntry();
+entry.Id = new AtomId(new Uri(&quot;urn:uuid:fbd850a0-e333-12dc-bc36-7d8b00dd6d4c&quot;));
+entry.Title = new AtomTextConstruct(&quot;Simple Atom Entry&quot;);
+entry.UpdatedOn = DateTime.Now;
+entry.Summary = new AtomTextConstruct(&quot;A minimal Atom feed entry.&quot;);
+
+AtomLink alternateLink = new AtomLink();
+alternateLink.Relation = &quot;alternate&quot;;
+alternateLink.Uri = new Uri(&quot;http://localhost/entries/SimpleAtomEntry.aspx&quot;);
+entry.Links.Add(alternateLink);
+
+feed.AddEntry(entry);
+
+using (FileStream stream = new FileStream(&quot;SimpleAtomFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    feed.Save(stream);
+}
+</code></pre>
+<p>The Atom feed generated in the above example represents the minimal information required per the Atom 1.0 specification.</p>
+<h3 id="how-to-save-an-atom-entry-document">How to save an Atom entry document</h3>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+AtomEntry entry = new AtomEntry();
+
+entry.Id = new AtomId(new Uri(&quot;http://localhost&quot;));
+entry.Title = new AtomTextConstruct(&quot;Atom Entry Document&quot;);
+entry.UpdatedOn = DateTime.Now;
+entry.Authors.Add(new AtomPersonConstruct(&quot;Brian William Kuhn&quot;));
+entry.Summary = new AtomTextConstruct(&quot;A stand-alone Atom Entry Document.&quot;);
+
+AtomLink alternateLink = new AtomLink();
+alternateLink.Relation = &quot;alternate&quot;;
+alternateLink.Uri = new Uri(&quot;http://localhost/entries/SimpleAtomEntry.aspx&quot;);
+entry.Links.Add(alternateLink);
+
+using (FileStream stream = new FileStream(&quot;AtomEntryDocument.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    entry.Save(stream);
+}
+</code></pre>
+<p>The Atom entry document generated in the above example represents the minimal information required per the Atom 1.0 specification.</p>
+<h2 id="example-2-specifying-the-set-of-features-to-support-when-generating-syndicated-content">Example #2: Specifying the set of features to support when generating syndicated content</h2>
+<p>The framework provides a means of specifying the set of features that are supported when persisting a syndication resource via the <em>SyndicationResourceSaveSettings</em> class. This class is passed as an argument to the <em>Save</em> method of the syndication resource in order to configure how the save operation is performed.</p>
+<p>The <em>SyndicationResourceSaveSettings</em> class exposes the following properties:</p>
+<ul>
+<li><strong>AutoDetectExtensions</strong> - Indicates if syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities.</li>
+<li><strong>CharacterEncoding</strong> - Indicates the character encoding that is used when persisting a syndication resource.</li>
+<li><strong>MinimizeOutputSize</strong> - Indictaes if syndication resource persist operations should attempt to minimize the physical size of the resulting output.</li>
+<li><strong>SupportedExtensions</strong> - Indicates the custom syndication extensions that you wish the save operation to support.</li>
+</ul>
+<h3 id="how-to-save-an-rss-feed-with-a-smaller-total-file-size">How to save an RSS feed with a smaller total file size</h3>
+<pre><code>using System.IO;
+using Argotic.Common;
+using Argotic.Syndication;
+
+RssFeed feed = new RssFeed();
+
+feed.Channel.Link = new Uri(&quot;http://localhost&quot;);
+feed.Channel.Title = &quot;Compact RSS Feed&quot;;
+feed.Channel.Description = &quot;A minimal and non-indented RSS 2.0 syndication feed.&quot;;
+ 
+RssItem item = new RssItem();
+item.Title = &quot;Simple RSS Item&quot;;
+item.Link = new Uri(&quot;http://localhost/items/SimpleRSSItem.aspx&quot;);
+item.Description = &quot;A minimal RSS channel item.&quot;;
+ 
+feed.Channel.AddItem(item);
+
+using (FileStream stream = new FileStream(&quot;CompactRssFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    SyndicationResourceSaveSettings settings = new SyndicationResourceSaveSettings();
+    settings.MinimizeOutputSize = true;
+
+    feed.Save(stream, settings);
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/feature/DocFx/DocFx/Articles/generating-syndication-feeds.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+  commentId: T:Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+  id: IAtomPublishingCommonObjectAttributes
+  parent: Argotic.Extensions.Core
+  children:
+  - Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+  - Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+  langs:
+  - csharp
+  - vb
+  name: IAtomPublishingCommonObjectAttributes
+  nameWithType: IAtomPublishingCommonObjectAttributes
+  fullName: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+  type: Interface
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IAtomPublishingCommonObjectAttributes
+    path: ../Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+    startLine: 8
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nAllows an object to implement common Atom entity attributes by representing a set of properties, methods, indexers and events common to Atom syndication resources.\n"
+  example: []
+  syntax:
+    content: public interface IAtomPublishingCommonObjectAttributes
+    content.vb: Public Interface IAtomPublishingCommonObjectAttributes
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+  commentId: P:Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+  id: BaseUri
+  parent: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+  langs:
+  - csharp
+  - vb
+  name: BaseUri
+  nameWithType: IAtomPublishingCommonObjectAttributes.BaseUri
+  fullName: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BaseUri
+    path: ../Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+    startLine: 19
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the base URI other than the base URI of the document or external entity.\n"
+  remarks: "\n<p>\n    The value of this property is interpreted as a URI Reference as defined in <a href=\"http://www.ietf.org/rfc/rfc2396.txt\">RFC 2396: Uniform Resource Identifiers</a>,\n    after processing according to <a href=\"http://www.w3.org/TR/xmlbase/#escaping\">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>\n"
+  example: []
+  syntax:
+    content: Uri BaseUri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.
+    content.vb: Property BaseUri As Uri
+  overload: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+  commentId: P:Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+  id: Language
+  parent: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: IAtomPublishingCommonObjectAttributes.Language
+  fullName: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Extensions/Core/AtomPublishing/IAtomPublishingCommonObjectAttributes.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Extensions
+  namespace: Argotic.Extensions.Core
+  summary: "\nGets or sets the natural or formal language in which the content is written.\n"
+  remarks: "\n<p>\n    The value of this property is a language identifier as defined by <a href=\"http://www.ietf.org/rfc/rfc3066.txt\">RFC 3066: Tags for the Identification of Languages</a>, or its successor.\n</p>\n"
+  example: []
+  syntax:
+    content: CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.
+    content.vb: Property Language As CultureInfo
+  overload: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Argotic.Extensions.Core
+  commentId: N:Argotic.Extensions.Core
+  name: Argotic.Extensions.Core
+  nameWithType: Argotic.Extensions.Core
+  fullName: Argotic.Extensions.Core
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri*
+  commentId: Overload:Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+  name: BaseUri
+  nameWithType: IAtomPublishingCommonObjectAttributes.BaseUri
+  fullName: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.BaseUri
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language*
+  commentId: Overload:Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+  name: Language
+  nameWithType: IAtomPublishingCommonObjectAttributes.Language
+  fullName: Argotic.Extensions.Core.IAtomPublishingCommonObjectAttributes.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization

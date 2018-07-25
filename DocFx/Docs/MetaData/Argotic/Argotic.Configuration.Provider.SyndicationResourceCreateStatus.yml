@@ -1,0 +1,414 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  id: SyndicationResourceCreateStatus
+  parent: Argotic.Configuration.Provider
+  children:
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.DuplicateProviderResourceKey
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormat
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormatVersion
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidProviderResourceKey
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidSource
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.None
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ProviderError
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ResourceRejected
+  - Argotic.Configuration.Provider.SyndicationResourceCreateStatus.Success
+  langs:
+  - csharp
+  - vb
+  name: SyndicationResourceCreateStatus
+  nameWithType: SyndicationResourceCreateStatus
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  type: Enum
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: SyndicationResourceCreateStatus
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 9
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nDescribes the result of a <xref href=\"Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object%2cArgotic.Common.ISyndicationResource)\" data-throw-if-not-resolved=\"false\"></xref> operation.\n"
+  example: []
+  syntax:
+    content: public enum SyndicationResourceCreateStatus
+    content.vb: Public Enum SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.None
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.None
+  id: None
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: SyndicationResourceCreateStatus.None
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.None
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: None
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 14
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nNo syndication resource creation status was specified.\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.DuplicateProviderResourceKey
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.DuplicateProviderResourceKey
+  id: DuplicateProviderResourceKey
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: DuplicateProviderResourceKey
+  nameWithType: SyndicationResourceCreateStatus.DuplicateProviderResourceKey
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.DuplicateProviderResourceKey
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: DuplicateProviderResourceKey
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 20
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe provider resource key already exists in the data store for the application.\n"
+  example: []
+  syntax:
+    content: DuplicateProviderResourceKey = 1
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormat
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormat
+  id: InvalidFormat
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: InvalidFormat
+  nameWithType: SyndicationResourceCreateStatus.InvalidFormat
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormat
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InvalidFormat
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 27
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe provider does not support the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> that the syndication resource conforms to.\n"
+  example: []
+  syntax:
+    content: InvalidFormat = 2
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  seealso:
+  - linkId: Argotic.Common.ISyndicationResource.Format
+    commentId: P:Argotic.Common.ISyndicationResource.Format
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormatVersion
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormatVersion
+  id: InvalidFormatVersion
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: InvalidFormatVersion
+  nameWithType: SyndicationResourceCreateStatus.InvalidFormatVersion
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidFormatVersion
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InvalidFormatVersion
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 34
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe provider does not support the <xref href=\"System.Version\" data-throw-if-not-resolved=\"false\"></xref> of the <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref> that the syndication resource conforms to or the <xref href=\"System.Version\" data-throw-if-not-resolved=\"false\"></xref> was a <strong>null</strong> reference.\n"
+  example: []
+  syntax:
+    content: InvalidFormatVersion = 3
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  seealso:
+  - linkId: Argotic.Common.ISyndicationResource.Version
+    commentId: P:Argotic.Common.ISyndicationResource.Version
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidProviderResourceKey
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidProviderResourceKey
+  id: InvalidProviderResourceKey
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: InvalidProviderResourceKey
+  nameWithType: SyndicationResourceCreateStatus.InvalidProviderResourceKey
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidProviderResourceKey
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InvalidProviderResourceKey
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 40
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe provider resource key is of an invalid type or format.\n"
+  example: []
+  syntax:
+    content: InvalidProviderResourceKey = 4
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidSource
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidSource
+  id: InvalidSource
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: InvalidSource
+  nameWithType: SyndicationResourceCreateStatus.InvalidSource
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.InvalidSource
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: InvalidSource
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 46
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe XML data source that describes the syndication resource was a <strong>null</strong> reference or does not conform to the provided <xref href=\"Argotic.Common.SyndicationContentFormat\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: InvalidSource = 5
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ProviderError
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ProviderError
+  id: ProviderError
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: ProviderError
+  nameWithType: SyndicationResourceCreateStatus.ProviderError
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ProviderError
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ProviderError
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 52
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe provider returned an error that is not described by other <xref href=\"Argotic.Configuration.Provider.SyndicationResourceCreateStatus\" data-throw-if-not-resolved=\"false\"></xref> enumeration values.\n"
+  example: []
+  syntax:
+    content: ProviderError = 6
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ResourceRejected
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ResourceRejected
+  id: ResourceRejected
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: ResourceRejected
+  nameWithType: SyndicationResourceCreateStatus.ResourceRejected
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.ResourceRejected
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: ResourceRejected
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 58
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe syndication resource was not created, for a reason defined by the provider.\n"
+  example: []
+  syntax:
+    content: ResourceRejected = 7
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.Success
+  commentId: F:Argotic.Configuration.Provider.SyndicationResourceCreateStatus.Success
+  id: Success
+  parent: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  langs:
+  - csharp
+  - vb
+  name: Success
+  nameWithType: SyndicationResourceCreateStatus.Success
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus.Success
+  type: Field
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Success
+    path: ../Solutions/Argotic.Core/Configuration/Provider/SyndicationResourceCreateStatus.cs
+    startLine: 64
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Configuration.Provider
+  summary: "\nThe syndication resource was successfully created.\n"
+  example: []
+  syntax:
+    content: Success = 8
+    return:
+      type: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  commentId: M:Argotic.Configuration.Provider.SyndicationResourceProvider.CreateResource(System.Object,Argotic.Common.ISyndicationResource)
+  isExternal: true
+- uid: Argotic.Configuration.Provider
+  commentId: N:Argotic.Configuration.Provider
+  name: Argotic.Configuration.Provider
+  nameWithType: Argotic.Configuration.Provider
+  fullName: Argotic.Configuration.Provider
+- uid: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  commentId: T:Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+  parent: Argotic.Configuration.Provider
+  name: SyndicationResourceCreateStatus
+  nameWithType: SyndicationResourceCreateStatus
+  fullName: Argotic.Configuration.Provider.SyndicationResourceCreateStatus
+- uid: Argotic.Common.SyndicationContentFormat
+  commentId: T:Argotic.Common.SyndicationContentFormat
+  parent: Argotic.Common
+  name: SyndicationContentFormat
+  nameWithType: SyndicationContentFormat
+  fullName: Argotic.Common.SyndicationContentFormat
+- uid: Argotic.Common.ISyndicationResource.Format
+  commentId: P:Argotic.Common.ISyndicationResource.Format
+  parent: Argotic.Common.ISyndicationResource
+  name: Format
+  nameWithType: ISyndicationResource.Format
+  fullName: Argotic.Common.ISyndicationResource.Format
+- uid: Argotic.Common
+  commentId: N:Argotic.Common
+  name: Argotic.Common
+  nameWithType: Argotic.Common
+  fullName: Argotic.Common
+- uid: Argotic.Common.ISyndicationResource
+  commentId: T:Argotic.Common.ISyndicationResource
+  parent: Argotic.Common
+  name: ISyndicationResource
+  nameWithType: ISyndicationResource
+  fullName: Argotic.Common.ISyndicationResource
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: Argotic.Common.ISyndicationResource.Version
+  commentId: P:Argotic.Common.ISyndicationResource.Version
+  parent: Argotic.Common.ISyndicationResource
+  name: Version
+  nameWithType: ISyndicationResource.Version
+  fullName: Argotic.Common.ISyndicationResource.Version
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System

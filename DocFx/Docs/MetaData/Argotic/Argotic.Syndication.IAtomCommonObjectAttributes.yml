@@ -1,0 +1,169 @@
+### YamlMime:ManagedReference
+items:
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes
+  commentId: T:Argotic.Syndication.IAtomCommonObjectAttributes
+  id: IAtomCommonObjectAttributes
+  parent: Argotic.Syndication
+  children:
+  - Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  - Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  langs:
+  - csharp
+  - vb
+  name: IAtomCommonObjectAttributes
+  nameWithType: IAtomCommonObjectAttributes
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes
+  type: Interface
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: IAtomCommonObjectAttributes
+    path: ../Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+    startLine: 10
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nAllows an object to implement common Atom entity attributes by representing a set of properties, methods, indexers and events common to Atom syndication resources.\n"
+  example: []
+  syntax:
+    content: public interface IAtomCommonObjectAttributes
+    content.vb: Public Interface IAtomCommonObjectAttributes
+  seealso:
+  - linkId: Argotic.Syndication.AtomEntry
+    commentId: T:Argotic.Syndication.AtomEntry
+  - linkId: Argotic.Syndication.AtomFeed
+    commentId: T:Argotic.Syndication.AtomFeed
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  id: BaseUri
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  langs:
+  - csharp
+  - vb
+  name: BaseUri
+  nameWithType: IAtomCommonObjectAttributes.BaseUri
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: BaseUri
+    path: ../Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+    startLine: 21
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the base URI other than the base URI of the document or external entity.\n"
+  remarks: "\n<p>\n    The value of this property is interpreted as a URI Reference as defined in <a href=\"http://www.ietf.org/rfc/rfc2396.txt\">RFC 2396: Uniform Resource Identifiers</a>,\n    after processing according to <a href=\"http://www.w3.org/TR/xmlbase/#escaping\">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>\n"
+  example: []
+  syntax:
+    content: Uri BaseUri { get; set; }
+    parameters: []
+    return:
+      type: System.Uri
+      description: A <xref href="System.Uri" data-throw-if-not-resolved="false"></xref> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.
+    content.vb: Property BaseUri As Uri
+  overload: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri*
+  modifiers.csharp:
+  - get
+  - set
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  commentId: P:Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  id: Language
+  parent: Argotic.Syndication.IAtomCommonObjectAttributes
+  langs:
+  - csharp
+  - vb
+  name: Language
+  nameWithType: IAtomCommonObjectAttributes.Language
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  type: Property
+  source:
+    remote:
+      path: Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+      branch: feature/DocFx
+      repo: https://github.com/endjin/Argotic.git
+    id: Language
+    path: ../Solutions/Argotic.Core/Syndication/Atom/IAtomCommonObjectAttributes.cs
+    startLine: 32
+  assemblies:
+  - Argotic.Core
+  namespace: Argotic.Syndication
+  summary: "\nGets or sets the natural or formal language in which the content is written.\n"
+  remarks: "\n<p>\n    The value of this property is a language identifier as defined by <a href=\"http://www.ietf.org/rfc/rfc3066.txt\">RFC 3066: Tags for the Identification of Languages</a>, or its successor.\n</p>\n"
+  example: []
+  syntax:
+    content: CultureInfo Language { get; set; }
+    parameters: []
+    return:
+      type: System.Globalization.CultureInfo
+      description: A <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.
+    content.vb: Property Language As CultureInfo
+  overload: Argotic.Syndication.IAtomCommonObjectAttributes.Language*
+  modifiers.csharp:
+  - get
+  - set
+references:
+- uid: Argotic.Syndication.AtomEntry
+  commentId: T:Argotic.Syndication.AtomEntry
+  parent: Argotic.Syndication
+  name: AtomEntry
+  nameWithType: AtomEntry
+  fullName: Argotic.Syndication.AtomEntry
+- uid: Argotic.Syndication.AtomFeed
+  commentId: T:Argotic.Syndication.AtomFeed
+  parent: Argotic.Syndication
+  name: AtomFeed
+  nameWithType: AtomFeed
+  fullName: Argotic.Syndication.AtomFeed
+- uid: Argotic.Syndication
+  commentId: N:Argotic.Syndication
+  name: Argotic.Syndication
+  nameWithType: Argotic.Syndication
+  fullName: Argotic.Syndication
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: System.Uri
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri*
+  commentId: Overload:Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+  name: BaseUri
+  nameWithType: IAtomCommonObjectAttributes.BaseUri
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.BaseUri
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: Argotic.Syndication.IAtomCommonObjectAttributes.Language*
+  commentId: Overload:Argotic.Syndication.IAtomCommonObjectAttributes.Language
+  name: Language
+  nameWithType: IAtomCommonObjectAttributes.Language
+  fullName: Argotic.Syndication.IAtomCommonObjectAttributes.Language
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Security.Permissions;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Configuration;
-
-namespace Argotic.Net
+﻿namespace Argotic.Net
 {
+    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Argotic.Common;
+    using Argotic.Configuration;
+
     /// <summary>
     /// Allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.
     /// </summary>
@@ -26,46 +25,38 @@ namespace Argotic.Net
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
-    ///             region="XmlRpcClient"
-    ///         />
+    ///         <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" region="XmlRpcClient" />
     ///     </code>
     /// </example>
     public class XmlRpcClient
     {
         /// <summary>
+        /// Private member to hold HTTP web request used by asynchronous send operations.
+        /// </summary>
+        private static WebRequest asyncHttpWebRequest;
+
+        /// <summary>
         /// Private member to hold the location of the host computer that client XML-RPC calls will be sent to.
         /// </summary>
         private Uri clientHost;
-        /// <summary>
-        /// Private member to hold information such as the application name, version, host operating system, and language.
-        /// </summary>
-        private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
+
         /// <summary>
         /// Private member to hold the web request options.
         /// </summary>
         private WebRequestOptions clientOptions = new WebRequestOptions();
+
         /// <summary>
         /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
         /// </summary>
-        private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
+        private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
+
         /// <summary>
-        /// Private member to hold a value that indictaes if the client sends default credentials when making an XML-RPC call.
+        /// Private member to hold information such as the application name, version, host operating system, and language.
         /// </summary>
-        private bool clientUsesDefaultCredentials;
-        /// <summary>
-        /// Private member to hold a value indicating if the client is in the process of sending a remote procedure call.
-        /// </summary>
-        private bool clientIsSending;
-        /// <summary>
-        /// Private member to hold a value indicating if the client asynchronous send operation was cancelled.
-        /// </summary>
-        private bool clientAsyncSendCancelled;
-        /// <summary>
-        /// Private member to hold HTTP web request used by asynchronous send operations.
-        /// </summary>
-        private static WebRequest asyncHttpWebRequest;
+        private string clientUserAgent = string.Format(
+            null,
+            "Argotic-Syndication-Framework/{0}",
+            System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class.
@@ -84,7 +75,7 @@ namespace Argotic.Net
         {
             this.Initialize();
 
-            this.Host   = host;
+            this.Host = host;
         }
 
         /// <summary>
@@ -95,43 +86,17 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-        public XmlRpcClient(Uri host, string userAgent) : this(host)
+        public XmlRpcClient(Uri host, string userAgent)
+            : this(host)
         {
-            this.UserAgent  = userAgent;
+            this.UserAgent = userAgent;
         }
 
         /// <summary>
         /// Occurs when an asynchronous remote procedure call send operation completes.
         /// </summary>
-        /// <seealso cref="SendAsync(XmlRpcMessage, Object)"/>
+        /// <seealso cref="SendAsync(XmlRpcMessage, object)"/>
         public event EventHandler<XmlRpcMessageSentEventArgs> SendCompleted;
-
-        /// <summary>
-        /// Raises the <see cref="SendCompleted"/> event.
-        /// </summary>
-        /// <param name="e">A <see cref="XmlRpcMessageSentEventArgs"/> that contains the event data.</param>
-        /// <remarks>
-        ///     <para>
-        ///         Classes that inherit from the <see cref="XmlRpcClient"/> class can override the <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> method
-        ///         to perform additional tasks when the <see cref="SendCompleted"/> event occurs.
-        ///     </para>
-        ///     <para>
-        ///         <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate.
-        ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
-        ///     </para>
-        /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
-        {
-            EventHandler<XmlRpcMessageSentEventArgs> handler    = null;
-
-            handler = this.SendCompleted;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
 
         /// <summary>
         /// Gets or sets the authentication credentials utilized by this client when making remote procedure calls.
@@ -144,12 +109,12 @@ namespace Argotic.Net
         {
             get
             {
-                return clientOptions.Credentials;
+                return this.clientOptions.Credentials;
             }
 
             set
             {
-                clientOptions.Credentials = value;
+                this.clientOptions.Credentials = value;
             }
         }
 
@@ -165,13 +130,13 @@ namespace Argotic.Net
         {
             get
             {
-                return clientHost;
+                return this.clientHost;
             }
 
             set
             {
                 Guard.ArgumentNotNull(value, "value");
-                clientHost = value;
+                this.clientHost = value;
             }
         }
 
@@ -186,12 +151,12 @@ namespace Argotic.Net
         {
             get
             {
-                return clientOptions.Proxy;
+                return this.clientOptions.Proxy;
             }
 
             set
             {
-                clientOptions.Proxy = value;
+                this.clientOptions.Proxy = value;
             }
         }
 
@@ -205,7 +170,7 @@ namespace Argotic.Net
         {
             get
             {
-                return clientTimeout;
+                return this.clientTimeout;
             }
 
             set
@@ -214,19 +179,18 @@ namespace Argotic.Net
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else if (value > TimeSpan.FromDays(365))
+
+                if (value > TimeSpan.FromDays(365))
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
-                else
-                {
-                    clientTimeout   = value;
-                }
+
+                this.clientTimeout = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
+        /// Gets or sets a value indicating whether gets or sets a <see cref="bool"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
         /// </summary>
         /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
@@ -245,18 +209,7 @@ namespace Argotic.Net
         ///         and the <see cref="Credentials"/> property has not been set, then remote procedure calls are sent to the server anonymously.
         ///     </para>
         /// </remarks>
-        public bool UseDefaultCredentials
-        {
-            get
-            {
-                return clientUsesDefaultCredentials;
-            }
-
-            set
-            {
-                clientUsesDefaultCredentials = value;
-            }
-        }
+        public bool UseDefaultCredentials { get; set; }
 
         /// <summary>
         /// Gets or sets information such as the client application name, version, host operating system, and language.
@@ -268,49 +221,27 @@ namespace Argotic.Net
         {
             get
             {
-                return clientUserAgent;
+                return this.clientUserAgent;
             }
 
             set
             {
                 Guard.ArgumentNotNullOrEmptyString(value, "value");
-                clientUserAgent = value.Trim();
+                this.clientUserAgent = value.Trim();
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
         /// <value><b>true</b> if client asynchronous send operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncSendHasBeenCancelled
-        {
-            get
-            {
-                return clientAsyncSendCancelled;
-            }
-
-            set
-            {
-                clientAsyncSendCancelled = value;
-            }
-        }
+        internal bool AsyncSendHasBeenCancelled { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating if the client is in the process of sending a remote procedure call.
+        /// Gets or sets a value indicating whether gets or sets a value indicating if the client is in the process of sending a remote procedure call.
         /// </summary>
         /// <value><b>true</b> if client is in the process of sending a remote procedure call, otherwise <b>false</b>.</value>
-        internal bool SendOperationInProgress
-        {
-            get
-            {
-                return clientIsSending;
-            }
-
-            set
-            {
-                clientIsSending = value;
-            }
-        }
+        internal bool SendOperationInProgress { get; set; }
 
         /// <summary>
         /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
@@ -325,23 +256,28 @@ namespace Argotic.Net
         /// </example>
         public static string ScalarTypeAsString(XmlRpcScalarValueType type)
         {
-            string name = String.Empty;
+            string name = string.Empty;
 
             foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
             {
                 if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
                 {
-                    XmlRpcScalarValueType valueType = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    XmlRpcScalarValueType valueType = (XmlRpcScalarValueType)Enum.Parse(
+                        fieldInfo.FieldType,
+                        fieldInfo.Name);
 
                     if (valueType == type)
                     {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(
+                            typeof(EnumerationMetadataAttribute),
+                            false);
 
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
-                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                            EnumerationMetadataAttribute enumerationMetadata =
+                                customAttributes[0] as EnumerationMetadataAttribute;
 
-                            name    = enumerationMetadata.AlternateValue;
+                            name = enumerationMetadata.AlternateValue;
                             break;
                         }
                     }
@@ -375,16 +311,20 @@ namespace Argotic.Net
             {
                 if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
                 {
-                    XmlRpcScalarValueType type  = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    XmlRpcScalarValueType type = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(
+                        typeof(EnumerationMetadataAttribute),
+                        false);
 
                     if (customAttributes != null && customAttributes.Length > 0)
                     {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+                        EnumerationMetadataAttribute enumerationMetadata =
+                            customAttributes[0] as EnumerationMetadataAttribute;
 
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase)
+                            == 0)
                         {
-                            valueType   = type;
+                            valueType = type;
                             break;
                         }
                     }
@@ -413,207 +353,127 @@ namespace Argotic.Net
         /// </remarks>
         public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
         {
-            if (source == null || String.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
+            if (source == null || string.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
             {
-                value   = null;
+                value = null;
                 return false;
             }
 
-            if(source.HasChildren)
+            if (source.HasChildren)
             {
-                XPathNavigator navigator    = source.CreateNavigator();
+                XPathNavigator navigator = source.CreateNavigator();
                 if (navigator.MoveToFirstChild())
                 {
-                    if (String.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         int scalar;
-                        if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
+                        if (int.TryParse(
+                            navigator.Value,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out scalar))
                         {
-                            value   = new XmlRpcScalarValue(scalar);
+                            value = new XmlRpcScalarValue(scalar);
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         int scalar;
-                        if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
+                        if (int.TryParse(
+                            navigator.Value,
+                            NumberStyles.Integer,
+                            NumberFormatInfo.InvariantInfo,
+                            out scalar))
                         {
-                            value   = new XmlRpcScalarValue(scalar);
+                            value = new XmlRpcScalarValue(scalar);
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         bool scalar;
-                        if (XmlRpcClient.TryParseBoolean(navigator.Value, out scalar))
+                        if (TryParseBoolean(navigator.Value, out scalar))
                         {
-                            value   = new XmlRpcScalarValue(scalar);
+                            value = new XmlRpcScalarValue(scalar);
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        value   = new XmlRpcScalarValue(navigator.Value);
+                        value = new XmlRpcScalarValue(navigator.Value);
                         return true;
                     }
-                    else if (String.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         double scalar;
-                        if (Double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out scalar))
+                        if (double.TryParse(
+                            navigator.Value,
+                            NumberStyles.Float,
+                            NumberFormatInfo.InvariantInfo,
+                            out scalar))
                         {
-                            value   = new XmlRpcScalarValue(scalar);
+                            value = new XmlRpcScalarValue(scalar);
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(
+                                 navigator.Name,
+                                 "dateTime.iso8601",
+                                 StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         DateTime scalar;
                         if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out scalar))
                         {
-                            value   = new XmlRpcScalarValue(scalar);
+                            value = new XmlRpcScalarValue(scalar);
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        if(!String.IsNullOrEmpty(navigator.Value))
+                        if (!string.IsNullOrEmpty(navigator.Value))
                         {
                             try
                             {
                                 byte[] data = Convert.FromBase64String(navigator.Value);
-                                value       = new XmlRpcScalarValue(data);
+                                value = new XmlRpcScalarValue(data);
                                 return true;
                             }
-                            catch(FormatException)
+                            catch (FormatException)
                             {
                                 value = null;
                                 return false;
                             }
                         }
                     }
-                    else if (String.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        XmlRpcStructureValue structure  = new XmlRpcStructureValue();
+                        XmlRpcStructureValue structure = new XmlRpcStructureValue();
                         if (structure.Load(source))
                         {
-                            value   = structure;
+                            value = structure;
                             return true;
                         }
                     }
-                    else if (String.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
+                    else if (string.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        XmlRpcArrayValue array  = new XmlRpcArrayValue();
+                        XmlRpcArrayValue array = new XmlRpcArrayValue();
                         if (array.Load(source))
                         {
-                            value   = array;
+                            value = array;
                             return true;
                         }
                     }
                 }
             }
-            else if (!String.IsNullOrEmpty(source.Value))
+            else if (!string.IsNullOrEmpty(source.Value))
             {
-                value   = new XmlRpcScalarValue(source.Value);
+                value = new XmlRpcScalarValue(source.Value);
                 return true;
             }
 
-            value   = null;
+            value = null;
             return false;
-        }
-
-        /// <summary>
-        /// Converts the specified string representation of a logical value to its <see cref="Boolean"/> equivalent. A return value indicates whether the conversion succeeded or failed.
-        /// </summary>
-        /// <param name="value">A string containing the value to convert.</param>
-        /// <param name="result">
-        ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
-        ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
-        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
-        ///     This parameter is passed uninitialized.
-        /// </param>
-        /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
-        internal static bool TryParseBoolean(string value, out bool result)
-        {
-            if (String.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = true;
-                return true;
-            }
-            else if (String.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = false;
-                return true;
-            }
-            else if (String.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = true;
-                return true;
-            }
-            else if (String.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result = false;
-                return true;
-            }
-            else
-            {
-                result  = false;
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Called when a corresponding asynchronous send operation completes.
-        /// </summary>
-        /// <param name="result">The result of the asynchronous operation.</param>
-        private static void AsyncSendCallback(IAsyncResult result)
-        {
-            XmlRpcResponse response         = null;
-            WebRequest httpWebRequest       = null;
-            XmlRpcClient client             = null;
-            Uri host                        = null;
-            XmlRpcMessage message           = null;
-            WebRequestOptions options       = null;
-            object userToken                = null;
-
-            if (result.IsCompleted)
-            {
-                object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                client              = parameters[1] as XmlRpcClient;
-                host                = parameters[2] as Uri;
-                message             = parameters[3] as XmlRpcMessage;
-                options             = parameters[4] as WebRequestOptions;
-                userToken           = parameters[5];
-
-                if (client != null)
-                {
-                    WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-
-                    response    = new XmlRpcResponse(httpWebResponse);
-
-                    client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
-
-                    client.SendOperationInProgress  = false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
-        /// </summary>
-        /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
-        /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
-        private void AsyncTimeoutCallback(object state, bool timedOut)
-        {
-            if (timedOut)
-            {
-                if (asyncHttpWebRequest != null)
-                {
-                    asyncHttpWebRequest.Abort();
-                }
-            }
-
-            this.SendOperationInProgress    = false;
         }
 
         /// <summary>
@@ -623,27 +483,41 @@ namespace Argotic.Net
         /// <returns>A <see cref="XmlRpcResponse"/> that represents the server's response to the remote procedure call.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
+        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, object)"/> call in progress.</exception>
         public XmlRpcResponse Send(XmlRpcMessage message)
         {
             XmlRpcResponse response = null;
 
             Guard.ArgumentNotNull(message, "message");
 
-            if(this.Host == null)
+            if (this.Host == null)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
-            }
-            else if (this.SendOperationInProgress)
-            {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(
+                    string.Format(
+                        null,
+                        "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}",
+                        message));
             }
 
-            WebRequest webRequest   = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
+            if (this.SendOperationInProgress)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        null,
+                        "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}",
+                        message));
+            }
+
+            WebRequest webRequest = CreateWebRequest(
+                this.Host,
+                this.UserAgent,
+                message,
+                this.UseDefaultCredentials,
+                this.clientOptions);
 
             using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
             {
-                response    = new XmlRpcResponse(webResponse);
+                response = new XmlRpcResponse(webResponse);
             }
 
             return response;
@@ -658,42 +532,64 @@ namespace Argotic.Net
         /// <remarks>
         ///     <para>
         ///         To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event.
-        ///         You can cancel a <see cref="SendAsync(XmlRpcMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
+        ///         You can cancel a <see cref="SendAsync(XmlRpcMessage, object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
-        //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-        public void SendAsync(XmlRpcMessage message, Object userToken)
+        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, object)"/> call in progress.</exception>
+        // [HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
+        public void SendAsync(XmlRpcMessage message, object userToken)
         {
             Guard.ArgumentNotNull(message, "message");
 
             if (this.Host == null)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(
+                    string.Format(
+                        null,
+                        "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}",
+                        message));
             }
-            else if (this.SendOperationInProgress)
+
+            if (this.SendOperationInProgress)
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+                throw new InvalidOperationException(
+                    string.Format(
+                        null,
+                        "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}",
+                        message));
             }
 
-            this.SendOperationInProgress    = true;
-            this.AsyncSendHasBeenCancelled  = false;
+            this.SendOperationInProgress = true;
+            this.AsyncSendHasBeenCancelled = false;
 
-            asyncHttpWebRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
+            asyncHttpWebRequest = CreateWebRequest(
+                this.Host,
+                this.UserAgent,
+                message,
+                this.UseDefaultCredentials,
+                this.clientOptions);
 
-            object[] state      = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
+            object[] state = new object[6]
+                                 {
+                                    asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken,
+                                };
             IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
 
-            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
+            ThreadPool.RegisterWaitForSingleObject(
+                result.AsyncWaitHandle,
+                new WaitOrTimerCallback(this.AsyncTimeoutCallback),
+                state,
+                this.Timeout,
+                true);
         }
 
         /// <summary>
         /// Cancels an asynchronous operation to send a remote procedure call.
         /// </summary>
         /// <remarks>
-        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(XmlRpcMessage, Object)"/> operation.
+        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(XmlRpcMessage, object)"/> operation.
         ///     If there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
         ///     If there is no send operation pending, this method does nothing.
         /// </remarks>
@@ -701,8 +597,116 @@ namespace Argotic.Net
         {
             if (this.SendOperationInProgress && !this.AsyncSendHasBeenCancelled)
             {
-                this.AsyncSendHasBeenCancelled  = true;
+                this.AsyncSendHasBeenCancelled = true;
                 asyncHttpWebRequest.Abort();
+            }
+        }
+
+        /// <summary>
+        /// Converts the specified string representation of a logical value to its <see cref="bool"/> equivalent. A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">A string containing the value to convert.</param>
+        /// <param name="result">
+        ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
+        ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
+        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
+        ///     This parameter is passed uninitialized.
+        /// </param>
+        /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
+        internal static bool TryParseBoolean(string value, out bool result)
+        {
+            if (string.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                result = true;
+                return true;
+            }
+
+            if (string.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                result = false;
+                return true;
+            }
+
+            if (string.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                result = true;
+                return true;
+            }
+
+            if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                result = false;
+                return true;
+            }
+
+            result = false;
+            return false;
+        }
+
+        /// <summary>
+        /// Raises the <see cref="SendCompleted"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="XmlRpcMessageSentEventArgs"/> that contains the event data.</param>
+        /// <remarks>
+        ///     <para>
+        ///         Classes that inherit from the <see cref="XmlRpcClient"/> class can override the <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> method
+        ///         to perform additional tasks when the <see cref="SendCompleted"/> event occurs.
+        ///     </para>
+        ///     <para>
+        ///         <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate.
+        ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
+        ///     </para>
+        /// </remarks>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#")]
+        protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
+        {
+            EventHandler<XmlRpcMessageSentEventArgs> handler = null;
+
+            handler = this.SendCompleted;
+
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        /// <summary>
+        /// Called when a corresponding asynchronous send operation completes.
+        /// </summary>
+        /// <param name="result">The result of the asynchronous operation.</param>
+        private static void AsyncSendCallback(IAsyncResult result)
+        {
+            XmlRpcResponse response = null;
+            WebRequest httpWebRequest = null;
+            XmlRpcClient client = null;
+            Uri host = null;
+            XmlRpcMessage message = null;
+            WebRequestOptions options = null;
+            object userToken = null;
+
+            if (result.IsCompleted)
+            {
+                object[] parameters = (object[])result.AsyncState;
+                httpWebRequest = parameters[0] as WebRequest;
+                client = parameters[1] as XmlRpcClient;
+                host = parameters[2] as Uri;
+                message = parameters[3] as XmlRpcMessage;
+                options = parameters[4] as WebRequestOptions;
+                userToken = parameters[5];
+
+                if (client != null)
+                {
+                    WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
+
+                    response = new XmlRpcResponse(httpWebResponse);
+
+                    client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
+
+                    client.SendOperationInProgress = false;
+                }
             }
         }
 
@@ -720,41 +724,49 @@ namespace Argotic.Net
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
+        private static WebRequest CreateWebRequest(
+            Uri host,
+            string userAgent,
+            XmlRpcMessage message,
+            bool useDefaultCredentials,
+            WebRequestOptions options)
         {
-            HttpWebRequest httpRequest  = null;
+            HttpWebRequest httpRequest = null;
             byte[] payloadData;
 
             Guard.ArgumentNotNull(host, "host");
             Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
             Guard.ArgumentNotNull(message, "message");
 
-            using(MemoryStream stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Document;
-                settings.Encoding           = message.Encoding;
-                settings.Indent             = true;
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.ConformanceLevel = ConformanceLevel.Document;
+                settings.Encoding = message.Encoding;
+                settings.Indent = true;
                 settings.OmitXmlDeclaration = false;
 
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
+                using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     message.WriteTo(writer);
                     writer.Flush();
                 }
 
                 stream.Seek(0, SeekOrigin.Begin);
-                payloadData                 = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
+                payloadData = message.Encoding.GetBytes(new StreamReader(stream).ReadToEnd());
             }
 
-            httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
-            httpRequest.Method              = "POST";
-            httpRequest.ContentLength       = payloadData.Length;
-            httpRequest.ContentType         = String.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
-            httpRequest.UserAgent           = userAgent;
-            if (options != null) options.ApplyOptions(httpRequest);
+            httpRequest = (HttpWebRequest)WebRequest.Create(host);
+            httpRequest.Method = "POST";
+            httpRequest.ContentLength = payloadData.Length;
+            httpRequest.ContentType = string.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
+            httpRequest.UserAgent = userAgent;
+            if (options != null)
+            {
+                options.ApplyOptions(httpRequest);
+            }
 
-            if(useDefaultCredentials)
+            if (useDefaultCredentials)
             {
                 httpRequest.Credentials = CredentialCache.DefaultCredentials;
             }
@@ -768,6 +780,24 @@ namespace Argotic.Net
         }
 
         /// <summary>
+        /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
+        /// </summary>
+        /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
+        /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
+        private void AsyncTimeoutCallback(object state, bool timedOut)
+        {
+            if (timedOut)
+            {
+                if (asyncHttpWebRequest != null)
+                {
+                    asyncHttpWebRequest.Abort();
+                }
+            }
+
+            this.SendOperationInProgress = false;
+        }
+
+        /// <summary>
         /// Initializes the current instance using the application configuration settings.
         /// </summary>
         /// <seealso cref="XmlRpcClientSection"/>
@@ -777,28 +807,29 @@ namespace Argotic.Net
 
             if (clientConfiguration != null)
             {
-                if(clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
+                if (clientConfiguration.Timeout.TotalMilliseconds > 0
+                    && clientConfiguration.Timeout < TimeSpan.FromDays(365))
                 {
-                    this.Timeout    = clientConfiguration.Timeout;
+                    this.Timeout = clientConfiguration.Timeout;
                 }
 
-                if (!String.IsNullOrEmpty(clientConfiguration.UserAgent))
+                if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
                 {
-                    this.UserAgent  = clientConfiguration.UserAgent;
+                    this.UserAgent = clientConfiguration.UserAgent;
                 }
 
                 if (clientConfiguration.Network != null)
                 {
-                    this.UseDefaultCredentials  = clientConfiguration.Network.DefaultCredentials;
+                    this.UseDefaultCredentials = clientConfiguration.Network.DefaultCredentials;
 
                     if (clientConfiguration.Network.Credential != null)
                     {
-                        this.Credentials    = clientConfiguration.Network.Credential;
+                        this.Credentials = clientConfiguration.Network.Credential;
                     }
 
                     if (clientConfiguration.Network.Host != null)
                     {
-                        this.Host   = clientConfiguration.Network.Host;
+                        this.Host = clientConfiguration.Network.Host;
                     }
                 }
             }

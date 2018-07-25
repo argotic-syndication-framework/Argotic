@@ -1,0 +1,3 @@
+[submodule "DocFx/WikiClone"]
+	path = DocFx/WikiClone
+	url = https://github.com/endjin/Argotic.wiki.git

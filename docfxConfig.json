@@ -1,0 +1,69 @@
+{
+    "HomePage":"Argotic.wiki/Home.md",
+    "Pages": [
+        {
+            "Name": "The Basics",
+            "Articles": {
+                "IncludedLocations": ["Argotic.wiki/overview-of-syndication-extensions-natively-supported-by-the-framework.md",
+                    "Argotic.wiki/introduction-to-the-framework-components.md",
+                    "Argotic.wiki/introduction-to-the-framework-api-and-core-entities.md",
+                    "Argotic.wiki/consuming-an-rss-feed.md","Argotic.wiki/consuming-an-atom-feed-or-atom-entry-document.md","Argotic.wiki/consuming-an-opml-outline.md",
+                    "Argotic.wiki/format-agnostic-consumption-of-syndication-feeds.md",
+                    "Argotic.wiki/generating-an-rss-feed.md",
+                    "Argotic.wiki/generating-an-atom-feed-or-atom-entry-document.md",
+                    "Argotic.wiki/generating-an-opml-outline.md"
+                ]
+            }
+        },
+        {
+            "Name": "Syndication Extensions",
+            "Articles": {
+                "IncludedLocations": [
+                    "Argotic.wiki/introduction-to-the-framework-extension-architecture.md",
+                    "Argotic.wiki/overview-of-syndication-extensions-natively-supported-by-the-framework.md",
+                    "Argotic.wiki/consuming-an-extended-rss-feed.md",
+                    "Argotic.wiki/generating-an-extended-rss-feed.md"
+                ]
+            }
+        },
+        {
+            "Name": "Network Protocols",
+            "Articles": {
+                "IncludedLocations": [
+                    "Argotic.wiki/sending-notification-pings-using-the-trackback-client.md",
+                    "Argotic.wiki/making-remote-procedure-calls-using-the-xml-rpc-client.md"
+                ]
+            }
+        },
+        {
+            "Name": "Specialized Content Formats",
+            "Articles": {
+                "IncludedLocations": [
+                    "Argotic.wiki/consuming-personal-attention-data.md",
+                    "Argotic.wiki/generating-attention-profile-information.md",
+                    "Argotic.wiki/consuming-web-log-communication-services-information.md",
+                    "Argotic.wiki/generating-portable-web-log-content.md",
+                    "Argotic.wiki/consuming-web-log-communication-services-information.md",
+                    "Argotic.wiki/publishing-auto-discoverable-web-log-communication-service-information.md"
+                ]
+            }
+        },
+        {
+            "Name": "Framework Provider Model",
+            "Articles": {
+                "IncludedLocations": [
+                    "Argotic.wiki/introduction-to-the-framework-extensible-provider-model.md",
+                    "Argotic.wiki/configuring-syndication-resource-providers-within-your-application.md",
+                    "Argotic.wiki/managing-provider-based-syndicated-content.md",
+                ]
+            }
+        },
+        {
+            "Name": "SDK",
+            "Projects": {
+                "IncludedLocations": ["Solutions/**/*.csproj"],
+                "ExcludedLocations": ["Solutions/**.Tests/*"]
+            }
+        },
+    ]
+}

@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to consume Attention Profiling Markup Language (APML) formatted attention data </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to consume Attention Profiling Markup Language (APML) formatted attention data ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-consume-attention-profiling-markup-language-apml-formatted-attention-data">How to consume Attention Profiling Markup Language (APML) formatted attention data</h1>
+
+<p>Attention Profiling Markup Language (APML) is an open standard that encapsulates a summary of your interests (across multiple profiles) in a simple, portable way. APML allows users to share their own personal <em>attention profile</em> in much the same way that OPML allows the exchange of reading lists between news readers. The idea is to compress all forms of attention data into a portable file format containing a description of ranked user interests.</p>
+<p>Attention data comes in many forms. These include specifically designed, high-resolution file formats or more familiar forms of user data storage such as IM chat logs, browser history and cache, email inboxes, documents, OPML lists, etc. In some usage scenarios, however, it is necessary to analyze all available attention data to determine an <em>attention profile</em>, a compressed, portable and open-standard description of one’s ranked personal interests. A portable attention profile would allow a user to own (and optionally submit) a meta view of their interests to create instant relationships with &quot;attention aware&quot; products and services; and thus creates an instantly customized user experience.</p>
+<p>The classes that together compose the implementation of APML are located in the <em>Argotic.Syndication.Specialized</em> namespace. The primary framework entity that you will use when working with APML formated syndication resources is the <em>ApmlDocument</em> class. This class implements the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated attention data. The framework will by default automatically load any syndication extensions that are present in addition to the syndicated attention data and attempt to handle malformed XML data.</p>
+<h2 id="discovery">Discovery</h2>
+<p>The APML document representing a particular web resource can be found in the header of the page. It is represented by a HTML element that looks like this:</p>
+<pre><code>&lt;link rel=&quot;meta&quot; type=&quot;application/xml+apml&quot; title=&quot;{Human readable label for attention data}&quot; href=&quot;{Absolute URI that points to the APML formatted attention data}&quot;/&gt;
+</code></pre>
+<p>Example:</p>
+<pre><code>&lt;link rel=&quot;meta&quot; type=&quot;application/xml+apml&quot; title=&quot;APML 0.6&quot; href=&quot;http://apml.pbwiki.com/apml&quot;/&gt;
+</code></pre>
+<h2 id="consuming-syndicated-attention-data">Consuming syndicated attention data</h2>
+<p>The <em>ApmlDocument</em> class provides two ways of consuming syndicated content that conforms to the APML syndication format. The first way to consume APML attention data is to use the static <em>Create</em> method exposed by the <em>ApmlDocument</em> class, which provides a means of quickly consuming attention data that is available at a given <em>Uri</em>:</p>
+<pre><code>using Argotic.Syndication.Specialized;
+
+ApmlDocument document = ApmlDocument.Create(new Uri(&quot;http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional&quot;));
+
+foreach (ApmlProfile profile in document.Profiles)
+{
+    if (profile.Name == document.DefaultProfileName)
+    {
+        //  Perform some processing on the attention profile
+        break;
+    }
+}
+</code></pre>
+<p>The other way to consume APML attention data is to use the overloaded <em>Load</em> method exposed by the <em>ApmlDocument</em> class, which provides a means of consuming syndicated attention data from a variety of data sources such as <em>IXPathNavigable</em>, <em>Stream</em>, <em>XmlReader</em>, and <em>Uri</em>:</p>
+<pre><code>using System.IO;
+using System.Xml;
+using System.Xml.Xpath;
+using Argotic.Syndication.Specialized;
+
+ApmlDocument document = new ApmlDocument();
+
+using (FileStream stream = new FileStream(&quot;SampleAttentionProfile.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    document.Load(stream);
+}
+
+document = new ApmlDocument();
+
+using (FileStream stream = new FileStream(&quot;SampleAttentionProfile.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    XmlReaderSettings settings = new XmlReaderSettings();
+    settings.IgnoreComments = true;
+    settings.IgnoreWhitespace = true;
+
+    using (XmlReader reader = XmlReader.Create(stream, settings))
+    {
+        document.Load(reader);
+    }
+}
+
+document = new ApmlDocument();
+
+using (FileStream stream = new FileStream(&quot;SampleAttentionProfile.xml&quot;, FileMode.Open, FileAccess.Read))
+{
+    document.Load(new XPathDocument(stream));
+}
+</code></pre>
+<p>Sample file that can be used with the above code example: <a href="samples/consuming-personal-attention-data-SampleAttentionProfile.xml" title="SampleAttentionProfile.xml">SampleAttentionProfile.xml</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Docs/Specialized_Content_Formats/Articles/consuming-personal-attention-data.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

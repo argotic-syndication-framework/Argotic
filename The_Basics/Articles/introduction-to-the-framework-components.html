@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction to the framework components </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Introduction to the framework components ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction-to-the-framework-components">Introduction to the framework components</h1>
+
+<p>The syndication framework is segmented both physically as a set of .NET class library assemblies and logically using namespaces that organize code and provides a way to create globally unique types. The framework supports both the Microsoft .NET 2.0 and Microsoft .NET 3.5 frameworks while still providing a consistent API to program against.</p>
+<h2 id="framework-physical-segmentation">Framework physical segmentation</h2>
+<ul>
+<li><em>Argotic.Common.dll</em>
+<ul>
+<li><strong>Purpose</strong>: Class library that contains classes, interfaces, and enumerations shared by the Argotic Syndication Framework entities.</li>
+<li><strong>Dependencies</strong>: None</li>
+</ul>
+</li>
+<li><em>Argotic.Core.dll</em>
+<ul>
+<li><strong>Purpose</strong>: Class library that contains the classes, interfaces, and enumerations that compose the core web content syndication framework.</li>
+<li><strong>Dependencies</strong>: <em>Argotic.Common.dll</em> and <em>Argotic.Extensions.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Extensions.dll</em>
+<ul>
+<li><strong>Purpose</strong>: Class library that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</li>
+<li><strong>Dependencies</strong>: <em>Argotic.Common.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Web.dll</em>
+<ul>
+<li><strong>Purpose</strong>: Class library that contains the classes, interfaces, and enumerations that enable web content syndication browser-server communication.</li>
+<li><strong>Dependencies</strong>: <em>Argotic.Common.dll</em>, <em>Argotic.Core.dll</em>, and <em>Argotic.Extensions.dll</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="framework-logical-segmentation">Framework logical segmentation</h2>
+<ul>
+<li><em>Argotic.Common</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Common namespace contains classes, interfaces, and enumerations shared by the Argotic Syndication Framework entities.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Common.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Configuration</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Configuration namespace contains the types that provide the programming model for handling configuration data.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Configuration.Provider</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Configuration.Provider namespace contains the base classes shared by both server and client applications to support a pluggable model to easily add or remove functionality.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Data.Adapters</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Data.Adapters namespace provides access to classes that represent the syndication adapter architecture. The adapter architecture provides a means of instantiating syndication entities from XML data sources.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Extensions</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Extensions namespace contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Extensions.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Extensions.Core</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Extensions.Core namespace contains native framework implementations of the most commonly utilized web content syndication extensions.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Extensions.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Net</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Net namespace contains the classes, interfaces, and enumerations that provide a simple programming interface for many of the protocols used in web content syndication. These programming interfaces enable you to develop applications that communicate with syndicated web resources without worrying about the specific details of the individual protocols.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Syndication</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Syndication namespace contains implementations of the core Atom, OPML, and RSS syndication specifications, as well as a generic syndication resource abstraction layer and syndicated content manager that utilizes the framework extensible provider model.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Syndication.Specialized</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Syndication.Specialized namespace contains implementations of specialized web content syndication formats.</li>
+<li><strong>Assembly</strong>: <em>Argotic.Core.dll</em></li>
+</ul>
+</li>
+<li><em>Argotic.Web</em>
+<ul>
+<li><strong>Purpose</strong>: The Argotic.Web namespace supplies classes and interfaces that enable web content syndication browser-server communication.</li>
+<li><strong>Assembly</strong>: Argotic.Web.dll</li>
+</ul>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Docs/The_Basics/Articles/introduction-to-the-framework-components.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

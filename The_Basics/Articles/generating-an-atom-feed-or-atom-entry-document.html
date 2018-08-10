@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create Atom feeds and stand-alone entry documents </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to create Atom feeds and stand-alone entry documents ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-create-atom-feeds-and-stand-alone-entry-documents">How to create Atom feeds and stand-alone entry documents</h1>
+
+<p>Atom is an an XML-based Web content and metadata syndication format that describes lists of related information known as <em>feeds</em>. Feeds are composed of a number of items, known as <em>entries</em>, each with an extensible set of attached metadata. An entry can also appear as the document (i.e., top-level) element of a stand-alone Atom Entry Document. The framework provides a complete implementation of the Atom 1.0 specification, which can be found at [url:http://www.atomenabled.org/developers/syndication/atom-format-spec.php].</p>
+<p>The classes and enumerations that together compose the implementation of Atom are located in the <em>Argotic.Syndication</em> namespace. The primary framework entities that you will use when working with Atom formated syndication resources are the <em>AtomFeed</em> and <em>AtomEntry</em> classes. These classes implement the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated content. The framework will by default automatically detect any syndication extensions that have been added to an <em>AtomFeed</em> or <em>AtomEntry</em> or their child entities and output the appropriate XML namespaces.</p>
+<p>One of the core principals of the framework is &quot;<em>Read flexibly, Write strictly</em>&quot;. The framework upholds this principal by consuming syndication resources as flexibly as possible, but always generates output that strictly matches the syndication format specification. This methodology ensures you can consume syndication resources with confidence while still publishing syndicated content that strictly conforms to its format specification.</p>
+<h2 id="creating-syndicated-content">Creating syndicated content</h2>
+<p>To create a new Atom feed, you simply instantiate a new instance of the <em>AtomFeed</em> class and utilize its properties and methods to describe the web content you wish to syndicate. The framework API will as much as possible match the terminology used in the syndication format specification, which allows you to easily navigate the framework syndication entities.</p>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+AtomFeed feed = new AtomFeed();
+
+feed.Id = new AtomId(new Uri(&quot;http://localhost&quot;));
+feed.Title = new AtomTextConstruct(&quot;Simple Atom Feed&quot;);
+feed.UpdatedOn = DateTime.Now;
+
+feed.Authors.Add(new AtomPersonConstruct(&quot;Brian William Kuhn&quot;));
+
+AtomLink selfLink = new AtomLink();
+selfLink.Relation = &quot;self&quot;;
+selfLink.Uri = new Uri(&quot;http://localhost/atom.xml&quot;);
+feed.Links.Add(selfLink);
+
+AtomEntry entry = new AtomEntry();
+entry.Id = new AtomId(new Uri(&quot;urn:uuid:fbd850a0-e333-12dc-bc36-7d8b00dd6d4c&quot;));
+entry.Title = new AtomTextConstruct(&quot;Simple Atom Entry&quot;);
+entry.UpdatedOn = DateTime.Now;
+entry.Summary = new AtomTextConstruct(&quot;A minimal Atom feed entry.&quot;);
+
+AtomLink alternateLink = new AtomLink();
+alternateLink.Relation = &quot;alternate&quot;;
+alternateLink.Uri = new Uri(&quot;http://localhost/entries/SimpleAtomEntry.aspx&quot;);
+entry.Links.Add(alternateLink);
+
+feed.AddEntry(entry);
+
+using (FileStream stream = new FileStream(&quot;SimpleAtomFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    feed.Save(stream);
+}
+</code></pre>
+<p>The Atom feed generated in the above example represents the minimal information required per the Atom 1.0 specification.</p>
+<p>To create a new Atom Entry Document, you simply instantiate a new instance of the <em>AtomEntry</em> class and utilize its properties and methods to describe the web content you wish to syndicate. The framework API will as much as possible match the terminology used in the syndication format specification, which allows you to easily navigate the framework syndication entities.</p>
+<pre><code>using System.IO;
+using Argotic.Syndication;
+
+AtomEntry entry = new AtomEntry();
+
+entry.Id = new AtomId(new Uri(&quot;http://localhost&quot;));
+entry.Title = new AtomTextConstruct(&quot;Atom Entry Document&quot;);
+entry.UpdatedOn = DateTime.Now;
+entry.Authors.Add(new AtomPersonConstruct(&quot;Brian William Kuhn&quot;));
+entry.Summary = new AtomTextConstruct(&quot;A stand-alone Atom Entry Document.&quot;);
+
+AtomLink alternateLink = new AtomLink();
+alternateLink.Relation = &quot;alternate&quot;;
+alternateLink.Uri = new Uri(&quot;http://localhost/entries/SimpleAtomEntry.aspx&quot;);
+entry.Links.Add(alternateLink);
+
+using (FileStream stream = new FileStream(&quot;AtomEntryDocument.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    entry.Save(stream);
+}
+</code></pre>
+<p>The Atom entry document generated in the above example represents the minimal information required per the Atom 1.0 specification.</p>
+<h2 id="specifying-the-set-of-features-to-support-when-generating-syndicated-content">Specifying the set of features to support when generating syndicated content</h2>
+<p>The framework provides a means of specifying the set of features that are supported when persisting a syndication resource via the <em>SyndicationResourceSaveSettings</em> class. This class is passed as an argument to the <em>Save</em> method of the syndication resource in order to configure how the save operation is performed.</p>
+<p>The <em>SyndicationResourceSaveSettings</em> class exposes the following properties:</p>
+<ul>
+<li><strong>AutoDetectExtensions</strong> - Indicates if syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities.</li>
+<li><strong>CharacterEncoding</strong> - Indicates the character encoding that is used when persisting a syndication resource.</li>
+<li><strong>MinimizeOutputSize</strong> - Indicates if syndication resource persist operations should attempt to minimize the physical size of the resulting output.</li>
+<li><strong>SupportedExtensions</strong> - Indicates the custom syndication extensions that you wish the save operation to support.</li>
+</ul>
+<p>Example:</p>
+<pre><code>using System.IO;
+using Argotic.Common;
+using Argotic.Syndication;
+
+AtomFeed feed = new AtomFeed();
+
+feed.Id = new AtomId(new Uri(&quot;http://localhost&quot;));
+feed.Title = new AtomTextConstruct(&quot;Compact Atom Feed&quot;);
+feed.UpdatedOn = DateTime.Now;
+
+feed.Authors.Add(new AtomPersonConstruct(&quot;Brian William Kuhn&quot;));
+
+AtomLink selfLink = new AtomLink();
+selfLink.Relation = &quot;self&quot;;
+selfLink.Uri = new Uri(&quot;http://localhost/atom.xml&quot;);
+feed.Links.Add(selfLink);
+
+AtomEntry entry = new AtomEntry();
+entry.Id = new AtomId(new Uri(&quot;urn:uuid:fbd850a0-e333-12dc-bc36-7d8b00dd6d4c&quot;));
+entry.Title = new AtomTextConstruct(&quot;Simple Atom Entry&quot;);
+entry.UpdatedOn = DateTime.Now;
+entry.Summary = new AtomTextConstruct(&quot;A minimal and non-indented Atom feed entry.&quot;);
+
+AtomLink alternateLink = new AtomLink();
+alternateLink.Relation = &quot;alternate&quot;;
+alternateLink.Uri = new Uri(&quot;http://localhost/entries/SimpleAtomEntry.aspx&quot;);
+entry.Links.Add(alternateLink);
+
+feed.AddEntry(entry);
+
+using (FileStream stream = new FileStream(&quot;CompactAtomFeed.xml&quot;, FileMode.Create, FileAccess.Write))
+{
+    SyndicationResourceSaveSettings settings = new SyndicationResourceSaveSettings();
+    settings.MinimizeOutputSize = true;
+
+    feed.Save(stream);
+}
+</code></pre>
+<p>In the example above, we are using the <em>SyndicationResourceSaveSettings</em> class to minimize the size of the raw XML data that represents the feed.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Docs/The_Basics/Articles/generating-an-atom-feed-or-atom-entry-document.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,823 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class XmlRpcClient
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class XmlRpcClient
+   ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Net.XmlRpcClient">
+  
+  
+  <h1 id="Argotic_Net_XmlRpcClient" data-uid="Argotic.Net.XmlRpcClient" class="text-break">Class XmlRpcClient
+  </h1>
+  <div class="markdown level0 summary"><p>Allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">XmlRpcClient</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
+  <h5 id="Argotic_Net_XmlRpcClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class XmlRpcClient : object</code></pre>
+  </div>
+  <h5 id="Argotic_Net_XmlRpcClient_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This implementation of XML-RPC is based on the XML-RPC 1.0 specification which can be found at <a href="http://www.xmlrpc.com/spec">http://www.xmlrpc.com/spec</a>.</p>
+<p><strong>XML-RPC</strong> is a Remote Procedure Calling protocol that works over the Internet.</p>
+<p>
+    An XML-RPC <em>message</em> is an HTTP-POST request. The body of the request is in XML.
+    A procedure executes on the server and the value it returns is also formatted in XML.
+</p>
+<p>Procedure parameters can be scalars, numbers, strings, dates and other simple types; and can also be complex record and list structures.</p>
+</div>
+  <h5 id="Argotic_Net_XmlRpcClient_examples"><strong>Examples</strong></h5>
+  <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs" region="XmlRpcClient"></code></pre>
+<p></code></pre><p>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient__ctor.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L73">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient__ctor_" data-uid="Argotic.Net.XmlRpcClient.#ctor*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient__ctor" data-uid="Argotic.Net.XmlRpcClient.#ctor">XmlRpcClient()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcClient.html">XmlRpcClient</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlRpcClient()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient__ctor_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.%23ctor(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L83">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient__ctor_" data-uid="Argotic.Net.XmlRpcClient.#ctor*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient__ctor_Uri_" data-uid="Argotic.Net.XmlRpcClient.#ctor(Uri)">XmlRpcClient(Uri)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcClient.html">XmlRpcClient</a> class that sends remote procedure calls using the specified XML-RPC server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlRpcClient(Uri host)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><span class="parametername">host</span></td>
+        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for XML-RPC transactions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient__ctor_Uri_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.%23ctor(Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L98">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient__ctor_" data-uid="Argotic.Net.XmlRpcClient.#ctor*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient__ctor_Uri_System_String_" data-uid="Argotic.Net.XmlRpcClient.#ctor(Uri,System.String)">XmlRpcClient(Uri, String)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcClient.html">XmlRpcClient</a> class that sends remote procedure calls using the specified XML-RPC server and user agent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlRpcClient(Uri host, string userAgent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><span class="parametername">host</span></td>
+        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for XML-RPC transactions.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">userAgent</span></td>
+        <td><p>Information such as the application name, version, host operating system, and language.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_Credentials.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.Credentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L143">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_Credentials_" data-uid="Argotic.Net.XmlRpcClient.Credentials*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_Credentials" data-uid="Argotic.Net.XmlRpcClient.Credentials">Credentials</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the authentication credentials utilized by this client when making remote procedure calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICredentials Credentials { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ICredentials</span></td>
+        <td><p>A <see cref="!:ICredentials"></see> object that represents the authentication credentials provided by this client when making remote procedure calls.
+The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_Host.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.Host%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L164">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_Host_" data-uid="Argotic.Net.XmlRpcClient.Host*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_Host" data-uid="Argotic.Net.XmlRpcClient.Host">Host</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the location of the host computer that client remote procedure calls will be sent to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri Host { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for XML-RPC transactions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_Host_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_Host">Host</a> is a null reference (Nothing in Visual Basic), <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_Host">Host</a> is initialized using the settings in the application or machine configuration files.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_Proxy.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.Proxy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L185">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_Proxy_" data-uid="Argotic.Net.XmlRpcClient.Proxy*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_Proxy" data-uid="Argotic.Net.XmlRpcClient.Proxy">Proxy</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the web proxy utilized by this client to proxy remote procedure calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IWebProxy Proxy { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IWebProxy</span></td>
+        <td><p>A <see cref="!:IWebProxy"></see> object that represents the web proxy utilized by this client to proxy remote procedure calls.
+The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_Timeout.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.Timeout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L204">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_Timeout_" data-uid="Argotic.Net.XmlRpcClient.Timeout*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_Timeout" data-uid="Argotic.Net.XmlRpcClient.Timeout">Timeout</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan Timeout { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TimeSpan</span></td>
+        <td><p>A <see cref="!:TimeSpan"></see> that specifies the time-out period. The default value is 15 seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_UseDefaultCredentials.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.UseDefaultCredentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L248">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_UseDefaultCredentials_" data-uid="Argotic.Net.XmlRpcClient.UseDefaultCredentials*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_UseDefaultCredentials" data-uid="Argotic.Net.XmlRpcClient.UseDefaultCredentials">UseDefaultCredentials</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a <see cref="!:Boolean"></see> value that controls whether the <see cref="!:CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseDefaultCredentials { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the default credentials are used; otherwise <strong>false</strong>. The default value is <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_UseDefaultCredentials_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf.
+    Set this property to <strong>true</strong> when this <a class="xref" href="Argotic.Net.XmlRpcClient.html">XmlRpcClient</a> object should, if requested by the server, authenticate using the
+    default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.
+</p>
+<p>
+    Credentials information can also be specified using the application and machine configuration files.
+    For more information, see <a class="xref" href="Argotic.Configuration.XmlRpcClientNetworkElement.html">XmlRpcClientNetworkElement</a> Element (Network Settings).
+</p>
+<p>
+    If the UseDefaultCredentials property is set to <strong>false</strong>, then the value set in the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_Credentials">Credentials</a> property
+    will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <strong>false</strong>
+    and the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_Credentials">Credentials</a> property has not been set, then remote procedure calls are sent to the server anonymously.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_UserAgent.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.UserAgent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L267">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_UserAgent_" data-uid="Argotic.Net.XmlRpcClient.UserAgent*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_UserAgent" data-uid="Argotic.Net.XmlRpcClient.UserAgent">UserAgent</h4>
+  <div class="markdown level1 summary"><p>Gets or sets information such as the client application name, version, host operating system, and language.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UserAgent { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_OnMessageSent_Argotic_Net_XmlRpcMessageSentEventArgs_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L123">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_OnMessageSent_" data-uid="Argotic.Net.XmlRpcClient.OnMessageSent*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_OnMessageSent_Argotic_Net_XmlRpcMessageSentEventArgs_" data-uid="Argotic.Net.XmlRpcClient.OnMessageSent(Argotic.Net.XmlRpcMessageSentEventArgs)">OnMessageSent(XmlRpcMessageSentEventArgs)</h4>
+  <div class="markdown level1 summary"><p>Raises the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendCompleted">SendCompleted</a> event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcMessageSentEventArgs.html">XmlRpcMessageSentEventArgs</a></td>
+        <td><span class="parametername">e</span></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcMessageSentEventArgs.html">XmlRpcMessageSentEventArgs</a> that contains the event data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_OnMessageSent_Argotic_Net_XmlRpcMessageSentEventArgs__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Classes that inherit from the <a class="xref" href="Argotic.Net.XmlRpcClient.html">XmlRpcClient</a> class can override the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_OnMessageSent_Argotic_Net_XmlRpcMessageSentEventArgs_">OnMessageSent(XmlRpcMessageSentEventArgs)</a> method
+    to perform additional tasks when the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendCompleted">SendCompleted</a> event occurs.
+</p>
+<p>
+<a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_OnMessageSent_Argotic_Net_XmlRpcMessageSentEventArgs_">OnMessageSent(XmlRpcMessageSentEventArgs)</a> also allows derived classes to handle <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendCompleted">SendCompleted</a> without attaching a delegate.
+This is the preferred technique for handling <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendCompleted">SendCompleted</a> in a derived class.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_ScalarTypeAsString_Argotic_Net_XmlRpcScalarValueType_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L326">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_ScalarTypeAsString_" data-uid="Argotic.Net.XmlRpcClient.ScalarTypeAsString*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_ScalarTypeAsString_Argotic_Net_XmlRpcScalarValueType_" data-uid="Argotic.Net.XmlRpcClient.ScalarTypeAsString(Argotic.Net.XmlRpcScalarValueType)">ScalarTypeAsString(XmlRpcScalarValueType)</h4>
+  <div class="markdown level1 summary"><p>Returns the scalar type identifier for the supplied <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ScalarTypeAsString(XmlRpcScalarValueType type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a> to get the scalar type identifier for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The scalar type identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">type</code>, otherwise returns an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_ScalarTypeAsString_Argotic_Net_XmlRpcScalarValueType__examples">Examples</h5>
+  <pre><code></code></pre>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_ScalarTypeByName_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L368">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_ScalarTypeByName_" data-uid="Argotic.Net.XmlRpcClient.ScalarTypeByName*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_ScalarTypeByName_System_String_" data-uid="Argotic.Net.XmlRpcClient.ScalarTypeByName(System.String)">ScalarTypeByName(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a> enumeration value that corresponds to the specified scalar type name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XmlRpcScalarValueType ScalarTypeByName(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the scalar type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html">XmlRpcScalarValueType</a> enumeration value that corresponds to the specified string, otherwise returns <strong>XmlRpcScalarValueType.None</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_ScalarTypeByName_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method disregards case of specified scalar type name.</p>
+</div>
+  <h5 id="Argotic_Net_XmlRpcClient_ScalarTypeByName_System_String__examples">Examples</h5>
+  <pre><code></code></pre>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_Send_Argotic_Net_XmlRpcMessage_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L627">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_Send_" data-uid="Argotic.Net.XmlRpcClient.Send*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_Send_Argotic_Net_XmlRpcMessage_" data-uid="Argotic.Net.XmlRpcClient.Send(Argotic.Net.XmlRpcMessage)">Send(XmlRpcMessage)</h4>
+  <div class="markdown level1 summary"><p>Sends the specified message to an XML-RPC server to execute a remote procedure call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlRpcResponse Send(XmlRpcMessage message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> that represents the information needed to execute the remote procedure call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcResponse.html">XmlRpcResponse</a></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcResponse.html">XmlRpcResponse</a> that represents the server's response to the remote procedure call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L668">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_SendAsync_" data-uid="Argotic.Net.XmlRpcClient.SendAsync*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object_" data-uid="Argotic.Net.XmlRpcClient.SendAsync(Argotic.Net.XmlRpcMessage,Object)">SendAsync(XmlRpcMessage, Object)</h4>
+  <div class="markdown level1 summary"><p>Sends the specified message to an XML-RPC server to execute a remote procedure call.
+This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SendAsync(XmlRpcMessage message, Object userToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> that represents the information needed to execute the remote procedure call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Object</span></td>
+        <td><span class="parametername">userToken</span></td>
+        <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendCompleted">SendCompleted</a> event.
+    You can cancel a <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object_">SendAsync(XmlRpcMessage, Object)</a> operation by calling the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendAsyncCancel">SendAsyncCancel()</a> method.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_SendAsyncCancel.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.SendAsyncCancel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L700">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_SendAsyncCancel_" data-uid="Argotic.Net.XmlRpcClient.SendAsyncCancel*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_SendAsyncCancel" data-uid="Argotic.Net.XmlRpcClient.SendAsyncCancel">SendAsyncCancel()</h4>
+  <div class="markdown level1 summary"><p>Cancels an asynchronous operation to send a remote procedure call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SendAsyncCancel()</code></pre>
+  </div>
+  <h5 id="Argotic_Net_XmlRpcClient_SendAsyncCancel_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use the <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendAsyncCancel">SendAsyncCancel()</a> method to cancel a pending <a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object_">SendAsync(XmlRpcMessage, Object)</a> operation.
+If there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
+If there is no send operation pending, this method does nothing.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_TryParseValue_XPathNavigator_Argotic_Net_IXmlRpcValue__.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.TryParseValue(XPathNavigator%2CArgotic.Net.IXmlRpcValue%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L414">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcClient_TryParseValue_" data-uid="Argotic.Net.XmlRpcClient.TryParseValue*"></a>
+  <h4 id="Argotic_Net_XmlRpcClient_TryParseValue_XPathNavigator_Argotic_Net_IXmlRpcValue__" data-uid="Argotic.Net.XmlRpcClient.TryParseValue(XPathNavigator,Argotic.Net.IXmlRpcValue@)">TryParseValue(XPathNavigator, out IXmlRpcValue)</h4>
+  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> object from the specified <see cref="!:XPathNavigator"></see>.
+Parameters specify the XML data source and the variable where the new <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> object is returned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A <see cref="!:XPathNavigator"></see> that represents the XML data source to be parsed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>When this method returns, contains an object that represents the <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> specified by the <code data-dev-comment-type="paramref" class="paramref">source</code>, or <strong>null</strong> if the conversion failed.
+This parameter is passed uninitialized.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if <code data-dev-comment-type="paramref" class="paramref">source</code> was converted successfully; otherwise, <strong>false</strong>.
+This operation returns <strong>false</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> parameter is a null reference (Nothing in Visual Basic),
+or represents XML data that is not in the expected format.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_TryParseValue_XPathNavigator_Argotic_Net_IXmlRpcValue___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is expected to represent an XML-RPC <strong>value</strong> node.</p>
+</div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient_SendCompleted.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient.SendCompleted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L107">View Source</a>
+  </span>
+  <h4 id="Argotic_Net_XmlRpcClient_SendCompleted" data-uid="Argotic.Net.XmlRpcClient.SendCompleted">SendCompleted</h4>
+  <div class="markdown level1 summary"><p>Occurs when an asynchronous remote procedure call send operation completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;XmlRpcMessageSentEventArgs&gt; SendCompleted</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Argotic.Net.XmlRpcMessageSentEventArgs.html">XmlRpcMessageSentEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcClient_SendCompleted_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Net.XmlRpcClient.html#Argotic_Net_XmlRpcClient_SendAsync_Argotic_Net_XmlRpcMessage_Object_">SendAsync(XmlRpcMessage, Object)</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcClient.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcClient.cs/#L35" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

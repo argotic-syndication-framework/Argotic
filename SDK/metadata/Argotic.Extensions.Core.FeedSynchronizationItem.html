@@ -1,0 +1,1242 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FeedSynchronizationItem
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FeedSynchronizationItem
+   ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem">
+  
+  
+  <h1 id="Argotic_Extensions_Core_FeedSynchronizationItem" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem" class="text-break">Class FeedSynchronizationItem
+  </h1>
+  <div class="markdown level0 summary"><p>Represents the information required for synchronization of syndication feeds.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">FeedSynchronizationItem</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class FeedSynchronizationItem : IComparable</code></pre>
+  </div>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> class represents a <strong>sx:sync</strong> element in the <em>FeedSync</em> specification.</p>
+<p>
+    This is <strong>required</strong> of all items in all feeds wishing to participate in FeedSync-based synchronization. 
+    Since <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationSharingInformation.html">FeedSynchronizationSharingInformation</a> is not required, feed consumers <strong>must</strong> consider the presence of <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> in items or entries 
+    as an indication that the feed contains sync data.
+</p>
+<p>
+    It acceptable for a feed to have some items or entries with <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> elements, and some without a <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a>. 
+    Only the items and entries that include the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> element participate in FeedSync synchronization.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem__ctor.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L59">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor">FeedSynchronizationItem()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeedSynchronizationItem()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem__ctor_System_String_System_Int32_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.%23ctor(System.String%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L71">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor_System_String_System_Int32_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor(System.String,System.Int32)">FeedSynchronizationItem(String, Int32)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> class using the supplied indentifier and number of updates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeedSynchronizationItem(string id, int updates)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The globally unique identifier for the item.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">updates</span></td>
+        <td><p>The number of updates applied to this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem__ctor_System_String_System_Int32_Argotic_Extensions_Core_FeedSynchronizationHistory_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.%23ctor(System.String%2CSystem.Int32%2CArgotic.Extensions.Core.FeedSynchronizationHistory)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L87">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem__ctor_System_String_System_Int32_Argotic_Extensions_Core_FeedSynchronizationHistory_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.#ctor(System.String,System.Int32,Argotic.Extensions.Core.FeedSynchronizationHistory)">FeedSynchronizationItem(String, Int32, FeedSynchronizationHistory)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> class using the supplied indentifier, number of updates, and initial <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The globally unique identifier for the item.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">updates</span></td>
+        <td><p>The number of updates applied to this item.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a></td>
+        <td><span class="parametername">history</span></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> object that represents the initial information about updates to this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservation.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L188">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservation_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservation" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservation">ConflictPreservation</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether conflict preservation is performed for this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeedSynchronizationConflictPreservationDirective ConflictPreservation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a> enumeration value that indicates whether conflict preservation is performed for this item.
+The default value is <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html#Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_None">None</a>, which indicates conflict preservation <strong>must</strong> be performed for the item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservation_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    This value <strong>must</strong> only be set once, and <em>shall</em> only be set when the updates property value is <strong>1</strong>. 
+    All updates to the item after the first update must propagate whatever state was set on the first update.
+</p>
+<p>
+    Within this framework, <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html#Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_Ignore">Ignore</a> is equivalent to <strong>true</strong> for the <em>noconflicts</em> attribute in the FeedSync specification, 
+    while <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html#Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_Perform">Perform</a> is equivalent to <strong>false</strong> for the <em>noconflicts</em> attribute in the FeedSync specification. 
+    Specifying a value of <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html#Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_None">None</a> is equivalent to the <em>noconflicts</em> attribute not being present.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Conflicts.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Conflicts%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L99">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Conflicts_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Conflicts*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Conflicts" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Conflicts">Conflicts</h4>
+  <div class="markdown level1 summary"><p>Gets the conflicting updates for this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;XPathNavigator&gt; Conflicts { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">XPathNavigator</span>&gt;</td>
+        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <see cref="!:XPathNavigator"></see> objects that represent conflicting updates for this item.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Histories.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Histories%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L118">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Histories_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Histories*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Histories" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Histories">Histories</h4>
+  <div class="markdown level1 summary"><p>Gets the information about updates to this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;FeedSynchronizationHistory&gt; Histories { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>&gt;</td>
+        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> objects that represent information about updates to this item.
+The default value is an <em>empty</em> collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Id.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L156">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Id_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Id*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Id" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Id">Id</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the globally unique identifier for this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Id { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The globally unique identifier for this item.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_Id_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html#Argotic_Extensions_Core_FeedSynchronizationItem_Id">Id</a> <strong>must</strong> be globally unique within the feed and it <strong>must</strong> be identical across feeds if an item is being shared or synchronized as part of multiple distinct independent feeds.
+</p>
+<p>
+    Atom has a similar requirement for each entry to have a unique id. While the Atom entry <em>id</em> could be used for the sync id at the publisher’s discretion, 
+    implementers <strong>must not</strong> assume that the Atom <em>id</em> for the entry matches the sync id. Likewise, if the RSS item includes a <em>guid</em>, 
+    implementers <strong>must not</strong> assume that the <em>guid</em> is the same as the sync id.
+</p>
+<p>
+    In Atom feeds, it is acceptable to have multiple entries in the same feed with the same atom id element; in this case, the entries are considered different versions of the same entry. 
+    It is allowed to use FeedSync in such a feed, but the <strong>sx:sync/@id</strong> attributes are still required to be different in each entry. 
+    FeedSync considers those entries to be different sync items.
+</p>
+<p>
+    The <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html#Argotic_Extensions_Core_FeedSynchronizationItem_Id">Id</a> is assigned by the creator of the item, and <strong>must not</strong> be changed by subsequent publishers. 
+    Applications will collate and compare these identifiers; therefore they <strong>must</strong> conform to the syntax for 
+    Namespace Specific Strings (the NSS portion of a URN) in <a href="http://www.ietf.org/rfc/rfc2141.txt">RFC 2141</a>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatus.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L215">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatus_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatus" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatus">TombstoneStatus</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating if the item has been deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FeedSynchronizationTombstoneStatus TombstoneStatus { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a> enumeration value that indicates whether this item has been deleted.
+The default value is <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html#Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_None">None</a>, which indicates the item has not been deleted.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatus_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    Within this framework, <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html#Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_Deleted">Deleted</a> is equivalent to <strong>true</strong> for the <em>deleted</em> attribute in the FeedSync specification, 
+    while <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html#Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_Present">Present</a> is equivalent to <strong>false</strong> for the <em>deleted</em> attribute in the FeedSync specification. 
+    Specifying a value of <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html#Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_None">None</a> is equivalent to the <em>deleted</em> attribute not being present.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Updates.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Updates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L233">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Updates_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Updates*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Updates" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Updates">Updates</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the number of updates applied to this item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Updates { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>The number of updates applied to this item. The default value is <strong>1</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_CompareSequence_Collection_Argotic_Extensions_Core_FeedSynchronizationHistory__Collection_Argotic_Extensions_Core_FeedSynchronizationHistory__.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.CompareSequence(Collection%7BArgotic.Extensions.Core.FeedSynchronizationHistory%7D%2CCollection%7BArgotic.Extensions.Core.FeedSynchronizationHistory%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L265">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_CompareSequence_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.CompareSequence*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_CompareSequence_Collection_Argotic_Extensions_Core_FeedSynchronizationHistory__Collection_Argotic_Extensions_Core_FeedSynchronizationHistory__" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.CompareSequence(Collection{Argotic.Extensions.Core.FeedSynchronizationHistory},Collection{Argotic.Extensions.Core.FeedSynchronizationHistory})">CompareSequence(Collection&lt;FeedSynchronizationHistory&gt;, Collection&lt;FeedSynchronizationHistory&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;FeedSynchronizationHistory>"></see> collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;FeedSynchronizationHistory&gt; source, Collection&lt;FeedSynchronizationHistory&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_CompareSequence_Collection_Argotic_Extensions_Core_FeedSynchronizationHistory__Collection_Argotic_Extensions_Core_FeedSynchronizationHistory___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L593">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_CompareTo_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.CompareTo*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_CompareTo_System_Object_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationAsString_Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationAsString(Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L295">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationAsString_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationAsString*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationAsString_Argotic_Extensions_Core_FeedSynchronizationConflictPreservationDirective_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationAsString(Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective)">ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective)</h4>
+  <div class="markdown level1 summary"><p>Returns the conflict preservation identifier for the supplied <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a></td>
+        <td><span class="parametername">directive</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a> to get the conflict preservation identifier for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The conflict preservation identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">vocabulary</code>, otherwise returns an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationByName_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationByName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L330">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationByName_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationByName*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationByName_System_String_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ConflictPreservationByName(System.String)">ConflictPreservationByName(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a> enumeration value that corresponds to the specified conflict preservation name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the conflict preservation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationConflictPreservationDirective.html">FeedSynchronizationConflictPreservationDirective</a> enumeration value that corresponds to the specified string, otherwise returns <strong>FeedSynchronizationConflictPreservationDirective.None</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_ConflictPreservationByName_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method disregards case of specified conflict preservation name.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L623">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Equals_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Equals*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Equals_Object_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Equals(Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L637">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_GetHashCode_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.GetHashCode*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_GetHashCode" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L433">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_Load_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Load*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_Load_XPathNavigator_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.Load(XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_Load_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusAsString_Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusAsString(Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L362">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusAsString_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusAsString*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusAsString_Argotic_Extensions_Core_FeedSynchronizationTombstoneStatus_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusAsString(Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus)">TombstoneStatusAsString(FeedSynchronizationTombstoneStatus)</h4>
+  <div class="markdown level1 summary"><p>Returns the tombstone status identifier for the supplied <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a></td>
+        <td><span class="parametername">status</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a> to get the tombstone status identifier for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The tombstone status identifier for the supplied <code data-dev-comment-type="paramref" class="paramref">vocabulary</code>, otherwise returns an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusByName_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusByName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L397">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusByName_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusByName*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusByName_System_String_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.TombstoneStatusByName(System.String)">TombstoneStatusByName(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a> enumeration value that corresponds to the specified tombstone status name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the tombstone status.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationTombstoneStatus.html">FeedSynchronizationTombstoneStatus</a> enumeration value that corresponds to the specified string, otherwise returns <strong>FeedSynchronizationTombstoneStatus.None</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_TombstoneStatusByName_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method disregards case of specified tombstone status name.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L564">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_ToString_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ToString*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_ToString" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationItem_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L520">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_WriteTo_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.WriteTo*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_op_Equality_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.op_Equality(Argotic.Extensions.Core.FeedSynchronizationItem%2CArgotic.Extensions.Core.FeedSynchronizationItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L650">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_op_Equality_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_Equality*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_op_Equality_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_Equality(Argotic.Extensions.Core.FeedSynchronizationItem,Argotic.Extensions.Core.FeedSynchronizationItem)">Equality(FeedSynchronizationItem, FeedSynchronizationItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(FeedSynchronizationItem first, FeedSynchronizationItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_op_GreaterThan_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationItem%2CArgotic.Extensions.Core.FeedSynchronizationItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L701">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_op_GreaterThan_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_GreaterThan*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_op_GreaterThan_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_GreaterThan(Argotic.Extensions.Core.FeedSynchronizationItem,Argotic.Extensions.Core.FeedSynchronizationItem)">GreaterThan(FeedSynchronizationItem, FeedSynchronizationItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(FeedSynchronizationItem first, FeedSynchronizationItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_op_Inequality_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.op_Inequality(Argotic.Extensions.Core.FeedSynchronizationItem%2CArgotic.Extensions.Core.FeedSynchronizationItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L670">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_op_Inequality_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_Inequality*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_op_Inequality_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_Inequality(Argotic.Extensions.Core.FeedSynchronizationItem,Argotic.Extensions.Core.FeedSynchronizationItem)">Inequality(FeedSynchronizationItem, FeedSynchronizationItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(FeedSynchronizationItem first, FeedSynchronizationItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem_op_LessThan_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem.op_LessThan(Argotic.Extensions.Core.FeedSynchronizationItem%2CArgotic.Extensions.Core.FeedSynchronizationItem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L681">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_FeedSynchronizationItem_op_LessThan_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_LessThan*"></a>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationItem_op_LessThan_Argotic_Extensions_Core_FeedSynchronizationItem_Argotic_Extensions_Core_FeedSynchronizationItem_" data-uid="Argotic.Extensions.Core.FeedSynchronizationItem.op_LessThan(Argotic.Extensions.Core.FeedSynchronizationItem,Argotic.Extensions.Core.FeedSynchronizationItem)">LessThan(FeedSynchronizationItem, FeedSynchronizationItem)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(FeedSynchronizationItem first, FeedSynchronizationItem second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationSyndicationExtensionContext.html">FeedSynchronizationSyndicationExtensionContext</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationItem.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationItem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationItem.cs/#L28" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

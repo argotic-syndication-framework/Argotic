@@ -1,0 +1,913 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SiteSummaryContentSyndicationExtension
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SiteSummaryContentSyndicationExtension
+   ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension">
+  
+  
+  <h1 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension" class="text-break">Class SiteSummaryContentSyndicationExtension
+  </h1>
+  <div class="markdown level0 summary"><p>Extends syndication specifications to provide a means of describing content, including its format and encoding.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a></div>
+    <div class="level2"><span class="xref">SiteSummaryContentSyndicationExtension</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></div>
+    <div><span class="xref">IXmlSerializable</span></div>
+    <div><span class="xref">IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Description">SyndicationExtension.Description</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Documentation">SyndicationExtension.Documentation</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Name">SyndicationExtension.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Version">SyndicationExtension.Version</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_XmlNamespace">SyndicationExtension.XmlNamespace</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_XmlPrefix">SyndicationExtension.XmlPrefix</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Loaded">SyndicationExtension.Loaded</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_OnExtensionLoaded_Argotic_Extensions_SyndicationExtensionLoadedEventArgs_">SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_CreateNamespaceManager_XPathNavigator_">SyndicationExtension.CreateNamespaceManager(XPathNavigator)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ExistsInSource_XPathNavigator_">SyndicationExtension.ExistsInSource(XPathNavigator)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXmlNamespaceDeclaration_XmlWriter_">SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_GetSchema">SyndicationExtension.GetSchema()</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ReadXml_XmlReader_">SyndicationExtension.ReadXml(XmlReader)</a>
+    </div>
+    <div>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXml_XmlWriter_">SyndicationExtension.WriteXml(XmlWriter)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable</code></pre>
+  </div>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    The <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a> extends syndicated content to specify the actual content of websites, in multiple formats. This syndication extension conforms to the 
+<strong>RDF Site Summary 1.0 Modules: Content</strong> 1.0 specification, which can be found at <a href="http://web.resource.org/rss/1.0/modules/content/">http://web.resource.org/rss/1.0/modules/content/</a>.
+</p>
+</div>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_examples"><strong>Examples</strong></h5>
+  <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\SiteSummaryContentSyndicationExtensionExample.cs" region="SiteSummaryContentSyndicationExtension"></code></pre>
+<p></code></pre><p>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension__ctor.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L39">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension__ctor_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.#ctor*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension__ctor" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.#ctor">SiteSummaryContentSyndicationExtension()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SiteSummaryContentSyndicationExtension()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Context.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Context%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L54">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Context_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Context*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Context" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Context">Context</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext.html">SiteSummaryContentSyndicationExtensionContext</a> object associated with this extension.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SiteSummaryContentSyndicationExtensionContext Context { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext.html">SiteSummaryContentSyndicationExtensionContext</a></td>
+        <td><p>A <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtensionContext.html">SiteSummaryContentSyndicationExtensionContext</a> object that contains information associated with the current syndication extension.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Context_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <strong>Context</strong> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity.
+Its purpose is to prevent property naming collisions between the base <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a> class and any custom properties that
+are defined for the custom syndication extension.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareSequence_Collection_Argotic_Extensions_Core_SiteSummaryContentItem__Collection_Argotic_Extensions_Core_SiteSummaryContentItem__.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareSequence(Collection%7BArgotic.Extensions.Core.SiteSummaryContentItem%7D%2CCollection%7BArgotic.Extensions.Core.SiteSummaryContentItem%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L87">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareSequence_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareSequence*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareSequence_Collection_Argotic_Extensions_Core_SiteSummaryContentItem__Collection_Argotic_Extensions_Core_SiteSummaryContentItem__" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareSequence(Collection{Argotic.Extensions.Core.SiteSummaryContentItem},Collection{Argotic.Extensions.Core.SiteSummaryContentItem})">CompareSequence(Collection&lt;SiteSummaryContentItem&gt;, Collection&lt;SiteSummaryContentItem&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;SiteSummaryContentItem>"></see> collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;SiteSummaryContentItem&gt; source, Collection&lt;SiteSummaryContentItem&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentItem.html">SiteSummaryContentItem</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentItem.html">SiteSummaryContentItem</a>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareSequence_Collection_Argotic_Extensions_Core_SiteSummaryContentItem__Collection_Argotic_Extensions_Core_SiteSummaryContentItem___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L211">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareTo_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareTo*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_CompareTo_System_Object_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L237">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Equals_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Equals*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Equals_Object_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Equals(Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L251">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_GetHashCode_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.GetHashCode*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_GetHashCode" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L138">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_IXPathNavigable_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load(IXPathNavigable)">Load(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:IXPathNavigable"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Load(IXPathNavigable source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <strong>IXPathNavigable</strong> used to load this <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_IXPathNavigable_">SyndicationExtension.Load(IXPathNavigable)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load(XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L156">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Load_XmlReader_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.Load(XmlReader)">Load(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:XmlReader"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Load(XmlReader reader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XmlReader</span></td>
+        <td><span class="parametername">reader</span></td>
+        <td><p>The <strong>XmlReader</strong> used to load this <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_XmlReader_">SyndicationExtension.Load(XmlReader)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_MatchByType_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L119">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_MatchByType_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.MatchByType*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_MatchByType_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)">MatchByType(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Predicate delegate that returns a value indicating if the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
+represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool MatchByType(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <see cref="!:Type"></see> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L182">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_ToString_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.ToString*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_ToString" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L169">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_WriteTo_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.WriteTo*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Writes the syndication extension to the specified <see cref="!:XmlWriter"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <strong>XmlWriter</strong> to which you want to write the syndication extension.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteTo_XmlWriter_">SyndicationExtension.WriteTo(XmlWriter)</a></div>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Equality_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Equality(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension%2CArgotic.Extensions.Core.SiteSummaryContentSyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L264">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Equality_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Equality*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Equality_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Equality(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension,Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension)">Equality(SiteSummaryContentSyndicationExtension, SiteSummaryContentSyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_GreaterThan_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_GreaterThan(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension%2CArgotic.Extensions.Core.SiteSummaryContentSyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L315">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_GreaterThan_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_GreaterThan*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_GreaterThan_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_GreaterThan(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension,Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension)">GreaterThan(SiteSummaryContentSyndicationExtension, SiteSummaryContentSyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Inequality_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Inequality(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension%2CArgotic.Extensions.Core.SiteSummaryContentSyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L284">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Inequality_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Inequality*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_Inequality_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_Inequality(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension,Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension)">Inequality(SiteSummaryContentSyndicationExtension, SiteSummaryContentSyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_LessThan_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_LessThan(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension%2CArgotic.Extensions.Core.SiteSummaryContentSyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L295">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_LessThan_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_LessThan*"></a>
+  <h4 id="Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_op_LessThan_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension_" data-uid="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.op_LessThan(Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension,Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension)">LessThan(SiteSummaryContentSyndicationExtension, SiteSummaryContentSyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension.html">SiteSummaryContentSyndicationExtension</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
+  </div>
+  <div>
+      <span class="xref">IXmlSerializable</span>
+  </div>
+  <div>
+      <span class="xref">IComparable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_SiteSummaryContentSyndicationExtension.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.SiteSummaryContentSyndicationExtension%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/SiteSummaryContent/SiteSummaryContentSyndicationExtension.cs/#L28" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

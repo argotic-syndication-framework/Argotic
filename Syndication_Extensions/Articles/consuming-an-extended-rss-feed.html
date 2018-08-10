@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to consume extended Really Simple Syndication (RSS) syndication feed </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to consume extended Really Simple Syndication (RSS) syndication feed ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-consume-extended-really-simple-syndication-rss-syndication-feed">How to consume extended Really Simple Syndication (RSS) syndication feed</h1>
+
+<p>Common publishing formats such as Really Simple Syndication (RSS) and the Atom Syndication Format allow for the addition of information and meta-data that is outside the scope of the format specification through the use of syndication extensions. The framework provides an extensibility model for syndication resources (objects that implement the ISyndicationResource interface) that allows you to consume and include syndication extension information. For more information on how syndication extension support is implemented in the framework, see [[Introduction to the framework extension architecture]]</p>
+<h2 id="consuming-extended-syndicated-content">Consuming extended syndicated content</h2>
+<p>The Argotic framework exposes syndication extension information through the <em>Extensions</em> collection property. All extensible framework entities also provide the <em>HasExtensions</em> property which can be used to determine if an entity has been extended; and the <em>FindExtension</em> method, which provides a means of performing predicate based searches against the extensions that have been applied to an entity. Consumers may choose to enumerate through the available extensions, define their own predicate search criteria, or utilize the static <em>MatchByType</em> method that all core framework extensions expose that may be used to lookup a specific extension.</p>
+<pre><code>using Argotic.Extensions.Core;
+using Argotic.Syndication;
+
+//  Retrieve extended syndication feed
+RssFeed feed = RssFeed.Create(new Uri(&quot;http://www.pwop.com/feed.aspx?show=dotnetrocks&amp;filetype=master&quot;));
+
+//  Verify feed channel is extended
+if (feed.Channel.HasExtensions)
+{
+    //  Retrieve iTunes syndication extension for channel using predicate-based search
+    ITunesSyndicationExtension itunesChannelExtension   = feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
+
+    if (itunesChannelExtension != null)
+    {
+        // Process channel iTunes extension information
+    }
+}
+
+foreach (RssItem item in feed.Channel.Items)
+{
+    //  Verify channel item is extended
+    if (item.HasExtensions)
+    {
+        //  Retrieve iTunes syndication extension for channel item using predicate-based search
+        ITunesSyndicationExtension itunesItemExtension = item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
+        if (itunesItemExtension != null)
+        {
+            // Process iTunes extension information for current channel item
+        }
+    }
+}
+</code></pre>
+<p>The above example demonstrates how to retrieve the <a href="http://www.apple.com/itunes/store/podcaststechspecs.html#rss">iTunes</a> syndication extension information at both the channel and item level of an extended RSS feed.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Docs/Syndication_Extensions/Articles/consuming-an-extended-rss-feed.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

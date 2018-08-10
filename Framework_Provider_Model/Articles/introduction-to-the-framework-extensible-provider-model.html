@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction to the framework extensible provider model </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Introduction to the framework extensible provider model ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction-to-the-framework-extensible-provider-model">Introduction to the framework extensible provider model</h1>
+
+<p>A <em>provider</em> is a software module that provides a uniform interface between a service and a data source. Providers abstract physical storage media, in much the same way that device drivers abstract physical hardware devices. Since the Argotic framework syndication resource management services are provider-based, storing syndicated content that implements the <em>ISyndicationResource</em> interface in an Oracle database rather than a Microsoft SQL Server database is as simple as plugging in a Oracle syndication resource provider. Code outside the provider layer needn't be modified, and a simple configuration change, accomplished declaratively through Web.config or App.config, connects the relevant services to the custom provider. The framework includes an XML file-based provider that can manage all of the syndication formats supported by the framework.</p>
+<p>Thanks to the provider model, applications using the Argotic framework can be configured to store syndicated content virtually anywhere. Syndication feed data, for example, could just as easily come from a Web service as from a database. All that's required is a custom provider. Some companies will prefer to acquire custom providers from third parties. Others, however, will want to write their own, either because no suitable provider is available off the shelf, or because they wish to adapt their content syndication systems to legacy storage media (for example, existing relational databases or flat files).</p>
+<h2 id="goals-of-the-framework-provider-model">Goals of the framework provider model</h2>
+<p>The Argotic framework provider model was designed with the following goals in mind:</p>
+<ul>
+<li>Use the existing provider model architecture that Microsoft .NET provides.</li>
+<li>To make syndication resource storage both flexible and extensible.</li>
+<li>To insulate application-level code from the physical storage media where syndicated content is stored, and to isolate the changes required to use alternative media types to a single well-defined layer with minimal surface area.</li>
+<li>To make writing custom providers as simple as possible by providing a robust and well-documented set of base classes from which developers can derive provider classes of their own.
+It is expected that developers who wish to publish syndicated content using data sources for which off-the-shelf providers are not available can, with a reasonable amount of effort, write custom providers to do the job.</li>
+</ul>
+<p>The <em>SyndicationResourceProvider</em> abstract class is simple, containing only a few basic methods and properties that are common to all syndication resource providers. Implementation-specific providers (such as the <em>XmlSyndicationResourceProvider</em>) inherit from this abstract base class in order to provide a uniform abstraction layer between a specific data storage implementation and the code that generates and/or manages the content being syndicated.</p>
+<p>The provider model is intended to encapsulate the retrieval and persistence of syndicated content. It allows the developer to create supporting classes that provide multiple implementations of the encapsulated CRUD functionality. The most important aspect of the provider model is that the implementation (for example, whether data is persisted as a XML file or in a database) is abstracted from the application code. The type of the implementation-specific provider for the retrieval and persistence of syndicated content is designated in a configuration file. The syndication manager then reads in the type from the configuration file and acts as a factory to the syndicated content management code. The application developer can then use the syndication management classes in the application code. The implementation type can be swapped out in the configuration file, eliminating the need to rewrite the code to accommodate the different implementation methodology.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Docs/Framework_Provider_Model/Articles/introduction-to-the-framework-extensible-provider-model.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

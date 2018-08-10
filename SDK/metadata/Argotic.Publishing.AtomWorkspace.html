@@ -1,0 +1,1431 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AtomWorkspace
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AtomWorkspace
+   ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Argotic.Publishing.AtomWorkspace">
+  
+  
+  <h1 id="Argotic_Publishing_AtomWorkspace" data-uid="Argotic.Publishing.AtomWorkspace" class="text-break">Class AtomWorkspace
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a server-defined group of <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> objects that describe member resources.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">AtomWorkspace</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Publishing.html">Argotic.Publishing</a></h6>
+  <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
+  <h5 id="Argotic_Publishing_AtomWorkspace_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes</code></pre>
+  </div>
+  <h5 id="Argotic_Publishing_AtomWorkspace_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+    The <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> class implements the <em>app:workspace</em> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+</p>
+<p>
+    A <a class="xref" href="Argotic.Publishing.AtomServiceDocument.html">AtomServiceDocument</a> groups <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> into <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.
+    Operations on <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>, such as creation or deletion, are not defined by the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>
+    specification. The <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a> specification assigns no meaning to <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>;
+    that is, a <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> does not imply any specific processing assumptions.
+</p>
+<p>
+    There is no requirement that a server support multiple <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.
+    In addition, a <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> <em>may</em> appear in more than one <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace__ctor.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L60">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace__ctor_" data-uid="Argotic.Publishing.AtomWorkspace.#ctor*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace__ctor" data-uid="Argotic.Publishing.AtomWorkspace.#ctor">AtomWorkspace()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomWorkspace()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace__ctor_Argotic_Syndication_AtomTextConstruct_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.%23ctor(Argotic.Syndication.AtomTextConstruct)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L69">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace__ctor_" data-uid="Argotic.Publishing.AtomWorkspace.#ctor*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace__ctor_Argotic_Syndication_AtomTextConstruct_" data-uid="Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct)">AtomWorkspace(AtomTextConstruct)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> class using the supplied <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomWorkspace(AtomTextConstruct title)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> object that represents information that conveys a human-readable title for the workspace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace__ctor_Argotic_Syndication_AtomTextConstruct_Collection_Argotic_Publishing_AtomMemberResources__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.%23ctor(Argotic.Syndication.AtomTextConstruct%2CCollection%7BArgotic.Publishing.AtomMemberResources%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L81">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace__ctor_" data-uid="Argotic.Publishing.AtomWorkspace.#ctor*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace__ctor_Argotic_Syndication_AtomTextConstruct_Collection_Argotic_Publishing_AtomMemberResources__" data-uid="Argotic.Publishing.AtomWorkspace.#ctor(Argotic.Syndication.AtomTextConstruct,Collection{Argotic.Publishing.AtomMemberResources})">AtomWorkspace(AtomTextConstruct, Collection&lt;AtomMemberResources&gt;)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> class using the supplied <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> and <see cref="!:Collection&lt;AtomMemberResources>"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomWorkspace(AtomTextConstruct title, Collection&lt;AtomMemberResources&gt; collections)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a></td>
+        <td><span class="parametername">title</span></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> object that represents information that conveys a human-readable title for the workspace.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>&gt;</td>
+        <td><span class="parametername">collections</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_BaseUri.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.BaseUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L123">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_BaseUri_" data-uid="Argotic.Publishing.AtomWorkspace.BaseUri*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_BaseUri" data-uid="Argotic.Publishing.AtomWorkspace.BaseUri">BaseUri</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the base URI other than the base URI of the document or external entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri BaseUri { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><p>A <see cref="!:Uri"></see> that represents a base URI other than the base URI of the document or external entity. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_BaseUri_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
+    after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Collections.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Collections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L268">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Collections_" data-uid="Argotic.Publishing.AtomWorkspace.Collections*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Collections" data-uid="Argotic.Publishing.AtomWorkspace.Collections">Collections</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the collections of resources available for editing that are associated with this workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;AtomMemberResources&gt; Collections { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>&gt;</td>
+        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> objects that represent the collections of resources available for editing that are associated with this workspace.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_Collections_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+<p>The <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> for the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> can contain zero or more <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> objects.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Extensions.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Extensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L166">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Extensions_" data-uid="Argotic.Publishing.AtomWorkspace.Extensions*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Extensions" data-uid="Argotic.Publishing.AtomWorkspace.Extensions">Extensions</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the syndication extensions applied to this syndication entity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ISyndicationExtension&gt; Extensions { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_Extensions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_HasExtensions.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.HasExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L188">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_HasExtensions_" data-uid="Argotic.Publishing.AtomWorkspace.HasExtensions*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_HasExtensions" data-uid="Argotic.Publishing.AtomWorkspace.HasExtensions">HasExtensions</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasExtensions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Extensions">Extensions</a> collection for this entity contains one or more <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects, otherwise returns <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Item_System_Int32_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Item(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L100">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Item_" data-uid="Argotic.Publishing.AtomWorkspace.Item*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Item_System_Int32_" data-uid="Argotic.Publishing.AtomWorkspace.Item(System.Int32)">Item[Int32]</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> available for editing at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomMemberResources this[int index] { get; set; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The zero-based index of the collection to get or set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><p>The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> available for editing at the specified index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Language.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Language%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L145">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Language_" data-uid="Argotic.Publishing.AtomWorkspace.Language*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Language" data-uid="Argotic.Publishing.AtomWorkspace.Language">Language</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the natural or formal language in which the content is written.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CultureInfo Language { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">CultureInfo</span></td>
+        <td><p>A <see cref="!:CultureInfo"></see> that represents the natural or formal language in which the content is written. The default value is a <strong>null</strong> reference.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_Language_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Title.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L294">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Title_" data-uid="Argotic.Publishing.AtomWorkspace.Title*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Title" data-uid="Argotic.Publishing.AtomWorkspace.Title">Title</h4>
+  <div class="markdown level1 summary"><p>Gets or sets information that conveys a human-readable title for this workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomTextConstruct Title { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a></td>
+        <td><p>A <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a> object that represents information that conveys a human-readable title for this workspace.
+The default value is an empty <a class="xref" href="Argotic.Syndication.AtomTextConstruct.html">AtomTextConstruct</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_AddCollection_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L359">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_AddCollection_" data-uid="Argotic.Publishing.AtomWorkspace.AddCollection*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_AddCollection_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomWorkspace.AddCollection(Argotic.Publishing.AtomMemberResources)">AddCollection(AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Adds the supplied <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> to the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AddCollection(AtomMemberResources collection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td><p>The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was added to the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_AddExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L202">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_AddExtension_" data-uid="Argotic.Publishing.AtomWorkspace.AddExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_AddExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Publishing.AtomWorkspace.AddExtension(Argotic.Extensions.ISyndicationExtension)">AddExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Adds the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AddExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was added to the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_CompareSequence_Collection_Argotic_Publishing_AtomMemberResources__Collection_Argotic_Publishing_AtomMemberResources__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.CompareSequence(Collection%7BArgotic.Publishing.AtomMemberResources%7D%2CCollection%7BArgotic.Publishing.AtomMemberResources%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L327">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_CompareSequence_" data-uid="Argotic.Publishing.AtomWorkspace.CompareSequence*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_CompareSequence_Collection_Argotic_Publishing_AtomMemberResources__Collection_Argotic_Publishing_AtomMemberResources__" data-uid="Argotic.Publishing.AtomWorkspace.CompareSequence(Collection{Argotic.Publishing.AtomMemberResources},Collection{Argotic.Publishing.AtomMemberResources})">CompareSequence(Collection&lt;AtomMemberResources&gt;, Collection&lt;AtomMemberResources&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;AtomMemberResources>"></see> collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;AtomMemberResources&gt; source, Collection&lt;AtomMemberResources&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_CompareSequence_Collection_Argotic_Publishing_AtomMemberResources__Collection_Argotic_Publishing_AtomMemberResources___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L558">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_CompareTo_" data-uid="Argotic.Publishing.AtomWorkspace.CompareTo*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_CompareTo_System_Object_" data-uid="Argotic.Publishing.AtomWorkspace.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>An object to compare with this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer that indicates the relative order of the objects being compared.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L586">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Equals_" data-uid="Argotic.Publishing.AtomWorkspace.Equals*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Equals_Object_" data-uid="Argotic.Publishing.AtomWorkspace.Equals(Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_FindCollection_Predicate_Argotic_Publishing_AtomMemberResources__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.FindCollection(Predicate%7BArgotic.Publishing.AtomMemberResources%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L384">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_FindCollection_" data-uid="Argotic.Publishing.AtomWorkspace.FindCollection*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_FindCollection_Predicate_Argotic_Publishing_AtomMemberResources__" data-uid="Argotic.Publishing.AtomWorkspace.FindCollection(Predicate{Argotic.Publishing.AtomMemberResources})">FindCollection(Predicate&lt;AtomMemberResources&gt;)</h4>
+  <div class="markdown level1 summary"><p>Searches for a collection that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AtomMemberResources FindCollection(Predicate&lt;AtomMemberResources&gt; match)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Predicate</span>&lt;<a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>&gt;</td>
+        <td><span class="parametername">match</span></td>
+        <td><p>The <see cref="!:Predicate&lt;AtomMemberResources>"></see> delegate that defines the conditions of the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> to search for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><p>The first collection that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_FindCollection_Predicate_Argotic_Publishing_AtomMemberResources___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <see cref="!:Predicate&lt;AtomMemberResources>"></see> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> are individually passed to the <see cref="!:Predicate&lt;AtomMemberResources>"></see> delegate, moving forward in
+the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.FindExtension(Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L227">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_FindExtension_" data-uid="Argotic.Publishing.AtomWorkspace.FindExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Publishing.AtomWorkspace.FindExtension(Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISyndicationExtension FindExtension(Predicate&lt;ISyndicationExtension&gt; match)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="parametername">match</span></td>
+        <td><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><p>The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Extensions">Extensions</a> are individually passed to the <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate, moving forward in
+the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L600">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_GetHashCode_" data-uid="Argotic.Publishing.AtomWorkspace.GetHashCode*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_GetHashCode" data-uid="Argotic.Publishing.AtomWorkspace.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns a hash code for the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer hash code.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L401">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Load_" data-uid="Argotic.Publishing.AtomWorkspace.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Load_XPathNavigator_" data-uid="Argotic.Publishing.AtomWorkspace.Load(XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_Load_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.Load(XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L456">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_Load_" data-uid="Argotic.Publishing.AtomWorkspace.Load*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Publishing.AtomWorkspace.Load(XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> using the supplied <see cref="!:XPathNavigator"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> used to configure the load operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> was initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_RemoveCollection_Argotic_Publishing_AtomMemberResources_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L480">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_RemoveCollection_" data-uid="Argotic.Publishing.AtomWorkspace.RemoveCollection*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_RemoveCollection_Argotic_Publishing_AtomMemberResources_" data-uid="Argotic.Publishing.AtomWorkspace.RemoveCollection(Argotic.Publishing.AtomMemberResources)">RemoveCollection(AtomMemberResources)</h4>
+  <div class="markdown level1 summary"><p>Removes the supplied <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> from the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveCollection(AtomMemberResources collection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a></td>
+        <td><span class="parametername">collection</span></td>
+        <td><p>The <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a> was removed from the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_RemoveCollection_Argotic_Publishing_AtomMemberResources__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Collections">Collections</a> of the workspace does not contain the specified <a class="xref" href="Argotic.Publishing.AtomMemberResources.html">AtomMemberResources</a>, will return <strong>false</strong>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L244">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_RemoveExtension_" data-uid="Argotic.Publishing.AtomWorkspace.RemoveExtension*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_RemoveExtension_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Publishing.AtomWorkspace.RemoveExtension(Argotic.Extensions.ISyndicationExtension)">RemoveExtension(ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Removes the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> from the current instance's <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveExtension(ISyndicationExtension extension)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
+        <td><span class="parametername">extension</span></td>
+        <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> was removed from the <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html#Argotic_Extensions_IExtensibleSyndicationObject_Extensions">Extensions</a> collection, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Publishing.AtomWorkspace.html#Argotic_Publishing_AtomWorkspace_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_ToString.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L529">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_ToString_" data-uid="Argotic.Publishing.AtomWorkspace.ToString*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_ToString" data-uid="Argotic.Publishing.AtomWorkspace.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Publishing_AtomWorkspace_ToString_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L500">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_WriteTo_" data-uid="Argotic.Publishing.AtomWorkspace.WriteTo*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_WriteTo_XmlWriter_" data-uid="Argotic.Publishing.AtomWorkspace.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteTo(XmlWriter writer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="parametername">writer</span></td>
+        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_op_Equality_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.op_Equality(Argotic.Publishing.AtomWorkspace%2CArgotic.Publishing.AtomWorkspace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L613">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_op_Equality_" data-uid="Argotic.Publishing.AtomWorkspace.op_Equality*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_op_Equality_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_" data-uid="Argotic.Publishing.AtomWorkspace.op_Equality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)">Equality(AtomWorkspace, AtomWorkspace)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(AtomWorkspace first, AtomWorkspace second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the values of its operands are equal, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_op_GreaterThan_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.op_GreaterThan(Argotic.Publishing.AtomWorkspace%2CArgotic.Publishing.AtomWorkspace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L664">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_op_GreaterThan_" data-uid="Argotic.Publishing.AtomWorkspace.op_GreaterThan*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_op_GreaterThan_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_" data-uid="Argotic.Publishing.AtomWorkspace.op_GreaterThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)">GreaterThan(AtomWorkspace, AtomWorkspace)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is greater than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(AtomWorkspace first, AtomWorkspace second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is greater than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_op_Inequality_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.op_Inequality(Argotic.Publishing.AtomWorkspace%2CArgotic.Publishing.AtomWorkspace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L633">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_op_Inequality_" data-uid="Argotic.Publishing.AtomWorkspace.op_Inequality*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_op_Inequality_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_" data-uid="Argotic.Publishing.AtomWorkspace.op_Inequality(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)">Inequality(AtomWorkspace, AtomWorkspace)</h4>
+  <div class="markdown level1 summary"><p>Determines if operands are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(AtomWorkspace first, AtomWorkspace second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>false</strong> if its operands are equal, otherwise; <strong>true</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace_op_LessThan_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace.op_LessThan(Argotic.Publishing.AtomWorkspace%2CArgotic.Publishing.AtomWorkspace)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L644">View Source</a>
+  </span>
+  <a id="Argotic_Publishing_AtomWorkspace_op_LessThan_" data-uid="Argotic.Publishing.AtomWorkspace.op_LessThan*"></a>
+  <h4 id="Argotic_Publishing_AtomWorkspace_op_LessThan_Argotic_Publishing_AtomWorkspace_Argotic_Publishing_AtomWorkspace_" data-uid="Argotic.Publishing.AtomWorkspace.op_LessThan(Argotic.Publishing.AtomWorkspace,Argotic.Publishing.AtomWorkspace)">LessThan(AtomWorkspace, AtomWorkspace)</h4>
+  <div class="markdown level1 summary"><p>Determines if first operand is less than second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(AtomWorkspace first, AtomWorkspace second)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">first</span></td>
+        <td><p>Operand to be compared.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Publishing.AtomWorkspace.html">AtomWorkspace</a></td>
+        <td><span class="parametername">second</span></td>
+        <td><p>Operand to compare to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the first operand is less than the second, otherwise; <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Publishing_AtomWorkspace.md&amp;value=---%0Auid%3A%20Argotic.Publishing.AtomWorkspace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Publishing/AtomWorkspace.cs/#L33" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

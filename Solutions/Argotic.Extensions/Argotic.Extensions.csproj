@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,9 +6,6 @@
     <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <ApplicationIcon>Argotic.ico</ApplicationIcon>
-    <AssemblyVersion>2008.0.2.0</AssemblyVersion>
-    <FileVersion>2008.0.2.0</FileVersion>
-    <Version>2008.0.2.0</Version>
     <Product>Argotic Syndication Framework</Product>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description>Argotic Entity Extensibility Class Library, that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</Description>

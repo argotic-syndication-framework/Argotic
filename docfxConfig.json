@@ -1,23 +1,33 @@
 {
-    "HomePage":"Argotic.wiki/Home.md",
+    "HomePage":"Argotic.wiki/home.md",
     "Pages": [
         {
             "Name": "The Basics",
             "Articles": {
-                "IncludedLocations": ["Argotic.wiki/overview-of-syndication-extensions-natively-supported-by-the-framework.md",
+                "HomePage": "Argotic.wiki/home.md",
+                "IncludedLocations": [
+                    "Argotic.wiki/images/**",
+                    "Argotic.wiki/files/**",
+                    "Argotic.wiki/samples/**",
+                    "Argotic.wiki/Overview-of-the-features-provided-by-the-framework.md",
                     "Argotic.wiki/introduction-to-the-framework-components.md",
                     "Argotic.wiki/introduction-to-the-framework-api-and-core-entities.md",
-                    "Argotic.wiki/consuming-an-rss-feed.md","Argotic.wiki/consuming-an-atom-feed-or-atom-entry-document.md","Argotic.wiki/consuming-an-opml-outline.md",
+                    "Argotic.wiki/consuming-an-rss-feed.md",
+                    "Argotic.wiki/consuming-an-atom-feed-or-atom-entry-document.md",
+                    "Argotic.wiki/consuming-an-opml-outline.md",
+                    "Argotic.wiki/consuming-web-log-markup-language-blogml-formatted-content.md",
                     "Argotic.wiki/format-agnostic-consumption-of-syndication-feeds.md",
                     "Argotic.wiki/generating-an-rss-feed.md",
                     "Argotic.wiki/generating-an-atom-feed-or-atom-entry-document.md",
-                    "Argotic.wiki/generating-an-opml-outline.md"
+                    "Argotic.wiki/generating-an-opml-outline.md",
+                    "Argotic.wiki/home.md"
                 ]
             }
         },
         {
             "Name": "Syndication Extensions",
             "Articles": {
+                "HomePage": "Argotic.wiki/introduction-to-the-framework-extension-architecture.md",
                 "IncludedLocations": [
                     "Argotic.wiki/introduction-to-the-framework-extension-architecture.md",
                     "Argotic.wiki/overview-of-syndication-extensions-natively-supported-by-the-framework.md",
@@ -29,6 +39,7 @@
         {
             "Name": "Network Protocols",
             "Articles": {
+                "HomePage": "Argotic.wiki/sending-notification-pings-using-the-trackback-client.md",
                 "IncludedLocations": [
                     "Argotic.wiki/sending-notification-pings-using-the-trackback-client.md",
                     "Argotic.wiki/making-remote-procedure-calls-using-the-xml-rpc-client.md"
@@ -38,6 +49,7 @@
         {
             "Name": "Specialized Content Formats",
             "Articles": {
+                "HomePage": "Argotic.wiki/consuming-personal-attention-data.md",
                 "IncludedLocations": [
                     "Argotic.wiki/consuming-personal-attention-data.md",
                     "Argotic.wiki/generating-attention-profile-information.md",
@@ -51,10 +63,20 @@
         {
             "Name": "Framework Provider Model",
             "Articles": {
+                "HomePage": "Argotic.wiki/introduction-to-the-framework-extensible-provider-model.md",
                 "IncludedLocations": [
                     "Argotic.wiki/introduction-to-the-framework-extensible-provider-model.md",
                     "Argotic.wiki/configuring-syndication-resource-providers-within-your-application.md",
-                    "Argotic.wiki/managing-provider-based-syndicated-content.md",
+                    "Argotic.wiki/managing-provider-based-syndicated-content.md"
+                ]
+            }
+        },
+        {
+            "Name": "Historical Road Map",
+            "Articles": {
+                "HomePage": "Argotic.wiki/argotic-syndication-framework-2008.1.0.0-planning-center.md",
+                "IncludedLocations": [
+                    "Argotic.wiki/argotic-syndication-framework-*.md"
                 ]
             }
         },
@@ -64,6 +86,17 @@
                 "IncludedLocations": ["Solutions/**/*.csproj"],
                 "ExcludedLocations": ["Solutions/**.Tests/*"]
             }
-        },
+        }
+    ],
+    "CleanupCacheHistory": false,
+    "disableGitFeatures": true,
+    "KeepFileLink": false,
+    "FileMetadataFiles": [],
+    "GlobalMetadataFiles": [],
+    "MarkdownEngineName": "markdig",
+    "NoLangKeyword": false,
+    "PostProcessors": [],
+    "Template": [
+        "default"
     ]
 }
